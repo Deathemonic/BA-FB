@@ -11,7 +11,7 @@ pub struct FbsDumper {
 pub struct FbsDumperOptions {
     pub dummy_dir: PathBuf,
     pub libil2cpp_path: PathBuf,
-    pub output_file: Option<String>,
+    pub output_file: Option<PathBuf>,
     pub namespace: Option<String>,
     pub force_snake_case: bool,
     pub namespace_to_look_for: Option<String>,

@@ -124,13 +124,13 @@ impl CommandHandler {
 
     fn get_il2cpp_paths(&self, server_config: &ServerConfig, file_manager: &FileManager) -> (PathBuf, PathBuf) {
         let libil2cpp = match server_config.region {
-            ServerRegion::Japan => file_manager.get_data_path("japan/il2cpp/libil2cpp.so"),
-            ServerRegion::Global => file_manager.get_data_path("global/il2cpp/libil2cpp.so"),
+            ServerRegion::Japan => file_manager.get_data_path("il2cpp/japan/libil2cpp.so"),
+            ServerRegion::Global => file_manager.get_data_path("il2cpp/global/libil2cpp.so"),
         };
 
         let metadata = match server_config.region {
-            ServerRegion::Japan => file_manager.get_data_path("japan/il2cpp/global-metadata.dat"),
-            ServerRegion::Global => file_manager.get_data_path("global/il2cpp/global-metadata.dat"),
+            ServerRegion::Japan => file_manager.get_data_path("il2cpp/japan/global-metadata.dat"),
+            ServerRegion::Global => file_manager.get_data_path("il2cpp/global/global-metadata.dat"),
         };
 
         (libil2cpp, metadata)
@@ -158,6 +158,7 @@ impl CommandHandler {
         let fbs_options = FbsDumperOptions {
             dummy_dir: output.join("dummy"),
             libil2cpp_path: libil2cpp,
+            output_file: Some(output.join("BlueArchive.fbs")),
             ..Default::default()
         };
 
