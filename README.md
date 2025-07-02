@@ -26,6 +26,21 @@ cd BA-FB
 cargo build
 ```
 
+### Other Projects
+
+- [BA-AD](https://github.com/Deathemonic/BA-AD): A tool and library that downloads the latest **Blue Archive** assets
+- [BA-AX](https://github.com/Deathemonic/BA-AX): A tool and library that extracts **Blue Archive** assets
+- [BA-CY](https://github.com/Deathemonic/BA-CY): Library for handling **Blue Archive** catalogs, tables, serialization/deserialization, encryption, and hashing.
+
+
+### Contributing
+Don't like my [shitty code](https://www.reddit.com/r/programminghorror) and what to change it? Feel free to contribute by submitting a pull request or issue. Always appreciate the help.
+
+
+### Acknowledgement
+- [ArkanDash/BA-Source-Dump](https://github.com/ArkanDash/BA-Source-Dump)
+- [ArkanDash/FbsDumperV2](https://github.com/ArkanDash/FbsDumperV2)
+- [LukeFZ/Il2CppInspectorRedux](https://github.com/LukeFZ/Il2CppInspectorRedux)
 
 ### Copyright
 Blue Archive is a registered trademark of NAT GAMES Co., Ltd., NEXON Korea Corp., and Yostar, Inc.
