@@ -1,5 +1,5 @@
 use anyhow::Result;
-use baad_core::{errors::{ErrorContext, ErrorExt}, info};
+use baad_core::{errors::{ErrorContext, ErrorExt}};
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -47,23 +47,15 @@ impl FbsDumper {
             cmd.arg("--namespace-to-look-for").arg(namespace_to_look_for);
         }
 
-        let output = cmd.output()
+        let status = cmd.status()
             .handle_errors()
             .error_context(&format!("Failed to execute FbsDumper at {}", self.binary.display()))?;
 
-        if !output.status.success() {
-            let stderr = String::from_utf8_lossy(&output.stderr);
-            let stdout = String::from_utf8_lossy(&output.stdout);
+        if !status.success() {
             return Err(anyhow::anyhow!(
-                "FbsDumper failed with exit code {:?}\nStdout: {}\nStderr: {}",
-                output.status.code(),
-                stdout,
-                stderr
+                "FbsDumper failed with exit code {:?}",
+                status.code()
             )).error_context("FbsDumper execution failed");
-        }
-
-        if !output.stdout.is_empty() {
-            info!("{}", String::from_utf8_lossy(&output.stdout));
         }
 
         Ok(())

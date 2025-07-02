@@ -137,6 +137,8 @@ impl CommandHandler {
     }
 
     fn run_il2cpp_dumper(&self, il2cpp_dumper: &Il2CppDumper, server_config: &ServerConfig, file_manager: &FileManager, output: &PathBuf) -> Result<()> {
+        info!("Dumping il2cpp...");
+        
         let (libil2cpp, metadata) = self.get_il2cpp_paths(server_config, file_manager);
 
         let il2cpp_options = Il2CppDumperOptions {
@@ -148,11 +150,13 @@ impl CommandHandler {
             dll_out: Some(output.join("dummy")),
             ..Default::default()
         };
-
+        
         il2cpp_dumper.run(il2cpp_options)
     }
 
     fn run_fbs_dumper(&self, fbs_dumper: &FbsDumper, server_config: &ServerConfig, file_manager: &FileManager, output: &PathBuf) -> Result<()> {
+        info!("Dumping fbs...");
+        
         let (libil2cpp, _) = self.get_il2cpp_paths(server_config, file_manager);
 
         let fbs_options = FbsDumperOptions {

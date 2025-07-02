@@ -1,5 +1,5 @@
 use anyhow::Result;
-use baad_core::{errors::{ErrorContext, ErrorExt}, info};
+use baad_core::{errors::{ErrorContext, ErrorExt}};
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -193,23 +193,15 @@ impl Il2CppDumper {
             }
         }
 
-        let output = cmd.output()
+        let status = cmd.status()
             .handle_errors()
             .error_context(&format!("Failed to execute IL2CPP dumper at {}", self.binary.display()))?;
 
-        if !output.status.success() {
-            let stderr = String::from_utf8_lossy(&output.stderr);
-            let stdout = String::from_utf8_lossy(&output.stdout);
+        if !status.success() {
             return Err(anyhow::anyhow!(
-                "IL2CPP dumper failed with exit code {:?}\nStdout: {}\nStderr: {}",
-                output.status.code(),
-                stdout,
-                stderr
+                "IL2CPP dumper failed with exit code {:?}",
+                status.code()
             )).error_context("IL2CPP dumper execution failed");
-        }
-
-        if !output.stdout.is_empty() {
-            info!("{}", String::from_utf8_lossy(&output.stdout));
         }
 
         Ok(())
