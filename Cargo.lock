@@ -201,6 +201,7 @@ dependencies = [
  "anyhow",
  "baad",
  "baad-core",
+ "clap",
  "reqwest",
  "tokio",
  "trauma",

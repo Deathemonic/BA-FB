@@ -18,3 +18,4 @@ baad-core = { git = "https://github.com/RZinth/BA-AD-Core", version = "0.0.2" }
 trauma = { git = "https://github.com/RZinth/trauma", version = "2.6.0", features = ["rustls"] }
 tokio = { version = "1.46.0", features = ["full"] }
 zip = "4.2.0"
+clap = { version = "4.5.40", features = ["derive"] }
