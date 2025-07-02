@@ -4,7 +4,7 @@ use std::io::{Read, Seek};
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
 use std::{fs, io};
-use baad_core::{info, success};
+use baad_core::{info, success, warn};
 use zip::ZipArchive;
 
 pub struct ToolsExtractor {
@@ -51,31 +51,46 @@ impl ToolsExtractor {
         Ok(())
     }
 
-    pub fn il2cpp_dumper(&self) -> Result<PathBuf> {
+    pub fn il2cpp_dumper(&self, forced: bool) -> Result<PathBuf> {
+        let target_dir = self
+            .file_manager
+            .get_data_path("tools/Il2CppInspectorRedux");
+        let binary_name = Self::get_binary_name("Il2CppInspector");
+        let binary_path = target_dir.join(&binary_name);
+
+        if binary_path.exists() && !forced {
+            warn!("Il2CppInspectorRedux already extracted, skipping...");
+            return Ok(binary_path);
+        }
+
         info!("Extracting Il2CppInspectorRedux...");
 
         let il2cpp_dumper = self
             .file_manager
             .get_data_path("tools/Il2CppInspectorRedux.zip");
-        let target_dir = self
-            .file_manager
-            .get_data_path("tools/Il2CppInspectorRedux");
 
         fs::create_dir_all(&target_dir)?;
         let file = fs::File::open(il2cpp_dumper)?;
         let mut archive = ZipArchive::new(file)?;
 
-        let binary_name = Self::get_binary_name("Il2CppInspector");
         Self::extract_zip(&mut archive, &target_dir, &binary_name)?;
 
-        Ok(target_dir.join(binary_name))
+        Ok(binary_path)
     }
 
-    pub fn fbs_dumper(&self) -> Result<PathBuf> {
+    pub fn fbs_dumper(&self, forced: bool) -> Result<PathBuf> {
+        let target_dir = self.file_manager.get_data_path("tools/FbsDumperV2");
+        let binary_name = Self::get_binary_name("FbsDumper");
+        let binary_path = target_dir.join(&binary_name);
+
+        if binary_path.exists() && !forced {
+            warn!("FbsDumperV2 already extracted, skipping...");
+            return Ok(binary_path);
+        }
+
         info!("Extracting FbsDumperV2...");
 
         let fbs_dumper = self.file_manager.get_data_path("tools/FbsDumperV2.zip");
-        let target_dir = self.file_manager.get_data_path("tools/FbsDumperV2");
 
         fs::create_dir_all(&target_dir)?;
         let file = fs::File::open(fbs_dumper)?;
@@ -87,9 +102,8 @@ impl ToolsExtractor {
 
         let mut inner_archive = ZipArchive::new(io::Cursor::new(inner_zip_data))?;
 
-        let binary_name = Self::get_binary_name("FbsDumper");
         Self::extract_zip(&mut inner_archive, &target_dir, &binary_name)?;
 
-        Ok(target_dir.join(binary_name))
+        Ok(binary_path)
     }
 }

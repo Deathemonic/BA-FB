@@ -7,6 +7,7 @@ pub struct FbsDumper {
     binary: PathBuf,
 }
 
+#[derive(Default)]
 pub struct FbsDumperOptions {
     pub dummy_dir: PathBuf,
     pub libil2cpp_path: PathBuf,
