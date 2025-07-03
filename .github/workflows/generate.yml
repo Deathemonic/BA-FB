@@ -78,6 +78,6 @@ jobs:
           fi
           
           git commit -m "Update generated flatbuffers - $(date '+%Y-%m-%d %H:%M:%S')"
-          git push origin flatdata
+          git push origin flatdata --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
