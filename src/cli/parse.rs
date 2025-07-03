@@ -196,6 +196,10 @@ impl CommandHandler {
             dummy_dir: output.join("dummy"),
             libil2cpp_path: libil2cpp,
             output_file: Some(output.join("BlueArchive.fbs")),
+            namespace: Some(match server_config.region {
+                ServerRegion::Japan => "Japan".to_string(),
+                ServerRegion::Global => "Global".to_string()
+            }),
             ..Default::default()
         };
 
