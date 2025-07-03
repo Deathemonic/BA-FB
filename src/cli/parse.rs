@@ -1,7 +1,8 @@
-use crate::cli::args::{Args, Commands, DumpTarget, GenerateTarget};
+use crate::cli::args::{Args, Commands, DumpTarget};
 use crate::tools::extract::ToolsExtractor;
 use crate::tools::fetch::ToolsFetcher;
 use crate::wrappers::fbs_dumper::{FbsDumper, FbsDumperOptions};
+use crate::wrappers::flatc::{FlatC, FlatCOptions, Language};
 use crate::wrappers::il2cpp_dumper::{Il2CppDumper, Il2CppDumperOptions};
 
 use anyhow::Result;
@@ -26,8 +27,8 @@ impl CommandHandler {
             Some(Commands::Dump { target }) => {
                 self.handle_dump(target).await
             }
-            Some(Commands::Generate { target }) => {
-                self.handle_generate(target).await
+            Some(Commands::Generate { fbs, language, output }) => {
+                self.execute_generate(fbs, language, output).await
             }
             None => {
                 if self.args.update {
@@ -65,10 +66,12 @@ impl CommandHandler {
         let tool_fetcher = ToolsFetcher::new(file_manager.clone())?;
         tool_fetcher.il2cpp_dumper().await?;
         tool_fetcher.fbs_dumper().await?;
+        tool_fetcher.flatc().await?;
 
         let tool_extractor = ToolsExtractor::new(file_manager.clone())?;
         tool_extractor.il2cpp_dumper(true)?;
         tool_extractor.fbs_dumper(true)?;
+        tool_extractor.flatc(true)?;
 
         Ok(())
     }
@@ -83,6 +86,36 @@ impl CommandHandler {
         self.run_fbs_dumper(&fbs_dumper, &server_config, &file_manager, output)?;
 
         Ok(())
+    }
+
+    async fn execute_generate(&self, fbs: &PathBuf, language: &Language, output: &PathBuf) -> Result<()> {
+        let file_manager = FileManager::new()?;
+
+        self.prepare_generate_files(&file_manager).await?;
+        let flatc= self.prepare_generate_tools(&file_manager)?;
+        self.run_flatc(&flatc, language, fbs, output)?;
+
+        Ok(())
+    }
+
+    async fn prepare_generate_files(&self, file_manager: &Rc<FileManager>) -> Result<()> {
+        let tool_fetcher = ToolsFetcher::new(file_manager.clone())?;
+        
+        let il2cpp_zip_path = file_manager.get_data_path("tools/Flatc.zip");
+        if !il2cpp_zip_path.exists() {
+            tool_fetcher.flatc().await?;
+        }
+
+        Ok(())
+    }
+
+    fn prepare_generate_tools(&self, file_manager: &Rc<FileManager>) -> Result<FlatC> {
+        let tool_extractor = ToolsExtractor::new(file_manager.clone())?;
+
+        let flatc_bin = tool_extractor.flatc(false)?;
+        let flatc = FlatC::new(flatc_bin)?;
+
+        Ok(flatc)
     }
 
     async fn prepare_dump_files(&self, server_config: &Rc<ServerConfig>, file_manager: &Rc<FileManager>) -> Result<()> {
@@ -169,8 +202,18 @@ impl CommandHandler {
         fbs_dumper.run(fbs_options)
     }
 
-    async fn handle_generate(&self, _target: &GenerateTarget) -> Result<()> {
-        Ok(())
+    fn run_flatc(&self, flatc: &FlatC, languages: &Language, fbs: &PathBuf, output: &PathBuf) -> Result<()> {
+        info!("Generating flatbuffers...");
+
+        let flatc_options = FlatCOptions {
+            languages: vec![*languages],
+            no_warnings: true,
+            scoped_enums: true,
+            output_path: Some(output.clone()),
+            ..Default::default()
+        };
+
+        flatc.compile(flatc_options, vec![fbs.clone()], vec![])
     }
 }
 

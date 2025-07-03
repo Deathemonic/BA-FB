@@ -34,22 +34,22 @@ impl ToolsFetcher {
         Ok(())
     }
 
-    fn get_platform() -> Result<&'static str> {
+    fn get_platform(mac_prefix: bool) -> Result<&'static str> {
         match (OS, ARCH) {
             ("windows", "x86_64") => Ok("win-x64"),
-            ("macos", "x86_64") => Ok("osx-x64"),
-            ("macos", "aarch64") => Ok("osx-arm64"),
+            ("macos", "x86_64") => Ok(if mac_prefix { "mac-x64" } else { "osx-x64" }),
+            ("macos", "aarch64") => Ok(if mac_prefix { "mac-arm64" } else { "osx-arm64" }),
             ("linux", "x86_64") => Ok("linux-x64"),
             ("linux", "aarch64") => Ok("linux-arm64"),
             _ => None.error_context("Unsupported platform")?,
         }
     }
-
+    
     pub async fn il2cpp_dumper(&self) -> Result<()> {
         info!("Downloading Il2CppInspectorRedux...");
         
         let base_url = "https://nightly.link/LukeFZ/Il2CppInspectorRedux/workflows/build/new-ui";
-        let platform = Self::get_platform()?;
+        let platform = Self::get_platform(false)?;
         let url = format!("{}/Il2CppInspectorRedux.CLI-{}.zip", base_url, platform);
         let filename = self
             .file_manager
@@ -70,11 +70,32 @@ impl ToolsFetcher {
         info!("Downloading FbsDumperV2...");
         
         let base_url = "https://nightly.link/Deathemonic/FbsDumperV2/workflows/build/main";
-        let platform = Self::get_platform()?;
+        let platform = Self::get_platform(false)?;
         let url = format!("{}/FbsDumperV2-{}.zip", base_url, platform);
         let filename = self
             .file_manager
             .get_data_path("tools/FbsDumperV2.zip")
+            .to_string_lossy()
+            .to_string();
+
+        let fbs_dumper = vec![Download {
+            url: Url::parse(url.as_str())?,
+            filename,
+            hash: None,
+        }];
+
+        self.download(&fbs_dumper).await
+    }
+
+    pub async fn flatc(&self) -> Result<()> {
+        info!("Downloading Flatc...");
+
+        let base_url = "https://deathemonic.github.io/storage/tools/flatc";
+        let platform = Self::get_platform(false)?;
+        let url = format!("{}/flatc-{}.zip", base_url, platform);
+        let filename = self
+            .file_manager
+            .get_data_path("tools/Flatc.zip")
             .to_string_lossy()
             .to_string();
 

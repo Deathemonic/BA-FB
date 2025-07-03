@@ -1,3 +1,5 @@
+use crate::wrappers::flatc::Language;
+
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
@@ -7,7 +9,7 @@ use std::path::PathBuf;
 pub struct Args {
     #[command(subcommand)]
     pub command: Option<Commands>,
-    
+
     /// Force update
     #[arg(short, long)]
     pub update: bool,
@@ -20,27 +22,22 @@ pub enum Commands {
         target: DumpTarget,
     },
     Generate {
-        #[command(subcommand)]
-        target: GenerateTarget,
+        /// FlatBuffers schema file
+        #[arg(short, long)]
+        fbs: PathBuf,
+
+        /// Programming language to generate
+        #[arg(short, long)]
+        language: Language,
+
+        /// Output path
+        #[arg(short, long)]
+        output: PathBuf,
     },
 }
 
 #[derive(Subcommand)]
 pub enum DumpTarget {
-    Global {
-        /// Output path
-        #[arg(short, long)]
-        output: PathBuf,
-    },
-    Japan {
-        /// Output path
-        #[arg(short, long)]
-        output: PathBuf,
-    },
-}
-
-#[derive(Subcommand)]
-pub enum GenerateTarget {
     Global {
         /// Output path
         #[arg(short, long)]

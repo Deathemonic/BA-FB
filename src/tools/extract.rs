@@ -106,4 +106,31 @@ impl ToolsExtractor {
 
         Ok(binary_path)
     }
+
+    pub fn flatc(&self, forced: bool) -> Result<PathBuf> {
+        let target_dir = self
+            .file_manager
+            .get_data_path("tools/Flatc");
+        let binary_name = Self::get_binary_name("flatc");
+        let binary_path = target_dir.join(&binary_name);
+
+        if binary_path.exists() && !forced {
+            warn!("Flatc already extracted, skipping...");
+            return Ok(binary_path);
+        }
+
+        info!("Extracting Flatc...");
+
+        let flatc = self
+            .file_manager
+            .get_data_path("tools/Flatc.zip");
+
+        fs::create_dir_all(&target_dir)?;
+        let file = fs::File::open(flatc)?;
+        let mut archive = ZipArchive::new(file)?;
+
+        Self::extract_zip(&mut archive, &target_dir, &binary_name)?;
+
+        Ok(binary_path)
+    }
 }
