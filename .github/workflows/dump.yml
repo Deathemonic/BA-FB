@@ -19,14 +19,41 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get latest release info
+        id: release
+        run: |
+          RELEASE_DATA=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest)
+          
+          DOWNLOAD_URL=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("linux")) | .browser_download_url' | head -1)
+          
+          if [ "$DOWNLOAD_URL" = "null" ] || [ -z "$DOWNLOAD_URL" ]; then
+            echo "No Linux asset found in latest release"
+            echo "Available assets:"
+            echo "$RELEASE_DATA" | jq -r '.assets[].name'
+            exit 1
+          fi
+          
+          echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
+          echo "Found download URL: $DOWNLOAD_URL"
+
       - name: Download latest release
         run: |
-          wget https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-linux-x86_64.zip
+          wget "${{ steps.release.outputs.download_url }}" -O release.zip
 
       - name: Extract executable
         run: |
-          unzip bafb-linux-x86_64.zip
-          chmod +x bafb
+          unzip release.zip
+          EXECUTABLE=$(find . -name "bafb*" -type f | head -1)
+          if [ -z "$EXECUTABLE" ]; then
+            echo "No executable found matching 'bafb*'"
+            echo "Contents of zip:"
+            ls -la
+            exit 1
+          fi
+          chmod +x "$EXECUTABLE"
+          if [ "$EXECUTABLE" != "./bafb" ]; then
+            ln -s "$EXECUTABLE" bafb
+          fi
 
       - name: Run Japan dump
         run: |
