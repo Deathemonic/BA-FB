@@ -7,7 +7,7 @@ A tool for dumping and generating Blue Archive flatbuffers
 ### Release
 You can download the latest pre-build binaries at [Releases](https://github.com/Deathemonic/BA-FB/releases)
 
-[Windows](https://github.com/Deathemonic/BA-FB/releases/download/v1,0,0/bafb-windows-x86_64.zip) | [Linux](https://github.com/Deathemonic/BA-AD/releases/download/v1.0.0/bafb-linux-x86_64.zip) | [MacOS](https://github.com/Deathemonic/BA-AD/releases/download/v1.0.0/bafb-macos-aarch64.zip)
+[Windows](https://github.com/Deathemonic/BA-FB/releases/download/v1,0,1/bafb-windows-x86_64.zip) | [Linux](https://github.com/Deathemonic/BA-AD/releases/download/v1.0.1/bafb-linux-x86_64.zip) | [MacOS](https://github.com/Deathemonic/BA-AD/releases/download/v1.0.1/bafb-macos-aarch64.zip)
 
 ### Cargo
 ```shell
