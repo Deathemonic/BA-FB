@@ -1,0 +1,83 @@
+name: Generate Flatbuffers
+
+on:
+  schedule:
+    - cron: '0 3 * * 1-5'
+    - cron: '0 5 * * 1-5'
+    - cron: '0 7 * * 1-5'
+    - cron: '0 9 * * 1-5'
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download latest release
+        run: |
+          wget https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-linux-x86_64.zip
+
+      - name: Extract executable
+        run: |
+          unzip bafb-linux-x86_64.zip
+          chmod +x bafb
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Switch to flatdata branch
+        run: |
+          git checkout -B flatdata
+
+      - name: Create output directory
+        run: mkdir -p generated
+
+      - name: Download Japan FBS
+        run: |
+          curl -o japan.fbs https://raw.githubusercontent.com/Deathemonic/BA-FB/refs/heads/data/Japan/BlueArchive.fbs
+
+      - name: Download Global FBS
+        run: |
+          curl -o global.fbs https://raw.githubusercontent.com/Deathemonic/BA-FB/refs/heads/data/Global/BlueArchive.fbs
+
+      - name: Generate Japan Flatbuffers
+        run: |
+          ./bafb generate --fbs japan.fbs --language rust --output generated/
+          mv generated/BlueArchive_generated.rs generated/japan_generated.rs
+
+      - name: Generate Global Flatbuffers
+        run: |
+          ./bafb generate --fbs global.fbs --language rust --output generated/
+          mv generated/BlueArchive_generated.rs generated/global_generated.rs
+
+      - name: Create mod.rs
+        run: |
+          cat > generated/mod.rs << 'EOF'
+          pub mod japan_generated;
+          pub mod global_generated;
+          EOF
+
+      - name: Clean up executable and zip file
+        run: |
+          rm -f bafb bafb-linux-x86_64.zip japan.fbs global.fbs
+
+      - name: Commit and push changes
+        run: |
+          git add generated/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          
+          git commit -m "Update generated flatbuffers - $(date '+%Y-%m-%d %H:%M:%S')"
+          git push origin flatdata
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
