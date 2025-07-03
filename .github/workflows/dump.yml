@@ -1,4 +1,76 @@
-name: dump.yml
+name: Dump Data
+
 on:
+  schedule:
+    - cron: '0 3 * * 1-5'
+    - cron: '0 5 * * 1-5'
+    - cron: '0 7 * * 1-5'
+    - cron: '0 9 * * 1-5'
+    - cron: '0 7 * * *'
+  workflow_dispatch:
 
 jobs:
+  dump-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download latest release
+        run: |
+          wget https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-linux-x86_64.zip
+
+      - name: Extract executable
+        run: |
+          unzip bafb-linux-x86_64.zip
+          chmod +x bafb
+
+      - name: Run Japan dump
+        run: |
+          ./bafb dump japan --output ./Japan
+
+      - name: Run Global dump
+        run: |
+          ./bafb dump global --output ./Global
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Switch to data branch
+        run: |
+          git checkout -B data
+
+      - name: Clean previous data and add new data
+        run: |
+          # Remove everything except .git directory
+          find . -name ".git" -prune -o -type f -exec rm {} +
+          find . -name ".git" -prune -o -type d -empty -delete 2>/dev/null || true
+          
+          # Move the dump folders to root
+          if [ -d "Japan" ]; then
+            cp -r Japan/* . 2>/dev/null || true
+            rm -rf Japan
+          fi
+          if [ -d "Global" ]; then
+            cp -r Global/* . 2>/dev/null || true
+            rm -rf Global
+          fi
+          
+          # Add all files
+          git add .
+
+      - name: Commit and push changes
+        run: |
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update data dumps - $(date '+%Y-%m-%d %H:%M:%S')"
+            git push origin data --force
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
