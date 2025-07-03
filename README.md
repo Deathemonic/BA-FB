@@ -4,6 +4,9 @@ A tool for dumping and generating Blue Archive flatbuffers
 
 ## Install
 
+### Requirements
+- [.NET 9.0](https://dotnet.microsoft.com/download/dotnet/9.0) or higher
+
 ### Release
 You can download the latest pre-build binaries at [Releases](https://github.com/Deathemonic/BA-FB/releases)
 
