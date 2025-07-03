@@ -48,12 +48,10 @@ jobs:
       - name: Generate Japan Flatbuffers
         run: |
           ./bafb generate --fbs japan.fbs --language rust --output ./
-          mv BlueArchive_generated.rs japan_generated.rs
 
       - name: Generate Global Flatbuffers
         run: |
           ./bafb generate --fbs global.fbs --language rust --output ./
-          mv BlueArchive_generated.rs global_generated.rs
 
       - name: Create mod.rs
         run: |
