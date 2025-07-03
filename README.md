@@ -2,16 +2,17 @@
 A tool for dumping and generating Blue Archive flatbuffers
 
 
-> [!WARNING]  
-> This is a work in progress project
-
 ## Install
+
+### Release
+You can download the latest pre-build binaries at [Releases](https://github.com/Deathemonic/BA-FB/releases)
+
+[Windows](https://github.com/Deathemonic/BA-FB/releases/download/v1,0,0/bafb-windows-x86_64.zip) | [Linux](https://github.com/Deathemonic/BA-AD/releases/download/v1.0.0/bafb-linux-x86_64.zip) | [MacOS](https://github.com/Deathemonic/BA-AD/releases/download/v1.0.0/bafb-macos-aarch64.zip)
 
 ### Cargo
 ```shell
-cargo install --git "https://github.com/Deathemonic/BA-AX" --locked
+cargo install --git "https://github.com/Deathemonic/BA-FB" --locked
 ```
-
 
 ## Building
 
