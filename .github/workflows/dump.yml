@@ -33,14 +33,6 @@ jobs:
           unzip bafb-linux-x86_64.zip
           chmod +x bafb
 
-      - name: Run Japan dump
-        run: |
-          ./bafb dump japan --output ./Japan
-
-      - name: Run Global dump
-        run: |
-          ./bafb dump global --output ./Global
-
       - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
@@ -50,24 +42,24 @@ jobs:
         run: |
           git checkout -B data
 
-      - name: Clean previous data and add new data
+      - name: Clean previous data
         run: |
+          rm -rf Japan Global
+          
           find . -name ".git" -prune -o -type f -exec rm {} +
           find . -name ".git" -prune -o -type d -empty -delete 2>/dev/null || true
-          
-          if [ -d "Japan" ]; then
-            cp -r Japan/* . 2>/dev/null || true
-            rm -rf Japan
-          fi
-          if [ -d "Global" ]; then
-            cp -r Global/* . 2>/dev/null || true
-            rm -rf Global
-          fi
-          
-          git add .
 
-      - name: Commit and push changes
+      - name: Run Japan dump
         run: |
+          ./bafb dump japan --output ./Japan
+
+      - name: Run Global dump
+        run: |
+          ./bafb dump global --output ./Global
+
+      - name: Add and commit changes
+        run: |
+          git add .
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
