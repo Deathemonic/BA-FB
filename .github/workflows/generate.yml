@@ -37,9 +37,6 @@ jobs:
         run: |
           git checkout -B flatdata
 
-      - name: Create output directory
-        run: mkdir -p generated
-
       - name: Download Japan FBS
         run: |
           curl -o japan.fbs https://raw.githubusercontent.com/Deathemonic/BA-FB/refs/heads/data/Japan/BlueArchive.fbs
@@ -50,17 +47,17 @@ jobs:
 
       - name: Generate Japan Flatbuffers
         run: |
-          ./bafb generate --fbs japan.fbs --language rust --output generated/
-          mv generated/BlueArchive_generated.rs generated/japan_generated.rs
+          ./bafb generate --fbs japan.fbs --language rust --output ./
+          mv BlueArchive_generated.rs japan_generated.rs
 
       - name: Generate Global Flatbuffers
         run: |
-          ./bafb generate --fbs global.fbs --language rust --output generated/
-          mv generated/BlueArchive_generated.rs generated/global_generated.rs
+          ./bafb generate --fbs global.fbs --language rust --output ./
+          mv BlueArchive_generated.rs global_generated.rs
 
       - name: Create mod.rs
         run: |
-          cat > generated/mod.rs << 'EOF'
+          cat > mod.rs << 'EOF'
           pub mod japan_generated;
           pub mod global_generated;
           EOF
@@ -71,7 +68,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add generated/
+          git add .
           if git diff --staged --quiet; then
             echo "No changes to commit"
             exit 0
