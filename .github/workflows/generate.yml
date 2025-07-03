@@ -37,6 +37,11 @@ jobs:
         run: |
           git checkout -B flatdata
 
+      - name: Clean previous data
+        run: |
+          find . -name ".git" -prune -o -name "bafb" -prune -o -name "*.zip" -prune -o -type f -exec rm {} +
+          find . -name ".git" -prune -o -name "bafb" -prune -o -type d -empty -delete 2>/dev/null || true
+
       - name: Download Japan FBS
         run: |
           curl -o japan.fbs https://raw.githubusercontent.com/Deathemonic/BA-FB/refs/heads/data/Japan/BlueArchive.fbs
