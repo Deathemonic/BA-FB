@@ -33,23 +33,6 @@ jobs:
           unzip bafb-linux-x86_64.zip
           chmod +x bafb
 
-      - name: Run Japan dump
-        run: |
-          ./bafb dump japan --output ./Japan
-
-      - name: Run Global dump
-        run: |
-          ./bafb dump global --output ./Global
-
-      - name: Debug - Check what was created
-        run: |
-          echo "=== Current directory structure ==="
-          find . -type f -name "*.json" -o -name "*.txt" -o -name "*.csv" | head -20
-          echo "=== Japan folder contents ==="
-          ls -la Japan/ 2>/dev/null || echo "Japan folder doesn't exist or is empty"
-          echo "=== Global folder contents ==="
-          ls -la Global/ 2>/dev/null || echo "Global folder doesn't exist or is empty"
-
       - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
@@ -59,36 +42,28 @@ jobs:
         run: |
           git checkout -B data
 
-      - name: Clean previous data and add new data
+      - name: Clean previous data (preserve bafb executable)
         run: |
-          # Remove all files except .git directory
-          find . -name ".git" -prune -o -type f -exec rm {} +
-          find . -name ".git" -prune -o -type d -empty -delete 2>/dev/null || true
-          
-          # Check if folders exist and have content before copying
-          if [ -d "Japan" ] && [ "$(ls -A Japan)" ]; then
-            echo "Copying Japan folder contents..."
-            cp -r Japan/* . 2>/dev/null || true
-            rm -rf Japan
-          else
-            echo "Japan folder is empty or doesn't exist"
-          fi
-          
-          if [ -d "Global" ] && [ "$(ls -A Global)" ]; then
-            echo "Copying Global folder contents..."
-            cp -r Global/* . 2>/dev/null || true
-            rm -rf Global
-          else
-            echo "Global folder is empty or doesn't exist"
-          fi
-          
-          echo "=== Files after copying ==="
-          ls -la
-          
-          git add .
+          rm -rf Japan Global
 
-      - name: Commit and push changes
+          find . -name ".git" -prune -o -name "bafb" -prune -o -name "*.zip" -prune -o -type f -exec rm {} +
+          find . -name ".git" -prune -o -name "bafb" -prune -o -type d -empty -delete 2>/dev/null || true
+
+      - name: Run Japan dump
         run: |
+          ./bafb dump japan --output ./Japan
+
+      - name: Run Global dump
+        run: |
+          ./bafb dump global --output ./Global
+
+      - name: Clean up executable and zip file
+        run: |
+          rm -f bafb bafb-linux-x86_64.zip
+
+      - name: Add and commit changes
+        run: |
+          git add .
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
