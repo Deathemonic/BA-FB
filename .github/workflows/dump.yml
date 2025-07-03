@@ -37,15 +37,17 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git config --local http.postBuffer 524288000
+          git config --local http.lowSpeedLimit 0
+          git config --local http.lowSpeedTime 999999
 
       - name: Switch to data branch
         run: |
           git checkout -B data
 
-      - name: Clean previous data (preserve bafb executable)
+      - name: Clean previous data
         run: |
           rm -rf Japan Global
-
           find . -name ".git" -prune -o -name "bafb" -prune -o -name "*.zip" -prune -o -type f -exec rm {} +
           find . -name ".git" -prune -o -name "bafb" -prune -o -type d -empty -delete 2>/dev/null || true
 
@@ -53,22 +55,57 @@ jobs:
         run: |
           ./bafb dump japan --output ./Japan
 
+      - name: Commit Japan data
+        run: |
+          git add Japan/
+          if ! git diff --staged --quiet; then
+            git commit -m "Update Japan data dumps - $(date '+%Y-%m-%d %H:%M:%S')"
+            
+            for i in {1..3}; do
+              echo "Push attempt $i for Japan data"
+              if git push origin data --force; then
+                echo "Japan data push successful!"
+                break
+              else
+                echo "Japan data push failed, waiting before retry..."
+                sleep $((i * 10))
+              fi
+            done
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Run Global dump
         run: |
           ./bafb dump global --output ./Global
 
+      - name: Commit Global data
+        run: |
+          git add Global/
+          if ! git diff --staged --quiet; then
+            git commit -m "Update Global data dumps - $(date '+%Y-%m-%d %H:%M:%S')"
+            
+            for i in {1..3}; do
+              echo "Push attempt $i for Global data"
+              if git push origin data; then
+                echo "Global data push successful!"
+                break
+              else
+                echo "Global data push failed, waiting before retry..."
+                sleep $((i * 10))
+              fi
+            done
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Clean up executable and zip file
         run: |
           rm -f bafb bafb-linux-x86_64.zip
-
-      - name: Add and commit changes
-        run: |
           git add .
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Update data dumps - $(date '+%Y-%m-%d %H:%M:%S')"
-            git push origin data --force
+          if ! git diff --staged --quiet; then
+            git commit -m "Clean up build artifacts - $(date '+%Y-%m-%d %H:%M:%S')"
+            git push origin data
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
