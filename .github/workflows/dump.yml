@@ -51,10 +51,20 @@ jobs:
           git lfs install
           
           git lfs track "*.json"
+          git lfs track "*.h"
+          git lfs track "*.cpp"
+          git lfs track "*.c"
+          git lfs track "*.hpp"
           git lfs track "*.zip"
           git lfs track "*.bin"
           git lfs track "*.dat"
           git lfs track "*.db"
+          git lfs track "*.txt"
+          
+          find . -type f -size +50M -not -path "./.git/*" -not -name "bafb" -not -name "*.zip" | while read file; do
+            echo "Tracking large file: $file"
+            git lfs track "$file"
+          done
           
           git add .gitattributes
           
@@ -80,12 +90,21 @@ jobs:
         run: |
           rm -f bafb bafb-linux-x86_64.zip
 
-      - name: Check data size and LFS status
+      - name: Check for large files and update LFS tracking
         run: |
-          echo "=== Data size check ==="
-          du -sh Japan Global 2>/dev/null || echo "Folders don't exist"
-          echo "=== Large files ==="
+          echo "=== Checking for large files ==="
           find Japan Global -type f -size +50M 2>/dev/null || echo "No large files found"
+          
+          find Japan Global -type f -size +50M 2>/dev/null | while read file; do
+            echo "Adding LFS tracking for: $file"
+            git lfs track "$file"
+          done
+          
+          git add .gitattributes
+          if ! git diff --staged --quiet .gitattributes; then
+            git commit -m "Update LFS tracking for new large files"
+          fi
+          
           echo "=== LFS tracked files ==="
           git lfs ls-files
 
