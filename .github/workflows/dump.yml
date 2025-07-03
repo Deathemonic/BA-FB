@@ -19,6 +19,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
       - name: Download latest release
         run: |
           wget https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-linux-x86_64.zip
