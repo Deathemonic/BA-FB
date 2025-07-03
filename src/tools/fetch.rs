@@ -69,7 +69,7 @@ impl ToolsFetcher {
     pub async fn fbs_dumper(&self) -> Result<()> {
         info!("Downloading FbsDumperV2...");
         
-        let base_url = "https://nightly.link/Deathemonic/FbsDumperV2/workflows/build/main";
+        let base_url = "https://nightly.link/ArkanDash/FbsDumperV2/workflows/build/main";
         let platform = Self::get_platform(false)?;
         let url = format!("{}/FbsDumperV2-{}.zip", base_url, platform);
         let filename = self
