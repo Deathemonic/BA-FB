@@ -28,6 +28,7 @@ pub enum Language {
 }
 
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub enum CppStd {
     Cpp0x,
     Cpp11,
@@ -430,6 +431,7 @@ impl FlatC {
         Ok(())
     }
 
+    #[allow(dead_code)]
     pub fn compile_schema(&self, schema_files: Vec<PathBuf>, language: Language, output_path: PathBuf) -> Result<()> {
         let options = FlatCOptions {
             languages: vec![language],
@@ -439,6 +441,7 @@ impl FlatC {
         self.compile(options, schema_files, vec![])
     }
 
+    #[allow(dead_code)]
     pub fn json_to_binary(&self, schema_file: PathBuf, json_file: PathBuf, output_path: Option<PathBuf>) -> Result<()> {
         let options = FlatCOptions {
             binary: true,
@@ -448,6 +451,7 @@ impl FlatC {
         self.compile(options, vec![schema_file, json_file], vec![])
     }
 
+    #[allow(dead_code)]
     pub fn binary_to_json(&self, schema_file: PathBuf, binary_file: PathBuf, output_path: Option<PathBuf>) -> Result<()> {
         let options = FlatCOptions {
             json: true,
