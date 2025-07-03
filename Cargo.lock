@@ -127,8 +127,8 @@ checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
 
 [[package]]
 name = "baad"
-version = "2.1.4"
-source = "git+https://github.com/Deathemonic/BA-AD#e274d561bf16b48158497387044d1f422029fe71"
+version = "2.1.5"
+source = "git+https://github.com/Deathemonic/BA-AD#9b84be183cbfc122dbf40658eff9ee7321780137"
 dependencies = [
  "anyhow",
  "baad-core",
