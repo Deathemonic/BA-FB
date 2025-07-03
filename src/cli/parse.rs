@@ -10,7 +10,7 @@ use baad::apk::{ApkExtractor, ApkFetcher};
 use baad::helpers::{ServerConfig, ServerRegion};
 use baad::utils::FileManager;
 use baad_core::info;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::rc::Rc;
 
 pub struct CommandHandler {
@@ -76,7 +76,7 @@ impl CommandHandler {
         Ok(())
     }
 
-    async fn execute_dump(&self, region: ServerRegion, output: &PathBuf) -> Result<()> {
+    async fn execute_dump(&self, region: ServerRegion, output: &Path) -> Result<()> {
         let server_config = ServerConfig::new(region)?;
         let file_manager = FileManager::new()?;
 
@@ -88,7 +88,7 @@ impl CommandHandler {
         Ok(())
     }
 
-    async fn execute_generate(&self, fbs: &PathBuf, language: &Language, output: &PathBuf) -> Result<()> {
+    async fn execute_generate(&self, fbs: &Path, language: &Language, output: &Path) -> Result<()> {
         let file_manager = FileManager::new()?;
 
         self.prepare_generate_files(&file_manager).await?;
@@ -100,7 +100,7 @@ impl CommandHandler {
 
     async fn prepare_generate_files(&self, file_manager: &Rc<FileManager>) -> Result<()> {
         let tool_fetcher = ToolsFetcher::new(file_manager.clone())?;
-        
+
         let il2cpp_zip_path = file_manager.get_data_path("tools/Flatc.zip");
         if !il2cpp_zip_path.exists() {
             tool_fetcher.flatc().await?;
@@ -169,7 +169,7 @@ impl CommandHandler {
         (libil2cpp, metadata)
     }
 
-    fn run_il2cpp_dumper(&self, il2cpp_dumper: &Il2CppDumper, server_config: &ServerConfig, file_manager: &FileManager, output: &PathBuf) -> Result<()> {
+    fn run_il2cpp_dumper(&self, il2cpp_dumper: &Il2CppDumper, server_config: &ServerConfig, file_manager: &FileManager, output: &Path) -> Result<()> {
         info!("Dumping il2cpp...");
         
         let (libil2cpp, metadata) = self.get_il2cpp_paths(server_config, file_manager);
@@ -187,7 +187,7 @@ impl CommandHandler {
         il2cpp_dumper.run(il2cpp_options)
     }
 
-    fn run_fbs_dumper(&self, fbs_dumper: &FbsDumper, server_config: &ServerConfig, file_manager: &FileManager, output: &PathBuf) -> Result<()> {
+    fn run_fbs_dumper(&self, fbs_dumper: &FbsDumper, server_config: &ServerConfig, file_manager: &FileManager, output: &Path) -> Result<()> {
         info!("Dumping fbs...");
         
         let (libil2cpp, _) = self.get_il2cpp_paths(server_config, file_manager);
@@ -202,18 +202,18 @@ impl CommandHandler {
         fbs_dumper.run(fbs_options)
     }
 
-    fn run_flatc(&self, flatc: &FlatC, languages: &Language, fbs: &PathBuf, output: &PathBuf) -> Result<()> {
+    fn run_flatc(&self, flatc: &FlatC, languages: &Language, fbs: &Path, output: &Path) -> Result<()> {
         info!("Generating flatbuffers...");
 
         let flatc_options = FlatCOptions {
             languages: vec![*languages],
             no_warnings: true,
             scoped_enums: true,
-            output_path: Some(output.clone()),
+            output_path: Some(output.to_path_buf()),
             ..Default::default()
         };
 
-        flatc.compile(flatc_options, vec![fbs.clone()], vec![])
+        flatc.compile(flatc_options, vec![fbs.to_path_buf()], vec![])
     }
 }
 

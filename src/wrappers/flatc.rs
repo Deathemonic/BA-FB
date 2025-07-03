@@ -35,6 +35,7 @@ pub enum CppStd {
     Cpp17,
 }
 
+#[derive(Default)]
 pub struct FlatCOptions {
     pub languages: Vec<Language>,
     pub grpc: bool,
@@ -101,75 +102,6 @@ pub struct FlatCOptions {
     pub grpc_python_typed_handlers: bool,
 }
 
-impl Default for FlatCOptions {
-    fn default() -> Self {
-        Self {
-            languages: vec![],
-            grpc: false,
-            output_path: None,
-            include_paths: vec![],
-            binary: false,
-            json: false,
-            strict_json: false,
-            allow_non_utf8: false,
-            natural_utf8: false,
-            defaults_json: false,
-            no_prefix: false,
-            scoped_enums: false,
-            no_emit_min_max_enum_values: false,
-            no_includes: false,
-            gen_mutable: false,
-            gen_onefile: false,
-            gen_name_strings: false,
-            gen_object_api: false,
-            gen_compare: false,
-            gen_nullable: false,
-            gen_generated: false,
-            gen_jvmstatic: false,
-            gen_all: false,
-            cpp_include: vec![],
-            cpp_ptr_type: None,
-            cpp_str_type: None,
-            cpp_str_flex_ctor: false,
-            no_cpp_direct_copy: false,
-            cpp_std: None,
-            object_prefix: None,
-            object_suffix: None,
-            go_namespace: None,
-            go_import: None,
-            raw_binary: false,
-            size_prefixed: false,
-            proto: false,
-            oneof_union: false,
-            schema: false,
-            bfbs_comments: false,
-            conform: None,
-            conform_includes: vec![],
-            filename_suffix: None,
-            filename_ext: None,
-            include_prefix: None,
-            keep_prefix: false,
-            reflect_types: false,
-            reflect_names: false,
-            root_type: None,
-            require_explicit_ids: false,
-            force_defaults: false,
-            force_empty: false,
-            force_empty_vectors: false,
-            flexbuffers: false,
-            no_warnings: false,
-            cs_global_alias: false,
-            json_nested_bytes: false,
-            python_no_type_prefix_suffix: false,
-            python_typing: false,
-            grpc_filename_suffix: None,
-            grpc_additional_header: vec![],
-            grpc_search_path: None,
-            grpc_use_system_headers: false,
-            grpc_python_typed_handlers: false,
-        }
-    }
-}
 
 impl FlatC {
     pub fn new(binary: PathBuf) -> Result<Self> {
