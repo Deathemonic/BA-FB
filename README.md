@@ -5,7 +5,7 @@ A tool for dumping and generating Blue Archive flatbuffers
 ## Install
 
 ### Requirements
-- [.NET 9.0](https://dotnet.microsoft.com/download/dotnet/9.0) or higher
+- [.NET 9.0 Runtime](https://dotnet.microsoft.com/download/dotnet/9.0) or higher
 
 ### Release
 You can download the latest pre-build binaries at [Releases](https://github.com/Deathemonic/BA-FB/releases)
@@ -34,6 +34,7 @@ cargo build
 
 - [BA-AD](https://github.com/Deathemonic/BA-AD): A tool and library that downloads the latest **Blue Archive** assets
 - [BA-AX](https://github.com/Deathemonic/BA-AX): A tool and library that extracts **Blue Archive** assets
+- [BA-MU](https://github.com/Deathemonic/BA-MU): A tool that re-dump AssetBundle for **Blue Archive**.
 - [BA-CY](https://github.com/Deathemonic/BA-CY): Library for handling **Blue Archive** catalogs, tables, serialization/deserialization, encryption, and hashing.
 
 
