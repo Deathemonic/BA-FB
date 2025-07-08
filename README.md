@@ -44,6 +44,7 @@ Don't like my [shitty code](https://www.reddit.com/r/programminghorror) and what
 
 ### Acknowledgement
 - [ArkanDash/BA-Source-Dump](https://github.com/ArkanDash/BA-Source-Dump)
+- [Hiro420/FbsDumperV2](https://github.com/Hiro420/FbsDumperV2)
 - [ArkanDash/FbsDumperV2](https://github.com/ArkanDash/FbsDumperV2)
 - [LukeFZ/Il2CppInspectorRedux](https://github.com/LukeFZ/Il2CppInspectorRedux)
 
