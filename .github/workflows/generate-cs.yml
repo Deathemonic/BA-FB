@@ -52,11 +52,11 @@ jobs:
 
       - name: Generate Japan Flatbuffers
         run: |
-          ./bafb generate --fbs japan.fbs --language csharp --output ./
+          ./bafb generate --fbs japan.fbs --language c-sharp --output ./
 
       - name: Generate Global Flatbuffers
         run: |
-          ./bafb generate --fbs global.fbs --language csharp --output ./
+          ./bafb generate --fbs global.fbs --language c-sharp --output ./
 
       - name: Clean up executable and zip file
         run: |
