@@ -196,7 +196,7 @@ dependencies = [
 
 [[package]]
 name = "bafb"
-version = "1.0.3"
+version = "1.0.4"
 dependencies = [
  "anyhow",
  "baad",

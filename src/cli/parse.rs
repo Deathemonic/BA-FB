@@ -213,6 +213,7 @@ impl CommandHandler {
             languages: vec![*languages],
             no_warnings: true,
             scoped_enums: true,
+            gen_object_api: true,
             output_path: Some(output.to_path_buf()),
             ..Default::default()
         };
