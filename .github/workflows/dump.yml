@@ -37,9 +37,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git config --local http.postBuffer 524288000
-          git config --local http.lowSpeedLimit 0
-          git config --local http.lowSpeedTime 999999
 
       - name: Switch to data branch
         run: |
@@ -96,24 +93,12 @@ jobs:
       - name: Run Japan dump
         timeout-minutes: 10
         run: |
-          Write-Host "Starting Japan dump..."
           .\bafb.exe dump japan --output .\Japan
-          if ($LASTEXITCODE -ne 0) {
-            Write-Host "Japan dump failed with exit code $LASTEXITCODE"
-            exit $LASTEXITCODE
-          }
-          Write-Host "Japan dump completed successfully"
 
       - name: Run Global dump
         timeout-minutes: 10
         run: |
-          Write-Host "Starting Global dump..."
           .\bafb.exe dump global --output .\Global
-          if ($LASTEXITCODE -ne 0) {
-            Write-Host "Global dump failed with exit code $LASTEXITCODE"
-            exit $LASTEXITCODE
-          }
-          Write-Host "Global dump completed successfully"
 
       - name: Clean up executable and zip file
         run: |
@@ -121,12 +106,10 @@ jobs:
 
       - name: Check for large files and update LFS tracking
         run: |
-          Write-Host "=== Checking for large files ==="
           $largeFiles = Get-ChildItem -Path "Japan", "Global" -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Length -gt 50MB }
           
           if ($largeFiles) {
             foreach ($file in $largeFiles) {
-              Write-Host "Adding LFS tracking for: $($file.FullName)"
               git lfs track "$($file.FullName)"
             }
             
@@ -135,38 +118,18 @@ jobs:
             if ($LASTEXITCODE -ne 0) {
               git commit -m "Update LFS tracking for new large files"
             }
-          } else {
-            Write-Host "No large files found"
           }
-          
-          Write-Host "=== LFS tracked files ==="
-          git lfs ls-files
 
       - name: Add and commit changes with LFS
         run: |
           git add .
           $staged = git diff --staged --quiet
           if ($LASTEXITCODE -eq 0) {
-            Write-Host "No changes to commit"
             exit 0
           }
           
           $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
           git commit -m "Update data dumps - $timestamp"
-          
-          for ($i = 1; $i -le 5; $i++) {
-            Write-Host "Push attempt $i of 5"
-            git push origin data --force
-            if ($LASTEXITCODE -eq 0) {
-              Write-Host "Push successful!"
-              exit 0
-            } else {
-              Write-Host "Push failed, waiting before retry..."
-              Start-Sleep -Seconds ($i * 15)
-            }
-          }
-          
-          Write-Host "All push attempts failed"
-          exit 1
+          git push origin data --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
