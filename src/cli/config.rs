@@ -161,32 +161,24 @@ impl Config {
             };
         }
 
-        merge_field!(binary_files);
-        merge_field!(metadata_file);
-        merge_field!(image_base);
-        merge_field!(select_outputs_only);
-        merge_field!(cs_out);
-        merge_field!(py_out);
-        merge_field!(cpp_out);
-        merge_field!(json_out);
-        merge_field!(dll_out);
-        merge_field!(metadata_out);
-        merge_field!(binary_out);
-        merge_field!(excluded_namespaces);
-        merge_field!(layout);
-        merge_field!(sort);
-        merge_field!(flatten);
-        merge_field!(suppress_metadata);
-        merge_field!(suppress_dll_metadata);
-        merge_field!(must_compile);
-        merge_field!(separate_attributes);
-        merge_field!(create_project);
-        merge_field!(cpp_compiler);
-        merge_field!(script_target);
-        merge_field!(unity_path);
-        merge_field!(unity_assemblies);
+        merge_field!(input_paths);
+        merge_field!(output);
+        merge_field!(output_cpp_scaffolding);
         merge_field!(unity_version);
-        merge_field!(unity_version_from_asset);
-        merge_field!(plugin_options);
+        merge_field!(compiler_type);
+        merge_field!(output_csharp_stub);
+        merge_field!(layout);
+        merge_field!(flatten_hierarchy);
+        merge_field!(sorting_mode);
+        merge_field!(suppress_metadata);
+        merge_field!(compilable);
+        merge_field!(separate_assembly_attributes);
+        merge_field!(output_disassembler_metadata);
+        merge_field!(disassembler);
+        merge_field!(output_dummy_dlls);
+        merge_field!(output_vs_solution);
+        merge_field!(unity_path);
+        merge_field!(unity_assemblies_path);
+        merge_field!(extract_il2cpp_files);
     }
 }

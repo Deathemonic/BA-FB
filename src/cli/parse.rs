@@ -178,16 +178,13 @@ impl CommandHandler {
         let (libil2cpp, metadata) = self.get_il2cpp_paths(server_config, file_manager);
 
         let mut il2cpp_options = Il2CppDumperOptions {
-            binary_files: vec![libil2cpp],
-            metadata_file: Some(metadata),
-            cs_out: Some(output.join("types.cs")),
-            py_out: Some(output.join("il2cpp.py")),
-            json_out: Some(output.join("metadata.json")),
-            dll_out: Some(output.join("dummy")),
+            input_paths: vec![libil2cpp, metadata],
+            output: Some(output.to_path_buf()),
+            output_csharp_stub: true,
+            output_dummy_dlls: true,
             ..Default::default()
         };
 
-        // Apply configuration
         self.config.merge_il2cpp_dumper_config(&mut il2cpp_options);
         
         il2cpp_dumper.run(il2cpp_options)

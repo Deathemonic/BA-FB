@@ -30,9 +30,21 @@ reflect_types = false
 reflect_names = false
 
 [il2cpp_dumper]
+# output = "./il2cpp_output"
+output_cpp_scaffolding = false
+unity_version = "2022.3.0f1"
+# compiler_type = "il2cpp"
+output_csharp_stub = true
 layout = "single"
-sort = "index"
-flatten = false
+flatten_hierarchy = false
+# sorting_mode = "index"
 suppress_metadata = false
-excluded_namespaces = ["System", "Unity", "UnityEngine"]
-script_target = "IDA"
+compilable = false
+separate_assembly_attributes = false
+output_disassembler_metadata = false
+# disassembler = "IDA"
+output_dummy_dlls = true
+output_vs_solution = false
+# unity_path = "/path/to/unity"
+# unity_assemblies_path = "/path/to/assemblies"
+extract_il2cpp_files = false
