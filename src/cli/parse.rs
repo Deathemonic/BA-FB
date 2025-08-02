@@ -182,6 +182,8 @@ impl CommandHandler {
             output: Some(output.to_path_buf()),
             output_csharp_stub: true,
             output_dummy_dlls: true,
+            output_disassembler_metadata: true,
+            disassembler: Some("IDA".to_string()),
             ..Default::default()
         };
 
@@ -196,7 +198,7 @@ impl CommandHandler {
         let (libil2cpp, _) = self.get_il2cpp_paths(server_config, file_manager);
 
         let mut fbs_options = FbsDumperOptions {
-            dummy_dir: output.join("dummy"),
+            dummy_dir: output.join("dll"),
             libil2cpp_path: libil2cpp,
             output_file: Some(output.join("BlueArchive.fbs")),
             namespace: Some(match server_config.region {
