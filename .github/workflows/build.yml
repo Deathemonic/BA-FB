@@ -70,7 +70,7 @@ jobs:
   
   build-macos-x86:
     name: Build for macOS (x86_64)
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -100,7 +100,7 @@ jobs:
 
   build-macos-aarch64:
     name: Build for macOS (aarch64)
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
