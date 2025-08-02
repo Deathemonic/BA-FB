@@ -1,0 +1,38 @@
+# BAFB Configuration File
+
+[fbs_dumper]
+force_snake_case = true
+namespace_to_look_for = "BlueArchive"
+
+[flatc]
+no_warnings = true
+scoped_enums = true
+gen_object_api = true
+rust_module_root_file = true
+rust_serialize = false
+cpp_std = "c++17"
+cpp_ptr_type = "std::unique_ptr"
+# cpp_include = ["custom_header.h"]
+python_typing = true
+# python_version = "3.8"
+ts_flat_files = false
+ts_entry_points = false
+strict_json = false
+defaults_json = false
+gen_compare = false
+gen_nullable = false
+gen_all = false
+filename_suffix = "_generated"
+# filename_ext = ".h"
+# include_prefix = "includes/"
+keep_prefix = false
+reflect_types = false
+reflect_names = false
+
+[il2cpp_dumper]
+layout = "single"
+sort = "index"
+flatten = false
+suppress_metadata = false
+excluded_namespaces = ["System", "Unity", "UnityEngine"]
+script_target = "IDA"

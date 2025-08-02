@@ -1,5 +1,6 @@
 use anyhow::Result;
-use baad_core::{errors::{ErrorContext, ErrorExt}};
+use baad_core::errors::{ErrorContext, ErrorExt};
+use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -7,7 +8,7 @@ pub struct FbsDumper {
     binary: PathBuf,
 }
 
-#[derive(Default)]
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub struct FbsDumperOptions {
     pub dummy_dir: PathBuf,
     pub libil2cpp_path: PathBuf,

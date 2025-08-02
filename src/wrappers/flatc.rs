@@ -1,6 +1,7 @@
 use anyhow::Result;
 use baad_core::errors::{ErrorContext, ErrorExt};
 use clap::ValueEnum;
+use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -8,11 +9,12 @@ pub struct FlatC {
     binary: PathBuf,
 }
 
-#[derive(Debug, Clone, ValueEnum, Copy)]
+#[derive(Debug, Clone, ValueEnum, Copy, Serialize, Deserialize)]
 pub enum Language {
     Cpp,
     Java,
     Kotlin,
+    KotlinKmp,
     CSharp,
     Go,
     Python,
@@ -27,7 +29,7 @@ pub enum Language {
     Nim,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub enum CppStd {
     Cpp0x,
@@ -35,7 +37,7 @@ pub enum CppStd {
     Cpp17,
 }
 
-#[derive(Default)]
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub struct FlatCOptions {
     pub languages: Vec<Language>,
     pub grpc: bool,
@@ -43,13 +45,16 @@ pub struct FlatCOptions {
     pub include_paths: Vec<PathBuf>,
     pub binary: bool,
     pub json: bool,
+    pub jsonschema: bool,
     pub strict_json: bool,
     pub allow_non_utf8: bool,
     pub natural_utf8: bool,
     pub defaults_json: bool,
+    pub unknown_json: bool,
     pub no_prefix: bool,
     pub scoped_enums: bool,
     pub no_emit_min_max_enum_values: bool,
+    pub swift_implementation_only: bool,
     pub no_includes: bool,
     pub gen_mutable: bool,
     pub gen_onefile: bool,
@@ -57,25 +62,38 @@ pub struct FlatCOptions {
     pub gen_object_api: bool,
     pub gen_compare: bool,
     pub gen_nullable: bool,
+    pub java_package_prefix: Option<String>,
+    pub java_checkerframework: bool,
     pub gen_generated: bool,
     pub gen_jvmstatic: bool,
     pub gen_all: bool,
+    pub gen_json_emit: bool,
     pub cpp_include: Vec<String>,
     pub cpp_ptr_type: Option<String>,
     pub cpp_str_type: Option<String>,
     pub cpp_str_flex_ctor: bool,
+    pub cpp_field_case_style: Option<String>,
     pub no_cpp_direct_copy: bool,
     pub cpp_std: Option<CppStd>,
+    pub cpp_static_reflection: bool,
     pub object_prefix: Option<String>,
     pub object_suffix: Option<String>,
     pub go_namespace: Option<String>,
     pub go_import: Option<String>,
+    pub go_module_name: Option<String>,
     pub raw_binary: bool,
     pub size_prefixed: bool,
     pub proto: bool,
+    pub proto_namespace_suffix: Option<String>,
     pub oneof_union: bool,
+    pub keep_proto_id: bool,
+    pub proto_id_gap: Option<String>,
     pub schema: bool,
+    pub bfbs_filenames: Option<PathBuf>,
+    pub bfbs_absolute_paths: bool,
     pub bfbs_comments: bool,
+    pub bfbs_builtins: bool,
+    pub bfbs_gen_embed: bool,
     pub conform: Option<PathBuf>,
     pub conform_includes: Vec<PathBuf>,
     pub filename_suffix: Option<String>,
@@ -84,6 +102,8 @@ pub struct FlatCOptions {
     pub keep_prefix: bool,
     pub reflect_types: bool,
     pub reflect_names: bool,
+    pub rust_serialize: bool,
+    pub rust_module_root_file: bool,
     pub root_type: Option<String>,
     pub require_explicit_ids: bool,
     pub force_defaults: bool,
@@ -91,10 +111,21 @@ pub struct FlatCOptions {
     pub force_empty_vectors: bool,
     pub flexbuffers: bool,
     pub no_warnings: bool,
+    pub warnings_as_errors: bool,
     pub cs_global_alias: bool,
+    pub cs_gen_json_serializer: bool,
     pub json_nested_bytes: bool,
+    pub ts_flat_files: bool,
+    pub ts_entry_points: bool,
+    pub annotate_sparse_vectors: bool,
+    pub annotate: Option<PathBuf>,
+    pub no_leak_private_annotation: bool,
     pub python_no_type_prefix_suffix: bool,
     pub python_typing: bool,
+    pub python_version: Option<String>,
+    pub python_gen_numpy: bool,
+    pub ts_omit_entrypoint: bool,
+    pub file_names_only: bool,
     pub grpc_filename_suffix: Option<String>,
     pub grpc_additional_header: Vec<String>,
     pub grpc_search_path: Option<String>,
@@ -119,6 +150,7 @@ impl FlatC {
                 Language::Cpp => cmd.arg("--cpp"),
                 Language::Java => cmd.arg("--java"),
                 Language::Kotlin => cmd.arg("--kotlin"),
+                Language::KotlinKmp => cmd.arg("--kotlin-kmp"),
                 Language::CSharp => cmd.arg("--csharp"),
                 Language::Go => cmd.arg("--go"),
                 Language::Python => cmd.arg("--python"),
@@ -152,6 +184,9 @@ impl FlatC {
         if options.json {
             cmd.arg("--json");
         }
+        if options.jsonschema {
+            cmd.arg("--jsonschema");
+        }
 
         if options.strict_json {
             cmd.arg("--strict-json");
@@ -165,6 +200,9 @@ impl FlatC {
         if options.defaults_json {
             cmd.arg("--defaults-json");
         }
+        if options.unknown_json {
+            cmd.arg("--unknown-json");
+        }
 
         if options.no_prefix {
             cmd.arg("--no-prefix");
@@ -174,6 +212,9 @@ impl FlatC {
         }
         if options.no_emit_min_max_enum_values {
             cmd.arg("--no-emit-min-max-enum-values");
+        }
+        if options.swift_implementation_only {
+            cmd.arg("--swift-implementation-only");
         }
         if options.no_includes {
             cmd.arg("--no-includes");
@@ -196,6 +237,12 @@ impl FlatC {
         if options.gen_nullable {
             cmd.arg("--gen-nullable");
         }
+        if let Some(prefix) = &options.java_package_prefix {
+            cmd.arg("--java-package-prefix").arg(prefix);
+        }
+        if options.java_checkerframework {
+            cmd.arg("--java-checkerframework");
+        }
         if options.gen_generated {
             cmd.arg("--gen-generated");
         }
@@ -204,6 +251,9 @@ impl FlatC {
         }
         if options.gen_all {
             cmd.arg("--gen-all");
+        }
+        if options.gen_json_emit {
+            cmd.arg("--gen-json-emit");
         }
 
         for include in &options.cpp_include {
@@ -218,6 +268,9 @@ impl FlatC {
         if options.cpp_str_flex_ctor {
             cmd.arg("--cpp-str-flex-ctor");
         }
+        if let Some(case_style) = &options.cpp_field_case_style {
+            cmd.arg("--cpp-field-case-style").arg(case_style);
+        }
         if options.no_cpp_direct_copy {
             cmd.arg("--no-cpp-direct-copy");
         }
@@ -227,6 +280,9 @@ impl FlatC {
                 CppStd::Cpp11 => "c++11",
                 CppStd::Cpp17 => "c++17",
             });
+        }
+        if options.cpp_static_reflection {
+            cmd.arg("--cpp-static-reflection");
         }
         if let Some(prefix) = &options.object_prefix {
             cmd.arg("--object-prefix").arg(prefix);
@@ -241,6 +297,9 @@ impl FlatC {
         if let Some(go_import) = &options.go_import {
             cmd.arg("--go-import").arg(go_import);
         }
+        if let Some(module_name) = &options.go_module_name {
+            cmd.arg("--go-module-name").arg(module_name);
+        }
 
         if options.raw_binary {
             cmd.arg("--raw-binary");
@@ -251,14 +310,35 @@ impl FlatC {
         if options.proto {
             cmd.arg("--proto");
         }
+        if let Some(suffix) = &options.proto_namespace_suffix {
+            cmd.arg("--proto-namespace-suffix").arg(suffix);
+        }
         if options.oneof_union {
             cmd.arg("--oneof-union");
+        }
+        if options.keep_proto_id {
+            cmd.arg("--keep-proto-id");
+        }
+        if let Some(gap_action) = &options.proto_id_gap {
+            cmd.arg("--proto-id-gap").arg(gap_action);
         }
         if options.schema {
             cmd.arg("--schema");
         }
+        if let Some(filenames_path) = &options.bfbs_filenames {
+            cmd.arg("--bfbs-filenames").arg(filenames_path);
+        }
+        if options.bfbs_absolute_paths {
+            cmd.arg("--bfbs-absolute-paths");
+        }
         if options.bfbs_comments {
             cmd.arg("--bfbs-comments");
+        }
+        if options.bfbs_builtins {
+            cmd.arg("--bfbs-builtins");
+        }
+        if options.bfbs_gen_embed {
+            cmd.arg("--bfbs-gen-embed");
         }
 
         if let Some(conform) = &options.conform {
@@ -287,6 +367,12 @@ impl FlatC {
         if options.reflect_names {
             cmd.arg("--reflect-names");
         }
+        if options.rust_serialize {
+            cmd.arg("--rust-serialize");
+        }
+        if options.rust_module_root_file {
+            cmd.arg("--rust-module-root-file");
+        }
         if let Some(root_type) = &options.root_type {
             cmd.arg("--root-type").arg(root_type);
         }
@@ -309,17 +395,50 @@ impl FlatC {
         if options.no_warnings {
             cmd.arg("--no-warnings");
         }
+        if options.warnings_as_errors {
+            cmd.arg("--warnings-as-errors");
+        }
         if options.cs_global_alias {
             cmd.arg("--cs-global-alias");
         }
+        if options.cs_gen_json_serializer {
+            cmd.arg("--cs-gen-json-serializer");
+        }
         if options.json_nested_bytes {
             cmd.arg("--json-nested-bytes");
+        }
+        if options.ts_flat_files {
+            cmd.arg("--ts-flat-files");
+        }
+        if options.ts_entry_points {
+            cmd.arg("--ts-entry-points");
+        }
+        if options.annotate_sparse_vectors {
+            cmd.arg("--annotate-sparse-vectors");
+        }
+        if let Some(schema) = &options.annotate {
+            cmd.arg("--annotate").arg(schema);
+        }
+        if options.no_leak_private_annotation {
+            cmd.arg("--no-leak-private-annotation");
         }
         if options.python_no_type_prefix_suffix {
             cmd.arg("--python-no-type-prefix-suffix");
         }
         if options.python_typing {
             cmd.arg("--python-typing");
+        }
+        if let Some(version) = &options.python_version {
+            cmd.arg("--python-version").arg(version);
+        }
+        if options.python_gen_numpy {
+            cmd.arg("--python-gen-numpy");
+        }
+        if options.ts_omit_entrypoint {
+            cmd.arg("--ts-omit-entrypoint");
+        }
+        if options.file_names_only {
+            cmd.arg("--file-names-only");
         }
 
         if let Some(suffix) = &options.grpc_filename_suffix {

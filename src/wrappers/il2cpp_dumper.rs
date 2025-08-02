@@ -1,5 +1,6 @@
 use anyhow::Result;
-use baad_core::{errors::{ErrorContext, ErrorExt}};
+use baad_core::errors::{ErrorContext, ErrorExt};
+use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -7,6 +8,7 @@ pub struct Il2CppDumper {
     binary: PathBuf,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Il2CppDumperOptions {
     pub binary_files: Vec<PathBuf>,
     pub metadata_file: Option<PathBuf>,

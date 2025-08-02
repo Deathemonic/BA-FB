@@ -10,6 +10,10 @@ pub struct Args {
     #[command(subcommand)]
     pub command: Option<Commands>,
 
+    /// Configuration file path (defaults to ./bafb.toml)
+    #[arg(long, global = true)]
+    pub config: Option<PathBuf>,
+
     /// Force update
     #[arg(short, long)]
     pub update: bool,

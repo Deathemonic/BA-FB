@@ -17,6 +17,72 @@ You can download the latest pre-build binaries at [Releases](https://github.com/
 cargo install --git "https://github.com/Deathemonic/BA-FB" --locked
 ```
 
+## Usage
+
+```shell
+# Dump Blue Archive flatbuffers from Japan server
+bafb dump japan -o ./output
+
+# Dump Blue Archive flatbuffers from Global server  
+bafb dump global -o ./output
+
+# Generate Rust code from flatbuffer schema
+bafb generate -f BlueArchive.fbs -l rust -o ./generated
+
+# Use custom configuration file
+bafb dump japan -o ./output --config ./my_configs.toml
+
+# Force update all tools and APKs
+bafb --update
+```
+
+<details>
+  <summary>Command Line</summary>
+
+| Command/Option | Short | Description                                               |
+|----------------|-------|-----------------------------------------------------------|
+| `dump`         |       | Dump Blue Archive flatbuffers                             |
+| `generate`     |       | Generate code from flatbuffer schema                      |
+| `help`         |       | Print this message or the help of the given subcommand(s) |
+| `--config`     |       | Path to configuration file (defaults to `./bafb.toml`)    |
+| `--update`     | `-u`  | Force update all tools and APK files                      |
+| `--help`       | `-h`  | Print help                                                |
+| `--version`    | `-V`  | Print version                                             |
+
+---
+
+### `bafb dump --help`
+
+| Command  | Description                                               |
+|----------|-----------------------------------------------------------|
+| `japan`  | Dump from Japan server                                    |
+| `global` | Dump from Global server                                   |
+| `help`   | Print this message or the help of the given subcommand(s) |
+
+---
+
+### `bafb dump {japan|global} --help`
+
+| Option              | Short | Description                           | Default |
+|---------------------|-------|---------------------------------------|---------|
+| `--output <OUTPUT>` | `-o`  | Output directory for dumped files     |         |
+| `--help`            | `-h`  | Print help                            |         |
+
+---
+
+### `bafb generate --help`
+
+| Option                | Short | Description                                                                                                                                                           | Default |
+|-----------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `--fbs <FBS>`         | `-f`  | FlatBuffers schema file (.fbs)                                                                                                                                        |         |
+| `--language <LANG>`   | `-l`  | Target language                                                                                                                                                       |         |
+| `--output <OUTPUT>`   | `-o`  | Output directory for generated code                                                                                                                                   |         |
+| `--help`              | `-h`  | Print help                                                                                                                                                            |         |
+
+**Supported Languages:** `cpp`, `java`, `kotlin`, `kotlin-kmp`, `csharp`, `go`, `python`, `javascript`, `typescript`, `php`, `dart`, `lua`, `lobster`, `rust`, `swift`, `nim`
+
+</details>
+
 ## Building
 
 1. Install [rustup](https://rustup.rs)
@@ -47,6 +113,7 @@ Don't like my [shitty code](https://www.reddit.com/r/programminghorror) and what
 - [Hiro420/FbsDumperV2](https://github.com/Hiro420/FbsDumperV2)
 - [ArkanDash/FbsDumperV2](https://github.com/ArkanDash/FbsDumperV2)
 - [LukeFZ/Il2CppInspectorRedux](https://github.com/LukeFZ/Il2CppInspectorRedux)
+- [A Certain Flatbuffer Compiler]()
 
 ### Copyright
 Blue Archive is a registered trademark of NAT GAMES Co., Ltd., NEXON Korea Corp., and Yostar, Inc.

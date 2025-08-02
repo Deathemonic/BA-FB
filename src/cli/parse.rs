@@ -1,4 +1,5 @@
 use crate::cli::args::{Args, Commands, DumpTarget};
+use crate::cli::config::Config;
 use crate::tools::extract::ToolsExtractor;
 use crate::tools::fetch::ToolsFetcher;
 use crate::wrappers::fbs_dumper::{FbsDumper, FbsDumperOptions};
@@ -15,11 +16,13 @@ use std::rc::Rc;
 
 pub struct CommandHandler {
     args: Args,
+    config: Config,
 }
 
 impl CommandHandler {
     pub fn new(args: Args) -> Result<Self> {
-        Ok(Self { args })
+        let config = Config::load(args.config.as_deref())?;
+        Ok(Self { args, config })
     }
 
     pub async fn handle(&self) -> Result<()> {
@@ -174,7 +177,7 @@ impl CommandHandler {
         
         let (libil2cpp, metadata) = self.get_il2cpp_paths(server_config, file_manager);
 
-        let il2cpp_options = Il2CppDumperOptions {
+        let mut il2cpp_options = Il2CppDumperOptions {
             binary_files: vec![libil2cpp],
             metadata_file: Some(metadata),
             cs_out: Some(output.join("types.cs")),
@@ -183,6 +186,9 @@ impl CommandHandler {
             dll_out: Some(output.join("dummy")),
             ..Default::default()
         };
+
+        // Apply configuration
+        self.config.merge_il2cpp_dumper_config(&mut il2cpp_options);
         
         il2cpp_dumper.run(il2cpp_options)
     }
@@ -192,7 +198,7 @@ impl CommandHandler {
         
         let (libil2cpp, _) = self.get_il2cpp_paths(server_config, file_manager);
 
-        let fbs_options = FbsDumperOptions {
+        let mut fbs_options = FbsDumperOptions {
             dummy_dir: output.join("dummy"),
             libil2cpp_path: libil2cpp,
             output_file: Some(output.join("BlueArchive.fbs")),
@@ -203,20 +209,26 @@ impl CommandHandler {
             ..Default::default()
         };
 
+        self.config.merge_fbs_dumper_config(&mut fbs_options);
+
         fbs_dumper.run(fbs_options)
     }
 
     fn run_flatc(&self, flatc: &FlatC, languages: &Language, fbs: &Path, output: &Path) -> Result<()> {
         info!("Generating flatbuffers...");
 
-        let flatc_options = FlatCOptions {
+        let mut flatc_options = FlatCOptions {
             languages: vec![*languages],
+            output_path: Some(output.to_path_buf()),
             no_warnings: true,
             scoped_enums: true,
             gen_object_api: true,
-            output_path: Some(output.to_path_buf()),
+            rust_module_root_file: true,
+            rust_serialize: true,
             ..Default::default()
         };
+
+        self.config.merge_flatc_config(&mut flatc_options);
 
         flatc.compile(flatc_options, vec![fbs.to_path_buf()], vec![])
     }
