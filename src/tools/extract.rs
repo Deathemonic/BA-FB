@@ -55,7 +55,7 @@ impl ToolsExtractor {
         let target_dir = self
             .file_manager
             .get_data_path("tools/Il2CppInspectorRedux");
-        let binary_name = Self::get_binary_name("Il2CppInspector");
+        let binary_name = Self::get_binary_name("Il2CppInspector.Redux.CLI");
         let binary_path = target_dir.join(&binary_name);
 
         if binary_path.exists() && !forced {
