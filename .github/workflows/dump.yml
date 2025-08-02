@@ -60,22 +60,38 @@ jobs:
           git lfs track "*.db"
           git lfs track "*.txt"
           
-          find . -type f -size +50M -not -path "./.git/*" -not -name "bafb" -not -name "*.zip" | while read file; do
-            echo "Tracking large file: $file"
-            git lfs track "$file"
-          done
+          # Find large files and track them with LFS
+          Get-ChildItem -Recurse -File | Where-Object { 
+            $_.Length -gt 50MB -and 
+            $_.FullName -notlike "*\.git\*" -and 
+            $_.Name -ne "bafb.exe" -and 
+            $_.Name -notlike "*.zip" 
+          } | ForEach-Object {
+            Write-Host "Tracking large file: $($_.FullName)"
+            git lfs track "$($_.FullName)"
+          }
           
           git add .gitattributes
           
-          if ! git diff --staged --quiet; then
+          $staged = git diff --staged --quiet
+          if ($LASTEXITCODE -ne 0) {
             git commit -m "Add Git LFS tracking for large files"
-          fi
+          }
 
       - name: Clean previous data
         run: |
-          rm -rf Japan Global
-          find . -name ".git" -prune -o -name "bafb" -prune -o -name "*.zip" -prune -o -name ".gitattributes" -prune -o -type f -exec rm {} +
-          find . -name ".git" -prune -o -name "bafb" -prune -o -type d -empty -delete 2>/dev/null || true
+          Remove-Item -Path "Japan", "Global" -Recurse -Force -ErrorAction SilentlyContinue
+          Get-ChildItem -Recurse -File | Where-Object { 
+            $_.FullName -notlike "*\.git\*" -and 
+            $_.Name -ne "bafb.exe" -and 
+            $_.Name -notlike "*.zip" -and 
+            $_.Name -ne ".gitattributes" 
+          } | Remove-Item -Force
+          Get-ChildItem -Recurse -Directory | Where-Object { 
+            $_.FullName -notlike "*\.git\*" -and 
+            $_.Name -ne "bafb.exe" -and 
+            (Get-ChildItem $_.FullName -Force | Measure-Object).Count -eq 0 
+          } | Remove-Item -Force -ErrorAction SilentlyContinue
 
       - name: Run Japan dump
         timeout-minutes: 10
@@ -105,44 +121,52 @@ jobs:
 
       - name: Check for large files and update LFS tracking
         run: |
-          echo "=== Checking for large files ==="
-          find Japan Global -type f -size +50M 2>/dev/null || echo "No large files found"
+          Write-Host "=== Checking for large files ==="
+          $largeFiles = Get-ChildItem -Path "Japan", "Global" -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Length -gt 50MB }
           
-          find Japan Global -type f -size +50M 2>/dev/null | while read file; do
-            echo "Adding LFS tracking for: $file"
-            git lfs track "$file"
-          done
+          if ($largeFiles) {
+            foreach ($file in $largeFiles) {
+              Write-Host "Adding LFS tracking for: $($file.FullName)"
+              git lfs track "$($file.FullName)"
+            }
+            
+            git add .gitattributes
+            $staged = git diff --staged --quiet .gitattributes
+            if ($LASTEXITCODE -ne 0) {
+              git commit -m "Update LFS tracking for new large files"
+            }
+          } else {
+            Write-Host "No large files found"
+          }
           
-          git add .gitattributes
-          if ! git diff --staged --quiet .gitattributes; then
-            git commit -m "Update LFS tracking for new large files"
-          fi
-          
-          echo "=== LFS tracked files ==="
+          Write-Host "=== LFS tracked files ==="
           git lfs ls-files
 
       - name: Add and commit changes with LFS
         run: |
           git add .
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
+          $staged = git diff --staged --quiet
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "No changes to commit"
             exit 0
-          fi
+          }
           
-          git commit -m "Update data dumps - $(date '+%Y-%m-%d %H:%M:%S')"
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+          git commit -m "Update data dumps - $timestamp"
           
-          for i in {1..5}; do
-            echo "Push attempt $i of 5"
-            if git push origin data --force; then
-              echo "Push successful!"
+          for ($i = 1; $i -le 5; $i++) {
+            Write-Host "Push attempt $i of 5"
+            git push origin data --force
+            if ($LASTEXITCODE -eq 0) {
+              Write-Host "Push successful!"
               exit 0
-            else
-              echo "Push failed, waiting before retry..."
-              sleep $((i * 15))
-            fi
-          done
+            } else {
+              Write-Host "Push failed, waiting before retry..."
+              Start-Sleep -Seconds ($i * 15)
+            }
+          }
           
-          echo "All push attempts failed"
+          Write-Host "All push attempts failed"
           exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
