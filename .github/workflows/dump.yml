@@ -79,12 +79,66 @@ jobs:
           find . -name ".git" -prune -o -name "bafb" -prune -o -type d -empty -delete 2>/dev/null || true
 
       - name: Run Japan dump
+        timeout-minutes: 10
+        env:
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_NOLOGO: 1
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
         run: |
-          ./bafb dump japan --output ./Japan
+          echo "Starting Japan dump..."
+          echo "Process tree before:"
+          ps aux | head -20
+          
+          # Try running with explicit timeout and process cleanup
+          timeout --preserve-status 8m ./bafb dump japan --output ./Japan
+          exit_code=$?
+          
+          echo "Process tree after:"
+          ps aux | head -20
+          
+          if [ $exit_code -eq 124 ]; then
+            echo "Japan dump timed out"
+            # Kill any remaining processes
+            pkill -f "Il2CppInspector" || true
+            pkill -f "FbsDumper" || true
+            exit 1
+          elif [ $exit_code -ne 0 ]; then
+            echo "Japan dump failed with exit code $exit_code"
+            exit $exit_code
+          else
+            echo "Japan dump completed successfully"
+          fi
 
       - name: Run Global dump
+        timeout-minutes: 10
+        env:
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_NOLOGO: 1
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
         run: |
-          ./bafb dump global --output ./Global
+          echo "Starting Global dump..."
+          echo "Process tree before:"
+          ps aux | head -20
+          
+          # Try running with explicit timeout and process cleanup
+          timeout --preserve-status 8m ./bafb dump global --output ./Global
+          exit_code=$?
+          
+          echo "Process tree after:"
+          ps aux | head -20
+          
+          if [ $exit_code -eq 124 ]; then
+            echo "Global dump timed out"
+            # Kill any remaining processes
+            pkill -f "Il2CppInspector" || true
+            pkill -f "FbsDumper" || true
+            exit 1
+          elif [ $exit_code -ne 0 ]; then
+            echo "Global dump failed with exit code $exit_code"
+            exit $exit_code
+          else
+            echo "Global dump completed successfully"
+          fi
 
       - name: Clean up executable and zip file
         run: |
