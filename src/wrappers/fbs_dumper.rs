@@ -10,8 +10,8 @@ pub struct FbsDumper {
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct FbsDumperOptions {
-    pub dummy_dir: PathBuf,
-    pub libil2cpp_path: PathBuf,
+    pub dummy_dll: PathBuf,
+    pub game_assembly: PathBuf,
     pub output_file: Option<PathBuf>,
     pub namespace: Option<String>,
     pub force_snake_case: bool,
@@ -29,8 +29,8 @@ impl FbsDumper {
     pub fn run(&self, options: FbsDumperOptions) -> Result<()> {
         let mut cmd = Command::new(&self.binary);
 
-        cmd.arg("--dummy-dir").arg(&options.dummy_dir);
-        cmd.arg("--libil2cpp-path").arg(&options.libil2cpp_path);
+        cmd.arg("--dummy-dll").arg(&options.dummy_dll);
+        cmd.arg("--game-assembly").arg(&options.game_assembly);
 
         if let Some(output_file) = &options.output_file {
             cmd.arg("--output-file").arg(output_file);

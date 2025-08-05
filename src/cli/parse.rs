@@ -198,8 +198,8 @@ impl CommandHandler {
         let (libil2cpp, _) = self.get_il2cpp_paths(server_config, file_manager);
 
         let mut fbs_options = FbsDumperOptions {
-            dummy_dir: output.join("dll"),
-            libil2cpp_path: libil2cpp,
+            dummy_dll: output.join("dll"),
+            game_assembly: libil2cpp,
             output_file: Some(output.join("BlueArchive.fbs")),
             namespace: Some(match server_config.region {
                 ServerRegion::Japan => "Japan".to_string(),
