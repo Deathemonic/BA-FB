@@ -29,23 +29,23 @@ impl FbsDumper {
     pub fn run(&self, options: FbsDumperOptions) -> Result<()> {
         let mut cmd = Command::new(&self.binary);
 
-        cmd.arg("--dummy-dll").arg(&options.dummy_dll);
-        cmd.arg("--game-assembly").arg(&options.game_assembly);
+        cmd.arg("-dummydll").arg(&options.dummy_dll);
+        cmd.arg("-gameassembly").arg(&options.game_assembly);
 
         if let Some(output_file) = &options.output_file {
-            cmd.arg("--output-file").arg(output_file);
+            cmd.arg("-outputfile").arg(output_file);
         }
 
         if let Some(namespace) = &options.namespace {
-            cmd.arg("--namespace").arg(namespace);
+            cmd.arg("-namespace").arg(namespace);
         }
 
         if options.force_snake_case {
-            cmd.arg("--force-snake-case");
+            cmd.arg("-forcesnakecase");
         }
 
         if let Some(namespace_to_look_for) = &options.namespace_to_look_for {
-            cmd.arg("--namespace-to-look-for").arg(namespace_to_look_for);
+            cmd.arg("-namespacetolookfor").arg(namespace_to_look_for);
         }
 
         let status = cmd.status()
