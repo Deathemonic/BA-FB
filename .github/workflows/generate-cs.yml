@@ -14,9 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
+      - name: Checkout flatdata-cs branch
         uses: actions/checkout@v4
         with:
+          ref: flatdata-cs
           fetch-depth: 0
 
       - name: Download latest release
@@ -32,10 +33,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-
-      - name: Switch to flatdata branch
-        run: |
-          git checkout -B flatdata-cs
 
       - name: Clean previous data
         run: |
@@ -71,6 +68,6 @@ jobs:
           fi
           
           git commit -m "Update generated flatbuffers - $(date '+%Y-%m-%d %H:%M:%S')"
-          git push origin flatdata-cs --force
+          git push origin flatdata-cs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
