@@ -14,9 +14,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout data branch
         uses: actions/checkout@v4
         with:
+          ref: data
           fetch-depth: 0
           lfs: true
 
@@ -37,10 +38,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-
-      - name: Switch to data branch
-        run: |
-          git checkout -B data
 
       - name: Setup Git LFS
         run: |
@@ -130,6 +127,6 @@ jobs:
           
           $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
           git commit -m "Update data dumps - $timestamp"
-          git push origin data --force
+          git push origin data
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
