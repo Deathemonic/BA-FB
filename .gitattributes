@@ -36,3 +36,7 @@ D:/a/BA-FB/BA-FB/Japan/il2cpp.h filter=lfs diff=lfs merge=lfs -text
 D:/a/BA-FB/BA-FB/Japan/il2cpp.json filter=lfs diff=lfs merge=lfs -text
 D:/a/BA-FB/BA-FB/Global/il2cpp.h filter=lfs diff=lfs merge=lfs -text
 D:/a/BA-FB/BA-FB/Global/il2cpp.json filter=lfs diff=lfs merge=lfs -text
+D:/a/BA-FB/BA-FB/Global/il2cpp.h filter=lfs diff=lfs merge=lfs -text
+D:/a/BA-FB/BA-FB/Global/il2cpp.json filter=lfs diff=lfs merge=lfs -text
+D:/a/BA-FB/BA-FB/Japan/il2cpp.h filter=lfs diff=lfs merge=lfs -text
+D:/a/BA-FB/BA-FB/Japan/il2cpp.json filter=lfs diff=lfs merge=lfs -text
