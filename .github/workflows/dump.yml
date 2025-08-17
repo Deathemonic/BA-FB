@@ -38,6 +38,10 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
+      - name: Switch to data branch
+        run: |
+          git checkout -B data
+
       - name: Setup Git LFS
         run: |
           git lfs install
@@ -121,11 +125,12 @@ jobs:
           git add .
           $staged = git diff --staged --quiet
           if ($LASTEXITCODE -eq 0) {
+            Write-Host "No changes to commit"
             exit 0
           }
           
           $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
           git commit -m "Update data dumps - $timestamp"
-          git push origin data
+          git push origin data --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
