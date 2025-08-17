@@ -17,7 +17,6 @@ jobs:
       - name: Checkout data branch
         uses: actions/checkout@v4
         with:
-          ref: data
           fetch-depth: 0
           lfs: true
 
