@@ -42,7 +42,8 @@ impl<'a> ShopRefreshExcel<'a> {
   pub const VT_REFRESHGROUP: flatbuffers::VOffsetT = 24;
   pub const VT_PROB: flatbuffers::VOffsetT = 26;
   pub const VT_BUYREPORTEVENTNAME: flatbuffers::VOffsetT = 28;
-  pub const VT_DISPLAYTAG: flatbuffers::VOffsetT = 30;
+  pub const VT_PRODUCTUPDATETIME: flatbuffers::VOffsetT = 30;
+  pub const VT_DISPLAYTAG: flatbuffers::VOffsetT = 32;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -73,6 +74,9 @@ impl<'a> ShopRefreshExcel<'a> {
       let x = args.DisplayTag;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_DisplayTag(x);
+      if let Some(x) = args.ProductUpdateTime {
+        builder.add_ProductUpdateTime(x);
+      }
       if let Some(x) = args.BuyReportEventName {
         builder.add_BuyReportEventName(x);
       }
@@ -121,6 +125,9 @@ impl<'a> ShopRefreshExcel<'a> {
     let BuyReportEventName = self.BuyReportEventName().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+    let ProductUpdateTime = self.ProductUpdateTime().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
       let DisplayTag = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_enum(self.DisplayTag(), &key)
       } else {
@@ -140,6 +147,7 @@ impl<'a> ShopRefreshExcel<'a> {
       RefreshGroup,
       Prob,
       BuyReportEventName,
+      ProductUpdateTime,
       DisplayTag,
     }
   }
@@ -236,6 +244,13 @@ impl<'a> ShopRefreshExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ShopRefreshExcel::VT_BUYREPORTEVENTNAME, None)}
   }
   #[inline]
+  pub fn ProductUpdateTime(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ShopRefreshExcel::VT_PRODUCTUPDATETIME, None)}
+  }
+  #[inline]
   pub fn DisplayTag(&self) -> ProductDisplayTag {
     // Safety:
     // Created from valid Table for this object
@@ -264,6 +279,7 @@ impl flatbuffers::Verifiable for ShopRefreshExcel<'_> {
      .visit_field::<i32>("RefreshGroup", Self::VT_REFRESHGROUP, false)?
      .visit_field::<i32>("Prob", Self::VT_PROB, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BuyReportEventName", Self::VT_BUYREPORTEVENTNAME, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ProductUpdateTime", Self::VT_PRODUCTUPDATETIME, false)?
      .visit_field::<ProductDisplayTag>("DisplayTag", Self::VT_DISPLAYTAG, false)?
      .finish();
     Ok(())
@@ -283,6 +299,7 @@ pub struct ShopRefreshExcelArgs<'a> {
     pub RefreshGroup: i32,
     pub Prob: i32,
     pub BuyReportEventName: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub ProductUpdateTime: Option<flatbuffers::WIPOffset<&'a str>>,
     pub DisplayTag: ProductDisplayTag,
 }
 impl<'a> Default for ShopRefreshExcelArgs<'a> {
@@ -302,6 +319,7 @@ impl<'a> Default for ShopRefreshExcelArgs<'a> {
       RefreshGroup: 0,
       Prob: 0,
       BuyReportEventName: None,
+      ProductUpdateTime: None,
       DisplayTag: ProductDisplayTag::None,
     }
   }
@@ -312,7 +330,7 @@ impl Serialize for ShopRefreshExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShopRefreshExcel", 14)?;
+    let mut s = serializer.serialize_struct("ShopRefreshExcel", 15)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
       s.serialize_field("IsLegacy", &self.IsLegacy())?;
@@ -329,6 +347,11 @@ impl Serialize for ShopRefreshExcel<'_> {
         s.serialize_field("BuyReportEventName", &f)?;
       } else {
         s.skip_field("BuyReportEventName")?;
+      }
+      if let Some(f) = self.ProductUpdateTime() {
+        s.serialize_field("ProductUpdateTime", &f)?;
+      } else {
+        s.skip_field("ProductUpdateTime")?;
       }
       s.serialize_field("DisplayTag", &self.DisplayTag())?;
     s.end()
@@ -393,6 +416,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopRefreshExcelBuilder<'a, 'b,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopRefreshExcel::VT_BUYREPORTEVENTNAME, BuyReportEventName);
   }
   #[inline]
+  pub fn add_ProductUpdateTime(&mut self, ProductUpdateTime: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopRefreshExcel::VT_PRODUCTUPDATETIME, ProductUpdateTime);
+  }
+  #[inline]
   pub fn add_DisplayTag(&mut self, DisplayTag: ProductDisplayTag) {
     self.fbb_.push_slot::<ProductDisplayTag>(ShopRefreshExcel::VT_DISPLAYTAG, DisplayTag, ProductDisplayTag::None);
   }
@@ -427,6 +454,7 @@ impl core::fmt::Debug for ShopRefreshExcel<'_> {
       ds.field("RefreshGroup", &self.RefreshGroup());
       ds.field("Prob", &self.Prob());
       ds.field("BuyReportEventName", &self.BuyReportEventName());
+      ds.field("ProductUpdateTime", &self.ProductUpdateTime());
       ds.field("DisplayTag", &self.DisplayTag());
       ds.finish()
   }
@@ -447,6 +475,7 @@ pub struct ShopRefreshExcelT {
   pub RefreshGroup: i32,
   pub Prob: i32,
   pub BuyReportEventName: Option<String>,
+  pub ProductUpdateTime: Option<String>,
   pub DisplayTag: ProductDisplayTag,
 }
 impl Default for ShopRefreshExcelT {
@@ -465,6 +494,7 @@ impl Default for ShopRefreshExcelT {
       RefreshGroup: 0,
       Prob: 0,
       BuyReportEventName: None,
+      ProductUpdateTime: None,
       DisplayTag: ProductDisplayTag::None,
     }
   }
@@ -489,6 +519,9 @@ impl ShopRefreshExcelT {
     let BuyReportEventName = self.BuyReportEventName.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let ProductUpdateTime = self.ProductUpdateTime.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     let DisplayTag = self.DisplayTag;
     ShopRefreshExcel::create(_fbb, &ShopRefreshExcelArgs{
       Id,
@@ -504,6 +537,7 @@ impl ShopRefreshExcelT {
       RefreshGroup,
       Prob,
       BuyReportEventName,
+      ProductUpdateTime,
       DisplayTag,
     })
   }

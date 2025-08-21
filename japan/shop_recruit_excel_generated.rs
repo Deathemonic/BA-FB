@@ -41,20 +41,21 @@ impl<'a> ShopRecruitExcel<'a> {
   pub const VT_VIDEOID: flatbuffers::VOffsetT = 22;
   pub const VT_LINKEDROBBYBANNERID: flatbuffers::VOffsetT = 24;
   pub const VT_INFOCHARACTERID: flatbuffers::VOffsetT = 26;
-  pub const VT_SALEPERIODFROM: flatbuffers::VOffsetT = 28;
-  pub const VT_SALEPERIODTO: flatbuffers::VOffsetT = 30;
-  pub const VT_RECRUITCOINID: flatbuffers::VOffsetT = 32;
-  pub const VT_RECRUITSELLECTIONSHOPID: flatbuffers::VOffsetT = 34;
-  pub const VT_PURCHASECOOLTIMEMIN: flatbuffers::VOffsetT = 36;
-  pub const VT_PURCHASECOUNTLIMIT: flatbuffers::VOffsetT = 38;
-  pub const VT_PURCHASECOUNTRESETTYPE: flatbuffers::VOffsetT = 40;
-  pub const VT_ISNEWBIE: flatbuffers::VOffsetT = 42;
-  pub const VT_ISSELECTRECRUIT: flatbuffers::VOffsetT = 44;
-  pub const VT_DIRECTPAYINVISIBLETOKENID: flatbuffers::VOffsetT = 46;
-  pub const VT_DIRECTPAYANDROIDSHOPCASHID: flatbuffers::VOffsetT = 48;
-  pub const VT_DIRECTPAYAPPLESHOPCASHID: flatbuffers::VOffsetT = 50;
-  pub const VT_SELECTABLEGACHAGROUPID: flatbuffers::VOffsetT = 52;
-  pub const VT_MAXSELECTCHARACTERNUM: flatbuffers::VOffsetT = 54;
+  pub const VT_SALEPERIODVISIBLE: flatbuffers::VOffsetT = 28;
+  pub const VT_SALEPERIODFROM: flatbuffers::VOffsetT = 30;
+  pub const VT_SALEPERIODTO: flatbuffers::VOffsetT = 32;
+  pub const VT_RECRUITCOINID: flatbuffers::VOffsetT = 34;
+  pub const VT_RECRUITSELLECTIONSHOPID: flatbuffers::VOffsetT = 36;
+  pub const VT_PURCHASECOOLTIMEMIN: flatbuffers::VOffsetT = 38;
+  pub const VT_PURCHASECOUNTLIMIT: flatbuffers::VOffsetT = 40;
+  pub const VT_PURCHASECOUNTRESETTYPE: flatbuffers::VOffsetT = 42;
+  pub const VT_ISNEWBIE: flatbuffers::VOffsetT = 44;
+  pub const VT_ISSELECTRECRUIT: flatbuffers::VOffsetT = 46;
+  pub const VT_DIRECTPAYINVISIBLETOKENID: flatbuffers::VOffsetT = 48;
+  pub const VT_DIRECTPAYANDROIDSHOPCASHID: flatbuffers::VOffsetT = 50;
+  pub const VT_DIRECTPAYAPPLESHOPCASHID: flatbuffers::VOffsetT = 52;
+  pub const VT_SELECTABLEGACHAGROUPID: flatbuffers::VOffsetT = 54;
+  pub const VT_MAXSELECTCHARACTERNUM: flatbuffers::VOffsetT = 56;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -138,6 +139,7 @@ impl<'a> ShopRecruitExcel<'a> {
       builder.add_CategoryType(x);
       builder.add_IsSelectRecruit(args.IsSelectRecruit);
       builder.add_IsNewbie(args.IsNewbie);
+      builder.add_SalePeriodVisible(args.SalePeriodVisible);
       builder.add_IsLegacy(args.IsLegacy);
     builder.finish()
   }
@@ -172,6 +174,7 @@ impl<'a> ShopRecruitExcel<'a> {
     let InfoCharacterId = self.InfoCharacterId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
+      let SalePeriodVisible = self.SalePeriodVisible();
     let SalePeriodFrom = self.SalePeriodFrom().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -207,6 +210,7 @@ impl<'a> ShopRecruitExcel<'a> {
       VideoId,
       LinkedRobbyBannerId,
       InfoCharacterId,
+      SalePeriodVisible,
       SalePeriodFrom,
       SalePeriodTo,
       RecruitCoinId,
@@ -307,6 +311,13 @@ impl<'a> ShopRecruitExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ShopRecruitExcel::VT_INFOCHARACTERID, None)}
+  }
+  #[inline]
+  pub fn SalePeriodVisible(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(ShopRecruitExcel::VT_SALEPERIODVISIBLE, Some(false)).unwrap()}
   }
   #[inline]
   pub fn SalePeriodFrom(&self) -> Option<&'a str> {
@@ -427,6 +438,7 @@ impl flatbuffers::Verifiable for ShopRecruitExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("VideoId", Self::VT_VIDEOID, false)?
      .visit_field::<i64>("LinkedRobbyBannerId", Self::VT_LINKEDROBBYBANNERID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("InfoCharacterId", Self::VT_INFOCHARACTERID, false)?
+     .visit_field::<bool>("SalePeriodVisible", Self::VT_SALEPERIODVISIBLE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodFrom", Self::VT_SALEPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodTo", Self::VT_SALEPERIODTO, false)?
      .visit_field::<i64>("RecruitCoinId", Self::VT_RECRUITCOINID, false)?
@@ -458,6 +470,7 @@ pub struct ShopRecruitExcelArgs<'a> {
     pub VideoId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub LinkedRobbyBannerId: i64,
     pub InfoCharacterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub SalePeriodVisible: bool,
     pub SalePeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SalePeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
     pub RecruitCoinId: i64,
@@ -489,6 +502,7 @@ impl<'a> Default for ShopRecruitExcelArgs<'a> {
       VideoId: None,
       LinkedRobbyBannerId: 0,
       InfoCharacterId: None,
+      SalePeriodVisible: false,
       SalePeriodFrom: None,
       SalePeriodTo: None,
       RecruitCoinId: 0,
@@ -512,7 +526,7 @@ impl Serialize for ShopRecruitExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShopRecruitExcel", 26)?;
+    let mut s = serializer.serialize_struct("ShopRecruitExcel", 27)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("CategoryType", &self.CategoryType())?;
       s.serialize_field("IsLegacy", &self.IsLegacy())?;
@@ -541,6 +555,7 @@ impl Serialize for ShopRecruitExcel<'_> {
       } else {
         s.skip_field("InfoCharacterId")?;
       }
+      s.serialize_field("SalePeriodVisible", &self.SalePeriodVisible())?;
       if let Some(f) = self.SalePeriodFrom() {
         s.serialize_field("SalePeriodFrom", &f)?;
       } else {
@@ -619,6 +634,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopRecruitExcelBuilder<'a, 'b,
   #[inline]
   pub fn add_InfoCharacterId(&mut self, InfoCharacterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopRecruitExcel::VT_INFOCHARACTERID, InfoCharacterId);
+  }
+  #[inline]
+  pub fn add_SalePeriodVisible(&mut self, SalePeriodVisible: bool) {
+    self.fbb_.push_slot::<bool>(ShopRecruitExcel::VT_SALEPERIODVISIBLE, SalePeriodVisible, false);
   }
   #[inline]
   pub fn add_SalePeriodFrom(&mut self, SalePeriodFrom: flatbuffers::WIPOffset<&'b  str>) {
@@ -706,6 +725,7 @@ impl core::fmt::Debug for ShopRecruitExcel<'_> {
       ds.field("VideoId", &self.VideoId());
       ds.field("LinkedRobbyBannerId", &self.LinkedRobbyBannerId());
       ds.field("InfoCharacterId", &self.InfoCharacterId());
+      ds.field("SalePeriodVisible", &self.SalePeriodVisible());
       ds.field("SalePeriodFrom", &self.SalePeriodFrom());
       ds.field("SalePeriodTo", &self.SalePeriodTo());
       ds.field("RecruitCoinId", &self.RecruitCoinId());
@@ -738,6 +758,7 @@ pub struct ShopRecruitExcelT {
   pub VideoId: Option<Vec<i64>>,
   pub LinkedRobbyBannerId: i64,
   pub InfoCharacterId: Option<Vec<i64>>,
+  pub SalePeriodVisible: bool,
   pub SalePeriodFrom: Option<String>,
   pub SalePeriodTo: Option<String>,
   pub RecruitCoinId: i64,
@@ -768,6 +789,7 @@ impl Default for ShopRecruitExcelT {
       VideoId: None,
       LinkedRobbyBannerId: 0,
       InfoCharacterId: None,
+      SalePeriodVisible: false,
       SalePeriodFrom: None,
       SalePeriodTo: None,
       RecruitCoinId: 0,
@@ -810,6 +832,7 @@ impl ShopRecruitExcelT {
     let InfoCharacterId = self.InfoCharacterId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
+    let SalePeriodVisible = self.SalePeriodVisible;
     let SalePeriodFrom = self.SalePeriodFrom.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -841,6 +864,7 @@ impl ShopRecruitExcelT {
       VideoId,
       LinkedRobbyBannerId,
       InfoCharacterId,
+      SalePeriodVisible,
       SalePeriodFrom,
       SalePeriodTo,
       RecruitCoinId,

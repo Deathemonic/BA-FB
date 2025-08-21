@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_SHOP_CATEGORY_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_SHOP_CATEGORY_TYPE: i32 = 37;
+pub const ENUM_MAX_SHOP_CATEGORY_TYPE: i32 = 38;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_SHOP_CATEGORY_TYPE: [ShopCategoryType; 38] = [
+pub const ENUM_VALUES_SHOP_CATEGORY_TYPE: [ShopCategoryType; 39] = [
   ShopCategoryType::General,
   ShopCategoryType::SecretStone,
   ShopCategoryType::Raid,
@@ -58,6 +58,7 @@ pub const ENUM_VALUES_SHOP_CATEGORY_TYPE: [ShopCategoryType; 38] = [
   ShopCategoryType::SelectPickupGacha,
   ShopCategoryType::GemDaily,
   ShopCategoryType::GemWeekly,
+  ShopCategoryType::CafeSummonTicket,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -103,9 +104,10 @@ impl ShopCategoryType {
   pub const SelectPickupGacha: Self = Self(35);
   pub const GemDaily: Self = Self(36);
   pub const GemWeekly: Self = Self(37);
+  pub const CafeSummonTicket: Self = Self(38);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 37;
+  pub const ENUM_MAX: i32 = 38;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::General,
     Self::SecretStone,
@@ -145,6 +147,7 @@ impl ShopCategoryType {
     Self::SelectPickupGacha,
     Self::GemDaily,
     Self::GemWeekly,
+    Self::CafeSummonTicket,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -187,6 +190,7 @@ impl ShopCategoryType {
       Self::SelectPickupGacha => Some("SelectPickupGacha"),
       Self::GemDaily => Some("GemDaily"),
       Self::GemWeekly => Some("GemWeekly"),
+      Self::CafeSummonTicket => Some("CafeSummonTicket"),
       _ => None,
     }
   }

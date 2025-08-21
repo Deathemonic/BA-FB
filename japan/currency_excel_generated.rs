@@ -50,6 +50,8 @@ impl<'a> CurrencyExcel<'a> {
   pub const VT_EXPIRYCHANGEPARCELTYPE: flatbuffers::VOffsetT = 40;
   pub const VT_EXPIRYCHANGEID: flatbuffers::VOffsetT = 42;
   pub const VT_EXPIRYCHANGEAMOUNT: flatbuffers::VOffsetT = 44;
+  pub const VT_RESETTYPE: flatbuffers::VOffsetT = 46;
+  pub const VT_RESETAMOUNT: flatbuffers::VOffsetT = 48;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -62,6 +64,9 @@ impl<'a> CurrencyExcel<'a> {
   ) -> flatbuffers::WIPOffset<CurrencyExcel<'bldr>> {
     let mut builder = CurrencyExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"Currency");
+      let x = args.ResetAmount;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ResetAmount(x);
       let x = args.ExpiryChangeAmount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ExpiryChangeAmount(x);
@@ -80,6 +85,9 @@ impl<'a> CurrencyExcel<'a> {
       let x = args.ID;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ID(x);
+      let x = args.ResetType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_ResetType(x);
       let x = args.ExpiryChangeParcelType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ExpiryChangeParcelType(x);
@@ -185,6 +193,12 @@ impl<'a> CurrencyExcel<'a> {
       };
       let ExpiryChangeId = self.ExpiryChangeId();
       let ExpiryChangeAmount = self.ExpiryChangeAmount();
+      let ResetType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.ResetType(), &key)
+      } else {
+        self.ResetType()
+      };
+      let ResetAmount = self.ResetAmount();
     CurrencyExcelT {
       ID,
       LocalizeEtcId,
@@ -207,6 +221,8 @@ impl<'a> CurrencyExcel<'a> {
       ExpiryChangeParcelType,
       ExpiryChangeId,
       ExpiryChangeAmount,
+      ResetType,
+      ResetAmount,
     }
   }
 
@@ -357,6 +373,20 @@ impl<'a> CurrencyExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(CurrencyExcel::VT_EXPIRYCHANGEAMOUNT, Some(0)).unwrap()}
   }
+  #[inline]
+  pub fn ResetType(&self) -> PeriodType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<PeriodType>(CurrencyExcel::VT_RESETTYPE, Some(PeriodType::None)).unwrap()}
+  }
+  #[inline]
+  pub fn ResetAmount(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(CurrencyExcel::VT_RESETAMOUNT, Some(0)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for CurrencyExcel<'_> {
@@ -387,6 +417,8 @@ impl flatbuffers::Verifiable for CurrencyExcel<'_> {
      .visit_field::<ParcelType>("ExpiryChangeParcelType", Self::VT_EXPIRYCHANGEPARCELTYPE, false)?
      .visit_field::<i64>("ExpiryChangeId", Self::VT_EXPIRYCHANGEID, false)?
      .visit_field::<i64>("ExpiryChangeAmount", Self::VT_EXPIRYCHANGEAMOUNT, false)?
+     .visit_field::<PeriodType>("ResetType", Self::VT_RESETTYPE, false)?
+     .visit_field::<i64>("ResetAmount", Self::VT_RESETAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -413,6 +445,8 @@ pub struct CurrencyExcelArgs<'a> {
     pub ExpiryChangeParcelType: ParcelType,
     pub ExpiryChangeId: i64,
     pub ExpiryChangeAmount: i64,
+    pub ResetType: PeriodType,
+    pub ResetAmount: i64,
 }
 impl<'a> Default for CurrencyExcelArgs<'a> {
   #[inline]
@@ -439,6 +473,8 @@ impl<'a> Default for CurrencyExcelArgs<'a> {
       ExpiryChangeParcelType: ParcelType::None,
       ExpiryChangeId: 0,
       ExpiryChangeAmount: 0,
+      ResetType: PeriodType::None,
+      ResetAmount: 0,
     }
   }
 }
@@ -448,7 +484,7 @@ impl Serialize for CurrencyExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("CurrencyExcel", 21)?;
+    let mut s = serializer.serialize_struct("CurrencyExcel", 23)?;
       s.serialize_field("ID", &self.ID())?;
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
       s.serialize_field("CurrencyType", &self.CurrencyType())?;
@@ -490,6 +526,8 @@ impl Serialize for CurrencyExcel<'_> {
       s.serialize_field("ExpiryChangeParcelType", &self.ExpiryChangeParcelType())?;
       s.serialize_field("ExpiryChangeId", &self.ExpiryChangeId())?;
       s.serialize_field("ExpiryChangeAmount", &self.ExpiryChangeAmount())?;
+      s.serialize_field("ResetType", &self.ResetType())?;
+      s.serialize_field("ResetAmount", &self.ResetAmount())?;
     s.end()
   }
 }
@@ -584,6 +622,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CurrencyExcelBuilder<'a, 'b, A>
     self.fbb_.push_slot::<i64>(CurrencyExcel::VT_EXPIRYCHANGEAMOUNT, ExpiryChangeAmount, 0);
   }
   #[inline]
+  pub fn add_ResetType(&mut self, ResetType: PeriodType) {
+    self.fbb_.push_slot::<PeriodType>(CurrencyExcel::VT_RESETTYPE, ResetType, PeriodType::None);
+  }
+  #[inline]
+  pub fn add_ResetAmount(&mut self, ResetAmount: i64) {
+    self.fbb_.push_slot::<i64>(CurrencyExcel::VT_RESETAMOUNT, ResetAmount, 0);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> CurrencyExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     CurrencyExcelBuilder {
@@ -622,6 +668,8 @@ impl core::fmt::Debug for CurrencyExcel<'_> {
       ds.field("ExpiryChangeParcelType", &self.ExpiryChangeParcelType());
       ds.field("ExpiryChangeId", &self.ExpiryChangeId());
       ds.field("ExpiryChangeAmount", &self.ExpiryChangeAmount());
+      ds.field("ResetType", &self.ResetType());
+      ds.field("ResetAmount", &self.ResetAmount());
       ds.finish()
   }
 }
@@ -649,6 +697,8 @@ pub struct CurrencyExcelT {
   pub ExpiryChangeParcelType: ParcelType,
   pub ExpiryChangeId: i64,
   pub ExpiryChangeAmount: i64,
+  pub ResetType: PeriodType,
+  pub ResetAmount: i64,
 }
 impl Default for CurrencyExcelT {
   fn default() -> Self {
@@ -674,6 +724,8 @@ impl Default for CurrencyExcelT {
       ExpiryChangeParcelType: ParcelType::None,
       ExpiryChangeId: 0,
       ExpiryChangeAmount: 0,
+      ResetType: PeriodType::None,
+      ResetAmount: 0,
     }
   }
 }
@@ -713,6 +765,8 @@ impl CurrencyExcelT {
     let ExpiryChangeParcelType = self.ExpiryChangeParcelType;
     let ExpiryChangeId = self.ExpiryChangeId;
     let ExpiryChangeAmount = self.ExpiryChangeAmount;
+    let ResetType = self.ResetType;
+    let ResetAmount = self.ResetAmount;
     CurrencyExcel::create(_fbb, &CurrencyExcelArgs{
       ID,
       LocalizeEtcId,
@@ -735,6 +789,8 @@ impl CurrencyExcelT {
       ExpiryChangeParcelType,
       ExpiryChangeId,
       ExpiryChangeAmount,
+      ResetType,
+      ResetAmount,
     })
   }
 }

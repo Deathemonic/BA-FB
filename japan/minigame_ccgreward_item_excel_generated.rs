@@ -35,6 +35,7 @@ impl<'a> MinigameCCGRewardItemExcel<'a> {
   pub const VT_REWARDPARCELTYPE: flatbuffers::VOffsetT = 10;
   pub const VT_REWARDPARCELID: flatbuffers::VOffsetT = 12;
   pub const VT_REWARDPARCELAMOUNT: flatbuffers::VOffsetT = 14;
+  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 16;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -47,6 +48,9 @@ impl<'a> MinigameCCGRewardItemExcel<'a> {
   ) -> flatbuffers::WIPOffset<MinigameCCGRewardItemExcel<'bldr>> {
     let mut builder = MinigameCCGRewardItemExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"MinigameCCGRewardItem");
+      let x = args.DisplayOrder;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_DisplayOrder(x);
       let x = args.RewardParcelId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_RewardParcelId(x);
@@ -80,6 +84,7 @@ impl<'a> MinigameCCGRewardItemExcel<'a> {
       };
       let RewardParcelId = self.RewardParcelId();
       let RewardParcelAmount = self.RewardParcelAmount();
+      let DisplayOrder = self.DisplayOrder();
     MinigameCCGRewardItemExcelT {
       Id,
       CCGId,
@@ -87,6 +92,7 @@ impl<'a> MinigameCCGRewardItemExcel<'a> {
       RewardParcelType,
       RewardParcelId,
       RewardParcelAmount,
+      DisplayOrder,
     }
   }
 
@@ -132,6 +138,13 @@ impl<'a> MinigameCCGRewardItemExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i32>(MinigameCCGRewardItemExcel::VT_REWARDPARCELAMOUNT, Some(0)).unwrap()}
   }
+  #[inline]
+  pub fn DisplayOrder(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(MinigameCCGRewardItemExcel::VT_DISPLAYORDER, Some(0)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for MinigameCCGRewardItemExcel<'_> {
@@ -147,6 +160,7 @@ impl flatbuffers::Verifiable for MinigameCCGRewardItemExcel<'_> {
      .visit_field::<ParcelType>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<i64>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
      .visit_field::<i32>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
+     .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .finish();
     Ok(())
   }
@@ -158,6 +172,7 @@ pub struct MinigameCCGRewardItemExcelArgs {
     pub RewardParcelType: ParcelType,
     pub RewardParcelId: i64,
     pub RewardParcelAmount: i32,
+    pub DisplayOrder: i64,
 }
 impl<'a> Default for MinigameCCGRewardItemExcelArgs {
   #[inline]
@@ -169,6 +184,7 @@ impl<'a> Default for MinigameCCGRewardItemExcelArgs {
       RewardParcelType: ParcelType::None,
       RewardParcelId: 0,
       RewardParcelAmount: 0,
+      DisplayOrder: 0,
     }
   }
 }
@@ -178,13 +194,14 @@ impl Serialize for MinigameCCGRewardItemExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("MinigameCCGRewardItemExcel", 6)?;
+    let mut s = serializer.serialize_struct("MinigameCCGRewardItemExcel", 7)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("CCGId", &self.CCGId())?;
       s.serialize_field("MinPoint", &self.MinPoint())?;
       s.serialize_field("RewardParcelType", &self.RewardParcelType())?;
       s.serialize_field("RewardParcelId", &self.RewardParcelId())?;
       s.serialize_field("RewardParcelAmount", &self.RewardParcelAmount())?;
+      s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
     s.end()
   }
 }
@@ -219,6 +236,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MinigameCCGRewardItemExcelBuild
     self.fbb_.push_slot::<i32>(MinigameCCGRewardItemExcel::VT_REWARDPARCELAMOUNT, RewardParcelAmount, 0);
   }
   #[inline]
+  pub fn add_DisplayOrder(&mut self, DisplayOrder: i64) {
+    self.fbb_.push_slot::<i64>(MinigameCCGRewardItemExcel::VT_DISPLAYORDER, DisplayOrder, 0);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> MinigameCCGRewardItemExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     MinigameCCGRewardItemExcelBuilder {
@@ -242,6 +263,7 @@ impl core::fmt::Debug for MinigameCCGRewardItemExcel<'_> {
       ds.field("RewardParcelType", &self.RewardParcelType());
       ds.field("RewardParcelId", &self.RewardParcelId());
       ds.field("RewardParcelAmount", &self.RewardParcelAmount());
+      ds.field("DisplayOrder", &self.DisplayOrder());
       ds.finish()
   }
 }
@@ -254,6 +276,7 @@ pub struct MinigameCCGRewardItemExcelT {
   pub RewardParcelType: ParcelType,
   pub RewardParcelId: i64,
   pub RewardParcelAmount: i32,
+  pub DisplayOrder: i64,
 }
 impl Default for MinigameCCGRewardItemExcelT {
   fn default() -> Self {
@@ -264,6 +287,7 @@ impl Default for MinigameCCGRewardItemExcelT {
       RewardParcelType: ParcelType::None,
       RewardParcelId: 0,
       RewardParcelAmount: 0,
+      DisplayOrder: 0,
     }
   }
 }
@@ -278,6 +302,7 @@ impl MinigameCCGRewardItemExcelT {
     let RewardParcelType = self.RewardParcelType;
     let RewardParcelId = self.RewardParcelId;
     let RewardParcelAmount = self.RewardParcelAmount;
+    let DisplayOrder = self.DisplayOrder;
     MinigameCCGRewardItemExcel::create(_fbb, &MinigameCCGRewardItemExcelArgs{
       Id,
       CCGId,
@@ -285,6 +310,7 @@ impl MinigameCCGRewardItemExcelT {
       RewardParcelType,
       RewardParcelId,
       RewardParcelAmount,
+      DisplayOrder,
     })
   }
 }

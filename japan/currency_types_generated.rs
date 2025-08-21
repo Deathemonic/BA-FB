@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_CURRENCY_TYPES: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_CURRENCY_TYPES: i32 = 28;
+pub const ENUM_MAX_CURRENCY_TYPES: i32 = 30;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_CURRENCY_TYPES: [CurrencyTypes; 29] = [
+pub const ENUM_VALUES_CURRENCY_TYPES: [CurrencyTypes; 31] = [
   CurrencyTypes::Invalid,
   CurrencyTypes::Gold,
   CurrencyTypes::GemPaid,
@@ -48,6 +48,8 @@ pub const ENUM_VALUES_CURRENCY_TYPES: [CurrencyTypes; 29] = [
   CurrencyTypes::EliminateTicketB,
   CurrencyTypes::EliminateTicketC,
   CurrencyTypes::EliminateTicketD,
+  CurrencyTypes::CafeSummonTicket1,
+  CurrencyTypes::CafeSummonTicket2,
   CurrencyTypes::Max,
 ];
 
@@ -84,10 +86,12 @@ impl CurrencyTypes {
   pub const EliminateTicketB: Self = Self(25);
   pub const EliminateTicketC: Self = Self(26);
   pub const EliminateTicketD: Self = Self(27);
-  pub const Max: Self = Self(28);
+  pub const CafeSummonTicket1: Self = Self(28);
+  pub const CafeSummonTicket2: Self = Self(29);
+  pub const Max: Self = Self(30);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 28;
+  pub const ENUM_MAX: i32 = 30;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Invalid,
     Self::Gold,
@@ -117,6 +121,8 @@ impl CurrencyTypes {
     Self::EliminateTicketB,
     Self::EliminateTicketC,
     Self::EliminateTicketD,
+    Self::CafeSummonTicket1,
+    Self::CafeSummonTicket2,
     Self::Max,
   ];
   /// Returns the variant's name or "" if unknown.
@@ -150,6 +156,8 @@ impl CurrencyTypes {
       Self::EliminateTicketB => Some("EliminateTicketB"),
       Self::EliminateTicketC => Some("EliminateTicketC"),
       Self::EliminateTicketD => Some("EliminateTicketD"),
+      Self::CafeSummonTicket1 => Some("CafeSummonTicket1"),
+      Self::CafeSummonTicket2 => Some("CafeSummonTicket2"),
       Self::Max => Some("Max"),
       _ => None,
     }

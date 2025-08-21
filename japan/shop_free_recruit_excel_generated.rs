@@ -34,7 +34,8 @@ impl<'a> ShopFreeRecruitExcel<'a> {
   pub const VT_FREERECRUITPERIODTO: flatbuffers::VOffsetT = 8;
   pub const VT_FREERECRUITTYPE: flatbuffers::VOffsetT = 10;
   pub const VT_FREERECRUITDECORATIONIMAGEPATH: flatbuffers::VOffsetT = 12;
-  pub const VT_SHOPRECRUITID: flatbuffers::VOffsetT = 14;
+  pub const VT_TENRECRUITCOUNTONLY: flatbuffers::VOffsetT = 14;
+  pub const VT_SHOPRECRUITID: flatbuffers::VOffsetT = 16;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -65,6 +66,7 @@ impl<'a> ShopFreeRecruitExcel<'a> {
       if let Some(x) = args.FreeRecruitPeriodFrom {
         builder.add_FreeRecruitPeriodFrom(x);
       }
+      builder.add_TenRecruitCountOnly(args.TenRecruitCountOnly);
     builder.finish()
   }
 
@@ -85,6 +87,7 @@ impl<'a> ShopFreeRecruitExcel<'a> {
     let FreeRecruitDecorationImagePath = self.FreeRecruitDecorationImagePath().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+      let TenRecruitCountOnly = self.TenRecruitCountOnly();
     let ShopRecruitId = self.ShopRecruitId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
@@ -94,6 +97,7 @@ impl<'a> ShopFreeRecruitExcel<'a> {
       FreeRecruitPeriodTo,
       FreeRecruitType,
       FreeRecruitDecorationImagePath,
+      TenRecruitCountOnly,
       ShopRecruitId,
     }
   }
@@ -134,6 +138,13 @@ impl<'a> ShopFreeRecruitExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ShopFreeRecruitExcel::VT_FREERECRUITDECORATIONIMAGEPATH, None)}
   }
   #[inline]
+  pub fn TenRecruitCountOnly(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(ShopFreeRecruitExcel::VT_TENRECRUITCOUNTONLY, Some(false)).unwrap()}
+  }
+  #[inline]
   pub fn ShopRecruitId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
@@ -154,6 +165,7 @@ impl flatbuffers::Verifiable for ShopFreeRecruitExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FreeRecruitPeriodTo", Self::VT_FREERECRUITPERIODTO, false)?
      .visit_field::<ShopFreeRecruitType>("FreeRecruitType", Self::VT_FREERECRUITTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FreeRecruitDecorationImagePath", Self::VT_FREERECRUITDECORATIONIMAGEPATH, false)?
+     .visit_field::<bool>("TenRecruitCountOnly", Self::VT_TENRECRUITCOUNTONLY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ShopRecruitId", Self::VT_SHOPRECRUITID, false)?
      .finish();
     Ok(())
@@ -165,6 +177,7 @@ pub struct ShopFreeRecruitExcelArgs<'a> {
     pub FreeRecruitPeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
     pub FreeRecruitType: ShopFreeRecruitType,
     pub FreeRecruitDecorationImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub TenRecruitCountOnly: bool,
     pub ShopRecruitId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for ShopFreeRecruitExcelArgs<'a> {
@@ -176,6 +189,7 @@ impl<'a> Default for ShopFreeRecruitExcelArgs<'a> {
       FreeRecruitPeriodTo: None,
       FreeRecruitType: ShopFreeRecruitType::None,
       FreeRecruitDecorationImagePath: None,
+      TenRecruitCountOnly: false,
       ShopRecruitId: None,
     }
   }
@@ -186,7 +200,7 @@ impl Serialize for ShopFreeRecruitExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShopFreeRecruitExcel", 6)?;
+    let mut s = serializer.serialize_struct("ShopFreeRecruitExcel", 7)?;
       s.serialize_field("Id", &self.Id())?;
       if let Some(f) = self.FreeRecruitPeriodFrom() {
         s.serialize_field("FreeRecruitPeriodFrom", &f)?;
@@ -204,6 +218,7 @@ impl Serialize for ShopFreeRecruitExcel<'_> {
       } else {
         s.skip_field("FreeRecruitDecorationImagePath")?;
       }
+      s.serialize_field("TenRecruitCountOnly", &self.TenRecruitCountOnly())?;
       if let Some(f) = self.ShopRecruitId() {
         s.serialize_field("ShopRecruitId", &f)?;
       } else {
@@ -239,6 +254,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopFreeRecruitExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopFreeRecruitExcel::VT_FREERECRUITDECORATIONIMAGEPATH, FreeRecruitDecorationImagePath);
   }
   #[inline]
+  pub fn add_TenRecruitCountOnly(&mut self, TenRecruitCountOnly: bool) {
+    self.fbb_.push_slot::<bool>(ShopFreeRecruitExcel::VT_TENRECRUITCOUNTONLY, TenRecruitCountOnly, false);
+  }
+  #[inline]
   pub fn add_ShopRecruitId(&mut self, ShopRecruitId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopFreeRecruitExcel::VT_SHOPRECRUITID, ShopRecruitId);
   }
@@ -265,6 +284,7 @@ impl core::fmt::Debug for ShopFreeRecruitExcel<'_> {
       ds.field("FreeRecruitPeriodTo", &self.FreeRecruitPeriodTo());
       ds.field("FreeRecruitType", &self.FreeRecruitType());
       ds.field("FreeRecruitDecorationImagePath", &self.FreeRecruitDecorationImagePath());
+      ds.field("TenRecruitCountOnly", &self.TenRecruitCountOnly());
       ds.field("ShopRecruitId", &self.ShopRecruitId());
       ds.finish()
   }
@@ -277,6 +297,7 @@ pub struct ShopFreeRecruitExcelT {
   pub FreeRecruitPeriodTo: Option<String>,
   pub FreeRecruitType: ShopFreeRecruitType,
   pub FreeRecruitDecorationImagePath: Option<String>,
+  pub TenRecruitCountOnly: bool,
   pub ShopRecruitId: Option<Vec<i64>>,
 }
 impl Default for ShopFreeRecruitExcelT {
@@ -287,6 +308,7 @@ impl Default for ShopFreeRecruitExcelT {
       FreeRecruitPeriodTo: None,
       FreeRecruitType: ShopFreeRecruitType::None,
       FreeRecruitDecorationImagePath: None,
+      TenRecruitCountOnly: false,
       ShopRecruitId: None,
     }
   }
@@ -307,6 +329,7 @@ impl ShopFreeRecruitExcelT {
     let FreeRecruitDecorationImagePath = self.FreeRecruitDecorationImagePath.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let TenRecruitCountOnly = self.TenRecruitCountOnly;
     let ShopRecruitId = self.ShopRecruitId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
@@ -316,6 +339,7 @@ impl ShopFreeRecruitExcelT {
       FreeRecruitPeriodTo,
       FreeRecruitType,
       FreeRecruitDecorationImagePath,
+      TenRecruitCountOnly,
       ShopRecruitId,
     })
   }

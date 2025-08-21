@@ -48,7 +48,6 @@ impl<'a> BattlePassInfoExcel<'a> {
   pub const VT_LOBBYBANNERPATH: flatbuffers::VOffsetT = 36;
   pub const VT_MAINICONPARCELPATH: flatbuffers::VOffsetT = 38;
   pub const VT_PURCHASESTEPPRODUCTIMAGEPATH: flatbuffers::VOffsetT = 40;
-  pub const VT_PURCHASESTEPBGIMAGEPATH: flatbuffers::VOffsetT = 42;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -91,9 +90,6 @@ impl<'a> BattlePassInfoExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.PurchaseStepBgImagePath {
-        builder.add_PurchaseStepBgImagePath(x);
-      }
       if let Some(x) = args.PurchaseStepProductImagePath {
         builder.add_PurchaseStepProductImagePath(x);
       }
@@ -157,9 +153,6 @@ impl<'a> BattlePassInfoExcel<'a> {
     let PurchaseStepProductImagePath = self.PurchaseStepProductImagePath().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let PurchaseStepBgImagePath = self.PurchaseStepBgImagePath().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
     BattlePassInfoExcelT {
       Id,
       FreeRewardGroupID,
@@ -180,7 +173,6 @@ impl<'a> BattlePassInfoExcel<'a> {
       LobbyBannerPath,
       MainIconParcelPath,
       PurchaseStepProductImagePath,
-      PurchaseStepBgImagePath,
     }
   }
 
@@ -317,13 +309,6 @@ impl<'a> BattlePassInfoExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(BattlePassInfoExcel::VT_PURCHASESTEPPRODUCTIMAGEPATH, None)}
   }
-  #[inline]
-  pub fn PurchaseStepBgImagePath(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(BattlePassInfoExcel::VT_PURCHASESTEPBGIMAGEPATH, None)}
-  }
 }
 
 impl flatbuffers::Verifiable for BattlePassInfoExcel<'_> {
@@ -352,7 +337,6 @@ impl flatbuffers::Verifiable for BattlePassInfoExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("LobbyBannerPath", Self::VT_LOBBYBANNERPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MainIconParcelPath", Self::VT_MAINICONPARCELPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PurchaseStepProductImagePath", Self::VT_PURCHASESTEPPRODUCTIMAGEPATH, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PurchaseStepBgImagePath", Self::VT_PURCHASESTEPBGIMAGEPATH, false)?
      .finish();
     Ok(())
   }
@@ -377,7 +361,6 @@ pub struct BattlePassInfoExcelArgs<'a> {
     pub LobbyBannerPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub MainIconParcelPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub PurchaseStepProductImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub PurchaseStepBgImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
 }
 impl<'a> Default for BattlePassInfoExcelArgs<'a> {
   #[inline]
@@ -402,7 +385,6 @@ impl<'a> Default for BattlePassInfoExcelArgs<'a> {
       LobbyBannerPath: None,
       MainIconParcelPath: None,
       PurchaseStepProductImagePath: None,
-      PurchaseStepBgImagePath: None,
     }
   }
 }
@@ -412,7 +394,7 @@ impl Serialize for BattlePassInfoExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("BattlePassInfoExcel", 20)?;
+    let mut s = serializer.serialize_struct("BattlePassInfoExcel", 19)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("FreeRewardGroupID", &self.FreeRewardGroupID())?;
       s.serialize_field("PurchaseRewardGroupID", &self.PurchaseRewardGroupID())?;
@@ -455,11 +437,6 @@ impl Serialize for BattlePassInfoExcel<'_> {
         s.serialize_field("PurchaseStepProductImagePath", &f)?;
       } else {
         s.skip_field("PurchaseStepProductImagePath")?;
-      }
-      if let Some(f) = self.PurchaseStepBgImagePath() {
-        s.serialize_field("PurchaseStepBgImagePath", &f)?;
-      } else {
-        s.skip_field("PurchaseStepBgImagePath")?;
       }
     s.end()
   }
@@ -547,10 +524,6 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> BattlePassInfoExcelBuilder<'a, 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(BattlePassInfoExcel::VT_PURCHASESTEPPRODUCTIMAGEPATH, PurchaseStepProductImagePath);
   }
   #[inline]
-  pub fn add_PurchaseStepBgImagePath(&mut self, PurchaseStepBgImagePath: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(BattlePassInfoExcel::VT_PURCHASESTEPBGIMAGEPATH, PurchaseStepBgImagePath);
-  }
-  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> BattlePassInfoExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     BattlePassInfoExcelBuilder {
@@ -587,7 +560,6 @@ impl core::fmt::Debug for BattlePassInfoExcel<'_> {
       ds.field("LobbyBannerPath", &self.LobbyBannerPath());
       ds.field("MainIconParcelPath", &self.MainIconParcelPath());
       ds.field("PurchaseStepProductImagePath", &self.PurchaseStepProductImagePath());
-      ds.field("PurchaseStepBgImagePath", &self.PurchaseStepBgImagePath());
       ds.finish()
   }
 }
@@ -613,7 +585,6 @@ pub struct BattlePassInfoExcelT {
   pub LobbyBannerPath: Option<String>,
   pub MainIconParcelPath: Option<String>,
   pub PurchaseStepProductImagePath: Option<String>,
-  pub PurchaseStepBgImagePath: Option<String>,
 }
 impl Default for BattlePassInfoExcelT {
   fn default() -> Self {
@@ -637,7 +608,6 @@ impl Default for BattlePassInfoExcelT {
       LobbyBannerPath: None,
       MainIconParcelPath: None,
       PurchaseStepProductImagePath: None,
-      PurchaseStepBgImagePath: None,
     }
   }
 }
@@ -677,9 +647,6 @@ impl BattlePassInfoExcelT {
     let PurchaseStepProductImagePath = self.PurchaseStepProductImagePath.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let PurchaseStepBgImagePath = self.PurchaseStepBgImagePath.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
     BattlePassInfoExcel::create(_fbb, &BattlePassInfoExcelArgs{
       Id,
       FreeRewardGroupID,
@@ -700,7 +667,6 @@ impl BattlePassInfoExcelT {
       LobbyBannerPath,
       MainIconParcelPath,
       PurchaseStepProductImagePath,
-      PurchaseStepBgImagePath,
     })
   }
 }

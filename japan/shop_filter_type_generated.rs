@@ -49,7 +49,7 @@ pub const ENUM_VALUES_SHOP_FILTER_TYPE: [ShopFilterType; 38] = [
   ShopFilterType::ChaserTotalTicket,
   ShopFilterType::SchoolTotalTicket,
   ShopFilterType::Highlander,
-  ShopFilterType::ShopFilterDUMMY_2,
+  ShopFilterType::WildHunt,
   ShopFilterType::ShopFilterDUMMY_3,
   ShopFilterType::ShopFilterDUMMY_4,
   ShopFilterType::ShopFilterDUMMY_5,
@@ -94,7 +94,7 @@ impl ShopFilterType {
   pub const ChaserTotalTicket: Self = Self(26);
   pub const SchoolTotalTicket: Self = Self(27);
   pub const Highlander: Self = Self(28);
-  pub const ShopFilterDUMMY_2: Self = Self(29);
+  pub const WildHunt: Self = Self(29);
   pub const ShopFilterDUMMY_3: Self = Self(30);
   pub const ShopFilterDUMMY_4: Self = Self(31);
   pub const ShopFilterDUMMY_5: Self = Self(32);
@@ -136,7 +136,7 @@ impl ShopFilterType {
     Self::ChaserTotalTicket,
     Self::SchoolTotalTicket,
     Self::Highlander,
-    Self::ShopFilterDUMMY_2,
+    Self::WildHunt,
     Self::ShopFilterDUMMY_3,
     Self::ShopFilterDUMMY_4,
     Self::ShopFilterDUMMY_5,
@@ -178,7 +178,7 @@ impl ShopFilterType {
       Self::ChaserTotalTicket => Some("ChaserTotalTicket"),
       Self::SchoolTotalTicket => Some("SchoolTotalTicket"),
       Self::Highlander => Some("Highlander"),
-      Self::ShopFilterDUMMY_2 => Some("ShopFilterDUMMY_2"),
+      Self::WildHunt => Some("WildHunt"),
       Self::ShopFilterDUMMY_3 => Some("ShopFilterDUMMY_3"),
       Self::ShopFilterDUMMY_4 => Some("ShopFilterDUMMY_4"),
       Self::ShopFilterDUMMY_5 => Some("ShopFilterDUMMY_5"),
