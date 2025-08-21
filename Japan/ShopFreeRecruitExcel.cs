@@ -43,14 +43,15 @@ public struct ShopFreeRecruitExcel : IFlatbufferObject
   public ArraySegment<byte>? GetFreeRecruitDecorationImagePathBytes() { return __p.__vector_as_arraysegment(12); }
 #endif
   public byte[] GetFreeRecruitDecorationImagePathArray() { return __p.__vector_as_array<byte>(12); }
-  public long ShopRecruitId(int j) { int o = __p.__offset(14); return o != 0 ? __p.bb.GetLong(__p.__vector(o) + j * 8) : (long)0; }
-  public int ShopRecruitIdLength { get { int o = __p.__offset(14); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public bool TenRecruitCountOnly { get { int o = __p.__offset(14); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public long ShopRecruitId(int j) { int o = __p.__offset(16); return o != 0 ? __p.bb.GetLong(__p.__vector(o) + j * 8) : (long)0; }
+  public int ShopRecruitIdLength { get { int o = __p.__offset(16); return o != 0 ? __p.__vector_len(o) : 0; } }
 #if ENABLE_SPAN_T
-  public Span<long> GetShopRecruitIdBytes() { return __p.__vector_as_span<long>(14, 8); }
+  public Span<long> GetShopRecruitIdBytes() { return __p.__vector_as_span<long>(16, 8); }
 #else
-  public ArraySegment<byte>? GetShopRecruitIdBytes() { return __p.__vector_as_arraysegment(14); }
+  public ArraySegment<byte>? GetShopRecruitIdBytes() { return __p.__vector_as_arraysegment(16); }
 #endif
-  public long[] GetShopRecruitIdArray() { return __p.__vector_as_array<long>(14); }
+  public long[] GetShopRecruitIdArray() { return __p.__vector_as_array<long>(16); }
 
   public static Offset<Japan.ShopFreeRecruitExcel> CreateShopFreeRecruitExcel(FlatBufferBuilder builder,
       long Id = 0,
@@ -58,24 +59,27 @@ public struct ShopFreeRecruitExcel : IFlatbufferObject
       StringOffset FreeRecruitPeriodToOffset = default(StringOffset),
       Japan.ShopFreeRecruitType FreeRecruitType = Japan.ShopFreeRecruitType.None,
       StringOffset FreeRecruitDecorationImagePathOffset = default(StringOffset),
+      bool TenRecruitCountOnly = false,
       VectorOffset ShopRecruitIdOffset = default(VectorOffset)) {
-    builder.StartTable(6);
+    builder.StartTable(7);
     ShopFreeRecruitExcel.AddId(builder, Id);
     ShopFreeRecruitExcel.AddShopRecruitId(builder, ShopRecruitIdOffset);
     ShopFreeRecruitExcel.AddFreeRecruitDecorationImagePath(builder, FreeRecruitDecorationImagePathOffset);
     ShopFreeRecruitExcel.AddFreeRecruitType(builder, FreeRecruitType);
     ShopFreeRecruitExcel.AddFreeRecruitPeriodTo(builder, FreeRecruitPeriodToOffset);
     ShopFreeRecruitExcel.AddFreeRecruitPeriodFrom(builder, FreeRecruitPeriodFromOffset);
+    ShopFreeRecruitExcel.AddTenRecruitCountOnly(builder, TenRecruitCountOnly);
     return ShopFreeRecruitExcel.EndShopFreeRecruitExcel(builder);
   }
 
-  public static void StartShopFreeRecruitExcel(FlatBufferBuilder builder) { builder.StartTable(6); }
+  public static void StartShopFreeRecruitExcel(FlatBufferBuilder builder) { builder.StartTable(7); }
   public static void AddId(FlatBufferBuilder builder, long id) { builder.AddLong(0, id, 0); }
   public static void AddFreeRecruitPeriodFrom(FlatBufferBuilder builder, StringOffset freeRecruitPeriodFromOffset) { builder.AddOffset(1, freeRecruitPeriodFromOffset.Value, 0); }
   public static void AddFreeRecruitPeriodTo(FlatBufferBuilder builder, StringOffset freeRecruitPeriodToOffset) { builder.AddOffset(2, freeRecruitPeriodToOffset.Value, 0); }
   public static void AddFreeRecruitType(FlatBufferBuilder builder, Japan.ShopFreeRecruitType freeRecruitType) { builder.AddInt(3, (int)freeRecruitType, 0); }
   public static void AddFreeRecruitDecorationImagePath(FlatBufferBuilder builder, StringOffset freeRecruitDecorationImagePathOffset) { builder.AddOffset(4, freeRecruitDecorationImagePathOffset.Value, 0); }
-  public static void AddShopRecruitId(FlatBufferBuilder builder, VectorOffset shopRecruitIdOffset) { builder.AddOffset(5, shopRecruitIdOffset.Value, 0); }
+  public static void AddTenRecruitCountOnly(FlatBufferBuilder builder, bool tenRecruitCountOnly) { builder.AddBool(5, tenRecruitCountOnly, false); }
+  public static void AddShopRecruitId(FlatBufferBuilder builder, VectorOffset shopRecruitIdOffset) { builder.AddOffset(6, shopRecruitIdOffset.Value, 0); }
   public static VectorOffset CreateShopRecruitIdVector(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); for (int i = data.Length - 1; i >= 0; i--) builder.AddLong(data[i]); return builder.EndVector(); }
   public static VectorOffset CreateShopRecruitIdVectorBlock(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateShopRecruitIdVectorBlock(FlatBufferBuilder builder, ArraySegment<long> data) { builder.StartVector(8, data.Count, 8); builder.Add(data); return builder.EndVector(); }
@@ -97,6 +101,7 @@ public struct ShopFreeRecruitExcel : IFlatbufferObject
     _o.FreeRecruitPeriodTo = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.FreeRecruitPeriodTo, key) : this.FreeRecruitPeriodTo;
     _o.FreeRecruitType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.FreeRecruitType, key) : this.FreeRecruitType;
     _o.FreeRecruitDecorationImagePath = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.FreeRecruitDecorationImagePath, key) : this.FreeRecruitDecorationImagePath;
+    _o.TenRecruitCountOnly = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.TenRecruitCountOnly, key) : this.TenRecruitCountOnly;
     _o.ShopRecruitId = new List<long>();
     for (var _j = 0; _j < this.ShopRecruitIdLength; ++_j) {_o.ShopRecruitId.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ShopRecruitId(_j), key) : this.ShopRecruitId(_j));}
   }
@@ -108,6 +113,7 @@ public struct ShopFreeRecruitExcel : IFlatbufferObject
     var _FreeRecruitPeriodTo = _o.FreeRecruitPeriodTo == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FreeRecruitPeriodTo, key) : _o.FreeRecruitPeriodTo));
 		var _FreeRecruitType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.FreeRecruitType, key) : _o.FreeRecruitType;
     var _FreeRecruitDecorationImagePath = _o.FreeRecruitDecorationImagePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FreeRecruitDecorationImagePath, key) : _o.FreeRecruitDecorationImagePath));
+		var _TenRecruitCountOnly = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.TenRecruitCountOnly, key) : _o.TenRecruitCountOnly;
     var _ShopRecruitId = default(VectorOffset);
     if (_o.ShopRecruitId != null) {
       var __ShopRecruitId = _o.ShopRecruitId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
@@ -120,6 +126,7 @@ public struct ShopFreeRecruitExcel : IFlatbufferObject
       _FreeRecruitPeriodTo,
       TableEncryptionService.UseEncryption ? _FreeRecruitType : _o.FreeRecruitType,
       _FreeRecruitDecorationImagePath,
+      TableEncryptionService.UseEncryption ? _TenRecruitCountOnly : _o.TenRecruitCountOnly,
       _ShopRecruitId);
   }
 }
@@ -131,6 +138,7 @@ public class ShopFreeRecruitExcelT
   public string FreeRecruitPeriodTo { get; set; }
   public Japan.ShopFreeRecruitType FreeRecruitType { get; set; }
   public string FreeRecruitDecorationImagePath { get; set; }
+  public bool TenRecruitCountOnly { get; set; }
   public List<long> ShopRecruitId { get; set; }
 
   public ShopFreeRecruitExcelT() {
@@ -139,6 +147,7 @@ public class ShopFreeRecruitExcelT
     this.FreeRecruitPeriodTo = null;
     this.FreeRecruitType = Japan.ShopFreeRecruitType.None;
     this.FreeRecruitDecorationImagePath = null;
+    this.TenRecruitCountOnly = false;
     this.ShopRecruitId = null;
   }
 }
@@ -154,7 +163,8 @@ static public class ShopFreeRecruitExcelVerify
       && verifier.VerifyString(tablePos, 8 /*FreeRecruitPeriodTo*/, false)
       && verifier.VerifyField(tablePos, 10 /*FreeRecruitType*/, 4 /*Japan.ShopFreeRecruitType*/, 4, false)
       && verifier.VerifyString(tablePos, 12 /*FreeRecruitDecorationImagePath*/, false)
-      && verifier.VerifyVectorOfData(tablePos, 14 /*ShopRecruitId*/, 8 /*long*/, false)
+      && verifier.VerifyField(tablePos, 14 /*TenRecruitCountOnly*/, 1 /*bool*/, 1, false)
+      && verifier.VerifyVectorOfData(tablePos, 16 /*ShopRecruitId*/, 8 /*long*/, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

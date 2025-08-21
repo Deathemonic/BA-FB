@@ -26,6 +26,7 @@ public struct MinigameCCGRewardItemExcel : IFlatbufferObject
   public Japan.ParcelType RewardParcelType { get { int o = __p.__offset(10); return o != 0 ? (Japan.ParcelType)__p.bb.GetInt(o + __p.bb_pos) : Japan.ParcelType.None; } }
   public long RewardParcelId { get { int o = __p.__offset(12); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
   public int RewardParcelAmount { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public long DisplayOrder { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
 
   public static Offset<Japan.MinigameCCGRewardItemExcel> CreateMinigameCCGRewardItemExcel(FlatBufferBuilder builder,
       long Id = 0,
@@ -33,8 +34,10 @@ public struct MinigameCCGRewardItemExcel : IFlatbufferObject
       int MinPoint = 0,
       Japan.ParcelType RewardParcelType = Japan.ParcelType.None,
       long RewardParcelId = 0,
-      int RewardParcelAmount = 0) {
-    builder.StartTable(6);
+      int RewardParcelAmount = 0,
+      long DisplayOrder = 0) {
+    builder.StartTable(7);
+    MinigameCCGRewardItemExcel.AddDisplayOrder(builder, DisplayOrder);
     MinigameCCGRewardItemExcel.AddRewardParcelId(builder, RewardParcelId);
     MinigameCCGRewardItemExcel.AddCCGId(builder, CCGId);
     MinigameCCGRewardItemExcel.AddId(builder, Id);
@@ -44,13 +47,14 @@ public struct MinigameCCGRewardItemExcel : IFlatbufferObject
     return MinigameCCGRewardItemExcel.EndMinigameCCGRewardItemExcel(builder);
   }
 
-  public static void StartMinigameCCGRewardItemExcel(FlatBufferBuilder builder) { builder.StartTable(6); }
+  public static void StartMinigameCCGRewardItemExcel(FlatBufferBuilder builder) { builder.StartTable(7); }
   public static void AddId(FlatBufferBuilder builder, long id) { builder.AddLong(0, id, 0); }
   public static void AddCCGId(FlatBufferBuilder builder, long cCGId) { builder.AddLong(1, cCGId, 0); }
   public static void AddMinPoint(FlatBufferBuilder builder, int minPoint) { builder.AddInt(2, minPoint, 0); }
   public static void AddRewardParcelType(FlatBufferBuilder builder, Japan.ParcelType rewardParcelType) { builder.AddInt(3, (int)rewardParcelType, 0); }
   public static void AddRewardParcelId(FlatBufferBuilder builder, long rewardParcelId) { builder.AddLong(4, rewardParcelId, 0); }
   public static void AddRewardParcelAmount(FlatBufferBuilder builder, int rewardParcelAmount) { builder.AddInt(5, rewardParcelAmount, 0); }
+  public static void AddDisplayOrder(FlatBufferBuilder builder, long displayOrder) { builder.AddLong(6, displayOrder, 0); }
   public static Offset<Japan.MinigameCCGRewardItemExcel> EndMinigameCCGRewardItemExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Japan.MinigameCCGRewardItemExcel>(o);
@@ -68,6 +72,7 @@ public struct MinigameCCGRewardItemExcel : IFlatbufferObject
     _o.RewardParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.RewardParcelType, key) : this.RewardParcelType;
     _o.RewardParcelId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.RewardParcelId, key) : this.RewardParcelId;
     _o.RewardParcelAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.RewardParcelAmount, key) : this.RewardParcelAmount;
+    _o.DisplayOrder = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.DisplayOrder, key) : this.DisplayOrder;
   }
   public static Offset<Japan.MinigameCCGRewardItemExcel> Pack(FlatBufferBuilder builder, MinigameCCGRewardItemExcelT _o) {
     if (_o == null) return default(Offset<Japan.MinigameCCGRewardItemExcel>);
@@ -78,6 +83,7 @@ public struct MinigameCCGRewardItemExcel : IFlatbufferObject
 		var _RewardParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RewardParcelType, key) : _o.RewardParcelType;
 		var _RewardParcelId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RewardParcelId, key) : _o.RewardParcelId;
 		var _RewardParcelAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RewardParcelAmount, key) : _o.RewardParcelAmount;
+		var _DisplayOrder = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayOrder, key) : _o.DisplayOrder;
     return CreateMinigameCCGRewardItemExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
@@ -85,7 +91,8 @@ public struct MinigameCCGRewardItemExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _MinPoint : _o.MinPoint,
       TableEncryptionService.UseEncryption ? _RewardParcelType : _o.RewardParcelType,
       TableEncryptionService.UseEncryption ? _RewardParcelId : _o.RewardParcelId,
-      TableEncryptionService.UseEncryption ? _RewardParcelAmount : _o.RewardParcelAmount);
+      TableEncryptionService.UseEncryption ? _RewardParcelAmount : _o.RewardParcelAmount,
+      TableEncryptionService.UseEncryption ? _DisplayOrder : _o.DisplayOrder);
   }
 }
 
@@ -97,6 +104,7 @@ public class MinigameCCGRewardItemExcelT
   public Japan.ParcelType RewardParcelType { get; set; }
   public long RewardParcelId { get; set; }
   public int RewardParcelAmount { get; set; }
+  public long DisplayOrder { get; set; }
 
   public MinigameCCGRewardItemExcelT() {
     this.Id = 0;
@@ -105,6 +113,7 @@ public class MinigameCCGRewardItemExcelT
     this.RewardParcelType = Japan.ParcelType.None;
     this.RewardParcelId = 0;
     this.RewardParcelAmount = 0;
+    this.DisplayOrder = 0;
   }
 }
 
@@ -120,6 +129,7 @@ static public class MinigameCCGRewardItemExcelVerify
       && verifier.VerifyField(tablePos, 10 /*RewardParcelType*/, 4 /*Japan.ParcelType*/, 4, false)
       && verifier.VerifyField(tablePos, 12 /*RewardParcelId*/, 8 /*long*/, 8, false)
       && verifier.VerifyField(tablePos, 14 /*RewardParcelAmount*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 16 /*DisplayOrder*/, 8 /*long*/, 8, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

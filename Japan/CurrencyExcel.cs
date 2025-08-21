@@ -72,6 +72,8 @@ public struct CurrencyExcel : IFlatbufferObject
   public Japan.ParcelType ExpiryChangeParcelType { get { int o = __p.__offset(40); return o != 0 ? (Japan.ParcelType)__p.bb.GetInt(o + __p.bb_pos) : Japan.ParcelType.None; } }
   public long ExpiryChangeId { get { int o = __p.__offset(42); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
   public long ExpiryChangeAmount { get { int o = __p.__offset(44); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public Japan.PeriodType ResetType { get { int o = __p.__offset(46); return o != 0 ? (Japan.PeriodType)__p.bb.GetInt(o + __p.bb_pos) : Japan.PeriodType.None; } }
+  public long ResetAmount { get { int o = __p.__offset(48); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
 
   public static Offset<Japan.CurrencyExcel> CreateCurrencyExcel(FlatBufferBuilder builder,
       long ID = 0,
@@ -94,14 +96,18 @@ public struct CurrencyExcel : IFlatbufferObject
       int ExpirationNotifyDateIn = 0,
       Japan.ParcelType ExpiryChangeParcelType = Japan.ParcelType.None,
       long ExpiryChangeId = 0,
-      long ExpiryChangeAmount = 0) {
-    builder.StartTable(21);
+      long ExpiryChangeAmount = 0,
+      Japan.PeriodType ResetType = Japan.PeriodType.None,
+      long ResetAmount = 0) {
+    builder.StartTable(23);
+    CurrencyExcel.AddResetAmount(builder, ResetAmount);
     CurrencyExcel.AddExpiryChangeAmount(builder, ExpiryChangeAmount);
     CurrencyExcel.AddExpiryChangeId(builder, ExpiryChangeId);
     CurrencyExcel.AddDailyRefillAmount(builder, DailyRefillAmount);
     CurrencyExcel.AddOverChargeLimit(builder, OverChargeLimit);
     CurrencyExcel.AddChargeLimit(builder, ChargeLimit);
     CurrencyExcel.AddID(builder, ID);
+    CurrencyExcel.AddResetType(builder, ResetType);
     CurrencyExcel.AddExpiryChangeParcelType(builder, ExpiryChangeParcelType);
     CurrencyExcel.AddExpirationNotifyDateIn(builder, ExpirationNotifyDateIn);
     CurrencyExcel.AddExpirationDateTime(builder, ExpirationDateTimeOffset);
@@ -120,7 +126,7 @@ public struct CurrencyExcel : IFlatbufferObject
     return CurrencyExcel.EndCurrencyExcel(builder);
   }
 
-  public static void StartCurrencyExcel(FlatBufferBuilder builder) { builder.StartTable(21); }
+  public static void StartCurrencyExcel(FlatBufferBuilder builder) { builder.StartTable(23); }
   public static void AddID(FlatBufferBuilder builder, long iD) { builder.AddLong(0, iD, 0); }
   public static void AddLocalizeEtcId(FlatBufferBuilder builder, uint localizeEtcId) { builder.AddUint(1, localizeEtcId, 0); }
   public static void AddCurrencyType(FlatBufferBuilder builder, Japan.CurrencyTypes currencyType) { builder.AddInt(2, (int)currencyType, 0); }
@@ -147,6 +153,8 @@ public struct CurrencyExcel : IFlatbufferObject
   public static void AddExpiryChangeParcelType(FlatBufferBuilder builder, Japan.ParcelType expiryChangeParcelType) { builder.AddInt(18, (int)expiryChangeParcelType, 0); }
   public static void AddExpiryChangeId(FlatBufferBuilder builder, long expiryChangeId) { builder.AddLong(19, expiryChangeId, 0); }
   public static void AddExpiryChangeAmount(FlatBufferBuilder builder, long expiryChangeAmount) { builder.AddLong(20, expiryChangeAmount, 0); }
+  public static void AddResetType(FlatBufferBuilder builder, Japan.PeriodType resetType) { builder.AddInt(21, (int)resetType, 0); }
+  public static void AddResetAmount(FlatBufferBuilder builder, long resetAmount) { builder.AddLong(22, resetAmount, 0); }
   public static Offset<Japan.CurrencyExcel> EndCurrencyExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Japan.CurrencyExcel>(o);
@@ -180,6 +188,8 @@ public struct CurrencyExcel : IFlatbufferObject
     _o.ExpiryChangeParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ExpiryChangeParcelType, key) : this.ExpiryChangeParcelType;
     _o.ExpiryChangeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ExpiryChangeId, key) : this.ExpiryChangeId;
     _o.ExpiryChangeAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ExpiryChangeAmount, key) : this.ExpiryChangeAmount;
+    _o.ResetType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ResetType, key) : this.ResetType;
+    _o.ResetAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ResetAmount, key) : this.ResetAmount;
   }
   public static Offset<Japan.CurrencyExcel> Pack(FlatBufferBuilder builder, CurrencyExcelT _o) {
     if (_o == null) return default(Offset<Japan.CurrencyExcel>);
@@ -209,6 +219,8 @@ public struct CurrencyExcel : IFlatbufferObject
 		var _ExpiryChangeParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ExpiryChangeParcelType, key) : _o.ExpiryChangeParcelType;
 		var _ExpiryChangeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ExpiryChangeId, key) : _o.ExpiryChangeId;
 		var _ExpiryChangeAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ExpiryChangeAmount, key) : _o.ExpiryChangeAmount;
+		var _ResetType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ResetType, key) : _o.ResetType;
+		var _ResetAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ResetAmount, key) : _o.ResetAmount;
     return CreateCurrencyExcel(
       builder,
       TableEncryptionService.UseEncryption ? _ID : _o.ID,
@@ -231,7 +243,9 @@ public struct CurrencyExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ExpirationNotifyDateIn : _o.ExpirationNotifyDateIn,
       TableEncryptionService.UseEncryption ? _ExpiryChangeParcelType : _o.ExpiryChangeParcelType,
       TableEncryptionService.UseEncryption ? _ExpiryChangeId : _o.ExpiryChangeId,
-      TableEncryptionService.UseEncryption ? _ExpiryChangeAmount : _o.ExpiryChangeAmount);
+      TableEncryptionService.UseEncryption ? _ExpiryChangeAmount : _o.ExpiryChangeAmount,
+      TableEncryptionService.UseEncryption ? _ResetType : _o.ResetType,
+      TableEncryptionService.UseEncryption ? _ResetAmount : _o.ResetAmount);
   }
 }
 
@@ -258,6 +272,8 @@ public class CurrencyExcelT
   public Japan.ParcelType ExpiryChangeParcelType { get; set; }
   public long ExpiryChangeId { get; set; }
   public long ExpiryChangeAmount { get; set; }
+  public Japan.PeriodType ResetType { get; set; }
+  public long ResetAmount { get; set; }
 
   public CurrencyExcelT() {
     this.ID = 0;
@@ -281,6 +297,8 @@ public class CurrencyExcelT
     this.ExpiryChangeParcelType = Japan.ParcelType.None;
     this.ExpiryChangeId = 0;
     this.ExpiryChangeAmount = 0;
+    this.ResetType = Japan.PeriodType.None;
+    this.ResetAmount = 0;
   }
 }
 
@@ -311,6 +329,8 @@ static public class CurrencyExcelVerify
       && verifier.VerifyField(tablePos, 40 /*ExpiryChangeParcelType*/, 4 /*Japan.ParcelType*/, 4, false)
       && verifier.VerifyField(tablePos, 42 /*ExpiryChangeId*/, 8 /*long*/, 8, false)
       && verifier.VerifyField(tablePos, 44 /*ExpiryChangeAmount*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 46 /*ResetType*/, 4 /*Japan.PeriodType*/, 4, false)
+      && verifier.VerifyField(tablePos, 48 /*ResetAmount*/, 8 /*long*/, 8, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

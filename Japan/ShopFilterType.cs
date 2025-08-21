@@ -36,7 +36,7 @@ public enum ShopFilterType : int
   ChaserTotalTicket = 26,
   SchoolTotalTicket = 27,
   Highlander = 28,
-  ShopFilterDUMMY_2 = 29,
+  WildHunt = 29,
   ShopFilterDUMMY_3 = 30,
   ShopFilterDUMMY_4 = 31,
   ShopFilterDUMMY_5 = 32,

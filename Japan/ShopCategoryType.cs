@@ -45,6 +45,7 @@ public enum ShopCategoryType : int
   SelectPickupGacha = 35,
   GemDaily = 36,
   GemWeekly = 37,
+  CafeSummonTicket = 38,
 };
 
 

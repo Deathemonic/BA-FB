@@ -24,25 +24,51 @@ public struct CafeInfoExcel : IFlatbufferObject
   public bool IsDefault { get { int o = __p.__offset(6); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
   public Japan.OpenConditionContent OpenConditionCafeId { get { int o = __p.__offset(8); return o != 0 ? (Japan.OpenConditionContent)__p.bb.GetInt(o + __p.bb_pos) : Japan.OpenConditionContent.Shop; } }
   public Japan.OpenConditionContent OpenConditionCafeInvite { get { int o = __p.__offset(10); return o != 0 ? (Japan.OpenConditionContent)__p.bb.GetInt(o + __p.bb_pos) : Japan.OpenConditionContent.Shop; } }
+  public Japan.ParcelType SummonParcelType { get { int o = __p.__offset(12); return o != 0 ? (Japan.ParcelType)__p.bb.GetInt(o + __p.bb_pos) : Japan.ParcelType.None; } }
+  public long SummonParcelId { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public long SummonParcelAmount { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public Japan.ShopCategoryType CategoryType { get { int o = __p.__offset(18); return o != 0 ? (Japan.ShopCategoryType)__p.bb.GetInt(o + __p.bb_pos) : Japan.ShopCategoryType.General; } }
+  public string SummonTicketIconPath { get { int o = __p.__offset(20); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetSummonTicketIconPathBytes() { return __p.__vector_as_span<byte>(20, 1); }
+#else
+  public ArraySegment<byte>? GetSummonTicketIconPathBytes() { return __p.__vector_as_arraysegment(20); }
+#endif
+  public byte[] GetSummonTicketIconPathArray() { return __p.__vector_as_array<byte>(20); }
 
   public static Offset<Japan.CafeInfoExcel> CreateCafeInfoExcel(FlatBufferBuilder builder,
       long CafeId = 0,
       bool IsDefault = false,
       Japan.OpenConditionContent OpenConditionCafeId = Japan.OpenConditionContent.Shop,
-      Japan.OpenConditionContent OpenConditionCafeInvite = Japan.OpenConditionContent.Shop) {
-    builder.StartTable(4);
+      Japan.OpenConditionContent OpenConditionCafeInvite = Japan.OpenConditionContent.Shop,
+      Japan.ParcelType SummonParcelType = Japan.ParcelType.None,
+      long SummonParcelId = 0,
+      long SummonParcelAmount = 0,
+      Japan.ShopCategoryType CategoryType = Japan.ShopCategoryType.General,
+      StringOffset SummonTicketIconPathOffset = default(StringOffset)) {
+    builder.StartTable(9);
+    CafeInfoExcel.AddSummonParcelAmount(builder, SummonParcelAmount);
+    CafeInfoExcel.AddSummonParcelId(builder, SummonParcelId);
     CafeInfoExcel.AddCafeId(builder, CafeId);
+    CafeInfoExcel.AddSummonTicketIconPath(builder, SummonTicketIconPathOffset);
+    CafeInfoExcel.AddCategoryType(builder, CategoryType);
+    CafeInfoExcel.AddSummonParcelType(builder, SummonParcelType);
     CafeInfoExcel.AddOpenConditionCafeInvite(builder, OpenConditionCafeInvite);
     CafeInfoExcel.AddOpenConditionCafeId(builder, OpenConditionCafeId);
     CafeInfoExcel.AddIsDefault(builder, IsDefault);
     return CafeInfoExcel.EndCafeInfoExcel(builder);
   }
 
-  public static void StartCafeInfoExcel(FlatBufferBuilder builder) { builder.StartTable(4); }
+  public static void StartCafeInfoExcel(FlatBufferBuilder builder) { builder.StartTable(9); }
   public static void AddCafeId(FlatBufferBuilder builder, long cafeId) { builder.AddLong(0, cafeId, 0); }
   public static void AddIsDefault(FlatBufferBuilder builder, bool isDefault) { builder.AddBool(1, isDefault, false); }
   public static void AddOpenConditionCafeId(FlatBufferBuilder builder, Japan.OpenConditionContent openConditionCafeId) { builder.AddInt(2, (int)openConditionCafeId, 0); }
   public static void AddOpenConditionCafeInvite(FlatBufferBuilder builder, Japan.OpenConditionContent openConditionCafeInvite) { builder.AddInt(3, (int)openConditionCafeInvite, 0); }
+  public static void AddSummonParcelType(FlatBufferBuilder builder, Japan.ParcelType summonParcelType) { builder.AddInt(4, (int)summonParcelType, 0); }
+  public static void AddSummonParcelId(FlatBufferBuilder builder, long summonParcelId) { builder.AddLong(5, summonParcelId, 0); }
+  public static void AddSummonParcelAmount(FlatBufferBuilder builder, long summonParcelAmount) { builder.AddLong(6, summonParcelAmount, 0); }
+  public static void AddCategoryType(FlatBufferBuilder builder, Japan.ShopCategoryType categoryType) { builder.AddInt(7, (int)categoryType, 0); }
+  public static void AddSummonTicketIconPath(FlatBufferBuilder builder, StringOffset summonTicketIconPathOffset) { builder.AddOffset(8, summonTicketIconPathOffset.Value, 0); }
   public static Offset<Japan.CafeInfoExcel> EndCafeInfoExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Japan.CafeInfoExcel>(o);
@@ -58,6 +84,11 @@ public struct CafeInfoExcel : IFlatbufferObject
     _o.IsDefault = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.IsDefault, key) : this.IsDefault;
     _o.OpenConditionCafeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.OpenConditionCafeId, key) : this.OpenConditionCafeId;
     _o.OpenConditionCafeInvite = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.OpenConditionCafeInvite, key) : this.OpenConditionCafeInvite;
+    _o.SummonParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SummonParcelType, key) : this.SummonParcelType;
+    _o.SummonParcelId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SummonParcelId, key) : this.SummonParcelId;
+    _o.SummonParcelAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SummonParcelAmount, key) : this.SummonParcelAmount;
+    _o.CategoryType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CategoryType, key) : this.CategoryType;
+    _o.SummonTicketIconPath = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SummonTicketIconPath, key) : this.SummonTicketIconPath;
   }
   public static Offset<Japan.CafeInfoExcel> Pack(FlatBufferBuilder builder, CafeInfoExcelT _o) {
     if (_o == null) return default(Offset<Japan.CafeInfoExcel>);
@@ -66,12 +97,22 @@ public struct CafeInfoExcel : IFlatbufferObject
 		var _IsDefault = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsDefault, key) : _o.IsDefault;
 		var _OpenConditionCafeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.OpenConditionCafeId, key) : _o.OpenConditionCafeId;
 		var _OpenConditionCafeInvite = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.OpenConditionCafeInvite, key) : _o.OpenConditionCafeInvite;
+		var _SummonParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SummonParcelType, key) : _o.SummonParcelType;
+		var _SummonParcelId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SummonParcelId, key) : _o.SummonParcelId;
+		var _SummonParcelAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SummonParcelAmount, key) : _o.SummonParcelAmount;
+		var _CategoryType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CategoryType, key) : _o.CategoryType;
+    var _SummonTicketIconPath = _o.SummonTicketIconPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SummonTicketIconPath, key) : _o.SummonTicketIconPath));
     return CreateCafeInfoExcel(
       builder,
       TableEncryptionService.UseEncryption ? _CafeId : _o.CafeId,
       TableEncryptionService.UseEncryption ? _IsDefault : _o.IsDefault,
       TableEncryptionService.UseEncryption ? _OpenConditionCafeId : _o.OpenConditionCafeId,
-      TableEncryptionService.UseEncryption ? _OpenConditionCafeInvite : _o.OpenConditionCafeInvite);
+      TableEncryptionService.UseEncryption ? _OpenConditionCafeInvite : _o.OpenConditionCafeInvite,
+      TableEncryptionService.UseEncryption ? _SummonParcelType : _o.SummonParcelType,
+      TableEncryptionService.UseEncryption ? _SummonParcelId : _o.SummonParcelId,
+      TableEncryptionService.UseEncryption ? _SummonParcelAmount : _o.SummonParcelAmount,
+      TableEncryptionService.UseEncryption ? _CategoryType : _o.CategoryType,
+      _SummonTicketIconPath);
   }
 }
 
@@ -81,12 +122,22 @@ public class CafeInfoExcelT
   public bool IsDefault { get; set; }
   public Japan.OpenConditionContent OpenConditionCafeId { get; set; }
   public Japan.OpenConditionContent OpenConditionCafeInvite { get; set; }
+  public Japan.ParcelType SummonParcelType { get; set; }
+  public long SummonParcelId { get; set; }
+  public long SummonParcelAmount { get; set; }
+  public Japan.ShopCategoryType CategoryType { get; set; }
+  public string SummonTicketIconPath { get; set; }
 
   public CafeInfoExcelT() {
     this.CafeId = 0;
     this.IsDefault = false;
     this.OpenConditionCafeId = Japan.OpenConditionContent.Shop;
     this.OpenConditionCafeInvite = Japan.OpenConditionContent.Shop;
+    this.SummonParcelType = Japan.ParcelType.None;
+    this.SummonParcelId = 0;
+    this.SummonParcelAmount = 0;
+    this.CategoryType = Japan.ShopCategoryType.General;
+    this.SummonTicketIconPath = null;
   }
 }
 
@@ -100,6 +151,11 @@ static public class CafeInfoExcelVerify
       && verifier.VerifyField(tablePos, 6 /*IsDefault*/, 1 /*bool*/, 1, false)
       && verifier.VerifyField(tablePos, 8 /*OpenConditionCafeId*/, 4 /*Japan.OpenConditionContent*/, 4, false)
       && verifier.VerifyField(tablePos, 10 /*OpenConditionCafeInvite*/, 4 /*Japan.OpenConditionContent*/, 4, false)
+      && verifier.VerifyField(tablePos, 12 /*SummonParcelType*/, 4 /*Japan.ParcelType*/, 4, false)
+      && verifier.VerifyField(tablePos, 14 /*SummonParcelId*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 16 /*SummonParcelAmount*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 18 /*CategoryType*/, 4 /*Japan.ShopCategoryType*/, 4, false)
+      && verifier.VerifyString(tablePos, 20 /*SummonTicketIconPath*/, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

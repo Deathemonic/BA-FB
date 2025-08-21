@@ -31,8 +31,10 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
 #endif
   public byte[] GetDiceRacePawnPrefabArray() { return __p.__vector_as_array<byte>(10); }
   public bool IsUsingFixedDice { get { int o = __p.__offset(12); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
-  public string DiceRaceEventType(int j) { int o = __p.__offset(14); return o != 0 ? __p.__string(__p.__vector(o) + j * 4) : null; }
-  public int DiceRaceEventTypeLength { get { int o = __p.__offset(14); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public string FixedDiceIcon(int j) { int o = __p.__offset(14); return o != 0 ? __p.__string(__p.__vector(o) + j * 4) : null; }
+  public int FixedDiceIconLength { get { int o = __p.__offset(14); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public string DiceRaceEventType(int j) { int o = __p.__offset(16); return o != 0 ? __p.__string(__p.__vector(o) + j * 4) : null; }
+  public int DiceRaceEventTypeLength { get { int o = __p.__offset(16); return o != 0 ? __p.__vector_len(o) : 0; } }
 
   public static Offset<Japan.EventContentDiceRaceExcel> CreateEventContentDiceRaceExcel(FlatBufferBuilder builder,
       long EventContentId = 0,
@@ -40,24 +42,32 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
       int SkipableLap = 0,
       StringOffset DiceRacePawnPrefabOffset = default(StringOffset),
       bool IsUsingFixedDice = false,
+      VectorOffset fixedDiceIconOffset = default(VectorOffset),
       VectorOffset diceRaceEventTypeOffset = default(VectorOffset)) {
-    builder.StartTable(6);
+    builder.StartTable(7);
     EventContentDiceRaceExcel.AddDiceCostGoodsId(builder, DiceCostGoodsId);
     EventContentDiceRaceExcel.AddEventContentId(builder, EventContentId);
     EventContentDiceRaceExcel.AddDiceRaceEventType(builder, diceRaceEventTypeOffset);
+    EventContentDiceRaceExcel.AddFixedDiceIcon(builder, fixedDiceIconOffset);
     EventContentDiceRaceExcel.AddDiceRacePawnPrefab(builder, DiceRacePawnPrefabOffset);
     EventContentDiceRaceExcel.AddSkipableLap(builder, SkipableLap);
     EventContentDiceRaceExcel.AddIsUsingFixedDice(builder, IsUsingFixedDice);
     return EventContentDiceRaceExcel.EndEventContentDiceRaceExcel(builder);
   }
 
-  public static void StartEventContentDiceRaceExcel(FlatBufferBuilder builder) { builder.StartTable(6); }
+  public static void StartEventContentDiceRaceExcel(FlatBufferBuilder builder) { builder.StartTable(7); }
   public static void AddEventContentId(FlatBufferBuilder builder, long eventContentId) { builder.AddLong(0, eventContentId, 0); }
   public static void AddDiceCostGoodsId(FlatBufferBuilder builder, long diceCostGoodsId) { builder.AddLong(1, diceCostGoodsId, 0); }
   public static void AddSkipableLap(FlatBufferBuilder builder, int skipableLap) { builder.AddInt(2, skipableLap, 0); }
   public static void AddDiceRacePawnPrefab(FlatBufferBuilder builder, StringOffset diceRacePawnPrefabOffset) { builder.AddOffset(3, diceRacePawnPrefabOffset.Value, 0); }
   public static void AddIsUsingFixedDice(FlatBufferBuilder builder, bool isUsingFixedDice) { builder.AddBool(4, isUsingFixedDice, false); }
-  public static void AddDiceRaceEventType(FlatBufferBuilder builder, VectorOffset diceRaceEventTypeOffset) { builder.AddOffset(5, diceRaceEventTypeOffset.Value, 0); }
+  public static void AddFixedDiceIcon(FlatBufferBuilder builder, VectorOffset fixedDiceIconOffset) { builder.AddOffset(5, fixedDiceIconOffset.Value, 0); }
+  public static VectorOffset CreateFixedDiceIconVector(FlatBufferBuilder builder, StringOffset[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
+  public static VectorOffset CreateFixedDiceIconVectorBlock(FlatBufferBuilder builder, StringOffset[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateFixedDiceIconVectorBlock(FlatBufferBuilder builder, ArraySegment<StringOffset> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateFixedDiceIconVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<StringOffset>(dataPtr, sizeInBytes); return builder.EndVector(); }
+  public static void StartFixedDiceIconVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddDiceRaceEventType(FlatBufferBuilder builder, VectorOffset diceRaceEventTypeOffset) { builder.AddOffset(6, diceRaceEventTypeOffset.Value, 0); }
   public static VectorOffset CreateDiceRaceEventTypeVector(FlatBufferBuilder builder, StringOffset[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static VectorOffset CreateDiceRaceEventTypeVectorBlock(FlatBufferBuilder builder, StringOffset[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateDiceRaceEventTypeVectorBlock(FlatBufferBuilder builder, ArraySegment<StringOffset> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
@@ -79,6 +89,8 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
     _o.SkipableLap = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SkipableLap, key) : this.SkipableLap;
     _o.DiceRacePawnPrefab = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.DiceRacePawnPrefab, key) : this.DiceRacePawnPrefab;
     _o.IsUsingFixedDice = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.IsUsingFixedDice, key) : this.IsUsingFixedDice;
+    _o.FixedDiceIcon = new List<string>();
+    for (var _j = 0; _j < this.FixedDiceIconLength; ++_j) {_o.FixedDiceIcon.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.FixedDiceIcon(_j), key) : this.FixedDiceIcon(_j));}
     _o.DiceRaceEventType = new List<string>();
     for (var _j = 0; _j < this.DiceRaceEventTypeLength; ++_j) {_o.DiceRaceEventType.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.DiceRaceEventType(_j), key) : this.DiceRaceEventType(_j));}
   }
@@ -90,6 +102,12 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
 		var _SkipableLap = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SkipableLap, key) : _o.SkipableLap;
     var _DiceRacePawnPrefab = _o.DiceRacePawnPrefab == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DiceRacePawnPrefab, key) : _o.DiceRacePawnPrefab));
 		var _IsUsingFixedDice = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsUsingFixedDice, key) : _o.IsUsingFixedDice;
+    var _fixedDiceIcon = default(VectorOffset);
+    if (_o.FixedDiceIcon != null) {
+      var __fixedDiceIcon = new StringOffset[_o.FixedDiceIcon.Count];
+      for (var _j = 0; _j < __fixedDiceIcon.Length; ++_j) { __fixedDiceIcon[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FixedDiceIcon[_j], key) : _o.FixedDiceIcon[_j])); }
+      _fixedDiceIcon = CreateFixedDiceIconVector(builder, __fixedDiceIcon);
+    }
     var _diceRaceEventType = default(VectorOffset);
     if (_o.DiceRaceEventType != null) {
       var __diceRaceEventType = new StringOffset[_o.DiceRaceEventType.Count];
@@ -103,6 +121,7 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _SkipableLap : _o.SkipableLap,
       _DiceRacePawnPrefab,
       TableEncryptionService.UseEncryption ? _IsUsingFixedDice : _o.IsUsingFixedDice,
+      _fixedDiceIcon,
       _diceRaceEventType);
   }
 }
@@ -114,6 +133,7 @@ public class EventContentDiceRaceExcelT
   public int SkipableLap { get; set; }
   public string DiceRacePawnPrefab { get; set; }
   public bool IsUsingFixedDice { get; set; }
+  public List<string> FixedDiceIcon { get; set; }
   public List<string> DiceRaceEventType { get; set; }
 
   public EventContentDiceRaceExcelT() {
@@ -122,6 +142,7 @@ public class EventContentDiceRaceExcelT
     this.SkipableLap = 0;
     this.DiceRacePawnPrefab = null;
     this.IsUsingFixedDice = false;
+    this.FixedDiceIcon = null;
     this.DiceRaceEventType = null;
   }
 }
@@ -137,7 +158,8 @@ static public class EventContentDiceRaceExcelVerify
       && verifier.VerifyField(tablePos, 8 /*SkipableLap*/, 4 /*int*/, 4, false)
       && verifier.VerifyString(tablePos, 10 /*DiceRacePawnPrefab*/, false)
       && verifier.VerifyField(tablePos, 12 /*IsUsingFixedDice*/, 1 /*bool*/, 1, false)
-      && verifier.VerifyVectorOfStrings(tablePos, 14 /*DiceRaceEventType*/, false)
+      && verifier.VerifyVectorOfStrings(tablePos, 14 /*FixedDiceIcon*/, false)
+      && verifier.VerifyVectorOfStrings(tablePos, 16 /*DiceRaceEventType*/, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }
