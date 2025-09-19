@@ -88,28 +88,31 @@ impl ToolsFetcher {
 
         info!("Downloading {} from {}...", tool_name, url);
 
-        let download_url = if url.starts_with(HTTP_PREFIX) || url.starts_with(HTTPS_PREFIX) {
-            url
-        } else {
-            let release = self.fetch_github(url).await?;
-            let platform = Self::get_platform(false)?;
-            let asset = Self::find_asset(&release.assets, platform)?;
-            &asset.browser_download_url
-        };
-
         let file_path = self
             .file_manager
             .get_data_path(&format!("{}/{}", TOOLS_DIR, filename))
             .to_string_lossy()
             .to_string();
 
-        let download = vec![Download {
-            url: Url::parse(&download_url)?,
-            filename: file_path,
-            hash: None,
-        }];
-
-        self.download(&download).await
+        if url.starts_with(HTTP_PREFIX) || url.starts_with(HTTPS_PREFIX) {
+            let download = vec![Download {
+                url: Url::parse(url)?,
+                filename: file_path,
+                hash: None,
+            }];
+            self.download(&download).await
+        } else {
+            let release = self.fetch_github(url).await?;
+            let platform = Self::get_platform(false)?;
+            let asset = Self::find_asset(&release.assets, platform)?;
+            
+            let download = vec![Download {
+                url: Url::parse(&asset.browser_download_url)?,
+                filename: file_path,
+                hash: None,
+            }];
+            self.download(&download).await
+        }
     }
 
     pub async fn il2cpp_dumper(&self) -> Result<()> {
