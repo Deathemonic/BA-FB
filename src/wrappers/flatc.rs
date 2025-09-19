@@ -9,7 +9,7 @@ pub struct FlatC {
     binary: PathBuf,
 }
 
-#[derive(Debug, Clone, ValueEnum, Copy, Serialize, Deserialize)]
+#[derive(Debug, Clone, ValueEnum, Copy, Serialize, Deserialize, PartialEq)]
 pub enum Language {
     Cpp,
     Java,

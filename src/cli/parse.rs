@@ -199,7 +199,7 @@ impl CommandHandler {
 
         let mut fbs_options = FbsDumperOptions {
             dummy_dll: output.join("dll"),
-            game_assembly: libil2cpp,
+            game_assembly: Some(libil2cpp),
             output_file: Some(output.join("BlueArchive.fbs")),
             namespace: Some(match server_config.region {
                 ServerRegion::Japan => "Japan".to_string(),

@@ -66,7 +66,7 @@ impl ToolsFetcher {
         }
     }
 
-    fn find_asset(assets: &[GitHubAsset], suffix: &str) -> Result<&GitHubAsset> {
+    fn find_asset<'a>(assets: &'a [GitHubAsset], suffix: &str) -> Result<&'a GitHubAsset> {
         assets
             .iter()
             .find(|asset| asset.name.contains(suffix))
