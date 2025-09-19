@@ -22,13 +22,13 @@ impl ToolsExtractor {
         cfg!(target_os = "windows")
     }
 
-    fn make_executable(path: &Path) -> Result<()> {
+    fn make_executable(_path: &Path) -> Result<()> {
         #[cfg(unix)]
         {
             use std::os::unix::fs::PermissionsExt;
-            let mut perms = fs::metadata(path)?.permissions();
+            let mut perms = fs::metadata(_path)?.permissions();
             perms.set_mode(0o755);
-            fs::set_permissions(path, perms)?;
+            fs::set_permissions(_path, perms)?;
         }
         Ok(())
     }

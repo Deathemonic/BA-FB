@@ -19,8 +19,7 @@ struct GitHubAsset {
 
 #[derive(Deserialize)]
 struct GitHubRelease {
-    assets: Vec<GitHubAsset>,
-    tag_name: String,
+    assets: Vec<GitHubAsset>
 }
 
 pub struct ToolsFetcher {
@@ -38,7 +37,9 @@ impl ToolsFetcher {
             .overwrite(true)
             .build();
 
-        let client = reqwest::Client::new();
+        let client = reqwest::Client::builder()
+            .user_agent("BA-FB/1.4 (Blue Archive - FlatBuffer)")
+            .build()?;
 
         Ok(Self {
             file_manager,
@@ -128,7 +129,7 @@ impl ToolsFetcher {
     }
 
     pub async fn flatc(&self) -> Result<()> {
-        let platform = Self::get_platform(false)?;
+        let platform = Self::get_platform(true)?;
         let tool = format!("flatc-{}.zip", platform);
         let url = format!("{}/{}", FLATC_BASE_URL, tool);
 
