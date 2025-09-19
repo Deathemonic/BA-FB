@@ -11,11 +11,14 @@ pub struct FbsDumper {
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct FbsDumperOptions {
     pub dummy_dll: PathBuf,
-    pub game_assembly: PathBuf,
+    pub game_assembly: Option<PathBuf>,
     pub output_file: Option<PathBuf>,
     pub namespace: Option<String>,
     pub force_snake_case: bool,
     pub namespace_to_look_for: Option<String>,
+    pub force: bool,
+    pub verbose: bool,
+    pub suppress_warnings: bool,
 }
 
 impl FbsDumper {
@@ -29,23 +32,38 @@ impl FbsDumper {
     pub fn run(&self, options: FbsDumperOptions) -> Result<()> {
         let mut cmd = Command::new(&self.binary);
 
-        cmd.arg("-dummydll").arg(&options.dummy_dll);
-        cmd.arg("-gameassembly").arg(&options.game_assembly);
+        cmd.arg("--dummy-dll").arg(&options.dummy_dll);
+
+        if let Some(game_assembly) = &options.game_assembly {
+            cmd.arg("--game-assembly").arg(game_assembly);
+        }
 
         if let Some(output_file) = &options.output_file {
-            cmd.arg("-outputfile").arg(output_file);
+            cmd.arg("--output-file").arg(output_file);
         }
 
         if let Some(namespace) = &options.namespace {
-            cmd.arg("-namespace").arg(namespace);
+            cmd.arg("--namespace").arg(namespace);
         }
 
         if options.force_snake_case {
-            cmd.arg("-forcesnakecase");
+            cmd.arg("--force-snake-case");
         }
 
         if let Some(namespace_to_look_for) = &options.namespace_to_look_for {
-            cmd.arg("-namespacetolookfor").arg(namespace_to_look_for);
+            cmd.arg("--namespace-to-look-for").arg(namespace_to_look_for);
+        }
+
+        if options.force {
+            cmd.arg("--force");
+        }
+
+        if options.verbose {
+            cmd.arg("--verbose");
+        }
+
+        if options.suppress_warnings {
+            cmd.arg("--suppress-warnings");
         }
 
         let status = cmd.status()

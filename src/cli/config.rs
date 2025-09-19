@@ -2,7 +2,7 @@ use crate::wrappers::flatc::FlatCOptions;
 use crate::wrappers::fbs_dumper::FbsDumperOptions;
 use crate::wrappers::il2cpp_dumper::Il2CppDumperOptions;
 
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use serde::{Deserialize, Serialize};
 use std::path::Path;
 
@@ -21,7 +21,7 @@ impl Config {
         let config_path = match custom_path {
             Some(path) => {
                 if !path.exists() {
-                    return Err(anyhow::anyhow!("Config file not found: {}", path.display()));
+                    return Err(anyhow!("Config file not found: {}", path.display()));
                 }
                 Some(path)
             }
@@ -45,12 +45,25 @@ impl Config {
     }
 
     pub fn merge_fbs_dumper_config(&self, options: &mut FbsDumperOptions) {
-        if self.fbs_dumper.force_snake_case != FbsDumperOptions::default().force_snake_case {
-            options.force_snake_case = self.fbs_dumper.force_snake_case;
+        let default_options = FbsDumperOptions::default();
+        
+        macro_rules! merge_field {
+            ($field:ident) => {
+                if self.fbs_dumper.$field != default_options.$field {
+                    options.$field = self.fbs_dumper.$field.clone();
+                }
+            };
         }
-        if self.fbs_dumper.namespace_to_look_for != FbsDumperOptions::default().namespace_to_look_for {
-            options.namespace_to_look_for = self.fbs_dumper.namespace_to_look_for.clone();
-        }
+
+        merge_field!(dummy_dll);
+        merge_field!(game_assembly);
+        merge_field!(output_file);
+        merge_field!(namespace);
+        merge_field!(force_snake_case);
+        merge_field!(namespace_to_look_for);
+        merge_field!(force);
+        merge_field!(verbose);
+        merge_field!(suppress_warnings);
     }
 
     pub fn merge_flatc_config(&self, options: &mut FlatCOptions) {
@@ -64,6 +77,12 @@ impl Config {
             };
         }
 
+        merge_field!(languages);
+        merge_field!(grpc);
+        merge_field!(output_path);
+        merge_field!(include_paths);
+        merge_field!(binary);
+        merge_field!(json);
         merge_field!(jsonschema);
         merge_field!(strict_json);
         merge_field!(allow_non_utf8);
@@ -113,6 +132,8 @@ impl Config {
         merge_field!(bfbs_comments);
         merge_field!(bfbs_builtins);
         merge_field!(bfbs_gen_embed);
+        merge_field!(conform);
+        merge_field!(conform_includes);
         merge_field!(filename_suffix);
         merge_field!(filename_ext);
         merge_field!(include_prefix);

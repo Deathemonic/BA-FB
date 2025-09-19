@@ -1,10 +1,12 @@
+use crate::helpers::config::*;
+
 use anyhow::Result;
 use baad::utils::FileManager;
+use baad_core::{info, success, warn};
 use std::io::{Read, Seek};
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
 use std::{fs, io};
-use baad_core::{info, success, warn};
 use zip::ZipArchive;
 
 pub struct ToolsExtractor {
@@ -32,10 +34,18 @@ impl ToolsExtractor {
     }
 
     fn get_binary_name(base_name: &str) -> String {
-        format!("{}{}", base_name, if Self::is_windows() { ".exe" } else { "" })
+        format!(
+            "{}{}",
+            base_name,
+            if Self::is_windows() { ".exe" } else { "" }
+        )
     }
 
-    fn extract_zip<R: Read + Seek>(archive: &mut ZipArchive<R>, target_dir: &Path, binary_name: &str) -> Result<()> {
+    fn extract_zip<R: Read + Seek>(
+        archive: &mut ZipArchive<R>,
+        target_dir: &Path,
+        binary_name: &str,
+    ) -> Result<()> {
         for i in 0..archive.len() {
             let mut file = archive.by_index(i)?;
             let outpath = target_dir.join(file.name());
@@ -51,86 +61,53 @@ impl ToolsExtractor {
         Ok(())
     }
 
-    pub fn il2cpp_dumper(&self, forced: bool) -> Result<PathBuf> {
-        let target_dir = self
+    fn extract_tool(
+        &self,
+        binary_name: &str,
+        zip_file: &str,
+        path: &str,
+        forced: bool,
+    ) -> Result<PathBuf> {
+        let tool_name = Path::new(zip_file)
+            .file_stem()
+            .and_then(|stem| stem.to_str())
+            .unwrap_or(zip_file);
+
+        let target_path = self
             .file_manager
-            .get_data_path("tools/Il2CppInspectorRedux");
-        let binary_name = Self::get_binary_name("Il2CppInspector.Redux.CLI");
-        let binary_path = target_dir.join(&binary_name);
+            .get_data_path(&format!("{}/{}", TOOLS_DIR, path));
+        let binary_name_with_ext = Self::get_binary_name(binary_name);
+        let binary_path = target_path.join(&binary_name_with_ext);
 
         if binary_path.exists() && !forced {
-            warn!("Il2CppInspectorRedux already extracted, skipping...");
+            warn!("{} already extracted, skipping...", tool_name);
             return Ok(binary_path);
         }
 
-        info!("Extracting Il2CppInspectorRedux...");
+        info!("Extracting {}...", tool_name);
 
-        let il2cpp_dumper = self
+        let zip_path = self
             .file_manager
-            .get_data_path("tools/Il2CppInspectorRedux.zip");
+            .get_data_path(&format!("{}/{}", TOOLS_DIR, zip_file));
 
-        fs::create_dir_all(&target_dir)?;
-        let file = fs::File::open(il2cpp_dumper)?;
+        fs::create_dir_all(&target_path)?;
+        let file = fs::File::open(zip_path)?;
         let mut archive = ZipArchive::new(file)?;
 
-        Self::extract_zip(&mut archive, &target_dir, &binary_name)?;
+        Self::extract_zip(&mut archive, &target_path, &binary_name_with_ext)?;
 
         Ok(binary_path)
+    }
+
+    pub fn il2cpp_dumper(&self, forced: bool) -> Result<PathBuf> {
+        self.extract_tool(IL2CPP_BINARY, IL2CPP_FILE, IL2CPP_DIR, forced)
     }
 
     pub fn fbs_dumper(&self, forced: bool) -> Result<PathBuf> {
-        let target_dir = self.file_manager.get_data_path("tools/FbsDumperV2");
-        let binary_name = Self::get_binary_name("FbsDumper");
-        let binary_path = target_dir.join(&binary_name);
-
-        if binary_path.exists() && !forced {
-            warn!("FbsDumperV2 already extracted, skipping...");
-            return Ok(binary_path);
-        }
-
-        info!("Extracting FbsDumperV2...");
-
-        let fbs_dumper = self.file_manager.get_data_path("tools/FbsDumperV2.zip");
-
-        fs::create_dir_all(&target_dir)?;
-        let file = fs::File::open(fbs_dumper)?;
-        let mut outer_archive = ZipArchive::new(file)?;
-
-        let mut inner_zip = outer_archive.by_index(0)?;
-        let mut inner_zip_data = Vec::new();
-        io::copy(&mut inner_zip, &mut inner_zip_data)?;
-
-        let mut inner_archive = ZipArchive::new(io::Cursor::new(inner_zip_data))?;
-
-        Self::extract_zip(&mut inner_archive, &target_dir, &binary_name)?;
-
-        Ok(binary_path)
+        self.extract_tool(FBS_DUMPER_BINARY, FBS_DUMPER_FILE, FBS_DUMPER_DIR, forced)
     }
 
     pub fn flatc(&self, forced: bool) -> Result<PathBuf> {
-        let target_dir = self
-            .file_manager
-            .get_data_path("tools/Flatc");
-        let binary_name = Self::get_binary_name("flatc");
-        let binary_path = target_dir.join(&binary_name);
-
-        if binary_path.exists() && !forced {
-            warn!("Flatc already extracted, skipping...");
-            return Ok(binary_path);
-        }
-
-        info!("Extracting Flatc...");
-
-        let flatc = self
-            .file_manager
-            .get_data_path("tools/Flatc.zip");
-
-        fs::create_dir_all(&target_dir)?;
-        let file = fs::File::open(flatc)?;
-        let mut archive = ZipArchive::new(file)?;
-
-        Self::extract_zip(&mut archive, &target_dir, &binary_name)?;
-
-        Ok(binary_path)
+        self.extract_tool(FLATC_BINARY, FLATC_FILE, FLATC_DIR, forced)
     }
 }
