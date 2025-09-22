@@ -117,11 +117,7 @@ impl ToolsFetcher {
     }
 
     pub async fn il2cpp_dumper(&self) -> Result<()> {
-        let platform = Self::get_platform(false)?;
-        let tool = format!("Il2CppInspectorRedux.CLI-{}.zip", platform);
-        let url = format!("{}/{}", IL2CPP_BASE_URL, tool);
-
-        self.download_tool(&url, IL2CPP_FILE).await
+        self.download_tool(IL2CPP_INSPECTOR_REPO, IL2CPP_INSPECTOR_FILE).await
     }
 
     pub async fn fbs_dumper(&self) -> Result<()> {

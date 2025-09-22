@@ -178,7 +178,8 @@ impl CommandHandler {
         let (libil2cpp, metadata) = self.get_il2cpp_paths(server_config, file_manager);
 
         let mut il2cpp_options = Il2CppDumperOptions {
-            input_paths: vec![libil2cpp, metadata],
+            il2cpp: libil2cpp,
+            metadata: Some(metadata),
             output: Some(output.to_path_buf()),
             output_csharp_stub: true,
             output_dummy_dlls: true,

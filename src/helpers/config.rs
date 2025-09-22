@@ -1,5 +1,4 @@
 pub const GITHUB_API_BASE: &str = "https://api.github.com/repos";
-pub const IL2CPP_BASE_URL: &str = "https://nightly.link/LukeFZ/Il2CppInspectorRedux/workflows/build/new-ui";
 pub const FLATC_BASE_URL: &str = "https://deathemonic.github.io/storage/tools/flatc";
 
 pub const HTTP_PREFIX: &str = "http://";
@@ -16,12 +15,13 @@ pub const LINUX_ARM64: &str = "linux-arm64";
 
 pub const TOOLS_DIR: &str = "tools";
 pub const FBS_DUMPER_REPO: &str = "ArkanDash/FbsDumper";
+pub const IL2CPP_INSPECTOR_REPO: &str = "Deathemonic/Il2CppInspectorRedux";
 pub const FBS_DUMPER_FILE: &str = "FbsDumper.zip";
-pub const IL2CPP_FILE: &str = "Il2CppInspectorRedux.zip";
+pub const IL2CPP_INSPECTOR_FILE: &str = "Il2CppInspectorRedux.zip";
 pub const FLATC_FILE: &str = "FlatC.zip";
 
-pub const IL2CPP_BINARY: &str = "Il2CppInspector.Redux.CLI";
-pub const IL2CPP_DIR: &str = "Il2CppInspectorRedux";
+pub const IL2CPP_INSPECTOR_BINARY: &str = "Il2CppInspectorRedux.CLI";
+pub const IL2CPP_INSPECTOR_DIR: &str = "Il2CppInspectorRedux";
 pub const FBS_DUMPER_BINARY: &str = "FbsDumper";
 pub const FBS_DUMPER_DIR: &str = "FbsDumper";
 pub const FLATC_BINARY: &str = "flatc";

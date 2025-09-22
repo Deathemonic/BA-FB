@@ -182,20 +182,21 @@ impl Config {
             };
         }
 
-        merge_field!(input_paths);
+        merge_field!(il2cpp);
+        merge_field!(metadata);
         merge_field!(output);
-        merge_field!(output_cpp_scaffolding);
         merge_field!(unity_version);
         merge_field!(compiler_type);
         merge_field!(output_csharp_stub);
         merge_field!(layout);
         merge_field!(flatten_hierarchy);
+        merge_field!(output_disassembler_metadata);
+        merge_field!(disassembler);
+        merge_field!(output_cpp_scaffolding);
         merge_field!(sorting_mode);
         merge_field!(suppress_metadata);
         merge_field!(compilable);
         merge_field!(separate_assembly_attributes);
-        merge_field!(output_disassembler_metadata);
-        merge_field!(disassembler);
         merge_field!(output_dummy_dlls);
         merge_field!(output_vs_solution);
         merge_field!(unity_path);

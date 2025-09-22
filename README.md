@@ -4,9 +4,6 @@ A tool for dumping and generating Blue Archive flatbuffers
 
 ## Install
 
-### Requirements
-- [.NET 9.0 Runtime](https://dotnet.microsoft.com/download/dotnet/9.0) or higher
-
 ### Release
 You can download the latest pre-build binaries at [Releases](https://github.com/Deathemonic/BA-FB/releases)
 
@@ -108,12 +105,16 @@ cargo build
 Don't like my [shitty code](https://www.reddit.com/r/programminghorror) and what to change it? Feel free to contribute by submitting a pull request or issue. Always appreciate the help.
 
 
+### Dependencies
+BA-FB relies on this tools in order for it to work.
+
+- [ArkanDash/FbsDumper](https://github.com/ArkanDash/FbsDumper) - Generates Flatbuffers schema.
+- [LukeFZ/Il2CppInspectorRedux](https://github.com/LukeFZ/Il2CppInspectorRedux) - Generates the il2cpp .NET dlls.
+- [google/flatbuffers](https://github.com/google/flatbuffers) - Compiles the Flatbuffers schema to various languages.
+
 ### Acknowledgement
 - [ArkanDash/BA-Source-Dump](https://github.com/ArkanDash/BA-Source-Dump)
-- [Hiro420/FbsDumperV2](https://github.com/Hiro420/FbsDumperV2)
-- [ArkanDash/FbsDumperV2](https://github.com/ArkanDash/FbsDumperV2)
-- [LukeFZ/Il2CppInspectorRedux](https://github.com/LukeFZ/Il2CppInspectorRedux)
-- [A Certain Flatbuffer Compiler]()
+- [Hiro420/FbsDumper](https://github.com/Hiro420/FbsDumper)
 
 ### Copyright
 Blue Archive is a registered trademark of NAT GAMES Co., Ltd., NEXON Korea Corp., and Yostar, Inc.

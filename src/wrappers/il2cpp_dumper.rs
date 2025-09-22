@@ -10,20 +10,21 @@ pub struct Il2CppDumper {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Il2CppDumperOptions {
-    pub input_paths: Vec<PathBuf>,
+    pub il2cpp: PathBuf,
+    pub metadata: Option<PathBuf>,
     pub output: Option<PathBuf>,
-    pub output_cpp_scaffolding: bool,
     pub unity_version: Option<String>,
     pub compiler_type: Option<String>,
     pub output_csharp_stub: bool,
     pub layout: Option<String>,
     pub flatten_hierarchy: bool,
+    pub output_disassembler_metadata: bool,
+    pub disassembler: Option<String>,
+    pub output_cpp_scaffolding: bool,
     pub sorting_mode: Option<String>,
     pub suppress_metadata: bool,
     pub compilable: bool,
     pub separate_assembly_attributes: bool,
-    pub output_disassembler_metadata: bool,
-    pub disassembler: Option<String>,
     pub output_dummy_dlls: bool,
     pub output_vs_solution: bool,
     pub unity_path: Option<PathBuf>,
@@ -34,21 +35,22 @@ pub struct Il2CppDumperOptions {
 impl Default for Il2CppDumperOptions {
     fn default() -> Self {
         Self {
-            input_paths: vec![],
+            il2cpp: PathBuf::new(),
+            metadata: None,
             output: None,
-            output_cpp_scaffolding: false,
             unity_version: None,
             compiler_type: None,
-            output_csharp_stub: true,
+            output_csharp_stub: false,
             layout: None,
             flatten_hierarchy: false,
+            output_disassembler_metadata: false,
+            disassembler: None,
+            output_cpp_scaffolding: false,
             sorting_mode: None,
             suppress_metadata: false,
             compilable: false,
             separate_assembly_attributes: false,
-            output_disassembler_metadata: false,
-            disassembler: None,
-            output_dummy_dlls: true,
+            output_dummy_dlls: false,
             output_vs_solution: false,
             unity_path: None,
             unity_assemblies_path: None,
@@ -68,18 +70,14 @@ impl Il2CppDumper {
     pub fn run(&self, options: Il2CppDumperOptions) -> Result<()> {
         let mut cmd = Command::new(&self.binary);
 
-        cmd.arg("process");
+        cmd.arg("--il2cpp").arg(&options.il2cpp);
 
-        for input_path in &options.input_paths {
-            cmd.arg(input_path);
+        if let Some(metadata) = &options.metadata {
+            cmd.arg("--metadata").arg(metadata);
         }
 
         if let Some(output) = &options.output {
             cmd.arg("--output").arg(output);
-        }
-
-        if options.output_cpp_scaffolding {
-            cmd.arg("--output-cpp-scaffolding");
         }
 
         if let Some(unity_version) = &options.unity_version {
@@ -102,6 +100,18 @@ impl Il2CppDumper {
             cmd.arg("--flatten-hierarchy");
         }
 
+        if options.output_disassembler_metadata {
+            cmd.arg("--output-disassembler-metadata");
+        }
+
+        if let Some(disassembler) = &options.disassembler {
+            cmd.arg("--disassembler").arg(disassembler);
+        }
+
+        if options.output_cpp_scaffolding {
+            cmd.arg("--output-cpp-scaffolding");
+        }
+
         if let Some(sorting_mode) = &options.sorting_mode {
             cmd.arg("--sorting-mode").arg(sorting_mode);
         }
@@ -116,14 +126,6 @@ impl Il2CppDumper {
 
         if options.separate_assembly_attributes {
             cmd.arg("--separate-assembly-attributes");
-        }
-
-        if options.output_disassembler_metadata {
-            cmd.arg("--output-disassembler-metadata");
-        }
-
-        if let Some(disassembler) = &options.disassembler {
-            cmd.arg("--disassembler").arg(disassembler);
         }
 
         if options.output_dummy_dlls {
@@ -143,7 +145,7 @@ impl Il2CppDumper {
         }
 
         if options.extract_il2cpp_files {
-            cmd.arg("--extract-il2cpp-files");
+            cmd.arg("--extract-il2-cpp-files");
         }
 
         let status = cmd.status()

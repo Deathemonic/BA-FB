@@ -100,7 +100,7 @@ impl ToolsExtractor {
     }
 
     pub fn il2cpp_dumper(&self, forced: bool) -> Result<PathBuf> {
-        self.extract_tool(IL2CPP_BINARY, IL2CPP_FILE, IL2CPP_DIR, forced)
+        self.extract_tool(IL2CPP_INSPECTOR_BINARY, IL2CPP_INSPECTOR_FILE, IL2CPP_INSPECTOR_DIR, forced)
     }
 
     pub fn fbs_dumper(&self, forced: bool) -> Result<PathBuf> {
