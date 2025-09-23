@@ -71,20 +71,21 @@ public struct SkillExcel : IFlatbufferObject
   public bool IsShowSpeechbubble { get { int o = __p.__offset(52); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
   public int PublicSpeechDuration { get { int o = __p.__offset(54); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
   public long AdditionalToolTipId { get { int o = __p.__offset(56); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
-  public string TextureSkillCardForFormConversion { get { int o = __p.__offset(58); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public long SelectExSkillToolTipId { get { int o = __p.__offset(58); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public string TextureSkillCardForFormConversion { get { int o = __p.__offset(60); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetTextureSkillCardForFormConversionBytes() { return __p.__vector_as_span<byte>(58, 1); }
+  public Span<byte> GetTextureSkillCardForFormConversionBytes() { return __p.__vector_as_span<byte>(60, 1); }
 #else
-  public ArraySegment<byte>? GetTextureSkillCardForFormConversionBytes() { return __p.__vector_as_arraysegment(58); }
+  public ArraySegment<byte>? GetTextureSkillCardForFormConversionBytes() { return __p.__vector_as_arraysegment(60); }
 #endif
-  public byte[] GetTextureSkillCardForFormConversionArray() { return __p.__vector_as_array<byte>(58); }
-  public string SkillCardLabelPath { get { int o = __p.__offset(60); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public byte[] GetTextureSkillCardForFormConversionArray() { return __p.__vector_as_array<byte>(60); }
+  public string SkillCardLabelPath { get { int o = __p.__offset(62); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetSkillCardLabelPathBytes() { return __p.__vector_as_span<byte>(60, 1); }
+  public Span<byte> GetSkillCardLabelPathBytes() { return __p.__vector_as_span<byte>(62, 1); }
 #else
-  public ArraySegment<byte>? GetSkillCardLabelPathBytes() { return __p.__vector_as_arraysegment(60); }
+  public ArraySegment<byte>? GetSkillCardLabelPathBytes() { return __p.__vector_as_arraysegment(62); }
 #endif
-  public byte[] GetSkillCardLabelPathArray() { return __p.__vector_as_array<byte>(60); }
+  public byte[] GetSkillCardLabelPathArray() { return __p.__vector_as_array<byte>(62); }
 
   public static Offset<Global.SkillExcel> CreateSkillExcel(FlatBufferBuilder builder,
       long Id = 0,
@@ -114,9 +115,11 @@ public struct SkillExcel : IFlatbufferObject
       bool IsShowSpeechbubble = false,
       int PublicSpeechDuration = 0,
       long AdditionalToolTipId = 0,
+      long SelectExSkillToolTipId = 0,
       StringOffset TextureSkillCardForFormConversionOffset = default(StringOffset),
       StringOffset SkillCardLabelPathOffset = default(StringOffset)) {
-    builder.StartTable(29);
+    builder.StartTable(30);
+    SkillExcel.AddSelectExSkillToolTipId(builder, SelectExSkillToolTipId);
     SkillExcel.AddAdditionalToolTipId(builder, AdditionalToolTipId);
     SkillExcel.AddRequireLevelUpMaterial(builder, RequireLevelUpMaterial);
     SkillExcel.AddId(builder, Id);
@@ -149,7 +152,7 @@ public struct SkillExcel : IFlatbufferObject
     return SkillExcel.EndSkillExcel(builder);
   }
 
-  public static void StartSkillExcel(FlatBufferBuilder builder) { builder.StartTable(29); }
+  public static void StartSkillExcel(FlatBufferBuilder builder) { builder.StartTable(30); }
   public static void AddId(FlatBufferBuilder builder, long id) { builder.AddLong(0, id, 0); }
   public static void AddLocalizeSkillId(FlatBufferBuilder builder, uint localizeSkillId) { builder.AddUint(1, localizeSkillId, 0); }
   public static void AddGroupId(FlatBufferBuilder builder, StringOffset groupIdOffset) { builder.AddOffset(2, groupIdOffset.Value, 0); }
@@ -177,8 +180,9 @@ public struct SkillExcel : IFlatbufferObject
   public static void AddIsShowSpeechbubble(FlatBufferBuilder builder, bool isShowSpeechbubble) { builder.AddBool(24, isShowSpeechbubble, false); }
   public static void AddPublicSpeechDuration(FlatBufferBuilder builder, int publicSpeechDuration) { builder.AddInt(25, publicSpeechDuration, 0); }
   public static void AddAdditionalToolTipId(FlatBufferBuilder builder, long additionalToolTipId) { builder.AddLong(26, additionalToolTipId, 0); }
-  public static void AddTextureSkillCardForFormConversion(FlatBufferBuilder builder, StringOffset textureSkillCardForFormConversionOffset) { builder.AddOffset(27, textureSkillCardForFormConversionOffset.Value, 0); }
-  public static void AddSkillCardLabelPath(FlatBufferBuilder builder, StringOffset skillCardLabelPathOffset) { builder.AddOffset(28, skillCardLabelPathOffset.Value, 0); }
+  public static void AddSelectExSkillToolTipId(FlatBufferBuilder builder, long selectExSkillToolTipId) { builder.AddLong(27, selectExSkillToolTipId, 0); }
+  public static void AddTextureSkillCardForFormConversion(FlatBufferBuilder builder, StringOffset textureSkillCardForFormConversionOffset) { builder.AddOffset(28, textureSkillCardForFormConversionOffset.Value, 0); }
+  public static void AddSkillCardLabelPath(FlatBufferBuilder builder, StringOffset skillCardLabelPathOffset) { builder.AddOffset(29, skillCardLabelPathOffset.Value, 0); }
   public static Offset<Global.SkillExcel> EndSkillExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Global.SkillExcel>(o);
@@ -217,6 +221,7 @@ public struct SkillExcel : IFlatbufferObject
     _o.IsShowSpeechbubble = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.IsShowSpeechbubble, key) : this.IsShowSpeechbubble;
     _o.PublicSpeechDuration = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.PublicSpeechDuration, key) : this.PublicSpeechDuration;
     _o.AdditionalToolTipId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.AdditionalToolTipId, key) : this.AdditionalToolTipId;
+    _o.SelectExSkillToolTipId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SelectExSkillToolTipId, key) : this.SelectExSkillToolTipId;
     _o.TextureSkillCardForFormConversion = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.TextureSkillCardForFormConversion, key) : this.TextureSkillCardForFormConversion;
     _o.SkillCardLabelPath = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SkillCardLabelPath, key) : this.SkillCardLabelPath;
   }
@@ -250,6 +255,7 @@ public struct SkillExcel : IFlatbufferObject
 		var _IsShowSpeechbubble = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsShowSpeechbubble, key) : _o.IsShowSpeechbubble;
 		var _PublicSpeechDuration = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.PublicSpeechDuration, key) : _o.PublicSpeechDuration;
 		var _AdditionalToolTipId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AdditionalToolTipId, key) : _o.AdditionalToolTipId;
+		var _SelectExSkillToolTipId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SelectExSkillToolTipId, key) : _o.SelectExSkillToolTipId;
     var _TextureSkillCardForFormConversion = _o.TextureSkillCardForFormConversion == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.TextureSkillCardForFormConversion, key) : _o.TextureSkillCardForFormConversion));
     var _SkillCardLabelPath = _o.SkillCardLabelPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SkillCardLabelPath, key) : _o.SkillCardLabelPath));
     return CreateSkillExcel(
@@ -281,6 +287,7 @@ public struct SkillExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IsShowSpeechbubble : _o.IsShowSpeechbubble,
       TableEncryptionService.UseEncryption ? _PublicSpeechDuration : _o.PublicSpeechDuration,
       TableEncryptionService.UseEncryption ? _AdditionalToolTipId : _o.AdditionalToolTipId,
+      TableEncryptionService.UseEncryption ? _SelectExSkillToolTipId : _o.SelectExSkillToolTipId,
       _TextureSkillCardForFormConversion,
       _SkillCardLabelPath);
   }
@@ -315,6 +322,7 @@ public class SkillExcelT
   public bool IsShowSpeechbubble { get; set; }
   public int PublicSpeechDuration { get; set; }
   public long AdditionalToolTipId { get; set; }
+  public long SelectExSkillToolTipId { get; set; }
   public string TextureSkillCardForFormConversion { get; set; }
   public string SkillCardLabelPath { get; set; }
 
@@ -346,6 +354,7 @@ public class SkillExcelT
     this.IsShowSpeechbubble = false;
     this.PublicSpeechDuration = 0;
     this.AdditionalToolTipId = 0;
+    this.SelectExSkillToolTipId = 0;
     this.TextureSkillCardForFormConversion = null;
     this.SkillCardLabelPath = null;
   }
@@ -384,8 +393,9 @@ static public class SkillExcelVerify
       && verifier.VerifyField(tablePos, 52 /*IsShowSpeechbubble*/, 1 /*bool*/, 1, false)
       && verifier.VerifyField(tablePos, 54 /*PublicSpeechDuration*/, 4 /*int*/, 4, false)
       && verifier.VerifyField(tablePos, 56 /*AdditionalToolTipId*/, 8 /*long*/, 8, false)
-      && verifier.VerifyString(tablePos, 58 /*TextureSkillCardForFormConversion*/, false)
-      && verifier.VerifyString(tablePos, 60 /*SkillCardLabelPath*/, false)
+      && verifier.VerifyField(tablePos, 58 /*SelectExSkillToolTipId*/, 8 /*long*/, 8, false)
+      && verifier.VerifyString(tablePos, 60 /*TextureSkillCardForFormConversion*/, false)
+      && verifier.VerifyString(tablePos, 62 /*SkillCardLabelPath*/, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

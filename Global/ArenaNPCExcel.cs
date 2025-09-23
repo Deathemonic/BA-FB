@@ -66,9 +66,9 @@ public struct ArenaNPCExcel : IFlatbufferObject
       long NPCLevel = 0,
       long NPCLevelDeviation = 0,
       long NPCStarGrade = 0,
-      VectorOffset exceptionCharacterRaritiesOffset = default(VectorOffset),
+      VectorOffset ExceptionCharacterRaritiesOffset = default(VectorOffset),
       VectorOffset ExceptionMainCharacterIdsOffset = default(VectorOffset),
-      VectorOffset exceptionSupportCharacterIdsOffset = default(VectorOffset),
+      VectorOffset ExceptionSupportCharacterIdsOffset = default(VectorOffset),
       VectorOffset ExceptionTSSIdsOffset = default(VectorOffset)) {
     builder.StartTable(10);
     ArenaNPCExcel.AddNPCStarGrade(builder, NPCStarGrade);
@@ -78,9 +78,9 @@ public struct ArenaNPCExcel : IFlatbufferObject
     ArenaNPCExcel.AddRank(builder, Rank);
     ArenaNPCExcel.AddUniqueId(builder, UniqueId);
     ArenaNPCExcel.AddExceptionTSSIds(builder, ExceptionTSSIdsOffset);
-    ArenaNPCExcel.AddExceptionSupportCharacterIds(builder, exceptionSupportCharacterIdsOffset);
+    ArenaNPCExcel.AddExceptionSupportCharacterIds(builder, ExceptionSupportCharacterIdsOffset);
     ArenaNPCExcel.AddExceptionMainCharacterIds(builder, ExceptionMainCharacterIdsOffset);
-    ArenaNPCExcel.AddExceptionCharacterRarities(builder, exceptionCharacterRaritiesOffset);
+    ArenaNPCExcel.AddExceptionCharacterRarities(builder, ExceptionCharacterRaritiesOffset);
     return ArenaNPCExcel.EndArenaNPCExcel(builder);
   }
 
@@ -150,20 +150,20 @@ public struct ArenaNPCExcel : IFlatbufferObject
 		var _NPCLevel = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.NPCLevel, key) : _o.NPCLevel;
 		var _NPCLevelDeviation = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.NPCLevelDeviation, key) : _o.NPCLevelDeviation;
 		var _NPCStarGrade = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.NPCStarGrade, key) : _o.NPCStarGrade;
-    var _exceptionCharacterRarities = default(VectorOffset);
+    var _ExceptionCharacterRarities = default(VectorOffset);
     if (_o.ExceptionCharacterRarities != null) {
-      var __exceptionCharacterRarities = _o.ExceptionCharacterRarities.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _exceptionCharacterRarities = CreateExceptionCharacterRaritiesVector(builder, __exceptionCharacterRarities);
+      var __ExceptionCharacterRarities = _o.ExceptionCharacterRarities.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ExceptionCharacterRarities = CreateExceptionCharacterRaritiesVector(builder, __ExceptionCharacterRarities);
     }
     var _ExceptionMainCharacterIds = default(VectorOffset);
     if (_o.ExceptionMainCharacterIds != null) {
       var __ExceptionMainCharacterIds = _o.ExceptionMainCharacterIds.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ExceptionMainCharacterIds = CreateExceptionMainCharacterIdsVector(builder, __ExceptionMainCharacterIds);
     }
-    var _exceptionSupportCharacterIds = default(VectorOffset);
+    var _ExceptionSupportCharacterIds = default(VectorOffset);
     if (_o.ExceptionSupportCharacterIds != null) {
-      var __exceptionSupportCharacterIds = _o.ExceptionSupportCharacterIds.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _exceptionSupportCharacterIds = CreateExceptionSupportCharacterIdsVector(builder, __exceptionSupportCharacterIds);
+      var __ExceptionSupportCharacterIds = _o.ExceptionSupportCharacterIds.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ExceptionSupportCharacterIds = CreateExceptionSupportCharacterIdsVector(builder, __ExceptionSupportCharacterIds);
     }
     var _ExceptionTSSIds = default(VectorOffset);
     if (_o.ExceptionTSSIds != null) {
@@ -178,9 +178,9 @@ public struct ArenaNPCExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _NPCLevel : _o.NPCLevel,
       TableEncryptionService.UseEncryption ? _NPCLevelDeviation : _o.NPCLevelDeviation,
       TableEncryptionService.UseEncryption ? _NPCStarGrade : _o.NPCStarGrade,
-      _exceptionCharacterRarities,
+      _ExceptionCharacterRarities,
       _ExceptionMainCharacterIds,
-      _exceptionSupportCharacterIds,
+      _ExceptionSupportCharacterIds,
       _ExceptionTSSIds);
   }
 }

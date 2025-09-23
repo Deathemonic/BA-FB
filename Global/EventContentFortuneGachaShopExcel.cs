@@ -64,7 +64,7 @@ public struct EventContentFortuneGachaShopExcel : IFlatbufferObject
       int Prob = 0,
       int ProbModifyValue = 0,
       int ProbModifyLimit = 0,
-      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
       VectorOffset RewardParcelIdOffset = default(VectorOffset),
       VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(12);
@@ -73,7 +73,7 @@ public struct EventContentFortuneGachaShopExcel : IFlatbufferObject
     EventContentFortuneGachaShopExcel.AddEventContentId(builder, EventContentId);
     EventContentFortuneGachaShopExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
     EventContentFortuneGachaShopExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
-    EventContentFortuneGachaShopExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
+    EventContentFortuneGachaShopExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
     EventContentFortuneGachaShopExcel.AddProbModifyLimit(builder, ProbModifyLimit);
     EventContentFortuneGachaShopExcel.AddProbModifyValue(builder, ProbModifyValue);
     EventContentFortuneGachaShopExcel.AddProb(builder, Prob);
@@ -150,10 +150,10 @@ public struct EventContentFortuneGachaShopExcel : IFlatbufferObject
 		var _Prob = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Prob, key) : _o.Prob;
 		var _ProbModifyValue = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ProbModifyValue, key) : _o.ProbModifyValue;
 		var _ProbModifyLimit = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ProbModifyLimit, key) : _o.ProbModifyLimit;
-    var _RewardParcelType = default(VectorOffset);
+    var _rewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
+      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
     }
     var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
@@ -176,7 +176,7 @@ public struct EventContentFortuneGachaShopExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _Prob : _o.Prob,
       TableEncryptionService.UseEncryption ? _ProbModifyValue : _o.ProbModifyValue,
       TableEncryptionService.UseEncryption ? _ProbModifyLimit : _o.ProbModifyLimit,
-      _RewardParcelType,
+      _rewardParcelType,
       _RewardParcelId,
       _RewardParcelAmount);
   }

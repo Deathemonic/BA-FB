@@ -128,7 +128,7 @@ public struct RaidStageExcel : IFlatbufferObject
       StringOffset PortraitPathOffset = default(StringOffset),
       StringOffset BGPathOffset = default(StringOffset),
       long RaidCharacterId = 0,
-      VectorOffset bossCharacterIdOffset = default(VectorOffset),
+      VectorOffset BossCharacterIdOffset = default(VectorOffset),
       Global.Difficulty Difficulty = Global.Difficulty.Normal,
       bool DifficultyOpenCondition = false,
       long MaxPlayerCount = 0,
@@ -146,7 +146,7 @@ public struct RaidStageExcel : IFlatbufferObject
       long MaximumAcquisitionScore = 0,
       long RaidRewardGroupId = 0,
       VectorOffset BattleReadyTimelinePathOffset = default(VectorOffset),
-      VectorOffset battleReadyTimelinePhaseStartOffset = default(VectorOffset),
+      VectorOffset BattleReadyTimelinePhaseStartOffset = default(VectorOffset),
       VectorOffset BattleReadyTimelinePhaseEndOffset = default(VectorOffset),
       StringOffset VictoryTimelinePathOffset = default(StringOffset),
       StringOffset PhaseChangeTimelinePathOffset = default(StringOffset),
@@ -177,14 +177,14 @@ public struct RaidStageExcel : IFlatbufferObject
     RaidStageExcel.AddPhaseChangeTimelinePath(builder, PhaseChangeTimelinePathOffset);
     RaidStageExcel.AddVictoryTimelinePath(builder, VictoryTimelinePathOffset);
     RaidStageExcel.AddBattleReadyTimelinePhaseEnd(builder, BattleReadyTimelinePhaseEndOffset);
-    RaidStageExcel.AddBattleReadyTimelinePhaseStart(builder, battleReadyTimelinePhaseStartOffset);
+    RaidStageExcel.AddBattleReadyTimelinePhaseStart(builder, BattleReadyTimelinePhaseStartOffset);
     RaidStageExcel.AddBattleReadyTimelinePath(builder, BattleReadyTimelinePathOffset);
     RaidStageExcel.AddTacticEnvironment(builder, TacticEnvironment);
     RaidStageExcel.AddEnterTimeLine(builder, EnterTimeLineOffset);
     RaidStageExcel.AddGroundDevName(builder, GroundDevNameOffset);
     RaidStageExcel.AddRaidRoomLifeTime(builder, RaidRoomLifeTime);
     RaidStageExcel.AddDifficulty(builder, Difficulty);
-    RaidStageExcel.AddBossCharacterId(builder, bossCharacterIdOffset);
+    RaidStageExcel.AddBossCharacterId(builder, BossCharacterIdOffset);
     RaidStageExcel.AddBGPath(builder, BGPathOffset);
     RaidStageExcel.AddPortraitPath(builder, PortraitPathOffset);
     RaidStageExcel.AddRaidBossGroup(builder, RaidBossGroupOffset);
@@ -312,10 +312,10 @@ public struct RaidStageExcel : IFlatbufferObject
     var _PortraitPath = _o.PortraitPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PortraitPath, key) : _o.PortraitPath));
     var _BGPath = _o.BGPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.BGPath, key) : _o.BGPath));
 		var _RaidCharacterId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RaidCharacterId, key) : _o.RaidCharacterId;
-    var _bossCharacterId = default(VectorOffset);
+    var _BossCharacterId = default(VectorOffset);
     if (_o.BossCharacterId != null) {
-      var __bossCharacterId = _o.BossCharacterId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _bossCharacterId = CreateBossCharacterIdVector(builder, __bossCharacterId);
+      var __BossCharacterId = _o.BossCharacterId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BossCharacterId = CreateBossCharacterIdVector(builder, __BossCharacterId);
     }
 		var _Difficulty = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Difficulty, key) : _o.Difficulty;
 		var _DifficultyOpenCondition = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DifficultyOpenCondition, key) : _o.DifficultyOpenCondition;
@@ -339,10 +339,10 @@ public struct RaidStageExcel : IFlatbufferObject
       for (var _j = 0; _j < __BattleReadyTimelinePath.Length; ++_j) { __BattleReadyTimelinePath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.BattleReadyTimelinePath[_j], key) : _o.BattleReadyTimelinePath[_j])); }
       _BattleReadyTimelinePath = CreateBattleReadyTimelinePathVector(builder, __BattleReadyTimelinePath);
     }
-    var _battleReadyTimelinePhaseStart = default(VectorOffset);
+    var _BattleReadyTimelinePhaseStart = default(VectorOffset);
     if (_o.BattleReadyTimelinePhaseStart != null) {
-      var __battleReadyTimelinePhaseStart = _o.BattleReadyTimelinePhaseStart.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _battleReadyTimelinePhaseStart = CreateBattleReadyTimelinePhaseStartVector(builder, __battleReadyTimelinePhaseStart);
+      var __BattleReadyTimelinePhaseStart = _o.BattleReadyTimelinePhaseStart.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BattleReadyTimelinePhaseStart = CreateBattleReadyTimelinePhaseStartVector(builder, __BattleReadyTimelinePhaseStart);
     }
     var _BattleReadyTimelinePhaseEnd = default(VectorOffset);
     if (_o.BattleReadyTimelinePhaseEnd != null) {
@@ -366,7 +366,7 @@ public struct RaidStageExcel : IFlatbufferObject
       _PortraitPath,
       _BGPath,
       TableEncryptionService.UseEncryption ? _RaidCharacterId : _o.RaidCharacterId,
-      _bossCharacterId,
+      _BossCharacterId,
       TableEncryptionService.UseEncryption ? _Difficulty : _o.Difficulty,
       TableEncryptionService.UseEncryption ? _DifficultyOpenCondition : _o.DifficultyOpenCondition,
       TableEncryptionService.UseEncryption ? _MaxPlayerCount : _o.MaxPlayerCount,
@@ -384,7 +384,7 @@ public struct RaidStageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _MaximumAcquisitionScore : _o.MaximumAcquisitionScore,
       TableEncryptionService.UseEncryption ? _RaidRewardGroupId : _o.RaidRewardGroupId,
       _BattleReadyTimelinePath,
-      _battleReadyTimelinePhaseStart,
+      _BattleReadyTimelinePhaseStart,
       _BattleReadyTimelinePhaseEnd,
       _VictoryTimelinePath,
       _PhaseChangeTimelinePath,

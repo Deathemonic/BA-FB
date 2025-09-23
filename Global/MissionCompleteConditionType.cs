@@ -32,7 +32,7 @@ public enum MissionCompleteConditionType : int
   Achieve_GetItem = 22,
   Reset_GetFavorLevel = 23,
   Reset___Deprecated_EquipmentAtSpecificLevelCount = 24,
-  Reset_EquipmentAtSpecificTierUpCount = 25,
+  Achieve_EquipmentAtSpecificTierUpCount = 25,
   Reset_CharacterAtSpecificLevelCount = 26,
   Reset_CharacterAtSpecificTranscendenceCount = 27,
   Achieve_CharacterSkillLevelUpCount = 28,
@@ -182,6 +182,15 @@ public enum MissionCompleteConditionType : int
   Reset_RoadpuzzleTileCount = 172,
   Reset_ClearSpecificRoundRoadpuzzle = 173,
   Reset_ClearCountRoadpuzzle = 174,
+  Reset_CCGResultCount = 175,
+  Reset_CCGCompleteCount = 176,
+  Reset_CCGUseCostCount = 177,
+  Reset_CCGTotalDamageCount = 178,
+  Reset_CCGRetreatCount = 179,
+  Reset_CCGSkillWithTagCount = 180,
+  Reset_CCGActivatePerkCount = 181,
+  Reset_ClearMultiFloorRaid = 182,
+  Reset_DayCompleteMission = 183,
 };
 
 

@@ -124,12 +124,12 @@ public struct AcademyRewardExcel : IFlatbufferObject
       long ExtraFavorExpProb = 0,
       VectorOffset ExtraRewardParcelTypeOffset = default(VectorOffset),
       VectorOffset ExtraRewardParcelIdOffset = default(VectorOffset),
-      VectorOffset extraRewardAmountOffset = default(VectorOffset),
-      VectorOffset extraRewardProbOffset = default(VectorOffset),
-      VectorOffset isExtraRewardDisplayedOffset = default(VectorOffset),
+      VectorOffset ExtraRewardAmountOffset = default(VectorOffset),
+      VectorOffset ExtraRewardProbOffset = default(VectorOffset),
+      VectorOffset IsExtraRewardDisplayedOffset = default(VectorOffset),
       VectorOffset RewardParcelTypeOffset = default(VectorOffset),
       VectorOffset RewardParcelIdOffset = default(VectorOffset),
-      VectorOffset rewardAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(20);
     AcademyRewardExcel.AddExtraFavorExpProb(builder, ExtraFavorExpProb);
     AcademyRewardExcel.AddExtraFavorExp(builder, ExtraFavorExp);
@@ -140,12 +140,12 @@ public struct AcademyRewardExcel : IFlatbufferObject
     AcademyRewardExcel.AddId(builder, Id);
     AcademyRewardExcel.AddOrderInGroup(builder, OrderInGroup);
     AcademyRewardExcel.AddScheduleGroupId(builder, ScheduleGroupId);
-    AcademyRewardExcel.AddRewardAmount(builder, rewardAmountOffset);
+    AcademyRewardExcel.AddRewardAmount(builder, RewardAmountOffset);
     AcademyRewardExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
     AcademyRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
-    AcademyRewardExcel.AddIsExtraRewardDisplayed(builder, isExtraRewardDisplayedOffset);
-    AcademyRewardExcel.AddExtraRewardProb(builder, extraRewardProbOffset);
-    AcademyRewardExcel.AddExtraRewardAmount(builder, extraRewardAmountOffset);
+    AcademyRewardExcel.AddIsExtraRewardDisplayed(builder, IsExtraRewardDisplayedOffset);
+    AcademyRewardExcel.AddExtraRewardProb(builder, ExtraRewardProbOffset);
+    AcademyRewardExcel.AddExtraRewardAmount(builder, ExtraRewardAmountOffset);
     AcademyRewardExcel.AddExtraRewardParcelId(builder, ExtraRewardParcelIdOffset);
     AcademyRewardExcel.AddExtraRewardParcelType(builder, ExtraRewardParcelTypeOffset);
     AcademyRewardExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
@@ -280,20 +280,20 @@ public struct AcademyRewardExcel : IFlatbufferObject
       var __ExtraRewardParcelId = _o.ExtraRewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ExtraRewardParcelId = CreateExtraRewardParcelIdVector(builder, __ExtraRewardParcelId);
     }
-    var _extraRewardAmount = default(VectorOffset);
+    var _ExtraRewardAmount = default(VectorOffset);
     if (_o.ExtraRewardAmount != null) {
-      var __extraRewardAmount = _o.ExtraRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _extraRewardAmount = CreateExtraRewardAmountVector(builder, __extraRewardAmount);
+      var __ExtraRewardAmount = _o.ExtraRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ExtraRewardAmount = CreateExtraRewardAmountVector(builder, __ExtraRewardAmount);
     }
-    var _extraRewardProb = default(VectorOffset);
+    var _ExtraRewardProb = default(VectorOffset);
     if (_o.ExtraRewardProb != null) {
-      var __extraRewardProb = _o.ExtraRewardProb.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _extraRewardProb = CreateExtraRewardProbVector(builder, __extraRewardProb);
+      var __ExtraRewardProb = _o.ExtraRewardProb.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ExtraRewardProb = CreateExtraRewardProbVector(builder, __ExtraRewardProb);
     }
-    var _isExtraRewardDisplayed = default(VectorOffset);
+    var _IsExtraRewardDisplayed = default(VectorOffset);
     if (_o.IsExtraRewardDisplayed != null) {
-      var __isExtraRewardDisplayed = _o.IsExtraRewardDisplayed.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _isExtraRewardDisplayed = CreateIsExtraRewardDisplayedVector(builder, __isExtraRewardDisplayed);
+      var __IsExtraRewardDisplayed = _o.IsExtraRewardDisplayed.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _IsExtraRewardDisplayed = CreateIsExtraRewardDisplayedVector(builder, __IsExtraRewardDisplayed);
     }
     var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
@@ -305,10 +305,10 @@ public struct AcademyRewardExcel : IFlatbufferObject
       var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
-    var _rewardAmount = default(VectorOffset);
+    var _RewardAmount = default(VectorOffset);
     if (_o.RewardAmount != null) {
-      var __rewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardAmount = CreateRewardAmountVector(builder, __rewardAmount);
+      var __RewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardAmount = CreateRewardAmountVector(builder, __RewardAmount);
     }
     return CreateAcademyRewardExcel(
       builder,
@@ -326,12 +326,12 @@ public struct AcademyRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ExtraFavorExpProb : _o.ExtraFavorExpProb,
       _ExtraRewardParcelType,
       _ExtraRewardParcelId,
-      _extraRewardAmount,
-      _extraRewardProb,
-      _isExtraRewardDisplayed,
+      _ExtraRewardAmount,
+      _ExtraRewardProb,
+      _IsExtraRewardDisplayed,
       _RewardParcelType,
       _RewardParcelId,
-      _rewardAmount);
+      _RewardAmount);
   }
 }
 

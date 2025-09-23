@@ -61,7 +61,7 @@ public struct ConquestStepExcel : IFlatbufferObject
       Global.ParcelType StepEnterItemType = Global.ParcelType.None,
       long StepEnterItemUniqueId = 0,
       long StepEnterItemAmount = 0,
-      VectorOffset unexpectedEventUnitIdOffset = default(VectorOffset),
+      VectorOffset UnexpectedEventUnitIdOffset = default(VectorOffset),
       StringOffset UnexpectedEventPrefabOffset = default(StringOffset),
       long TreasureBoxObjectId = 0,
       int TreasureBoxCountPerStepOpen = 0) {
@@ -73,7 +73,7 @@ public struct ConquestStepExcel : IFlatbufferObject
     ConquestStepExcel.AddEventContentId(builder, EventContentId);
     ConquestStepExcel.AddTreasureBoxCountPerStepOpen(builder, TreasureBoxCountPerStepOpen);
     ConquestStepExcel.AddUnexpectedEventPrefab(builder, UnexpectedEventPrefabOffset);
-    ConquestStepExcel.AddUnexpectedEventUnitId(builder, unexpectedEventUnitIdOffset);
+    ConquestStepExcel.AddUnexpectedEventUnitId(builder, UnexpectedEventUnitIdOffset);
     ConquestStepExcel.AddStepEnterItemType(builder, StepEnterItemType);
     ConquestStepExcel.AddStepGoalLocalize(builder, StepGoalLocalizeOffset);
     ConquestStepExcel.AddStep(builder, Step);
@@ -135,10 +135,10 @@ public struct ConquestStepExcel : IFlatbufferObject
 		var _StepEnterItemType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StepEnterItemType, key) : _o.StepEnterItemType;
 		var _StepEnterItemUniqueId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StepEnterItemUniqueId, key) : _o.StepEnterItemUniqueId;
 		var _StepEnterItemAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StepEnterItemAmount, key) : _o.StepEnterItemAmount;
-    var _unexpectedEventUnitId = default(VectorOffset);
+    var _UnexpectedEventUnitId = default(VectorOffset);
     if (_o.UnexpectedEventUnitId != null) {
-      var __unexpectedEventUnitId = _o.UnexpectedEventUnitId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _unexpectedEventUnitId = CreateUnexpectedEventUnitIdVector(builder, __unexpectedEventUnitId);
+      var __UnexpectedEventUnitId = _o.UnexpectedEventUnitId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _UnexpectedEventUnitId = CreateUnexpectedEventUnitIdVector(builder, __UnexpectedEventUnitId);
     }
     var _UnexpectedEventPrefab = _o.UnexpectedEventPrefab == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.UnexpectedEventPrefab, key) : _o.UnexpectedEventPrefab));
 		var _TreasureBoxObjectId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.TreasureBoxObjectId, key) : _o.TreasureBoxObjectId;
@@ -153,7 +153,7 @@ public struct ConquestStepExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _StepEnterItemType : _o.StepEnterItemType,
       TableEncryptionService.UseEncryption ? _StepEnterItemUniqueId : _o.StepEnterItemUniqueId,
       TableEncryptionService.UseEncryption ? _StepEnterItemAmount : _o.StepEnterItemAmount,
-      _unexpectedEventUnitId,
+      _UnexpectedEventUnitId,
       _UnexpectedEventPrefab,
       TableEncryptionService.UseEncryption ? _TreasureBoxObjectId : _o.TreasureBoxObjectId,
       TableEncryptionService.UseEncryption ? _TreasureBoxCountPerStepOpen : _o.TreasureBoxCountPerStepOpen);

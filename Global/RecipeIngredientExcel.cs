@@ -76,20 +76,20 @@ public struct RecipeIngredientExcel : IFlatbufferObject
       long Id = 0,
       Global.RecipeType RecipeType = Global.RecipeType.None,
       VectorOffset CostParcelTypeOffset = default(VectorOffset),
-      VectorOffset costIdOffset = default(VectorOffset),
-      VectorOffset costAmountOffset = default(VectorOffset),
-      VectorOffset ingredientParcelTypeOffset = default(VectorOffset),
-      VectorOffset ingredientIdOffset = default(VectorOffset),
-      VectorOffset ingredientAmountOffset = default(VectorOffset),
+      VectorOffset CostIdOffset = default(VectorOffset),
+      VectorOffset CostAmountOffset = default(VectorOffset),
+      VectorOffset IngredientParcelTypeOffset = default(VectorOffset),
+      VectorOffset IngredientIdOffset = default(VectorOffset),
+      VectorOffset IngredientAmountOffset = default(VectorOffset),
       long CostTimeInSecond = 0) {
     builder.StartTable(9);
     RecipeIngredientExcel.AddCostTimeInSecond(builder, CostTimeInSecond);
     RecipeIngredientExcel.AddId(builder, Id);
-    RecipeIngredientExcel.AddIngredientAmount(builder, ingredientAmountOffset);
-    RecipeIngredientExcel.AddIngredientId(builder, ingredientIdOffset);
-    RecipeIngredientExcel.AddIngredientParcelType(builder, ingredientParcelTypeOffset);
-    RecipeIngredientExcel.AddCostAmount(builder, costAmountOffset);
-    RecipeIngredientExcel.AddCostId(builder, costIdOffset);
+    RecipeIngredientExcel.AddIngredientAmount(builder, IngredientAmountOffset);
+    RecipeIngredientExcel.AddIngredientId(builder, IngredientIdOffset);
+    RecipeIngredientExcel.AddIngredientParcelType(builder, IngredientParcelTypeOffset);
+    RecipeIngredientExcel.AddCostAmount(builder, CostAmountOffset);
+    RecipeIngredientExcel.AddCostId(builder, CostIdOffset);
     RecipeIngredientExcel.AddCostParcelType(builder, CostParcelTypeOffset);
     RecipeIngredientExcel.AddRecipeType(builder, RecipeType);
     return RecipeIngredientExcel.EndRecipeIngredientExcel(builder);
@@ -172,30 +172,30 @@ public struct RecipeIngredientExcel : IFlatbufferObject
       var __CostParcelType = _o.CostParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _CostParcelType = CreateCostParcelTypeVector(builder, __CostParcelType);
     }
-    var _costId = default(VectorOffset);
+    var _CostId = default(VectorOffset);
     if (_o.CostId != null) {
-      var __costId = _o.CostId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _costId = CreateCostIdVector(builder, __costId);
+      var __CostId = _o.CostId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _CostId = CreateCostIdVector(builder, __CostId);
     }
-    var _costAmount = default(VectorOffset);
+    var _CostAmount = default(VectorOffset);
     if (_o.CostAmount != null) {
-      var __costAmount = _o.CostAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _costAmount = CreateCostAmountVector(builder, __costAmount);
+      var __CostAmount = _o.CostAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _CostAmount = CreateCostAmountVector(builder, __CostAmount);
     }
-    var _ingredientParcelType = default(VectorOffset);
+    var _IngredientParcelType = default(VectorOffset);
     if (_o.IngredientParcelType != null) {
-      var __ingredientParcelType = _o.IngredientParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _ingredientParcelType = CreateIngredientParcelTypeVector(builder, __ingredientParcelType);
+      var __IngredientParcelType = _o.IngredientParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _IngredientParcelType = CreateIngredientParcelTypeVector(builder, __IngredientParcelType);
     }
-    var _ingredientId = default(VectorOffset);
+    var _IngredientId = default(VectorOffset);
     if (_o.IngredientId != null) {
-      var __ingredientId = _o.IngredientId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _ingredientId = CreateIngredientIdVector(builder, __ingredientId);
+      var __IngredientId = _o.IngredientId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _IngredientId = CreateIngredientIdVector(builder, __IngredientId);
     }
-    var _ingredientAmount = default(VectorOffset);
+    var _IngredientAmount = default(VectorOffset);
     if (_o.IngredientAmount != null) {
-      var __ingredientAmount = _o.IngredientAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _ingredientAmount = CreateIngredientAmountVector(builder, __ingredientAmount);
+      var __IngredientAmount = _o.IngredientAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _IngredientAmount = CreateIngredientAmountVector(builder, __IngredientAmount);
     }
 		var _CostTimeInSecond = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CostTimeInSecond, key) : _o.CostTimeInSecond;
     return CreateRecipeIngredientExcel(
@@ -203,11 +203,11 @@ public struct RecipeIngredientExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       TableEncryptionService.UseEncryption ? _RecipeType : _o.RecipeType,
       _CostParcelType,
-      _costId,
-      _costAmount,
-      _ingredientParcelType,
-      _ingredientId,
-      _ingredientAmount,
+      _CostId,
+      _CostAmount,
+      _IngredientParcelType,
+      _IngredientId,
+      _IngredientAmount,
       TableEncryptionService.UseEncryption ? _CostTimeInSecond : _o.CostTimeInSecond);
   }
 }

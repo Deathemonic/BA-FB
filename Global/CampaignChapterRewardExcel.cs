@@ -50,15 +50,15 @@ public struct CampaignChapterRewardExcel : IFlatbufferObject
   public static Offset<Global.CampaignChapterRewardExcel> CreateCampaignChapterRewardExcel(FlatBufferBuilder builder,
       long Id = 0,
       long CampaignChapterStar = 0,
-      VectorOffset chapterRewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset ChapterRewardParcelTypeOffset = default(VectorOffset),
       VectorOffset ChapterRewardIdOffset = default(VectorOffset),
-      VectorOffset chapterRewardAmountOffset = default(VectorOffset)) {
+      VectorOffset ChapterRewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(5);
     CampaignChapterRewardExcel.AddCampaignChapterStar(builder, CampaignChapterStar);
     CampaignChapterRewardExcel.AddId(builder, Id);
-    CampaignChapterRewardExcel.AddChapterRewardAmount(builder, chapterRewardAmountOffset);
+    CampaignChapterRewardExcel.AddChapterRewardAmount(builder, ChapterRewardAmountOffset);
     CampaignChapterRewardExcel.AddChapterRewardId(builder, ChapterRewardIdOffset);
-    CampaignChapterRewardExcel.AddChapterRewardParcelType(builder, chapterRewardParcelTypeOffset);
+    CampaignChapterRewardExcel.AddChapterRewardParcelType(builder, ChapterRewardParcelTypeOffset);
     return CampaignChapterRewardExcel.EndCampaignChapterRewardExcel(builder);
   }
 
@@ -108,28 +108,28 @@ public struct CampaignChapterRewardExcel : IFlatbufferObject
 		byte[] key = TableEncryptionService.CreateKey("CampaignChapterReward");
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
 		var _CampaignChapterStar = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CampaignChapterStar, key) : _o.CampaignChapterStar;
-    var _chapterRewardParcelType = default(VectorOffset);
+    var _ChapterRewardParcelType = default(VectorOffset);
     if (_o.ChapterRewardParcelType != null) {
-      var __chapterRewardParcelType = _o.ChapterRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _chapterRewardParcelType = CreateChapterRewardParcelTypeVector(builder, __chapterRewardParcelType);
+      var __ChapterRewardParcelType = _o.ChapterRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ChapterRewardParcelType = CreateChapterRewardParcelTypeVector(builder, __ChapterRewardParcelType);
     }
     var _ChapterRewardId = default(VectorOffset);
     if (_o.ChapterRewardId != null) {
       var __ChapterRewardId = _o.ChapterRewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ChapterRewardId = CreateChapterRewardIdVector(builder, __ChapterRewardId);
     }
-    var _chapterRewardAmount = default(VectorOffset);
+    var _ChapterRewardAmount = default(VectorOffset);
     if (_o.ChapterRewardAmount != null) {
-      var __chapterRewardAmount = _o.ChapterRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _chapterRewardAmount = CreateChapterRewardAmountVector(builder, __chapterRewardAmount);
+      var __ChapterRewardAmount = _o.ChapterRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ChapterRewardAmount = CreateChapterRewardAmountVector(builder, __ChapterRewardAmount);
     }
     return CreateCampaignChapterRewardExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       TableEncryptionService.UseEncryption ? _CampaignChapterStar : _o.CampaignChapterStar,
-      _chapterRewardParcelType,
+      _ChapterRewardParcelType,
       _ChapterRewardId,
-      _chapterRewardAmount);
+      _ChapterRewardAmount);
   }
 }
 

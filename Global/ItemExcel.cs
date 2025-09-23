@@ -107,7 +107,7 @@ public struct ItemExcel : IFlatbufferObject
       long ExpiryChangeAmount = 0,
       bool CanTierUpgrade = false,
       long TierUpgradeRecipeCraftId = 0,
-      VectorOffset tagsOffset = default(VectorOffset),
+      VectorOffset TagsOffset = default(VectorOffset),
       long CraftQualityTier0 = 0,
       long CraftQualityTier1 = 0,
       long CraftQualityTier2 = 0,
@@ -137,7 +137,7 @@ public struct ItemExcel : IFlatbufferObject
     ItemExcel.AddExpirationDateTime(builder, ExpirationDateTimeOffset);
     ItemExcel.AddShopCategory(builder, ShopCategoryOffset);
     ItemExcel.AddMaxGiftTags(builder, MaxGiftTags);
-    ItemExcel.AddTags(builder, tagsOffset);
+    ItemExcel.AddTags(builder, TagsOffset);
     ItemExcel.AddExpiryChangeParcelType(builder, ExpiryChangeParcelType);
     ItemExcel.AddMailType(builder, MailType);
     ItemExcel.AddUsingResultParcelType(builder, UsingResultParcelType);
@@ -267,10 +267,10 @@ public struct ItemExcel : IFlatbufferObject
 		var _ExpiryChangeAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ExpiryChangeAmount, key) : _o.ExpiryChangeAmount;
 		var _CanTierUpgrade = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CanTierUpgrade, key) : _o.CanTierUpgrade;
 		var _TierUpgradeRecipeCraftId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.TierUpgradeRecipeCraftId, key) : _o.TierUpgradeRecipeCraftId;
-    var _tags = default(VectorOffset);
+    var _Tags = default(VectorOffset);
     if (_o.Tags != null) {
-      var __tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _tags = CreateTagsVector(builder, __tags);
+      var __Tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _Tags = CreateTagsVector(builder, __Tags);
     }
 		var _CraftQualityTier0 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CraftQualityTier0, key) : _o.CraftQualityTier0;
 		var _CraftQualityTier1 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CraftQualityTier1, key) : _o.CraftQualityTier1;
@@ -309,7 +309,7 @@ public struct ItemExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ExpiryChangeAmount : _o.ExpiryChangeAmount,
       TableEncryptionService.UseEncryption ? _CanTierUpgrade : _o.CanTierUpgrade,
       TableEncryptionService.UseEncryption ? _TierUpgradeRecipeCraftId : _o.TierUpgradeRecipeCraftId,
-      _tags,
+      _Tags,
       TableEncryptionService.UseEncryption ? _CraftQualityTier0 : _o.CraftQualityTier0,
       TableEncryptionService.UseEncryption ? _CraftQualityTier1 : _o.CraftQualityTier1,
       TableEncryptionService.UseEncryption ? _CraftQualityTier2 : _o.CraftQualityTier2,

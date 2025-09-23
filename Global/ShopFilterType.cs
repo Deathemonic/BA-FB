@@ -44,6 +44,7 @@ public enum ShopFilterType : int
   ShopFilterDUMMY_7 = 34,
   ETC = 35,
   Bundle = 36,
+  FavorItem = 37,
 };
 
 

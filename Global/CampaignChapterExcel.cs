@@ -94,14 +94,14 @@ public struct CampaignChapterExcel : IFlatbufferObject
       StringOffset NormalImagePathOffset = default(StringOffset),
       StringOffset HardImagePathOffset = default(StringOffset),
       long Order = 0,
-      VectorOffset preChapterIdOffset = default(VectorOffset),
+      VectorOffset PreChapterIdOffset = default(VectorOffset),
       long ChapterRewardId = 0,
       long ChapterHardRewardId = 0,
       long ChapterVeryHardRewardId = 0,
       VectorOffset NormalCampaignStageIdOffset = default(VectorOffset),
       VectorOffset NormalExtraStageIdOffset = default(VectorOffset),
-      VectorOffset hardCampaignStageIdOffset = default(VectorOffset),
-      VectorOffset veryHardCampaignStageIdOffset = default(VectorOffset),
+      VectorOffset HardCampaignStageIdOffset = default(VectorOffset),
+      VectorOffset VeryHardCampaignStageIdOffset = default(VectorOffset),
       bool IsTacticSkip = false) {
     builder.StartTable(14);
     CampaignChapterExcel.AddChapterVeryHardRewardId(builder, ChapterVeryHardRewardId);
@@ -109,11 +109,11 @@ public struct CampaignChapterExcel : IFlatbufferObject
     CampaignChapterExcel.AddChapterRewardId(builder, ChapterRewardId);
     CampaignChapterExcel.AddOrder(builder, Order);
     CampaignChapterExcel.AddId(builder, Id);
-    CampaignChapterExcel.AddVeryHardCampaignStageId(builder, veryHardCampaignStageIdOffset);
-    CampaignChapterExcel.AddHardCampaignStageId(builder, hardCampaignStageIdOffset);
+    CampaignChapterExcel.AddVeryHardCampaignStageId(builder, VeryHardCampaignStageIdOffset);
+    CampaignChapterExcel.AddHardCampaignStageId(builder, HardCampaignStageIdOffset);
     CampaignChapterExcel.AddNormalExtraStageId(builder, NormalExtraStageIdOffset);
     CampaignChapterExcel.AddNormalCampaignStageId(builder, NormalCampaignStageIdOffset);
-    CampaignChapterExcel.AddPreChapterId(builder, preChapterIdOffset);
+    CampaignChapterExcel.AddPreChapterId(builder, PreChapterIdOffset);
     CampaignChapterExcel.AddHardImagePath(builder, HardImagePathOffset);
     CampaignChapterExcel.AddNormalImagePath(builder, NormalImagePathOffset);
     CampaignChapterExcel.AddName(builder, NameOffset);
@@ -200,10 +200,10 @@ public struct CampaignChapterExcel : IFlatbufferObject
     var _NormalImagePath = _o.NormalImagePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.NormalImagePath, key) : _o.NormalImagePath));
     var _HardImagePath = _o.HardImagePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.HardImagePath, key) : _o.HardImagePath));
 		var _Order = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Order, key) : _o.Order;
-    var _preChapterId = default(VectorOffset);
+    var _PreChapterId = default(VectorOffset);
     if (_o.PreChapterId != null) {
-      var __preChapterId = _o.PreChapterId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _preChapterId = CreatePreChapterIdVector(builder, __preChapterId);
+      var __PreChapterId = _o.PreChapterId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _PreChapterId = CreatePreChapterIdVector(builder, __PreChapterId);
     }
 		var _ChapterRewardId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ChapterRewardId, key) : _o.ChapterRewardId;
 		var _ChapterHardRewardId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ChapterHardRewardId, key) : _o.ChapterHardRewardId;
@@ -218,15 +218,15 @@ public struct CampaignChapterExcel : IFlatbufferObject
       var __NormalExtraStageId = _o.NormalExtraStageId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _NormalExtraStageId = CreateNormalExtraStageIdVector(builder, __NormalExtraStageId);
     }
-    var _hardCampaignStageId = default(VectorOffset);
+    var _HardCampaignStageId = default(VectorOffset);
     if (_o.HardCampaignStageId != null) {
-      var __hardCampaignStageId = _o.HardCampaignStageId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _hardCampaignStageId = CreateHardCampaignStageIdVector(builder, __hardCampaignStageId);
+      var __HardCampaignStageId = _o.HardCampaignStageId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _HardCampaignStageId = CreateHardCampaignStageIdVector(builder, __HardCampaignStageId);
     }
-    var _veryHardCampaignStageId = default(VectorOffset);
+    var _VeryHardCampaignStageId = default(VectorOffset);
     if (_o.VeryHardCampaignStageId != null) {
-      var __veryHardCampaignStageId = _o.VeryHardCampaignStageId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _veryHardCampaignStageId = CreateVeryHardCampaignStageIdVector(builder, __veryHardCampaignStageId);
+      var __VeryHardCampaignStageId = _o.VeryHardCampaignStageId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _VeryHardCampaignStageId = CreateVeryHardCampaignStageIdVector(builder, __VeryHardCampaignStageId);
     }
 		var _IsTacticSkip = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsTacticSkip, key) : _o.IsTacticSkip;
     return CreateCampaignChapterExcel(
@@ -236,14 +236,14 @@ public struct CampaignChapterExcel : IFlatbufferObject
       _NormalImagePath,
       _HardImagePath,
       TableEncryptionService.UseEncryption ? _Order : _o.Order,
-      _preChapterId,
+      _PreChapterId,
       TableEncryptionService.UseEncryption ? _ChapterRewardId : _o.ChapterRewardId,
       TableEncryptionService.UseEncryption ? _ChapterHardRewardId : _o.ChapterHardRewardId,
       TableEncryptionService.UseEncryption ? _ChapterVeryHardRewardId : _o.ChapterVeryHardRewardId,
       _NormalCampaignStageId,
       _NormalExtraStageId,
-      _hardCampaignStageId,
-      _veryHardCampaignStageId,
+      _HardCampaignStageId,
+      _VeryHardCampaignStageId,
       TableEncryptionService.UseEncryption ? _IsTacticSkip : _o.IsTacticSkip);
   }
 }

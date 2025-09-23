@@ -34,10 +34,10 @@ public struct TrophyCollectionExcel : IFlatbufferObject
   public static Offset<Global.TrophyCollectionExcel> CreateTrophyCollectionExcel(FlatBufferBuilder builder,
       long GroupId = 0,
       uint LocalizeCodeId = 0,
-      VectorOffset furnitureIdOffset = default(VectorOffset)) {
+      VectorOffset FurnitureIdOffset = default(VectorOffset)) {
     builder.StartTable(3);
     TrophyCollectionExcel.AddGroupId(builder, GroupId);
-    TrophyCollectionExcel.AddFurnitureId(builder, furnitureIdOffset);
+    TrophyCollectionExcel.AddFurnitureId(builder, FurnitureIdOffset);
     TrophyCollectionExcel.AddLocalizeCodeId(builder, LocalizeCodeId);
     return TrophyCollectionExcel.EndTrophyCollectionExcel(builder);
   }
@@ -72,16 +72,16 @@ public struct TrophyCollectionExcel : IFlatbufferObject
 		byte[] key = TableEncryptionService.CreateKey("TrophyCollection");
 		var _GroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroupId, key) : _o.GroupId;
 		var _LocalizeCodeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeCodeId, key) : _o.LocalizeCodeId;
-    var _furnitureId = default(VectorOffset);
+    var _FurnitureId = default(VectorOffset);
     if (_o.FurnitureId != null) {
-      var __furnitureId = _o.FurnitureId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _furnitureId = CreateFurnitureIdVector(builder, __furnitureId);
+      var __FurnitureId = _o.FurnitureId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _FurnitureId = CreateFurnitureIdVector(builder, __FurnitureId);
     }
     return CreateTrophyCollectionExcel(
       builder,
       TableEncryptionService.UseEncryption ? _GroupId : _o.GroupId,
       TableEncryptionService.UseEncryption ? _LocalizeCodeId : _o.LocalizeCodeId,
-      _furnitureId);
+      _FurnitureId);
   }
 }
 

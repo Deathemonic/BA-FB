@@ -87,7 +87,10 @@ public enum StatType : int
   HealedMysticRate = 77,
   HealedSonicRate = 78,
   HealedNormalRate = 79,
-  Max = 80,
+  GrowthScore = 80,
+  CharacterBulletTypeEnhanceRate = 81,
+  MaxCostIncrease = 82,
+  Max = 83,
 };
 
 

@@ -98,7 +98,7 @@ public struct FieldSceneExcel : IFlatbufferObject
       VectorOffset BeginConditionalBGMScenarioGroupIdOffset = default(VectorOffset),
       VectorOffset BeginConditionalBGMInteractionIdOffset = default(VectorOffset),
       VectorOffset EndConditionalBGMScenarioGroupIdOffset = default(VectorOffset),
-      VectorOffset endConditionalBGMInteractionIdOffset = default(VectorOffset),
+      VectorOffset EndConditionalBGMInteractionIdOffset = default(VectorOffset),
       VectorOffset conditionalBGMIdOffset = default(VectorOffset)) {
     builder.StartTable(12);
     FieldSceneExcel.AddBGMId(builder, BGMId);
@@ -106,7 +106,7 @@ public struct FieldSceneExcel : IFlatbufferObject
     FieldSceneExcel.AddDateId(builder, DateId);
     FieldSceneExcel.AddUniqueId(builder, UniqueId);
     FieldSceneExcel.AddConditionalBGMId(builder, conditionalBGMIdOffset);
-    FieldSceneExcel.AddEndConditionalBGMInteractionId(builder, endConditionalBGMInteractionIdOffset);
+    FieldSceneExcel.AddEndConditionalBGMInteractionId(builder, EndConditionalBGMInteractionIdOffset);
     FieldSceneExcel.AddEndConditionalBGMScenarioGroupId(builder, EndConditionalBGMScenarioGroupIdOffset);
     FieldSceneExcel.AddBeginConditionalBGMInteractionId(builder, BeginConditionalBGMInteractionIdOffset);
     FieldSceneExcel.AddBeginConditionalBGMScenarioGroupId(builder, BeginConditionalBGMScenarioGroupIdOffset);
@@ -218,10 +218,10 @@ public struct FieldSceneExcel : IFlatbufferObject
       var __EndConditionalBGMScenarioGroupId = _o.EndConditionalBGMScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _EndConditionalBGMScenarioGroupId = CreateEndConditionalBGMScenarioGroupIdVector(builder, __EndConditionalBGMScenarioGroupId);
     }
-    var _endConditionalBGMInteractionId = default(VectorOffset);
+    var _EndConditionalBGMInteractionId = default(VectorOffset);
     if (_o.EndConditionalBGMInteractionId != null) {
-      var __endConditionalBGMInteractionId = _o.EndConditionalBGMInteractionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _endConditionalBGMInteractionId = CreateEndConditionalBGMInteractionIdVector(builder, __endConditionalBGMInteractionId);
+      var __EndConditionalBGMInteractionId = _o.EndConditionalBGMInteractionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _EndConditionalBGMInteractionId = CreateEndConditionalBGMInteractionIdVector(builder, __EndConditionalBGMInteractionId);
     }
     var _conditionalBGMId = default(VectorOffset);
     if (_o.ConditionalBGMId != null) {
@@ -240,7 +240,7 @@ public struct FieldSceneExcel : IFlatbufferObject
       _BeginConditionalBGMScenarioGroupId,
       _BeginConditionalBGMInteractionId,
       _EndConditionalBGMScenarioGroupId,
-      _endConditionalBGMInteractionId,
+      _EndConditionalBGMInteractionId,
       _conditionalBGMId);
   }
 }

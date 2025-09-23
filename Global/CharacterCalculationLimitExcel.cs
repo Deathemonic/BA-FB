@@ -48,14 +48,14 @@ public struct CharacterCalculationLimitExcel : IFlatbufferObject
       Global.BattleCalculationStat CalculationValue = Global.BattleCalculationStat.FinalDamage,
       long MinValue = 0,
       long MaxValue = 0,
-      VectorOffset limitStartValueOffset = default(VectorOffset),
-      VectorOffset DecreaseRateOffset = default(VectorOffset)) {
+      VectorOffset LimitStartValueOffset = default(VectorOffset),
+      VectorOffset decreaseRateOffset = default(VectorOffset)) {
     builder.StartTable(7);
     CharacterCalculationLimitExcel.AddMaxValue(builder, MaxValue);
     CharacterCalculationLimitExcel.AddMinValue(builder, MinValue);
     CharacterCalculationLimitExcel.AddId(builder, Id);
-    CharacterCalculationLimitExcel.AddDecreaseRate(builder, DecreaseRateOffset);
-    CharacterCalculationLimitExcel.AddLimitStartValue(builder, limitStartValueOffset);
+    CharacterCalculationLimitExcel.AddDecreaseRate(builder, decreaseRateOffset);
+    CharacterCalculationLimitExcel.AddLimitStartValue(builder, LimitStartValueOffset);
     CharacterCalculationLimitExcel.AddCalculationValue(builder, CalculationValue);
     CharacterCalculationLimitExcel.AddTacticEntityType(builder, TacticEntityType);
     return CharacterCalculationLimitExcel.EndCharacterCalculationLimitExcel(builder);
@@ -108,15 +108,15 @@ public struct CharacterCalculationLimitExcel : IFlatbufferObject
 		var _CalculationValue = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CalculationValue, key) : _o.CalculationValue;
 		var _MinValue = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MinValue, key) : _o.MinValue;
 		var _MaxValue = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MaxValue, key) : _o.MaxValue;
-    var _limitStartValue = default(VectorOffset);
+    var _LimitStartValue = default(VectorOffset);
     if (_o.LimitStartValue != null) {
-      var __limitStartValue = _o.LimitStartValue.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _limitStartValue = CreateLimitStartValueVector(builder, __limitStartValue);
+      var __LimitStartValue = _o.LimitStartValue.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _LimitStartValue = CreateLimitStartValueVector(builder, __LimitStartValue);
     }
-    var _DecreaseRate = default(VectorOffset);
+    var _decreaseRate = default(VectorOffset);
     if (_o.DecreaseRate != null) {
-      var __DecreaseRate = _o.DecreaseRate.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _DecreaseRate = CreateDecreaseRateVector(builder, __DecreaseRate);
+      var __decreaseRate = _o.DecreaseRate.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _decreaseRate = CreateDecreaseRateVector(builder, __decreaseRate);
     }
     return CreateCharacterCalculationLimitExcel(
       builder,
@@ -125,8 +125,8 @@ public struct CharacterCalculationLimitExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _CalculationValue : _o.CalculationValue,
       TableEncryptionService.UseEncryption ? _MinValue : _o.MinValue,
       TableEncryptionService.UseEncryption ? _MaxValue : _o.MaxValue,
-      _limitStartValue,
-      _DecreaseRate);
+      _LimitStartValue,
+      _decreaseRate);
   }
 }
 

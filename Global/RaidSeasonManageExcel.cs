@@ -82,12 +82,12 @@ public struct RaidSeasonManageExcel : IFlatbufferObject
       long RankingRewardGroupId = 0,
       int MaxSeasonRewardGauage = 0,
       VectorOffset StackedSeasonRewardGaugeOffset = default(VectorOffset),
-      VectorOffset seasonRewardIdOffset = default(VectorOffset)) {
+      VectorOffset SeasonRewardIdOffset = default(VectorOffset)) {
     builder.StartTable(11);
     RaidSeasonManageExcel.AddRankingRewardGroupId(builder, RankingRewardGroupId);
     RaidSeasonManageExcel.AddSeasonDisplay(builder, SeasonDisplay);
     RaidSeasonManageExcel.AddSeasonId(builder, SeasonId);
-    RaidSeasonManageExcel.AddSeasonRewardId(builder, seasonRewardIdOffset);
+    RaidSeasonManageExcel.AddSeasonRewardId(builder, SeasonRewardIdOffset);
     RaidSeasonManageExcel.AddStackedSeasonRewardGauge(builder, StackedSeasonRewardGaugeOffset);
     RaidSeasonManageExcel.AddMaxSeasonRewardGauage(builder, MaxSeasonRewardGauage);
     RaidSeasonManageExcel.AddOpenRaidBossGroup(builder, OpenRaidBossGroupOffset);
@@ -173,10 +173,10 @@ public struct RaidSeasonManageExcel : IFlatbufferObject
       var __StackedSeasonRewardGauge = _o.StackedSeasonRewardGauge.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _StackedSeasonRewardGauge = CreateStackedSeasonRewardGaugeVector(builder, __StackedSeasonRewardGauge);
     }
-    var _seasonRewardId = default(VectorOffset);
+    var _SeasonRewardId = default(VectorOffset);
     if (_o.SeasonRewardId != null) {
-      var __seasonRewardId = _o.SeasonRewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _seasonRewardId = CreateSeasonRewardIdVector(builder, __seasonRewardId);
+      var __SeasonRewardId = _o.SeasonRewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _SeasonRewardId = CreateSeasonRewardIdVector(builder, __SeasonRewardId);
     }
     return CreateRaidSeasonManageExcel(
       builder,
@@ -190,7 +190,7 @@ public struct RaidSeasonManageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _RankingRewardGroupId : _o.RankingRewardGroupId,
       TableEncryptionService.UseEncryption ? _MaxSeasonRewardGauage : _o.MaxSeasonRewardGauage,
       _StackedSeasonRewardGauge,
-      _seasonRewardId);
+      _SeasonRewardId);
   }
 }
 

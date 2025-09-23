@@ -64,18 +64,18 @@ public struct ArenaRewardExcel : IFlatbufferObject
       long RankStart = 0,
       long RankEnd = 0,
       StringOffset RankIconPathOffset = default(StringOffset),
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelUniqueIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardParcelUniqueIdOffset = default(VectorOffset),
       VectorOffset RewardParcelUniqueNameOffset = default(VectorOffset),
-      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(9);
     ArenaRewardExcel.AddRankEnd(builder, RankEnd);
     ArenaRewardExcel.AddRankStart(builder, RankStart);
     ArenaRewardExcel.AddUniqueId(builder, UniqueId);
-    ArenaRewardExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
+    ArenaRewardExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
     ArenaRewardExcel.AddRewardParcelUniqueName(builder, RewardParcelUniqueNameOffset);
-    ArenaRewardExcel.AddRewardParcelUniqueId(builder, rewardParcelUniqueIdOffset);
-    ArenaRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    ArenaRewardExcel.AddRewardParcelUniqueId(builder, RewardParcelUniqueIdOffset);
+    ArenaRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     ArenaRewardExcel.AddRankIconPath(builder, RankIconPathOffset);
     ArenaRewardExcel.AddArenaRewardType(builder, ArenaRewardType);
     return ArenaRewardExcel.EndArenaRewardExcel(builder);
@@ -144,15 +144,15 @@ public struct ArenaRewardExcel : IFlatbufferObject
 		var _RankStart = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RankStart, key) : _o.RankStart;
 		var _RankEnd = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RankEnd, key) : _o.RankEnd;
     var _RankIconPath = _o.RankIconPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.RankIconPath, key) : _o.RankIconPath));
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelUniqueId = default(VectorOffset);
+    var _RewardParcelUniqueId = default(VectorOffset);
     if (_o.RewardParcelUniqueId != null) {
-      var __rewardParcelUniqueId = _o.RewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelUniqueId = CreateRewardParcelUniqueIdVector(builder, __rewardParcelUniqueId);
+      var __RewardParcelUniqueId = _o.RewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelUniqueId = CreateRewardParcelUniqueIdVector(builder, __RewardParcelUniqueId);
     }
     var _RewardParcelUniqueName = default(VectorOffset);
     if (_o.RewardParcelUniqueName != null) {
@@ -160,10 +160,10 @@ public struct ArenaRewardExcel : IFlatbufferObject
       for (var _j = 0; _j < __RewardParcelUniqueName.Length; ++_j) { __RewardParcelUniqueName[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.RewardParcelUniqueName[_j], key) : _o.RewardParcelUniqueName[_j])); }
       _RewardParcelUniqueName = CreateRewardParcelUniqueNameVector(builder, __RewardParcelUniqueName);
     }
-    var _rewardParcelAmount = default(VectorOffset);
+    var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
+      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
     }
     return CreateArenaRewardExcel(
       builder,
@@ -172,10 +172,10 @@ public struct ArenaRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _RankStart : _o.RankStart,
       TableEncryptionService.UseEncryption ? _RankEnd : _o.RankEnd,
       _RankIconPath,
-      _rewardParcelType,
-      _rewardParcelUniqueId,
+      _RewardParcelType,
+      _RewardParcelUniqueId,
       _RewardParcelUniqueName,
-      _rewardParcelAmount);
+      _RewardParcelAmount);
   }
 }
 

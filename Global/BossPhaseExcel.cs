@@ -42,11 +42,11 @@ public struct BossPhaseExcel : IFlatbufferObject
       long Id = 0,
       long AIPhase = 0,
       StringOffset NormalAttackSkillUniqueNameOffset = default(StringOffset),
-      VectorOffset useExSkillOffset = default(VectorOffset)) {
+      VectorOffset UseExSkillOffset = default(VectorOffset)) {
     builder.StartTable(4);
     BossPhaseExcel.AddAIPhase(builder, AIPhase);
     BossPhaseExcel.AddId(builder, Id);
-    BossPhaseExcel.AddUseExSkill(builder, useExSkillOffset);
+    BossPhaseExcel.AddUseExSkill(builder, UseExSkillOffset);
     BossPhaseExcel.AddNormalAttackSkillUniqueName(builder, NormalAttackSkillUniqueNameOffset);
     return BossPhaseExcel.EndBossPhaseExcel(builder);
   }
@@ -84,17 +84,17 @@ public struct BossPhaseExcel : IFlatbufferObject
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
 		var _AIPhase = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AIPhase, key) : _o.AIPhase;
     var _NormalAttackSkillUniqueName = _o.NormalAttackSkillUniqueName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.NormalAttackSkillUniqueName, key) : _o.NormalAttackSkillUniqueName));
-    var _useExSkill = default(VectorOffset);
+    var _UseExSkill = default(VectorOffset);
     if (_o.UseExSkill != null) {
-      var __useExSkill = _o.UseExSkill.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _useExSkill = CreateUseExSkillVector(builder, __useExSkill);
+      var __UseExSkill = _o.UseExSkill.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _UseExSkill = CreateUseExSkillVector(builder, __UseExSkill);
     }
     return CreateBossPhaseExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       TableEncryptionService.UseEncryption ? _AIPhase : _o.AIPhase,
       _NormalAttackSkillUniqueName,
-      _useExSkill);
+      _UseExSkill);
   }
 }
 

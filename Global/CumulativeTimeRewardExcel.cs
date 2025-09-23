@@ -82,12 +82,12 @@ public struct CumulativeTimeRewardExcel : IFlatbufferObject
       StringOffset EndDateOffset = default(StringOffset),
       VectorOffset TimeConditionOffset = default(VectorOffset),
       VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset RewardIdOffset = default(VectorOffset),
+      VectorOffset rewardIdOffset = default(VectorOffset),
       VectorOffset RewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(8);
     CumulativeTimeRewardExcel.AddId(builder, Id);
     CumulativeTimeRewardExcel.AddRewardAmount(builder, RewardAmountOffset);
-    CumulativeTimeRewardExcel.AddRewardId(builder, RewardIdOffset);
+    CumulativeTimeRewardExcel.AddRewardId(builder, rewardIdOffset);
     CumulativeTimeRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
     CumulativeTimeRewardExcel.AddTimeCondition(builder, TimeConditionOffset);
     CumulativeTimeRewardExcel.AddEndDate(builder, EndDateOffset);
@@ -166,10 +166,10 @@ public struct CumulativeTimeRewardExcel : IFlatbufferObject
       var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
     }
-    var _RewardId = default(VectorOffset);
+    var _rewardId = default(VectorOffset);
     if (_o.RewardId != null) {
-      var __RewardId = _o.RewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RewardId = CreateRewardIdVector(builder, __RewardId);
+      var __rewardId = _o.RewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _rewardId = CreateRewardIdVector(builder, __rewardId);
     }
     var _RewardAmount = default(VectorOffset);
     if (_o.RewardAmount != null) {
@@ -184,7 +184,7 @@ public struct CumulativeTimeRewardExcel : IFlatbufferObject
       _EndDate,
       _TimeCondition,
       _rewardParcelType,
-      _RewardId,
+      _rewardId,
       _RewardAmount);
   }
 }

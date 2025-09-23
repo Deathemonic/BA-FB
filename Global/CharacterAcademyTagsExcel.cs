@@ -64,18 +64,18 @@ public struct CharacterAcademyTagsExcel : IFlatbufferObject
 
   public static Offset<Global.CharacterAcademyTagsExcel> CreateCharacterAcademyTagsExcel(FlatBufferBuilder builder,
       long Id = 0,
-      VectorOffset favorTagsOffset = default(VectorOffset),
-      VectorOffset favorItemTagsOffset = default(VectorOffset),
+      VectorOffset FavorTagsOffset = default(VectorOffset),
+      VectorOffset FavorItemTagsOffset = default(VectorOffset),
       VectorOffset FavorItemUniqueTagsOffset = default(VectorOffset),
-      VectorOffset forbiddenTagsOffset = default(VectorOffset),
+      VectorOffset ForbiddenTagsOffset = default(VectorOffset),
       VectorOffset ZoneWhiteListTagsOffset = default(VectorOffset)) {
     builder.StartTable(6);
     CharacterAcademyTagsExcel.AddId(builder, Id);
     CharacterAcademyTagsExcel.AddZoneWhiteListTags(builder, ZoneWhiteListTagsOffset);
-    CharacterAcademyTagsExcel.AddForbiddenTags(builder, forbiddenTagsOffset);
+    CharacterAcademyTagsExcel.AddForbiddenTags(builder, ForbiddenTagsOffset);
     CharacterAcademyTagsExcel.AddFavorItemUniqueTags(builder, FavorItemUniqueTagsOffset);
-    CharacterAcademyTagsExcel.AddFavorItemTags(builder, favorItemTagsOffset);
-    CharacterAcademyTagsExcel.AddFavorTags(builder, favorTagsOffset);
+    CharacterAcademyTagsExcel.AddFavorItemTags(builder, FavorItemTagsOffset);
+    CharacterAcademyTagsExcel.AddFavorTags(builder, FavorTagsOffset);
     return CharacterAcademyTagsExcel.EndCharacterAcademyTagsExcel(builder);
   }
 
@@ -138,25 +138,25 @@ public struct CharacterAcademyTagsExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.CharacterAcademyTagsExcel>);
 		byte[] key = TableEncryptionService.CreateKey("CharacterAcademyTags");
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
-    var _favorTags = default(VectorOffset);
+    var _FavorTags = default(VectorOffset);
     if (_o.FavorTags != null) {
-      var __favorTags = _o.FavorTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _favorTags = CreateFavorTagsVector(builder, __favorTags);
+      var __FavorTags = _o.FavorTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _FavorTags = CreateFavorTagsVector(builder, __FavorTags);
     }
-    var _favorItemTags = default(VectorOffset);
+    var _FavorItemTags = default(VectorOffset);
     if (_o.FavorItemTags != null) {
-      var __favorItemTags = _o.FavorItemTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _favorItemTags = CreateFavorItemTagsVector(builder, __favorItemTags);
+      var __FavorItemTags = _o.FavorItemTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _FavorItemTags = CreateFavorItemTagsVector(builder, __FavorItemTags);
     }
     var _FavorItemUniqueTags = default(VectorOffset);
     if (_o.FavorItemUniqueTags != null) {
       var __FavorItemUniqueTags = _o.FavorItemUniqueTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _FavorItemUniqueTags = CreateFavorItemUniqueTagsVector(builder, __FavorItemUniqueTags);
     }
-    var _forbiddenTags = default(VectorOffset);
+    var _ForbiddenTags = default(VectorOffset);
     if (_o.ForbiddenTags != null) {
-      var __forbiddenTags = _o.ForbiddenTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _forbiddenTags = CreateForbiddenTagsVector(builder, __forbiddenTags);
+      var __ForbiddenTags = _o.ForbiddenTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ForbiddenTags = CreateForbiddenTagsVector(builder, __ForbiddenTags);
     }
     var _ZoneWhiteListTags = default(VectorOffset);
     if (_o.ZoneWhiteListTags != null) {
@@ -166,10 +166,10 @@ public struct CharacterAcademyTagsExcel : IFlatbufferObject
     return CreateCharacterAcademyTagsExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
-      _favorTags,
-      _favorItemTags,
+      _FavorTags,
+      _FavorItemTags,
       _FavorItemUniqueTags,
-      _forbiddenTags,
+      _ForbiddenTags,
       _ZoneWhiteListTags);
   }
 }

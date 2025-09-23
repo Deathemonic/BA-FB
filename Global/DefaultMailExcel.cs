@@ -69,12 +69,12 @@ public struct DefaultMailExcel : IFlatbufferObject
       StringOffset MailSendPeriodFromOffset = default(StringOffset),
       StringOffset MailSendPeriodToOffset = default(StringOffset),
       VectorOffset RewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset RewardParcelIdOffset = default(VectorOffset),
-      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset rewardParcelIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(8);
     DefaultMailExcel.AddId(builder, Id);
-    DefaultMailExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
-    DefaultMailExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
+    DefaultMailExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
+    DefaultMailExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
     DefaultMailExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     DefaultMailExcel.AddMailSendPeriodTo(builder, MailSendPeriodToOffset);
     DefaultMailExcel.AddMailSendPeriodFrom(builder, MailSendPeriodFromOffset);
@@ -143,15 +143,15 @@ public struct DefaultMailExcel : IFlatbufferObject
       var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _RewardParcelId = default(VectorOffset);
+    var _rewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
-      var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
+      var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
     }
-    var _rewardParcelAmount = default(VectorOffset);
+    var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
+      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
     }
     return CreateDefaultMailExcel(
       builder,
@@ -161,8 +161,8 @@ public struct DefaultMailExcel : IFlatbufferObject
       _MailSendPeriodFrom,
       _MailSendPeriodTo,
       _RewardParcelType,
-      _RewardParcelId,
-      _rewardParcelAmount);
+      _rewardParcelId,
+      _RewardParcelAmount);
   }
 }
 

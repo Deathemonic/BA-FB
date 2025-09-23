@@ -15,6 +15,7 @@ public enum GachaDisplayTag : int
   New = 5,
   Fes = 6,
   SelectRecruit = 7,
+  LimitedThreeStar = 8,
 };
 
 

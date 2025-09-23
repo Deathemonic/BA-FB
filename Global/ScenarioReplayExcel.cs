@@ -50,7 +50,7 @@ public struct ScenarioReplayExcel : IFlatbufferObject
       Global.ScenarioModeReplayTypes ReplayType = Global.ScenarioModeReplayTypes.None,
       long ChapterId = 0,
       long EpisodeId = 0,
-      VectorOffset frontScenarioGroupIdOffset = default(VectorOffset),
+      VectorOffset FrontScenarioGroupIdOffset = default(VectorOffset),
       long GroundId = 0,
       long BattleDuration = 0,
       VectorOffset BackScenarioGroupIdOffset = default(VectorOffset)) {
@@ -62,7 +62,7 @@ public struct ScenarioReplayExcel : IFlatbufferObject
     ScenarioReplayExcel.AddVolumeId(builder, VolumeId);
     ScenarioReplayExcel.AddModeId(builder, ModeId);
     ScenarioReplayExcel.AddBackScenarioGroupId(builder, BackScenarioGroupIdOffset);
-    ScenarioReplayExcel.AddFrontScenarioGroupId(builder, frontScenarioGroupIdOffset);
+    ScenarioReplayExcel.AddFrontScenarioGroupId(builder, FrontScenarioGroupIdOffset);
     ScenarioReplayExcel.AddReplayType(builder, ReplayType);
     return ScenarioReplayExcel.EndScenarioReplayExcel(builder);
   }
@@ -118,10 +118,10 @@ public struct ScenarioReplayExcel : IFlatbufferObject
 		var _ReplayType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ReplayType, key) : _o.ReplayType;
 		var _ChapterId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ChapterId, key) : _o.ChapterId;
 		var _EpisodeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EpisodeId, key) : _o.EpisodeId;
-    var _frontScenarioGroupId = default(VectorOffset);
+    var _FrontScenarioGroupId = default(VectorOffset);
     if (_o.FrontScenarioGroupId != null) {
-      var __frontScenarioGroupId = _o.FrontScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _frontScenarioGroupId = CreateFrontScenarioGroupIdVector(builder, __frontScenarioGroupId);
+      var __FrontScenarioGroupId = _o.FrontScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _FrontScenarioGroupId = CreateFrontScenarioGroupIdVector(builder, __FrontScenarioGroupId);
     }
 		var _GroundId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroundId, key) : _o.GroundId;
 		var _BattleDuration = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.BattleDuration, key) : _o.BattleDuration;
@@ -137,7 +137,7 @@ public struct ScenarioReplayExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ReplayType : _o.ReplayType,
       TableEncryptionService.UseEncryption ? _ChapterId : _o.ChapterId,
       TableEncryptionService.UseEncryption ? _EpisodeId : _o.EpisodeId,
-      _frontScenarioGroupId,
+      _FrontScenarioGroupId,
       TableEncryptionService.UseEncryption ? _GroundId : _o.GroundId,
       TableEncryptionService.UseEncryption ? _BattleDuration : _o.BattleDuration,
       _BackScenarioGroupId);

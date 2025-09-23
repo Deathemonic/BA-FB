@@ -62,18 +62,18 @@ public struct RecipeExcel : IFlatbufferObject
       Global.RecipeType RecipeType = Global.RecipeType.None,
       long RecipeIngredientId = 0,
       long RecipeSelectionGroupId = 0,
-      VectorOffset parcelTypeOffset = default(VectorOffset),
-      VectorOffset parcelIdOffset = default(VectorOffset),
+      VectorOffset ParcelTypeOffset = default(VectorOffset),
+      VectorOffset ParcelIdOffset = default(VectorOffset),
       VectorOffset ResultAmountMinOffset = default(VectorOffset),
-      VectorOffset resultAmountMaxOffset = default(VectorOffset)) {
+      VectorOffset ResultAmountMaxOffset = default(VectorOffset)) {
     builder.StartTable(8);
     RecipeExcel.AddRecipeSelectionGroupId(builder, RecipeSelectionGroupId);
     RecipeExcel.AddRecipeIngredientId(builder, RecipeIngredientId);
     RecipeExcel.AddId(builder, Id);
-    RecipeExcel.AddResultAmountMax(builder, resultAmountMaxOffset);
+    RecipeExcel.AddResultAmountMax(builder, ResultAmountMaxOffset);
     RecipeExcel.AddResultAmountMin(builder, ResultAmountMinOffset);
-    RecipeExcel.AddParcelId(builder, parcelIdOffset);
-    RecipeExcel.AddParcelType(builder, parcelTypeOffset);
+    RecipeExcel.AddParcelId(builder, ParcelIdOffset);
+    RecipeExcel.AddParcelType(builder, ParcelTypeOffset);
     RecipeExcel.AddRecipeType(builder, RecipeType);
     return RecipeExcel.EndRecipeExcel(builder);
   }
@@ -138,25 +138,25 @@ public struct RecipeExcel : IFlatbufferObject
 		var _RecipeType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RecipeType, key) : _o.RecipeType;
 		var _RecipeIngredientId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RecipeIngredientId, key) : _o.RecipeIngredientId;
 		var _RecipeSelectionGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RecipeSelectionGroupId, key) : _o.RecipeSelectionGroupId;
-    var _parcelType = default(VectorOffset);
+    var _ParcelType = default(VectorOffset);
     if (_o.ParcelType != null) {
-      var __parcelType = _o.ParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelType = CreateParcelTypeVector(builder, __parcelType);
+      var __ParcelType = _o.ParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelType = CreateParcelTypeVector(builder, __ParcelType);
     }
-    var _parcelId = default(VectorOffset);
+    var _ParcelId = default(VectorOffset);
     if (_o.ParcelId != null) {
-      var __parcelId = _o.ParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelId = CreateParcelIdVector(builder, __parcelId);
+      var __ParcelId = _o.ParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelId = CreateParcelIdVector(builder, __ParcelId);
     }
     var _ResultAmountMin = default(VectorOffset);
     if (_o.ResultAmountMin != null) {
       var __ResultAmountMin = _o.ResultAmountMin.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ResultAmountMin = CreateResultAmountMinVector(builder, __ResultAmountMin);
     }
-    var _resultAmountMax = default(VectorOffset);
+    var _ResultAmountMax = default(VectorOffset);
     if (_o.ResultAmountMax != null) {
-      var __resultAmountMax = _o.ResultAmountMax.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _resultAmountMax = CreateResultAmountMaxVector(builder, __resultAmountMax);
+      var __ResultAmountMax = _o.ResultAmountMax.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ResultAmountMax = CreateResultAmountMaxVector(builder, __ResultAmountMax);
     }
     return CreateRecipeExcel(
       builder,
@@ -164,10 +164,10 @@ public struct RecipeExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _RecipeType : _o.RecipeType,
       TableEncryptionService.UseEncryption ? _RecipeIngredientId : _o.RecipeIngredientId,
       TableEncryptionService.UseEncryption ? _RecipeSelectionGroupId : _o.RecipeSelectionGroupId,
-      _parcelType,
-      _parcelId,
+      _ParcelType,
+      _ParcelId,
       _ResultAmountMin,
-      _resultAmountMax);
+      _ResultAmountMax);
   }
 }
 

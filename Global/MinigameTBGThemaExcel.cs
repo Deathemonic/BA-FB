@@ -87,8 +87,8 @@ public struct MinigameTBGThemaExcel : IFlatbufferObject
       Global.TBGThemaType ThemaType = Global.TBGThemaType.None,
       StringOffset ThemaMapOffset = default(StringOffset),
       StringOffset ThemaMapBGOffset = default(StringOffset),
-      VectorOffset portalConditionOffset = default(VectorOffset),
-      VectorOffset portalConditionParameterOffset = default(VectorOffset),
+      VectorOffset PortalConditionOffset = default(VectorOffset),
+      VectorOffset PortalConditionParameterOffset = default(VectorOffset),
       StringOffset ThemaNameLocalizeOffset = default(StringOffset),
       StringOffset ThemaLoadingImageOffset = default(StringOffset),
       StringOffset ThemaPlayerPrefabOffset = default(StringOffset),
@@ -105,8 +105,8 @@ public struct MinigameTBGThemaExcel : IFlatbufferObject
     MinigameTBGThemaExcel.AddThemaPlayerPrefab(builder, ThemaPlayerPrefabOffset);
     MinigameTBGThemaExcel.AddThemaLoadingImage(builder, ThemaLoadingImageOffset);
     MinigameTBGThemaExcel.AddThemaNameLocalize(builder, ThemaNameLocalizeOffset);
-    MinigameTBGThemaExcel.AddPortalConditionParameter(builder, portalConditionParameterOffset);
-    MinigameTBGThemaExcel.AddPortalCondition(builder, portalConditionOffset);
+    MinigameTBGThemaExcel.AddPortalConditionParameter(builder, PortalConditionParameterOffset);
+    MinigameTBGThemaExcel.AddPortalCondition(builder, PortalConditionOffset);
     MinigameTBGThemaExcel.AddThemaMapBG(builder, ThemaMapBGOffset);
     MinigameTBGThemaExcel.AddThemaMap(builder, ThemaMapOffset);
     MinigameTBGThemaExcel.AddThemaType(builder, ThemaType);
@@ -179,16 +179,16 @@ public struct MinigameTBGThemaExcel : IFlatbufferObject
 		var _ThemaType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ThemaType, key) : _o.ThemaType;
     var _ThemaMap = _o.ThemaMap == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ThemaMap, key) : _o.ThemaMap));
     var _ThemaMapBG = _o.ThemaMapBG == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ThemaMapBG, key) : _o.ThemaMapBG));
-    var _portalCondition = default(VectorOffset);
+    var _PortalCondition = default(VectorOffset);
     if (_o.PortalCondition != null) {
-      var __portalCondition = _o.PortalCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _portalCondition = CreatePortalConditionVector(builder, __portalCondition);
+      var __PortalCondition = _o.PortalCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _PortalCondition = CreatePortalConditionVector(builder, __PortalCondition);
     }
-    var _portalConditionParameter = default(VectorOffset);
+    var _PortalConditionParameter = default(VectorOffset);
     if (_o.PortalConditionParameter != null) {
-      var __portalConditionParameter = new StringOffset[_o.PortalConditionParameter.Count];
-      for (var _j = 0; _j < __portalConditionParameter.Length; ++_j) { __portalConditionParameter[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PortalConditionParameter[_j], key) : _o.PortalConditionParameter[_j])); }
-      _portalConditionParameter = CreatePortalConditionParameterVector(builder, __portalConditionParameter);
+      var __PortalConditionParameter = new StringOffset[_o.PortalConditionParameter.Count];
+      for (var _j = 0; _j < __PortalConditionParameter.Length; ++_j) { __PortalConditionParameter[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PortalConditionParameter[_j], key) : _o.PortalConditionParameter[_j])); }
+      _PortalConditionParameter = CreatePortalConditionParameterVector(builder, __PortalConditionParameter);
     }
     var _ThemaNameLocalize = _o.ThemaNameLocalize == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ThemaNameLocalize, key) : _o.ThemaNameLocalize));
     var _ThemaLoadingImage = _o.ThemaLoadingImage == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ThemaLoadingImage, key) : _o.ThemaLoadingImage));
@@ -205,8 +205,8 @@ public struct MinigameTBGThemaExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ThemaType : _o.ThemaType,
       _ThemaMap,
       _ThemaMapBG,
-      _portalCondition,
-      _portalConditionParameter,
+      _PortalCondition,
+      _PortalConditionParameter,
       _ThemaNameLocalize,
       _ThemaLoadingImage,
       _ThemaPlayerPrefab,

@@ -52,16 +52,16 @@ public struct MiniGameShootingStageRewardExcel : IFlatbufferObject
       long GroupId = 0,
       long RewardId = 0,
       long ClearSection = 0,
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardParcelIdOffset = default(VectorOffset),
       VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(6);
     MiniGameShootingStageRewardExcel.AddClearSection(builder, ClearSection);
     MiniGameShootingStageRewardExcel.AddRewardId(builder, RewardId);
     MiniGameShootingStageRewardExcel.AddGroupId(builder, GroupId);
     MiniGameShootingStageRewardExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
-    MiniGameShootingStageRewardExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
-    MiniGameShootingStageRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    MiniGameShootingStageRewardExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
+    MiniGameShootingStageRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     return MiniGameShootingStageRewardExcel.EndMiniGameShootingStageRewardExcel(builder);
   }
 
@@ -114,15 +114,15 @@ public struct MiniGameShootingStageRewardExcel : IFlatbufferObject
 		var _GroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroupId, key) : _o.GroupId;
 		var _RewardId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RewardId, key) : _o.RewardId;
 		var _ClearSection = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ClearSection, key) : _o.ClearSection;
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelId = default(VectorOffset);
+    var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
-      var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
+      var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
     var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
@@ -134,8 +134,8 @@ public struct MiniGameShootingStageRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _GroupId : _o.GroupId,
       TableEncryptionService.UseEncryption ? _RewardId : _o.RewardId,
       TableEncryptionService.UseEncryption ? _ClearSection : _o.ClearSection,
-      _rewardParcelType,
-      _rewardParcelId,
+      _RewardParcelType,
+      _RewardParcelId,
       _RewardParcelAmount);
   }
 }

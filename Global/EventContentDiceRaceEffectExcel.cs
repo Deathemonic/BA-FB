@@ -44,10 +44,10 @@ public struct EventContentDiceRaceEffectExcel : IFlatbufferObject
       Global.EventContentDiceRaceResultType EventContentDiceRaceResultType = Global.EventContentDiceRaceResultType.DiceResult1,
       bool isDiceResult = false,
       StringOffset AniClipOffset = default(StringOffset),
-      VectorOffset VoiceIdOffset = default(VectorOffset)) {
+      VectorOffset voiceIdOffset = default(VectorOffset)) {
     builder.StartTable(5);
     EventContentDiceRaceEffectExcel.AddEventContentId(builder, EventContentId);
-    EventContentDiceRaceEffectExcel.AddVoiceId(builder, VoiceIdOffset);
+    EventContentDiceRaceEffectExcel.AddVoiceId(builder, voiceIdOffset);
     EventContentDiceRaceEffectExcel.AddAniClip(builder, AniClipOffset);
     EventContentDiceRaceEffectExcel.AddEventContentDiceRaceResultType(builder, EventContentDiceRaceResultType);
     EventContentDiceRaceEffectExcel.AddIsDiceResult(builder, isDiceResult);
@@ -90,10 +90,10 @@ public struct EventContentDiceRaceEffectExcel : IFlatbufferObject
 		var _EventContentDiceRaceResultType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentDiceRaceResultType, key) : _o.EventContentDiceRaceResultType;
 		var _isDiceResult = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsDiceResult, key) : _o.IsDiceResult;
     var _AniClip = _o.AniClip == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.AniClip, key) : _o.AniClip));
-    var _VoiceId = default(VectorOffset);
+    var _voiceId = default(VectorOffset);
     if (_o.VoiceId != null) {
-      var __VoiceId = _o.VoiceId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _VoiceId = CreateVoiceIdVector(builder, __VoiceId);
+      var __voiceId = _o.VoiceId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _voiceId = CreateVoiceIdVector(builder, __voiceId);
     }
     return CreateEventContentDiceRaceEffectExcel(
       builder,
@@ -101,7 +101,7 @@ public struct EventContentDiceRaceEffectExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _EventContentDiceRaceResultType : _o.EventContentDiceRaceResultType,
       TableEncryptionService.UseEncryption ? _isDiceResult : _o.IsDiceResult,
       _AniClip,
-      _VoiceId);
+      _voiceId);
   }
 }
 

@@ -56,15 +56,15 @@ public struct MinigameTBGDiceExcel : IFlatbufferObject
       int DiceGroup = 0,
       int DiceResult = 0,
       int Prob = 0,
-      VectorOffset probModifyConditionOffset = default(VectorOffset),
+      VectorOffset ProbModifyConditionOffset = default(VectorOffset),
       VectorOffset ProbModifyValueOffset = default(VectorOffset),
-      VectorOffset probModifyLimitOffset = default(VectorOffset)) {
+      VectorOffset ProbModifyLimitOffset = default(VectorOffset)) {
     builder.StartTable(8);
     MinigameTBGDiceExcel.AddUniqueId(builder, UniqueId);
     MinigameTBGDiceExcel.AddEventContentId(builder, EventContentId);
-    MinigameTBGDiceExcel.AddProbModifyLimit(builder, probModifyLimitOffset);
+    MinigameTBGDiceExcel.AddProbModifyLimit(builder, ProbModifyLimitOffset);
     MinigameTBGDiceExcel.AddProbModifyValue(builder, ProbModifyValueOffset);
-    MinigameTBGDiceExcel.AddProbModifyCondition(builder, probModifyConditionOffset);
+    MinigameTBGDiceExcel.AddProbModifyCondition(builder, ProbModifyConditionOffset);
     MinigameTBGDiceExcel.AddProb(builder, Prob);
     MinigameTBGDiceExcel.AddDiceResult(builder, DiceResult);
     MinigameTBGDiceExcel.AddDiceGroup(builder, DiceGroup);
@@ -126,20 +126,20 @@ public struct MinigameTBGDiceExcel : IFlatbufferObject
 		var _DiceGroup = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DiceGroup, key) : _o.DiceGroup;
 		var _DiceResult = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DiceResult, key) : _o.DiceResult;
 		var _Prob = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Prob, key) : _o.Prob;
-    var _probModifyCondition = default(VectorOffset);
+    var _ProbModifyCondition = default(VectorOffset);
     if (_o.ProbModifyCondition != null) {
-      var __probModifyCondition = _o.ProbModifyCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _probModifyCondition = CreateProbModifyConditionVector(builder, __probModifyCondition);
+      var __ProbModifyCondition = _o.ProbModifyCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ProbModifyCondition = CreateProbModifyConditionVector(builder, __ProbModifyCondition);
     }
     var _ProbModifyValue = default(VectorOffset);
     if (_o.ProbModifyValue != null) {
       var __ProbModifyValue = _o.ProbModifyValue.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ProbModifyValue = CreateProbModifyValueVector(builder, __ProbModifyValue);
     }
-    var _probModifyLimit = default(VectorOffset);
+    var _ProbModifyLimit = default(VectorOffset);
     if (_o.ProbModifyLimit != null) {
-      var __probModifyLimit = _o.ProbModifyLimit.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _probModifyLimit = CreateProbModifyLimitVector(builder, __probModifyLimit);
+      var __ProbModifyLimit = _o.ProbModifyLimit.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ProbModifyLimit = CreateProbModifyLimitVector(builder, __ProbModifyLimit);
     }
     return CreateMinigameTBGDiceExcel(
       builder,
@@ -148,9 +148,9 @@ public struct MinigameTBGDiceExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _DiceGroup : _o.DiceGroup,
       TableEncryptionService.UseEncryption ? _DiceResult : _o.DiceResult,
       TableEncryptionService.UseEncryption ? _Prob : _o.Prob,
-      _probModifyCondition,
+      _ProbModifyCondition,
       _ProbModifyValue,
-      _probModifyLimit);
+      _ProbModifyLimit);
   }
 }
 

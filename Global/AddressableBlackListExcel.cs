@@ -29,10 +29,10 @@ public struct AddressableBlackListExcel : IFlatbufferObject
   public static Offset<Global.AddressableBlackListExcel> CreateAddressableBlackListExcel(FlatBufferBuilder builder,
       long Id = 0,
       VectorOffset folderPathOffset = default(VectorOffset),
-      VectorOffset resourcePathOffset = default(VectorOffset)) {
+      VectorOffset ResourcePathOffset = default(VectorOffset)) {
     builder.StartTable(3);
     AddressableBlackListExcel.AddId(builder, Id);
-    AddressableBlackListExcel.AddResourcePath(builder, resourcePathOffset);
+    AddressableBlackListExcel.AddResourcePath(builder, ResourcePathOffset);
     AddressableBlackListExcel.AddFolderPath(builder, folderPathOffset);
     return AddressableBlackListExcel.EndAddressableBlackListExcel(builder);
   }
@@ -78,17 +78,17 @@ public struct AddressableBlackListExcel : IFlatbufferObject
       for (var _j = 0; _j < __folderPath.Length; ++_j) { __folderPath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FolderPath[_j], key) : _o.FolderPath[_j])); }
       _folderPath = CreateFolderPathVector(builder, __folderPath);
     }
-    var _resourcePath = default(VectorOffset);
+    var _ResourcePath = default(VectorOffset);
     if (_o.ResourcePath != null) {
-      var __resourcePath = new StringOffset[_o.ResourcePath.Count];
-      for (var _j = 0; _j < __resourcePath.Length; ++_j) { __resourcePath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ResourcePath[_j], key) : _o.ResourcePath[_j])); }
-      _resourcePath = CreateResourcePathVector(builder, __resourcePath);
+      var __ResourcePath = new StringOffset[_o.ResourcePath.Count];
+      for (var _j = 0; _j < __ResourcePath.Length; ++_j) { __ResourcePath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ResourcePath[_j], key) : _o.ResourcePath[_j])); }
+      _ResourcePath = CreateResourcePathVector(builder, __ResourcePath);
     }
     return CreateAddressableBlackListExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       _folderPath,
-      _resourcePath);
+      _ResourcePath);
   }
 }
 

@@ -58,11 +58,11 @@ public struct FieldMasteryLevelExcel : IFlatbufferObject
       int Level = 0,
       VectorOffset idOffset = default(VectorOffset),
       VectorOffset ExpOffset = default(VectorOffset),
-      VectorOffset totalExpOffset = default(VectorOffset),
+      VectorOffset TotalExpOffset = default(VectorOffset),
       VectorOffset RewardIdOffset = default(VectorOffset)) {
     builder.StartTable(5);
     FieldMasteryLevelExcel.AddRewardId(builder, RewardIdOffset);
-    FieldMasteryLevelExcel.AddTotalExp(builder, totalExpOffset);
+    FieldMasteryLevelExcel.AddTotalExp(builder, TotalExpOffset);
     FieldMasteryLevelExcel.AddExp(builder, ExpOffset);
     FieldMasteryLevelExcel.AddId(builder, idOffset);
     FieldMasteryLevelExcel.AddLevel(builder, Level);
@@ -130,10 +130,10 @@ public struct FieldMasteryLevelExcel : IFlatbufferObject
       var __Exp = _o.Exp.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _Exp = CreateExpVector(builder, __Exp);
     }
-    var _totalExp = default(VectorOffset);
+    var _TotalExp = default(VectorOffset);
     if (_o.TotalExp != null) {
-      var __totalExp = _o.TotalExp.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _totalExp = CreateTotalExpVector(builder, __totalExp);
+      var __TotalExp = _o.TotalExp.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _TotalExp = CreateTotalExpVector(builder, __TotalExp);
     }
     var _RewardId = default(VectorOffset);
     if (_o.RewardId != null) {
@@ -145,7 +145,7 @@ public struct FieldMasteryLevelExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _Level : _o.Level,
       _id,
       _Exp,
-      _totalExp,
+      _TotalExp,
       _RewardId);
   }
 }

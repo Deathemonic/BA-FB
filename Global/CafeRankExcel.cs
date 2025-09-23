@@ -54,7 +54,7 @@ public struct CafeRankExcel : IFlatbufferObject
       int CharacterVisitMin = 0,
       int CharacterVisitMax = 0,
       int CafeVisitWeightBase = 0,
-      VectorOffset cafeVisitWeightTagBonusStepOffset = default(VectorOffset),
+      VectorOffset CafeVisitWeightTagBonusStepOffset = default(VectorOffset),
       VectorOffset CafeVisitWeightTagBonusOffset = default(VectorOffset)) {
     builder.StartTable(10);
     CafeRankExcel.AddTagCountMax(builder, TagCountMax);
@@ -63,7 +63,7 @@ public struct CafeRankExcel : IFlatbufferObject
     CafeRankExcel.AddRank(builder, Rank);
     CafeRankExcel.AddCafeId(builder, CafeId);
     CafeRankExcel.AddCafeVisitWeightTagBonus(builder, CafeVisitWeightTagBonusOffset);
-    CafeRankExcel.AddCafeVisitWeightTagBonusStep(builder, cafeVisitWeightTagBonusStepOffset);
+    CafeRankExcel.AddCafeVisitWeightTagBonusStep(builder, CafeVisitWeightTagBonusStepOffset);
     CafeRankExcel.AddCafeVisitWeightBase(builder, CafeVisitWeightBase);
     CafeRankExcel.AddCharacterVisitMax(builder, CharacterVisitMax);
     CafeRankExcel.AddCharacterVisitMin(builder, CharacterVisitMin);
@@ -126,10 +126,10 @@ public struct CafeRankExcel : IFlatbufferObject
 		var _CharacterVisitMin = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CharacterVisitMin, key) : _o.CharacterVisitMin;
 		var _CharacterVisitMax = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CharacterVisitMax, key) : _o.CharacterVisitMax;
 		var _CafeVisitWeightBase = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CafeVisitWeightBase, key) : _o.CafeVisitWeightBase;
-    var _cafeVisitWeightTagBonusStep = default(VectorOffset);
+    var _CafeVisitWeightTagBonusStep = default(VectorOffset);
     if (_o.CafeVisitWeightTagBonusStep != null) {
-      var __cafeVisitWeightTagBonusStep = _o.CafeVisitWeightTagBonusStep.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _cafeVisitWeightTagBonusStep = CreateCafeVisitWeightTagBonusStepVector(builder, __cafeVisitWeightTagBonusStep);
+      var __CafeVisitWeightTagBonusStep = _o.CafeVisitWeightTagBonusStep.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _CafeVisitWeightTagBonusStep = CreateCafeVisitWeightTagBonusStepVector(builder, __CafeVisitWeightTagBonusStep);
     }
     var _CafeVisitWeightTagBonus = default(VectorOffset);
     if (_o.CafeVisitWeightTagBonus != null) {
@@ -146,7 +146,7 @@ public struct CafeRankExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _CharacterVisitMin : _o.CharacterVisitMin,
       TableEncryptionService.UseEncryption ? _CharacterVisitMax : _o.CharacterVisitMax,
       TableEncryptionService.UseEncryption ? _CafeVisitWeightBase : _o.CafeVisitWeightBase,
-      _cafeVisitWeightTagBonusStep,
+      _CafeVisitWeightTagBonusStep,
       _CafeVisitWeightTagBonus);
   }
 }

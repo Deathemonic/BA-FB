@@ -96,6 +96,7 @@ public enum EquipmentOptionType : int
   AmmoCost_Base = 86,
   RegenCost_Base = 87,
   RegenCost_Coefficient = 88,
+  MaxCostIncrease_Base = 89,
 };
 
 

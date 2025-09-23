@@ -59,7 +59,7 @@ public struct MiniGameShootingStageExcel : IFlatbufferObject
 
   public static Offset<Global.MiniGameShootingStageExcel> CreateMiniGameShootingStageExcel(FlatBufferBuilder builder,
       long UniqueId = 0,
-      VectorOffset bgmIdOffset = default(VectorOffset),
+      VectorOffset BgmIdOffset = default(VectorOffset),
       long CostGoodsId = 0,
       Global.Difficulty Difficulty = Global.Difficulty.Normal,
       StringOffset DesignLevelOffset = default(StringOffset),
@@ -80,7 +80,7 @@ public struct MiniGameShootingStageExcel : IFlatbufferObject
     MiniGameShootingStageExcel.AddArtLevel(builder, ArtLevelOffset);
     MiniGameShootingStageExcel.AddDesignLevel(builder, DesignLevelOffset);
     MiniGameShootingStageExcel.AddDifficulty(builder, Difficulty);
-    MiniGameShootingStageExcel.AddBgmId(builder, bgmIdOffset);
+    MiniGameShootingStageExcel.AddBgmId(builder, BgmIdOffset);
     return MiniGameShootingStageExcel.EndMiniGameShootingStageExcel(builder);
   }
 
@@ -129,10 +129,10 @@ public struct MiniGameShootingStageExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.MiniGameShootingStageExcel>);
 		byte[] key = TableEncryptionService.CreateKey("MiniGameShootingStage");
 		var _UniqueId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UniqueId, key) : _o.UniqueId;
-    var _bgmId = default(VectorOffset);
+    var _BgmId = default(VectorOffset);
     if (_o.BgmId != null) {
-      var __bgmId = _o.BgmId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _bgmId = CreateBgmIdVector(builder, __bgmId);
+      var __BgmId = _o.BgmId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BgmId = CreateBgmIdVector(builder, __BgmId);
     }
 		var _CostGoodsId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CostGoodsId, key) : _o.CostGoodsId;
 		var _Difficulty = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Difficulty, key) : _o.Difficulty;
@@ -146,7 +146,7 @@ public struct MiniGameShootingStageExcel : IFlatbufferObject
     return CreateMiniGameShootingStageExcel(
       builder,
       TableEncryptionService.UseEncryption ? _UniqueId : _o.UniqueId,
-      _bgmId,
+      _BgmId,
       TableEncryptionService.UseEncryption ? _CostGoodsId : _o.CostGoodsId,
       TableEncryptionService.UseEncryption ? _Difficulty : _o.Difficulty,
       _DesignLevel,

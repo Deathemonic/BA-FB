@@ -81,33 +81,66 @@ public struct MiniGameMissionExcel : IFlatbufferObject
   public ArraySegment<byte>? GetRewardIconBytes() { return __p.__vector_as_arraysegment(44); }
 #endif
   public byte[] GetRewardIconArray() { return __p.__vector_as_array<byte>(44); }
-  public Global.ParcelType MissionRewardParcelType(int j) { int o = __p.__offset(46); return o != 0 ? (Global.ParcelType)__p.bb.GetInt(__p.__vector(o) + j * 4) : (Global.ParcelType)0; }
-  public int MissionRewardParcelTypeLength { get { int o = __p.__offset(46); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public long CompleteConditionMissionId(int j) { int o = __p.__offset(46); return o != 0 ? __p.bb.GetLong(__p.__vector(o) + j * 8) : (long)0; }
+  public int CompleteConditionMissionIdLength { get { int o = __p.__offset(46); return o != 0 ? __p.__vector_len(o) : 0; } }
 #if ENABLE_SPAN_T
-  public Span<Global.ParcelType> GetMissionRewardParcelTypeBytes() { return __p.__vector_as_span<Global.ParcelType>(46, 4); }
+  public Span<long> GetCompleteConditionMissionIdBytes() { return __p.__vector_as_span<long>(46, 8); }
 #else
-  public ArraySegment<byte>? GetMissionRewardParcelTypeBytes() { return __p.__vector_as_arraysegment(46); }
+  public ArraySegment<byte>? GetCompleteConditionMissionIdBytes() { return __p.__vector_as_arraysegment(46); }
 #endif
-  public Global.ParcelType[] GetMissionRewardParcelTypeArray() { int o = __p.__offset(46); if (o == 0) return null; int p = __p.__vector(o); int l = __p.__vector_len(o); Global.ParcelType[] a = new Global.ParcelType[l]; for (int i = 0; i < l; i++) { a[i] = (Global.ParcelType)__p.bb.GetInt(p + i * 4); } return a; }
-  public long MissionRewardParcelId(int j) { int o = __p.__offset(48); return o != 0 ? __p.bb.GetLong(__p.__vector(o) + j * 8) : (long)0; }
-  public int MissionRewardParcelIdLength { get { int o = __p.__offset(48); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public long[] GetCompleteConditionMissionIdArray() { return __p.__vector_as_array<long>(46); }
+  public long CompleteConditionMissionCount { get { int o = __p.__offset(48); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public Global.ParcelType MissionRewardParcelType(int j) { int o = __p.__offset(50); return o != 0 ? (Global.ParcelType)__p.bb.GetInt(__p.__vector(o) + j * 4) : (Global.ParcelType)0; }
+  public int MissionRewardParcelTypeLength { get { int o = __p.__offset(50); return o != 0 ? __p.__vector_len(o) : 0; } }
 #if ENABLE_SPAN_T
-  public Span<long> GetMissionRewardParcelIdBytes() { return __p.__vector_as_span<long>(48, 8); }
+  public Span<Global.ParcelType> GetMissionRewardParcelTypeBytes() { return __p.__vector_as_span<Global.ParcelType>(50, 4); }
 #else
-  public ArraySegment<byte>? GetMissionRewardParcelIdBytes() { return __p.__vector_as_arraysegment(48); }
+  public ArraySegment<byte>? GetMissionRewardParcelTypeBytes() { return __p.__vector_as_arraysegment(50); }
 #endif
-  public long[] GetMissionRewardParcelIdArray() { return __p.__vector_as_array<long>(48); }
-  public int MissionRewardAmount(int j) { int o = __p.__offset(50); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
-  public int MissionRewardAmountLength { get { int o = __p.__offset(50); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public Global.ParcelType[] GetMissionRewardParcelTypeArray() { int o = __p.__offset(50); if (o == 0) return null; int p = __p.__vector(o); int l = __p.__vector_len(o); Global.ParcelType[] a = new Global.ParcelType[l]; for (int i = 0; i < l; i++) { a[i] = (Global.ParcelType)__p.bb.GetInt(p + i * 4); } return a; }
+  public long MissionRewardParcelId(int j) { int o = __p.__offset(52); return o != 0 ? __p.bb.GetLong(__p.__vector(o) + j * 8) : (long)0; }
+  public int MissionRewardParcelIdLength { get { int o = __p.__offset(52); return o != 0 ? __p.__vector_len(o) : 0; } }
 #if ENABLE_SPAN_T
-  public Span<int> GetMissionRewardAmountBytes() { return __p.__vector_as_span<int>(50, 4); }
+  public Span<long> GetMissionRewardParcelIdBytes() { return __p.__vector_as_span<long>(52, 8); }
 #else
-  public ArraySegment<byte>? GetMissionRewardAmountBytes() { return __p.__vector_as_arraysegment(50); }
+  public ArraySegment<byte>? GetMissionRewardParcelIdBytes() { return __p.__vector_as_arraysegment(52); }
 #endif
-  public int[] GetMissionRewardAmountArray() { return __p.__vector_as_array<int>(50); }
+  public long[] GetMissionRewardParcelIdArray() { return __p.__vector_as_array<long>(52); }
+  public int MissionRewardAmount(int j) { int o = __p.__offset(54); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int MissionRewardAmountLength { get { int o = __p.__offset(54); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetMissionRewardAmountBytes() { return __p.__vector_as_span<int>(54, 4); }
+#else
+  public ArraySegment<byte>? GetMissionRewardAmountBytes() { return __p.__vector_as_arraysegment(54); }
+#endif
+  public int[] GetMissionRewardAmountArray() { return __p.__vector_as_array<int>(54); }
+  public Global.ParcelType ConditionRewardParcelType(int j) { int o = __p.__offset(56); return o != 0 ? (Global.ParcelType)__p.bb.GetInt(__p.__vector(o) + j * 4) : (Global.ParcelType)0; }
+  public int ConditionRewardParcelTypeLength { get { int o = __p.__offset(56); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<Global.ParcelType> GetConditionRewardParcelTypeBytes() { return __p.__vector_as_span<Global.ParcelType>(56, 4); }
+#else
+  public ArraySegment<byte>? GetConditionRewardParcelTypeBytes() { return __p.__vector_as_arraysegment(56); }
+#endif
+  public Global.ParcelType[] GetConditionRewardParcelTypeArray() { int o = __p.__offset(56); if (o == 0) return null; int p = __p.__vector(o); int l = __p.__vector_len(o); Global.ParcelType[] a = new Global.ParcelType[l]; for (int i = 0; i < l; i++) { a[i] = (Global.ParcelType)__p.bb.GetInt(p + i * 4); } return a; }
+  public long ConditionRewardParcelId(int j) { int o = __p.__offset(58); return o != 0 ? __p.bb.GetLong(__p.__vector(o) + j * 8) : (long)0; }
+  public int ConditionRewardParcelIdLength { get { int o = __p.__offset(58); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<long> GetConditionRewardParcelIdBytes() { return __p.__vector_as_span<long>(58, 8); }
+#else
+  public ArraySegment<byte>? GetConditionRewardParcelIdBytes() { return __p.__vector_as_arraysegment(58); }
+#endif
+  public long[] GetConditionRewardParcelIdArray() { return __p.__vector_as_array<long>(58); }
+  public int ConditionRewardAmount(int j) { int o = __p.__offset(60); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int ConditionRewardAmountLength { get { int o = __p.__offset(60); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetConditionRewardAmountBytes() { return __p.__vector_as_span<int>(60, 4); }
+#else
+  public ArraySegment<byte>? GetConditionRewardAmountBytes() { return __p.__vector_as_arraysegment(60); }
+#endif
+  public int[] GetConditionRewardAmountArray() { return __p.__vector_as_array<int>(60); }
 
   public static Offset<Global.MiniGameMissionExcel> CreateMiniGameMissionExcel(FlatBufferBuilder builder,
-      long id = 0,
+      long Id = 0,
       long EventContentId = 0,
       long GroupId = 0,
       StringOffset GroupNameOffset = default(StringOffset),
@@ -118,36 +151,46 @@ public struct MiniGameMissionExcel : IFlatbufferObject
       StringOffset ToastImagePathOffset = default(StringOffset),
       bool ViewFlag = false,
       long DisplayOrder = 0,
-      VectorOffset preMissionIdOffset = default(VectorOffset),
+      VectorOffset PreMissionIdOffset = default(VectorOffset),
       Global.AccountState AccountType = Global.AccountState.WaitingSignIn,
       long AccountLevel = 0,
-      VectorOffset shortcutUIOffset = default(VectorOffset),
+      VectorOffset ShortcutUIOffset = default(VectorOffset),
       Global.MissionCompleteConditionType CompleteConditionType = Global.MissionCompleteConditionType.None,
       bool IsCompleteExtensionTime = false,
       long CompleteConditionCount = 0,
-      VectorOffset completeConditionParameterOffset = default(VectorOffset),
+      VectorOffset CompleteConditionParameterOffset = default(VectorOffset),
       VectorOffset CompleteConditionParameterTagOffset = default(VectorOffset),
       StringOffset RewardIconOffset = default(StringOffset),
-      VectorOffset missionRewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset CompleteConditionMissionIdOffset = default(VectorOffset),
+      long CompleteConditionMissionCount = 0,
+      VectorOffset MissionRewardParcelTypeOffset = default(VectorOffset),
       VectorOffset MissionRewardParcelIdOffset = default(VectorOffset),
-      VectorOffset MissionRewardAmountOffset = default(VectorOffset)) {
-    builder.StartTable(24);
+      VectorOffset MissionRewardAmountOffset = default(VectorOffset),
+      VectorOffset ConditionRewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset ConditionRewardParcelIdOffset = default(VectorOffset),
+      VectorOffset ConditionRewardAmountOffset = default(VectorOffset)) {
+    builder.StartTable(29);
+    MiniGameMissionExcel.AddCompleteConditionMissionCount(builder, CompleteConditionMissionCount);
     MiniGameMissionExcel.AddCompleteConditionCount(builder, CompleteConditionCount);
     MiniGameMissionExcel.AddAccountLevel(builder, AccountLevel);
     MiniGameMissionExcel.AddDisplayOrder(builder, DisplayOrder);
     MiniGameMissionExcel.AddGroupId(builder, GroupId);
     MiniGameMissionExcel.AddEventContentId(builder, EventContentId);
-    MiniGameMissionExcel.AddId(builder, id);
+    MiniGameMissionExcel.AddId(builder, Id);
+    MiniGameMissionExcel.AddConditionRewardAmount(builder, ConditionRewardAmountOffset);
+    MiniGameMissionExcel.AddConditionRewardParcelId(builder, ConditionRewardParcelIdOffset);
+    MiniGameMissionExcel.AddConditionRewardParcelType(builder, ConditionRewardParcelTypeOffset);
     MiniGameMissionExcel.AddMissionRewardAmount(builder, MissionRewardAmountOffset);
     MiniGameMissionExcel.AddMissionRewardParcelId(builder, MissionRewardParcelIdOffset);
-    MiniGameMissionExcel.AddMissionRewardParcelType(builder, missionRewardParcelTypeOffset);
+    MiniGameMissionExcel.AddMissionRewardParcelType(builder, MissionRewardParcelTypeOffset);
+    MiniGameMissionExcel.AddCompleteConditionMissionId(builder, CompleteConditionMissionIdOffset);
     MiniGameMissionExcel.AddRewardIcon(builder, RewardIconOffset);
     MiniGameMissionExcel.AddCompleteConditionParameterTag(builder, CompleteConditionParameterTagOffset);
-    MiniGameMissionExcel.AddCompleteConditionParameter(builder, completeConditionParameterOffset);
+    MiniGameMissionExcel.AddCompleteConditionParameter(builder, CompleteConditionParameterOffset);
     MiniGameMissionExcel.AddCompleteConditionType(builder, CompleteConditionType);
-    MiniGameMissionExcel.AddShortcutUI(builder, shortcutUIOffset);
+    MiniGameMissionExcel.AddShortcutUI(builder, ShortcutUIOffset);
     MiniGameMissionExcel.AddAccountType(builder, AccountType);
-    MiniGameMissionExcel.AddPreMissionId(builder, preMissionIdOffset);
+    MiniGameMissionExcel.AddPreMissionId(builder, PreMissionIdOffset);
     MiniGameMissionExcel.AddToastImagePath(builder, ToastImagePathOffset);
     MiniGameMissionExcel.AddToastDisplayType(builder, ToastDisplayType);
     MiniGameMissionExcel.AddResetType(builder, ResetType);
@@ -159,7 +202,7 @@ public struct MiniGameMissionExcel : IFlatbufferObject
     return MiniGameMissionExcel.EndMiniGameMissionExcel(builder);
   }
 
-  public static void StartMiniGameMissionExcel(FlatBufferBuilder builder) { builder.StartTable(24); }
+  public static void StartMiniGameMissionExcel(FlatBufferBuilder builder) { builder.StartTable(29); }
   public static void AddId(FlatBufferBuilder builder, long id) { builder.AddLong(0, id, 0); }
   public static void AddEventContentId(FlatBufferBuilder builder, long eventContentId) { builder.AddLong(1, eventContentId, 0); }
   public static void AddGroupId(FlatBufferBuilder builder, long groupId) { builder.AddLong(2, groupId, 0); }
@@ -201,24 +244,49 @@ public struct MiniGameMissionExcel : IFlatbufferObject
   public static VectorOffset CreateCompleteConditionParameterTagVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<Global.Tag>(dataPtr, sizeInBytes); return builder.EndVector(); }
   public static void StartCompleteConditionParameterTagVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static void AddRewardIcon(FlatBufferBuilder builder, StringOffset rewardIconOffset) { builder.AddOffset(20, rewardIconOffset.Value, 0); }
-  public static void AddMissionRewardParcelType(FlatBufferBuilder builder, VectorOffset missionRewardParcelTypeOffset) { builder.AddOffset(21, missionRewardParcelTypeOffset.Value, 0); }
+  public static void AddCompleteConditionMissionId(FlatBufferBuilder builder, VectorOffset completeConditionMissionIdOffset) { builder.AddOffset(21, completeConditionMissionIdOffset.Value, 0); }
+  public static VectorOffset CreateCompleteConditionMissionIdVector(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); for (int i = data.Length - 1; i >= 0; i--) builder.AddLong(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateCompleteConditionMissionIdVectorBlock(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateCompleteConditionMissionIdVectorBlock(FlatBufferBuilder builder, ArraySegment<long> data) { builder.StartVector(8, data.Count, 8); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateCompleteConditionMissionIdVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<long>(dataPtr, sizeInBytes); return builder.EndVector(); }
+  public static void StartCompleteConditionMissionIdVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(8, numElems, 8); }
+  public static void AddCompleteConditionMissionCount(FlatBufferBuilder builder, long completeConditionMissionCount) { builder.AddLong(22, completeConditionMissionCount, 0); }
+  public static void AddMissionRewardParcelType(FlatBufferBuilder builder, VectorOffset missionRewardParcelTypeOffset) { builder.AddOffset(23, missionRewardParcelTypeOffset.Value, 0); }
   public static VectorOffset CreateMissionRewardParcelTypeVector(FlatBufferBuilder builder, Global.ParcelType[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt((int)data[i]); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardParcelTypeVectorBlock(FlatBufferBuilder builder, Global.ParcelType[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardParcelTypeVectorBlock(FlatBufferBuilder builder, ArraySegment<Global.ParcelType> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardParcelTypeVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<Global.ParcelType>(dataPtr, sizeInBytes); return builder.EndVector(); }
   public static void StartMissionRewardParcelTypeVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
-  public static void AddMissionRewardParcelId(FlatBufferBuilder builder, VectorOffset missionRewardParcelIdOffset) { builder.AddOffset(22, missionRewardParcelIdOffset.Value, 0); }
+  public static void AddMissionRewardParcelId(FlatBufferBuilder builder, VectorOffset missionRewardParcelIdOffset) { builder.AddOffset(24, missionRewardParcelIdOffset.Value, 0); }
   public static VectorOffset CreateMissionRewardParcelIdVector(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); for (int i = data.Length - 1; i >= 0; i--) builder.AddLong(data[i]); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardParcelIdVectorBlock(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardParcelIdVectorBlock(FlatBufferBuilder builder, ArraySegment<long> data) { builder.StartVector(8, data.Count, 8); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardParcelIdVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<long>(dataPtr, sizeInBytes); return builder.EndVector(); }
   public static void StartMissionRewardParcelIdVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(8, numElems, 8); }
-  public static void AddMissionRewardAmount(FlatBufferBuilder builder, VectorOffset missionRewardAmountOffset) { builder.AddOffset(23, missionRewardAmountOffset.Value, 0); }
+  public static void AddMissionRewardAmount(FlatBufferBuilder builder, VectorOffset missionRewardAmountOffset) { builder.AddOffset(25, missionRewardAmountOffset.Value, 0); }
   public static VectorOffset CreateMissionRewardAmountVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardAmountVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardAmountVectorBlock(FlatBufferBuilder builder, ArraySegment<int> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateMissionRewardAmountVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<int>(dataPtr, sizeInBytes); return builder.EndVector(); }
   public static void StartMissionRewardAmountVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddConditionRewardParcelType(FlatBufferBuilder builder, VectorOffset conditionRewardParcelTypeOffset) { builder.AddOffset(26, conditionRewardParcelTypeOffset.Value, 0); }
+  public static VectorOffset CreateConditionRewardParcelTypeVector(FlatBufferBuilder builder, Global.ParcelType[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt((int)data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardParcelTypeVectorBlock(FlatBufferBuilder builder, Global.ParcelType[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardParcelTypeVectorBlock(FlatBufferBuilder builder, ArraySegment<Global.ParcelType> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardParcelTypeVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<Global.ParcelType>(dataPtr, sizeInBytes); return builder.EndVector(); }
+  public static void StartConditionRewardParcelTypeVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddConditionRewardParcelId(FlatBufferBuilder builder, VectorOffset conditionRewardParcelIdOffset) { builder.AddOffset(27, conditionRewardParcelIdOffset.Value, 0); }
+  public static VectorOffset CreateConditionRewardParcelIdVector(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); for (int i = data.Length - 1; i >= 0; i--) builder.AddLong(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardParcelIdVectorBlock(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardParcelIdVectorBlock(FlatBufferBuilder builder, ArraySegment<long> data) { builder.StartVector(8, data.Count, 8); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardParcelIdVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<long>(dataPtr, sizeInBytes); return builder.EndVector(); }
+  public static void StartConditionRewardParcelIdVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(8, numElems, 8); }
+  public static void AddConditionRewardAmount(FlatBufferBuilder builder, VectorOffset conditionRewardAmountOffset) { builder.AddOffset(28, conditionRewardAmountOffset.Value, 0); }
+  public static VectorOffset CreateConditionRewardAmountVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardAmountVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardAmountVectorBlock(FlatBufferBuilder builder, ArraySegment<int> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConditionRewardAmountVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<int>(dataPtr, sizeInBytes); return builder.EndVector(); }
+  public static void StartConditionRewardAmountVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static Offset<Global.MiniGameMissionExcel> EndMiniGameMissionExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Global.MiniGameMissionExcel>(o);
@@ -255,17 +323,26 @@ public struct MiniGameMissionExcel : IFlatbufferObject
     _o.CompleteConditionParameterTag = new List<Global.Tag>();
     for (var _j = 0; _j < this.CompleteConditionParameterTagLength; ++_j) {_o.CompleteConditionParameterTag.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CompleteConditionParameterTag(_j), key) : this.CompleteConditionParameterTag(_j));}
     _o.RewardIcon = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.RewardIcon, key) : this.RewardIcon;
+    _o.CompleteConditionMissionId = new List<long>();
+    for (var _j = 0; _j < this.CompleteConditionMissionIdLength; ++_j) {_o.CompleteConditionMissionId.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CompleteConditionMissionId(_j), key) : this.CompleteConditionMissionId(_j));}
+    _o.CompleteConditionMissionCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CompleteConditionMissionCount, key) : this.CompleteConditionMissionCount;
     _o.MissionRewardParcelType = new List<Global.ParcelType>();
     for (var _j = 0; _j < this.MissionRewardParcelTypeLength; ++_j) {_o.MissionRewardParcelType.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.MissionRewardParcelType(_j), key) : this.MissionRewardParcelType(_j));}
     _o.MissionRewardParcelId = new List<long>();
     for (var _j = 0; _j < this.MissionRewardParcelIdLength; ++_j) {_o.MissionRewardParcelId.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.MissionRewardParcelId(_j), key) : this.MissionRewardParcelId(_j));}
     _o.MissionRewardAmount = new List<int>();
     for (var _j = 0; _j < this.MissionRewardAmountLength; ++_j) {_o.MissionRewardAmount.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.MissionRewardAmount(_j), key) : this.MissionRewardAmount(_j));}
+    _o.ConditionRewardParcelType = new List<Global.ParcelType>();
+    for (var _j = 0; _j < this.ConditionRewardParcelTypeLength; ++_j) {_o.ConditionRewardParcelType.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConditionRewardParcelType(_j), key) : this.ConditionRewardParcelType(_j));}
+    _o.ConditionRewardParcelId = new List<long>();
+    for (var _j = 0; _j < this.ConditionRewardParcelIdLength; ++_j) {_o.ConditionRewardParcelId.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConditionRewardParcelId(_j), key) : this.ConditionRewardParcelId(_j));}
+    _o.ConditionRewardAmount = new List<int>();
+    for (var _j = 0; _j < this.ConditionRewardAmountLength; ++_j) {_o.ConditionRewardAmount.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConditionRewardAmount(_j), key) : this.ConditionRewardAmount(_j));}
   }
   public static Offset<Global.MiniGameMissionExcel> Pack(FlatBufferBuilder builder, MiniGameMissionExcelT _o) {
     if (_o == null) return default(Offset<Global.MiniGameMissionExcel>);
 		byte[] key = TableEncryptionService.CreateKey("MiniGameMission");
-		var _id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
+		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
 		var _EventContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentId, key) : _o.EventContentId;
 		var _GroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroupId, key) : _o.GroupId;
     var _GroupName = _o.GroupName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.GroupName, key) : _o.GroupName));
@@ -276,26 +353,26 @@ public struct MiniGameMissionExcel : IFlatbufferObject
     var _ToastImagePath = _o.ToastImagePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ToastImagePath, key) : _o.ToastImagePath));
 		var _ViewFlag = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ViewFlag, key) : _o.ViewFlag;
 		var _DisplayOrder = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayOrder, key) : _o.DisplayOrder;
-    var _preMissionId = default(VectorOffset);
+    var _PreMissionId = default(VectorOffset);
     if (_o.PreMissionId != null) {
-      var __preMissionId = _o.PreMissionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _preMissionId = CreatePreMissionIdVector(builder, __preMissionId);
+      var __PreMissionId = _o.PreMissionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _PreMissionId = CreatePreMissionIdVector(builder, __PreMissionId);
     }
 		var _AccountType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AccountType, key) : _o.AccountType;
 		var _AccountLevel = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AccountLevel, key) : _o.AccountLevel;
-    var _shortcutUI = default(VectorOffset);
+    var _ShortcutUI = default(VectorOffset);
     if (_o.ShortcutUI != null) {
-      var __shortcutUI = new StringOffset[_o.ShortcutUI.Count];
-      for (var _j = 0; _j < __shortcutUI.Length; ++_j) { __shortcutUI[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ShortcutUI[_j], key) : _o.ShortcutUI[_j])); }
-      _shortcutUI = CreateShortcutUIVector(builder, __shortcutUI);
+      var __ShortcutUI = new StringOffset[_o.ShortcutUI.Count];
+      for (var _j = 0; _j < __ShortcutUI.Length; ++_j) { __ShortcutUI[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ShortcutUI[_j], key) : _o.ShortcutUI[_j])); }
+      _ShortcutUI = CreateShortcutUIVector(builder, __ShortcutUI);
     }
 		var _CompleteConditionType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CompleteConditionType, key) : _o.CompleteConditionType;
 		var _IsCompleteExtensionTime = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsCompleteExtensionTime, key) : _o.IsCompleteExtensionTime;
 		var _CompleteConditionCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CompleteConditionCount, key) : _o.CompleteConditionCount;
-    var _completeConditionParameter = default(VectorOffset);
+    var _CompleteConditionParameter = default(VectorOffset);
     if (_o.CompleteConditionParameter != null) {
-      var __completeConditionParameter = _o.CompleteConditionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _completeConditionParameter = CreateCompleteConditionParameterVector(builder, __completeConditionParameter);
+      var __CompleteConditionParameter = _o.CompleteConditionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _CompleteConditionParameter = CreateCompleteConditionParameterVector(builder, __CompleteConditionParameter);
     }
     var _CompleteConditionParameterTag = default(VectorOffset);
     if (_o.CompleteConditionParameterTag != null) {
@@ -303,10 +380,16 @@ public struct MiniGameMissionExcel : IFlatbufferObject
       _CompleteConditionParameterTag = CreateCompleteConditionParameterTagVector(builder, __CompleteConditionParameterTag);
     }
     var _RewardIcon = _o.RewardIcon == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.RewardIcon, key) : _o.RewardIcon));
-    var _missionRewardParcelType = default(VectorOffset);
+    var _CompleteConditionMissionId = default(VectorOffset);
+    if (_o.CompleteConditionMissionId != null) {
+      var __CompleteConditionMissionId = _o.CompleteConditionMissionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _CompleteConditionMissionId = CreateCompleteConditionMissionIdVector(builder, __CompleteConditionMissionId);
+    }
+		var _CompleteConditionMissionCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CompleteConditionMissionCount, key) : _o.CompleteConditionMissionCount;
+    var _MissionRewardParcelType = default(VectorOffset);
     if (_o.MissionRewardParcelType != null) {
-      var __missionRewardParcelType = _o.MissionRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _missionRewardParcelType = CreateMissionRewardParcelTypeVector(builder, __missionRewardParcelType);
+      var __MissionRewardParcelType = _o.MissionRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _MissionRewardParcelType = CreateMissionRewardParcelTypeVector(builder, __MissionRewardParcelType);
     }
     var _MissionRewardParcelId = default(VectorOffset);
     if (_o.MissionRewardParcelId != null) {
@@ -318,9 +401,24 @@ public struct MiniGameMissionExcel : IFlatbufferObject
       var __MissionRewardAmount = _o.MissionRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _MissionRewardAmount = CreateMissionRewardAmountVector(builder, __MissionRewardAmount);
     }
+    var _ConditionRewardParcelType = default(VectorOffset);
+    if (_o.ConditionRewardParcelType != null) {
+      var __ConditionRewardParcelType = _o.ConditionRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConditionRewardParcelType = CreateConditionRewardParcelTypeVector(builder, __ConditionRewardParcelType);
+    }
+    var _ConditionRewardParcelId = default(VectorOffset);
+    if (_o.ConditionRewardParcelId != null) {
+      var __ConditionRewardParcelId = _o.ConditionRewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConditionRewardParcelId = CreateConditionRewardParcelIdVector(builder, __ConditionRewardParcelId);
+    }
+    var _ConditionRewardAmount = default(VectorOffset);
+    if (_o.ConditionRewardAmount != null) {
+      var __ConditionRewardAmount = _o.ConditionRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConditionRewardAmount = CreateConditionRewardAmountVector(builder, __ConditionRewardAmount);
+    }
     return CreateMiniGameMissionExcel(
       builder,
-      TableEncryptionService.UseEncryption ? _id : _o.Id,
+      TableEncryptionService.UseEncryption ? _Id : _o.Id,
       TableEncryptionService.UseEncryption ? _EventContentId : _o.EventContentId,
       TableEncryptionService.UseEncryption ? _GroupId : _o.GroupId,
       _GroupName,
@@ -331,19 +429,24 @@ public struct MiniGameMissionExcel : IFlatbufferObject
       _ToastImagePath,
       TableEncryptionService.UseEncryption ? _ViewFlag : _o.ViewFlag,
       TableEncryptionService.UseEncryption ? _DisplayOrder : _o.DisplayOrder,
-      _preMissionId,
+      _PreMissionId,
       TableEncryptionService.UseEncryption ? _AccountType : _o.AccountType,
       TableEncryptionService.UseEncryption ? _AccountLevel : _o.AccountLevel,
-      _shortcutUI,
+      _ShortcutUI,
       TableEncryptionService.UseEncryption ? _CompleteConditionType : _o.CompleteConditionType,
       TableEncryptionService.UseEncryption ? _IsCompleteExtensionTime : _o.IsCompleteExtensionTime,
       TableEncryptionService.UseEncryption ? _CompleteConditionCount : _o.CompleteConditionCount,
-      _completeConditionParameter,
+      _CompleteConditionParameter,
       _CompleteConditionParameterTag,
       _RewardIcon,
-      _missionRewardParcelType,
+      _CompleteConditionMissionId,
+      TableEncryptionService.UseEncryption ? _CompleteConditionMissionCount : _o.CompleteConditionMissionCount,
+      _MissionRewardParcelType,
       _MissionRewardParcelId,
-      _MissionRewardAmount);
+      _MissionRewardAmount,
+      _ConditionRewardParcelType,
+      _ConditionRewardParcelId,
+      _ConditionRewardAmount);
   }
 }
 
@@ -370,9 +473,14 @@ public class MiniGameMissionExcelT
   public List<long> CompleteConditionParameter { get; set; }
   public List<Global.Tag> CompleteConditionParameterTag { get; set; }
   public string RewardIcon { get; set; }
+  public List<long> CompleteConditionMissionId { get; set; }
+  public long CompleteConditionMissionCount { get; set; }
   public List<Global.ParcelType> MissionRewardParcelType { get; set; }
   public List<long> MissionRewardParcelId { get; set; }
   public List<int> MissionRewardAmount { get; set; }
+  public List<Global.ParcelType> ConditionRewardParcelType { get; set; }
+  public List<long> ConditionRewardParcelId { get; set; }
+  public List<int> ConditionRewardAmount { get; set; }
 
   public MiniGameMissionExcelT() {
     this.Id = 0;
@@ -396,9 +504,14 @@ public class MiniGameMissionExcelT
     this.CompleteConditionParameter = null;
     this.CompleteConditionParameterTag = null;
     this.RewardIcon = null;
+    this.CompleteConditionMissionId = null;
+    this.CompleteConditionMissionCount = 0;
     this.MissionRewardParcelType = null;
     this.MissionRewardParcelId = null;
     this.MissionRewardAmount = null;
+    this.ConditionRewardParcelType = null;
+    this.ConditionRewardParcelId = null;
+    this.ConditionRewardAmount = null;
   }
 }
 
@@ -429,9 +542,14 @@ static public class MiniGameMissionExcelVerify
       && verifier.VerifyVectorOfData(tablePos, 40 /*CompleteConditionParameter*/, 8 /*long*/, false)
       && verifier.VerifyVectorOfData(tablePos, 42 /*CompleteConditionParameterTag*/, 4 /*Global.Tag*/, false)
       && verifier.VerifyString(tablePos, 44 /*RewardIcon*/, false)
-      && verifier.VerifyVectorOfData(tablePos, 46 /*MissionRewardParcelType*/, 4 /*Global.ParcelType*/, false)
-      && verifier.VerifyVectorOfData(tablePos, 48 /*MissionRewardParcelId*/, 8 /*long*/, false)
-      && verifier.VerifyVectorOfData(tablePos, 50 /*MissionRewardAmount*/, 4 /*int*/, false)
+      && verifier.VerifyVectorOfData(tablePos, 46 /*CompleteConditionMissionId*/, 8 /*long*/, false)
+      && verifier.VerifyField(tablePos, 48 /*CompleteConditionMissionCount*/, 8 /*long*/, 8, false)
+      && verifier.VerifyVectorOfData(tablePos, 50 /*MissionRewardParcelType*/, 4 /*Global.ParcelType*/, false)
+      && verifier.VerifyVectorOfData(tablePos, 52 /*MissionRewardParcelId*/, 8 /*long*/, false)
+      && verifier.VerifyVectorOfData(tablePos, 54 /*MissionRewardAmount*/, 4 /*int*/, false)
+      && verifier.VerifyVectorOfData(tablePos, 56 /*ConditionRewardParcelType*/, 4 /*Global.ParcelType*/, false)
+      && verifier.VerifyVectorOfData(tablePos, 58 /*ConditionRewardParcelId*/, 8 /*long*/, false)
+      && verifier.VerifyVectorOfData(tablePos, 60 /*ConditionRewardAmount*/, 4 /*int*/, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

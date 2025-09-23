@@ -40,12 +40,12 @@ public struct CharacterStatsDetailExcel : IFlatbufferObject
 
   public static Offset<Global.CharacterStatsDetailExcel> CreateCharacterStatsDetailExcel(FlatBufferBuilder builder,
       long Id = 0,
-      VectorOffset DetailShowStatsOffset = default(VectorOffset),
+      VectorOffset detailShowStatsOffset = default(VectorOffset),
       VectorOffset IsStatsPercentOffset = default(VectorOffset)) {
     builder.StartTable(3);
     CharacterStatsDetailExcel.AddId(builder, Id);
     CharacterStatsDetailExcel.AddIsStatsPercent(builder, IsStatsPercentOffset);
-    CharacterStatsDetailExcel.AddDetailShowStats(builder, DetailShowStatsOffset);
+    CharacterStatsDetailExcel.AddDetailShowStats(builder, detailShowStatsOffset);
     return CharacterStatsDetailExcel.EndCharacterStatsDetailExcel(builder);
   }
 
@@ -84,10 +84,10 @@ public struct CharacterStatsDetailExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.CharacterStatsDetailExcel>);
 		byte[] key = TableEncryptionService.CreateKey("CharacterStatsDetail");
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
-    var _DetailShowStats = default(VectorOffset);
+    var _detailShowStats = default(VectorOffset);
     if (_o.DetailShowStats != null) {
-      var __DetailShowStats = _o.DetailShowStats.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _DetailShowStats = CreateDetailShowStatsVector(builder, __DetailShowStats);
+      var __detailShowStats = _o.DetailShowStats.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _detailShowStats = CreateDetailShowStatsVector(builder, __detailShowStats);
     }
     var _IsStatsPercent = default(VectorOffset);
     if (_o.IsStatsPercent != null) {
@@ -97,7 +97,7 @@ public struct CharacterStatsDetailExcel : IFlatbufferObject
     return CreateCharacterStatsDetailExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
-      _DetailShowStats,
+      _detailShowStats,
       _IsStatsPercent);
   }
 }

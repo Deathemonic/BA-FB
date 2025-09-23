@@ -79,9 +79,9 @@ public struct EliminateRaidRankingRewardExcel : IFlatbufferObject
       long PercentRankEnd = 0,
       int Tier = 0,
       VectorOffset RewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelUniqueIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelUniqueIdOffset = default(VectorOffset),
       VectorOffset RewardParcelUniqueNameOffset = default(VectorOffset),
-      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(19);
     EliminateRaidRankingRewardExcel.AddPercentRankEnd(builder, PercentRankEnd);
     EliminateRaidRankingRewardExcel.AddPercentRankStart(builder, PercentRankStart);
@@ -97,9 +97,9 @@ public struct EliminateRaidRankingRewardExcel : IFlatbufferObject
     EliminateRaidRankingRewardExcel.AddRankStart(builder, RankStart);
     EliminateRaidRankingRewardExcel.AddId(builder, Id);
     EliminateRaidRankingRewardExcel.AddRankingRewardGroupId(builder, RankingRewardGroupId);
-    EliminateRaidRankingRewardExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
+    EliminateRaidRankingRewardExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
     EliminateRaidRankingRewardExcel.AddRewardParcelUniqueName(builder, RewardParcelUniqueNameOffset);
-    EliminateRaidRankingRewardExcel.AddRewardParcelUniqueId(builder, rewardParcelUniqueIdOffset);
+    EliminateRaidRankingRewardExcel.AddRewardParcelUniqueId(builder, RewardParcelUniqueIdOffset);
     EliminateRaidRankingRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     EliminateRaidRankingRewardExcel.AddTier(builder, Tier);
     return EliminateRaidRankingRewardExcel.EndEliminateRaidRankingRewardExcel(builder);
@@ -203,10 +203,10 @@ public struct EliminateRaidRankingRewardExcel : IFlatbufferObject
       var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelUniqueId = default(VectorOffset);
+    var _RewardParcelUniqueId = default(VectorOffset);
     if (_o.RewardParcelUniqueId != null) {
-      var __rewardParcelUniqueId = _o.RewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelUniqueId = CreateRewardParcelUniqueIdVector(builder, __rewardParcelUniqueId);
+      var __RewardParcelUniqueId = _o.RewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelUniqueId = CreateRewardParcelUniqueIdVector(builder, __RewardParcelUniqueId);
     }
     var _RewardParcelUniqueName = default(VectorOffset);
     if (_o.RewardParcelUniqueName != null) {
@@ -214,10 +214,10 @@ public struct EliminateRaidRankingRewardExcel : IFlatbufferObject
       for (var _j = 0; _j < __RewardParcelUniqueName.Length; ++_j) { __RewardParcelUniqueName[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.RewardParcelUniqueName[_j], key) : _o.RewardParcelUniqueName[_j])); }
       _RewardParcelUniqueName = CreateRewardParcelUniqueNameVector(builder, __RewardParcelUniqueName);
     }
-    var _rewardParcelAmount = default(VectorOffset);
+    var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
+      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
     }
     return CreateEliminateRaidRankingRewardExcel(
       builder,
@@ -237,9 +237,9 @@ public struct EliminateRaidRankingRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _PercentRankEnd : _o.PercentRankEnd,
       TableEncryptionService.UseEncryption ? _Tier : _o.Tier,
       _RewardParcelType,
-      _rewardParcelUniqueId,
+      _RewardParcelUniqueId,
       _RewardParcelUniqueName,
-      _rewardParcelAmount);
+      _RewardParcelAmount);
   }
 }
 

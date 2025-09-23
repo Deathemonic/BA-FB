@@ -40,14 +40,14 @@ public struct ConquestGroupBuffExcel : IFlatbufferObject
 
   public static Offset<Global.ConquestGroupBuffExcel> CreateConquestGroupBuffExcel(FlatBufferBuilder builder,
       long ConquestBuffId = 0,
-      VectorOffset schoolOffset = default(VectorOffset),
+      VectorOffset SchoolOffset = default(VectorOffset),
       uint RecommandLocalizeEtcId = 0,
       StringOffset SkillGroupIdOffset = default(StringOffset)) {
     builder.StartTable(4);
     ConquestGroupBuffExcel.AddConquestBuffId(builder, ConquestBuffId);
     ConquestGroupBuffExcel.AddSkillGroupId(builder, SkillGroupIdOffset);
     ConquestGroupBuffExcel.AddRecommandLocalizeEtcId(builder, RecommandLocalizeEtcId);
-    ConquestGroupBuffExcel.AddSchool(builder, schoolOffset);
+    ConquestGroupBuffExcel.AddSchool(builder, SchoolOffset);
     return ConquestGroupBuffExcel.EndConquestGroupBuffExcel(builder);
   }
 
@@ -82,17 +82,17 @@ public struct ConquestGroupBuffExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.ConquestGroupBuffExcel>);
 		byte[] key = TableEncryptionService.CreateKey("ConquestGroupBuff");
 		var _ConquestBuffId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConquestBuffId, key) : _o.ConquestBuffId;
-    var _school = default(VectorOffset);
+    var _School = default(VectorOffset);
     if (_o.School != null) {
-      var __school = _o.School.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _school = CreateSchoolVector(builder, __school);
+      var __School = _o.School.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _School = CreateSchoolVector(builder, __School);
     }
 		var _RecommandLocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RecommandLocalizeEtcId, key) : _o.RecommandLocalizeEtcId;
     var _SkillGroupId = _o.SkillGroupId == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SkillGroupId, key) : _o.SkillGroupId));
     return CreateConquestGroupBuffExcel(
       builder,
       TableEncryptionService.UseEncryption ? _ConquestBuffId : _o.ConquestBuffId,
-      _school,
+      _School,
       TableEncryptionService.UseEncryption ? _RecommandLocalizeEtcId : _o.RecommandLocalizeEtcId,
       _SkillGroupId);
   }

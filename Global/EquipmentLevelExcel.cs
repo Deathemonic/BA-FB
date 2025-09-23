@@ -40,11 +40,11 @@ public struct EquipmentLevelExcel : IFlatbufferObject
 
   public static Offset<Global.EquipmentLevelExcel> CreateEquipmentLevelExcel(FlatBufferBuilder builder,
       int Level = 0,
-      VectorOffset tierLevelExpOffset = default(VectorOffset),
+      VectorOffset TierLevelExpOffset = default(VectorOffset),
       VectorOffset TotalExpOffset = default(VectorOffset)) {
     builder.StartTable(3);
     EquipmentLevelExcel.AddTotalExp(builder, TotalExpOffset);
-    EquipmentLevelExcel.AddTierLevelExp(builder, tierLevelExpOffset);
+    EquipmentLevelExcel.AddTierLevelExp(builder, TierLevelExpOffset);
     EquipmentLevelExcel.AddLevel(builder, Level);
     return EquipmentLevelExcel.EndEquipmentLevelExcel(builder);
   }
@@ -84,10 +84,10 @@ public struct EquipmentLevelExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.EquipmentLevelExcel>);
 		byte[] key = TableEncryptionService.CreateKey("EquipmentLevel");
 		var _Level = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Level, key) : _o.Level;
-    var _tierLevelExp = default(VectorOffset);
+    var _TierLevelExp = default(VectorOffset);
     if (_o.TierLevelExp != null) {
-      var __tierLevelExp = _o.TierLevelExp.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _tierLevelExp = CreateTierLevelExpVector(builder, __tierLevelExp);
+      var __TierLevelExp = _o.TierLevelExp.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _TierLevelExp = CreateTierLevelExpVector(builder, __TierLevelExp);
     }
     var _TotalExp = default(VectorOffset);
     if (_o.TotalExp != null) {
@@ -97,7 +97,7 @@ public struct EquipmentLevelExcel : IFlatbufferObject
     return CreateEquipmentLevelExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Level : _o.Level,
-      _tierLevelExp,
+      _TierLevelExp,
       _TotalExp);
   }
 }

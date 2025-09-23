@@ -28,12 +28,12 @@ public struct AddressableWhiteListExcel : IFlatbufferObject
 
   public static Offset<Global.AddressableWhiteListExcel> CreateAddressableWhiteListExcel(FlatBufferBuilder builder,
       long Id = 0,
-      VectorOffset FolderPathOffset = default(VectorOffset),
+      VectorOffset folderPathOffset = default(VectorOffset),
       VectorOffset resourcePathOffset = default(VectorOffset)) {
     builder.StartTable(3);
     AddressableWhiteListExcel.AddId(builder, Id);
     AddressableWhiteListExcel.AddResourcePath(builder, resourcePathOffset);
-    AddressableWhiteListExcel.AddFolderPath(builder, FolderPathOffset);
+    AddressableWhiteListExcel.AddFolderPath(builder, folderPathOffset);
     return AddressableWhiteListExcel.EndAddressableWhiteListExcel(builder);
   }
 
@@ -72,11 +72,11 @@ public struct AddressableWhiteListExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.AddressableWhiteListExcel>);
 		byte[] key = TableEncryptionService.CreateKey("AddressableWhiteList");
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
-    var _FolderPath = default(VectorOffset);
+    var _folderPath = default(VectorOffset);
     if (_o.FolderPath != null) {
-      var __FolderPath = new StringOffset[_o.FolderPath.Count];
-      for (var _j = 0; _j < __FolderPath.Length; ++_j) { __FolderPath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FolderPath[_j], key) : _o.FolderPath[_j])); }
-      _FolderPath = CreateFolderPathVector(builder, __FolderPath);
+      var __folderPath = new StringOffset[_o.FolderPath.Count];
+      for (var _j = 0; _j < __folderPath.Length; ++_j) { __folderPath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FolderPath[_j], key) : _o.FolderPath[_j])); }
+      _folderPath = CreateFolderPathVector(builder, __folderPath);
     }
     var _resourcePath = default(VectorOffset);
     if (_o.ResourcePath != null) {
@@ -87,7 +87,7 @@ public struct AddressableWhiteListExcel : IFlatbufferObject
     return CreateAddressableWhiteListExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
-      _FolderPath,
+      _folderPath,
       _resourcePath);
   }
 }

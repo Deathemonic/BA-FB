@@ -83,7 +83,7 @@ public struct FieldContentStageExcel : IFlatbufferObject
       bool SkipFormationSettings = false,
       bool DailyLastPlay = false,
       VectorOffset starGoalOffset = default(VectorOffset),
-      VectorOffset starGoalAmountOffset = default(VectorOffset)) {
+      VectorOffset StarGoalAmountOffset = default(VectorOffset)) {
     builder.StartTable(21);
     FieldContentStageExcel.AddFixedEchelonId(builder, FixedEchelonId);
     FieldContentStageExcel.AddBGMId(builder, BGMId);
@@ -95,7 +95,7 @@ public struct FieldContentStageExcel : IFlatbufferObject
     FieldContentStageExcel.AddAreaId(builder, AreaId);
     FieldContentStageExcel.AddSeasonId(builder, SeasonId);
     FieldContentStageExcel.AddId(builder, Id);
-    FieldContentStageExcel.AddStarGoalAmount(builder, starGoalAmountOffset);
+    FieldContentStageExcel.AddStarGoalAmount(builder, StarGoalAmountOffset);
     FieldContentStageExcel.AddStarGoal(builder, starGoalOffset);
     FieldContentStageExcel.AddRecommandLevel(builder, RecommandLevel);
     FieldContentStageExcel.AddStageTopography(builder, StageTopography);
@@ -203,10 +203,10 @@ public struct FieldContentStageExcel : IFlatbufferObject
       var __starGoal = _o.StarGoal.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _starGoal = CreateStarGoalVector(builder, __starGoal);
     }
-    var _starGoalAmount = default(VectorOffset);
+    var _StarGoalAmount = default(VectorOffset);
     if (_o.StarGoalAmount != null) {
-      var __starGoalAmount = _o.StarGoalAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _starGoalAmount = CreateStarGoalAmountVector(builder, __starGoalAmount);
+      var __StarGoalAmount = _o.StarGoalAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StarGoalAmount = CreateStarGoalAmountVector(builder, __StarGoalAmount);
     }
     return CreateFieldContentStageExcel(
       builder,
@@ -230,7 +230,7 @@ public struct FieldContentStageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _SkipFormationSettings : _o.SkipFormationSettings,
       TableEncryptionService.UseEncryption ? _DailyLastPlay : _o.DailyLastPlay,
       _starGoal,
-      _starGoalAmount);
+      _StarGoalAmount);
   }
 }
 

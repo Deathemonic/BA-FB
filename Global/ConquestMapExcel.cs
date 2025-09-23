@@ -85,7 +85,7 @@ public struct ConquestMapExcel : IFlatbufferObject
       int StepIndex = 0,
       StringOffset ConquestMapOffset = default(StringOffset),
       long StepEnterScenarioGroupId = 0,
-      VectorOffset stepOpenConditionTypeOffset = default(VectorOffset),
+      VectorOffset StepOpenConditionTypeOffset = default(VectorOffset),
       VectorOffset StepOpenConditionParameterOffset = default(VectorOffset),
       StringOffset MapGoalLocalizeOffset = default(StringOffset),
       StringOffset StepGoalLocalizeOffset = default(StringOffset),
@@ -101,7 +101,7 @@ public struct ConquestMapExcel : IFlatbufferObject
     ConquestMapExcel.AddStepGoalLocalize(builder, StepGoalLocalizeOffset);
     ConquestMapExcel.AddMapGoalLocalize(builder, MapGoalLocalizeOffset);
     ConquestMapExcel.AddStepOpenConditionParameter(builder, StepOpenConditionParameterOffset);
-    ConquestMapExcel.AddStepOpenConditionType(builder, stepOpenConditionTypeOffset);
+    ConquestMapExcel.AddStepOpenConditionType(builder, StepOpenConditionTypeOffset);
     ConquestMapExcel.AddConquestMap(builder, ConquestMapOffset);
     ConquestMapExcel.AddStepIndex(builder, StepIndex);
     ConquestMapExcel.AddMapDifficulty(builder, MapDifficulty);
@@ -169,10 +169,10 @@ public struct ConquestMapExcel : IFlatbufferObject
 		var _StepIndex = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StepIndex, key) : _o.StepIndex;
     var _ConquestMap = _o.ConquestMap == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ConquestMap, key) : _o.ConquestMap));
 		var _StepEnterScenarioGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StepEnterScenarioGroupId, key) : _o.StepEnterScenarioGroupId;
-    var _stepOpenConditionType = default(VectorOffset);
+    var _StepOpenConditionType = default(VectorOffset);
     if (_o.StepOpenConditionType != null) {
-      var __stepOpenConditionType = _o.StepOpenConditionType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _stepOpenConditionType = CreateStepOpenConditionTypeVector(builder, __stepOpenConditionType);
+      var __StepOpenConditionType = _o.StepOpenConditionType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StepOpenConditionType = CreateStepOpenConditionTypeVector(builder, __StepOpenConditionType);
     }
     var _StepOpenConditionParameter = default(VectorOffset);
     if (_o.StepOpenConditionParameter != null) {
@@ -193,7 +193,7 @@ public struct ConquestMapExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _StepIndex : _o.StepIndex,
       _ConquestMap,
       TableEncryptionService.UseEncryption ? _StepEnterScenarioGroupId : _o.StepEnterScenarioGroupId,
-      _stepOpenConditionType,
+      _StepOpenConditionType,
       _StepOpenConditionParameter,
       _MapGoalLocalize,
       _StepGoalLocalize,

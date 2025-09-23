@@ -112,6 +112,13 @@ public struct ScenarioModeExcel : IFlatbufferObject
   public byte[] GetCompleteReportEventNameArray() { return __p.__vector_as_array<byte>(80); }
   public Global.EchelonExtensionType EchelonExtensionType { get { int o = __p.__offset(82); return o != 0 ? (Global.EchelonExtensionType)__p.bb.GetInt(o + __p.bb_pos) : Global.EchelonExtensionType.Base; } }
   public long CollectionGroupId { get { int o = __p.__offset(84); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public string FirstClearFunnelMessage { get { int o = __p.__offset(86); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetFirstClearFunnelMessageBytes() { return __p.__vector_as_span<byte>(86, 1); }
+#else
+  public ArraySegment<byte>? GetFirstClearFunnelMessageBytes() { return __p.__vector_as_arraysegment(86); }
+#endif
+  public byte[] GetFirstClearFunnelMessageArray() { return __p.__vector_as_array<byte>(86); }
 
   public static Offset<Global.ScenarioModeExcel> CreateScenarioModeExcel(FlatBufferBuilder builder,
       long ModeId = 0,
@@ -154,8 +161,9 @@ public struct ScenarioModeExcel : IFlatbufferObject
       long FixedEchelonId = 0,
       StringOffset CompleteReportEventNameOffset = default(StringOffset),
       Global.EchelonExtensionType EchelonExtensionType = Global.EchelonExtensionType.Base,
-      long CollectionGroupId = 0) {
-    builder.StartTable(41);
+      long CollectionGroupId = 0,
+      StringOffset FirstClearFunnelMessageOffset = default(StringOffset)) {
+    builder.StartTable(42);
     ScenarioModeExcel.AddCollectionGroupId(builder, CollectionGroupId);
     ScenarioModeExcel.AddFixedEchelonId(builder, FixedEchelonId);
     ScenarioModeExcel.AddEventContentConditionGroup(builder, EventContentConditionGroup);
@@ -172,6 +180,7 @@ public struct ScenarioModeExcel : IFlatbufferObject
     ScenarioModeExcel.AddChapterId(builder, ChapterId);
     ScenarioModeExcel.AddVolumeId(builder, VolumeId);
     ScenarioModeExcel.AddModeId(builder, ModeId);
+    ScenarioModeExcel.AddFirstClearFunnelMessage(builder, FirstClearFunnelMessageOffset);
     ScenarioModeExcel.AddEchelonExtensionType(builder, EchelonExtensionType);
     ScenarioModeExcel.AddCompleteReportEventName(builder, CompleteReportEventNameOffset);
     ScenarioModeExcel.AddStageTopography(builder, StageTopography);
@@ -200,7 +209,7 @@ public struct ScenarioModeExcel : IFlatbufferObject
     return ScenarioModeExcel.EndScenarioModeExcel(builder);
   }
 
-  public static void StartScenarioModeExcel(FlatBufferBuilder builder) { builder.StartTable(41); }
+  public static void StartScenarioModeExcel(FlatBufferBuilder builder) { builder.StartTable(42); }
   public static void AddModeId(FlatBufferBuilder builder, long modeId) { builder.AddLong(0, modeId, 0); }
   public static void AddModeType(FlatBufferBuilder builder, Global.ScenarioModeTypes modeType) { builder.AddInt(1, (int)modeType, 0); }
   public static void AddSubType(FlatBufferBuilder builder, Global.ScenarioModeSubTypes subType) { builder.AddInt(2, (int)subType, 0); }
@@ -257,6 +266,7 @@ public struct ScenarioModeExcel : IFlatbufferObject
   public static void AddCompleteReportEventName(FlatBufferBuilder builder, StringOffset completeReportEventNameOffset) { builder.AddOffset(38, completeReportEventNameOffset.Value, 0); }
   public static void AddEchelonExtensionType(FlatBufferBuilder builder, Global.EchelonExtensionType echelonExtensionType) { builder.AddInt(39, (int)echelonExtensionType, 0); }
   public static void AddCollectionGroupId(FlatBufferBuilder builder, long collectionGroupId) { builder.AddLong(40, collectionGroupId, 0); }
+  public static void AddFirstClearFunnelMessage(FlatBufferBuilder builder, StringOffset firstClearFunnelMessageOffset) { builder.AddOffset(41, firstClearFunnelMessageOffset.Value, 0); }
   public static Offset<Global.ScenarioModeExcel> EndScenarioModeExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Global.ScenarioModeExcel>(o);
@@ -312,6 +322,7 @@ public struct ScenarioModeExcel : IFlatbufferObject
     _o.CompleteReportEventName = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CompleteReportEventName, key) : this.CompleteReportEventName;
     _o.EchelonExtensionType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonExtensionType, key) : this.EchelonExtensionType;
     _o.CollectionGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CollectionGroupId, key) : this.CollectionGroupId;
+    _o.FirstClearFunnelMessage = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.FirstClearFunnelMessage, key) : this.FirstClearFunnelMessage;
   }
   public static Offset<Global.ScenarioModeExcel> Pack(FlatBufferBuilder builder, ScenarioModeExcelT _o) {
     if (_o == null) return default(Offset<Global.ScenarioModeExcel>);
@@ -369,6 +380,7 @@ public struct ScenarioModeExcel : IFlatbufferObject
     var _CompleteReportEventName = _o.CompleteReportEventName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CompleteReportEventName, key) : _o.CompleteReportEventName));
 		var _EchelonExtensionType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonExtensionType, key) : _o.EchelonExtensionType;
 		var _CollectionGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CollectionGroupId, key) : _o.CollectionGroupId;
+    var _FirstClearFunnelMessage = _o.FirstClearFunnelMessage == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FirstClearFunnelMessage, key) : _o.FirstClearFunnelMessage));
     return CreateScenarioModeExcel(
       builder,
       TableEncryptionService.UseEncryption ? _ModeId : _o.ModeId,
@@ -411,7 +423,8 @@ public struct ScenarioModeExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _FixedEchelonId : _o.FixedEchelonId,
       _CompleteReportEventName,
       TableEncryptionService.UseEncryption ? _EchelonExtensionType : _o.EchelonExtensionType,
-      TableEncryptionService.UseEncryption ? _CollectionGroupId : _o.CollectionGroupId);
+      TableEncryptionService.UseEncryption ? _CollectionGroupId : _o.CollectionGroupId,
+      _FirstClearFunnelMessage);
   }
 }
 
@@ -458,6 +471,7 @@ public class ScenarioModeExcelT
   public string CompleteReportEventName { get; set; }
   public Global.EchelonExtensionType EchelonExtensionType { get; set; }
   public long CollectionGroupId { get; set; }
+  public string FirstClearFunnelMessage { get; set; }
 
   public ScenarioModeExcelT() {
     this.ModeId = 0;
@@ -501,6 +515,7 @@ public class ScenarioModeExcelT
     this.CompleteReportEventName = null;
     this.EchelonExtensionType = Global.EchelonExtensionType.Base;
     this.CollectionGroupId = 0;
+    this.FirstClearFunnelMessage = null;
   }
 }
 
@@ -551,6 +566,7 @@ static public class ScenarioModeExcelVerify
       && verifier.VerifyString(tablePos, 80 /*CompleteReportEventName*/, false)
       && verifier.VerifyField(tablePos, 82 /*EchelonExtensionType*/, 4 /*Global.EchelonExtensionType*/, 4, false)
       && verifier.VerifyField(tablePos, 84 /*CollectionGroupId*/, 8 /*long*/, 8, false)
+      && verifier.VerifyString(tablePos, 86 /*FirstClearFunnelMessage*/, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

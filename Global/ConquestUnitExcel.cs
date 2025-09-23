@@ -114,7 +114,7 @@ public struct ConquestUnitExcel : IFlatbufferObject
       long BattleDuration = 0,
       long GroundId = 0,
       VectorOffset StarGoalOffset = default(VectorOffset),
-      VectorOffset starGoalAmountOffset = default(VectorOffset),
+      VectorOffset StarGoalAmountOffset = default(VectorOffset),
       long GroupBuffId = 0,
       Global.ParcelType StageEnterCostType = Global.ParcelType.None,
       long StageEnterCostId = 0,
@@ -151,7 +151,7 @@ public struct ConquestUnitExcel : IFlatbufferObject
     ConquestUnitExcel.AddManageEchelonStageEnterCostType(builder, ManageEchelonStageEnterCostType);
     ConquestUnitExcel.AddStageEnterCostAmount(builder, StageEnterCostAmount);
     ConquestUnitExcel.AddStageEnterCostType(builder, StageEnterCostType);
-    ConquestUnitExcel.AddStarGoalAmount(builder, starGoalAmountOffset);
+    ConquestUnitExcel.AddStarGoalAmount(builder, StarGoalAmountOffset);
     ConquestUnitExcel.AddStarGoal(builder, StarGoalOffset);
     ConquestUnitExcel.AddTeam(builder, Team);
     ConquestUnitExcel.AddEnemyType(builder, EnemyType);
@@ -278,10 +278,10 @@ public struct ConquestUnitExcel : IFlatbufferObject
       var __StarGoal = _o.StarGoal.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _StarGoal = CreateStarGoalVector(builder, __StarGoal);
     }
-    var _starGoalAmount = default(VectorOffset);
+    var _StarGoalAmount = default(VectorOffset);
     if (_o.StarGoalAmount != null) {
-      var __starGoalAmount = _o.StarGoalAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _starGoalAmount = CreateStarGoalAmountVector(builder, __starGoalAmount);
+      var __StarGoalAmount = _o.StarGoalAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StarGoalAmount = CreateStarGoalAmountVector(builder, __StarGoalAmount);
     }
 		var _GroupBuffId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroupBuffId, key) : _o.GroupBuffId;
 		var _StageEnterCostType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StageEnterCostType, key) : _o.StageEnterCostType;
@@ -316,7 +316,7 @@ public struct ConquestUnitExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _BattleDuration : _o.BattleDuration,
       TableEncryptionService.UseEncryption ? _GroundId : _o.GroundId,
       _StarGoal,
-      _starGoalAmount,
+      _StarGoalAmount,
       TableEncryptionService.UseEncryption ? _GroupBuffId : _o.GroupBuffId,
       TableEncryptionService.UseEncryption ? _StageEnterCostType : _o.StageEnterCostType,
       TableEncryptionService.UseEncryption ? _StageEnterCostId : _o.StageEnterCostId,

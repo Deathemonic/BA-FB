@@ -14,6 +14,7 @@ public enum StoreType : int
   MicrosoftStore = 4,
   GalaxyStore = 5,
   STEAM = 6,
+  FreeProduct = 7,
 };
 
 

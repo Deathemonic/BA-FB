@@ -51,13 +51,13 @@ public struct ConquestProgressResourceExcel : IFlatbufferObject
       long EventContentId = 0,
       Global.ConquestProgressType Group = Global.ConquestProgressType.None,
       StringOffset ProgressResourceOffset = default(StringOffset),
-      VectorOffset voiceIdOffset = default(VectorOffset),
+      VectorOffset VoiceIdOffset = default(VectorOffset),
       StringOffset ProgressLocalizeCodeOffset = default(StringOffset)) {
     builder.StartTable(6);
     ConquestProgressResourceExcel.AddEventContentId(builder, EventContentId);
     ConquestProgressResourceExcel.AddId(builder, Id);
     ConquestProgressResourceExcel.AddProgressLocalizeCode(builder, ProgressLocalizeCodeOffset);
-    ConquestProgressResourceExcel.AddVoiceId(builder, voiceIdOffset);
+    ConquestProgressResourceExcel.AddVoiceId(builder, VoiceIdOffset);
     ConquestProgressResourceExcel.AddProgressResource(builder, ProgressResourceOffset);
     ConquestProgressResourceExcel.AddGroup(builder, Group);
     return ConquestProgressResourceExcel.EndConquestProgressResourceExcel(builder);
@@ -101,10 +101,10 @@ public struct ConquestProgressResourceExcel : IFlatbufferObject
 		var _EventContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentId, key) : _o.EventContentId;
 		var _Group = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Group, key) : _o.Group;
     var _ProgressResource = _o.ProgressResource == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ProgressResource, key) : _o.ProgressResource));
-    var _voiceId = default(VectorOffset);
+    var _VoiceId = default(VectorOffset);
     if (_o.VoiceId != null) {
-      var __voiceId = _o.VoiceId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _voiceId = CreateVoiceIdVector(builder, __voiceId);
+      var __VoiceId = _o.VoiceId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _VoiceId = CreateVoiceIdVector(builder, __VoiceId);
     }
     var _ProgressLocalizeCode = _o.ProgressLocalizeCode == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ProgressLocalizeCode, key) : _o.ProgressLocalizeCode));
     return CreateConquestProgressResourceExcel(
@@ -113,7 +113,7 @@ public struct ConquestProgressResourceExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _EventContentId : _o.EventContentId,
       TableEncryptionService.UseEncryption ? _Group : _o.Group,
       _ProgressResource,
-      _voiceId,
+      _VoiceId,
       _ProgressLocalizeCode);
   }
 }

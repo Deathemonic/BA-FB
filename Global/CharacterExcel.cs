@@ -190,7 +190,7 @@ public struct CharacterExcel : IFlatbufferObject
       bool IgnoreObstacle = false,
       bool IsAirUnit = false,
       long AirUnitHeight = 0,
-      VectorOffset TagsOffset = default(VectorOffset),
+      VectorOffset tagsOffset = default(VectorOffset),
       long SecretStoneItemId = 0,
       int SecretStoneItemAmount = 0,
       long CharacterPieceItemId = 0,
@@ -211,7 +211,7 @@ public struct CharacterExcel : IFlatbufferObject
     CharacterExcel.AddId(builder, Id);
     CharacterExcel.AddCharacterPieceItemAmount(builder, CharacterPieceItemAmount);
     CharacterExcel.AddSecretStoneItemAmount(builder, SecretStoneItemAmount);
-    CharacterExcel.AddTags(builder, TagsOffset);
+    CharacterExcel.AddTags(builder, tagsOffset);
     CharacterExcel.AddAppearFrame(builder, AppearFrame);
     CharacterExcel.AddJumpMotionFrame(builder, JumpMotionFrame);
     CharacterExcel.AddMoveEndFrame(builder, MoveEndFrame);
@@ -486,10 +486,10 @@ public struct CharacterExcel : IFlatbufferObject
 		var _IgnoreObstacle = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IgnoreObstacle, key) : _o.IgnoreObstacle;
 		var _IsAirUnit = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsAirUnit, key) : _o.IsAirUnit;
 		var _AirUnitHeight = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AirUnitHeight, key) : _o.AirUnitHeight;
-    var _Tags = default(VectorOffset);
+    var _tags = default(VectorOffset);
     if (_o.Tags != null) {
-      var __Tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _Tags = CreateTagsVector(builder, __Tags);
+      var __tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _tags = CreateTagsVector(builder, __tags);
     }
 		var _SecretStoneItemId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SecretStoneItemId, key) : _o.SecretStoneItemId;
 		var _SecretStoneItemAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SecretStoneItemAmount, key) : _o.SecretStoneItemAmount;
@@ -557,7 +557,7 @@ public struct CharacterExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IgnoreObstacle : _o.IgnoreObstacle,
       TableEncryptionService.UseEncryption ? _IsAirUnit : _o.IsAirUnit,
       TableEncryptionService.UseEncryption ? _AirUnitHeight : _o.AirUnitHeight,
-      _Tags,
+      _tags,
       TableEncryptionService.UseEncryption ? _SecretStoneItemId : _o.SecretStoneItemId,
       TableEncryptionService.UseEncryption ? _SecretStoneItemAmount : _o.SecretStoneItemAmount,
       TableEncryptionService.UseEncryption ? _CharacterPieceItemId : _o.CharacterPieceItemId,

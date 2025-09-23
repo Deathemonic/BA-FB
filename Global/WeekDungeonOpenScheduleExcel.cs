@@ -32,9 +32,9 @@ public struct WeekDungeonOpenScheduleExcel : IFlatbufferObject
 
   public static Offset<Global.WeekDungeonOpenScheduleExcel> CreateWeekDungeonOpenScheduleExcel(FlatBufferBuilder builder,
       Global.WeekDay WeekDay = Global.WeekDay.Sunday,
-      VectorOffset openOffset = default(VectorOffset)) {
+      VectorOffset OpenOffset = default(VectorOffset)) {
     builder.StartTable(2);
-    WeekDungeonOpenScheduleExcel.AddOpen(builder, openOffset);
+    WeekDungeonOpenScheduleExcel.AddOpen(builder, OpenOffset);
     WeekDungeonOpenScheduleExcel.AddWeekDay(builder, WeekDay);
     return WeekDungeonOpenScheduleExcel.EndWeekDungeonOpenScheduleExcel(builder);
   }
@@ -66,15 +66,15 @@ public struct WeekDungeonOpenScheduleExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.WeekDungeonOpenScheduleExcel>);
 		byte[] key = TableEncryptionService.CreateKey("WeekDungeonOpenSchedule");
 		var _WeekDay = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.WeekDay, key) : _o.WeekDay;
-    var _open = default(VectorOffset);
+    var _Open = default(VectorOffset);
     if (_o.Open != null) {
-      var __open = _o.Open.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _open = CreateOpenVector(builder, __open);
+      var __Open = _o.Open.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _Open = CreateOpenVector(builder, __Open);
     }
     return CreateWeekDungeonOpenScheduleExcel(
       builder,
       TableEncryptionService.UseEncryption ? _WeekDay : _o.WeekDay,
-      _open);
+      _Open);
   }
 }
 

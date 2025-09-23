@@ -64,6 +64,7 @@ public enum OpenConditionContent : int
   StrategySkip = 54,
   MinigameDreamMaker = 55,
   MiniGameDefense = 56,
+  MiniGameCCG = 57,
 };
 
 

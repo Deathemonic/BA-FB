@@ -40,11 +40,11 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
       int SkipableLap = 0,
       StringOffset DiceRacePawnPrefabOffset = default(StringOffset),
       bool IsUsingFixedDice = false,
-      VectorOffset DiceRaceEventTypeOffset = default(VectorOffset)) {
+      VectorOffset diceRaceEventTypeOffset = default(VectorOffset)) {
     builder.StartTable(6);
     EventContentDiceRaceExcel.AddDiceCostGoodsId(builder, DiceCostGoodsId);
     EventContentDiceRaceExcel.AddEventContentId(builder, EventContentId);
-    EventContentDiceRaceExcel.AddDiceRaceEventType(builder, DiceRaceEventTypeOffset);
+    EventContentDiceRaceExcel.AddDiceRaceEventType(builder, diceRaceEventTypeOffset);
     EventContentDiceRaceExcel.AddDiceRacePawnPrefab(builder, DiceRacePawnPrefabOffset);
     EventContentDiceRaceExcel.AddSkipableLap(builder, SkipableLap);
     EventContentDiceRaceExcel.AddIsUsingFixedDice(builder, IsUsingFixedDice);
@@ -90,11 +90,11 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
 		var _SkipableLap = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SkipableLap, key) : _o.SkipableLap;
     var _DiceRacePawnPrefab = _o.DiceRacePawnPrefab == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DiceRacePawnPrefab, key) : _o.DiceRacePawnPrefab));
 		var _IsUsingFixedDice = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsUsingFixedDice, key) : _o.IsUsingFixedDice;
-    var _DiceRaceEventType = default(VectorOffset);
+    var _diceRaceEventType = default(VectorOffset);
     if (_o.DiceRaceEventType != null) {
-      var __DiceRaceEventType = new StringOffset[_o.DiceRaceEventType.Count];
-      for (var _j = 0; _j < __DiceRaceEventType.Length; ++_j) { __DiceRaceEventType[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DiceRaceEventType[_j], key) : _o.DiceRaceEventType[_j])); }
-      _DiceRaceEventType = CreateDiceRaceEventTypeVector(builder, __DiceRaceEventType);
+      var __diceRaceEventType = new StringOffset[_o.DiceRaceEventType.Count];
+      for (var _j = 0; _j < __diceRaceEventType.Length; ++_j) { __diceRaceEventType[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DiceRaceEventType[_j], key) : _o.DiceRaceEventType[_j])); }
+      _diceRaceEventType = CreateDiceRaceEventTypeVector(builder, __diceRaceEventType);
     }
     return CreateEventContentDiceRaceExcel(
       builder,
@@ -103,7 +103,7 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _SkipableLap : _o.SkipableLap,
       _DiceRacePawnPrefab,
       TableEncryptionService.UseEncryption ? _IsUsingFixedDice : _o.IsUsingFixedDice,
-      _DiceRaceEventType);
+      _diceRaceEventType);
   }
 }
 

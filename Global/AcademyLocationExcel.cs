@@ -61,7 +61,7 @@ public struct AcademyLocationExcel : IFlatbufferObject
       uint LocalizeEtcId = 0,
       StringOffset PrefabPathOffset = default(StringOffset),
       StringOffset IconImagePathOffset = default(StringOffset),
-      VectorOffset openConditionOffset = default(VectorOffset),
+      VectorOffset OpenConditionOffset = default(VectorOffset),
       VectorOffset OpenConditionCountOffset = default(VectorOffset),
       Global.ParcelType RewardParcelType = Global.ParcelType.None,
       long RewardParcelId = 0,
@@ -72,7 +72,7 @@ public struct AcademyLocationExcel : IFlatbufferObject
     AcademyLocationExcel.AddId(builder, Id);
     AcademyLocationExcel.AddRewardParcelType(builder, RewardParcelType);
     AcademyLocationExcel.AddOpenConditionCount(builder, OpenConditionCountOffset);
-    AcademyLocationExcel.AddOpenCondition(builder, openConditionOffset);
+    AcademyLocationExcel.AddOpenCondition(builder, OpenConditionOffset);
     AcademyLocationExcel.AddIconImagePath(builder, IconImagePathOffset);
     AcademyLocationExcel.AddPrefabPath(builder, PrefabPathOffset);
     AcademyLocationExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
@@ -129,10 +129,10 @@ public struct AcademyLocationExcel : IFlatbufferObject
 		var _LocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeEtcId, key) : _o.LocalizeEtcId;
     var _PrefabPath = _o.PrefabPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PrefabPath, key) : _o.PrefabPath));
     var _IconImagePath = _o.IconImagePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.IconImagePath, key) : _o.IconImagePath));
-    var _openCondition = default(VectorOffset);
+    var _OpenCondition = default(VectorOffset);
     if (_o.OpenCondition != null) {
-      var __openCondition = _o.OpenCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _openCondition = CreateOpenConditionVector(builder, __openCondition);
+      var __OpenCondition = _o.OpenCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _OpenCondition = CreateOpenConditionVector(builder, __OpenCondition);
     }
     var _OpenConditionCount = default(VectorOffset);
     if (_o.OpenConditionCount != null) {
@@ -148,7 +148,7 @@ public struct AcademyLocationExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _LocalizeEtcId : _o.LocalizeEtcId,
       _PrefabPath,
       _IconImagePath,
-      _openCondition,
+      _OpenCondition,
       _OpenConditionCount,
       TableEncryptionService.UseEncryption ? _RewardParcelType : _o.RewardParcelType,
       TableEncryptionService.UseEncryption ? _RewardParcelId : _o.RewardParcelId,

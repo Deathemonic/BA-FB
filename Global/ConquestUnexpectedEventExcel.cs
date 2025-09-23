@@ -44,14 +44,14 @@ public struct ConquestUnexpectedEventExcel : IFlatbufferObject
       long UnexpectedEventConditionAmount = 0,
       int UnexpectedEventOccurDailyLimitCount = 0,
       int UnitCountPerStep = 0,
-      VectorOffset unexpectedEventPrefabOffset = default(VectorOffset),
+      VectorOffset UnexpectedEventPrefabOffset = default(VectorOffset),
       VectorOffset UnexpectedEventUnitIdOffset = default(VectorOffset)) {
     builder.StartTable(8);
     ConquestUnexpectedEventExcel.AddUnexpectedEventConditionAmount(builder, UnexpectedEventConditionAmount);
     ConquestUnexpectedEventExcel.AddUnexpectedEventConditionUniqueId(builder, UnexpectedEventConditionUniqueId);
     ConquestUnexpectedEventExcel.AddEventContentId(builder, EventContentId);
     ConquestUnexpectedEventExcel.AddUnexpectedEventUnitId(builder, UnexpectedEventUnitIdOffset);
-    ConquestUnexpectedEventExcel.AddUnexpectedEventPrefab(builder, unexpectedEventPrefabOffset);
+    ConquestUnexpectedEventExcel.AddUnexpectedEventPrefab(builder, UnexpectedEventPrefabOffset);
     ConquestUnexpectedEventExcel.AddUnitCountPerStep(builder, UnitCountPerStep);
     ConquestUnexpectedEventExcel.AddUnexpectedEventOccurDailyLimitCount(builder, UnexpectedEventOccurDailyLimitCount);
     ConquestUnexpectedEventExcel.AddUnexpectedEventConditionType(builder, UnexpectedEventConditionType);
@@ -108,11 +108,11 @@ public struct ConquestUnexpectedEventExcel : IFlatbufferObject
 		var _UnexpectedEventConditionAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UnexpectedEventConditionAmount, key) : _o.UnexpectedEventConditionAmount;
 		var _UnexpectedEventOccurDailyLimitCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UnexpectedEventOccurDailyLimitCount, key) : _o.UnexpectedEventOccurDailyLimitCount;
 		var _UnitCountPerStep = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UnitCountPerStep, key) : _o.UnitCountPerStep;
-    var _unexpectedEventPrefab = default(VectorOffset);
+    var _UnexpectedEventPrefab = default(VectorOffset);
     if (_o.UnexpectedEventPrefab != null) {
-      var __unexpectedEventPrefab = new StringOffset[_o.UnexpectedEventPrefab.Count];
-      for (var _j = 0; _j < __unexpectedEventPrefab.Length; ++_j) { __unexpectedEventPrefab[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.UnexpectedEventPrefab[_j], key) : _o.UnexpectedEventPrefab[_j])); }
-      _unexpectedEventPrefab = CreateUnexpectedEventPrefabVector(builder, __unexpectedEventPrefab);
+      var __UnexpectedEventPrefab = new StringOffset[_o.UnexpectedEventPrefab.Count];
+      for (var _j = 0; _j < __UnexpectedEventPrefab.Length; ++_j) { __UnexpectedEventPrefab[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.UnexpectedEventPrefab[_j], key) : _o.UnexpectedEventPrefab[_j])); }
+      _UnexpectedEventPrefab = CreateUnexpectedEventPrefabVector(builder, __UnexpectedEventPrefab);
     }
     var _UnexpectedEventUnitId = default(VectorOffset);
     if (_o.UnexpectedEventUnitId != null) {
@@ -127,7 +127,7 @@ public struct ConquestUnexpectedEventExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _UnexpectedEventConditionAmount : _o.UnexpectedEventConditionAmount,
       TableEncryptionService.UseEncryption ? _UnexpectedEventOccurDailyLimitCount : _o.UnexpectedEventOccurDailyLimitCount,
       TableEncryptionService.UseEncryption ? _UnitCountPerStep : _o.UnitCountPerStep,
-      _unexpectedEventPrefab,
+      _UnexpectedEventPrefab,
       _UnexpectedEventUnitId);
   }
 }

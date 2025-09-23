@@ -42,6 +42,9 @@ public enum ShopCategoryType : int
   BeforehandGacha = 32,
   EliminateRaid = 33,
   GlobalSpecialGacha = 34,
+  SelectPickupGacha = 35,
+  GemDaily = 36,
+  GemWeekly = 37,
 };
 
 

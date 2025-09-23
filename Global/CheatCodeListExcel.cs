@@ -36,12 +36,12 @@ public struct CheatCodeListExcel : IFlatbufferObject
   public static Offset<Global.CheatCodeListExcel> CreateCheatCodeListExcel(FlatBufferBuilder builder,
       long Id = 0,
       VectorOffset cheatCodeOffset = default(VectorOffset),
-      VectorOffset InputTitleOffset = default(VectorOffset),
+      VectorOffset inputTitleOffset = default(VectorOffset),
       StringOffset DescOffset = default(StringOffset)) {
     builder.StartTable(4);
     CheatCodeListExcel.AddId(builder, Id);
     CheatCodeListExcel.AddDesc(builder, DescOffset);
-    CheatCodeListExcel.AddInputTitle(builder, InputTitleOffset);
+    CheatCodeListExcel.AddInputTitle(builder, inputTitleOffset);
     CheatCodeListExcel.AddCheatCode(builder, cheatCodeOffset);
     return CheatCodeListExcel.EndCheatCodeListExcel(builder);
   }
@@ -89,18 +89,18 @@ public struct CheatCodeListExcel : IFlatbufferObject
       for (var _j = 0; _j < __cheatCode.Length; ++_j) { __cheatCode[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CheatCode[_j], key) : _o.CheatCode[_j])); }
       _cheatCode = CreateCheatCodeVector(builder, __cheatCode);
     }
-    var _InputTitle = default(VectorOffset);
+    var _inputTitle = default(VectorOffset);
     if (_o.InputTitle != null) {
-      var __InputTitle = new StringOffset[_o.InputTitle.Count];
-      for (var _j = 0; _j < __InputTitle.Length; ++_j) { __InputTitle[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.InputTitle[_j], key) : _o.InputTitle[_j])); }
-      _InputTitle = CreateInputTitleVector(builder, __InputTitle);
+      var __inputTitle = new StringOffset[_o.InputTitle.Count];
+      for (var _j = 0; _j < __inputTitle.Length; ++_j) { __inputTitle[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.InputTitle[_j], key) : _o.InputTitle[_j])); }
+      _inputTitle = CreateInputTitleVector(builder, __inputTitle);
     }
     var _Desc = _o.Desc == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.Desc, key) : _o.Desc));
     return CreateCheatCodeListExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       _cheatCode,
-      _InputTitle,
+      _inputTitle,
       _Desc);
   }
 }

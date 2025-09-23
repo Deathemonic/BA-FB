@@ -56,14 +56,14 @@ public struct MiniGameTBGThemaRewardExcel : IFlatbufferObject
       int ThemaUniqueId = 0,
       bool IsLoop = false,
       Global.MiniGameTBGThemaRewardType MiniGameTBGThemaRewardType = Global.MiniGameTBGThemaRewardType.TreasureReward,
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
       VectorOffset RewardParcelIdOffset = default(VectorOffset),
-      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(8);
     MiniGameTBGThemaRewardExcel.AddEventContentId(builder, EventContentId);
-    MiniGameTBGThemaRewardExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
+    MiniGameTBGThemaRewardExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
     MiniGameTBGThemaRewardExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
-    MiniGameTBGThemaRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    MiniGameTBGThemaRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     MiniGameTBGThemaRewardExcel.AddMiniGameTBGThemaRewardType(builder, MiniGameTBGThemaRewardType);
     MiniGameTBGThemaRewardExcel.AddThemaUniqueId(builder, ThemaUniqueId);
     MiniGameTBGThemaRewardExcel.AddThemaRound(builder, ThemaRound);
@@ -126,20 +126,20 @@ public struct MiniGameTBGThemaRewardExcel : IFlatbufferObject
 		var _ThemaUniqueId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ThemaUniqueId, key) : _o.ThemaUniqueId;
 		var _IsLoop = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsLoop, key) : _o.IsLoop;
 		var _MiniGameTBGThemaRewardType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MiniGameTBGThemaRewardType, key) : _o.MiniGameTBGThemaRewardType;
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
     var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
       var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
-    var _rewardParcelAmount = default(VectorOffset);
+    var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
+      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
     }
     return CreateMiniGameTBGThemaRewardExcel(
       builder,
@@ -148,9 +148,9 @@ public struct MiniGameTBGThemaRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ThemaUniqueId : _o.ThemaUniqueId,
       TableEncryptionService.UseEncryption ? _IsLoop : _o.IsLoop,
       TableEncryptionService.UseEncryption ? _MiniGameTBGThemaRewardType : _o.MiniGameTBGThemaRewardType,
-      _rewardParcelType,
+      _RewardParcelType,
       _RewardParcelId,
-      _rewardParcelAmount);
+      _RewardParcelAmount);
   }
 }
 

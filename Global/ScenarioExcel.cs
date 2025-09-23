@@ -45,7 +45,7 @@ public struct ScenarioExcel : IFlatbufferObject
   public Global.ScenarioContentType Prologue { get { int o = __p.__offset(20); return o != 0 ? (Global.ScenarioContentType)__p.bb.GetInt(o + __p.bb_pos) : Global.ScenarioContentType.Prologue; } }
 
   public static Offset<Global.ScenarioExcel> CreateScenarioExcel(FlatBufferBuilder builder,
-      VectorOffset noneOffset = default(VectorOffset),
+      VectorOffset NoneOffset = default(VectorOffset),
       VectorOffset idleOffset = default(VectorOffset),
       Global.DialogCategory Cafe = Global.DialogCategory.Cafe,
       Global.DialogType Talk = Global.DialogType.Talk,
@@ -63,7 +63,7 @@ public struct ScenarioExcel : IFlatbufferObject
     ScenarioExcel.AddTalk(builder, Talk);
     ScenarioExcel.AddCafe(builder, Cafe);
     ScenarioExcel.AddIdle(builder, idleOffset);
-    ScenarioExcel.AddNone(builder, noneOffset);
+    ScenarioExcel.AddNone(builder, NoneOffset);
     return ScenarioExcel.EndScenarioExcel(builder);
   }
 
@@ -113,10 +113,10 @@ public struct ScenarioExcel : IFlatbufferObject
   public static Offset<Global.ScenarioExcel> Pack(FlatBufferBuilder builder, ScenarioExcelT _o) {
     if (_o == null) return default(Offset<Global.ScenarioExcel>);
 		byte[] key = TableEncryptionService.CreateKey("Scenario");
-    var _none = default(VectorOffset);
+    var _None = default(VectorOffset);
     if (_o.None != null) {
-      var __none = _o.None.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _none = CreateNoneVector(builder, __none);
+      var __None = _o.None.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _None = CreateNoneVector(builder, __None);
     }
     var _idle = default(VectorOffset);
     if (_o.Idle != null) {
@@ -132,7 +132,7 @@ public struct ScenarioExcel : IFlatbufferObject
 		var _Prologue = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Prologue, key) : _o.Prologue;
     return CreateScenarioExcel(
       builder,
-      _none,
+      _None,
       _idle,
       TableEncryptionService.UseEncryption ? _Cafe : _o.Cafe,
       TableEncryptionService.UseEncryption ? _Talk : _o.Talk,

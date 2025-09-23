@@ -36,11 +36,11 @@ public struct RecipeSelectionAutoUseExcel : IFlatbufferObject
       long Id = 0,
       Global.ParcelType ParcelType = Global.ParcelType.None,
       long TargetItemId = 0,
-      VectorOffset priorityOffset = default(VectorOffset)) {
+      VectorOffset PriorityOffset = default(VectorOffset)) {
     builder.StartTable(4);
     RecipeSelectionAutoUseExcel.AddTargetItemId(builder, TargetItemId);
     RecipeSelectionAutoUseExcel.AddId(builder, Id);
-    RecipeSelectionAutoUseExcel.AddPriority(builder, priorityOffset);
+    RecipeSelectionAutoUseExcel.AddPriority(builder, PriorityOffset);
     RecipeSelectionAutoUseExcel.AddParcelType(builder, ParcelType);
     return RecipeSelectionAutoUseExcel.EndRecipeSelectionAutoUseExcel(builder);
   }
@@ -78,17 +78,17 @@ public struct RecipeSelectionAutoUseExcel : IFlatbufferObject
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
 		var _ParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ParcelType, key) : _o.ParcelType;
 		var _TargetItemId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.TargetItemId, key) : _o.TargetItemId;
-    var _priority = default(VectorOffset);
+    var _Priority = default(VectorOffset);
     if (_o.Priority != null) {
-      var __priority = _o.Priority.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _priority = CreatePriorityVector(builder, __priority);
+      var __Priority = _o.Priority.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _Priority = CreatePriorityVector(builder, __Priority);
     }
     return CreateRecipeSelectionAutoUseExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       TableEncryptionService.UseEncryption ? _ParcelType : _o.ParcelType,
       TableEncryptionService.UseEncryption ? _TargetItemId : _o.TargetItemId,
-      _priority);
+      _Priority);
   }
 }
 

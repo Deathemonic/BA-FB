@@ -44,12 +44,12 @@ public struct FurnitureGroupExcel : IFlatbufferObject
       long Id = 0,
       uint GroupNameLocalize = 0,
       uint LocalizeEtcId = 0,
-      VectorOffset requiredFurnitureCountOffset = default(VectorOffset),
+      VectorOffset RequiredFurnitureCountOffset = default(VectorOffset),
       VectorOffset ComfortBonusOffset = default(VectorOffset)) {
     builder.StartTable(5);
     FurnitureGroupExcel.AddId(builder, Id);
     FurnitureGroupExcel.AddComfortBonus(builder, ComfortBonusOffset);
-    FurnitureGroupExcel.AddRequiredFurnitureCount(builder, requiredFurnitureCountOffset);
+    FurnitureGroupExcel.AddRequiredFurnitureCount(builder, RequiredFurnitureCountOffset);
     FurnitureGroupExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
     FurnitureGroupExcel.AddGroupNameLocalize(builder, GroupNameLocalize);
     return FurnitureGroupExcel.EndFurnitureGroupExcel(builder);
@@ -96,10 +96,10 @@ public struct FurnitureGroupExcel : IFlatbufferObject
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
 		var _GroupNameLocalize = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroupNameLocalize, key) : _o.GroupNameLocalize;
 		var _LocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeEtcId, key) : _o.LocalizeEtcId;
-    var _requiredFurnitureCount = default(VectorOffset);
+    var _RequiredFurnitureCount = default(VectorOffset);
     if (_o.RequiredFurnitureCount != null) {
-      var __requiredFurnitureCount = _o.RequiredFurnitureCount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _requiredFurnitureCount = CreateRequiredFurnitureCountVector(builder, __requiredFurnitureCount);
+      var __RequiredFurnitureCount = _o.RequiredFurnitureCount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RequiredFurnitureCount = CreateRequiredFurnitureCountVector(builder, __RequiredFurnitureCount);
     }
     var _ComfortBonus = default(VectorOffset);
     if (_o.ComfortBonus != null) {
@@ -111,7 +111,7 @@ public struct FurnitureGroupExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       TableEncryptionService.UseEncryption ? _GroupNameLocalize : _o.GroupNameLocalize,
       TableEncryptionService.UseEncryption ? _LocalizeEtcId : _o.LocalizeEtcId,
-      _requiredFurnitureCount,
+      _RequiredFurnitureCount,
       _ComfortBonus);
   }
 }

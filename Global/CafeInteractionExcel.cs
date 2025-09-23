@@ -63,7 +63,7 @@ public struct CafeInteractionExcel : IFlatbufferObject
       bool IgnoreIfUnobtained = false,
       StringOffset IgnoreIfUnobtainedStartDateOffset = default(StringOffset),
       StringOffset IgnoreIfUnobtainedEndDateOffset = default(StringOffset),
-      VectorOffset bubbleTypeOffset = default(VectorOffset),
+      VectorOffset BubbleTypeOffset = default(VectorOffset),
       VectorOffset BubbleDurationOffset = default(VectorOffset),
       Global.ParcelType FavorEmoticonRewardParcelType = Global.ParcelType.None,
       long FavorEmoticonRewardId = 0,
@@ -76,7 +76,7 @@ public struct CafeInteractionExcel : IFlatbufferObject
     CafeInteractionExcel.AddCafeCharacterState(builder, CafeCharacterStateOffset);
     CafeInteractionExcel.AddFavorEmoticonRewardParcelType(builder, FavorEmoticonRewardParcelType);
     CafeInteractionExcel.AddBubbleDuration(builder, BubbleDurationOffset);
-    CafeInteractionExcel.AddBubbleType(builder, bubbleTypeOffset);
+    CafeInteractionExcel.AddBubbleType(builder, BubbleTypeOffset);
     CafeInteractionExcel.AddIgnoreIfUnobtainedEndDate(builder, IgnoreIfUnobtainedEndDateOffset);
     CafeInteractionExcel.AddIgnoreIfUnobtainedStartDate(builder, IgnoreIfUnobtainedStartDateOffset);
     CafeInteractionExcel.AddIgnoreIfUnobtained(builder, IgnoreIfUnobtained);
@@ -141,10 +141,10 @@ public struct CafeInteractionExcel : IFlatbufferObject
 		var _IgnoreIfUnobtained = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IgnoreIfUnobtained, key) : _o.IgnoreIfUnobtained;
     var _IgnoreIfUnobtainedStartDate = _o.IgnoreIfUnobtainedStartDate == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.IgnoreIfUnobtainedStartDate, key) : _o.IgnoreIfUnobtainedStartDate));
     var _IgnoreIfUnobtainedEndDate = _o.IgnoreIfUnobtainedEndDate == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.IgnoreIfUnobtainedEndDate, key) : _o.IgnoreIfUnobtainedEndDate));
-    var _bubbleType = default(VectorOffset);
+    var _BubbleType = default(VectorOffset);
     if (_o.BubbleType != null) {
-      var __bubbleType = _o.BubbleType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _bubbleType = CreateBubbleTypeVector(builder, __bubbleType);
+      var __BubbleType = _o.BubbleType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BubbleType = CreateBubbleTypeVector(builder, __BubbleType);
     }
     var _BubbleDuration = default(VectorOffset);
     if (_o.BubbleDuration != null) {
@@ -166,7 +166,7 @@ public struct CafeInteractionExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IgnoreIfUnobtained : _o.IgnoreIfUnobtained,
       _IgnoreIfUnobtainedStartDate,
       _IgnoreIfUnobtainedEndDate,
-      _bubbleType,
+      _BubbleType,
       _BubbleDuration,
       TableEncryptionService.UseEncryption ? _FavorEmoticonRewardParcelType : _o.FavorEmoticonRewardParcelType,
       TableEncryptionService.UseEncryption ? _FavorEmoticonRewardId : _o.FavorEmoticonRewardId,

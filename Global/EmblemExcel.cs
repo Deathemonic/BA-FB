@@ -85,25 +85,32 @@ public struct EmblemExcel : IFlatbufferObject
   public ArraySegment<byte>? GetEmblemBGPathEnBytes() { return __p.__vector_as_arraysegment(36); }
 #endif
   public byte[] GetEmblemBGPathEnArray() { return __p.__vector_as_array<byte>(36); }
-  public Global.EmblemDisplayType DisplayType { get { int o = __p.__offset(38); return o != 0 ? (Global.EmblemDisplayType)__p.bb.GetInt(o + __p.bb_pos) : Global.EmblemDisplayType.Always; } }
-  public string DisplayStartDate { get { int o = __p.__offset(40); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public string EmblemEffectPath { get { int o = __p.__offset(38); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetDisplayStartDateBytes() { return __p.__vector_as_span<byte>(40, 1); }
+  public Span<byte> GetEmblemEffectPathBytes() { return __p.__vector_as_span<byte>(38, 1); }
 #else
-  public ArraySegment<byte>? GetDisplayStartDateBytes() { return __p.__vector_as_arraysegment(40); }
+  public ArraySegment<byte>? GetEmblemEffectPathBytes() { return __p.__vector_as_arraysegment(38); }
 #endif
-  public byte[] GetDisplayStartDateArray() { return __p.__vector_as_array<byte>(40); }
-  public string DisplayEndDate { get { int o = __p.__offset(42); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public byte[] GetEmblemEffectPathArray() { return __p.__vector_as_array<byte>(38); }
+  public Global.EmblemDisplayType DisplayType { get { int o = __p.__offset(40); return o != 0 ? (Global.EmblemDisplayType)__p.bb.GetInt(o + __p.bb_pos) : Global.EmblemDisplayType.Always; } }
+  public string DisplayStartDate { get { int o = __p.__offset(42); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetDisplayEndDateBytes() { return __p.__vector_as_span<byte>(42, 1); }
+  public Span<byte> GetDisplayStartDateBytes() { return __p.__vector_as_span<byte>(42, 1); }
 #else
-  public ArraySegment<byte>? GetDisplayEndDateBytes() { return __p.__vector_as_arraysegment(42); }
+  public ArraySegment<byte>? GetDisplayStartDateBytes() { return __p.__vector_as_arraysegment(42); }
 #endif
-  public byte[] GetDisplayEndDateArray() { return __p.__vector_as_array<byte>(42); }
-  public int DislpayFavorLevel { get { int o = __p.__offset(44); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
-  public Global.EmblemCheckPassType CheckPassType { get { int o = __p.__offset(46); return o != 0 ? (Global.EmblemCheckPassType)__p.bb.GetInt(o + __p.bb_pos) : Global.EmblemCheckPassType.None; } }
-  public long EmblemParameter { get { int o = __p.__offset(48); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
-  public long CheckPassCount { get { int o = __p.__offset(50); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public byte[] GetDisplayStartDateArray() { return __p.__vector_as_array<byte>(42); }
+  public string DisplayEndDate { get { int o = __p.__offset(44); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetDisplayEndDateBytes() { return __p.__vector_as_span<byte>(44, 1); }
+#else
+  public ArraySegment<byte>? GetDisplayEndDateBytes() { return __p.__vector_as_arraysegment(44); }
+#endif
+  public byte[] GetDisplayEndDateArray() { return __p.__vector_as_array<byte>(44); }
+  public int DislpayFavorLevel { get { int o = __p.__offset(46); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public Global.EmblemCheckPassType CheckPassType { get { int o = __p.__offset(48); return o != 0 ? (Global.EmblemCheckPassType)__p.bb.GetInt(o + __p.bb_pos) : Global.EmblemCheckPassType.None; } }
+  public long EmblemParameter { get { int o = __p.__offset(50); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public long CheckPassCount { get { int o = __p.__offset(52); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
 
   public static Offset<Global.EmblemExcel> CreateEmblemExcel(FlatBufferBuilder builder,
       long Id = 0,
@@ -123,6 +130,7 @@ public struct EmblemExcel : IFlatbufferObject
       StringOffset EmblemBGPathThOffset = default(StringOffset),
       StringOffset EmblemBGPathTwOffset = default(StringOffset),
       StringOffset EmblemBGPathEnOffset = default(StringOffset),
+      StringOffset EmblemEffectPathOffset = default(StringOffset),
       Global.EmblemDisplayType DisplayType = Global.EmblemDisplayType.Always,
       StringOffset DisplayStartDateOffset = default(StringOffset),
       StringOffset DisplayEndDateOffset = default(StringOffset),
@@ -130,7 +138,7 @@ public struct EmblemExcel : IFlatbufferObject
       Global.EmblemCheckPassType CheckPassType = Global.EmblemCheckPassType.None,
       long EmblemParameter = 0,
       long CheckPassCount = 0) {
-    builder.StartTable(24);
+    builder.StartTable(25);
     EmblemExcel.AddCheckPassCount(builder, CheckPassCount);
     EmblemExcel.AddEmblemParameter(builder, EmblemParameter);
     EmblemExcel.AddUseAtLocalizeId(builder, UseAtLocalizeId);
@@ -141,6 +149,7 @@ public struct EmblemExcel : IFlatbufferObject
     EmblemExcel.AddDisplayEndDate(builder, DisplayEndDateOffset);
     EmblemExcel.AddDisplayStartDate(builder, DisplayStartDateOffset);
     EmblemExcel.AddDisplayType(builder, DisplayType);
+    EmblemExcel.AddEmblemEffectPath(builder, EmblemEffectPathOffset);
     EmblemExcel.AddEmblemBGPathEn(builder, EmblemBGPathEnOffset);
     EmblemExcel.AddEmblemBGPathTw(builder, EmblemBGPathTwOffset);
     EmblemExcel.AddEmblemBGPathTh(builder, EmblemBGPathThOffset);
@@ -158,7 +167,7 @@ public struct EmblemExcel : IFlatbufferObject
     return EmblemExcel.EndEmblemExcel(builder);
   }
 
-  public static void StartEmblemExcel(FlatBufferBuilder builder) { builder.StartTable(24); }
+  public static void StartEmblemExcel(FlatBufferBuilder builder) { builder.StartTable(25); }
   public static void AddId(FlatBufferBuilder builder, long id) { builder.AddLong(0, id, 0); }
   public static void AddCategory(FlatBufferBuilder builder, Global.EmblemCategory category) { builder.AddInt(1, (int)category, 0); }
   public static void AddRarity(FlatBufferBuilder builder, Global.Rarity rarity) { builder.AddInt(2, (int)rarity, 0); }
@@ -176,13 +185,14 @@ public struct EmblemExcel : IFlatbufferObject
   public static void AddEmblemBGPathTh(FlatBufferBuilder builder, StringOffset emblemBGPathThOffset) { builder.AddOffset(14, emblemBGPathThOffset.Value, 0); }
   public static void AddEmblemBGPathTw(FlatBufferBuilder builder, StringOffset emblemBGPathTwOffset) { builder.AddOffset(15, emblemBGPathTwOffset.Value, 0); }
   public static void AddEmblemBGPathEn(FlatBufferBuilder builder, StringOffset emblemBGPathEnOffset) { builder.AddOffset(16, emblemBGPathEnOffset.Value, 0); }
-  public static void AddDisplayType(FlatBufferBuilder builder, Global.EmblemDisplayType displayType) { builder.AddInt(17, (int)displayType, 0); }
-  public static void AddDisplayStartDate(FlatBufferBuilder builder, StringOffset displayStartDateOffset) { builder.AddOffset(18, displayStartDateOffset.Value, 0); }
-  public static void AddDisplayEndDate(FlatBufferBuilder builder, StringOffset displayEndDateOffset) { builder.AddOffset(19, displayEndDateOffset.Value, 0); }
-  public static void AddDislpayFavorLevel(FlatBufferBuilder builder, int dislpayFavorLevel) { builder.AddInt(20, dislpayFavorLevel, 0); }
-  public static void AddCheckPassType(FlatBufferBuilder builder, Global.EmblemCheckPassType checkPassType) { builder.AddInt(21, (int)checkPassType, 0); }
-  public static void AddEmblemParameter(FlatBufferBuilder builder, long emblemParameter) { builder.AddLong(22, emblemParameter, 0); }
-  public static void AddCheckPassCount(FlatBufferBuilder builder, long checkPassCount) { builder.AddLong(23, checkPassCount, 0); }
+  public static void AddEmblemEffectPath(FlatBufferBuilder builder, StringOffset emblemEffectPathOffset) { builder.AddOffset(17, emblemEffectPathOffset.Value, 0); }
+  public static void AddDisplayType(FlatBufferBuilder builder, Global.EmblemDisplayType displayType) { builder.AddInt(18, (int)displayType, 0); }
+  public static void AddDisplayStartDate(FlatBufferBuilder builder, StringOffset displayStartDateOffset) { builder.AddOffset(19, displayStartDateOffset.Value, 0); }
+  public static void AddDisplayEndDate(FlatBufferBuilder builder, StringOffset displayEndDateOffset) { builder.AddOffset(20, displayEndDateOffset.Value, 0); }
+  public static void AddDislpayFavorLevel(FlatBufferBuilder builder, int dislpayFavorLevel) { builder.AddInt(21, dislpayFavorLevel, 0); }
+  public static void AddCheckPassType(FlatBufferBuilder builder, Global.EmblemCheckPassType checkPassType) { builder.AddInt(22, (int)checkPassType, 0); }
+  public static void AddEmblemParameter(FlatBufferBuilder builder, long emblemParameter) { builder.AddLong(23, emblemParameter, 0); }
+  public static void AddCheckPassCount(FlatBufferBuilder builder, long checkPassCount) { builder.AddLong(24, checkPassCount, 0); }
   public static Offset<Global.EmblemExcel> EndEmblemExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Global.EmblemExcel>(o);
@@ -211,6 +221,7 @@ public struct EmblemExcel : IFlatbufferObject
     _o.EmblemBGPathTh = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EmblemBGPathTh, key) : this.EmblemBGPathTh;
     _o.EmblemBGPathTw = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EmblemBGPathTw, key) : this.EmblemBGPathTw;
     _o.EmblemBGPathEn = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EmblemBGPathEn, key) : this.EmblemBGPathEn;
+    _o.EmblemEffectPath = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EmblemEffectPath, key) : this.EmblemEffectPath;
     _o.DisplayType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.DisplayType, key) : this.DisplayType;
     _o.DisplayStartDate = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.DisplayStartDate, key) : this.DisplayStartDate;
     _o.DisplayEndDate = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.DisplayEndDate, key) : this.DisplayEndDate;
@@ -239,6 +250,7 @@ public struct EmblemExcel : IFlatbufferObject
     var _EmblemBGPathTh = _o.EmblemBGPathTh == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EmblemBGPathTh, key) : _o.EmblemBGPathTh));
     var _EmblemBGPathTw = _o.EmblemBGPathTw == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EmblemBGPathTw, key) : _o.EmblemBGPathTw));
     var _EmblemBGPathEn = _o.EmblemBGPathEn == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EmblemBGPathEn, key) : _o.EmblemBGPathEn));
+    var _EmblemEffectPath = _o.EmblemEffectPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EmblemEffectPath, key) : _o.EmblemEffectPath));
 		var _DisplayType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayType, key) : _o.DisplayType;
     var _DisplayStartDate = _o.DisplayStartDate == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DisplayStartDate, key) : _o.DisplayStartDate));
     var _DisplayEndDate = _o.DisplayEndDate == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DisplayEndDate, key) : _o.DisplayEndDate));
@@ -265,6 +277,7 @@ public struct EmblemExcel : IFlatbufferObject
       _EmblemBGPathTh,
       _EmblemBGPathTw,
       _EmblemBGPathEn,
+      _EmblemEffectPath,
       TableEncryptionService.UseEncryption ? _DisplayType : _o.DisplayType,
       _DisplayStartDate,
       _DisplayEndDate,
@@ -294,6 +307,7 @@ public class EmblemExcelT
   public string EmblemBGPathTh { get; set; }
   public string EmblemBGPathTw { get; set; }
   public string EmblemBGPathEn { get; set; }
+  public string EmblemEffectPath { get; set; }
   public Global.EmblemDisplayType DisplayType { get; set; }
   public string DisplayStartDate { get; set; }
   public string DisplayEndDate { get; set; }
@@ -320,6 +334,7 @@ public class EmblemExcelT
     this.EmblemBGPathTh = null;
     this.EmblemBGPathTw = null;
     this.EmblemBGPathEn = null;
+    this.EmblemEffectPath = null;
     this.DisplayType = Global.EmblemDisplayType.Always;
     this.DisplayStartDate = null;
     this.DisplayEndDate = null;
@@ -353,13 +368,14 @@ static public class EmblemExcelVerify
       && verifier.VerifyString(tablePos, 32 /*EmblemBGPathTh*/, false)
       && verifier.VerifyString(tablePos, 34 /*EmblemBGPathTw*/, false)
       && verifier.VerifyString(tablePos, 36 /*EmblemBGPathEn*/, false)
-      && verifier.VerifyField(tablePos, 38 /*DisplayType*/, 4 /*Global.EmblemDisplayType*/, 4, false)
-      && verifier.VerifyString(tablePos, 40 /*DisplayStartDate*/, false)
-      && verifier.VerifyString(tablePos, 42 /*DisplayEndDate*/, false)
-      && verifier.VerifyField(tablePos, 44 /*DislpayFavorLevel*/, 4 /*int*/, 4, false)
-      && verifier.VerifyField(tablePos, 46 /*CheckPassType*/, 4 /*Global.EmblemCheckPassType*/, 4, false)
-      && verifier.VerifyField(tablePos, 48 /*EmblemParameter*/, 8 /*long*/, 8, false)
-      && verifier.VerifyField(tablePos, 50 /*CheckPassCount*/, 8 /*long*/, 8, false)
+      && verifier.VerifyString(tablePos, 38 /*EmblemEffectPath*/, false)
+      && verifier.VerifyField(tablePos, 40 /*DisplayType*/, 4 /*Global.EmblemDisplayType*/, 4, false)
+      && verifier.VerifyString(tablePos, 42 /*DisplayStartDate*/, false)
+      && verifier.VerifyString(tablePos, 44 /*DisplayEndDate*/, false)
+      && verifier.VerifyField(tablePos, 46 /*DislpayFavorLevel*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 48 /*CheckPassType*/, 4 /*Global.EmblemCheckPassType*/, 4, false)
+      && verifier.VerifyField(tablePos, 50 /*EmblemParameter*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 52 /*CheckPassCount*/, 8 /*long*/, 8, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

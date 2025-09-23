@@ -79,6 +79,9 @@ public enum DialogCategory : int
   UIEventMiniGameDreamMaker = 69,
   UIAttendanceEvent17 = 70,
   UIAttendanceEvent18 = 71,
+  UIBattlePassLobby = 72,
+  UIBattlePassMission = 73,
+  UIAttendanceEvent19 = 74,
 };
 
 

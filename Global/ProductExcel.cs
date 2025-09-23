@@ -80,16 +80,16 @@ public struct ProductExcel : IFlatbufferObject
       StringOffset PriceReferenceOffset = default(StringOffset),
       Global.PurchasePeriodType PurchasePeriodType = Global.PurchasePeriodType.None,
       long PurchasePeriodLimit = 0,
-      VectorOffset parcelTypeOffset = default(VectorOffset),
+      VectorOffset ParcelTypeOffset = default(VectorOffset),
       VectorOffset ParcelIdOffset = default(VectorOffset),
-      VectorOffset parcelAmountOffset = default(VectorOffset)) {
+      VectorOffset ParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(11);
     ProductExcel.AddPurchasePeriodLimit(builder, PurchasePeriodLimit);
     ProductExcel.AddPrice(builder, Price);
     ProductExcel.AddId(builder, Id);
-    ProductExcel.AddParcelAmount(builder, parcelAmountOffset);
+    ProductExcel.AddParcelAmount(builder, ParcelAmountOffset);
     ProductExcel.AddParcelId(builder, ParcelIdOffset);
-    ProductExcel.AddParcelType(builder, parcelTypeOffset);
+    ProductExcel.AddParcelType(builder, ParcelTypeOffset);
     ProductExcel.AddPurchasePeriodType(builder, PurchasePeriodType);
     ProductExcel.AddPriceReference(builder, PriceReferenceOffset);
     ProductExcel.AddStoreType(builder, StoreType);
@@ -162,20 +162,20 @@ public struct ProductExcel : IFlatbufferObject
     var _PriceReference = _o.PriceReference == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PriceReference, key) : _o.PriceReference));
 		var _PurchasePeriodType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.PurchasePeriodType, key) : _o.PurchasePeriodType;
 		var _PurchasePeriodLimit = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.PurchasePeriodLimit, key) : _o.PurchasePeriodLimit;
-    var _parcelType = default(VectorOffset);
+    var _ParcelType = default(VectorOffset);
     if (_o.ParcelType != null) {
-      var __parcelType = _o.ParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelType = CreateParcelTypeVector(builder, __parcelType);
+      var __ParcelType = _o.ParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelType = CreateParcelTypeVector(builder, __ParcelType);
     }
     var _ParcelId = default(VectorOffset);
     if (_o.ParcelId != null) {
       var __ParcelId = _o.ParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ParcelId = CreateParcelIdVector(builder, __ParcelId);
     }
-    var _parcelAmount = default(VectorOffset);
+    var _ParcelAmount = default(VectorOffset);
     if (_o.ParcelAmount != null) {
-      var __parcelAmount = _o.ParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelAmount = CreateParcelAmountVector(builder, __parcelAmount);
+      var __ParcelAmount = _o.ParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelAmount = CreateParcelAmountVector(builder, __ParcelAmount);
     }
     return CreateProductExcel(
       builder,
@@ -187,9 +187,9 @@ public struct ProductExcel : IFlatbufferObject
       _PriceReference,
       TableEncryptionService.UseEncryption ? _PurchasePeriodType : _o.PurchasePeriodType,
       TableEncryptionService.UseEncryption ? _PurchasePeriodLimit : _o.PurchasePeriodLimit,
-      _parcelType,
+      _ParcelType,
       _ParcelId,
-      _parcelAmount);
+      _ParcelAmount);
   }
 }
 

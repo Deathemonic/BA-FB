@@ -44,12 +44,12 @@ public struct DefaultEchelonExcel : IFlatbufferObject
       int EchlonId = 0,
       long LeaderId = 0,
       VectorOffset MainIdOffset = default(VectorOffset),
-      VectorOffset SupportIdOffset = default(VectorOffset),
+      VectorOffset supportIdOffset = default(VectorOffset),
       long TssId = 0) {
     builder.StartTable(5);
     DefaultEchelonExcel.AddTssId(builder, TssId);
     DefaultEchelonExcel.AddLeaderId(builder, LeaderId);
-    DefaultEchelonExcel.AddSupportId(builder, SupportIdOffset);
+    DefaultEchelonExcel.AddSupportId(builder, supportIdOffset);
     DefaultEchelonExcel.AddMainId(builder, MainIdOffset);
     DefaultEchelonExcel.AddEchlonId(builder, EchlonId);
     return DefaultEchelonExcel.EndDefaultEchelonExcel(builder);
@@ -100,10 +100,10 @@ public struct DefaultEchelonExcel : IFlatbufferObject
       var __MainId = _o.MainId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _MainId = CreateMainIdVector(builder, __MainId);
     }
-    var _SupportId = default(VectorOffset);
+    var _supportId = default(VectorOffset);
     if (_o.SupportId != null) {
-      var __SupportId = _o.SupportId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _SupportId = CreateSupportIdVector(builder, __SupportId);
+      var __supportId = _o.SupportId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _supportId = CreateSupportIdVector(builder, __supportId);
     }
 		var _TssId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.TssId, key) : _o.TssId;
     return CreateDefaultEchelonExcel(
@@ -111,7 +111,7 @@ public struct DefaultEchelonExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _EchlonId : _o.EchlonId,
       TableEncryptionService.UseEncryption ? _LeaderId : _o.LeaderId,
       _MainId,
-      _SupportId,
+      _supportId,
       TableEncryptionService.UseEncryption ? _TssId : _o.TssId);
   }
 }

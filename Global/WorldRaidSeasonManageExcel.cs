@@ -114,11 +114,11 @@ public struct WorldRaidSeasonManageExcel : IFlatbufferObject
       bool HideWorldRaidTicketUI = false,
       bool HideWorldRaidBossCompleteRewardUI = false,
       bool UseWorldRaidCommonToast = false,
-      VectorOffset openRaidBossGroupIdOffset = default(VectorOffset),
+      VectorOffset OpenRaidBossGroupIdOffset = default(VectorOffset),
       VectorOffset BossSpawnTimeOffset = default(VectorOffset),
       VectorOffset EliminateTimeOffset = default(VectorOffset),
       VectorOffset ScenarioOutputConditionIdOffset = default(VectorOffset),
-      VectorOffset conditionScenarioGroupidOffset = default(VectorOffset),
+      VectorOffset ConditionScenarioGroupidOffset = default(VectorOffset),
       StringOffset WorldRaidMapEnterOperatorOffset = default(StringOffset),
       bool UseFavorRankBuff = false) {
     builder.StartTable(23);
@@ -127,11 +127,11 @@ public struct WorldRaidSeasonManageExcel : IFlatbufferObject
     WorldRaidSeasonManageExcel.AddEventContentId(builder, EventContentId);
     WorldRaidSeasonManageExcel.AddSeasonId(builder, SeasonId);
     WorldRaidSeasonManageExcel.AddWorldRaidMapEnterOperator(builder, WorldRaidMapEnterOperatorOffset);
-    WorldRaidSeasonManageExcel.AddConditionScenarioGroupid(builder, conditionScenarioGroupidOffset);
+    WorldRaidSeasonManageExcel.AddConditionScenarioGroupid(builder, ConditionScenarioGroupidOffset);
     WorldRaidSeasonManageExcel.AddScenarioOutputConditionId(builder, ScenarioOutputConditionIdOffset);
     WorldRaidSeasonManageExcel.AddEliminateTime(builder, EliminateTimeOffset);
     WorldRaidSeasonManageExcel.AddBossSpawnTime(builder, BossSpawnTimeOffset);
-    WorldRaidSeasonManageExcel.AddOpenRaidBossGroupId(builder, openRaidBossGroupIdOffset);
+    WorldRaidSeasonManageExcel.AddOpenRaidBossGroupId(builder, OpenRaidBossGroupIdOffset);
     WorldRaidSeasonManageExcel.AddWorldRaidUniqueThemeName(builder, WorldRaidUniqueThemeNameOffset);
     WorldRaidSeasonManageExcel.AddWorldRaidLobbyBG(builder, WorldRaidLobbyBGOffset);
     WorldRaidSeasonManageExcel.AddWorldRaidLobbyBanner(builder, WorldRaidLobbyBannerOffset);
@@ -256,10 +256,10 @@ public struct WorldRaidSeasonManageExcel : IFlatbufferObject
 		var _HideWorldRaidTicketUI = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.HideWorldRaidTicketUI, key) : _o.HideWorldRaidTicketUI;
 		var _HideWorldRaidBossCompleteRewardUI = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.HideWorldRaidBossCompleteRewardUI, key) : _o.HideWorldRaidBossCompleteRewardUI;
 		var _UseWorldRaidCommonToast = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UseWorldRaidCommonToast, key) : _o.UseWorldRaidCommonToast;
-    var _openRaidBossGroupId = default(VectorOffset);
+    var _OpenRaidBossGroupId = default(VectorOffset);
     if (_o.OpenRaidBossGroupId != null) {
-      var __openRaidBossGroupId = _o.OpenRaidBossGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _openRaidBossGroupId = CreateOpenRaidBossGroupIdVector(builder, __openRaidBossGroupId);
+      var __OpenRaidBossGroupId = _o.OpenRaidBossGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _OpenRaidBossGroupId = CreateOpenRaidBossGroupIdVector(builder, __OpenRaidBossGroupId);
     }
     var _BossSpawnTime = default(VectorOffset);
     if (_o.BossSpawnTime != null) {
@@ -278,10 +278,10 @@ public struct WorldRaidSeasonManageExcel : IFlatbufferObject
       var __ScenarioOutputConditionId = _o.ScenarioOutputConditionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ScenarioOutputConditionId = CreateScenarioOutputConditionIdVector(builder, __ScenarioOutputConditionId);
     }
-    var _conditionScenarioGroupid = default(VectorOffset);
+    var _ConditionScenarioGroupid = default(VectorOffset);
     if (_o.ConditionScenarioGroupid != null) {
-      var __conditionScenarioGroupid = _o.ConditionScenarioGroupid.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _conditionScenarioGroupid = CreateConditionScenarioGroupidVector(builder, __conditionScenarioGroupid);
+      var __ConditionScenarioGroupid = _o.ConditionScenarioGroupid.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConditionScenarioGroupid = CreateConditionScenarioGroupidVector(builder, __ConditionScenarioGroupid);
     }
     var _WorldRaidMapEnterOperator = _o.WorldRaidMapEnterOperator == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.WorldRaidMapEnterOperator, key) : _o.WorldRaidMapEnterOperator));
 		var _UseFavorRankBuff = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UseFavorRankBuff, key) : _o.UseFavorRankBuff;
@@ -303,11 +303,11 @@ public struct WorldRaidSeasonManageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _HideWorldRaidTicketUI : _o.HideWorldRaidTicketUI,
       TableEncryptionService.UseEncryption ? _HideWorldRaidBossCompleteRewardUI : _o.HideWorldRaidBossCompleteRewardUI,
       TableEncryptionService.UseEncryption ? _UseWorldRaidCommonToast : _o.UseWorldRaidCommonToast,
-      _openRaidBossGroupId,
+      _OpenRaidBossGroupId,
       _BossSpawnTime,
       _EliminateTime,
       _ScenarioOutputConditionId,
-      _conditionScenarioGroupid,
+      _ConditionScenarioGroupid,
       _WorldRaidMapEnterOperator,
       TableEncryptionService.UseEncryption ? _UseFavorRankBuff : _o.UseFavorRankBuff);
   }

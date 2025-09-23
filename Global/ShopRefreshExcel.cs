@@ -25,19 +25,21 @@ public struct ShopRefreshExcel : IFlatbufferObject
   public bool IsLegacy { get { int o = __p.__offset(8); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
   public long GoodsId { get { int o = __p.__offset(10); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
   public bool IsBundle { get { int o = __p.__offset(12); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
-  public long VisibleAmount { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
-  public long DisplayOrder { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
-  public Global.ShopCategoryType CategoryType { get { int o = __p.__offset(18); return o != 0 ? (Global.ShopCategoryType)__p.bb.GetInt(o + __p.bb_pos) : Global.ShopCategoryType.General; } }
-  public int RefreshGroup { get { int o = __p.__offset(20); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
-  public int Prob { get { int o = __p.__offset(22); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
-  public string BuyReportEventName { get { int o = __p.__offset(24); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public Global.ShopPurchasePopupType ShopPurchasePopupType { get { int o = __p.__offset(14); return o != 0 ? (Global.ShopPurchasePopupType)__p.bb.GetInt(o + __p.bb_pos) : Global.ShopPurchasePopupType.None; } }
+  public long VisibleAmount { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public long PurchaseCountLimit { get { int o = __p.__offset(18); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public long DisplayOrder { get { int o = __p.__offset(20); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public Global.ShopCategoryType CategoryType { get { int o = __p.__offset(22); return o != 0 ? (Global.ShopCategoryType)__p.bb.GetInt(o + __p.bb_pos) : Global.ShopCategoryType.General; } }
+  public int RefreshGroup { get { int o = __p.__offset(24); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int Prob { get { int o = __p.__offset(26); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public string BuyReportEventName { get { int o = __p.__offset(28); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetBuyReportEventNameBytes() { return __p.__vector_as_span<byte>(24, 1); }
+  public Span<byte> GetBuyReportEventNameBytes() { return __p.__vector_as_span<byte>(28, 1); }
 #else
-  public ArraySegment<byte>? GetBuyReportEventNameBytes() { return __p.__vector_as_arraysegment(24); }
+  public ArraySegment<byte>? GetBuyReportEventNameBytes() { return __p.__vector_as_arraysegment(28); }
 #endif
-  public byte[] GetBuyReportEventNameArray() { return __p.__vector_as_array<byte>(24); }
-  public Global.ProductDisplayTag DisplayTag { get { int o = __p.__offset(26); return o != 0 ? (Global.ProductDisplayTag)__p.bb.GetInt(o + __p.bb_pos) : Global.ProductDisplayTag.None; } }
+  public byte[] GetBuyReportEventNameArray() { return __p.__vector_as_array<byte>(28); }
+  public Global.ProductDisplayTag DisplayTag { get { int o = __p.__offset(30); return o != 0 ? (Global.ProductDisplayTag)__p.bb.GetInt(o + __p.bb_pos) : Global.ProductDisplayTag.None; } }
 
   public static Offset<Global.ShopRefreshExcel> CreateShopRefreshExcel(FlatBufferBuilder builder,
       long Id = 0,
@@ -45,15 +47,18 @@ public struct ShopRefreshExcel : IFlatbufferObject
       bool IsLegacy = false,
       long GoodsId = 0,
       bool IsBundle = false,
+      Global.ShopPurchasePopupType ShopPurchasePopupType = Global.ShopPurchasePopupType.None,
       long VisibleAmount = 0,
+      long PurchaseCountLimit = 0,
       long DisplayOrder = 0,
       Global.ShopCategoryType CategoryType = Global.ShopCategoryType.General,
       int RefreshGroup = 0,
       int Prob = 0,
       StringOffset BuyReportEventNameOffset = default(StringOffset),
       Global.ProductDisplayTag DisplayTag = Global.ProductDisplayTag.None) {
-    builder.StartTable(12);
+    builder.StartTable(14);
     ShopRefreshExcel.AddDisplayOrder(builder, DisplayOrder);
+    ShopRefreshExcel.AddPurchaseCountLimit(builder, PurchaseCountLimit);
     ShopRefreshExcel.AddVisibleAmount(builder, VisibleAmount);
     ShopRefreshExcel.AddGoodsId(builder, GoodsId);
     ShopRefreshExcel.AddId(builder, Id);
@@ -62,25 +67,28 @@ public struct ShopRefreshExcel : IFlatbufferObject
     ShopRefreshExcel.AddProb(builder, Prob);
     ShopRefreshExcel.AddRefreshGroup(builder, RefreshGroup);
     ShopRefreshExcel.AddCategoryType(builder, CategoryType);
+    ShopRefreshExcel.AddShopPurchasePopupType(builder, ShopPurchasePopupType);
     ShopRefreshExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
     ShopRefreshExcel.AddIsBundle(builder, IsBundle);
     ShopRefreshExcel.AddIsLegacy(builder, IsLegacy);
     return ShopRefreshExcel.EndShopRefreshExcel(builder);
   }
 
-  public static void StartShopRefreshExcel(FlatBufferBuilder builder) { builder.StartTable(12); }
+  public static void StartShopRefreshExcel(FlatBufferBuilder builder) { builder.StartTable(14); }
   public static void AddId(FlatBufferBuilder builder, long id) { builder.AddLong(0, id, 0); }
   public static void AddLocalizeEtcId(FlatBufferBuilder builder, uint localizeEtcId) { builder.AddUint(1, localizeEtcId, 0); }
   public static void AddIsLegacy(FlatBufferBuilder builder, bool isLegacy) { builder.AddBool(2, isLegacy, false); }
   public static void AddGoodsId(FlatBufferBuilder builder, long goodsId) { builder.AddLong(3, goodsId, 0); }
   public static void AddIsBundle(FlatBufferBuilder builder, bool isBundle) { builder.AddBool(4, isBundle, false); }
-  public static void AddVisibleAmount(FlatBufferBuilder builder, long visibleAmount) { builder.AddLong(5, visibleAmount, 0); }
-  public static void AddDisplayOrder(FlatBufferBuilder builder, long displayOrder) { builder.AddLong(6, displayOrder, 0); }
-  public static void AddCategoryType(FlatBufferBuilder builder, Global.ShopCategoryType categoryType) { builder.AddInt(7, (int)categoryType, 0); }
-  public static void AddRefreshGroup(FlatBufferBuilder builder, int refreshGroup) { builder.AddInt(8, refreshGroup, 0); }
-  public static void AddProb(FlatBufferBuilder builder, int prob) { builder.AddInt(9, prob, 0); }
-  public static void AddBuyReportEventName(FlatBufferBuilder builder, StringOffset buyReportEventNameOffset) { builder.AddOffset(10, buyReportEventNameOffset.Value, 0); }
-  public static void AddDisplayTag(FlatBufferBuilder builder, Global.ProductDisplayTag displayTag) { builder.AddInt(11, (int)displayTag, 0); }
+  public static void AddShopPurchasePopupType(FlatBufferBuilder builder, Global.ShopPurchasePopupType shopPurchasePopupType) { builder.AddInt(5, (int)shopPurchasePopupType, 0); }
+  public static void AddVisibleAmount(FlatBufferBuilder builder, long visibleAmount) { builder.AddLong(6, visibleAmount, 0); }
+  public static void AddPurchaseCountLimit(FlatBufferBuilder builder, long purchaseCountLimit) { builder.AddLong(7, purchaseCountLimit, 0); }
+  public static void AddDisplayOrder(FlatBufferBuilder builder, long displayOrder) { builder.AddLong(8, displayOrder, 0); }
+  public static void AddCategoryType(FlatBufferBuilder builder, Global.ShopCategoryType categoryType) { builder.AddInt(9, (int)categoryType, 0); }
+  public static void AddRefreshGroup(FlatBufferBuilder builder, int refreshGroup) { builder.AddInt(10, refreshGroup, 0); }
+  public static void AddProb(FlatBufferBuilder builder, int prob) { builder.AddInt(11, prob, 0); }
+  public static void AddBuyReportEventName(FlatBufferBuilder builder, StringOffset buyReportEventNameOffset) { builder.AddOffset(12, buyReportEventNameOffset.Value, 0); }
+  public static void AddDisplayTag(FlatBufferBuilder builder, Global.ProductDisplayTag displayTag) { builder.AddInt(13, (int)displayTag, 0); }
   public static Offset<Global.ShopRefreshExcel> EndShopRefreshExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Global.ShopRefreshExcel>(o);
@@ -97,7 +105,9 @@ public struct ShopRefreshExcel : IFlatbufferObject
     _o.IsLegacy = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.IsLegacy, key) : this.IsLegacy;
     _o.GoodsId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.GoodsId, key) : this.GoodsId;
     _o.IsBundle = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.IsBundle, key) : this.IsBundle;
+    _o.ShopPurchasePopupType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ShopPurchasePopupType, key) : this.ShopPurchasePopupType;
     _o.VisibleAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.VisibleAmount, key) : this.VisibleAmount;
+    _o.PurchaseCountLimit = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.PurchaseCountLimit, key) : this.PurchaseCountLimit;
     _o.DisplayOrder = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.DisplayOrder, key) : this.DisplayOrder;
     _o.CategoryType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CategoryType, key) : this.CategoryType;
     _o.RefreshGroup = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.RefreshGroup, key) : this.RefreshGroup;
@@ -113,7 +123,9 @@ public struct ShopRefreshExcel : IFlatbufferObject
 		var _IsLegacy = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsLegacy, key) : _o.IsLegacy;
 		var _GoodsId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GoodsId, key) : _o.GoodsId;
 		var _IsBundle = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsBundle, key) : _o.IsBundle;
+		var _ShopPurchasePopupType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ShopPurchasePopupType, key) : _o.ShopPurchasePopupType;
 		var _VisibleAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.VisibleAmount, key) : _o.VisibleAmount;
+		var _PurchaseCountLimit = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.PurchaseCountLimit, key) : _o.PurchaseCountLimit;
 		var _DisplayOrder = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayOrder, key) : _o.DisplayOrder;
 		var _CategoryType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CategoryType, key) : _o.CategoryType;
 		var _RefreshGroup = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RefreshGroup, key) : _o.RefreshGroup;
@@ -127,7 +139,9 @@ public struct ShopRefreshExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IsLegacy : _o.IsLegacy,
       TableEncryptionService.UseEncryption ? _GoodsId : _o.GoodsId,
       TableEncryptionService.UseEncryption ? _IsBundle : _o.IsBundle,
+      TableEncryptionService.UseEncryption ? _ShopPurchasePopupType : _o.ShopPurchasePopupType,
       TableEncryptionService.UseEncryption ? _VisibleAmount : _o.VisibleAmount,
+      TableEncryptionService.UseEncryption ? _PurchaseCountLimit : _o.PurchaseCountLimit,
       TableEncryptionService.UseEncryption ? _DisplayOrder : _o.DisplayOrder,
       TableEncryptionService.UseEncryption ? _CategoryType : _o.CategoryType,
       TableEncryptionService.UseEncryption ? _RefreshGroup : _o.RefreshGroup,
@@ -144,7 +158,9 @@ public class ShopRefreshExcelT
   public bool IsLegacy { get; set; }
   public long GoodsId { get; set; }
   public bool IsBundle { get; set; }
+  public Global.ShopPurchasePopupType ShopPurchasePopupType { get; set; }
   public long VisibleAmount { get; set; }
+  public long PurchaseCountLimit { get; set; }
   public long DisplayOrder { get; set; }
   public Global.ShopCategoryType CategoryType { get; set; }
   public int RefreshGroup { get; set; }
@@ -158,7 +174,9 @@ public class ShopRefreshExcelT
     this.IsLegacy = false;
     this.GoodsId = 0;
     this.IsBundle = false;
+    this.ShopPurchasePopupType = Global.ShopPurchasePopupType.None;
     this.VisibleAmount = 0;
+    this.PurchaseCountLimit = 0;
     this.DisplayOrder = 0;
     this.CategoryType = Global.ShopCategoryType.General;
     this.RefreshGroup = 0;
@@ -179,13 +197,15 @@ static public class ShopRefreshExcelVerify
       && verifier.VerifyField(tablePos, 8 /*IsLegacy*/, 1 /*bool*/, 1, false)
       && verifier.VerifyField(tablePos, 10 /*GoodsId*/, 8 /*long*/, 8, false)
       && verifier.VerifyField(tablePos, 12 /*IsBundle*/, 1 /*bool*/, 1, false)
-      && verifier.VerifyField(tablePos, 14 /*VisibleAmount*/, 8 /*long*/, 8, false)
-      && verifier.VerifyField(tablePos, 16 /*DisplayOrder*/, 8 /*long*/, 8, false)
-      && verifier.VerifyField(tablePos, 18 /*CategoryType*/, 4 /*Global.ShopCategoryType*/, 4, false)
-      && verifier.VerifyField(tablePos, 20 /*RefreshGroup*/, 4 /*int*/, 4, false)
-      && verifier.VerifyField(tablePos, 22 /*Prob*/, 4 /*int*/, 4, false)
-      && verifier.VerifyString(tablePos, 24 /*BuyReportEventName*/, false)
-      && verifier.VerifyField(tablePos, 26 /*DisplayTag*/, 4 /*Global.ProductDisplayTag*/, 4, false)
+      && verifier.VerifyField(tablePos, 14 /*ShopPurchasePopupType*/, 4 /*Global.ShopPurchasePopupType*/, 4, false)
+      && verifier.VerifyField(tablePos, 16 /*VisibleAmount*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 18 /*PurchaseCountLimit*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 20 /*DisplayOrder*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 22 /*CategoryType*/, 4 /*Global.ShopCategoryType*/, 4, false)
+      && verifier.VerifyField(tablePos, 24 /*RefreshGroup*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 26 /*Prob*/, 4 /*int*/, 4, false)
+      && verifier.VerifyString(tablePos, 28 /*BuyReportEventName*/, false)
+      && verifier.VerifyField(tablePos, 30 /*DisplayTag*/, 4 /*Global.ProductDisplayTag*/, 4, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

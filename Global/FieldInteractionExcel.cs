@@ -97,25 +97,25 @@ public struct FieldInteractionExcel : IFlatbufferObject
       bool ShowEmoji = false,
       StringOffset KeywordLocalizeOffset = default(StringOffset),
       VectorOffset interactionTypeOffset = default(VectorOffset),
-      VectorOffset interactionIdOffset = default(VectorOffset),
+      VectorOffset InteractionIdOffset = default(VectorOffset),
       Global.FieldConditionClass ConditionClass = Global.FieldConditionClass.AndOr,
-      VectorOffset conditionClassParametersOffset = default(VectorOffset),
+      VectorOffset ConditionClassParametersOffset = default(VectorOffset),
       bool OnceOnly = false,
-      VectorOffset ConditionIndexOffset = default(VectorOffset),
-      VectorOffset ConditionTypeOffset = default(VectorOffset),
-      VectorOffset conditionIdOffset = default(VectorOffset),
-      VectorOffset NegateConditionOffset = default(VectorOffset)) {
+      VectorOffset conditionIndexOffset = default(VectorOffset),
+      VectorOffset conditionTypeOffset = default(VectorOffset),
+      VectorOffset ConditionIdOffset = default(VectorOffset),
+      VectorOffset negateConditionOffset = default(VectorOffset)) {
     builder.StartTable(14);
     FieldInteractionExcel.AddFieldDateId(builder, FieldDateId);
     FieldInteractionExcel.AddUniqueId(builder, UniqueId);
     FieldInteractionExcel.AddFieldSeasonId(builder, FieldSeasonId);
-    FieldInteractionExcel.AddNegateCondition(builder, NegateConditionOffset);
-    FieldInteractionExcel.AddConditionId(builder, conditionIdOffset);
-    FieldInteractionExcel.AddConditionType(builder, ConditionTypeOffset);
-    FieldInteractionExcel.AddConditionIndex(builder, ConditionIndexOffset);
-    FieldInteractionExcel.AddConditionClassParameters(builder, conditionClassParametersOffset);
+    FieldInteractionExcel.AddNegateCondition(builder, negateConditionOffset);
+    FieldInteractionExcel.AddConditionId(builder, ConditionIdOffset);
+    FieldInteractionExcel.AddConditionType(builder, conditionTypeOffset);
+    FieldInteractionExcel.AddConditionIndex(builder, conditionIndexOffset);
+    FieldInteractionExcel.AddConditionClassParameters(builder, ConditionClassParametersOffset);
     FieldInteractionExcel.AddConditionClass(builder, ConditionClass);
-    FieldInteractionExcel.AddInteractionId(builder, interactionIdOffset);
+    FieldInteractionExcel.AddInteractionId(builder, InteractionIdOffset);
     FieldInteractionExcel.AddInteractionType(builder, interactionTypeOffset);
     FieldInteractionExcel.AddKeywordLocalize(builder, KeywordLocalizeOffset);
     FieldInteractionExcel.AddOnceOnly(builder, OnceOnly);
@@ -219,37 +219,37 @@ public struct FieldInteractionExcel : IFlatbufferObject
       var __interactionType = _o.InteractionType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _interactionType = CreateInteractionTypeVector(builder, __interactionType);
     }
-    var _interactionId = default(VectorOffset);
+    var _InteractionId = default(VectorOffset);
     if (_o.InteractionId != null) {
-      var __interactionId = _o.InteractionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _interactionId = CreateInteractionIdVector(builder, __interactionId);
+      var __InteractionId = _o.InteractionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _InteractionId = CreateInteractionIdVector(builder, __InteractionId);
     }
 		var _ConditionClass = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConditionClass, key) : _o.ConditionClass;
-    var _conditionClassParameters = default(VectorOffset);
+    var _ConditionClassParameters = default(VectorOffset);
     if (_o.ConditionClassParameters != null) {
-      var __conditionClassParameters = _o.ConditionClassParameters.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _conditionClassParameters = CreateConditionClassParametersVector(builder, __conditionClassParameters);
+      var __ConditionClassParameters = _o.ConditionClassParameters.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConditionClassParameters = CreateConditionClassParametersVector(builder, __ConditionClassParameters);
     }
 		var _OnceOnly = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.OnceOnly, key) : _o.OnceOnly;
-    var _ConditionIndex = default(VectorOffset);
+    var _conditionIndex = default(VectorOffset);
     if (_o.ConditionIndex != null) {
-      var __ConditionIndex = _o.ConditionIndex.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _ConditionIndex = CreateConditionIndexVector(builder, __ConditionIndex);
+      var __conditionIndex = _o.ConditionIndex.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _conditionIndex = CreateConditionIndexVector(builder, __conditionIndex);
     }
-    var _ConditionType = default(VectorOffset);
+    var _conditionType = default(VectorOffset);
     if (_o.ConditionType != null) {
-      var __ConditionType = _o.ConditionType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _ConditionType = CreateConditionTypeVector(builder, __ConditionType);
+      var __conditionType = _o.ConditionType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _conditionType = CreateConditionTypeVector(builder, __conditionType);
     }
-    var _conditionId = default(VectorOffset);
+    var _ConditionId = default(VectorOffset);
     if (_o.ConditionId != null) {
-      var __conditionId = _o.ConditionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _conditionId = CreateConditionIdVector(builder, __conditionId);
+      var __ConditionId = _o.ConditionId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConditionId = CreateConditionIdVector(builder, __ConditionId);
     }
-    var _NegateCondition = default(VectorOffset);
+    var _negateCondition = default(VectorOffset);
     if (_o.NegateCondition != null) {
-      var __NegateCondition = _o.NegateCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _NegateCondition = CreateNegateConditionVector(builder, __NegateCondition);
+      var __negateCondition = _o.NegateCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _negateCondition = CreateNegateConditionVector(builder, __negateCondition);
     }
     return CreateFieldInteractionExcel(
       builder,
@@ -259,14 +259,14 @@ public struct FieldInteractionExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ShowEmoji : _o.ShowEmoji,
       _KeywordLocalize,
       _interactionType,
-      _interactionId,
+      _InteractionId,
       TableEncryptionService.UseEncryption ? _ConditionClass : _o.ConditionClass,
-      _conditionClassParameters,
+      _ConditionClassParameters,
       TableEncryptionService.UseEncryption ? _OnceOnly : _o.OnceOnly,
-      _ConditionIndex,
-      _ConditionType,
-      _conditionId,
-      _NegateCondition);
+      _conditionIndex,
+      _conditionType,
+      _ConditionId,
+      _negateCondition);
   }
 }
 

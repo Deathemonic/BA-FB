@@ -133,8 +133,8 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
       long ExtraFavorExpProb = 0,
       VectorOffset extraRewardParcelTypeOffset = default(VectorOffset),
       VectorOffset ExtraRewardParcelIdOffset = default(VectorOffset),
-      VectorOffset ExtraRewardAmountOffset = default(VectorOffset),
-      VectorOffset ExtraRewardProbOffset = default(VectorOffset),
+      VectorOffset extraRewardAmountOffset = default(VectorOffset),
+      VectorOffset extraRewardProbOffset = default(VectorOffset),
       VectorOffset IsExtraRewardDisplayedOffset = default(VectorOffset),
       VectorOffset RewardParcelTypeOffset = default(VectorOffset),
       VectorOffset rewardParcelIdOffset = default(VectorOffset),
@@ -153,8 +153,8 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
     EventContentLocationRewardExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
     EventContentLocationRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     EventContentLocationRewardExcel.AddIsExtraRewardDisplayed(builder, IsExtraRewardDisplayedOffset);
-    EventContentLocationRewardExcel.AddExtraRewardProb(builder, ExtraRewardProbOffset);
-    EventContentLocationRewardExcel.AddExtraRewardAmount(builder, ExtraRewardAmountOffset);
+    EventContentLocationRewardExcel.AddExtraRewardProb(builder, extraRewardProbOffset);
+    EventContentLocationRewardExcel.AddExtraRewardAmount(builder, extraRewardAmountOffset);
     EventContentLocationRewardExcel.AddExtraRewardParcelId(builder, ExtraRewardParcelIdOffset);
     EventContentLocationRewardExcel.AddExtraRewardParcelType(builder, extraRewardParcelTypeOffset);
     EventContentLocationRewardExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
@@ -303,15 +303,15 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
       var __ExtraRewardParcelId = _o.ExtraRewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ExtraRewardParcelId = CreateExtraRewardParcelIdVector(builder, __ExtraRewardParcelId);
     }
-    var _ExtraRewardAmount = default(VectorOffset);
+    var _extraRewardAmount = default(VectorOffset);
     if (_o.ExtraRewardAmount != null) {
-      var __ExtraRewardAmount = _o.ExtraRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _ExtraRewardAmount = CreateExtraRewardAmountVector(builder, __ExtraRewardAmount);
+      var __extraRewardAmount = _o.ExtraRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _extraRewardAmount = CreateExtraRewardAmountVector(builder, __extraRewardAmount);
     }
-    var _ExtraRewardProb = default(VectorOffset);
+    var _extraRewardProb = default(VectorOffset);
     if (_o.ExtraRewardProb != null) {
-      var __ExtraRewardProb = _o.ExtraRewardProb.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _ExtraRewardProb = CreateExtraRewardProbVector(builder, __ExtraRewardProb);
+      var __extraRewardProb = _o.ExtraRewardProb.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _extraRewardProb = CreateExtraRewardProbVector(builder, __extraRewardProb);
     }
     var _IsExtraRewardDisplayed = default(VectorOffset);
     if (_o.IsExtraRewardDisplayed != null) {
@@ -350,8 +350,8 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ExtraFavorExpProb : _o.ExtraFavorExpProb,
       _extraRewardParcelType,
       _ExtraRewardParcelId,
-      _ExtraRewardAmount,
-      _ExtraRewardProb,
+      _extraRewardAmount,
+      _extraRewardProb,
       _IsExtraRewardDisplayed,
       _RewardParcelType,
       _rewardParcelId,

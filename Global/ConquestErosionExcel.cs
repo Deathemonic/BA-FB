@@ -61,7 +61,7 @@ public struct ConquestErosionExcel : IFlatbufferObject
       VectorOffset PhaseStartConditionTypeOffset = default(VectorOffset),
       VectorOffset PhaseStartConditionParameterOffset = default(VectorOffset),
       VectorOffset PhaseBeforeExposeConditionTypeOffset = default(VectorOffset),
-      VectorOffset phaseBeforeExposeConditionParameterOffset = default(VectorOffset),
+      VectorOffset PhaseBeforeExposeConditionParameterOffset = default(VectorOffset),
       Global.ParcelType ErosionBattleConditionParcelType = Global.ParcelType.None,
       long ErosionBattleConditionParcelUniqueId = 0,
       long ErosionBattleConditionParcelAmount = 0,
@@ -73,7 +73,7 @@ public struct ConquestErosionExcel : IFlatbufferObject
     ConquestErosionExcel.AddId(builder, Id);
     ConquestErosionExcel.AddEventContentId(builder, EventContentId);
     ConquestErosionExcel.AddErosionBattleConditionParcelType(builder, ErosionBattleConditionParcelType);
-    ConquestErosionExcel.AddPhaseBeforeExposeConditionParameter(builder, phaseBeforeExposeConditionParameterOffset);
+    ConquestErosionExcel.AddPhaseBeforeExposeConditionParameter(builder, PhaseBeforeExposeConditionParameterOffset);
     ConquestErosionExcel.AddPhaseBeforeExposeConditionType(builder, PhaseBeforeExposeConditionTypeOffset);
     ConquestErosionExcel.AddPhaseStartConditionParameter(builder, PhaseStartConditionParameterOffset);
     ConquestErosionExcel.AddPhaseStartConditionType(builder, PhaseStartConditionTypeOffset);
@@ -174,11 +174,11 @@ public struct ConquestErosionExcel : IFlatbufferObject
       var __PhaseBeforeExposeConditionType = _o.PhaseBeforeExposeConditionType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _PhaseBeforeExposeConditionType = CreatePhaseBeforeExposeConditionTypeVector(builder, __PhaseBeforeExposeConditionType);
     }
-    var _phaseBeforeExposeConditionParameter = default(VectorOffset);
+    var _PhaseBeforeExposeConditionParameter = default(VectorOffset);
     if (_o.PhaseBeforeExposeConditionParameter != null) {
-      var __phaseBeforeExposeConditionParameter = new StringOffset[_o.PhaseBeforeExposeConditionParameter.Count];
-      for (var _j = 0; _j < __phaseBeforeExposeConditionParameter.Length; ++_j) { __phaseBeforeExposeConditionParameter[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PhaseBeforeExposeConditionParameter[_j], key) : _o.PhaseBeforeExposeConditionParameter[_j])); }
-      _phaseBeforeExposeConditionParameter = CreatePhaseBeforeExposeConditionParameterVector(builder, __phaseBeforeExposeConditionParameter);
+      var __PhaseBeforeExposeConditionParameter = new StringOffset[_o.PhaseBeforeExposeConditionParameter.Count];
+      for (var _j = 0; _j < __PhaseBeforeExposeConditionParameter.Length; ++_j) { __PhaseBeforeExposeConditionParameter[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PhaseBeforeExposeConditionParameter[_j], key) : _o.PhaseBeforeExposeConditionParameter[_j])); }
+      _PhaseBeforeExposeConditionParameter = CreatePhaseBeforeExposeConditionParameterVector(builder, __PhaseBeforeExposeConditionParameter);
     }
 		var _ErosionBattleConditionParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ErosionBattleConditionParcelType, key) : _o.ErosionBattleConditionParcelType;
 		var _ErosionBattleConditionParcelUniqueId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ErosionBattleConditionParcelUniqueId, key) : _o.ErosionBattleConditionParcelUniqueId;
@@ -195,7 +195,7 @@ public struct ConquestErosionExcel : IFlatbufferObject
       _PhaseStartConditionType,
       _PhaseStartConditionParameter,
       _PhaseBeforeExposeConditionType,
-      _phaseBeforeExposeConditionParameter,
+      _PhaseBeforeExposeConditionParameter,
       TableEncryptionService.UseEncryption ? _ErosionBattleConditionParcelType : _o.ErosionBattleConditionParcelType,
       TableEncryptionService.UseEncryption ? _ErosionBattleConditionParcelUniqueId : _o.ErosionBattleConditionParcelUniqueId,
       TableEncryptionService.UseEncryption ? _ErosionBattleConditionParcelAmount : _o.ErosionBattleConditionParcelAmount,

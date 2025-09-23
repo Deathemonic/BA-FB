@@ -60,7 +60,7 @@ public struct ConstStrategyExcel : IFlatbufferObject
       float CameraZoomMin = 0.0f,
       float CameraZoomDefault = 0.0f,
       Global.CurrencyTypes HealCostType = Global.CurrencyTypes.Invalid,
-      VectorOffset HealCostAmountOffset = default(VectorOffset),
+      VectorOffset healCostAmountOffset = default(VectorOffset),
       int CanHealHpRate = 0,
       long PlayTimeLimitInSeconds = 0,
       int AdventureEchelonCount = 0,
@@ -98,7 +98,7 @@ public struct ConstStrategyExcel : IFlatbufferObject
     ConstStrategyExcel.AddRaidEchelonCount(builder, RaidEchelonCount);
     ConstStrategyExcel.AddAdventureEchelonCount(builder, AdventureEchelonCount);
     ConstStrategyExcel.AddCanHealHpRate(builder, CanHealHpRate);
-    ConstStrategyExcel.AddHealCostAmount(builder, HealCostAmountOffset);
+    ConstStrategyExcel.AddHealCostAmount(builder, healCostAmountOffset);
     ConstStrategyExcel.AddHealCostType(builder, HealCostType);
     ConstStrategyExcel.AddCameraZoomDefault(builder, CameraZoomDefault);
     ConstStrategyExcel.AddCameraZoomMin(builder, CameraZoomMin);
@@ -186,10 +186,10 @@ public struct ConstStrategyExcel : IFlatbufferObject
 		var _CameraZoomMin = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CameraZoomMin, key) : _o.CameraZoomMin;
 		var _CameraZoomDefault = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CameraZoomDefault, key) : _o.CameraZoomDefault;
 		var _HealCostType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.HealCostType, key) : _o.HealCostType;
-    var _HealCostAmount = default(VectorOffset);
+    var _healCostAmount = default(VectorOffset);
     if (_o.HealCostAmount != null) {
-      var __HealCostAmount = _o.HealCostAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _HealCostAmount = CreateHealCostAmountVector(builder, __HealCostAmount);
+      var __healCostAmount = _o.HealCostAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _healCostAmount = CreateHealCostAmountVector(builder, __healCostAmount);
     }
 		var _CanHealHpRate = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CanHealHpRate, key) : _o.CanHealHpRate;
 		var _PlayTimeLimitInSeconds = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.PlayTimeLimitInSeconds, key) : _o.PlayTimeLimitInSeconds;
@@ -217,7 +217,7 @@ public struct ConstStrategyExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _CameraZoomMin : _o.CameraZoomMin,
       TableEncryptionService.UseEncryption ? _CameraZoomDefault : _o.CameraZoomDefault,
       TableEncryptionService.UseEncryption ? _HealCostType : _o.HealCostType,
-      _HealCostAmount,
+      _healCostAmount,
       TableEncryptionService.UseEncryption ? _CanHealHpRate : _o.CanHealHpRate,
       TableEncryptionService.UseEncryption ? _PlayTimeLimitInSeconds : _o.PlayTimeLimitInSeconds,
       TableEncryptionService.UseEncryption ? _AdventureEchelonCount : _o.AdventureEchelonCount,

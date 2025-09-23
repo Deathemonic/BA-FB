@@ -128,8 +128,8 @@ public struct WorldRaidStageExcel : IFlatbufferObject
       long GroundId = 0,
       long RaidBattleEndRewardGroupId = 0,
       long RaidRewardGroupId = 0,
-      VectorOffset battleReadyTimelinePathOffset = default(VectorOffset),
-      VectorOffset battleReadyTimelinePhaseStartOffset = default(VectorOffset),
+      VectorOffset BattleReadyTimelinePathOffset = default(VectorOffset),
+      VectorOffset BattleReadyTimelinePhaseStartOffset = default(VectorOffset),
       VectorOffset BattleReadyTimelinePhaseEndOffset = default(VectorOffset),
       StringOffset VictoryTimelinePathOffset = default(StringOffset),
       StringOffset PhaseChangeTimelinePathOffset = default(StringOffset),
@@ -142,7 +142,7 @@ public struct WorldRaidStageExcel : IFlatbufferObject
       bool ShowSkillCard = false,
       uint BossBGInfoKey = 0,
       long DamageToWorldBoss = 0,
-      VectorOffset allyPassiveSkillOffset = default(VectorOffset),
+      VectorOffset AllyPassiveSkillOffset = default(VectorOffset),
       VectorOffset AllyPassiveSkillLevelOffset = default(VectorOffset),
       bool SaveCurrentLocalBossHP = false,
       Global.EchelonExtensionType EchelonExtensionType = Global.EchelonExtensionType.Base) {
@@ -164,13 +164,13 @@ public struct WorldRaidStageExcel : IFlatbufferObject
     WorldRaidStageExcel.AddId(builder, Id);
     WorldRaidStageExcel.AddEchelonExtensionType(builder, EchelonExtensionType);
     WorldRaidStageExcel.AddAllyPassiveSkillLevel(builder, AllyPassiveSkillLevelOffset);
-    WorldRaidStageExcel.AddAllyPassiveSkill(builder, allyPassiveSkillOffset);
+    WorldRaidStageExcel.AddAllyPassiveSkill(builder, AllyPassiveSkillOffset);
     WorldRaidStageExcel.AddBossBGInfoKey(builder, BossBGInfoKey);
     WorldRaidStageExcel.AddPhaseChangeTimelinePath(builder, PhaseChangeTimelinePathOffset);
     WorldRaidStageExcel.AddVictoryTimelinePath(builder, VictoryTimelinePathOffset);
     WorldRaidStageExcel.AddBattleReadyTimelinePhaseEnd(builder, BattleReadyTimelinePhaseEndOffset);
-    WorldRaidStageExcel.AddBattleReadyTimelinePhaseStart(builder, battleReadyTimelinePhaseStartOffset);
-    WorldRaidStageExcel.AddBattleReadyTimelinePath(builder, battleReadyTimelinePathOffset);
+    WorldRaidStageExcel.AddBattleReadyTimelinePhaseStart(builder, BattleReadyTimelinePhaseStartOffset);
+    WorldRaidStageExcel.AddBattleReadyTimelinePath(builder, BattleReadyTimelinePathOffset);
     WorldRaidStageExcel.AddWorldRaidDifficulty(builder, WorldRaidDifficulty);
     WorldRaidStageExcel.AddBossCharacterId(builder, BossCharacterIdOffset);
     WorldRaidStageExcel.AddBGPath(builder, BGPathOffset);
@@ -328,16 +328,16 @@ public struct WorldRaidStageExcel : IFlatbufferObject
 		var _GroundId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroundId, key) : _o.GroundId;
 		var _RaidBattleEndRewardGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RaidBattleEndRewardGroupId, key) : _o.RaidBattleEndRewardGroupId;
 		var _RaidRewardGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RaidRewardGroupId, key) : _o.RaidRewardGroupId;
-    var _battleReadyTimelinePath = default(VectorOffset);
+    var _BattleReadyTimelinePath = default(VectorOffset);
     if (_o.BattleReadyTimelinePath != null) {
-      var __battleReadyTimelinePath = new StringOffset[_o.BattleReadyTimelinePath.Count];
-      for (var _j = 0; _j < __battleReadyTimelinePath.Length; ++_j) { __battleReadyTimelinePath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.BattleReadyTimelinePath[_j], key) : _o.BattleReadyTimelinePath[_j])); }
-      _battleReadyTimelinePath = CreateBattleReadyTimelinePathVector(builder, __battleReadyTimelinePath);
+      var __BattleReadyTimelinePath = new StringOffset[_o.BattleReadyTimelinePath.Count];
+      for (var _j = 0; _j < __BattleReadyTimelinePath.Length; ++_j) { __BattleReadyTimelinePath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.BattleReadyTimelinePath[_j], key) : _o.BattleReadyTimelinePath[_j])); }
+      _BattleReadyTimelinePath = CreateBattleReadyTimelinePathVector(builder, __BattleReadyTimelinePath);
     }
-    var _battleReadyTimelinePhaseStart = default(VectorOffset);
+    var _BattleReadyTimelinePhaseStart = default(VectorOffset);
     if (_o.BattleReadyTimelinePhaseStart != null) {
-      var __battleReadyTimelinePhaseStart = _o.BattleReadyTimelinePhaseStart.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _battleReadyTimelinePhaseStart = CreateBattleReadyTimelinePhaseStartVector(builder, __battleReadyTimelinePhaseStart);
+      var __BattleReadyTimelinePhaseStart = _o.BattleReadyTimelinePhaseStart.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BattleReadyTimelinePhaseStart = CreateBattleReadyTimelinePhaseStartVector(builder, __BattleReadyTimelinePhaseStart);
     }
     var _BattleReadyTimelinePhaseEnd = default(VectorOffset);
     if (_o.BattleReadyTimelinePhaseEnd != null) {
@@ -355,11 +355,11 @@ public struct WorldRaidStageExcel : IFlatbufferObject
 		var _ShowSkillCard = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ShowSkillCard, key) : _o.ShowSkillCard;
 		var _BossBGInfoKey = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.BossBGInfoKey, key) : _o.BossBGInfoKey;
 		var _DamageToWorldBoss = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DamageToWorldBoss, key) : _o.DamageToWorldBoss;
-    var _allyPassiveSkill = default(VectorOffset);
+    var _AllyPassiveSkill = default(VectorOffset);
     if (_o.AllyPassiveSkill != null) {
-      var __allyPassiveSkill = new StringOffset[_o.AllyPassiveSkill.Count];
-      for (var _j = 0; _j < __allyPassiveSkill.Length; ++_j) { __allyPassiveSkill[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.AllyPassiveSkill[_j], key) : _o.AllyPassiveSkill[_j])); }
-      _allyPassiveSkill = CreateAllyPassiveSkillVector(builder, __allyPassiveSkill);
+      var __AllyPassiveSkill = new StringOffset[_o.AllyPassiveSkill.Count];
+      for (var _j = 0; _j < __AllyPassiveSkill.Length; ++_j) { __AllyPassiveSkill[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.AllyPassiveSkill[_j], key) : _o.AllyPassiveSkill[_j])); }
+      _AllyPassiveSkill = CreateAllyPassiveSkillVector(builder, __AllyPassiveSkill);
     }
     var _AllyPassiveSkillLevel = default(VectorOffset);
     if (_o.AllyPassiveSkillLevel != null) {
@@ -387,8 +387,8 @@ public struct WorldRaidStageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _GroundId : _o.GroundId,
       TableEncryptionService.UseEncryption ? _RaidBattleEndRewardGroupId : _o.RaidBattleEndRewardGroupId,
       TableEncryptionService.UseEncryption ? _RaidRewardGroupId : _o.RaidRewardGroupId,
-      _battleReadyTimelinePath,
-      _battleReadyTimelinePhaseStart,
+      _BattleReadyTimelinePath,
+      _BattleReadyTimelinePhaseStart,
       _BattleReadyTimelinePhaseEnd,
       _VictoryTimelinePath,
       _PhaseChangeTimelinePath,
@@ -401,7 +401,7 @@ public struct WorldRaidStageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ShowSkillCard : _o.ShowSkillCard,
       TableEncryptionService.UseEncryption ? _BossBGInfoKey : _o.BossBGInfoKey,
       TableEncryptionService.UseEncryption ? _DamageToWorldBoss : _o.DamageToWorldBoss,
-      _allyPassiveSkill,
+      _AllyPassiveSkill,
       _AllyPassiveSkillLevel,
       TableEncryptionService.UseEncryption ? _SaveCurrentLocalBossHP : _o.SaveCurrentLocalBossHP,
       TableEncryptionService.UseEncryption ? _EchelonExtensionType : _o.EchelonExtensionType);

@@ -79,12 +79,12 @@ public struct EquipmentExcel : IFlatbufferObject
       int StackableMax = 0,
       StringOffset IconOffset = default(StringOffset),
       StringOffset ImageNameOffset = default(StringOffset),
-      VectorOffset tagsOffset = default(VectorOffset),
+      VectorOffset TagsOffset = default(VectorOffset),
       long CraftQualityTier0 = 0,
       long CraftQualityTier1 = 0,
       long CraftQualityTier2 = 0,
       long ShiftingCraftQuality = 0,
-      VectorOffset shopCategoryOffset = default(VectorOffset),
+      VectorOffset ShopCategoryOffset = default(VectorOffset),
       long ShortcutTypeId = 0) {
     builder.StartTable(19);
     EquipmentExcel.AddShortcutTypeId(builder, ShortcutTypeId);
@@ -95,8 +95,8 @@ public struct EquipmentExcel : IFlatbufferObject
     EquipmentExcel.AddNextTierEquipment(builder, NextTierEquipment);
     EquipmentExcel.AddTierInit(builder, TierInit);
     EquipmentExcel.AddId(builder, Id);
-    EquipmentExcel.AddShopCategory(builder, shopCategoryOffset);
-    EquipmentExcel.AddTags(builder, tagsOffset);
+    EquipmentExcel.AddShopCategory(builder, ShopCategoryOffset);
+    EquipmentExcel.AddTags(builder, TagsOffset);
     EquipmentExcel.AddImageName(builder, ImageNameOffset);
     EquipmentExcel.AddIcon(builder, IconOffset);
     EquipmentExcel.AddStackableMax(builder, StackableMax);
@@ -187,19 +187,19 @@ public struct EquipmentExcel : IFlatbufferObject
 		var _StackableMax = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StackableMax, key) : _o.StackableMax;
     var _Icon = _o.Icon == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.Icon, key) : _o.Icon));
     var _ImageName = _o.ImageName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ImageName, key) : _o.ImageName));
-    var _tags = default(VectorOffset);
+    var _Tags = default(VectorOffset);
     if (_o.Tags != null) {
-      var __tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _tags = CreateTagsVector(builder, __tags);
+      var __Tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _Tags = CreateTagsVector(builder, __Tags);
     }
 		var _CraftQualityTier0 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CraftQualityTier0, key) : _o.CraftQualityTier0;
 		var _CraftQualityTier1 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CraftQualityTier1, key) : _o.CraftQualityTier1;
 		var _CraftQualityTier2 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CraftQualityTier2, key) : _o.CraftQualityTier2;
 		var _ShiftingCraftQuality = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ShiftingCraftQuality, key) : _o.ShiftingCraftQuality;
-    var _shopCategory = default(VectorOffset);
+    var _ShopCategory = default(VectorOffset);
     if (_o.ShopCategory != null) {
-      var __shopCategory = _o.ShopCategory.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _shopCategory = CreateShopCategoryVector(builder, __shopCategory);
+      var __ShopCategory = _o.ShopCategory.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ShopCategory = CreateShopCategoryVector(builder, __ShopCategory);
     }
 		var _ShortcutTypeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ShortcutTypeId, key) : _o.ShortcutTypeId;
     return CreateEquipmentExcel(
@@ -216,12 +216,12 @@ public struct EquipmentExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _StackableMax : _o.StackableMax,
       _Icon,
       _ImageName,
-      _tags,
+      _Tags,
       TableEncryptionService.UseEncryption ? _CraftQualityTier0 : _o.CraftQualityTier0,
       TableEncryptionService.UseEncryption ? _CraftQualityTier1 : _o.CraftQualityTier1,
       TableEncryptionService.UseEncryption ? _CraftQualityTier2 : _o.CraftQualityTier2,
       TableEncryptionService.UseEncryption ? _ShiftingCraftQuality : _o.ShiftingCraftQuality,
-      _shopCategory,
+      _ShopCategory,
       TableEncryptionService.UseEncryption ? _ShortcutTypeId : _o.ShortcutTypeId);
   }
 }

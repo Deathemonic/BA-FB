@@ -116,6 +116,7 @@ public struct FurnitureExcel : IFlatbufferObject
   public int CafeCharacterStateMakeLength { get { int o = __p.__offset(84); return o != 0 ? __p.__vector_len(o) : 0; } }
   public string CafeCharacterStateOnly(int j) { int o = __p.__offset(86); return o != 0 ? __p.__string(__p.__vector(o) + j * 4) : null; }
   public int CafeCharacterStateOnlyLength { get { int o = __p.__offset(86); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public bool HideCraftShortcut { get { int o = __p.__offset(88); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
 
   public static Offset<Global.FurnitureExcel> CreateFurnitureExcel(FlatBufferBuilder builder,
       long Id = 0,
@@ -145,22 +146,23 @@ public struct FurnitureExcel : IFlatbufferObject
       long ComfortBonus = 0,
       long VisitOperationType = 0,
       long VisitBonusOperationType = 0,
-      VectorOffset tagsOffset = default(VectorOffset),
+      VectorOffset TagsOffset = default(VectorOffset),
       long CraftQualityTier0 = 0,
       long CraftQualityTier1 = 0,
       long CraftQualityTier2 = 0,
       long ShiftingCraftQuality = 0,
       Global.FurnitureFunctionType FurnitureFunctionType = Global.FurnitureFunctionType.None,
-      VectorOffset furnitureFunctionParameterOffset = default(VectorOffset),
+      VectorOffset FurnitureFunctionParameterOffset = default(VectorOffset),
       long VideoId = 0,
       long EventCollectionId = 0,
       long FurnitureBubbleOffsetX = 0,
       long FurnitureBubbleOffsetY = 0,
       VectorOffset CafeCharacterStateReqOffset = default(VectorOffset),
-      VectorOffset cafeCharacterStateAddOffset = default(VectorOffset),
+      VectorOffset CafeCharacterStateAddOffset = default(VectorOffset),
       VectorOffset CafeCharacterStateMakeOffset = default(VectorOffset),
-      VectorOffset CafeCharacterStateOnlyOffset = default(VectorOffset)) {
-    builder.StartTable(42);
+      VectorOffset CafeCharacterStateOnlyOffset = default(VectorOffset),
+      bool HideCraftShortcut = false) {
+    builder.StartTable(43);
     FurnitureExcel.AddFurnitureBubbleOffsetY(builder, FurnitureBubbleOffsetY);
     FurnitureExcel.AddFurnitureBubbleOffsetX(builder, FurnitureBubbleOffsetX);
     FurnitureExcel.AddEventCollectionId(builder, EventCollectionId);
@@ -179,11 +181,11 @@ public struct FurnitureExcel : IFlatbufferObject
     FurnitureExcel.AddId(builder, Id);
     FurnitureExcel.AddCafeCharacterStateOnly(builder, CafeCharacterStateOnlyOffset);
     FurnitureExcel.AddCafeCharacterStateMake(builder, CafeCharacterStateMakeOffset);
-    FurnitureExcel.AddCafeCharacterStateAdd(builder, cafeCharacterStateAddOffset);
+    FurnitureExcel.AddCafeCharacterStateAdd(builder, CafeCharacterStateAddOffset);
     FurnitureExcel.AddCafeCharacterStateReq(builder, CafeCharacterStateReqOffset);
-    FurnitureExcel.AddFurnitureFunctionParameter(builder, furnitureFunctionParameterOffset);
+    FurnitureExcel.AddFurnitureFunctionParameter(builder, FurnitureFunctionParameterOffset);
     FurnitureExcel.AddFurnitureFunctionType(builder, FurnitureFunctionType);
-    FurnitureExcel.AddTags(builder, tagsOffset);
+    FurnitureExcel.AddTags(builder, TagsOffset);
     FurnitureExcel.AddCornerPrefab(builder, CornerPrefabOffset);
     FurnitureExcel.AddSubExpandPrefab(builder, SubExpandPrefabOffset);
     FurnitureExcel.AddSubPrefab(builder, SubPrefabOffset);
@@ -200,13 +202,14 @@ public struct FurnitureExcel : IFlatbufferObject
     FurnitureExcel.AddCategory(builder, Category);
     FurnitureExcel.AddRarity(builder, Rarity);
     FurnitureExcel.AddProductionStep(builder, ProductionStep);
+    FurnitureExcel.AddHideCraftShortcut(builder, HideCraftShortcut);
     FurnitureExcel.AddReverseRotation(builder, ReverseRotation);
     FurnitureExcel.AddEnable(builder, Enable);
     FurnitureExcel.AddCheckFloorDecoration(builder, CheckFloorDecoration);
     return FurnitureExcel.EndFurnitureExcel(builder);
   }
 
-  public static void StartFurnitureExcel(FlatBufferBuilder builder) { builder.StartTable(42); }
+  public static void StartFurnitureExcel(FlatBufferBuilder builder) { builder.StartTable(43); }
   public static void AddId(FlatBufferBuilder builder, long id) { builder.AddLong(0, id, 0); }
   public static void AddProductionStep(FlatBufferBuilder builder, Global.ProductionStep productionStep) { builder.AddInt(1, (int)productionStep, 0); }
   public static void AddRarity(FlatBufferBuilder builder, Global.Rarity rarity) { builder.AddInt(2, (int)rarity, 0); }
@@ -279,6 +282,7 @@ public struct FurnitureExcel : IFlatbufferObject
   public static VectorOffset CreateCafeCharacterStateOnlyVectorBlock(FlatBufferBuilder builder, ArraySegment<StringOffset> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateCafeCharacterStateOnlyVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<StringOffset>(dataPtr, sizeInBytes); return builder.EndVector(); }
   public static void StartCafeCharacterStateOnlyVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddHideCraftShortcut(FlatBufferBuilder builder, bool hideCraftShortcut) { builder.AddBool(42, hideCraftShortcut, false); }
   public static Offset<Global.FurnitureExcel> EndFurnitureExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Global.FurnitureExcel>(o);
@@ -338,6 +342,7 @@ public struct FurnitureExcel : IFlatbufferObject
     for (var _j = 0; _j < this.CafeCharacterStateMakeLength; ++_j) {_o.CafeCharacterStateMake.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CafeCharacterStateMake(_j), key) : this.CafeCharacterStateMake(_j));}
     _o.CafeCharacterStateOnly = new List<string>();
     for (var _j = 0; _j < this.CafeCharacterStateOnlyLength; ++_j) {_o.CafeCharacterStateOnly.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CafeCharacterStateOnly(_j), key) : this.CafeCharacterStateOnly(_j));}
+    _o.HideCraftShortcut = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.HideCraftShortcut, key) : this.HideCraftShortcut;
   }
   public static Offset<Global.FurnitureExcel> Pack(FlatBufferBuilder builder, FurnitureExcelT _o) {
     if (_o == null) return default(Offset<Global.FurnitureExcel>);
@@ -369,20 +374,20 @@ public struct FurnitureExcel : IFlatbufferObject
 		var _ComfortBonus = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ComfortBonus, key) : _o.ComfortBonus;
 		var _VisitOperationType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.VisitOperationType, key) : _o.VisitOperationType;
 		var _VisitBonusOperationType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.VisitBonusOperationType, key) : _o.VisitBonusOperationType;
-    var _tags = default(VectorOffset);
+    var _Tags = default(VectorOffset);
     if (_o.Tags != null) {
-      var __tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _tags = CreateTagsVector(builder, __tags);
+      var __Tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _Tags = CreateTagsVector(builder, __Tags);
     }
 		var _CraftQualityTier0 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CraftQualityTier0, key) : _o.CraftQualityTier0;
 		var _CraftQualityTier1 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CraftQualityTier1, key) : _o.CraftQualityTier1;
 		var _CraftQualityTier2 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CraftQualityTier2, key) : _o.CraftQualityTier2;
 		var _ShiftingCraftQuality = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ShiftingCraftQuality, key) : _o.ShiftingCraftQuality;
 		var _FurnitureFunctionType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.FurnitureFunctionType, key) : _o.FurnitureFunctionType;
-    var _furnitureFunctionParameter = default(VectorOffset);
+    var _FurnitureFunctionParameter = default(VectorOffset);
     if (_o.FurnitureFunctionParameter != null) {
-      var __furnitureFunctionParameter = _o.FurnitureFunctionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _furnitureFunctionParameter = CreateFurnitureFunctionParameterVector(builder, __furnitureFunctionParameter);
+      var __FurnitureFunctionParameter = _o.FurnitureFunctionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _FurnitureFunctionParameter = CreateFurnitureFunctionParameterVector(builder, __FurnitureFunctionParameter);
     }
 		var _VideoId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.VideoId, key) : _o.VideoId;
 		var _EventCollectionId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventCollectionId, key) : _o.EventCollectionId;
@@ -394,11 +399,11 @@ public struct FurnitureExcel : IFlatbufferObject
       for (var _j = 0; _j < __CafeCharacterStateReq.Length; ++_j) { __CafeCharacterStateReq[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CafeCharacterStateReq[_j], key) : _o.CafeCharacterStateReq[_j])); }
       _CafeCharacterStateReq = CreateCafeCharacterStateReqVector(builder, __CafeCharacterStateReq);
     }
-    var _cafeCharacterStateAdd = default(VectorOffset);
+    var _CafeCharacterStateAdd = default(VectorOffset);
     if (_o.CafeCharacterStateAdd != null) {
-      var __cafeCharacterStateAdd = new StringOffset[_o.CafeCharacterStateAdd.Count];
-      for (var _j = 0; _j < __cafeCharacterStateAdd.Length; ++_j) { __cafeCharacterStateAdd[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CafeCharacterStateAdd[_j], key) : _o.CafeCharacterStateAdd[_j])); }
-      _cafeCharacterStateAdd = CreateCafeCharacterStateAddVector(builder, __cafeCharacterStateAdd);
+      var __CafeCharacterStateAdd = new StringOffset[_o.CafeCharacterStateAdd.Count];
+      for (var _j = 0; _j < __CafeCharacterStateAdd.Length; ++_j) { __CafeCharacterStateAdd[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CafeCharacterStateAdd[_j], key) : _o.CafeCharacterStateAdd[_j])); }
+      _CafeCharacterStateAdd = CreateCafeCharacterStateAddVector(builder, __CafeCharacterStateAdd);
     }
     var _CafeCharacterStateMake = default(VectorOffset);
     if (_o.CafeCharacterStateMake != null) {
@@ -412,6 +417,7 @@ public struct FurnitureExcel : IFlatbufferObject
       for (var _j = 0; _j < __CafeCharacterStateOnly.Length; ++_j) { __CafeCharacterStateOnly[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CafeCharacterStateOnly[_j], key) : _o.CafeCharacterStateOnly[_j])); }
       _CafeCharacterStateOnly = CreateCafeCharacterStateOnlyVector(builder, __CafeCharacterStateOnly);
     }
+		var _HideCraftShortcut = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.HideCraftShortcut, key) : _o.HideCraftShortcut;
     return CreateFurnitureExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
@@ -441,21 +447,22 @@ public struct FurnitureExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ComfortBonus : _o.ComfortBonus,
       TableEncryptionService.UseEncryption ? _VisitOperationType : _o.VisitOperationType,
       TableEncryptionService.UseEncryption ? _VisitBonusOperationType : _o.VisitBonusOperationType,
-      _tags,
+      _Tags,
       TableEncryptionService.UseEncryption ? _CraftQualityTier0 : _o.CraftQualityTier0,
       TableEncryptionService.UseEncryption ? _CraftQualityTier1 : _o.CraftQualityTier1,
       TableEncryptionService.UseEncryption ? _CraftQualityTier2 : _o.CraftQualityTier2,
       TableEncryptionService.UseEncryption ? _ShiftingCraftQuality : _o.ShiftingCraftQuality,
       TableEncryptionService.UseEncryption ? _FurnitureFunctionType : _o.FurnitureFunctionType,
-      _furnitureFunctionParameter,
+      _FurnitureFunctionParameter,
       TableEncryptionService.UseEncryption ? _VideoId : _o.VideoId,
       TableEncryptionService.UseEncryption ? _EventCollectionId : _o.EventCollectionId,
       TableEncryptionService.UseEncryption ? _FurnitureBubbleOffsetX : _o.FurnitureBubbleOffsetX,
       TableEncryptionService.UseEncryption ? _FurnitureBubbleOffsetY : _o.FurnitureBubbleOffsetY,
       _CafeCharacterStateReq,
-      _cafeCharacterStateAdd,
+      _CafeCharacterStateAdd,
       _CafeCharacterStateMake,
-      _CafeCharacterStateOnly);
+      _CafeCharacterStateOnly,
+      TableEncryptionService.UseEncryption ? _HideCraftShortcut : _o.HideCraftShortcut);
   }
 }
 
@@ -503,6 +510,7 @@ public class FurnitureExcelT
   public List<string> CafeCharacterStateAdd { get; set; }
   public List<string> CafeCharacterStateMake { get; set; }
   public List<string> CafeCharacterStateOnly { get; set; }
+  public bool HideCraftShortcut { get; set; }
 
   public FurnitureExcelT() {
     this.Id = 0;
@@ -547,6 +555,7 @@ public class FurnitureExcelT
     this.CafeCharacterStateAdd = null;
     this.CafeCharacterStateMake = null;
     this.CafeCharacterStateOnly = null;
+    this.HideCraftShortcut = false;
   }
 }
 
@@ -598,6 +607,7 @@ static public class FurnitureExcelVerify
       && verifier.VerifyVectorOfStrings(tablePos, 82 /*CafeCharacterStateAdd*/, false)
       && verifier.VerifyVectorOfStrings(tablePos, 84 /*CafeCharacterStateMake*/, false)
       && verifier.VerifyVectorOfStrings(tablePos, 86 /*CafeCharacterStateOnly*/, false)
+      && verifier.VerifyField(tablePos, 88 /*HideCraftShortcut*/, 1 /*bool*/, 1, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

@@ -63,9 +63,9 @@ public struct MiniGameAudioAnimatorExcel : IFlatbufferObject
       float Delay = 0.0f,
       int AudioPriority = 0,
       VectorOffset AudioClipPathOffset = default(VectorOffset),
-      VectorOffset voiceHashOffset = default(VectorOffset)) {
+      VectorOffset VoiceHashOffset = default(VectorOffset)) {
     builder.StartTable(11);
-    MiniGameAudioAnimatorExcel.AddVoiceHash(builder, voiceHashOffset);
+    MiniGameAudioAnimatorExcel.AddVoiceHash(builder, VoiceHashOffset);
     MiniGameAudioAnimatorExcel.AddAudioClipPath(builder, AudioClipPathOffset);
     MiniGameAudioAnimatorExcel.AddAudioPriority(builder, AudioPriority);
     MiniGameAudioAnimatorExcel.AddDelay(builder, Delay);
@@ -144,10 +144,10 @@ public struct MiniGameAudioAnimatorExcel : IFlatbufferObject
       for (var _j = 0; _j < __AudioClipPath.Length; ++_j) { __AudioClipPath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.AudioClipPath[_j], key) : _o.AudioClipPath[_j])); }
       _AudioClipPath = CreateAudioClipPathVector(builder, __AudioClipPath);
     }
-    var _voiceHash = default(VectorOffset);
+    var _VoiceHash = default(VectorOffset);
     if (_o.VoiceHash != null) {
-      var __voiceHash = _o.VoiceHash.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _voiceHash = CreateVoiceHashVector(builder, __voiceHash);
+      var __VoiceHash = _o.VoiceHash.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _VoiceHash = CreateVoiceHashVector(builder, __VoiceHash);
     }
     return CreateMiniGameAudioAnimatorExcel(
       builder,
@@ -161,7 +161,7 @@ public struct MiniGameAudioAnimatorExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _Delay : _o.Delay,
       TableEncryptionService.UseEncryption ? _AudioPriority : _o.AudioPriority,
       _AudioClipPath,
-      _voiceHash);
+      _VoiceHash);
   }
 }
 

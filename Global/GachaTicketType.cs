@@ -18,6 +18,9 @@ public enum GachaTicketType : int
   PackagePropertyThreeStar = 8,
   Temp_1 = 9,
   PackageAcademyThreeStar = 10,
+  SelectPickup = 11,
+  SelectPickupOnce = 12,
+  PackageLimitedThreeStar = 13,
 };
 
 

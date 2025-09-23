@@ -142,10 +142,10 @@ public struct ConstArenaExcel : IFlatbufferObject
       VectorOffset characterSlotHideRankOffset = default(VectorOffset),
       long MapSlotHideRank = 0,
       VectorOffset RelativeOpponentRankStartOffset = default(VectorOffset),
-      VectorOffset RelativeOpponentRankEndOffset = default(VectorOffset),
+      VectorOffset relativeOpponentRankEndOffset = default(VectorOffset),
       VectorOffset ModifiedStatTypeOffset = default(VectorOffset),
       VectorOffset statMulFactorOffset = default(VectorOffset),
-      VectorOffset StatSumFactorOffset = default(VectorOffset),
+      VectorOffset statSumFactorOffset = default(VectorOffset),
       VectorOffset NPCNameOffset = default(VectorOffset),
       long NPCMainCharacterCount = 0,
       long NPCSupportCharacterCount = 0,
@@ -186,10 +186,10 @@ public struct ConstArenaExcel : IFlatbufferObject
     ConstArenaExcel.AddShowSeasonChangeInfoStartTime(builder, ShowSeasonChangeInfoStartTimeOffset);
     ConstArenaExcel.AddHiddenCharacterImagePath(builder, HiddenCharacterImagePathOffset);
     ConstArenaExcel.AddNPCName(builder, NPCNameOffset);
-    ConstArenaExcel.AddStatSumFactor(builder, StatSumFactorOffset);
+    ConstArenaExcel.AddStatSumFactor(builder, statSumFactorOffset);
     ConstArenaExcel.AddStatMulFactor(builder, statMulFactorOffset);
     ConstArenaExcel.AddModifiedStatType(builder, ModifiedStatTypeOffset);
-    ConstArenaExcel.AddRelativeOpponentRankEnd(builder, RelativeOpponentRankEndOffset);
+    ConstArenaExcel.AddRelativeOpponentRankEnd(builder, relativeOpponentRankEndOffset);
     ConstArenaExcel.AddRelativeOpponentRankStart(builder, RelativeOpponentRankStartOffset);
     ConstArenaExcel.AddCharacterSlotHideRank(builder, characterSlotHideRankOffset);
     ConstArenaExcel.AddOpenScenarioId(builder, OpenScenarioIdOffset);
@@ -344,10 +344,10 @@ public struct ConstArenaExcel : IFlatbufferObject
       var __RelativeOpponentRankStart = _o.RelativeOpponentRankStart.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RelativeOpponentRankStart = CreateRelativeOpponentRankStartVector(builder, __RelativeOpponentRankStart);
     }
-    var _RelativeOpponentRankEnd = default(VectorOffset);
+    var _relativeOpponentRankEnd = default(VectorOffset);
     if (_o.RelativeOpponentRankEnd != null) {
-      var __RelativeOpponentRankEnd = _o.RelativeOpponentRankEnd.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RelativeOpponentRankEnd = CreateRelativeOpponentRankEndVector(builder, __RelativeOpponentRankEnd);
+      var __relativeOpponentRankEnd = _o.RelativeOpponentRankEnd.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _relativeOpponentRankEnd = CreateRelativeOpponentRankEndVector(builder, __relativeOpponentRankEnd);
     }
     var _ModifiedStatType = default(VectorOffset);
     if (_o.ModifiedStatType != null) {
@@ -359,10 +359,10 @@ public struct ConstArenaExcel : IFlatbufferObject
       var __statMulFactor = _o.StatMulFactor.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _statMulFactor = CreateStatMulFactorVector(builder, __statMulFactor);
     }
-    var _StatSumFactor = default(VectorOffset);
+    var _statSumFactor = default(VectorOffset);
     if (_o.StatSumFactor != null) {
-      var __StatSumFactor = _o.StatSumFactor.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _StatSumFactor = CreateStatSumFactorVector(builder, __StatSumFactor);
+      var __statSumFactor = _o.StatSumFactor.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _statSumFactor = CreateStatSumFactorVector(builder, __statSumFactor);
     }
     var _NPCName = default(VectorOffset);
     if (_o.NPCName != null) {
@@ -400,10 +400,10 @@ public struct ConstArenaExcel : IFlatbufferObject
       _characterSlotHideRank,
       TableEncryptionService.UseEncryption ? _MapSlotHideRank : _o.MapSlotHideRank,
       _RelativeOpponentRankStart,
-      _RelativeOpponentRankEnd,
+      _relativeOpponentRankEnd,
       _ModifiedStatType,
       _statMulFactor,
-      _StatSumFactor,
+      _statSumFactor,
       _NPCName,
       TableEncryptionService.UseEncryption ? _NPCMainCharacterCount : _o.NPCMainCharacterCount,
       TableEncryptionService.UseEncryption ? _NPCSupportCharacterCount : _o.NPCSupportCharacterCount,

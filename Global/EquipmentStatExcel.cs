@@ -65,9 +65,9 @@ public struct EquipmentStatExcel : IFlatbufferObject
   public static Offset<Global.EquipmentStatExcel> CreateEquipmentStatExcel(FlatBufferBuilder builder,
       long EquipmentId = 0,
       Global.StatLevelUpType StatLevelUpType = Global.StatLevelUpType.Standard,
-      VectorOffset statTypeOffset = default(VectorOffset),
-      VectorOffset minStatOffset = default(VectorOffset),
-      VectorOffset maxStatOffset = default(VectorOffset),
+      VectorOffset StatTypeOffset = default(VectorOffset),
+      VectorOffset MinStatOffset = default(VectorOffset),
+      VectorOffset MaxStatOffset = default(VectorOffset),
       int LevelUpInsertLimit = 0,
       long LevelUpFeedExp = 0,
       Global.CurrencyTypes LevelUpFeedCostCurrency = Global.CurrencyTypes.Invalid,
@@ -88,9 +88,9 @@ public struct EquipmentStatExcel : IFlatbufferObject
     EquipmentStatExcel.AddEquipmentCategory(builder, EquipmentCategory);
     EquipmentStatExcel.AddLevelUpFeedCostCurrency(builder, LevelUpFeedCostCurrency);
     EquipmentStatExcel.AddLevelUpInsertLimit(builder, LevelUpInsertLimit);
-    EquipmentStatExcel.AddMaxStat(builder, maxStatOffset);
-    EquipmentStatExcel.AddMinStat(builder, minStatOffset);
-    EquipmentStatExcel.AddStatType(builder, statTypeOffset);
+    EquipmentStatExcel.AddMaxStat(builder, MaxStatOffset);
+    EquipmentStatExcel.AddMinStat(builder, MinStatOffset);
+    EquipmentStatExcel.AddStatType(builder, StatTypeOffset);
     EquipmentStatExcel.AddStatLevelUpType(builder, StatLevelUpType);
     return EquipmentStatExcel.EndEquipmentStatExcel(builder);
   }
@@ -159,20 +159,20 @@ public struct EquipmentStatExcel : IFlatbufferObject
 		byte[] key = TableEncryptionService.CreateKey("EquipmentStat");
 		var _EquipmentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EquipmentId, key) : _o.EquipmentId;
 		var _StatLevelUpType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StatLevelUpType, key) : _o.StatLevelUpType;
-    var _statType = default(VectorOffset);
+    var _StatType = default(VectorOffset);
     if (_o.StatType != null) {
-      var __statType = _o.StatType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _statType = CreateStatTypeVector(builder, __statType);
+      var __StatType = _o.StatType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StatType = CreateStatTypeVector(builder, __StatType);
     }
-    var _minStat = default(VectorOffset);
+    var _MinStat = default(VectorOffset);
     if (_o.MinStat != null) {
-      var __minStat = _o.MinStat.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _minStat = CreateMinStatVector(builder, __minStat);
+      var __MinStat = _o.MinStat.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _MinStat = CreateMinStatVector(builder, __MinStat);
     }
-    var _maxStat = default(VectorOffset);
+    var _MaxStat = default(VectorOffset);
     if (_o.MaxStat != null) {
-      var __maxStat = _o.MaxStat.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _maxStat = CreateMaxStatVector(builder, __maxStat);
+      var __MaxStat = _o.MaxStat.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _MaxStat = CreateMaxStatVector(builder, __MaxStat);
     }
 		var _LevelUpInsertLimit = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LevelUpInsertLimit, key) : _o.LevelUpInsertLimit;
 		var _LevelUpFeedExp = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LevelUpFeedExp, key) : _o.LevelUpFeedExp;
@@ -187,9 +187,9 @@ public struct EquipmentStatExcel : IFlatbufferObject
       builder,
       TableEncryptionService.UseEncryption ? _EquipmentId : _o.EquipmentId,
       TableEncryptionService.UseEncryption ? _StatLevelUpType : _o.StatLevelUpType,
-      _statType,
-      _minStat,
-      _maxStat,
+      _StatType,
+      _MinStat,
+      _MaxStat,
       TableEncryptionService.UseEncryption ? _LevelUpInsertLimit : _o.LevelUpInsertLimit,
       TableEncryptionService.UseEncryption ? _LevelUpFeedExp : _o.LevelUpFeedExp,
       TableEncryptionService.UseEncryption ? _LevelUpFeedCostCurrency : _o.LevelUpFeedCostCurrency,

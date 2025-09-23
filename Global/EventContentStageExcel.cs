@@ -159,8 +159,8 @@ public struct EventContentStageExcel : IFlatbufferObject
       long BuffContentId = 0,
       long FixedEchelonId = 0,
       bool ChallengeDisplay = false,
-      VectorOffset starGoalOffset = default(VectorOffset),
-      VectorOffset starGoalAmountOffset = default(VectorOffset),
+      VectorOffset StarGoalOffset = default(VectorOffset),
+      VectorOffset StarGoalAmountOffset = default(VectorOffset),
       bool IsDefeatBattle = false,
       uint StageHint = 0,
       Global.EchelonExtensionType EchelonExtensionType = Global.EchelonExtensionType.Base) {
@@ -184,8 +184,8 @@ public struct EventContentStageExcel : IFlatbufferObject
     EventContentStageExcel.AddId(builder, Id);
     EventContentStageExcel.AddEchelonExtensionType(builder, EchelonExtensionType);
     EventContentStageExcel.AddStageHint(builder, StageHint);
-    EventContentStageExcel.AddStarGoalAmount(builder, starGoalAmountOffset);
-    EventContentStageExcel.AddStarGoal(builder, starGoalOffset);
+    EventContentStageExcel.AddStarGoalAmount(builder, StarGoalAmountOffset);
+    EventContentStageExcel.AddStarGoal(builder, StarGoalOffset);
     EventContentStageExcel.AddContentType(builder, ContentType);
     EventContentStageExcel.AddStrategyEnvironment(builder, StrategyEnvironment);
     EventContentStageExcel.AddBgmId(builder, BgmIdOffset);
@@ -379,15 +379,15 @@ public struct EventContentStageExcel : IFlatbufferObject
 		var _BuffContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.BuffContentId, key) : _o.BuffContentId;
 		var _FixedEchelonId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.FixedEchelonId, key) : _o.FixedEchelonId;
 		var _ChallengeDisplay = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ChallengeDisplay, key) : _o.ChallengeDisplay;
-    var _starGoal = default(VectorOffset);
+    var _StarGoal = default(VectorOffset);
     if (_o.StarGoal != null) {
-      var __starGoal = _o.StarGoal.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _starGoal = CreateStarGoalVector(builder, __starGoal);
+      var __StarGoal = _o.StarGoal.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StarGoal = CreateStarGoalVector(builder, __StarGoal);
     }
-    var _starGoalAmount = default(VectorOffset);
+    var _StarGoalAmount = default(VectorOffset);
     if (_o.StarGoalAmount != null) {
-      var __starGoalAmount = _o.StarGoalAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _starGoalAmount = CreateStarGoalAmountVector(builder, __starGoalAmount);
+      var __StarGoalAmount = _o.StarGoalAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StarGoalAmount = CreateStarGoalAmountVector(builder, __StarGoalAmount);
     }
 		var _IsDefeatBattle = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsDefeatBattle, key) : _o.IsDefeatBattle;
 		var _StageHint = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StageHint, key) : _o.StageHint;
@@ -431,8 +431,8 @@ public struct EventContentStageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _BuffContentId : _o.BuffContentId,
       TableEncryptionService.UseEncryption ? _FixedEchelonId : _o.FixedEchelonId,
       TableEncryptionService.UseEncryption ? _ChallengeDisplay : _o.ChallengeDisplay,
-      _starGoal,
-      _starGoalAmount,
+      _StarGoal,
+      _StarGoalAmount,
       TableEncryptionService.UseEncryption ? _IsDefeatBattle : _o.IsDefeatBattle,
       TableEncryptionService.UseEncryption ? _StageHint : _o.StageHint,
       TableEncryptionService.UseEncryption ? _EchelonExtensionType : _o.EchelonExtensionType);

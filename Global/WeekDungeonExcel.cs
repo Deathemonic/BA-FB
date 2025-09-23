@@ -90,7 +90,7 @@ public struct WeekDungeonExcel : IFlatbufferObject
       long PrevStageId = 0,
       VectorOffset StageEnterCostTypeOffset = default(VectorOffset),
       VectorOffset StageEnterCostIdOffset = default(VectorOffset),
-      VectorOffset stageEnterCostAmountOffset = default(VectorOffset),
+      VectorOffset StageEnterCostAmountOffset = default(VectorOffset),
       int GroundId = 0,
       VectorOffset StarGoalOffset = default(VectorOffset),
       VectorOffset StarGoalAmountOffset = default(VectorOffset),
@@ -117,7 +117,7 @@ public struct WeekDungeonExcel : IFlatbufferObject
     WeekDungeonExcel.AddStarGoalAmount(builder, StarGoalAmountOffset);
     WeekDungeonExcel.AddStarGoal(builder, StarGoalOffset);
     WeekDungeonExcel.AddGroundId(builder, GroundId);
-    WeekDungeonExcel.AddStageEnterCostAmount(builder, stageEnterCostAmountOffset);
+    WeekDungeonExcel.AddStageEnterCostAmount(builder, StageEnterCostAmountOffset);
     WeekDungeonExcel.AddStageEnterCostId(builder, StageEnterCostIdOffset);
     WeekDungeonExcel.AddStageEnterCostType(builder, StageEnterCostTypeOffset);
     WeekDungeonExcel.AddDifficulty(builder, Difficulty);
@@ -230,10 +230,10 @@ public struct WeekDungeonExcel : IFlatbufferObject
       var __StageEnterCostId = _o.StageEnterCostId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _StageEnterCostId = CreateStageEnterCostIdVector(builder, __StageEnterCostId);
     }
-    var _stageEnterCostAmount = default(VectorOffset);
+    var _StageEnterCostAmount = default(VectorOffset);
     if (_o.StageEnterCostAmount != null) {
-      var __stageEnterCostAmount = _o.StageEnterCostAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _stageEnterCostAmount = CreateStageEnterCostAmountVector(builder, __stageEnterCostAmount);
+      var __StageEnterCostAmount = _o.StageEnterCostAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StageEnterCostAmount = CreateStageEnterCostAmountVector(builder, __StageEnterCostAmount);
     }
 		var _GroundId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroundId, key) : _o.GroundId;
     var _StarGoal = default(VectorOffset);
@@ -267,7 +267,7 @@ public struct WeekDungeonExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _PrevStageId : _o.PrevStageId,
       _StageEnterCostType,
       _StageEnterCostId,
-      _stageEnterCostAmount,
+      _StageEnterCostAmount,
       TableEncryptionService.UseEncryption ? _GroundId : _o.GroundId,
       _StarGoal,
       _StarGoalAmount,

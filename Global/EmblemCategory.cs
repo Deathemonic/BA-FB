@@ -19,6 +19,7 @@ public enum EmblemCategory : int
   Etc_Anniversary = 9,
   MultiFloorRaid = 10,
   Potential = 11,
+  BattlePass = 12,
 };
 
 

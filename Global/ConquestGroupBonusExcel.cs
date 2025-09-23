@@ -97,28 +97,28 @@ public struct ConquestGroupBonusExcel : IFlatbufferObject
 
   public static Offset<Global.ConquestGroupBonusExcel> CreateConquestGroupBonusExcel(FlatBufferBuilder builder,
       long ConquestBonusId = 0,
-      VectorOffset schoolOffset = default(VectorOffset),
+      VectorOffset SchoolOffset = default(VectorOffset),
       uint RecommandLocalizeEtcId = 0,
       VectorOffset BonusParcelTypeOffset = default(VectorOffset),
-      VectorOffset bonusIdOffset = default(VectorOffset),
+      VectorOffset BonusIdOffset = default(VectorOffset),
       VectorOffset BonusCharacterCount1Offset = default(VectorOffset),
       VectorOffset BonusPercentage1Offset = default(VectorOffset),
-      VectorOffset bonusCharacterCount2Offset = default(VectorOffset),
-      VectorOffset bonusPercentage2Offset = default(VectorOffset),
+      VectorOffset BonusCharacterCount2Offset = default(VectorOffset),
+      VectorOffset BonusPercentage2Offset = default(VectorOffset),
       VectorOffset BonusCharacterCount3Offset = default(VectorOffset),
-      VectorOffset bonusPercentage3Offset = default(VectorOffset)) {
+      VectorOffset BonusPercentage3Offset = default(VectorOffset)) {
     builder.StartTable(11);
     ConquestGroupBonusExcel.AddConquestBonusId(builder, ConquestBonusId);
-    ConquestGroupBonusExcel.AddBonusPercentage3(builder, bonusPercentage3Offset);
+    ConquestGroupBonusExcel.AddBonusPercentage3(builder, BonusPercentage3Offset);
     ConquestGroupBonusExcel.AddBonusCharacterCount3(builder, BonusCharacterCount3Offset);
-    ConquestGroupBonusExcel.AddBonusPercentage2(builder, bonusPercentage2Offset);
-    ConquestGroupBonusExcel.AddBonusCharacterCount2(builder, bonusCharacterCount2Offset);
+    ConquestGroupBonusExcel.AddBonusPercentage2(builder, BonusPercentage2Offset);
+    ConquestGroupBonusExcel.AddBonusCharacterCount2(builder, BonusCharacterCount2Offset);
     ConquestGroupBonusExcel.AddBonusPercentage1(builder, BonusPercentage1Offset);
     ConquestGroupBonusExcel.AddBonusCharacterCount1(builder, BonusCharacterCount1Offset);
-    ConquestGroupBonusExcel.AddBonusId(builder, bonusIdOffset);
+    ConquestGroupBonusExcel.AddBonusId(builder, BonusIdOffset);
     ConquestGroupBonusExcel.AddBonusParcelType(builder, BonusParcelTypeOffset);
     ConquestGroupBonusExcel.AddRecommandLocalizeEtcId(builder, RecommandLocalizeEtcId);
-    ConquestGroupBonusExcel.AddSchool(builder, schoolOffset);
+    ConquestGroupBonusExcel.AddSchool(builder, SchoolOffset);
     return ConquestGroupBonusExcel.EndConquestGroupBonusExcel(builder);
   }
 
@@ -215,10 +215,10 @@ public struct ConquestGroupBonusExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.ConquestGroupBonusExcel>);
 		byte[] key = TableEncryptionService.CreateKey("ConquestGroupBonus");
 		var _ConquestBonusId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConquestBonusId, key) : _o.ConquestBonusId;
-    var _school = default(VectorOffset);
+    var _School = default(VectorOffset);
     if (_o.School != null) {
-      var __school = _o.School.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _school = CreateSchoolVector(builder, __school);
+      var __School = _o.School.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _School = CreateSchoolVector(builder, __School);
     }
 		var _RecommandLocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RecommandLocalizeEtcId, key) : _o.RecommandLocalizeEtcId;
     var _BonusParcelType = default(VectorOffset);
@@ -226,10 +226,10 @@ public struct ConquestGroupBonusExcel : IFlatbufferObject
       var __BonusParcelType = _o.BonusParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _BonusParcelType = CreateBonusParcelTypeVector(builder, __BonusParcelType);
     }
-    var _bonusId = default(VectorOffset);
+    var _BonusId = default(VectorOffset);
     if (_o.BonusId != null) {
-      var __bonusId = _o.BonusId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _bonusId = CreateBonusIdVector(builder, __bonusId);
+      var __BonusId = _o.BonusId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BonusId = CreateBonusIdVector(builder, __BonusId);
     }
     var _BonusCharacterCount1 = default(VectorOffset);
     if (_o.BonusCharacterCount1 != null) {
@@ -241,39 +241,39 @@ public struct ConquestGroupBonusExcel : IFlatbufferObject
       var __BonusPercentage1 = _o.BonusPercentage1.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _BonusPercentage1 = CreateBonusPercentage1Vector(builder, __BonusPercentage1);
     }
-    var _bonusCharacterCount2 = default(VectorOffset);
+    var _BonusCharacterCount2 = default(VectorOffset);
     if (_o.BonusCharacterCount2 != null) {
-      var __bonusCharacterCount2 = _o.BonusCharacterCount2.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _bonusCharacterCount2 = CreateBonusCharacterCount2Vector(builder, __bonusCharacterCount2);
+      var __BonusCharacterCount2 = _o.BonusCharacterCount2.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BonusCharacterCount2 = CreateBonusCharacterCount2Vector(builder, __BonusCharacterCount2);
     }
-    var _bonusPercentage2 = default(VectorOffset);
+    var _BonusPercentage2 = default(VectorOffset);
     if (_o.BonusPercentage2 != null) {
-      var __bonusPercentage2 = _o.BonusPercentage2.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _bonusPercentage2 = CreateBonusPercentage2Vector(builder, __bonusPercentage2);
+      var __BonusPercentage2 = _o.BonusPercentage2.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BonusPercentage2 = CreateBonusPercentage2Vector(builder, __BonusPercentage2);
     }
     var _BonusCharacterCount3 = default(VectorOffset);
     if (_o.BonusCharacterCount3 != null) {
       var __BonusCharacterCount3 = _o.BonusCharacterCount3.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _BonusCharacterCount3 = CreateBonusCharacterCount3Vector(builder, __BonusCharacterCount3);
     }
-    var _bonusPercentage3 = default(VectorOffset);
+    var _BonusPercentage3 = default(VectorOffset);
     if (_o.BonusPercentage3 != null) {
-      var __bonusPercentage3 = _o.BonusPercentage3.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _bonusPercentage3 = CreateBonusPercentage3Vector(builder, __bonusPercentage3);
+      var __BonusPercentage3 = _o.BonusPercentage3.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BonusPercentage3 = CreateBonusPercentage3Vector(builder, __BonusPercentage3);
     }
     return CreateConquestGroupBonusExcel(
       builder,
       TableEncryptionService.UseEncryption ? _ConquestBonusId : _o.ConquestBonusId,
-      _school,
+      _School,
       TableEncryptionService.UseEncryption ? _RecommandLocalizeEtcId : _o.RecommandLocalizeEtcId,
       _BonusParcelType,
-      _bonusId,
+      _BonusId,
       _BonusCharacterCount1,
       _BonusPercentage1,
-      _bonusCharacterCount2,
-      _bonusPercentage2,
+      _BonusCharacterCount2,
+      _BonusPercentage2,
       _BonusCharacterCount3,
-      _bonusPercentage3);
+      _BonusPercentage3);
   }
 }
 

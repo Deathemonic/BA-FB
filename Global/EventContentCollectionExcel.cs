@@ -58,21 +58,28 @@ public struct EventContentCollectionExcel : IFlatbufferObject
   public ArraySegment<byte>? GetFullResourceBytes() { return __p.__vector_as_arraysegment(28); }
 #endif
   public byte[] GetFullResourceArray() { return __p.__vector_as_array<byte>(28); }
-  public uint LocalizeEtcId { get { int o = __p.__offset(30); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
-  public string SubNameLocalizeCodeId { get { int o = __p.__offset(32); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public string Decoration { get { int o = __p.__offset(30); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetSubNameLocalizeCodeIdBytes() { return __p.__vector_as_span<byte>(32, 1); }
+  public Span<byte> GetDecorationBytes() { return __p.__vector_as_span<byte>(30, 1); }
 #else
-  public ArraySegment<byte>? GetSubNameLocalizeCodeIdBytes() { return __p.__vector_as_arraysegment(32); }
+  public ArraySegment<byte>? GetDecorationBytes() { return __p.__vector_as_arraysegment(30); }
 #endif
-  public byte[] GetSubNameLocalizeCodeIdArray() { return __p.__vector_as_array<byte>(32); }
+  public byte[] GetDecorationArray() { return __p.__vector_as_array<byte>(30); }
+  public uint LocalizeEtcId { get { int o = __p.__offset(32); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
+  public string SubNameLocalizeCodeId { get { int o = __p.__offset(34); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetSubNameLocalizeCodeIdBytes() { return __p.__vector_as_span<byte>(34, 1); }
+#else
+  public ArraySegment<byte>? GetSubNameLocalizeCodeIdBytes() { return __p.__vector_as_arraysegment(34); }
+#endif
+  public byte[] GetSubNameLocalizeCodeIdArray() { return __p.__vector_as_array<byte>(34); }
 
   public static Offset<Global.EventContentCollectionExcel> CreateEventContentCollectionExcel(FlatBufferBuilder builder,
       long Id = 0,
       long EventContentId = 0,
       long GroupId = 0,
       Global.CollectionUnlockType UnlockConditionType = Global.CollectionUnlockType.None,
-      VectorOffset unlockConditionParameterOffset = default(VectorOffset),
+      VectorOffset UnlockConditionParameterOffset = default(VectorOffset),
       Global.MultipleConditionCheckType MultipleConditionCheckType = Global.MultipleConditionCheckType.And,
       long UnlockConditionCount = 0,
       bool IsObject = false,
@@ -81,20 +88,22 @@ public struct EventContentCollectionExcel : IFlatbufferObject
       StringOffset EmblemResourceOffset = default(StringOffset),
       StringOffset ThumbResourceOffset = default(StringOffset),
       StringOffset FullResourceOffset = default(StringOffset),
+      StringOffset DecorationOffset = default(StringOffset),
       uint LocalizeEtcId = 0,
       StringOffset SubNameLocalizeCodeIdOffset = default(StringOffset)) {
-    builder.StartTable(15);
+    builder.StartTable(16);
     EventContentCollectionExcel.AddUnlockConditionCount(builder, UnlockConditionCount);
     EventContentCollectionExcel.AddGroupId(builder, GroupId);
     EventContentCollectionExcel.AddEventContentId(builder, EventContentId);
     EventContentCollectionExcel.AddId(builder, Id);
     EventContentCollectionExcel.AddSubNameLocalizeCodeId(builder, SubNameLocalizeCodeIdOffset);
     EventContentCollectionExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
+    EventContentCollectionExcel.AddDecoration(builder, DecorationOffset);
     EventContentCollectionExcel.AddFullResource(builder, FullResourceOffset);
     EventContentCollectionExcel.AddThumbResource(builder, ThumbResourceOffset);
     EventContentCollectionExcel.AddEmblemResource(builder, EmblemResourceOffset);
     EventContentCollectionExcel.AddMultipleConditionCheckType(builder, MultipleConditionCheckType);
-    EventContentCollectionExcel.AddUnlockConditionParameter(builder, unlockConditionParameterOffset);
+    EventContentCollectionExcel.AddUnlockConditionParameter(builder, UnlockConditionParameterOffset);
     EventContentCollectionExcel.AddUnlockConditionType(builder, UnlockConditionType);
     EventContentCollectionExcel.AddIsHorizon(builder, IsHorizon);
     EventContentCollectionExcel.AddIsObjectOnFullResource(builder, IsObjectOnFullResource);
@@ -102,7 +111,7 @@ public struct EventContentCollectionExcel : IFlatbufferObject
     return EventContentCollectionExcel.EndEventContentCollectionExcel(builder);
   }
 
-  public static void StartEventContentCollectionExcel(FlatBufferBuilder builder) { builder.StartTable(15); }
+  public static void StartEventContentCollectionExcel(FlatBufferBuilder builder) { builder.StartTable(16); }
   public static void AddId(FlatBufferBuilder builder, long id) { builder.AddLong(0, id, 0); }
   public static void AddEventContentId(FlatBufferBuilder builder, long eventContentId) { builder.AddLong(1, eventContentId, 0); }
   public static void AddGroupId(FlatBufferBuilder builder, long groupId) { builder.AddLong(2, groupId, 0); }
@@ -121,8 +130,9 @@ public struct EventContentCollectionExcel : IFlatbufferObject
   public static void AddEmblemResource(FlatBufferBuilder builder, StringOffset emblemResourceOffset) { builder.AddOffset(10, emblemResourceOffset.Value, 0); }
   public static void AddThumbResource(FlatBufferBuilder builder, StringOffset thumbResourceOffset) { builder.AddOffset(11, thumbResourceOffset.Value, 0); }
   public static void AddFullResource(FlatBufferBuilder builder, StringOffset fullResourceOffset) { builder.AddOffset(12, fullResourceOffset.Value, 0); }
-  public static void AddLocalizeEtcId(FlatBufferBuilder builder, uint localizeEtcId) { builder.AddUint(13, localizeEtcId, 0); }
-  public static void AddSubNameLocalizeCodeId(FlatBufferBuilder builder, StringOffset subNameLocalizeCodeIdOffset) { builder.AddOffset(14, subNameLocalizeCodeIdOffset.Value, 0); }
+  public static void AddDecoration(FlatBufferBuilder builder, StringOffset decorationOffset) { builder.AddOffset(13, decorationOffset.Value, 0); }
+  public static void AddLocalizeEtcId(FlatBufferBuilder builder, uint localizeEtcId) { builder.AddUint(14, localizeEtcId, 0); }
+  public static void AddSubNameLocalizeCodeId(FlatBufferBuilder builder, StringOffset subNameLocalizeCodeIdOffset) { builder.AddOffset(15, subNameLocalizeCodeIdOffset.Value, 0); }
   public static Offset<Global.EventContentCollectionExcel> EndEventContentCollectionExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Global.EventContentCollectionExcel>(o);
@@ -148,6 +158,7 @@ public struct EventContentCollectionExcel : IFlatbufferObject
     _o.EmblemResource = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EmblemResource, key) : this.EmblemResource;
     _o.ThumbResource = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ThumbResource, key) : this.ThumbResource;
     _o.FullResource = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.FullResource, key) : this.FullResource;
+    _o.Decoration = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.Decoration, key) : this.Decoration;
     _o.LocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.LocalizeEtcId, key) : this.LocalizeEtcId;
     _o.SubNameLocalizeCodeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SubNameLocalizeCodeId, key) : this.SubNameLocalizeCodeId;
   }
@@ -158,10 +169,10 @@ public struct EventContentCollectionExcel : IFlatbufferObject
 		var _EventContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentId, key) : _o.EventContentId;
 		var _GroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroupId, key) : _o.GroupId;
 		var _UnlockConditionType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UnlockConditionType, key) : _o.UnlockConditionType;
-    var _unlockConditionParameter = default(VectorOffset);
+    var _UnlockConditionParameter = default(VectorOffset);
     if (_o.UnlockConditionParameter != null) {
-      var __unlockConditionParameter = _o.UnlockConditionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _unlockConditionParameter = CreateUnlockConditionParameterVector(builder, __unlockConditionParameter);
+      var __UnlockConditionParameter = _o.UnlockConditionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _UnlockConditionParameter = CreateUnlockConditionParameterVector(builder, __UnlockConditionParameter);
     }
 		var _MultipleConditionCheckType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MultipleConditionCheckType, key) : _o.MultipleConditionCheckType;
 		var _UnlockConditionCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UnlockConditionCount, key) : _o.UnlockConditionCount;
@@ -171,6 +182,7 @@ public struct EventContentCollectionExcel : IFlatbufferObject
     var _EmblemResource = _o.EmblemResource == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EmblemResource, key) : _o.EmblemResource));
     var _ThumbResource = _o.ThumbResource == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ThumbResource, key) : _o.ThumbResource));
     var _FullResource = _o.FullResource == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FullResource, key) : _o.FullResource));
+    var _Decoration = _o.Decoration == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.Decoration, key) : _o.Decoration));
 		var _LocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeEtcId, key) : _o.LocalizeEtcId;
     var _SubNameLocalizeCodeId = _o.SubNameLocalizeCodeId == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SubNameLocalizeCodeId, key) : _o.SubNameLocalizeCodeId));
     return CreateEventContentCollectionExcel(
@@ -179,7 +191,7 @@ public struct EventContentCollectionExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _EventContentId : _o.EventContentId,
       TableEncryptionService.UseEncryption ? _GroupId : _o.GroupId,
       TableEncryptionService.UseEncryption ? _UnlockConditionType : _o.UnlockConditionType,
-      _unlockConditionParameter,
+      _UnlockConditionParameter,
       TableEncryptionService.UseEncryption ? _MultipleConditionCheckType : _o.MultipleConditionCheckType,
       TableEncryptionService.UseEncryption ? _UnlockConditionCount : _o.UnlockConditionCount,
       TableEncryptionService.UseEncryption ? _IsObject : _o.IsObject,
@@ -188,6 +200,7 @@ public struct EventContentCollectionExcel : IFlatbufferObject
       _EmblemResource,
       _ThumbResource,
       _FullResource,
+      _Decoration,
       TableEncryptionService.UseEncryption ? _LocalizeEtcId : _o.LocalizeEtcId,
       _SubNameLocalizeCodeId);
   }
@@ -208,6 +221,7 @@ public class EventContentCollectionExcelT
   public string EmblemResource { get; set; }
   public string ThumbResource { get; set; }
   public string FullResource { get; set; }
+  public string Decoration { get; set; }
   public uint LocalizeEtcId { get; set; }
   public string SubNameLocalizeCodeId { get; set; }
 
@@ -225,6 +239,7 @@ public class EventContentCollectionExcelT
     this.EmblemResource = null;
     this.ThumbResource = null;
     this.FullResource = null;
+    this.Decoration = null;
     this.LocalizeEtcId = 0;
     this.SubNameLocalizeCodeId = null;
   }
@@ -249,8 +264,9 @@ static public class EventContentCollectionExcelVerify
       && verifier.VerifyString(tablePos, 24 /*EmblemResource*/, false)
       && verifier.VerifyString(tablePos, 26 /*ThumbResource*/, false)
       && verifier.VerifyString(tablePos, 28 /*FullResource*/, false)
-      && verifier.VerifyField(tablePos, 30 /*LocalizeEtcId*/, 4 /*uint*/, 4, false)
-      && verifier.VerifyString(tablePos, 32 /*SubNameLocalizeCodeId*/, false)
+      && verifier.VerifyString(tablePos, 30 /*Decoration*/, false)
+      && verifier.VerifyField(tablePos, 32 /*LocalizeEtcId*/, 4 /*uint*/, 4, false)
+      && verifier.VerifyString(tablePos, 34 /*SubNameLocalizeCodeId*/, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

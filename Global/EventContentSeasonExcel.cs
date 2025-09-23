@@ -183,7 +183,7 @@ public struct EventContentSeasonExcel : IFlatbufferObject
       StringOffset SubIconParcelPathOffset = default(StringOffset),
       StringOffset BeforehandBgImagePathOffset = default(StringOffset),
       long MinigamePrologScenarioGroupId = 0,
-      VectorOffset BeforehandScenarioGroupIdOffset = default(VectorOffset),
+      VectorOffset beforehandScenarioGroupIdOffset = default(VectorOffset),
       StringOffset MainBannerImagePathOffset = default(StringOffset),
       StringOffset MainBgImagePathOffset = default(StringOffset),
       long ShiftTriggerStageId = 0,
@@ -220,7 +220,7 @@ public struct EventContentSeasonExcel : IFlatbufferObject
     EventContentSeasonExcel.AddShiftMainBgImagePath(builder, ShiftMainBgImagePathOffset);
     EventContentSeasonExcel.AddMainBgImagePath(builder, MainBgImagePathOffset);
     EventContentSeasonExcel.AddMainBannerImagePath(builder, MainBannerImagePathOffset);
-    EventContentSeasonExcel.AddBeforehandScenarioGroupId(builder, BeforehandScenarioGroupIdOffset);
+    EventContentSeasonExcel.AddBeforehandScenarioGroupId(builder, beforehandScenarioGroupIdOffset);
     EventContentSeasonExcel.AddBeforehandBgImagePath(builder, BeforehandBgImagePathOffset);
     EventContentSeasonExcel.AddSubIconParcelPath(builder, SubIconParcelPathOffset);
     EventContentSeasonExcel.AddMainIconParcelPath(builder, MainIconParcelPathOffset);
@@ -357,10 +357,10 @@ public struct EventContentSeasonExcel : IFlatbufferObject
     var _SubIconParcelPath = _o.SubIconParcelPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SubIconParcelPath, key) : _o.SubIconParcelPath));
     var _BeforehandBgImagePath = _o.BeforehandBgImagePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.BeforehandBgImagePath, key) : _o.BeforehandBgImagePath));
 		var _MinigamePrologScenarioGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MinigamePrologScenarioGroupId, key) : _o.MinigamePrologScenarioGroupId;
-    var _BeforehandScenarioGroupId = default(VectorOffset);
+    var _beforehandScenarioGroupId = default(VectorOffset);
     if (_o.BeforehandScenarioGroupId != null) {
-      var __BeforehandScenarioGroupId = _o.BeforehandScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _BeforehandScenarioGroupId = CreateBeforehandScenarioGroupIdVector(builder, __BeforehandScenarioGroupId);
+      var __beforehandScenarioGroupId = _o.BeforehandScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _beforehandScenarioGroupId = CreateBeforehandScenarioGroupIdVector(builder, __beforehandScenarioGroupId);
     }
     var _MainBannerImagePath = _o.MainBannerImagePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.MainBannerImagePath, key) : _o.MainBannerImagePath));
     var _MainBgImagePath = _o.MainBgImagePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.MainBgImagePath, key) : _o.MainBgImagePath));
@@ -400,7 +400,7 @@ public struct EventContentSeasonExcel : IFlatbufferObject
       _SubIconParcelPath,
       _BeforehandBgImagePath,
       TableEncryptionService.UseEncryption ? _MinigamePrologScenarioGroupId : _o.MinigamePrologScenarioGroupId,
-      _BeforehandScenarioGroupId,
+      _beforehandScenarioGroupId,
       _MainBannerImagePath,
       _MainBgImagePath,
       TableEncryptionService.UseEncryption ? _ShiftTriggerStageId : _o.ShiftTriggerStageId,

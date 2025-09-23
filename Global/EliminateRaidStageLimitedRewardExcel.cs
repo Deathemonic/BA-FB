@@ -48,14 +48,14 @@ public struct EliminateRaidStageLimitedRewardExcel : IFlatbufferObject
 
   public static Offset<Global.EliminateRaidStageLimitedRewardExcel> CreateEliminateRaidStageLimitedRewardExcel(FlatBufferBuilder builder,
       long LimitedRewardId = 0,
-      VectorOffset limitedRewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset limitedRewardParcelUniqueIdOffset = default(VectorOffset),
+      VectorOffset LimitedRewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset LimitedRewardParcelUniqueIdOffset = default(VectorOffset),
       VectorOffset LimitedRewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(4);
     EliminateRaidStageLimitedRewardExcel.AddLimitedRewardId(builder, LimitedRewardId);
     EliminateRaidStageLimitedRewardExcel.AddLimitedRewardAmount(builder, LimitedRewardAmountOffset);
-    EliminateRaidStageLimitedRewardExcel.AddLimitedRewardParcelUniqueId(builder, limitedRewardParcelUniqueIdOffset);
-    EliminateRaidStageLimitedRewardExcel.AddLimitedRewardParcelType(builder, limitedRewardParcelTypeOffset);
+    EliminateRaidStageLimitedRewardExcel.AddLimitedRewardParcelUniqueId(builder, LimitedRewardParcelUniqueIdOffset);
+    EliminateRaidStageLimitedRewardExcel.AddLimitedRewardParcelType(builder, LimitedRewardParcelTypeOffset);
     return EliminateRaidStageLimitedRewardExcel.EndEliminateRaidStageLimitedRewardExcel(builder);
   }
 
@@ -102,15 +102,15 @@ public struct EliminateRaidStageLimitedRewardExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.EliminateRaidStageLimitedRewardExcel>);
 		byte[] key = TableEncryptionService.CreateKey("EliminateRaidStageLimitedReward");
 		var _LimitedRewardId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LimitedRewardId, key) : _o.LimitedRewardId;
-    var _limitedRewardParcelType = default(VectorOffset);
+    var _LimitedRewardParcelType = default(VectorOffset);
     if (_o.LimitedRewardParcelType != null) {
-      var __limitedRewardParcelType = _o.LimitedRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _limitedRewardParcelType = CreateLimitedRewardParcelTypeVector(builder, __limitedRewardParcelType);
+      var __LimitedRewardParcelType = _o.LimitedRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _LimitedRewardParcelType = CreateLimitedRewardParcelTypeVector(builder, __LimitedRewardParcelType);
     }
-    var _limitedRewardParcelUniqueId = default(VectorOffset);
+    var _LimitedRewardParcelUniqueId = default(VectorOffset);
     if (_o.LimitedRewardParcelUniqueId != null) {
-      var __limitedRewardParcelUniqueId = _o.LimitedRewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _limitedRewardParcelUniqueId = CreateLimitedRewardParcelUniqueIdVector(builder, __limitedRewardParcelUniqueId);
+      var __LimitedRewardParcelUniqueId = _o.LimitedRewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _LimitedRewardParcelUniqueId = CreateLimitedRewardParcelUniqueIdVector(builder, __LimitedRewardParcelUniqueId);
     }
     var _LimitedRewardAmount = default(VectorOffset);
     if (_o.LimitedRewardAmount != null) {
@@ -120,8 +120,8 @@ public struct EliminateRaidStageLimitedRewardExcel : IFlatbufferObject
     return CreateEliminateRaidStageLimitedRewardExcel(
       builder,
       TableEncryptionService.UseEncryption ? _LimitedRewardId : _o.LimitedRewardId,
-      _limitedRewardParcelType,
-      _limitedRewardParcelUniqueId,
+      _LimitedRewardParcelType,
+      _LimitedRewardParcelUniqueId,
       _LimitedRewardAmount);
   }
 }

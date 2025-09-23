@@ -50,16 +50,16 @@ public struct EliminateRaidStageSeasonRewardExcel : IFlatbufferObject
 
   public static Offset<Global.EliminateRaidStageSeasonRewardExcel> CreateEliminateRaidStageSeasonRewardExcel(FlatBufferBuilder builder,
       long SeasonRewardId = 0,
-      VectorOffset seasonRewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset seasonRewardParcelUniqueIdOffset = default(VectorOffset),
-      VectorOffset seasonRewardParcelUniqueNameOffset = default(VectorOffset),
-      VectorOffset seasonRewardAmountOffset = default(VectorOffset)) {
+      VectorOffset SeasonRewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset SeasonRewardParcelUniqueIdOffset = default(VectorOffset),
+      VectorOffset SeasonRewardParcelUniqueNameOffset = default(VectorOffset),
+      VectorOffset SeasonRewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(5);
     EliminateRaidStageSeasonRewardExcel.AddSeasonRewardId(builder, SeasonRewardId);
-    EliminateRaidStageSeasonRewardExcel.AddSeasonRewardAmount(builder, seasonRewardAmountOffset);
-    EliminateRaidStageSeasonRewardExcel.AddSeasonRewardParcelUniqueName(builder, seasonRewardParcelUniqueNameOffset);
-    EliminateRaidStageSeasonRewardExcel.AddSeasonRewardParcelUniqueId(builder, seasonRewardParcelUniqueIdOffset);
-    EliminateRaidStageSeasonRewardExcel.AddSeasonRewardParcelType(builder, seasonRewardParcelTypeOffset);
+    EliminateRaidStageSeasonRewardExcel.AddSeasonRewardAmount(builder, SeasonRewardAmountOffset);
+    EliminateRaidStageSeasonRewardExcel.AddSeasonRewardParcelUniqueName(builder, SeasonRewardParcelUniqueNameOffset);
+    EliminateRaidStageSeasonRewardExcel.AddSeasonRewardParcelUniqueId(builder, SeasonRewardParcelUniqueIdOffset);
+    EliminateRaidStageSeasonRewardExcel.AddSeasonRewardParcelType(builder, SeasonRewardParcelTypeOffset);
     return EliminateRaidStageSeasonRewardExcel.EndEliminateRaidStageSeasonRewardExcel(builder);
   }
 
@@ -114,34 +114,34 @@ public struct EliminateRaidStageSeasonRewardExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.EliminateRaidStageSeasonRewardExcel>);
 		byte[] key = TableEncryptionService.CreateKey("EliminateRaidStageSeasonReward");
 		var _SeasonRewardId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SeasonRewardId, key) : _o.SeasonRewardId;
-    var _seasonRewardParcelType = default(VectorOffset);
+    var _SeasonRewardParcelType = default(VectorOffset);
     if (_o.SeasonRewardParcelType != null) {
-      var __seasonRewardParcelType = _o.SeasonRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _seasonRewardParcelType = CreateSeasonRewardParcelTypeVector(builder, __seasonRewardParcelType);
+      var __SeasonRewardParcelType = _o.SeasonRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _SeasonRewardParcelType = CreateSeasonRewardParcelTypeVector(builder, __SeasonRewardParcelType);
     }
-    var _seasonRewardParcelUniqueId = default(VectorOffset);
+    var _SeasonRewardParcelUniqueId = default(VectorOffset);
     if (_o.SeasonRewardParcelUniqueId != null) {
-      var __seasonRewardParcelUniqueId = _o.SeasonRewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _seasonRewardParcelUniqueId = CreateSeasonRewardParcelUniqueIdVector(builder, __seasonRewardParcelUniqueId);
+      var __SeasonRewardParcelUniqueId = _o.SeasonRewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _SeasonRewardParcelUniqueId = CreateSeasonRewardParcelUniqueIdVector(builder, __SeasonRewardParcelUniqueId);
     }
-    var _seasonRewardParcelUniqueName = default(VectorOffset);
+    var _SeasonRewardParcelUniqueName = default(VectorOffset);
     if (_o.SeasonRewardParcelUniqueName != null) {
-      var __seasonRewardParcelUniqueName = new StringOffset[_o.SeasonRewardParcelUniqueName.Count];
-      for (var _j = 0; _j < __seasonRewardParcelUniqueName.Length; ++_j) { __seasonRewardParcelUniqueName[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SeasonRewardParcelUniqueName[_j], key) : _o.SeasonRewardParcelUniqueName[_j])); }
-      _seasonRewardParcelUniqueName = CreateSeasonRewardParcelUniqueNameVector(builder, __seasonRewardParcelUniqueName);
+      var __SeasonRewardParcelUniqueName = new StringOffset[_o.SeasonRewardParcelUniqueName.Count];
+      for (var _j = 0; _j < __SeasonRewardParcelUniqueName.Length; ++_j) { __SeasonRewardParcelUniqueName[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SeasonRewardParcelUniqueName[_j], key) : _o.SeasonRewardParcelUniqueName[_j])); }
+      _SeasonRewardParcelUniqueName = CreateSeasonRewardParcelUniqueNameVector(builder, __SeasonRewardParcelUniqueName);
     }
-    var _seasonRewardAmount = default(VectorOffset);
+    var _SeasonRewardAmount = default(VectorOffset);
     if (_o.SeasonRewardAmount != null) {
-      var __seasonRewardAmount = _o.SeasonRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _seasonRewardAmount = CreateSeasonRewardAmountVector(builder, __seasonRewardAmount);
+      var __SeasonRewardAmount = _o.SeasonRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _SeasonRewardAmount = CreateSeasonRewardAmountVector(builder, __SeasonRewardAmount);
     }
     return CreateEliminateRaidStageSeasonRewardExcel(
       builder,
       TableEncryptionService.UseEncryption ? _SeasonRewardId : _o.SeasonRewardId,
-      _seasonRewardParcelType,
-      _seasonRewardParcelUniqueId,
-      _seasonRewardParcelUniqueName,
-      _seasonRewardAmount);
+      _SeasonRewardParcelType,
+      _SeasonRewardParcelUniqueId,
+      _SeasonRewardParcelUniqueName,
+      _SeasonRewardAmount);
   }
 }
 

@@ -109,25 +109,25 @@ public struct ProductMonthlyExcel : IFlatbufferObject
       long MonthlyDays = 0,
       bool UseMonthlyProductCheck = false,
       long PurchaseCountLimit = 0,
-      VectorOffset parcelTypeOffset = default(VectorOffset),
+      VectorOffset ParcelTypeOffset = default(VectorOffset),
       VectorOffset ParcelIdOffset = default(VectorOffset),
-      VectorOffset parcelAmountOffset = default(VectorOffset),
+      VectorOffset ParcelAmountOffset = default(VectorOffset),
       long EnterCostReduceGroupId = 0,
       VectorOffset DailyParcelTypeOffset = default(VectorOffset),
       VectorOffset DailyParcelIdOffset = default(VectorOffset),
-      VectorOffset dailyParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset DailyParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(17);
     ProductMonthlyExcel.AddEnterCostReduceGroupId(builder, EnterCostReduceGroupId);
     ProductMonthlyExcel.AddPurchaseCountLimit(builder, PurchaseCountLimit);
     ProductMonthlyExcel.AddMonthlyDays(builder, MonthlyDays);
     ProductMonthlyExcel.AddPrice(builder, Price);
     ProductMonthlyExcel.AddId(builder, Id);
-    ProductMonthlyExcel.AddDailyParcelAmount(builder, dailyParcelAmountOffset);
+    ProductMonthlyExcel.AddDailyParcelAmount(builder, DailyParcelAmountOffset);
     ProductMonthlyExcel.AddDailyParcelId(builder, DailyParcelIdOffset);
     ProductMonthlyExcel.AddDailyParcelType(builder, DailyParcelTypeOffset);
-    ProductMonthlyExcel.AddParcelAmount(builder, parcelAmountOffset);
+    ProductMonthlyExcel.AddParcelAmount(builder, ParcelAmountOffset);
     ProductMonthlyExcel.AddParcelId(builder, ParcelIdOffset);
-    ProductMonthlyExcel.AddParcelType(builder, parcelTypeOffset);
+    ProductMonthlyExcel.AddParcelType(builder, ParcelTypeOffset);
     ProductMonthlyExcel.AddProductTagType(builder, ProductTagType);
     ProductMonthlyExcel.AddPriceReference(builder, PriceReferenceOffset);
     ProductMonthlyExcel.AddStoreType(builder, StoreType);
@@ -233,20 +233,20 @@ public struct ProductMonthlyExcel : IFlatbufferObject
 		var _MonthlyDays = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MonthlyDays, key) : _o.MonthlyDays;
 		var _UseMonthlyProductCheck = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UseMonthlyProductCheck, key) : _o.UseMonthlyProductCheck;
 		var _PurchaseCountLimit = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.PurchaseCountLimit, key) : _o.PurchaseCountLimit;
-    var _parcelType = default(VectorOffset);
+    var _ParcelType = default(VectorOffset);
     if (_o.ParcelType != null) {
-      var __parcelType = _o.ParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelType = CreateParcelTypeVector(builder, __parcelType);
+      var __ParcelType = _o.ParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelType = CreateParcelTypeVector(builder, __ParcelType);
     }
     var _ParcelId = default(VectorOffset);
     if (_o.ParcelId != null) {
       var __ParcelId = _o.ParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ParcelId = CreateParcelIdVector(builder, __ParcelId);
     }
-    var _parcelAmount = default(VectorOffset);
+    var _ParcelAmount = default(VectorOffset);
     if (_o.ParcelAmount != null) {
-      var __parcelAmount = _o.ParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelAmount = CreateParcelAmountVector(builder, __parcelAmount);
+      var __ParcelAmount = _o.ParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelAmount = CreateParcelAmountVector(builder, __ParcelAmount);
     }
 		var _EnterCostReduceGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EnterCostReduceGroupId, key) : _o.EnterCostReduceGroupId;
     var _DailyParcelType = default(VectorOffset);
@@ -259,10 +259,10 @@ public struct ProductMonthlyExcel : IFlatbufferObject
       var __DailyParcelId = _o.DailyParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _DailyParcelId = CreateDailyParcelIdVector(builder, __DailyParcelId);
     }
-    var _dailyParcelAmount = default(VectorOffset);
+    var _DailyParcelAmount = default(VectorOffset);
     if (_o.DailyParcelAmount != null) {
-      var __dailyParcelAmount = _o.DailyParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _dailyParcelAmount = CreateDailyParcelAmountVector(builder, __dailyParcelAmount);
+      var __DailyParcelAmount = _o.DailyParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _DailyParcelAmount = CreateDailyParcelAmountVector(builder, __DailyParcelAmount);
     }
     return CreateProductMonthlyExcel(
       builder,
@@ -276,13 +276,13 @@ public struct ProductMonthlyExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _MonthlyDays : _o.MonthlyDays,
       TableEncryptionService.UseEncryption ? _UseMonthlyProductCheck : _o.UseMonthlyProductCheck,
       TableEncryptionService.UseEncryption ? _PurchaseCountLimit : _o.PurchaseCountLimit,
-      _parcelType,
+      _ParcelType,
       _ParcelId,
-      _parcelAmount,
+      _ParcelAmount,
       TableEncryptionService.UseEncryption ? _EnterCostReduceGroupId : _o.EnterCostReduceGroupId,
       _DailyParcelType,
       _DailyParcelId,
-      _dailyParcelAmount);
+      _DailyParcelAmount);
   }
 }
 

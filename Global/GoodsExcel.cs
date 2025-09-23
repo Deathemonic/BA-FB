@@ -62,8 +62,22 @@ public struct GoodsExcel : IFlatbufferObject
   public ArraySegment<byte>? GetConsumeConditionBytes() { return __p.__vector_as_arraysegment(18); }
 #endif
   public Global.ConsumeCondition[] GetConsumeConditionArray() { int o = __p.__offset(18); if (o == 0) return null; int p = __p.__vector(o); int l = __p.__vector_len(o); Global.ConsumeCondition[] a = new Global.ConsumeCondition[l]; for (int i = 0; i < l; i++) { a[i] = (Global.ConsumeCondition)__p.bb.GetInt(p + i * 4); } return a; }
-  public Global.GachaTicketType ConsumeGachaTicketType { get { int o = __p.__offset(20); return o != 0 ? (Global.GachaTicketType)__p.bb.GetInt(o + __p.bb_pos) : Global.GachaTicketType.None; } }
-  public long ConsumeGachaTicketTypeAmount { get { int o = __p.__offset(22); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public Global.GachaTicketType ConsumeGachaTicketType(int j) { int o = __p.__offset(20); return o != 0 ? (Global.GachaTicketType)__p.bb.GetInt(__p.__vector(o) + j * 4) : (Global.GachaTicketType)0; }
+  public int ConsumeGachaTicketTypeLength { get { int o = __p.__offset(20); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<Global.GachaTicketType> GetConsumeGachaTicketTypeBytes() { return __p.__vector_as_span<Global.GachaTicketType>(20, 4); }
+#else
+  public ArraySegment<byte>? GetConsumeGachaTicketTypeBytes() { return __p.__vector_as_arraysegment(20); }
+#endif
+  public Global.GachaTicketType[] GetConsumeGachaTicketTypeArray() { int o = __p.__offset(20); if (o == 0) return null; int p = __p.__vector(o); int l = __p.__vector_len(o); Global.GachaTicketType[] a = new Global.GachaTicketType[l]; for (int i = 0; i < l; i++) { a[i] = (Global.GachaTicketType)__p.bb.GetInt(p + i * 4); } return a; }
+  public long ConsumeGachaTicketTypeAmount(int j) { int o = __p.__offset(22); return o != 0 ? __p.bb.GetLong(__p.__vector(o) + j * 8) : (long)0; }
+  public int ConsumeGachaTicketTypeAmountLength { get { int o = __p.__offset(22); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<long> GetConsumeGachaTicketTypeAmountBytes() { return __p.__vector_as_span<long>(22, 8); }
+#else
+  public ArraySegment<byte>? GetConsumeGachaTicketTypeAmountBytes() { return __p.__vector_as_arraysegment(22); }
+#endif
+  public long[] GetConsumeGachaTicketTypeAmountArray() { return __p.__vector_as_array<long>(22); }
   public long ProductIdAOS { get { int o = __p.__offset(24); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
   public long ProductIdiOS { get { int o = __p.__offset(26); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
   public long ProductIdONE { get { int o = __p.__offset(28); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
@@ -116,42 +130,42 @@ public struct GoodsExcel : IFlatbufferObject
       int Type = 0,
       Global.Rarity Rarity = Global.Rarity.N,
       StringOffset IconPathOffset = default(StringOffset),
-      VectorOffset consumeParcelTypeOffset = default(VectorOffset),
+      VectorOffset ConsumeParcelTypeOffset = default(VectorOffset),
       VectorOffset ConsumeParcelIdOffset = default(VectorOffset),
       VectorOffset ConsumeParcelAmountOffset = default(VectorOffset),
       VectorOffset ConsumeConditionOffset = default(VectorOffset),
-      Global.GachaTicketType ConsumeGachaTicketType = Global.GachaTicketType.None,
-      long ConsumeGachaTicketTypeAmount = 0,
+      VectorOffset ConsumeGachaTicketTypeOffset = default(VectorOffset),
+      VectorOffset ConsumeGachaTicketTypeAmountOffset = default(VectorOffset),
       long ProductIdAOS = 0,
       long ProductIdiOS = 0,
       long ProductIdONE = 0,
       long ProductIdSGS = 0,
       long ProductIdSTEAM = 0,
-      VectorOffset consumeExtraStepOffset = default(VectorOffset),
+      VectorOffset ConsumeExtraStepOffset = default(VectorOffset),
       VectorOffset ConsumeExtraAmountOffset = default(VectorOffset),
       int State = 0,
-      VectorOffset parcelTypeOffset = default(VectorOffset),
-      VectorOffset parcelIdOffset = default(VectorOffset),
-      VectorOffset parcelAmountOffset = default(VectorOffset)) {
+      VectorOffset ParcelTypeOffset = default(VectorOffset),
+      VectorOffset ParcelIdOffset = default(VectorOffset),
+      VectorOffset ParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(21);
     GoodsExcel.AddProductIdSTEAM(builder, ProductIdSTEAM);
     GoodsExcel.AddProductIdSGS(builder, ProductIdSGS);
     GoodsExcel.AddProductIdONE(builder, ProductIdONE);
     GoodsExcel.AddProductIdiOS(builder, ProductIdiOS);
     GoodsExcel.AddProductIdAOS(builder, ProductIdAOS);
-    GoodsExcel.AddConsumeGachaTicketTypeAmount(builder, ConsumeGachaTicketTypeAmount);
     GoodsExcel.AddId(builder, Id);
-    GoodsExcel.AddParcelAmount(builder, parcelAmountOffset);
-    GoodsExcel.AddParcelId(builder, parcelIdOffset);
-    GoodsExcel.AddParcelType(builder, parcelTypeOffset);
+    GoodsExcel.AddParcelAmount(builder, ParcelAmountOffset);
+    GoodsExcel.AddParcelId(builder, ParcelIdOffset);
+    GoodsExcel.AddParcelType(builder, ParcelTypeOffset);
     GoodsExcel.AddState(builder, State);
     GoodsExcel.AddConsumeExtraAmount(builder, ConsumeExtraAmountOffset);
-    GoodsExcel.AddConsumeExtraStep(builder, consumeExtraStepOffset);
-    GoodsExcel.AddConsumeGachaTicketType(builder, ConsumeGachaTicketType);
+    GoodsExcel.AddConsumeExtraStep(builder, ConsumeExtraStepOffset);
+    GoodsExcel.AddConsumeGachaTicketTypeAmount(builder, ConsumeGachaTicketTypeAmountOffset);
+    GoodsExcel.AddConsumeGachaTicketType(builder, ConsumeGachaTicketTypeOffset);
     GoodsExcel.AddConsumeCondition(builder, ConsumeConditionOffset);
     GoodsExcel.AddConsumeParcelAmount(builder, ConsumeParcelAmountOffset);
     GoodsExcel.AddConsumeParcelId(builder, ConsumeParcelIdOffset);
-    GoodsExcel.AddConsumeParcelType(builder, consumeParcelTypeOffset);
+    GoodsExcel.AddConsumeParcelType(builder, ConsumeParcelTypeOffset);
     GoodsExcel.AddIconPath(builder, IconPathOffset);
     GoodsExcel.AddRarity(builder, Rarity);
     GoodsExcel.AddType(builder, Type);
@@ -187,8 +201,18 @@ public struct GoodsExcel : IFlatbufferObject
   public static VectorOffset CreateConsumeConditionVectorBlock(FlatBufferBuilder builder, ArraySegment<Global.ConsumeCondition> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
   public static VectorOffset CreateConsumeConditionVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<Global.ConsumeCondition>(dataPtr, sizeInBytes); return builder.EndVector(); }
   public static void StartConsumeConditionVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
-  public static void AddConsumeGachaTicketType(FlatBufferBuilder builder, Global.GachaTicketType consumeGachaTicketType) { builder.AddInt(8, (int)consumeGachaTicketType, 0); }
-  public static void AddConsumeGachaTicketTypeAmount(FlatBufferBuilder builder, long consumeGachaTicketTypeAmount) { builder.AddLong(9, consumeGachaTicketTypeAmount, 0); }
+  public static void AddConsumeGachaTicketType(FlatBufferBuilder builder, VectorOffset consumeGachaTicketTypeOffset) { builder.AddOffset(8, consumeGachaTicketTypeOffset.Value, 0); }
+  public static VectorOffset CreateConsumeGachaTicketTypeVector(FlatBufferBuilder builder, Global.GachaTicketType[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt((int)data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateConsumeGachaTicketTypeVectorBlock(FlatBufferBuilder builder, Global.GachaTicketType[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConsumeGachaTicketTypeVectorBlock(FlatBufferBuilder builder, ArraySegment<Global.GachaTicketType> data) { builder.StartVector(4, data.Count, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConsumeGachaTicketTypeVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<Global.GachaTicketType>(dataPtr, sizeInBytes); return builder.EndVector(); }
+  public static void StartConsumeGachaTicketTypeVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddConsumeGachaTicketTypeAmount(FlatBufferBuilder builder, VectorOffset consumeGachaTicketTypeAmountOffset) { builder.AddOffset(9, consumeGachaTicketTypeAmountOffset.Value, 0); }
+  public static VectorOffset CreateConsumeGachaTicketTypeAmountVector(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); for (int i = data.Length - 1; i >= 0; i--) builder.AddLong(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateConsumeGachaTicketTypeAmountVectorBlock(FlatBufferBuilder builder, long[] data) { builder.StartVector(8, data.Length, 8); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConsumeGachaTicketTypeAmountVectorBlock(FlatBufferBuilder builder, ArraySegment<long> data) { builder.StartVector(8, data.Count, 8); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateConsumeGachaTicketTypeAmountVectorBlock(FlatBufferBuilder builder, IntPtr dataPtr, int sizeInBytes) { builder.StartVector(1, sizeInBytes, 1); builder.Add<long>(dataPtr, sizeInBytes); return builder.EndVector(); }
+  public static void StartConsumeGachaTicketTypeAmountVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(8, numElems, 8); }
   public static void AddProductIdAOS(FlatBufferBuilder builder, long productIdAOS) { builder.AddLong(10, productIdAOS, 0); }
   public static void AddProductIdiOS(FlatBufferBuilder builder, long productIdiOS) { builder.AddLong(11, productIdiOS, 0); }
   public static void AddProductIdONE(FlatBufferBuilder builder, long productIdONE) { builder.AddLong(12, productIdONE, 0); }
@@ -248,8 +272,10 @@ public struct GoodsExcel : IFlatbufferObject
     for (var _j = 0; _j < this.ConsumeParcelAmountLength; ++_j) {_o.ConsumeParcelAmount.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConsumeParcelAmount(_j), key) : this.ConsumeParcelAmount(_j));}
     _o.ConsumeCondition = new List<Global.ConsumeCondition>();
     for (var _j = 0; _j < this.ConsumeConditionLength; ++_j) {_o.ConsumeCondition.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConsumeCondition(_j), key) : this.ConsumeCondition(_j));}
-    _o.ConsumeGachaTicketType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConsumeGachaTicketType, key) : this.ConsumeGachaTicketType;
-    _o.ConsumeGachaTicketTypeAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConsumeGachaTicketTypeAmount, key) : this.ConsumeGachaTicketTypeAmount;
+    _o.ConsumeGachaTicketType = new List<Global.GachaTicketType>();
+    for (var _j = 0; _j < this.ConsumeGachaTicketTypeLength; ++_j) {_o.ConsumeGachaTicketType.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConsumeGachaTicketType(_j), key) : this.ConsumeGachaTicketType(_j));}
+    _o.ConsumeGachaTicketTypeAmount = new List<long>();
+    for (var _j = 0; _j < this.ConsumeGachaTicketTypeAmountLength; ++_j) {_o.ConsumeGachaTicketTypeAmount.Add(TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ConsumeGachaTicketTypeAmount(_j), key) : this.ConsumeGachaTicketTypeAmount(_j));}
     _o.ProductIdAOS = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ProductIdAOS, key) : this.ProductIdAOS;
     _o.ProductIdiOS = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ProductIdiOS, key) : this.ProductIdiOS;
     _o.ProductIdONE = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ProductIdONE, key) : this.ProductIdONE;
@@ -274,10 +300,10 @@ public struct GoodsExcel : IFlatbufferObject
 		var _Type = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Type, key) : _o.Type;
 		var _Rarity = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Rarity, key) : _o.Rarity;
     var _IconPath = _o.IconPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.IconPath, key) : _o.IconPath));
-    var _consumeParcelType = default(VectorOffset);
+    var _ConsumeParcelType = default(VectorOffset);
     if (_o.ConsumeParcelType != null) {
-      var __consumeParcelType = _o.ConsumeParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _consumeParcelType = CreateConsumeParcelTypeVector(builder, __consumeParcelType);
+      var __ConsumeParcelType = _o.ConsumeParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConsumeParcelType = CreateConsumeParcelTypeVector(builder, __ConsumeParcelType);
     }
     var _ConsumeParcelId = default(VectorOffset);
     if (_o.ConsumeParcelId != null) {
@@ -294,17 +320,25 @@ public struct GoodsExcel : IFlatbufferObject
       var __ConsumeCondition = _o.ConsumeCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _ConsumeCondition = CreateConsumeConditionVector(builder, __ConsumeCondition);
     }
-		var _ConsumeGachaTicketType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConsumeGachaTicketType, key) : _o.ConsumeGachaTicketType;
-		var _ConsumeGachaTicketTypeAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConsumeGachaTicketTypeAmount, key) : _o.ConsumeGachaTicketTypeAmount;
+    var _ConsumeGachaTicketType = default(VectorOffset);
+    if (_o.ConsumeGachaTicketType != null) {
+      var __ConsumeGachaTicketType = _o.ConsumeGachaTicketType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConsumeGachaTicketType = CreateConsumeGachaTicketTypeVector(builder, __ConsumeGachaTicketType);
+    }
+    var _ConsumeGachaTicketTypeAmount = default(VectorOffset);
+    if (_o.ConsumeGachaTicketTypeAmount != null) {
+      var __ConsumeGachaTicketTypeAmount = _o.ConsumeGachaTicketTypeAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConsumeGachaTicketTypeAmount = CreateConsumeGachaTicketTypeAmountVector(builder, __ConsumeGachaTicketTypeAmount);
+    }
 		var _ProductIdAOS = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ProductIdAOS, key) : _o.ProductIdAOS;
 		var _ProductIdiOS = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ProductIdiOS, key) : _o.ProductIdiOS;
 		var _ProductIdONE = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ProductIdONE, key) : _o.ProductIdONE;
 		var _ProductIdSGS = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ProductIdSGS, key) : _o.ProductIdSGS;
 		var _ProductIdSTEAM = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ProductIdSTEAM, key) : _o.ProductIdSTEAM;
-    var _consumeExtraStep = default(VectorOffset);
+    var _ConsumeExtraStep = default(VectorOffset);
     if (_o.ConsumeExtraStep != null) {
-      var __consumeExtraStep = _o.ConsumeExtraStep.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _consumeExtraStep = CreateConsumeExtraStepVector(builder, __consumeExtraStep);
+      var __ConsumeExtraStep = _o.ConsumeExtraStep.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConsumeExtraStep = CreateConsumeExtraStepVector(builder, __ConsumeExtraStep);
     }
     var _ConsumeExtraAmount = default(VectorOffset);
     if (_o.ConsumeExtraAmount != null) {
@@ -312,20 +346,20 @@ public struct GoodsExcel : IFlatbufferObject
       _ConsumeExtraAmount = CreateConsumeExtraAmountVector(builder, __ConsumeExtraAmount);
     }
 		var _State = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.State, key) : _o.State;
-    var _parcelType = default(VectorOffset);
+    var _ParcelType = default(VectorOffset);
     if (_o.ParcelType != null) {
-      var __parcelType = _o.ParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelType = CreateParcelTypeVector(builder, __parcelType);
+      var __ParcelType = _o.ParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelType = CreateParcelTypeVector(builder, __ParcelType);
     }
-    var _parcelId = default(VectorOffset);
+    var _ParcelId = default(VectorOffset);
     if (_o.ParcelId != null) {
-      var __parcelId = _o.ParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelId = CreateParcelIdVector(builder, __parcelId);
+      var __ParcelId = _o.ParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelId = CreateParcelIdVector(builder, __ParcelId);
     }
-    var _parcelAmount = default(VectorOffset);
+    var _ParcelAmount = default(VectorOffset);
     if (_o.ParcelAmount != null) {
-      var __parcelAmount = _o.ParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _parcelAmount = CreateParcelAmountVector(builder, __parcelAmount);
+      var __ParcelAmount = _o.ParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ParcelAmount = CreateParcelAmountVector(builder, __ParcelAmount);
     }
     return CreateGoodsExcel(
       builder,
@@ -333,23 +367,23 @@ public struct GoodsExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _Type : _o.Type,
       TableEncryptionService.UseEncryption ? _Rarity : _o.Rarity,
       _IconPath,
-      _consumeParcelType,
+      _ConsumeParcelType,
       _ConsumeParcelId,
       _ConsumeParcelAmount,
       _ConsumeCondition,
-      TableEncryptionService.UseEncryption ? _ConsumeGachaTicketType : _o.ConsumeGachaTicketType,
-      TableEncryptionService.UseEncryption ? _ConsumeGachaTicketTypeAmount : _o.ConsumeGachaTicketTypeAmount,
+      _ConsumeGachaTicketType,
+      _ConsumeGachaTicketTypeAmount,
       TableEncryptionService.UseEncryption ? _ProductIdAOS : _o.ProductIdAOS,
       TableEncryptionService.UseEncryption ? _ProductIdiOS : _o.ProductIdiOS,
       TableEncryptionService.UseEncryption ? _ProductIdONE : _o.ProductIdONE,
       TableEncryptionService.UseEncryption ? _ProductIdSGS : _o.ProductIdSGS,
       TableEncryptionService.UseEncryption ? _ProductIdSTEAM : _o.ProductIdSTEAM,
-      _consumeExtraStep,
+      _ConsumeExtraStep,
       _ConsumeExtraAmount,
       TableEncryptionService.UseEncryption ? _State : _o.State,
-      _parcelType,
-      _parcelId,
-      _parcelAmount);
+      _ParcelType,
+      _ParcelId,
+      _ParcelAmount);
   }
 }
 
@@ -363,8 +397,8 @@ public class GoodsExcelT
   public List<long> ConsumeParcelId { get; set; }
   public List<long> ConsumeParcelAmount { get; set; }
   public List<Global.ConsumeCondition> ConsumeCondition { get; set; }
-  public Global.GachaTicketType ConsumeGachaTicketType { get; set; }
-  public long ConsumeGachaTicketTypeAmount { get; set; }
+  public List<Global.GachaTicketType> ConsumeGachaTicketType { get; set; }
+  public List<long> ConsumeGachaTicketTypeAmount { get; set; }
   public long ProductIdAOS { get; set; }
   public long ProductIdiOS { get; set; }
   public long ProductIdONE { get; set; }
@@ -386,8 +420,8 @@ public class GoodsExcelT
     this.ConsumeParcelId = null;
     this.ConsumeParcelAmount = null;
     this.ConsumeCondition = null;
-    this.ConsumeGachaTicketType = Global.GachaTicketType.None;
-    this.ConsumeGachaTicketTypeAmount = 0;
+    this.ConsumeGachaTicketType = null;
+    this.ConsumeGachaTicketTypeAmount = null;
     this.ProductIdAOS = 0;
     this.ProductIdiOS = 0;
     this.ProductIdONE = 0;
@@ -416,8 +450,8 @@ static public class GoodsExcelVerify
       && verifier.VerifyVectorOfData(tablePos, 14 /*ConsumeParcelId*/, 8 /*long*/, false)
       && verifier.VerifyVectorOfData(tablePos, 16 /*ConsumeParcelAmount*/, 8 /*long*/, false)
       && verifier.VerifyVectorOfData(tablePos, 18 /*ConsumeCondition*/, 4 /*Global.ConsumeCondition*/, false)
-      && verifier.VerifyField(tablePos, 20 /*ConsumeGachaTicketType*/, 4 /*Global.GachaTicketType*/, 4, false)
-      && verifier.VerifyField(tablePos, 22 /*ConsumeGachaTicketTypeAmount*/, 8 /*long*/, 8, false)
+      && verifier.VerifyVectorOfData(tablePos, 20 /*ConsumeGachaTicketType*/, 4 /*Global.GachaTicketType*/, false)
+      && verifier.VerifyVectorOfData(tablePos, 22 /*ConsumeGachaTicketTypeAmount*/, 8 /*long*/, false)
       && verifier.VerifyField(tablePos, 24 /*ProductIdAOS*/, 8 /*long*/, 8, false)
       && verifier.VerifyField(tablePos, 26 /*ProductIdiOS*/, 8 /*long*/, 8, false)
       && verifier.VerifyField(tablePos, 28 /*ProductIdONE*/, 8 /*long*/, 8, false)

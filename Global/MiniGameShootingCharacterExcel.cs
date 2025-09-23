@@ -71,7 +71,7 @@ public struct MiniGameShootingCharacterExcel : IFlatbufferObject
       float BodyRadius = 0.0f,
       StringOffset ModelPrefabNameOffset = default(StringOffset),
       StringOffset NormalAttackSkillDataOffset = default(StringOffset),
-      VectorOffset publicSkillDataOffset = default(VectorOffset),
+      VectorOffset PublicSkillDataOffset = default(VectorOffset),
       StringOffset DeathSkillDataOffset = default(StringOffset),
       long MaxHP = 0,
       long AttackPower = 0,
@@ -98,7 +98,7 @@ public struct MiniGameShootingCharacterExcel : IFlatbufferObject
     MiniGameShootingCharacterExcel.AddUniqueId(builder, UniqueId);
     MiniGameShootingCharacterExcel.AddScale(builder, Scale);
     MiniGameShootingCharacterExcel.AddDeathSkillData(builder, DeathSkillDataOffset);
-    MiniGameShootingCharacterExcel.AddPublicSkillData(builder, publicSkillDataOffset);
+    MiniGameShootingCharacterExcel.AddPublicSkillData(builder, PublicSkillDataOffset);
     MiniGameShootingCharacterExcel.AddNormalAttackSkillData(builder, NormalAttackSkillDataOffset);
     MiniGameShootingCharacterExcel.AddModelPrefabName(builder, ModelPrefabNameOffset);
     MiniGameShootingCharacterExcel.AddBodyRadius(builder, BodyRadius);
@@ -173,11 +173,11 @@ public struct MiniGameShootingCharacterExcel : IFlatbufferObject
 		var _BodyRadius = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.BodyRadius, key) : _o.BodyRadius;
     var _ModelPrefabName = _o.ModelPrefabName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ModelPrefabName, key) : _o.ModelPrefabName));
     var _NormalAttackSkillData = _o.NormalAttackSkillData == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.NormalAttackSkillData, key) : _o.NormalAttackSkillData));
-    var _publicSkillData = default(VectorOffset);
+    var _PublicSkillData = default(VectorOffset);
     if (_o.PublicSkillData != null) {
-      var __publicSkillData = new StringOffset[_o.PublicSkillData.Count];
-      for (var _j = 0; _j < __publicSkillData.Length; ++_j) { __publicSkillData[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PublicSkillData[_j], key) : _o.PublicSkillData[_j])); }
-      _publicSkillData = CreatePublicSkillDataVector(builder, __publicSkillData);
+      var __PublicSkillData = new StringOffset[_o.PublicSkillData.Count];
+      for (var _j = 0; _j < __PublicSkillData.Length; ++_j) { __PublicSkillData[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PublicSkillData[_j], key) : _o.PublicSkillData[_j])); }
+      _PublicSkillData = CreatePublicSkillDataVector(builder, __PublicSkillData);
     }
     var _DeathSkillData = _o.DeathSkillData == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DeathSkillData, key) : _o.DeathSkillData));
 		var _MaxHP = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MaxHP, key) : _o.MaxHP;
@@ -199,7 +199,7 @@ public struct MiniGameShootingCharacterExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _BodyRadius : _o.BodyRadius,
       _ModelPrefabName,
       _NormalAttackSkillData,
-      _publicSkillData,
+      _PublicSkillData,
       _DeathSkillData,
       TableEncryptionService.UseEncryption ? _MaxHP : _o.MaxHP,
       TableEncryptionService.UseEncryption ? _AttackPower : _o.AttackPower,

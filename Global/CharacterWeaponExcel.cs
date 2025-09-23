@@ -98,13 +98,13 @@ public struct CharacterWeaponExcel : IFlatbufferObject
       long MaxHP100 = 0,
       long HealPower = 0,
       long HealPower100 = 0,
-      VectorOffset tagsOffset = default(VectorOffset),
+      VectorOffset TagsOffset = default(VectorOffset),
       VectorOffset UnlockOffset = default(VectorOffset),
       VectorOffset RecipeIdOffset = default(VectorOffset),
       VectorOffset MaxLevelOffset = default(VectorOffset),
-      VectorOffset learnSkillSlotOffset = default(VectorOffset),
-      VectorOffset statTypeOffset = default(VectorOffset),
-      VectorOffset statValueOffset = default(VectorOffset)) {
+      VectorOffset LearnSkillSlotOffset = default(VectorOffset),
+      VectorOffset StatTypeOffset = default(VectorOffset),
+      VectorOffset StatValueOffset = default(VectorOffset)) {
     builder.StartTable(17);
     CharacterWeaponExcel.AddHealPower100(builder, HealPower100);
     CharacterWeaponExcel.AddHealPower(builder, HealPower);
@@ -114,13 +114,13 @@ public struct CharacterWeaponExcel : IFlatbufferObject
     CharacterWeaponExcel.AddAttackPower(builder, AttackPower);
     CharacterWeaponExcel.AddSetRecipe(builder, SetRecipe);
     CharacterWeaponExcel.AddId(builder, Id);
-    CharacterWeaponExcel.AddStatValue(builder, statValueOffset);
-    CharacterWeaponExcel.AddStatType(builder, statTypeOffset);
-    CharacterWeaponExcel.AddLearnSkillSlot(builder, learnSkillSlotOffset);
+    CharacterWeaponExcel.AddStatValue(builder, StatValueOffset);
+    CharacterWeaponExcel.AddStatType(builder, StatTypeOffset);
+    CharacterWeaponExcel.AddLearnSkillSlot(builder, LearnSkillSlotOffset);
     CharacterWeaponExcel.AddMaxLevel(builder, MaxLevelOffset);
     CharacterWeaponExcel.AddRecipeId(builder, RecipeIdOffset);
     CharacterWeaponExcel.AddUnlock(builder, UnlockOffset);
-    CharacterWeaponExcel.AddTags(builder, tagsOffset);
+    CharacterWeaponExcel.AddTags(builder, TagsOffset);
     CharacterWeaponExcel.AddStatLevelUpType(builder, StatLevelUpType);
     CharacterWeaponExcel.AddImagePath(builder, ImagePathOffset);
     return CharacterWeaponExcel.EndCharacterWeaponExcel(builder);
@@ -228,10 +228,10 @@ public struct CharacterWeaponExcel : IFlatbufferObject
 		var _MaxHP100 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MaxHP100, key) : _o.MaxHP100;
 		var _HealPower = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.HealPower, key) : _o.HealPower;
 		var _HealPower100 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.HealPower100, key) : _o.HealPower100;
-    var _tags = default(VectorOffset);
+    var _Tags = default(VectorOffset);
     if (_o.Tags != null) {
-      var __tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _tags = CreateTagsVector(builder, __tags);
+      var __Tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _Tags = CreateTagsVector(builder, __Tags);
     }
     var _Unlock = default(VectorOffset);
     if (_o.Unlock != null) {
@@ -248,21 +248,21 @@ public struct CharacterWeaponExcel : IFlatbufferObject
       var __MaxLevel = _o.MaxLevel.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _MaxLevel = CreateMaxLevelVector(builder, __MaxLevel);
     }
-    var _learnSkillSlot = default(VectorOffset);
+    var _LearnSkillSlot = default(VectorOffset);
     if (_o.LearnSkillSlot != null) {
-      var __learnSkillSlot = new StringOffset[_o.LearnSkillSlot.Count];
-      for (var _j = 0; _j < __learnSkillSlot.Length; ++_j) { __learnSkillSlot[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.LearnSkillSlot[_j], key) : _o.LearnSkillSlot[_j])); }
-      _learnSkillSlot = CreateLearnSkillSlotVector(builder, __learnSkillSlot);
+      var __LearnSkillSlot = new StringOffset[_o.LearnSkillSlot.Count];
+      for (var _j = 0; _j < __LearnSkillSlot.Length; ++_j) { __LearnSkillSlot[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.LearnSkillSlot[_j], key) : _o.LearnSkillSlot[_j])); }
+      _LearnSkillSlot = CreateLearnSkillSlotVector(builder, __LearnSkillSlot);
     }
-    var _statType = default(VectorOffset);
+    var _StatType = default(VectorOffset);
     if (_o.StatType != null) {
-      var __statType = _o.StatType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _statType = CreateStatTypeVector(builder, __statType);
+      var __StatType = _o.StatType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StatType = CreateStatTypeVector(builder, __StatType);
     }
-    var _statValue = default(VectorOffset);
+    var _StatValue = default(VectorOffset);
     if (_o.StatValue != null) {
-      var __statValue = _o.StatValue.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _statValue = CreateStatValueVector(builder, __statValue);
+      var __StatValue = _o.StatValue.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StatValue = CreateStatValueVector(builder, __StatValue);
     }
     return CreateCharacterWeaponExcel(
       builder,
@@ -276,13 +276,13 @@ public struct CharacterWeaponExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _MaxHP100 : _o.MaxHP100,
       TableEncryptionService.UseEncryption ? _HealPower : _o.HealPower,
       TableEncryptionService.UseEncryption ? _HealPower100 : _o.HealPower100,
-      _tags,
+      _Tags,
       _Unlock,
       _RecipeId,
       _MaxLevel,
-      _learnSkillSlot,
-      _statType,
-      _statValue);
+      _LearnSkillSlot,
+      _StatType,
+      _StatValue);
   }
 }
 

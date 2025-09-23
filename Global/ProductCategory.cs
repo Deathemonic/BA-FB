@@ -13,6 +13,8 @@ public enum ProductCategory : int
   Package = 3,
   GachaDirect_DontUseGlobal = 4,
   TimeLimit = 5,
+  BattlePass = 6,
+  GooglePoint = 7,
 };
 
 

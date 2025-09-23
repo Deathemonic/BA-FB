@@ -166,11 +166,17 @@ public struct ConstCombatExcel : IFlatbufferObject
 #endif
   public byte[] GetEchelonExtensionVictoryTimelinePathArray() { return __p.__vector_as_array<byte>(184); }
   public int EchelonExtensionEchelonMaxCommonCost { get { int o = __p.__offset(186); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
-  public int EchelonExtensionEchelonInitCommonCost { get { int o = __p.__offset(188); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
-  public long EchelonExtensionCostRegenRatio { get { int o = __p.__offset(190); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
-  public int CheckCheaterMaxUseCostMultiFloorRaid { get { int o = __p.__offset(192); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
-  public float ExcessiveTouchCheckTime { get { int o = __p.__offset(194); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
-  public int ExcessiveTouchCheckCount { get { int o = __p.__offset(196); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public long EchelonMaxOverloadCost { get { int o = __p.__offset(188); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public long EchelonExtensionMaxOverloadCost { get { int o = __p.__offset(190); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public int EchelonExtensionEchelonInitCommonCost { get { int o = __p.__offset(192); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public long EchelonExtensionCostRegenRatio { get { int o = __p.__offset(194); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public long EchelonOverloadCostRegenRatio { get { int o = __p.__offset(196); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public long EchelonExtensionOverloadCostRegenRatio { get { int o = __p.__offset(198); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public int CheckCheaterMaxUseCostMultiFloorRaid { get { int o = __p.__offset(200); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public float ExcessiveTouchCheckTime { get { int o = __p.__offset(202); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
+  public int ExcessiveTouchCheckCount { get { int o = __p.__offset(204); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int CampaignAlertPopupLevelGap { get { int o = __p.__offset(206); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int MoveCorrectionSkipRatio { get { int o = __p.__offset(208); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
 
   public static Offset<Global.ConstCombatExcel> CreateConstCombatExcel(FlatBufferBuilder builder,
       int SkillHandCount = 0,
@@ -265,13 +271,23 @@ public struct ConstCombatExcel : IFlatbufferObject
       StringOffset EchelonExtensionEngageWithSupporterTimelinePathOffset = default(StringOffset),
       StringOffset EchelonExtensionVictoryTimelinePathOffset = default(StringOffset),
       int EchelonExtensionEchelonMaxCommonCost = 0,
+      long EchelonMaxOverloadCost = 0,
+      long EchelonExtensionMaxOverloadCost = 0,
       int EchelonExtensionEchelonInitCommonCost = 0,
       long EchelonExtensionCostRegenRatio = 0,
+      long EchelonOverloadCostRegenRatio = 0,
+      long EchelonExtensionOverloadCostRegenRatio = 0,
       int CheckCheaterMaxUseCostMultiFloorRaid = 0,
       float ExcessiveTouchCheckTime = 0.0f,
-      int ExcessiveTouchCheckCount = 0) {
-    builder.StartTable(97);
+      int ExcessiveTouchCheckCount = 0,
+      int CampaignAlertPopupLevelGap = 0,
+      int MoveCorrectionSkipRatio = 0) {
+    builder.StartTable(103);
+    ConstCombatExcel.AddEchelonExtensionOverloadCostRegenRatio(builder, EchelonExtensionOverloadCostRegenRatio);
+    ConstCombatExcel.AddEchelonOverloadCostRegenRatio(builder, EchelonOverloadCostRegenRatio);
     ConstCombatExcel.AddEchelonExtensionCostRegenRatio(builder, EchelonExtensionCostRegenRatio);
+    ConstCombatExcel.AddEchelonExtensionMaxOverloadCost(builder, EchelonExtensionMaxOverloadCost);
+    ConstCombatExcel.AddEchelonMaxOverloadCost(builder, EchelonMaxOverloadCost);
     ConstCombatExcel.AddVictoryInteractionRate(builder, VictoryInteractionRate);
     ConstCombatExcel.AddTSAInteractionDamageFactor(builder, TSAInteractionDamageFactor);
     ConstCombatExcel.AddAuraExitThresholdMargin(builder, AuraExitThresholdMargin);
@@ -329,6 +345,8 @@ public struct ConstCombatExcel : IFlatbufferObject
     ConstCombatExcel.AddTimeLimitAlarm(builder, TimeLimitAlarm);
     ConstCombatExcel.AddMaxRaidBossSkillSlot(builder, MaxRaidBossSkillSlot);
     ConstCombatExcel.AddMaxRaidTicketCount(builder, MaxRaidTicketCount);
+    ConstCombatExcel.AddMoveCorrectionSkipRatio(builder, MoveCorrectionSkipRatio);
+    ConstCombatExcel.AddCampaignAlertPopupLevelGap(builder, CampaignAlertPopupLevelGap);
     ConstCombatExcel.AddExcessiveTouchCheckCount(builder, ExcessiveTouchCheckCount);
     ConstCombatExcel.AddExcessiveTouchCheckTime(builder, ExcessiveTouchCheckTime);
     ConstCombatExcel.AddCheckCheaterMaxUseCostMultiFloorRaid(builder, CheckCheaterMaxUseCostMultiFloorRaid);
@@ -371,7 +389,7 @@ public struct ConstCombatExcel : IFlatbufferObject
     return ConstCombatExcel.EndConstCombatExcel(builder);
   }
 
-  public static void StartConstCombatExcel(FlatBufferBuilder builder) { builder.StartTable(97); }
+  public static void StartConstCombatExcel(FlatBufferBuilder builder) { builder.StartTable(103); }
   public static void AddSkillHandCount(FlatBufferBuilder builder, int skillHandCount) { builder.AddInt(0, skillHandCount, 0); }
   public static void AddDyingTime(FlatBufferBuilder builder, int dyingTime) { builder.AddInt(1, dyingTime, 0); }
   public static void AddBuffIconBlinkTime(FlatBufferBuilder builder, int buffIconBlinkTime) { builder.AddInt(2, buffIconBlinkTime, 0); }
@@ -464,11 +482,17 @@ public struct ConstCombatExcel : IFlatbufferObject
   public static void AddEchelonExtensionEngageWithSupporterTimelinePath(FlatBufferBuilder builder, StringOffset echelonExtensionEngageWithSupporterTimelinePathOffset) { builder.AddOffset(89, echelonExtensionEngageWithSupporterTimelinePathOffset.Value, 0); }
   public static void AddEchelonExtensionVictoryTimelinePath(FlatBufferBuilder builder, StringOffset echelonExtensionVictoryTimelinePathOffset) { builder.AddOffset(90, echelonExtensionVictoryTimelinePathOffset.Value, 0); }
   public static void AddEchelonExtensionEchelonMaxCommonCost(FlatBufferBuilder builder, int echelonExtensionEchelonMaxCommonCost) { builder.AddInt(91, echelonExtensionEchelonMaxCommonCost, 0); }
-  public static void AddEchelonExtensionEchelonInitCommonCost(FlatBufferBuilder builder, int echelonExtensionEchelonInitCommonCost) { builder.AddInt(92, echelonExtensionEchelonInitCommonCost, 0); }
-  public static void AddEchelonExtensionCostRegenRatio(FlatBufferBuilder builder, long echelonExtensionCostRegenRatio) { builder.AddLong(93, echelonExtensionCostRegenRatio, 0); }
-  public static void AddCheckCheaterMaxUseCostMultiFloorRaid(FlatBufferBuilder builder, int checkCheaterMaxUseCostMultiFloorRaid) { builder.AddInt(94, checkCheaterMaxUseCostMultiFloorRaid, 0); }
-  public static void AddExcessiveTouchCheckTime(FlatBufferBuilder builder, float excessiveTouchCheckTime) { builder.AddFloat(95, excessiveTouchCheckTime, 0.0f); }
-  public static void AddExcessiveTouchCheckCount(FlatBufferBuilder builder, int excessiveTouchCheckCount) { builder.AddInt(96, excessiveTouchCheckCount, 0); }
+  public static void AddEchelonMaxOverloadCost(FlatBufferBuilder builder, long echelonMaxOverloadCost) { builder.AddLong(92, echelonMaxOverloadCost, 0); }
+  public static void AddEchelonExtensionMaxOverloadCost(FlatBufferBuilder builder, long echelonExtensionMaxOverloadCost) { builder.AddLong(93, echelonExtensionMaxOverloadCost, 0); }
+  public static void AddEchelonExtensionEchelonInitCommonCost(FlatBufferBuilder builder, int echelonExtensionEchelonInitCommonCost) { builder.AddInt(94, echelonExtensionEchelonInitCommonCost, 0); }
+  public static void AddEchelonExtensionCostRegenRatio(FlatBufferBuilder builder, long echelonExtensionCostRegenRatio) { builder.AddLong(95, echelonExtensionCostRegenRatio, 0); }
+  public static void AddEchelonOverloadCostRegenRatio(FlatBufferBuilder builder, long echelonOverloadCostRegenRatio) { builder.AddLong(96, echelonOverloadCostRegenRatio, 0); }
+  public static void AddEchelonExtensionOverloadCostRegenRatio(FlatBufferBuilder builder, long echelonExtensionOverloadCostRegenRatio) { builder.AddLong(97, echelonExtensionOverloadCostRegenRatio, 0); }
+  public static void AddCheckCheaterMaxUseCostMultiFloorRaid(FlatBufferBuilder builder, int checkCheaterMaxUseCostMultiFloorRaid) { builder.AddInt(98, checkCheaterMaxUseCostMultiFloorRaid, 0); }
+  public static void AddExcessiveTouchCheckTime(FlatBufferBuilder builder, float excessiveTouchCheckTime) { builder.AddFloat(99, excessiveTouchCheckTime, 0.0f); }
+  public static void AddExcessiveTouchCheckCount(FlatBufferBuilder builder, int excessiveTouchCheckCount) { builder.AddInt(100, excessiveTouchCheckCount, 0); }
+  public static void AddCampaignAlertPopupLevelGap(FlatBufferBuilder builder, int campaignAlertPopupLevelGap) { builder.AddInt(101, campaignAlertPopupLevelGap, 0); }
+  public static void AddMoveCorrectionSkipRatio(FlatBufferBuilder builder, int moveCorrectionSkipRatio) { builder.AddInt(102, moveCorrectionSkipRatio, 0); }
   public static Offset<Global.ConstCombatExcel> EndConstCombatExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Global.ConstCombatExcel>(o);
@@ -572,11 +596,17 @@ public struct ConstCombatExcel : IFlatbufferObject
     _o.EchelonExtensionEngageWithSupporterTimelinePath = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonExtensionEngageWithSupporterTimelinePath, key) : this.EchelonExtensionEngageWithSupporterTimelinePath;
     _o.EchelonExtensionVictoryTimelinePath = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonExtensionVictoryTimelinePath, key) : this.EchelonExtensionVictoryTimelinePath;
     _o.EchelonExtensionEchelonMaxCommonCost = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonExtensionEchelonMaxCommonCost, key) : this.EchelonExtensionEchelonMaxCommonCost;
+    _o.EchelonMaxOverloadCost = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonMaxOverloadCost, key) : this.EchelonMaxOverloadCost;
+    _o.EchelonExtensionMaxOverloadCost = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonExtensionMaxOverloadCost, key) : this.EchelonExtensionMaxOverloadCost;
     _o.EchelonExtensionEchelonInitCommonCost = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonExtensionEchelonInitCommonCost, key) : this.EchelonExtensionEchelonInitCommonCost;
     _o.EchelonExtensionCostRegenRatio = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonExtensionCostRegenRatio, key) : this.EchelonExtensionCostRegenRatio;
+    _o.EchelonOverloadCostRegenRatio = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonOverloadCostRegenRatio, key) : this.EchelonOverloadCostRegenRatio;
+    _o.EchelonExtensionOverloadCostRegenRatio = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonExtensionOverloadCostRegenRatio, key) : this.EchelonExtensionOverloadCostRegenRatio;
     _o.CheckCheaterMaxUseCostMultiFloorRaid = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CheckCheaterMaxUseCostMultiFloorRaid, key) : this.CheckCheaterMaxUseCostMultiFloorRaid;
     _o.ExcessiveTouchCheckTime = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ExcessiveTouchCheckTime, key) : this.ExcessiveTouchCheckTime;
     _o.ExcessiveTouchCheckCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ExcessiveTouchCheckCount, key) : this.ExcessiveTouchCheckCount;
+    _o.CampaignAlertPopupLevelGap = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.CampaignAlertPopupLevelGap, key) : this.CampaignAlertPopupLevelGap;
+    _o.MoveCorrectionSkipRatio = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.MoveCorrectionSkipRatio, key) : this.MoveCorrectionSkipRatio;
   }
   public static Offset<Global.ConstCombatExcel> Pack(FlatBufferBuilder builder, ConstCombatExcelT _o) {
     if (_o == null) return default(Offset<Global.ConstCombatExcel>);
@@ -673,11 +703,17 @@ public struct ConstCombatExcel : IFlatbufferObject
     var _EchelonExtensionEngageWithSupporterTimelinePath = _o.EchelonExtensionEngageWithSupporterTimelinePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EchelonExtensionEngageWithSupporterTimelinePath, key) : _o.EchelonExtensionEngageWithSupporterTimelinePath));
     var _EchelonExtensionVictoryTimelinePath = _o.EchelonExtensionVictoryTimelinePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EchelonExtensionVictoryTimelinePath, key) : _o.EchelonExtensionVictoryTimelinePath));
 		var _EchelonExtensionEchelonMaxCommonCost = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonExtensionEchelonMaxCommonCost, key) : _o.EchelonExtensionEchelonMaxCommonCost;
+		var _EchelonMaxOverloadCost = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonMaxOverloadCost, key) : _o.EchelonMaxOverloadCost;
+		var _EchelonExtensionMaxOverloadCost = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonExtensionMaxOverloadCost, key) : _o.EchelonExtensionMaxOverloadCost;
 		var _EchelonExtensionEchelonInitCommonCost = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonExtensionEchelonInitCommonCost, key) : _o.EchelonExtensionEchelonInitCommonCost;
 		var _EchelonExtensionCostRegenRatio = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonExtensionCostRegenRatio, key) : _o.EchelonExtensionCostRegenRatio;
+		var _EchelonOverloadCostRegenRatio = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonOverloadCostRegenRatio, key) : _o.EchelonOverloadCostRegenRatio;
+		var _EchelonExtensionOverloadCostRegenRatio = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonExtensionOverloadCostRegenRatio, key) : _o.EchelonExtensionOverloadCostRegenRatio;
 		var _CheckCheaterMaxUseCostMultiFloorRaid = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CheckCheaterMaxUseCostMultiFloorRaid, key) : _o.CheckCheaterMaxUseCostMultiFloorRaid;
 		var _ExcessiveTouchCheckTime = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ExcessiveTouchCheckTime, key) : _o.ExcessiveTouchCheckTime;
 		var _ExcessiveTouchCheckCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ExcessiveTouchCheckCount, key) : _o.ExcessiveTouchCheckCount;
+		var _CampaignAlertPopupLevelGap = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CampaignAlertPopupLevelGap, key) : _o.CampaignAlertPopupLevelGap;
+		var _MoveCorrectionSkipRatio = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MoveCorrectionSkipRatio, key) : _o.MoveCorrectionSkipRatio;
     return CreateConstCombatExcel(
       builder,
       TableEncryptionService.UseEncryption ? _SkillHandCount : _o.SkillHandCount,
@@ -772,11 +808,17 @@ public struct ConstCombatExcel : IFlatbufferObject
       _EchelonExtensionEngageWithSupporterTimelinePath,
       _EchelonExtensionVictoryTimelinePath,
       TableEncryptionService.UseEncryption ? _EchelonExtensionEchelonMaxCommonCost : _o.EchelonExtensionEchelonMaxCommonCost,
+      TableEncryptionService.UseEncryption ? _EchelonMaxOverloadCost : _o.EchelonMaxOverloadCost,
+      TableEncryptionService.UseEncryption ? _EchelonExtensionMaxOverloadCost : _o.EchelonExtensionMaxOverloadCost,
       TableEncryptionService.UseEncryption ? _EchelonExtensionEchelonInitCommonCost : _o.EchelonExtensionEchelonInitCommonCost,
       TableEncryptionService.UseEncryption ? _EchelonExtensionCostRegenRatio : _o.EchelonExtensionCostRegenRatio,
+      TableEncryptionService.UseEncryption ? _EchelonOverloadCostRegenRatio : _o.EchelonOverloadCostRegenRatio,
+      TableEncryptionService.UseEncryption ? _EchelonExtensionOverloadCostRegenRatio : _o.EchelonExtensionOverloadCostRegenRatio,
       TableEncryptionService.UseEncryption ? _CheckCheaterMaxUseCostMultiFloorRaid : _o.CheckCheaterMaxUseCostMultiFloorRaid,
       TableEncryptionService.UseEncryption ? _ExcessiveTouchCheckTime : _o.ExcessiveTouchCheckTime,
-      TableEncryptionService.UseEncryption ? _ExcessiveTouchCheckCount : _o.ExcessiveTouchCheckCount);
+      TableEncryptionService.UseEncryption ? _ExcessiveTouchCheckCount : _o.ExcessiveTouchCheckCount,
+      TableEncryptionService.UseEncryption ? _CampaignAlertPopupLevelGap : _o.CampaignAlertPopupLevelGap,
+      TableEncryptionService.UseEncryption ? _MoveCorrectionSkipRatio : _o.MoveCorrectionSkipRatio);
   }
 }
 
@@ -874,11 +916,17 @@ public class ConstCombatExcelT
   public string EchelonExtensionEngageWithSupporterTimelinePath { get; set; }
   public string EchelonExtensionVictoryTimelinePath { get; set; }
   public int EchelonExtensionEchelonMaxCommonCost { get; set; }
+  public long EchelonMaxOverloadCost { get; set; }
+  public long EchelonExtensionMaxOverloadCost { get; set; }
   public int EchelonExtensionEchelonInitCommonCost { get; set; }
   public long EchelonExtensionCostRegenRatio { get; set; }
+  public long EchelonOverloadCostRegenRatio { get; set; }
+  public long EchelonExtensionOverloadCostRegenRatio { get; set; }
   public int CheckCheaterMaxUseCostMultiFloorRaid { get; set; }
   public float ExcessiveTouchCheckTime { get; set; }
   public int ExcessiveTouchCheckCount { get; set; }
+  public int CampaignAlertPopupLevelGap { get; set; }
+  public int MoveCorrectionSkipRatio { get; set; }
 
   public ConstCombatExcelT() {
     this.SkillHandCount = 0;
@@ -973,11 +1021,17 @@ public class ConstCombatExcelT
     this.EchelonExtensionEngageWithSupporterTimelinePath = null;
     this.EchelonExtensionVictoryTimelinePath = null;
     this.EchelonExtensionEchelonMaxCommonCost = 0;
+    this.EchelonMaxOverloadCost = 0;
+    this.EchelonExtensionMaxOverloadCost = 0;
     this.EchelonExtensionEchelonInitCommonCost = 0;
     this.EchelonExtensionCostRegenRatio = 0;
+    this.EchelonOverloadCostRegenRatio = 0;
+    this.EchelonExtensionOverloadCostRegenRatio = 0;
     this.CheckCheaterMaxUseCostMultiFloorRaid = 0;
     this.ExcessiveTouchCheckTime = 0.0f;
     this.ExcessiveTouchCheckCount = 0;
+    this.CampaignAlertPopupLevelGap = 0;
+    this.MoveCorrectionSkipRatio = 0;
   }
 }
 
@@ -1079,11 +1133,17 @@ static public class ConstCombatExcelVerify
       && verifier.VerifyString(tablePos, 182 /*EchelonExtensionEngageWithSupporterTimelinePath*/, false)
       && verifier.VerifyString(tablePos, 184 /*EchelonExtensionVictoryTimelinePath*/, false)
       && verifier.VerifyField(tablePos, 186 /*EchelonExtensionEchelonMaxCommonCost*/, 4 /*int*/, 4, false)
-      && verifier.VerifyField(tablePos, 188 /*EchelonExtensionEchelonInitCommonCost*/, 4 /*int*/, 4, false)
-      && verifier.VerifyField(tablePos, 190 /*EchelonExtensionCostRegenRatio*/, 8 /*long*/, 8, false)
-      && verifier.VerifyField(tablePos, 192 /*CheckCheaterMaxUseCostMultiFloorRaid*/, 4 /*int*/, 4, false)
-      && verifier.VerifyField(tablePos, 194 /*ExcessiveTouchCheckTime*/, 4 /*float*/, 4, false)
-      && verifier.VerifyField(tablePos, 196 /*ExcessiveTouchCheckCount*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 188 /*EchelonMaxOverloadCost*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 190 /*EchelonExtensionMaxOverloadCost*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 192 /*EchelonExtensionEchelonInitCommonCost*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 194 /*EchelonExtensionCostRegenRatio*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 196 /*EchelonOverloadCostRegenRatio*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 198 /*EchelonExtensionOverloadCostRegenRatio*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 200 /*CheckCheaterMaxUseCostMultiFloorRaid*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 202 /*ExcessiveTouchCheckTime*/, 4 /*float*/, 4, false)
+      && verifier.VerifyField(tablePos, 204 /*ExcessiveTouchCheckCount*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 206 /*CampaignAlertPopupLevelGap*/, 4 /*int*/, 4, false)
+      && verifier.VerifyField(tablePos, 208 /*MoveCorrectionSkipRatio*/, 4 /*int*/, 4, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

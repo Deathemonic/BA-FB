@@ -55,7 +55,7 @@ public struct ArenaSeasonCloseRewardExcel : IFlatbufferObject
       long RankStart = 0,
       long RankEnd = 0,
       VectorOffset RewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelUniqueIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelUniqueIdOffset = default(VectorOffset),
       VectorOffset RewardParcelUniqueNameOffset = default(VectorOffset),
       VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(7);
@@ -64,7 +64,7 @@ public struct ArenaSeasonCloseRewardExcel : IFlatbufferObject
     ArenaSeasonCloseRewardExcel.AddSeasonId(builder, SeasonId);
     ArenaSeasonCloseRewardExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
     ArenaSeasonCloseRewardExcel.AddRewardParcelUniqueName(builder, RewardParcelUniqueNameOffset);
-    ArenaSeasonCloseRewardExcel.AddRewardParcelUniqueId(builder, rewardParcelUniqueIdOffset);
+    ArenaSeasonCloseRewardExcel.AddRewardParcelUniqueId(builder, RewardParcelUniqueIdOffset);
     ArenaSeasonCloseRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     return ArenaSeasonCloseRewardExcel.EndArenaSeasonCloseRewardExcel(builder);
   }
@@ -131,10 +131,10 @@ public struct ArenaSeasonCloseRewardExcel : IFlatbufferObject
       var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelUniqueId = default(VectorOffset);
+    var _RewardParcelUniqueId = default(VectorOffset);
     if (_o.RewardParcelUniqueId != null) {
-      var __rewardParcelUniqueId = _o.RewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelUniqueId = CreateRewardParcelUniqueIdVector(builder, __rewardParcelUniqueId);
+      var __RewardParcelUniqueId = _o.RewardParcelUniqueId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelUniqueId = CreateRewardParcelUniqueIdVector(builder, __RewardParcelUniqueId);
     }
     var _RewardParcelUniqueName = default(VectorOffset);
     if (_o.RewardParcelUniqueName != null) {
@@ -153,7 +153,7 @@ public struct ArenaSeasonCloseRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _RankStart : _o.RankStart,
       TableEncryptionService.UseEncryption ? _RankEnd : _o.RankEnd,
       _RewardParcelType,
-      _rewardParcelUniqueId,
+      _RewardParcelUniqueId,
       _RewardParcelUniqueName,
       _RewardParcelAmount);
   }
