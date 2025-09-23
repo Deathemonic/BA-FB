@@ -11,7 +11,7 @@ on:
 
 jobs:
   dump-data:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout data branch
@@ -20,18 +20,13 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Setup .NET 9.0
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.0.x'
-
       - name: Download latest release
         run: |
-          Invoke-WebRequest -Uri "https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-windows-x86_64.zip" -OutFile "bafb-windows-x86_64.zip"
+          wget -O bafb-linux-x86_64.zip "https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-linux-x86_64.zip"
 
       - name: Extract executable
         run: |
-          Expand-Archive -Path "bafb-windows-x86_64.zip" -DestinationPath "."
+          unzip bafb-linux-x86_64.zip
 
       - name: Configure Git
         run: |
@@ -58,78 +53,72 @@ jobs:
           git lfs track "*.txt"
           
           # Find large files and track them with LFS
-          Get-ChildItem -Recurse -File | Where-Object { 
-            $_.Length -gt 50MB -and 
-            $_.FullName -notlike "*\.git\*" -and 
-            $_.Name -ne "bafb.exe" -and 
-            $_.Name -notlike "*.zip" 
-          } | ForEach-Object {
-            Write-Host "Tracking large file: $($_.FullName)"
-            git lfs track "$($_.FullName)"
-          }
+          find . -type f -size +50M \
+            ! -path "./.git/*" \
+            ! -name "bafb" \
+            ! -name "*.zip" | while read -r file; do
+            echo "Tracking large file: $file"
+            git lfs track "$file"
+          done
           
           git add .gitattributes
           
-          $staged = git diff --staged --quiet
-          if ($LASTEXITCODE -ne 0) {
+          if ! git diff --staged --quiet .gitattributes; then
             git commit -m "Add Git LFS tracking for large files"
-          }
+          fi
 
       - name: Clean previous data
         run: |
-          Remove-Item -Path "Japan", "Global" -Recurse -Force -ErrorAction SilentlyContinue
-          Get-ChildItem -Recurse -File | Where-Object { 
-            $_.FullName -notlike "*\.git\*" -and 
-            $_.Name -ne "bafb.exe" -and 
-            $_.Name -notlike "*.zip" -and 
-            $_.Name -ne ".gitattributes" 
-          } | Remove-Item -Force
-          Get-ChildItem -Recurse -Directory | Where-Object { 
-            $_.FullName -notlike "*\.git\*" -and 
-            $_.Name -ne "bafb.exe" -and 
-            (Get-ChildItem $_.FullName -Force | Measure-Object).Count -eq 0 
-          } | Remove-Item -Force -ErrorAction SilentlyContinue
+          rm -rf Japan Global || true
+          find . -type f \
+            ! -path "./.git/*" \
+            ! -name "bafb" \
+            ! -name "*.zip" \
+            ! -name ".gitattributes" \
+            -delete || true
+          find . -type d -empty \
+            ! -path "./.git/*" \
+            -delete || true
 
       - name: Run Japan dump
         timeout-minutes: 10
         run: |
-          .\bafb.exe dump japan --output .\Japan
+          chmod +x ./bafb
+          ./bafb dump japan --output ./Japan
 
       - name: Run Global dump
         timeout-minutes: 10
         run: |
-          .\bafb.exe dump global --output .\Global
+          ./bafb dump global --output ./Global
 
       - name: Clean up executable and zip file
         run: |
-          Remove-Item -Path "bafb.exe", "bafb-windows-x86_64.zip" -ErrorAction SilentlyContinue
+          rm -f bafb bafb-linux-x86_64.zip
 
       - name: Check for large files and update LFS tracking
         run: |
-          $largeFiles = Get-ChildItem -Path "Japan", "Global" -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Length -gt 50MB }
+          large_files=$(find Japan Global -type f -size +50M 2>/dev/null || true)
           
-          if ($largeFiles) {
-            foreach ($file in $largeFiles) {
-              git lfs track "$($file.FullName)"
-            }
+          if [ -n "$large_files" ]; then
+            echo "$large_files" | while read -r file; do
+              git lfs track "$file"
+            done
             
             git add .gitattributes
-            $staged = git diff --staged --quiet .gitattributes
-            if ($LASTEXITCODE -ne 0) {
+            if ! git diff --staged --quiet .gitattributes; then
               git commit -m "Update LFS tracking for new large files"
-            }
-          }
+            fi
+          fi
 
       - name: Add and commit changes with LFS
         run: |
           git add .
-          $staged = git diff --staged --quiet
-          if ($LASTEXITCODE -eq 0) {
-            Write-Host "No changes to commit"
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
             exit 0
-          }
+          fi
           
-          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+          timestamp=$(date '+%Y-%m-%d %H:%M:%S')
           git commit -m "Update data dumps - $timestamp"
           git push origin data --force
         env:
