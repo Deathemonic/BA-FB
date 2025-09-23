@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_EVENT_CONTENT_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_EVENT_CONTENT_TYPE: i32 = 39;
+pub const ENUM_MAX_EVENT_CONTENT_TYPE: i32 = 40;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_EVENT_CONTENT_TYPE: [EventContentType; 40] = [
+pub const ENUM_VALUES_EVENT_CONTENT_TYPE: [EventContentType; 41] = [
   EventContentType::Stage,
   EventContentType::Gacha,
   EventContentType::Mission,
@@ -60,6 +60,7 @@ pub const ENUM_VALUES_EVENT_CONTENT_TYPE: [EventContentType; 40] = [
   EventContentType::SeasonalEvent,
   EventContentType::MiniShop,
   EventContentType::MiniGameRoad,
+  EventContentType::MiniGameCCG,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -107,9 +108,10 @@ impl EventContentType {
   pub const SeasonalEvent: Self = Self(37);
   pub const MiniShop: Self = Self(38);
   pub const MiniGameRoad: Self = Self(39);
+  pub const MiniGameCCG: Self = Self(40);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 39;
+  pub const ENUM_MAX: i32 = 40;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Stage,
     Self::Gacha,
@@ -151,6 +153,7 @@ impl EventContentType {
     Self::SeasonalEvent,
     Self::MiniShop,
     Self::MiniGameRoad,
+    Self::MiniGameCCG,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -195,6 +198,7 @@ impl EventContentType {
       Self::SeasonalEvent => Some("SeasonalEvent"),
       Self::MiniShop => Some("MiniShop"),
       Self::MiniGameRoad => Some("MiniGameRoad"),
+      Self::MiniGameCCG => Some("MiniGameCCG"),
       _ => None,
     }
   }

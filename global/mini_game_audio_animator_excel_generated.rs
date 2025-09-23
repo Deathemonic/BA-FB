@@ -52,8 +52,8 @@ impl<'a> MiniGameAudioAnimatorExcel<'a> {
   ) -> flatbuffers::WIPOffset<MiniGameAudioAnimatorExcel<'bldr>> {
     let mut builder = MiniGameAudioAnimatorExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"MiniGameAudioAnimator");
-      if let Some(x) = args.voiceHash {
-        builder.add_voiceHash(x);
+      if let Some(x) = args.VoiceHash {
+        builder.add_VoiceHash(x);
       }
       if let Some(x) = args.AudioClipPath {
         builder.add_AudioClipPath(x);
@@ -110,7 +110,7 @@ impl<'a> MiniGameAudioAnimatorExcel<'a> {
     let AudioClipPath = self.AudioClipPath().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let voiceHash = self.voiceHash().map(|x| {
+    let VoiceHash = self.VoiceHash().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(*val, &key) } else { *val }).collect()
     });
     MiniGameAudioAnimatorExcelT {
@@ -124,7 +124,7 @@ impl<'a> MiniGameAudioAnimatorExcel<'a> {
       Delay,
       AudioPriority,
       AudioClipPath,
-      voiceHash,
+      VoiceHash,
     }
   }
 
@@ -199,7 +199,7 @@ impl<'a> MiniGameAudioAnimatorExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(MiniGameAudioAnimatorExcel::VT_AUDIOCLIPPATH, None)}
   }
   #[inline]
-  pub fn voiceHash(&self) -> Option<flatbuffers::Vector<'a, u32>> {
+  pub fn VoiceHash(&self) -> Option<flatbuffers::Vector<'a, u32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -224,7 +224,7 @@ impl flatbuffers::Verifiable for MiniGameAudioAnimatorExcel<'_> {
      .visit_field::<f32>("Delay", Self::VT_DELAY, false)?
      .visit_field::<i32>("AudioPriority", Self::VT_AUDIOPRIORITY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("AudioClipPath", Self::VT_AUDIOCLIPPATH, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, u32>>>("voiceHash", Self::VT_VOICEHASH, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, u32>>>("VoiceHash", Self::VT_VOICEHASH, false)?
      .finish();
     Ok(())
   }
@@ -240,7 +240,7 @@ pub struct MiniGameAudioAnimatorExcelArgs<'a> {
     pub Delay: f32,
     pub AudioPriority: i32,
     pub AudioClipPath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub voiceHash: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, u32>>>,
+    pub VoiceHash: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, u32>>>,
 }
 impl<'a> Default for MiniGameAudioAnimatorExcelArgs<'a> {
   #[inline]
@@ -256,7 +256,7 @@ impl<'a> Default for MiniGameAudioAnimatorExcelArgs<'a> {
       Delay: 0.0,
       AudioPriority: 0,
       AudioClipPath: None,
-      voiceHash: None,
+      VoiceHash: None,
     }
   }
 }
@@ -289,10 +289,10 @@ impl Serialize for MiniGameAudioAnimatorExcel<'_> {
       } else {
         s.skip_field("AudioClipPath")?;
       }
-      if let Some(f) = self.voiceHash() {
-        s.serialize_field("voiceHash", &f)?;
+      if let Some(f) = self.VoiceHash() {
+        s.serialize_field("VoiceHash", &f)?;
       } else {
-        s.skip_field("voiceHash")?;
+        s.skip_field("VoiceHash")?;
       }
     s.end()
   }
@@ -344,8 +344,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameAudioAnimatorExcelBuild
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameAudioAnimatorExcel::VT_AUDIOCLIPPATH, AudioClipPath);
   }
   #[inline]
-  pub fn add_voiceHash(&mut self, voiceHash: flatbuffers::WIPOffset<flatbuffers::Vector<'b , u32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameAudioAnimatorExcel::VT_VOICEHASH, voiceHash);
+  pub fn add_VoiceHash(&mut self, VoiceHash: flatbuffers::WIPOffset<flatbuffers::Vector<'b , u32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameAudioAnimatorExcel::VT_VOICEHASH, VoiceHash);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> MiniGameAudioAnimatorExcelBuilder<'a, 'b, A> {
@@ -375,7 +375,7 @@ impl core::fmt::Debug for MiniGameAudioAnimatorExcel<'_> {
       ds.field("Delay", &self.Delay());
       ds.field("AudioPriority", &self.AudioPriority());
       ds.field("AudioClipPath", &self.AudioClipPath());
-      ds.field("voiceHash", &self.voiceHash());
+      ds.field("VoiceHash", &self.VoiceHash());
       ds.finish()
   }
 }
@@ -392,7 +392,7 @@ pub struct MiniGameAudioAnimatorExcelT {
   pub Delay: f32,
   pub AudioPriority: i32,
   pub AudioClipPath: Option<Vec<String>>,
-  pub voiceHash: Option<Vec<u32>>,
+  pub VoiceHash: Option<Vec<u32>>,
 }
 impl Default for MiniGameAudioAnimatorExcelT {
   fn default() -> Self {
@@ -407,7 +407,7 @@ impl Default for MiniGameAudioAnimatorExcelT {
       Delay: 0.0,
       AudioPriority: 0,
       AudioClipPath: None,
-      voiceHash: None,
+      VoiceHash: None,
     }
   }
 }
@@ -432,7 +432,7 @@ impl MiniGameAudioAnimatorExcelT {
     let AudioClipPath = self.AudioClipPath.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let voiceHash = self.voiceHash.as_ref().map(|x|{
+    let VoiceHash = self.VoiceHash.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     MiniGameAudioAnimatorExcel::create(_fbb, &MiniGameAudioAnimatorExcelArgs{
@@ -446,7 +446,7 @@ impl MiniGameAudioAnimatorExcelT {
       Delay,
       AudioPriority,
       AudioClipPath,
-      voiceHash,
+      VoiceHash,
     })
   }
 }

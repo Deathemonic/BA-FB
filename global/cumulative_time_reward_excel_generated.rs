@@ -55,8 +55,8 @@ impl<'a> CumulativeTimeRewardExcel<'a> {
       if let Some(x) = args.RewardAmount {
         builder.add_RewardAmount(x);
       }
-      if let Some(x) = args.RewardId {
-        builder.add_RewardId(x);
+      if let Some(x) = args.rewardId {
+        builder.add_rewardId(x);
       }
       if let Some(x) = args.rewardParcelType {
         builder.add_rewardParcelType(x);
@@ -94,7 +94,7 @@ impl<'a> CumulativeTimeRewardExcel<'a> {
     let rewardParcelType = self.rewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let RewardId = self.RewardId().map(|x| {
+    let rewardId = self.rewardId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let RewardAmount = self.RewardAmount().map(|x| {
@@ -107,7 +107,7 @@ impl<'a> CumulativeTimeRewardExcel<'a> {
       EndDate,
       TimeCondition,
       rewardParcelType,
-      RewardId,
+      rewardId,
       RewardAmount,
     }
   }
@@ -155,7 +155,7 @@ impl<'a> CumulativeTimeRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(CumulativeTimeRewardExcel::VT_REWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn RewardId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn rewardId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -183,7 +183,7 @@ impl flatbuffers::Verifiable for CumulativeTimeRewardExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EndDate", Self::VT_ENDDATE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("TimeCondition", Self::VT_TIMECONDITION, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardId", Self::VT_REWARDID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardId", Self::VT_REWARDID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("RewardAmount", Self::VT_REWARDAMOUNT, false)?
      .finish();
     Ok(())
@@ -196,7 +196,7 @@ pub struct CumulativeTimeRewardExcelArgs<'a> {
     pub EndDate: Option<flatbuffers::WIPOffset<&'a str>>,
     pub TimeCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub RewardId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub rewardId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for CumulativeTimeRewardExcelArgs<'a> {
@@ -209,7 +209,7 @@ impl<'a> Default for CumulativeTimeRewardExcelArgs<'a> {
       EndDate: None,
       TimeCondition: None,
       rewardParcelType: None,
-      RewardId: None,
+      rewardId: None,
       RewardAmount: None,
     }
   }
@@ -247,10 +247,10 @@ impl Serialize for CumulativeTimeRewardExcel<'_> {
       } else {
         s.skip_field("rewardParcelType")?;
       }
-      if let Some(f) = self.RewardId() {
-        s.serialize_field("RewardId", &f)?;
+      if let Some(f) = self.rewardId() {
+        s.serialize_field("rewardId", &f)?;
       } else {
-        s.skip_field("RewardId")?;
+        s.skip_field("rewardId")?;
       }
       if let Some(f) = self.RewardAmount() {
         s.serialize_field("RewardAmount", &f)?;
@@ -291,8 +291,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CumulativeTimeRewardExcelBuilde
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CumulativeTimeRewardExcel::VT_REWARDPARCELTYPE, rewardParcelType);
   }
   #[inline]
-  pub fn add_RewardId(&mut self, RewardId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CumulativeTimeRewardExcel::VT_REWARDID, RewardId);
+  pub fn add_rewardId(&mut self, rewardId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CumulativeTimeRewardExcel::VT_REWARDID, rewardId);
   }
   #[inline]
   pub fn add_RewardAmount(&mut self, RewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
@@ -322,7 +322,7 @@ impl core::fmt::Debug for CumulativeTimeRewardExcel<'_> {
       ds.field("EndDate", &self.EndDate());
       ds.field("TimeCondition", &self.TimeCondition());
       ds.field("rewardParcelType", &self.rewardParcelType());
-      ds.field("RewardId", &self.RewardId());
+      ds.field("rewardId", &self.rewardId());
       ds.field("RewardAmount", &self.RewardAmount());
       ds.finish()
   }
@@ -336,7 +336,7 @@ pub struct CumulativeTimeRewardExcelT {
   pub EndDate: Option<String>,
   pub TimeCondition: Option<Vec<i64>>,
   pub rewardParcelType: Option<Vec<ParcelType>>,
-  pub RewardId: Option<Vec<i64>>,
+  pub rewardId: Option<Vec<i64>>,
   pub RewardAmount: Option<Vec<i32>>,
 }
 impl Default for CumulativeTimeRewardExcelT {
@@ -348,7 +348,7 @@ impl Default for CumulativeTimeRewardExcelT {
       EndDate: None,
       TimeCondition: None,
       rewardParcelType: None,
-      RewardId: None,
+      rewardId: None,
       RewardAmount: None,
     }
   }
@@ -374,7 +374,7 @@ impl CumulativeTimeRewardExcelT {
     let rewardParcelType = self.rewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let RewardId = self.RewardId.as_ref().map(|x|{
+    let rewardId = self.rewardId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardAmount = self.RewardAmount.as_ref().map(|x|{
@@ -387,7 +387,7 @@ impl CumulativeTimeRewardExcelT {
       EndDate,
       TimeCondition,
       rewardParcelType,
-      RewardId,
+      rewardId,
       RewardAmount,
     })
   }

@@ -16,14 +16,15 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_DIALOG_CONDITION_DETAIL: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_DIALOG_CONDITION_DETAIL: i32 = 3;
+pub const ENUM_MAX_DIALOG_CONDITION_DETAIL: i32 = 4;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_DIALOG_CONDITION_DETAIL: [DialogConditionDetail; 4] = [
+pub const ENUM_VALUES_DIALOG_CONDITION_DETAIL: [DialogConditionDetail; 5] = [
   DialogConditionDetail::None,
   DialogConditionDetail::Day,
   DialogConditionDetail::Close,
   DialogConditionDetail::MiniGameDreamMakerDay,
+  DialogConditionDetail::PassLevel,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -35,14 +36,16 @@ impl DialogConditionDetail {
   pub const Day: Self = Self(1);
   pub const Close: Self = Self(2);
   pub const MiniGameDreamMakerDay: Self = Self(3);
+  pub const PassLevel: Self = Self(4);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 3;
+  pub const ENUM_MAX: i32 = 4;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Day,
     Self::Close,
     Self::MiniGameDreamMakerDay,
+    Self::PassLevel,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -51,6 +54,7 @@ impl DialogConditionDetail {
       Self::Day => Some("Day"),
       Self::Close => Some("Close"),
       Self::MiniGameDreamMakerDay => Some("MiniGameDreamMakerDay"),
+      Self::PassLevel => Some("PassLevel"),
       _ => None,
     }
   }

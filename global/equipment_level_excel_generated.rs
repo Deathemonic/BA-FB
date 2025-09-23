@@ -47,8 +47,8 @@ impl<'a> EquipmentLevelExcel<'a> {
       if let Some(x) = args.TotalExp {
         builder.add_TotalExp(x);
       }
-      if let Some(x) = args.tierLevelExp {
-        builder.add_tierLevelExp(x);
+      if let Some(x) = args.TierLevelExp {
+        builder.add_TierLevelExp(x);
       }
       let x = args.Level;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -59,7 +59,7 @@ impl<'a> EquipmentLevelExcel<'a> {
   pub fn unpack(&self) -> EquipmentLevelExcelT {
     let key = table_encryption_service::create_key(b"EquipmentLevel");
       let Level = self.Level();
-    let tierLevelExp = self.tierLevelExp().map(|x| {
+    let TierLevelExp = self.TierLevelExp().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let TotalExp = self.TotalExp().map(|x| {
@@ -67,7 +67,7 @@ impl<'a> EquipmentLevelExcel<'a> {
     });
     EquipmentLevelExcelT {
       Level,
-      tierLevelExp,
+      TierLevelExp,
       TotalExp,
     }
   }
@@ -80,7 +80,7 @@ impl<'a> EquipmentLevelExcel<'a> {
     unsafe { self._tab.get::<i32>(EquipmentLevelExcel::VT_LEVEL, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn tierLevelExp(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn TierLevelExp(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -103,7 +103,7 @@ impl flatbuffers::Verifiable for EquipmentLevelExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i32>("Level", Self::VT_LEVEL, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("tierLevelExp", Self::VT_TIERLEVELEXP, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("TierLevelExp", Self::VT_TIERLEVELEXP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("TotalExp", Self::VT_TOTALEXP, false)?
      .finish();
     Ok(())
@@ -111,7 +111,7 @@ impl flatbuffers::Verifiable for EquipmentLevelExcel<'_> {
 }
 pub struct EquipmentLevelExcelArgs<'a> {
     pub Level: i32,
-    pub tierLevelExp: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub TierLevelExp: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub TotalExp: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EquipmentLevelExcelArgs<'a> {
@@ -119,7 +119,7 @@ impl<'a> Default for EquipmentLevelExcelArgs<'a> {
   fn default() -> Self {
     EquipmentLevelExcelArgs {
       Level: 0,
-      tierLevelExp: None,
+      TierLevelExp: None,
       TotalExp: None,
     }
   }
@@ -132,10 +132,10 @@ impl Serialize for EquipmentLevelExcel<'_> {
   {
     let mut s = serializer.serialize_struct("EquipmentLevelExcel", 3)?;
       s.serialize_field("Level", &self.Level())?;
-      if let Some(f) = self.tierLevelExp() {
-        s.serialize_field("tierLevelExp", &f)?;
+      if let Some(f) = self.TierLevelExp() {
+        s.serialize_field("TierLevelExp", &f)?;
       } else {
-        s.skip_field("tierLevelExp")?;
+        s.skip_field("TierLevelExp")?;
       }
       if let Some(f) = self.TotalExp() {
         s.serialize_field("TotalExp", &f)?;
@@ -156,8 +156,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EquipmentLevelExcelBuilder<'a, 
     self.fbb_.push_slot::<i32>(EquipmentLevelExcel::VT_LEVEL, Level, 0);
   }
   #[inline]
-  pub fn add_tierLevelExp(&mut self, tierLevelExp: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentLevelExcel::VT_TIERLEVELEXP, tierLevelExp);
+  pub fn add_TierLevelExp(&mut self, TierLevelExp: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentLevelExcel::VT_TIERLEVELEXP, TierLevelExp);
   }
   #[inline]
   pub fn add_TotalExp(&mut self, TotalExp: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -182,7 +182,7 @@ impl core::fmt::Debug for EquipmentLevelExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("EquipmentLevelExcel");
       ds.field("Level", &self.Level());
-      ds.field("tierLevelExp", &self.tierLevelExp());
+      ds.field("TierLevelExp", &self.TierLevelExp());
       ds.field("TotalExp", &self.TotalExp());
       ds.finish()
   }
@@ -191,14 +191,14 @@ impl core::fmt::Debug for EquipmentLevelExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct EquipmentLevelExcelT {
   pub Level: i32,
-  pub tierLevelExp: Option<Vec<i64>>,
+  pub TierLevelExp: Option<Vec<i64>>,
   pub TotalExp: Option<Vec<i64>>,
 }
 impl Default for EquipmentLevelExcelT {
   fn default() -> Self {
     Self {
       Level: 0,
-      tierLevelExp: None,
+      TierLevelExp: None,
       TotalExp: None,
     }
   }
@@ -209,7 +209,7 @@ impl EquipmentLevelExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<EquipmentLevelExcel<'b>> {
     let Level = self.Level;
-    let tierLevelExp = self.tierLevelExp.as_ref().map(|x|{
+    let TierLevelExp = self.TierLevelExp.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let TotalExp = self.TotalExp.as_ref().map(|x|{
@@ -217,7 +217,7 @@ impl EquipmentLevelExcelT {
     });
     EquipmentLevelExcel::create(_fbb, &EquipmentLevelExcelArgs{
       Level,
-      tierLevelExp,
+      TierLevelExp,
       TotalExp,
     })
   }

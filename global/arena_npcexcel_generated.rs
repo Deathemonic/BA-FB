@@ -72,14 +72,14 @@ impl<'a> ArenaNPCExcel<'a> {
       if let Some(x) = args.ExceptionTSSIds {
         builder.add_ExceptionTSSIds(x);
       }
-      if let Some(x) = args.exceptionSupportCharacterIds {
-        builder.add_exceptionSupportCharacterIds(x);
+      if let Some(x) = args.ExceptionSupportCharacterIds {
+        builder.add_ExceptionSupportCharacterIds(x);
       }
       if let Some(x) = args.ExceptionMainCharacterIds {
         builder.add_ExceptionMainCharacterIds(x);
       }
-      if let Some(x) = args.exceptionCharacterRarities {
-        builder.add_exceptionCharacterRarities(x);
+      if let Some(x) = args.ExceptionCharacterRarities {
+        builder.add_ExceptionCharacterRarities(x);
       }
     builder.finish()
   }
@@ -92,13 +92,13 @@ impl<'a> ArenaNPCExcel<'a> {
       let NPCLevel = self.NPCLevel();
       let NPCLevelDeviation = self.NPCLevelDeviation();
       let NPCStarGrade = self.NPCStarGrade();
-    let exceptionCharacterRarities = self.exceptionCharacterRarities().map(|x| {
+    let ExceptionCharacterRarities = self.ExceptionCharacterRarities().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let ExceptionMainCharacterIds = self.ExceptionMainCharacterIds().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let exceptionSupportCharacterIds = self.exceptionSupportCharacterIds().map(|x| {
+    let ExceptionSupportCharacterIds = self.ExceptionSupportCharacterIds().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let ExceptionTSSIds = self.ExceptionTSSIds().map(|x| {
@@ -111,9 +111,9 @@ impl<'a> ArenaNPCExcel<'a> {
       NPCLevel,
       NPCLevelDeviation,
       NPCStarGrade,
-      exceptionCharacterRarities,
+      ExceptionCharacterRarities,
       ExceptionMainCharacterIds,
-      exceptionSupportCharacterIds,
+      ExceptionSupportCharacterIds,
       ExceptionTSSIds,
     }
   }
@@ -161,7 +161,7 @@ impl<'a> ArenaNPCExcel<'a> {
     unsafe { self._tab.get::<i64>(ArenaNPCExcel::VT_NPCSTARGRADE, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn exceptionCharacterRarities(&self) -> Option<flatbuffers::Vector<'a, Rarity>> {
+  pub fn ExceptionCharacterRarities(&self) -> Option<flatbuffers::Vector<'a, Rarity>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -175,7 +175,7 @@ impl<'a> ArenaNPCExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ArenaNPCExcel::VT_EXCEPTIONMAINCHARACTERIDS, None)}
   }
   #[inline]
-  pub fn exceptionSupportCharacterIds(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ExceptionSupportCharacterIds(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -203,9 +203,9 @@ impl flatbuffers::Verifiable for ArenaNPCExcel<'_> {
      .visit_field::<i64>("NPCLevel", Self::VT_NPCLEVEL, false)?
      .visit_field::<i64>("NPCLevelDeviation", Self::VT_NPCLEVELDEVIATION, false)?
      .visit_field::<i64>("NPCStarGrade", Self::VT_NPCSTARGRADE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Rarity>>>("exceptionCharacterRarities", Self::VT_EXCEPTIONCHARACTERRARITIES, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Rarity>>>("ExceptionCharacterRarities", Self::VT_EXCEPTIONCHARACTERRARITIES, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExceptionMainCharacterIds", Self::VT_EXCEPTIONMAINCHARACTERIDS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("exceptionSupportCharacterIds", Self::VT_EXCEPTIONSUPPORTCHARACTERIDS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExceptionSupportCharacterIds", Self::VT_EXCEPTIONSUPPORTCHARACTERIDS, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExceptionTSSIds", Self::VT_EXCEPTIONTSSIDS, false)?
      .finish();
     Ok(())
@@ -218,9 +218,9 @@ pub struct ArenaNPCExcelArgs<'a> {
     pub NPCLevel: i64,
     pub NPCLevelDeviation: i64,
     pub NPCStarGrade: i64,
-    pub exceptionCharacterRarities: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Rarity>>>,
+    pub ExceptionCharacterRarities: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Rarity>>>,
     pub ExceptionMainCharacterIds: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub exceptionSupportCharacterIds: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ExceptionSupportCharacterIds: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ExceptionTSSIds: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for ArenaNPCExcelArgs<'a> {
@@ -233,9 +233,9 @@ impl<'a> Default for ArenaNPCExcelArgs<'a> {
       NPCLevel: 0,
       NPCLevelDeviation: 0,
       NPCStarGrade: 0,
-      exceptionCharacterRarities: None,
+      ExceptionCharacterRarities: None,
       ExceptionMainCharacterIds: None,
-      exceptionSupportCharacterIds: None,
+      ExceptionSupportCharacterIds: None,
       ExceptionTSSIds: None,
     }
   }
@@ -253,20 +253,20 @@ impl Serialize for ArenaNPCExcel<'_> {
       s.serialize_field("NPCLevel", &self.NPCLevel())?;
       s.serialize_field("NPCLevelDeviation", &self.NPCLevelDeviation())?;
       s.serialize_field("NPCStarGrade", &self.NPCStarGrade())?;
-      if let Some(f) = self.exceptionCharacterRarities() {
-        s.serialize_field("exceptionCharacterRarities", &f)?;
+      if let Some(f) = self.ExceptionCharacterRarities() {
+        s.serialize_field("ExceptionCharacterRarities", &f)?;
       } else {
-        s.skip_field("exceptionCharacterRarities")?;
+        s.skip_field("ExceptionCharacterRarities")?;
       }
       if let Some(f) = self.ExceptionMainCharacterIds() {
         s.serialize_field("ExceptionMainCharacterIds", &f)?;
       } else {
         s.skip_field("ExceptionMainCharacterIds")?;
       }
-      if let Some(f) = self.exceptionSupportCharacterIds() {
-        s.serialize_field("exceptionSupportCharacterIds", &f)?;
+      if let Some(f) = self.ExceptionSupportCharacterIds() {
+        s.serialize_field("ExceptionSupportCharacterIds", &f)?;
       } else {
-        s.skip_field("exceptionSupportCharacterIds")?;
+        s.skip_field("ExceptionSupportCharacterIds")?;
       }
       if let Some(f) = self.ExceptionTSSIds() {
         s.serialize_field("ExceptionTSSIds", &f)?;
@@ -307,16 +307,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ArenaNPCExcelBuilder<'a, 'b, A>
     self.fbb_.push_slot::<i64>(ArenaNPCExcel::VT_NPCSTARGRADE, NPCStarGrade, 0);
   }
   #[inline]
-  pub fn add_exceptionCharacterRarities(&mut self, exceptionCharacterRarities: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Rarity>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaNPCExcel::VT_EXCEPTIONCHARACTERRARITIES, exceptionCharacterRarities);
+  pub fn add_ExceptionCharacterRarities(&mut self, ExceptionCharacterRarities: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Rarity>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaNPCExcel::VT_EXCEPTIONCHARACTERRARITIES, ExceptionCharacterRarities);
   }
   #[inline]
   pub fn add_ExceptionMainCharacterIds(&mut self, ExceptionMainCharacterIds: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaNPCExcel::VT_EXCEPTIONMAINCHARACTERIDS, ExceptionMainCharacterIds);
   }
   #[inline]
-  pub fn add_exceptionSupportCharacterIds(&mut self, exceptionSupportCharacterIds: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaNPCExcel::VT_EXCEPTIONSUPPORTCHARACTERIDS, exceptionSupportCharacterIds);
+  pub fn add_ExceptionSupportCharacterIds(&mut self, ExceptionSupportCharacterIds: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaNPCExcel::VT_EXCEPTIONSUPPORTCHARACTERIDS, ExceptionSupportCharacterIds);
   }
   #[inline]
   pub fn add_ExceptionTSSIds(&mut self, ExceptionTSSIds: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -346,9 +346,9 @@ impl core::fmt::Debug for ArenaNPCExcel<'_> {
       ds.field("NPCLevel", &self.NPCLevel());
       ds.field("NPCLevelDeviation", &self.NPCLevelDeviation());
       ds.field("NPCStarGrade", &self.NPCStarGrade());
-      ds.field("exceptionCharacterRarities", &self.exceptionCharacterRarities());
+      ds.field("ExceptionCharacterRarities", &self.ExceptionCharacterRarities());
       ds.field("ExceptionMainCharacterIds", &self.ExceptionMainCharacterIds());
-      ds.field("exceptionSupportCharacterIds", &self.exceptionSupportCharacterIds());
+      ds.field("ExceptionSupportCharacterIds", &self.ExceptionSupportCharacterIds());
       ds.field("ExceptionTSSIds", &self.ExceptionTSSIds());
       ds.finish()
   }
@@ -362,9 +362,9 @@ pub struct ArenaNPCExcelT {
   pub NPCLevel: i64,
   pub NPCLevelDeviation: i64,
   pub NPCStarGrade: i64,
-  pub exceptionCharacterRarities: Option<Vec<Rarity>>,
+  pub ExceptionCharacterRarities: Option<Vec<Rarity>>,
   pub ExceptionMainCharacterIds: Option<Vec<i64>>,
-  pub exceptionSupportCharacterIds: Option<Vec<i64>>,
+  pub ExceptionSupportCharacterIds: Option<Vec<i64>>,
   pub ExceptionTSSIds: Option<Vec<i64>>,
 }
 impl Default for ArenaNPCExcelT {
@@ -376,9 +376,9 @@ impl Default for ArenaNPCExcelT {
       NPCLevel: 0,
       NPCLevelDeviation: 0,
       NPCStarGrade: 0,
-      exceptionCharacterRarities: None,
+      ExceptionCharacterRarities: None,
       ExceptionMainCharacterIds: None,
-      exceptionSupportCharacterIds: None,
+      ExceptionSupportCharacterIds: None,
       ExceptionTSSIds: None,
     }
   }
@@ -394,13 +394,13 @@ impl ArenaNPCExcelT {
     let NPCLevel = self.NPCLevel;
     let NPCLevelDeviation = self.NPCLevelDeviation;
     let NPCStarGrade = self.NPCStarGrade;
-    let exceptionCharacterRarities = self.exceptionCharacterRarities.as_ref().map(|x|{
+    let ExceptionCharacterRarities = self.ExceptionCharacterRarities.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ExceptionMainCharacterIds = self.ExceptionMainCharacterIds.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let exceptionSupportCharacterIds = self.exceptionSupportCharacterIds.as_ref().map(|x|{
+    let ExceptionSupportCharacterIds = self.ExceptionSupportCharacterIds.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ExceptionTSSIds = self.ExceptionTSSIds.as_ref().map(|x|{
@@ -413,9 +413,9 @@ impl ArenaNPCExcelT {
       NPCLevel,
       NPCLevelDeviation,
       NPCStarGrade,
-      exceptionCharacterRarities,
+      ExceptionCharacterRarities,
       ExceptionMainCharacterIds,
-      exceptionSupportCharacterIds,
+      ExceptionSupportCharacterIds,
       ExceptionTSSIds,
     })
   }

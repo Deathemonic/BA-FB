@@ -102,8 +102,8 @@ impl<'a> WeekDungeonExcel<'a> {
       let x = args.GroundId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_GroundId(x);
-      if let Some(x) = args.stageEnterCostAmount {
-        builder.add_stageEnterCostAmount(x);
+      if let Some(x) = args.StageEnterCostAmount {
+        builder.add_StageEnterCostAmount(x);
       }
       if let Some(x) = args.StageEnterCostId {
         builder.add_StageEnterCostId(x);
@@ -137,7 +137,7 @@ impl<'a> WeekDungeonExcel<'a> {
     let StageEnterCostId = self.StageEnterCostId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let stageEnterCostAmount = self.stageEnterCostAmount().map(|x| {
+    let StageEnterCostAmount = self.StageEnterCostAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
       let GroundId = self.GroundId();
@@ -173,7 +173,7 @@ impl<'a> WeekDungeonExcel<'a> {
       PrevStageId,
       StageEnterCostType,
       StageEnterCostId,
-      stageEnterCostAmount,
+      StageEnterCostAmount,
       GroundId,
       StarGoal,
       StarGoalAmount,
@@ -238,7 +238,7 @@ impl<'a> WeekDungeonExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(WeekDungeonExcel::VT_STAGEENTERCOSTID, None)}
   }
   #[inline]
-  pub fn stageEnterCostAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn StageEnterCostAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -337,7 +337,7 @@ impl flatbuffers::Verifiable for WeekDungeonExcel<'_> {
      .visit_field::<i64>("PrevStageId", Self::VT_PREVSTAGEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("StageEnterCostType", Self::VT_STAGEENTERCOSTTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StageEnterCostId", Self::VT_STAGEENTERCOSTID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("stageEnterCostAmount", Self::VT_STAGEENTERCOSTAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("StageEnterCostAmount", Self::VT_STAGEENTERCOSTAMOUNT, false)?
      .visit_field::<i32>("GroundId", Self::VT_GROUNDID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StarGoalType>>>("StarGoal", Self::VT_STARGOAL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("StarGoalAmount", Self::VT_STARGOALAMOUNT, false)?
@@ -361,7 +361,7 @@ pub struct WeekDungeonExcelArgs<'a> {
     pub PrevStageId: i64,
     pub StageEnterCostType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub StageEnterCostId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub stageEnterCostAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub StageEnterCostAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub GroundId: i32,
     pub StarGoal: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StarGoalType>>>,
     pub StarGoalAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
@@ -385,7 +385,7 @@ impl<'a> Default for WeekDungeonExcelArgs<'a> {
       PrevStageId: 0,
       StageEnterCostType: None,
       StageEnterCostId: None,
-      stageEnterCostAmount: None,
+      StageEnterCostAmount: None,
       GroundId: 0,
       StarGoal: None,
       StarGoalAmount: None,
@@ -422,10 +422,10 @@ impl Serialize for WeekDungeonExcel<'_> {
       } else {
         s.skip_field("StageEnterCostId")?;
       }
-      if let Some(f) = self.stageEnterCostAmount() {
-        s.serialize_field("stageEnterCostAmount", &f)?;
+      if let Some(f) = self.StageEnterCostAmount() {
+        s.serialize_field("StageEnterCostAmount", &f)?;
       } else {
-        s.skip_field("stageEnterCostAmount")?;
+        s.skip_field("StageEnterCostAmount")?;
       }
       s.serialize_field("GroundId", &self.GroundId())?;
       if let Some(f) = self.StarGoal() {
@@ -488,8 +488,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> WeekDungeonExcelBuilder<'a, 'b,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WeekDungeonExcel::VT_STAGEENTERCOSTID, StageEnterCostId);
   }
   #[inline]
-  pub fn add_stageEnterCostAmount(&mut self, stageEnterCostAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WeekDungeonExcel::VT_STAGEENTERCOSTAMOUNT, stageEnterCostAmount);
+  pub fn add_StageEnterCostAmount(&mut self, StageEnterCostAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WeekDungeonExcel::VT_STAGEENTERCOSTAMOUNT, StageEnterCostAmount);
   }
   #[inline]
   pub fn add_GroundId(&mut self, GroundId: i32) {
@@ -560,7 +560,7 @@ impl core::fmt::Debug for WeekDungeonExcel<'_> {
       ds.field("PrevStageId", &self.PrevStageId());
       ds.field("StageEnterCostType", &self.StageEnterCostType());
       ds.field("StageEnterCostId", &self.StageEnterCostId());
-      ds.field("stageEnterCostAmount", &self.stageEnterCostAmount());
+      ds.field("StageEnterCostAmount", &self.StageEnterCostAmount());
       ds.field("GroundId", &self.GroundId());
       ds.field("StarGoal", &self.StarGoal());
       ds.field("StarGoalAmount", &self.StarGoalAmount());
@@ -585,7 +585,7 @@ pub struct WeekDungeonExcelT {
   pub PrevStageId: i64,
   pub StageEnterCostType: Option<Vec<ParcelType>>,
   pub StageEnterCostId: Option<Vec<i64>>,
-  pub stageEnterCostAmount: Option<Vec<i32>>,
+  pub StageEnterCostAmount: Option<Vec<i32>>,
   pub GroundId: i32,
   pub StarGoal: Option<Vec<StarGoalType>>,
   pub StarGoalAmount: Option<Vec<i32>>,
@@ -608,7 +608,7 @@ impl Default for WeekDungeonExcelT {
       PrevStageId: 0,
       StageEnterCostType: None,
       StageEnterCostId: None,
-      stageEnterCostAmount: None,
+      StageEnterCostAmount: None,
       GroundId: 0,
       StarGoal: None,
       StarGoalAmount: None,
@@ -639,7 +639,7 @@ impl WeekDungeonExcelT {
     let StageEnterCostId = self.StageEnterCostId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let stageEnterCostAmount = self.stageEnterCostAmount.as_ref().map(|x|{
+    let StageEnterCostAmount = self.StageEnterCostAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let GroundId = self.GroundId;
@@ -667,7 +667,7 @@ impl WeekDungeonExcelT {
       PrevStageId,
       StageEnterCostType,
       StageEnterCostId,
-      stageEnterCostAmount,
+      StageEnterCostAmount,
       GroundId,
       StarGoal,
       StarGoalAmount,

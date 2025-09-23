@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_MAIL_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_MAIL_TYPE: i32 = 27;
+pub const ENUM_MAX_MAIL_TYPE: i32 = 30;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_MAIL_TYPE: [MailType; 28] = [
+pub const ENUM_VALUES_MAIL_TYPE: [MailType; 31] = [
   MailType::System,
   MailType::Attendance,
   MailType::Event,
@@ -48,6 +48,9 @@ pub const ENUM_VALUES_MAIL_TYPE: [MailType; 28] = [
   MailType::BirthdayMail,
   MailType::FromCS,
   MailType::ExpiryChangeCurrency,
+  MailType::ExpiryBattlePassItem,
+  MailType::FreeProductReward,
+  MailType::ProductGooglePointReward,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -83,9 +86,12 @@ impl MailType {
   pub const BirthdayMail: Self = Self(25);
   pub const FromCS: Self = Self(26);
   pub const ExpiryChangeCurrency: Self = Self(27);
+  pub const ExpiryBattlePassItem: Self = Self(28);
+  pub const FreeProductReward: Self = Self(29);
+  pub const ProductGooglePointReward: Self = Self(30);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 27;
+  pub const ENUM_MAX: i32 = 30;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::System,
     Self::Attendance,
@@ -115,6 +121,9 @@ impl MailType {
     Self::BirthdayMail,
     Self::FromCS,
     Self::ExpiryChangeCurrency,
+    Self::ExpiryBattlePassItem,
+    Self::FreeProductReward,
+    Self::ProductGooglePointReward,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -147,6 +156,9 @@ impl MailType {
       Self::BirthdayMail => Some("BirthdayMail"),
       Self::FromCS => Some("FromCS"),
       Self::ExpiryChangeCurrency => Some("ExpiryChangeCurrency"),
+      Self::ExpiryBattlePassItem => Some("ExpiryBattlePassItem"),
+      Self::FreeProductReward => Some("FreeProductReward"),
+      Self::ProductGooglePointReward => Some("ProductGooglePointReward"),
       _ => None,
     }
   }

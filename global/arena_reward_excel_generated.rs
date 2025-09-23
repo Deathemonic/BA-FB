@@ -59,17 +59,17 @@ impl<'a> ArenaRewardExcel<'a> {
       let x = args.UniqueId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_UniqueId(x);
-      if let Some(x) = args.rewardParcelAmount {
-        builder.add_rewardParcelAmount(x);
+      if let Some(x) = args.RewardParcelAmount {
+        builder.add_RewardParcelAmount(x);
       }
       if let Some(x) = args.RewardParcelUniqueName {
         builder.add_RewardParcelUniqueName(x);
       }
-      if let Some(x) = args.rewardParcelUniqueId {
-        builder.add_rewardParcelUniqueId(x);
+      if let Some(x) = args.RewardParcelUniqueId {
+        builder.add_RewardParcelUniqueId(x);
       }
-      if let Some(x) = args.rewardParcelType {
-        builder.add_rewardParcelType(x);
+      if let Some(x) = args.RewardParcelType {
+        builder.add_RewardParcelType(x);
       }
       if let Some(x) = args.RankIconPath {
         builder.add_RankIconPath(x);
@@ -93,16 +93,16 @@ impl<'a> ArenaRewardExcel<'a> {
     let RankIconPath = self.RankIconPath().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let rewardParcelType = self.rewardParcelType().map(|x| {
+    let RewardParcelType = self.RewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let rewardParcelUniqueId = self.rewardParcelUniqueId().map(|x| {
+    let RewardParcelUniqueId = self.RewardParcelUniqueId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let RewardParcelUniqueName = self.RewardParcelUniqueName().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let rewardParcelAmount = self.rewardParcelAmount().map(|x| {
+    let RewardParcelAmount = self.RewardParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     ArenaRewardExcelT {
@@ -111,10 +111,10 @@ impl<'a> ArenaRewardExcel<'a> {
       RankStart,
       RankEnd,
       RankIconPath,
-      rewardParcelType,
-      rewardParcelUniqueId,
+      RewardParcelType,
+      RewardParcelUniqueId,
       RewardParcelUniqueName,
-      rewardParcelAmount,
+      RewardParcelAmount,
     }
   }
 
@@ -154,14 +154,14 @@ impl<'a> ArenaRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ArenaRewardExcel::VT_RANKICONPATH, None)}
   }
   #[inline]
-  pub fn rewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn RewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(ArenaRewardExcel::VT_REWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn rewardParcelUniqueId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardParcelUniqueId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -175,7 +175,7 @@ impl<'a> ArenaRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(ArenaRewardExcel::VT_REWARDPARCELUNIQUENAME, None)}
   }
   #[inline]
-  pub fn rewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -195,10 +195,10 @@ impl flatbuffers::Verifiable for ArenaRewardExcel<'_> {
      .visit_field::<i64>("RankStart", Self::VT_RANKSTART, false)?
      .visit_field::<i64>("RankEnd", Self::VT_RANKEND, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("RankIconPath", Self::VT_RANKICONPATH, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelUniqueId", Self::VT_REWARDPARCELUNIQUEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelUniqueId", Self::VT_REWARDPARCELUNIQUEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("RewardParcelUniqueName", Self::VT_REWARDPARCELUNIQUENAME, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -209,10 +209,10 @@ pub struct ArenaRewardExcelArgs<'a> {
     pub RankStart: i64,
     pub RankEnd: i64,
     pub RankIconPath: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub rewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub RewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardParcelUniqueName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub rewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for ArenaRewardExcelArgs<'a> {
   #[inline]
@@ -223,10 +223,10 @@ impl<'a> Default for ArenaRewardExcelArgs<'a> {
       RankStart: 0,
       RankEnd: 0,
       RankIconPath: None,
-      rewardParcelType: None,
-      rewardParcelUniqueId: None,
+      RewardParcelType: None,
+      RewardParcelUniqueId: None,
       RewardParcelUniqueName: None,
-      rewardParcelAmount: None,
+      RewardParcelAmount: None,
     }
   }
 }
@@ -246,25 +246,25 @@ impl Serialize for ArenaRewardExcel<'_> {
       } else {
         s.skip_field("RankIconPath")?;
       }
-      if let Some(f) = self.rewardParcelType() {
-        s.serialize_field("rewardParcelType", &f)?;
+      if let Some(f) = self.RewardParcelType() {
+        s.serialize_field("RewardParcelType", &f)?;
       } else {
-        s.skip_field("rewardParcelType")?;
+        s.skip_field("RewardParcelType")?;
       }
-      if let Some(f) = self.rewardParcelUniqueId() {
-        s.serialize_field("rewardParcelUniqueId", &f)?;
+      if let Some(f) = self.RewardParcelUniqueId() {
+        s.serialize_field("RewardParcelUniqueId", &f)?;
       } else {
-        s.skip_field("rewardParcelUniqueId")?;
+        s.skip_field("RewardParcelUniqueId")?;
       }
       if let Some(f) = self.RewardParcelUniqueName() {
         s.serialize_field("RewardParcelUniqueName", &f)?;
       } else {
         s.skip_field("RewardParcelUniqueName")?;
       }
-      if let Some(f) = self.rewardParcelAmount() {
-        s.serialize_field("rewardParcelAmount", &f)?;
+      if let Some(f) = self.RewardParcelAmount() {
+        s.serialize_field("RewardParcelAmount", &f)?;
       } else {
-        s.skip_field("rewardParcelAmount")?;
+        s.skip_field("RewardParcelAmount")?;
       }
     s.end()
   }
@@ -296,20 +296,20 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ArenaRewardExcelBuilder<'a, 'b,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaRewardExcel::VT_RANKICONPATH, RankIconPath);
   }
   #[inline]
-  pub fn add_rewardParcelType(&mut self, rewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaRewardExcel::VT_REWARDPARCELTYPE, rewardParcelType);
+  pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaRewardExcel::VT_REWARDPARCELTYPE, RewardParcelType);
   }
   #[inline]
-  pub fn add_rewardParcelUniqueId(&mut self, rewardParcelUniqueId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaRewardExcel::VT_REWARDPARCELUNIQUEID, rewardParcelUniqueId);
+  pub fn add_RewardParcelUniqueId(&mut self, RewardParcelUniqueId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaRewardExcel::VT_REWARDPARCELUNIQUEID, RewardParcelUniqueId);
   }
   #[inline]
   pub fn add_RewardParcelUniqueName(&mut self, RewardParcelUniqueName: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaRewardExcel::VT_REWARDPARCELUNIQUENAME, RewardParcelUniqueName);
   }
   #[inline]
-  pub fn add_rewardParcelAmount(&mut self, rewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaRewardExcel::VT_REWARDPARCELAMOUNT, rewardParcelAmount);
+  pub fn add_RewardParcelAmount(&mut self, RewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaRewardExcel::VT_REWARDPARCELAMOUNT, RewardParcelAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ArenaRewardExcelBuilder<'a, 'b, A> {
@@ -334,10 +334,10 @@ impl core::fmt::Debug for ArenaRewardExcel<'_> {
       ds.field("RankStart", &self.RankStart());
       ds.field("RankEnd", &self.RankEnd());
       ds.field("RankIconPath", &self.RankIconPath());
-      ds.field("rewardParcelType", &self.rewardParcelType());
-      ds.field("rewardParcelUniqueId", &self.rewardParcelUniqueId());
+      ds.field("RewardParcelType", &self.RewardParcelType());
+      ds.field("RewardParcelUniqueId", &self.RewardParcelUniqueId());
       ds.field("RewardParcelUniqueName", &self.RewardParcelUniqueName());
-      ds.field("rewardParcelAmount", &self.rewardParcelAmount());
+      ds.field("RewardParcelAmount", &self.RewardParcelAmount());
       ds.finish()
   }
 }
@@ -349,10 +349,10 @@ pub struct ArenaRewardExcelT {
   pub RankStart: i64,
   pub RankEnd: i64,
   pub RankIconPath: Option<String>,
-  pub rewardParcelType: Option<Vec<ParcelType>>,
-  pub rewardParcelUniqueId: Option<Vec<i64>>,
+  pub RewardParcelType: Option<Vec<ParcelType>>,
+  pub RewardParcelUniqueId: Option<Vec<i64>>,
   pub RewardParcelUniqueName: Option<Vec<String>>,
-  pub rewardParcelAmount: Option<Vec<i64>>,
+  pub RewardParcelAmount: Option<Vec<i64>>,
 }
 impl Default for ArenaRewardExcelT {
   fn default() -> Self {
@@ -362,10 +362,10 @@ impl Default for ArenaRewardExcelT {
       RankStart: 0,
       RankEnd: 0,
       RankIconPath: None,
-      rewardParcelType: None,
-      rewardParcelUniqueId: None,
+      RewardParcelType: None,
+      RewardParcelUniqueId: None,
       RewardParcelUniqueName: None,
-      rewardParcelAmount: None,
+      RewardParcelAmount: None,
     }
   }
 }
@@ -381,16 +381,16 @@ impl ArenaRewardExcelT {
     let RankIconPath = self.RankIconPath.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let rewardParcelType = self.rewardParcelType.as_ref().map(|x|{
+    let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardParcelUniqueId = self.rewardParcelUniqueId.as_ref().map(|x|{
+    let RewardParcelUniqueId = self.RewardParcelUniqueId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardParcelUniqueName = self.RewardParcelUniqueName.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let rewardParcelAmount = self.rewardParcelAmount.as_ref().map(|x|{
+    let RewardParcelAmount = self.RewardParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     ArenaRewardExcel::create(_fbb, &ArenaRewardExcelArgs{
@@ -399,10 +399,10 @@ impl ArenaRewardExcelT {
       RankStart,
       RankEnd,
       RankIconPath,
-      rewardParcelType,
-      rewardParcelUniqueId,
+      RewardParcelType,
+      RewardParcelUniqueId,
       RewardParcelUniqueName,
-      rewardParcelAmount,
+      RewardParcelAmount,
     })
   }
 }

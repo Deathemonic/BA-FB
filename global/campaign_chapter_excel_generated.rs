@@ -70,11 +70,11 @@ impl<'a> CampaignChapterExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.veryHardCampaignStageId {
-        builder.add_veryHardCampaignStageId(x);
+      if let Some(x) = args.VeryHardCampaignStageId {
+        builder.add_VeryHardCampaignStageId(x);
       }
-      if let Some(x) = args.hardCampaignStageId {
-        builder.add_hardCampaignStageId(x);
+      if let Some(x) = args.HardCampaignStageId {
+        builder.add_HardCampaignStageId(x);
       }
       if let Some(x) = args.NormalExtraStageId {
         builder.add_NormalExtraStageId(x);
@@ -82,8 +82,8 @@ impl<'a> CampaignChapterExcel<'a> {
       if let Some(x) = args.NormalCampaignStageId {
         builder.add_NormalCampaignStageId(x);
       }
-      if let Some(x) = args.preChapterId {
-        builder.add_preChapterId(x);
+      if let Some(x) = args.PreChapterId {
+        builder.add_PreChapterId(x);
       }
       if let Some(x) = args.HardImagePath {
         builder.add_HardImagePath(x);
@@ -111,7 +111,7 @@ impl<'a> CampaignChapterExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let Order = self.Order();
-    let preChapterId = self.preChapterId().map(|x| {
+    let PreChapterId = self.PreChapterId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let ChapterRewardId = self.ChapterRewardId();
@@ -123,10 +123,10 @@ impl<'a> CampaignChapterExcel<'a> {
     let NormalExtraStageId = self.NormalExtraStageId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let hardCampaignStageId = self.hardCampaignStageId().map(|x| {
+    let HardCampaignStageId = self.HardCampaignStageId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let veryHardCampaignStageId = self.veryHardCampaignStageId().map(|x| {
+    let VeryHardCampaignStageId = self.VeryHardCampaignStageId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let IsTacticSkip = self.IsTacticSkip();
@@ -136,14 +136,14 @@ impl<'a> CampaignChapterExcel<'a> {
       NormalImagePath,
       HardImagePath,
       Order,
-      preChapterId,
+      PreChapterId,
       ChapterRewardId,
       ChapterHardRewardId,
       ChapterVeryHardRewardId,
       NormalCampaignStageId,
       NormalExtraStageId,
-      hardCampaignStageId,
-      veryHardCampaignStageId,
+      HardCampaignStageId,
+      VeryHardCampaignStageId,
       IsTacticSkip,
     }
   }
@@ -184,7 +184,7 @@ impl<'a> CampaignChapterExcel<'a> {
     unsafe { self._tab.get::<i64>(CampaignChapterExcel::VT_ORDER, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn preChapterId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn PreChapterId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -226,14 +226,14 @@ impl<'a> CampaignChapterExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CampaignChapterExcel::VT_NORMALEXTRASTAGEID, None)}
   }
   #[inline]
-  pub fn hardCampaignStageId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn HardCampaignStageId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CampaignChapterExcel::VT_HARDCAMPAIGNSTAGEID, None)}
   }
   #[inline]
-  pub fn veryHardCampaignStageId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn VeryHardCampaignStageId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -260,14 +260,14 @@ impl flatbuffers::Verifiable for CampaignChapterExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("NormalImagePath", Self::VT_NORMALIMAGEPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("HardImagePath", Self::VT_HARDIMAGEPATH, false)?
      .visit_field::<i64>("Order", Self::VT_ORDER, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("preChapterId", Self::VT_PRECHAPTERID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("PreChapterId", Self::VT_PRECHAPTERID, false)?
      .visit_field::<i64>("ChapterRewardId", Self::VT_CHAPTERREWARDID, false)?
      .visit_field::<i64>("ChapterHardRewardId", Self::VT_CHAPTERHARDREWARDID, false)?
      .visit_field::<i64>("ChapterVeryHardRewardId", Self::VT_CHAPTERVERYHARDREWARDID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("NormalCampaignStageId", Self::VT_NORMALCAMPAIGNSTAGEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("NormalExtraStageId", Self::VT_NORMALEXTRASTAGEID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("hardCampaignStageId", Self::VT_HARDCAMPAIGNSTAGEID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("veryHardCampaignStageId", Self::VT_VERYHARDCAMPAIGNSTAGEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("HardCampaignStageId", Self::VT_HARDCAMPAIGNSTAGEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("VeryHardCampaignStageId", Self::VT_VERYHARDCAMPAIGNSTAGEID, false)?
      .visit_field::<bool>("IsTacticSkip", Self::VT_ISTACTICSKIP, false)?
      .finish();
     Ok(())
@@ -279,14 +279,14 @@ pub struct CampaignChapterExcelArgs<'a> {
     pub NormalImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub HardImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub Order: i64,
-    pub preChapterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub PreChapterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ChapterRewardId: i64,
     pub ChapterHardRewardId: i64,
     pub ChapterVeryHardRewardId: i64,
     pub NormalCampaignStageId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub NormalExtraStageId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub hardCampaignStageId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub veryHardCampaignStageId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub HardCampaignStageId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub VeryHardCampaignStageId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub IsTacticSkip: bool,
 }
 impl<'a> Default for CampaignChapterExcelArgs<'a> {
@@ -298,14 +298,14 @@ impl<'a> Default for CampaignChapterExcelArgs<'a> {
       NormalImagePath: None,
       HardImagePath: None,
       Order: 0,
-      preChapterId: None,
+      PreChapterId: None,
       ChapterRewardId: 0,
       ChapterHardRewardId: 0,
       ChapterVeryHardRewardId: 0,
       NormalCampaignStageId: None,
       NormalExtraStageId: None,
-      hardCampaignStageId: None,
-      veryHardCampaignStageId: None,
+      HardCampaignStageId: None,
+      VeryHardCampaignStageId: None,
       IsTacticSkip: false,
     }
   }
@@ -334,10 +334,10 @@ impl Serialize for CampaignChapterExcel<'_> {
         s.skip_field("HardImagePath")?;
       }
       s.serialize_field("Order", &self.Order())?;
-      if let Some(f) = self.preChapterId() {
-        s.serialize_field("preChapterId", &f)?;
+      if let Some(f) = self.PreChapterId() {
+        s.serialize_field("PreChapterId", &f)?;
       } else {
-        s.skip_field("preChapterId")?;
+        s.skip_field("PreChapterId")?;
       }
       s.serialize_field("ChapterRewardId", &self.ChapterRewardId())?;
       s.serialize_field("ChapterHardRewardId", &self.ChapterHardRewardId())?;
@@ -352,15 +352,15 @@ impl Serialize for CampaignChapterExcel<'_> {
       } else {
         s.skip_field("NormalExtraStageId")?;
       }
-      if let Some(f) = self.hardCampaignStageId() {
-        s.serialize_field("hardCampaignStageId", &f)?;
+      if let Some(f) = self.HardCampaignStageId() {
+        s.serialize_field("HardCampaignStageId", &f)?;
       } else {
-        s.skip_field("hardCampaignStageId")?;
+        s.skip_field("HardCampaignStageId")?;
       }
-      if let Some(f) = self.veryHardCampaignStageId() {
-        s.serialize_field("veryHardCampaignStageId", &f)?;
+      if let Some(f) = self.VeryHardCampaignStageId() {
+        s.serialize_field("VeryHardCampaignStageId", &f)?;
       } else {
-        s.skip_field("veryHardCampaignStageId")?;
+        s.skip_field("VeryHardCampaignStageId")?;
       }
       s.serialize_field("IsTacticSkip", &self.IsTacticSkip())?;
     s.end()
@@ -393,8 +393,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CampaignChapterExcelBuilder<'a,
     self.fbb_.push_slot::<i64>(CampaignChapterExcel::VT_ORDER, Order, 0);
   }
   #[inline]
-  pub fn add_preChapterId(&mut self, preChapterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterExcel::VT_PRECHAPTERID, preChapterId);
+  pub fn add_PreChapterId(&mut self, PreChapterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterExcel::VT_PRECHAPTERID, PreChapterId);
   }
   #[inline]
   pub fn add_ChapterRewardId(&mut self, ChapterRewardId: i64) {
@@ -417,12 +417,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CampaignChapterExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterExcel::VT_NORMALEXTRASTAGEID, NormalExtraStageId);
   }
   #[inline]
-  pub fn add_hardCampaignStageId(&mut self, hardCampaignStageId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterExcel::VT_HARDCAMPAIGNSTAGEID, hardCampaignStageId);
+  pub fn add_HardCampaignStageId(&mut self, HardCampaignStageId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterExcel::VT_HARDCAMPAIGNSTAGEID, HardCampaignStageId);
   }
   #[inline]
-  pub fn add_veryHardCampaignStageId(&mut self, veryHardCampaignStageId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterExcel::VT_VERYHARDCAMPAIGNSTAGEID, veryHardCampaignStageId);
+  pub fn add_VeryHardCampaignStageId(&mut self, VeryHardCampaignStageId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterExcel::VT_VERYHARDCAMPAIGNSTAGEID, VeryHardCampaignStageId);
   }
   #[inline]
   pub fn add_IsTacticSkip(&mut self, IsTacticSkip: bool) {
@@ -451,14 +451,14 @@ impl core::fmt::Debug for CampaignChapterExcel<'_> {
       ds.field("NormalImagePath", &self.NormalImagePath());
       ds.field("HardImagePath", &self.HardImagePath());
       ds.field("Order", &self.Order());
-      ds.field("preChapterId", &self.preChapterId());
+      ds.field("PreChapterId", &self.PreChapterId());
       ds.field("ChapterRewardId", &self.ChapterRewardId());
       ds.field("ChapterHardRewardId", &self.ChapterHardRewardId());
       ds.field("ChapterVeryHardRewardId", &self.ChapterVeryHardRewardId());
       ds.field("NormalCampaignStageId", &self.NormalCampaignStageId());
       ds.field("NormalExtraStageId", &self.NormalExtraStageId());
-      ds.field("hardCampaignStageId", &self.hardCampaignStageId());
-      ds.field("veryHardCampaignStageId", &self.veryHardCampaignStageId());
+      ds.field("HardCampaignStageId", &self.HardCampaignStageId());
+      ds.field("VeryHardCampaignStageId", &self.VeryHardCampaignStageId());
       ds.field("IsTacticSkip", &self.IsTacticSkip());
       ds.finish()
   }
@@ -471,14 +471,14 @@ pub struct CampaignChapterExcelT {
   pub NormalImagePath: Option<String>,
   pub HardImagePath: Option<String>,
   pub Order: i64,
-  pub preChapterId: Option<Vec<i64>>,
+  pub PreChapterId: Option<Vec<i64>>,
   pub ChapterRewardId: i64,
   pub ChapterHardRewardId: i64,
   pub ChapterVeryHardRewardId: i64,
   pub NormalCampaignStageId: Option<Vec<i64>>,
   pub NormalExtraStageId: Option<Vec<i64>>,
-  pub hardCampaignStageId: Option<Vec<i64>>,
-  pub veryHardCampaignStageId: Option<Vec<i64>>,
+  pub HardCampaignStageId: Option<Vec<i64>>,
+  pub VeryHardCampaignStageId: Option<Vec<i64>>,
   pub IsTacticSkip: bool,
 }
 impl Default for CampaignChapterExcelT {
@@ -489,14 +489,14 @@ impl Default for CampaignChapterExcelT {
       NormalImagePath: None,
       HardImagePath: None,
       Order: 0,
-      preChapterId: None,
+      PreChapterId: None,
       ChapterRewardId: 0,
       ChapterHardRewardId: 0,
       ChapterVeryHardRewardId: 0,
       NormalCampaignStageId: None,
       NormalExtraStageId: None,
-      hardCampaignStageId: None,
-      veryHardCampaignStageId: None,
+      HardCampaignStageId: None,
+      VeryHardCampaignStageId: None,
       IsTacticSkip: false,
     }
   }
@@ -517,7 +517,7 @@ impl CampaignChapterExcelT {
       _fbb.create_string(x)
     });
     let Order = self.Order;
-    let preChapterId = self.preChapterId.as_ref().map(|x|{
+    let PreChapterId = self.PreChapterId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ChapterRewardId = self.ChapterRewardId;
@@ -529,10 +529,10 @@ impl CampaignChapterExcelT {
     let NormalExtraStageId = self.NormalExtraStageId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let hardCampaignStageId = self.hardCampaignStageId.as_ref().map(|x|{
+    let HardCampaignStageId = self.HardCampaignStageId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let veryHardCampaignStageId = self.veryHardCampaignStageId.as_ref().map(|x|{
+    let VeryHardCampaignStageId = self.VeryHardCampaignStageId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let IsTacticSkip = self.IsTacticSkip;
@@ -542,14 +542,14 @@ impl CampaignChapterExcelT {
       NormalImagePath,
       HardImagePath,
       Order,
-      preChapterId,
+      PreChapterId,
       ChapterRewardId,
       ChapterHardRewardId,
       ChapterVeryHardRewardId,
       NormalCampaignStageId,
       NormalExtraStageId,
-      hardCampaignStageId,
-      veryHardCampaignStageId,
+      HardCampaignStageId,
+      VeryHardCampaignStageId,
       IsTacticSkip,
     })
   }

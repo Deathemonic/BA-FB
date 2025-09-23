@@ -85,14 +85,14 @@ impl<'a> EquipmentStatExcel<'a> {
       let x = args.LevelUpInsertLimit;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_LevelUpInsertLimit(x);
-      if let Some(x) = args.maxStat {
-        builder.add_maxStat(x);
+      if let Some(x) = args.MaxStat {
+        builder.add_MaxStat(x);
       }
-      if let Some(x) = args.minStat {
-        builder.add_minStat(x);
+      if let Some(x) = args.MinStat {
+        builder.add_MinStat(x);
       }
-      if let Some(x) = args.statType {
-        builder.add_statType(x);
+      if let Some(x) = args.StatType {
+        builder.add_StatType(x);
       }
       let x = args.StatLevelUpType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -108,13 +108,13 @@ impl<'a> EquipmentStatExcel<'a> {
       } else {
         self.StatLevelUpType()
       };
-    let statType = self.statType().map(|x| {
+    let StatType = self.StatType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let minStat = self.minStat().map(|x| {
+    let MinStat = self.MinStat().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let maxStat = self.maxStat().map(|x| {
+    let MaxStat = self.MaxStat().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let LevelUpInsertLimit = self.LevelUpInsertLimit();
@@ -139,9 +139,9 @@ impl<'a> EquipmentStatExcel<'a> {
     EquipmentStatExcelT {
       EquipmentId,
       StatLevelUpType,
-      statType,
-      minStat,
-      maxStat,
+      StatType,
+      MinStat,
+      MaxStat,
       LevelUpInsertLimit,
       LevelUpFeedExp,
       LevelUpFeedCostCurrency,
@@ -169,21 +169,21 @@ impl<'a> EquipmentStatExcel<'a> {
     unsafe { self._tab.get::<StatLevelUpType>(EquipmentStatExcel::VT_STATLEVELUPTYPE, Some(StatLevelUpType::Standard)).unwrap()}
   }
   #[inline]
-  pub fn statType(&self) -> Option<flatbuffers::Vector<'a, EquipmentOptionType>> {
+  pub fn StatType(&self) -> Option<flatbuffers::Vector<'a, EquipmentOptionType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, EquipmentOptionType>>>(EquipmentStatExcel::VT_STATTYPE, None)}
   }
   #[inline]
-  pub fn minStat(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn MinStat(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EquipmentStatExcel::VT_MINSTAT, None)}
   }
   #[inline]
-  pub fn maxStat(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn MaxStat(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -263,9 +263,9 @@ impl flatbuffers::Verifiable for EquipmentStatExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("EquipmentId", Self::VT_EQUIPMENTID, false)?
      .visit_field::<StatLevelUpType>("StatLevelUpType", Self::VT_STATLEVELUPTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EquipmentOptionType>>>("statType", Self::VT_STATTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("minStat", Self::VT_MINSTAT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("maxStat", Self::VT_MAXSTAT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EquipmentOptionType>>>("StatType", Self::VT_STATTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("MinStat", Self::VT_MINSTAT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("MaxStat", Self::VT_MAXSTAT, false)?
      .visit_field::<i32>("LevelUpInsertLimit", Self::VT_LEVELUPINSERTLIMIT, false)?
      .visit_field::<i64>("LevelUpFeedExp", Self::VT_LEVELUPFEEDEXP, false)?
      .visit_field::<CurrencyTypes>("LevelUpFeedCostCurrency", Self::VT_LEVELUPFEEDCOSTCURRENCY, false)?
@@ -282,9 +282,9 @@ impl flatbuffers::Verifiable for EquipmentStatExcel<'_> {
 pub struct EquipmentStatExcelArgs<'a> {
     pub EquipmentId: i64,
     pub StatLevelUpType: StatLevelUpType,
-    pub statType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EquipmentOptionType>>>,
-    pub minStat: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub maxStat: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub StatType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EquipmentOptionType>>>,
+    pub MinStat: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub MaxStat: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub LevelUpInsertLimit: i32,
     pub LevelUpFeedExp: i64,
     pub LevelUpFeedCostCurrency: CurrencyTypes,
@@ -301,9 +301,9 @@ impl<'a> Default for EquipmentStatExcelArgs<'a> {
     EquipmentStatExcelArgs {
       EquipmentId: 0,
       StatLevelUpType: StatLevelUpType::Standard,
-      statType: None,
-      minStat: None,
-      maxStat: None,
+      StatType: None,
+      MinStat: None,
+      MaxStat: None,
       LevelUpInsertLimit: 0,
       LevelUpFeedExp: 0,
       LevelUpFeedCostCurrency: CurrencyTypes::Invalid,
@@ -325,20 +325,20 @@ impl Serialize for EquipmentStatExcel<'_> {
     let mut s = serializer.serialize_struct("EquipmentStatExcel", 14)?;
       s.serialize_field("EquipmentId", &self.EquipmentId())?;
       s.serialize_field("StatLevelUpType", &self.StatLevelUpType())?;
-      if let Some(f) = self.statType() {
-        s.serialize_field("statType", &f)?;
+      if let Some(f) = self.StatType() {
+        s.serialize_field("StatType", &f)?;
       } else {
-        s.skip_field("statType")?;
+        s.skip_field("StatType")?;
       }
-      if let Some(f) = self.minStat() {
-        s.serialize_field("minStat", &f)?;
+      if let Some(f) = self.MinStat() {
+        s.serialize_field("MinStat", &f)?;
       } else {
-        s.skip_field("minStat")?;
+        s.skip_field("MinStat")?;
       }
-      if let Some(f) = self.maxStat() {
-        s.serialize_field("maxStat", &f)?;
+      if let Some(f) = self.MaxStat() {
+        s.serialize_field("MaxStat", &f)?;
       } else {
-        s.skip_field("maxStat")?;
+        s.skip_field("MaxStat")?;
       }
       s.serialize_field("LevelUpInsertLimit", &self.LevelUpInsertLimit())?;
       s.serialize_field("LevelUpFeedExp", &self.LevelUpFeedExp())?;
@@ -371,16 +371,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EquipmentStatExcelBuilder<'a, '
     self.fbb_.push_slot::<StatLevelUpType>(EquipmentStatExcel::VT_STATLEVELUPTYPE, StatLevelUpType, StatLevelUpType::Standard);
   }
   #[inline]
-  pub fn add_statType(&mut self, statType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , EquipmentOptionType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentStatExcel::VT_STATTYPE, statType);
+  pub fn add_StatType(&mut self, StatType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , EquipmentOptionType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentStatExcel::VT_STATTYPE, StatType);
   }
   #[inline]
-  pub fn add_minStat(&mut self, minStat: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentStatExcel::VT_MINSTAT, minStat);
+  pub fn add_MinStat(&mut self, MinStat: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentStatExcel::VT_MINSTAT, MinStat);
   }
   #[inline]
-  pub fn add_maxStat(&mut self, maxStat: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentStatExcel::VT_MAXSTAT, maxStat);
+  pub fn add_MaxStat(&mut self, MaxStat: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentStatExcel::VT_MAXSTAT, MaxStat);
   }
   #[inline]
   pub fn add_LevelUpInsertLimit(&mut self, LevelUpInsertLimit: i32) {
@@ -438,9 +438,9 @@ impl core::fmt::Debug for EquipmentStatExcel<'_> {
     let mut ds = f.debug_struct("EquipmentStatExcel");
       ds.field("EquipmentId", &self.EquipmentId());
       ds.field("StatLevelUpType", &self.StatLevelUpType());
-      ds.field("statType", &self.statType());
-      ds.field("minStat", &self.minStat());
-      ds.field("maxStat", &self.maxStat());
+      ds.field("StatType", &self.StatType());
+      ds.field("MinStat", &self.MinStat());
+      ds.field("MaxStat", &self.MaxStat());
       ds.field("LevelUpInsertLimit", &self.LevelUpInsertLimit());
       ds.field("LevelUpFeedExp", &self.LevelUpFeedExp());
       ds.field("LevelUpFeedCostCurrency", &self.LevelUpFeedCostCurrency());
@@ -458,9 +458,9 @@ impl core::fmt::Debug for EquipmentStatExcel<'_> {
 pub struct EquipmentStatExcelT {
   pub EquipmentId: i64,
   pub StatLevelUpType: StatLevelUpType,
-  pub statType: Option<Vec<EquipmentOptionType>>,
-  pub minStat: Option<Vec<i64>>,
-  pub maxStat: Option<Vec<i64>>,
+  pub StatType: Option<Vec<EquipmentOptionType>>,
+  pub MinStat: Option<Vec<i64>>,
+  pub MaxStat: Option<Vec<i64>>,
   pub LevelUpInsertLimit: i32,
   pub LevelUpFeedExp: i64,
   pub LevelUpFeedCostCurrency: CurrencyTypes,
@@ -476,9 +476,9 @@ impl Default for EquipmentStatExcelT {
     Self {
       EquipmentId: 0,
       StatLevelUpType: StatLevelUpType::Standard,
-      statType: None,
-      minStat: None,
-      maxStat: None,
+      StatType: None,
+      MinStat: None,
+      MaxStat: None,
       LevelUpInsertLimit: 0,
       LevelUpFeedExp: 0,
       LevelUpFeedCostCurrency: CurrencyTypes::Invalid,
@@ -498,13 +498,13 @@ impl EquipmentStatExcelT {
   ) -> flatbuffers::WIPOffset<EquipmentStatExcel<'b>> {
     let EquipmentId = self.EquipmentId;
     let StatLevelUpType = self.StatLevelUpType;
-    let statType = self.statType.as_ref().map(|x|{
+    let StatType = self.StatType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let minStat = self.minStat.as_ref().map(|x|{
+    let MinStat = self.MinStat.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let maxStat = self.maxStat.as_ref().map(|x|{
+    let MaxStat = self.MaxStat.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let LevelUpInsertLimit = self.LevelUpInsertLimit;
@@ -521,9 +521,9 @@ impl EquipmentStatExcelT {
     EquipmentStatExcel::create(_fbb, &EquipmentStatExcelArgs{
       EquipmentId,
       StatLevelUpType,
-      statType,
-      minStat,
-      maxStat,
+      StatType,
+      MinStat,
+      MaxStat,
       LevelUpInsertLimit,
       LevelUpFeedExp,
       LevelUpFeedCostCurrency,

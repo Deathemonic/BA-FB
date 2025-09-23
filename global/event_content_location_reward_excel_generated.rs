@@ -101,11 +101,11 @@ impl<'a> EventContentLocationRewardExcel<'a> {
       if let Some(x) = args.IsExtraRewardDisplayed {
         builder.add_IsExtraRewardDisplayed(x);
       }
-      if let Some(x) = args.ExtraRewardProb {
-        builder.add_ExtraRewardProb(x);
+      if let Some(x) = args.extraRewardProb {
+        builder.add_extraRewardProb(x);
       }
-      if let Some(x) = args.ExtraRewardAmount {
-        builder.add_ExtraRewardAmount(x);
+      if let Some(x) = args.extraRewardAmount {
+        builder.add_extraRewardAmount(x);
       }
       if let Some(x) = args.ExtraRewardParcelId {
         builder.add_ExtraRewardParcelId(x);
@@ -155,10 +155,10 @@ impl<'a> EventContentLocationRewardExcel<'a> {
     let ExtraRewardParcelId = self.ExtraRewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let ExtraRewardAmount = self.ExtraRewardAmount().map(|x| {
+    let extraRewardAmount = self.extraRewardAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let ExtraRewardProb = self.ExtraRewardProb().map(|x| {
+    let extraRewardProb = self.extraRewardProb().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let IsExtraRewardDisplayed = self.IsExtraRewardDisplayed().map(|x| {
@@ -189,8 +189,8 @@ impl<'a> EventContentLocationRewardExcel<'a> {
       ExtraFavorExpProb,
       extraRewardParcelType,
       ExtraRewardParcelId,
-      ExtraRewardAmount,
-      ExtraRewardProb,
+      extraRewardAmount,
+      extraRewardProb,
       IsExtraRewardDisplayed,
       RewardParcelType,
       rewardParcelId,
@@ -304,14 +304,14 @@ impl<'a> EventContentLocationRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EventContentLocationRewardExcel::VT_EXTRAREWARDPARCELID, None)}
   }
   #[inline]
-  pub fn ExtraRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn extraRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EventContentLocationRewardExcel::VT_EXTRAREWARDAMOUNT, None)}
   }
   #[inline]
-  pub fn ExtraRewardProb(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn extraRewardProb(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -369,8 +369,8 @@ impl flatbuffers::Verifiable for EventContentLocationRewardExcel<'_> {
      .visit_field::<i64>("ExtraFavorExpProb", Self::VT_EXTRAFAVOREXPPROB, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("extraRewardParcelType", Self::VT_EXTRAREWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExtraRewardParcelId", Self::VT_EXTRAREWARDPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExtraRewardAmount", Self::VT_EXTRAREWARDAMOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExtraRewardProb", Self::VT_EXTRAREWARDPROB, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("extraRewardAmount", Self::VT_EXTRAREWARDAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("extraRewardProb", Self::VT_EXTRAREWARDPROB, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("IsExtraRewardDisplayed", Self::VT_ISEXTRAREWARDDISPLAYED, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelId", Self::VT_REWARDPARCELID, false)?
@@ -395,8 +395,8 @@ pub struct EventContentLocationRewardExcelArgs<'a> {
     pub ExtraFavorExpProb: i64,
     pub extraRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub ExtraRewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub ExtraRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub ExtraRewardProb: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub extraRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub extraRewardProb: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub IsExtraRewardDisplayed: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
     pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub rewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
@@ -421,8 +421,8 @@ impl<'a> Default for EventContentLocationRewardExcelArgs<'a> {
       ExtraFavorExpProb: 0,
       extraRewardParcelType: None,
       ExtraRewardParcelId: None,
-      ExtraRewardAmount: None,
-      ExtraRewardProb: None,
+      extraRewardAmount: None,
+      extraRewardProb: None,
       IsExtraRewardDisplayed: None,
       RewardParcelType: None,
       rewardParcelId: None,
@@ -472,15 +472,15 @@ impl Serialize for EventContentLocationRewardExcel<'_> {
       } else {
         s.skip_field("ExtraRewardParcelId")?;
       }
-      if let Some(f) = self.ExtraRewardAmount() {
-        s.serialize_field("ExtraRewardAmount", &f)?;
+      if let Some(f) = self.extraRewardAmount() {
+        s.serialize_field("extraRewardAmount", &f)?;
       } else {
-        s.skip_field("ExtraRewardAmount")?;
+        s.skip_field("extraRewardAmount")?;
       }
-      if let Some(f) = self.ExtraRewardProb() {
-        s.serialize_field("ExtraRewardProb", &f)?;
+      if let Some(f) = self.extraRewardProb() {
+        s.serialize_field("extraRewardProb", &f)?;
       } else {
-        s.skip_field("ExtraRewardProb")?;
+        s.skip_field("extraRewardProb")?;
       }
       if let Some(f) = self.IsExtraRewardDisplayed() {
         s.serialize_field("IsExtraRewardDisplayed", &f)?;
@@ -572,12 +572,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentLocationRewardExcel
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentLocationRewardExcel::VT_EXTRAREWARDPARCELID, ExtraRewardParcelId);
   }
   #[inline]
-  pub fn add_ExtraRewardAmount(&mut self, ExtraRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentLocationRewardExcel::VT_EXTRAREWARDAMOUNT, ExtraRewardAmount);
+  pub fn add_extraRewardAmount(&mut self, extraRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentLocationRewardExcel::VT_EXTRAREWARDAMOUNT, extraRewardAmount);
   }
   #[inline]
-  pub fn add_ExtraRewardProb(&mut self, ExtraRewardProb: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentLocationRewardExcel::VT_EXTRAREWARDPROB, ExtraRewardProb);
+  pub fn add_extraRewardProb(&mut self, extraRewardProb: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentLocationRewardExcel::VT_EXTRAREWARDPROB, extraRewardProb);
   }
   #[inline]
   pub fn add_IsExtraRewardDisplayed(&mut self, IsExtraRewardDisplayed: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
@@ -628,8 +628,8 @@ impl core::fmt::Debug for EventContentLocationRewardExcel<'_> {
       ds.field("ExtraFavorExpProb", &self.ExtraFavorExpProb());
       ds.field("extraRewardParcelType", &self.extraRewardParcelType());
       ds.field("ExtraRewardParcelId", &self.ExtraRewardParcelId());
-      ds.field("ExtraRewardAmount", &self.ExtraRewardAmount());
-      ds.field("ExtraRewardProb", &self.ExtraRewardProb());
+      ds.field("extraRewardAmount", &self.extraRewardAmount());
+      ds.field("extraRewardProb", &self.extraRewardProb());
       ds.field("IsExtraRewardDisplayed", &self.IsExtraRewardDisplayed());
       ds.field("RewardParcelType", &self.RewardParcelType());
       ds.field("rewardParcelId", &self.rewardParcelId());
@@ -655,8 +655,8 @@ pub struct EventContentLocationRewardExcelT {
   pub ExtraFavorExpProb: i64,
   pub extraRewardParcelType: Option<Vec<ParcelType>>,
   pub ExtraRewardParcelId: Option<Vec<i64>>,
-  pub ExtraRewardAmount: Option<Vec<i64>>,
-  pub ExtraRewardProb: Option<Vec<i64>>,
+  pub extraRewardAmount: Option<Vec<i64>>,
+  pub extraRewardProb: Option<Vec<i64>>,
   pub IsExtraRewardDisplayed: Option<Vec<bool>>,
   pub RewardParcelType: Option<Vec<ParcelType>>,
   pub rewardParcelId: Option<Vec<i64>>,
@@ -680,8 +680,8 @@ impl Default for EventContentLocationRewardExcelT {
       ExtraFavorExpProb: 0,
       extraRewardParcelType: None,
       ExtraRewardParcelId: None,
-      ExtraRewardAmount: None,
-      ExtraRewardProb: None,
+      extraRewardAmount: None,
+      extraRewardProb: None,
       IsExtraRewardDisplayed: None,
       RewardParcelType: None,
       rewardParcelId: None,
@@ -719,10 +719,10 @@ impl EventContentLocationRewardExcelT {
     let ExtraRewardParcelId = self.ExtraRewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ExtraRewardAmount = self.ExtraRewardAmount.as_ref().map(|x|{
+    let extraRewardAmount = self.extraRewardAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ExtraRewardProb = self.ExtraRewardProb.as_ref().map(|x|{
+    let extraRewardProb = self.extraRewardProb.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let IsExtraRewardDisplayed = self.IsExtraRewardDisplayed.as_ref().map(|x|{
@@ -753,8 +753,8 @@ impl EventContentLocationRewardExcelT {
       ExtraFavorExpProb,
       extraRewardParcelType,
       ExtraRewardParcelId,
-      ExtraRewardAmount,
-      ExtraRewardProb,
+      extraRewardAmount,
+      extraRewardProb,
       IsExtraRewardDisplayed,
       RewardParcelType,
       rewardParcelId,

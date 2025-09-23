@@ -42,8 +42,9 @@ impl<'a> EventContentCollectionExcel<'a> {
   pub const VT_EMBLEMRESOURCE: flatbuffers::VOffsetT = 24;
   pub const VT_THUMBRESOURCE: flatbuffers::VOffsetT = 26;
   pub const VT_FULLRESOURCE: flatbuffers::VOffsetT = 28;
-  pub const VT_LOCALIZEETCID: flatbuffers::VOffsetT = 30;
-  pub const VT_SUBNAMELOCALIZECODEID: flatbuffers::VOffsetT = 32;
+  pub const VT_DECORATION: flatbuffers::VOffsetT = 30;
+  pub const VT_LOCALIZEETCID: flatbuffers::VOffsetT = 32;
+  pub const VT_SUBNAMELOCALIZECODEID: flatbuffers::VOffsetT = 34;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -74,6 +75,9 @@ impl<'a> EventContentCollectionExcel<'a> {
       let x = args.LocalizeEtcId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_LocalizeEtcId(x);
+      if let Some(x) = args.Decoration {
+        builder.add_Decoration(x);
+      }
       if let Some(x) = args.FullResource {
         builder.add_FullResource(x);
       }
@@ -86,8 +90,8 @@ impl<'a> EventContentCollectionExcel<'a> {
       let x = args.MultipleConditionCheckType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_MultipleConditionCheckType(x);
-      if let Some(x) = args.unlockConditionParameter {
-        builder.add_unlockConditionParameter(x);
+      if let Some(x) = args.UnlockConditionParameter {
+        builder.add_UnlockConditionParameter(x);
       }
       let x = args.UnlockConditionType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -108,7 +112,7 @@ impl<'a> EventContentCollectionExcel<'a> {
       } else {
         self.UnlockConditionType()
       };
-    let unlockConditionParameter = self.unlockConditionParameter().map(|x| {
+    let UnlockConditionParameter = self.UnlockConditionParameter().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let MultipleConditionCheckType = if table_encryption_service::use_encryption() {
@@ -129,6 +133,9 @@ impl<'a> EventContentCollectionExcel<'a> {
     let FullResource = self.FullResource().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+    let Decoration = self.Decoration().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
       let LocalizeEtcId = self.LocalizeEtcId();
     let SubNameLocalizeCodeId = self.SubNameLocalizeCodeId().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
@@ -138,7 +145,7 @@ impl<'a> EventContentCollectionExcel<'a> {
       EventContentId,
       GroupId,
       UnlockConditionType,
-      unlockConditionParameter,
+      UnlockConditionParameter,
       MultipleConditionCheckType,
       UnlockConditionCount,
       IsObject,
@@ -147,6 +154,7 @@ impl<'a> EventContentCollectionExcel<'a> {
       EmblemResource,
       ThumbResource,
       FullResource,
+      Decoration,
       LocalizeEtcId,
       SubNameLocalizeCodeId,
     }
@@ -181,7 +189,7 @@ impl<'a> EventContentCollectionExcel<'a> {
     unsafe { self._tab.get::<CollectionUnlockType>(EventContentCollectionExcel::VT_UNLOCKCONDITIONTYPE, Some(CollectionUnlockType::None)).unwrap()}
   }
   #[inline]
-  pub fn unlockConditionParameter(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn UnlockConditionParameter(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -244,6 +252,13 @@ impl<'a> EventContentCollectionExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentCollectionExcel::VT_FULLRESOURCE, None)}
   }
   #[inline]
+  pub fn Decoration(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentCollectionExcel::VT_DECORATION, None)}
+  }
+  #[inline]
   pub fn LocalizeEtcId(&self) -> u32 {
     // Safety:
     // Created from valid Table for this object
@@ -270,7 +285,7 @@ impl flatbuffers::Verifiable for EventContentCollectionExcel<'_> {
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
      .visit_field::<i64>("GroupId", Self::VT_GROUPID, false)?
      .visit_field::<CollectionUnlockType>("UnlockConditionType", Self::VT_UNLOCKCONDITIONTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("unlockConditionParameter", Self::VT_UNLOCKCONDITIONPARAMETER, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("UnlockConditionParameter", Self::VT_UNLOCKCONDITIONPARAMETER, false)?
      .visit_field::<MultipleConditionCheckType>("MultipleConditionCheckType", Self::VT_MULTIPLECONDITIONCHECKTYPE, false)?
      .visit_field::<i64>("UnlockConditionCount", Self::VT_UNLOCKCONDITIONCOUNT, false)?
      .visit_field::<bool>("IsObject", Self::VT_ISOBJECT, false)?
@@ -279,6 +294,7 @@ impl flatbuffers::Verifiable for EventContentCollectionExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EmblemResource", Self::VT_EMBLEMRESOURCE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ThumbResource", Self::VT_THUMBRESOURCE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FullResource", Self::VT_FULLRESOURCE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("Decoration", Self::VT_DECORATION, false)?
      .visit_field::<u32>("LocalizeEtcId", Self::VT_LOCALIZEETCID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SubNameLocalizeCodeId", Self::VT_SUBNAMELOCALIZECODEID, false)?
      .finish();
@@ -290,7 +306,7 @@ pub struct EventContentCollectionExcelArgs<'a> {
     pub EventContentId: i64,
     pub GroupId: i64,
     pub UnlockConditionType: CollectionUnlockType,
-    pub unlockConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub UnlockConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub MultipleConditionCheckType: MultipleConditionCheckType,
     pub UnlockConditionCount: i64,
     pub IsObject: bool,
@@ -299,6 +315,7 @@ pub struct EventContentCollectionExcelArgs<'a> {
     pub EmblemResource: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ThumbResource: Option<flatbuffers::WIPOffset<&'a str>>,
     pub FullResource: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub Decoration: Option<flatbuffers::WIPOffset<&'a str>>,
     pub LocalizeEtcId: u32,
     pub SubNameLocalizeCodeId: Option<flatbuffers::WIPOffset<&'a str>>,
 }
@@ -310,7 +327,7 @@ impl<'a> Default for EventContentCollectionExcelArgs<'a> {
       EventContentId: 0,
       GroupId: 0,
       UnlockConditionType: CollectionUnlockType::None,
-      unlockConditionParameter: None,
+      UnlockConditionParameter: None,
       MultipleConditionCheckType: MultipleConditionCheckType::And,
       UnlockConditionCount: 0,
       IsObject: false,
@@ -319,6 +336,7 @@ impl<'a> Default for EventContentCollectionExcelArgs<'a> {
       EmblemResource: None,
       ThumbResource: None,
       FullResource: None,
+      Decoration: None,
       LocalizeEtcId: 0,
       SubNameLocalizeCodeId: None,
     }
@@ -330,15 +348,15 @@ impl Serialize for EventContentCollectionExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EventContentCollectionExcel", 15)?;
+    let mut s = serializer.serialize_struct("EventContentCollectionExcel", 16)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("GroupId", &self.GroupId())?;
       s.serialize_field("UnlockConditionType", &self.UnlockConditionType())?;
-      if let Some(f) = self.unlockConditionParameter() {
-        s.serialize_field("unlockConditionParameter", &f)?;
+      if let Some(f) = self.UnlockConditionParameter() {
+        s.serialize_field("UnlockConditionParameter", &f)?;
       } else {
-        s.skip_field("unlockConditionParameter")?;
+        s.skip_field("UnlockConditionParameter")?;
       }
       s.serialize_field("MultipleConditionCheckType", &self.MultipleConditionCheckType())?;
       s.serialize_field("UnlockConditionCount", &self.UnlockConditionCount())?;
@@ -359,6 +377,11 @@ impl Serialize for EventContentCollectionExcel<'_> {
         s.serialize_field("FullResource", &f)?;
       } else {
         s.skip_field("FullResource")?;
+      }
+      if let Some(f) = self.Decoration() {
+        s.serialize_field("Decoration", &f)?;
+      } else {
+        s.skip_field("Decoration")?;
       }
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
       if let Some(f) = self.SubNameLocalizeCodeId() {
@@ -392,8 +415,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentCollectionExcelBuil
     self.fbb_.push_slot::<CollectionUnlockType>(EventContentCollectionExcel::VT_UNLOCKCONDITIONTYPE, UnlockConditionType, CollectionUnlockType::None);
   }
   #[inline]
-  pub fn add_unlockConditionParameter(&mut self, unlockConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCollectionExcel::VT_UNLOCKCONDITIONPARAMETER, unlockConditionParameter);
+  pub fn add_UnlockConditionParameter(&mut self, UnlockConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCollectionExcel::VT_UNLOCKCONDITIONPARAMETER, UnlockConditionParameter);
   }
   #[inline]
   pub fn add_MultipleConditionCheckType(&mut self, MultipleConditionCheckType: MultipleConditionCheckType) {
@@ -428,6 +451,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentCollectionExcelBuil
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCollectionExcel::VT_FULLRESOURCE, FullResource);
   }
   #[inline]
+  pub fn add_Decoration(&mut self, Decoration: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCollectionExcel::VT_DECORATION, Decoration);
+  }
+  #[inline]
   pub fn add_LocalizeEtcId(&mut self, LocalizeEtcId: u32) {
     self.fbb_.push_slot::<u32>(EventContentCollectionExcel::VT_LOCALIZEETCID, LocalizeEtcId, 0);
   }
@@ -457,7 +484,7 @@ impl core::fmt::Debug for EventContentCollectionExcel<'_> {
       ds.field("EventContentId", &self.EventContentId());
       ds.field("GroupId", &self.GroupId());
       ds.field("UnlockConditionType", &self.UnlockConditionType());
-      ds.field("unlockConditionParameter", &self.unlockConditionParameter());
+      ds.field("UnlockConditionParameter", &self.UnlockConditionParameter());
       ds.field("MultipleConditionCheckType", &self.MultipleConditionCheckType());
       ds.field("UnlockConditionCount", &self.UnlockConditionCount());
       ds.field("IsObject", &self.IsObject());
@@ -466,6 +493,7 @@ impl core::fmt::Debug for EventContentCollectionExcel<'_> {
       ds.field("EmblemResource", &self.EmblemResource());
       ds.field("ThumbResource", &self.ThumbResource());
       ds.field("FullResource", &self.FullResource());
+      ds.field("Decoration", &self.Decoration());
       ds.field("LocalizeEtcId", &self.LocalizeEtcId());
       ds.field("SubNameLocalizeCodeId", &self.SubNameLocalizeCodeId());
       ds.finish()
@@ -478,7 +506,7 @@ pub struct EventContentCollectionExcelT {
   pub EventContentId: i64,
   pub GroupId: i64,
   pub UnlockConditionType: CollectionUnlockType,
-  pub unlockConditionParameter: Option<Vec<i64>>,
+  pub UnlockConditionParameter: Option<Vec<i64>>,
   pub MultipleConditionCheckType: MultipleConditionCheckType,
   pub UnlockConditionCount: i64,
   pub IsObject: bool,
@@ -487,6 +515,7 @@ pub struct EventContentCollectionExcelT {
   pub EmblemResource: Option<String>,
   pub ThumbResource: Option<String>,
   pub FullResource: Option<String>,
+  pub Decoration: Option<String>,
   pub LocalizeEtcId: u32,
   pub SubNameLocalizeCodeId: Option<String>,
 }
@@ -497,7 +526,7 @@ impl Default for EventContentCollectionExcelT {
       EventContentId: 0,
       GroupId: 0,
       UnlockConditionType: CollectionUnlockType::None,
-      unlockConditionParameter: None,
+      UnlockConditionParameter: None,
       MultipleConditionCheckType: MultipleConditionCheckType::And,
       UnlockConditionCount: 0,
       IsObject: false,
@@ -506,6 +535,7 @@ impl Default for EventContentCollectionExcelT {
       EmblemResource: None,
       ThumbResource: None,
       FullResource: None,
+      Decoration: None,
       LocalizeEtcId: 0,
       SubNameLocalizeCodeId: None,
     }
@@ -520,7 +550,7 @@ impl EventContentCollectionExcelT {
     let EventContentId = self.EventContentId;
     let GroupId = self.GroupId;
     let UnlockConditionType = self.UnlockConditionType;
-    let unlockConditionParameter = self.unlockConditionParameter.as_ref().map(|x|{
+    let UnlockConditionParameter = self.UnlockConditionParameter.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let MultipleConditionCheckType = self.MultipleConditionCheckType;
@@ -537,6 +567,9 @@ impl EventContentCollectionExcelT {
     let FullResource = self.FullResource.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let Decoration = self.Decoration.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     let LocalizeEtcId = self.LocalizeEtcId;
     let SubNameLocalizeCodeId = self.SubNameLocalizeCodeId.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -546,7 +579,7 @@ impl EventContentCollectionExcelT {
       EventContentId,
       GroupId,
       UnlockConditionType,
-      unlockConditionParameter,
+      UnlockConditionParameter,
       MultipleConditionCheckType,
       UnlockConditionCount,
       IsObject,
@@ -555,6 +588,7 @@ impl EventContentCollectionExcelT {
       EmblemResource,
       ThumbResource,
       FullResource,
+      Decoration,
       LocalizeEtcId,
       SubNameLocalizeCodeId,
     })

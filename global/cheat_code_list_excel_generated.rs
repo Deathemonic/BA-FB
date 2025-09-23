@@ -51,8 +51,8 @@ impl<'a> CheatCodeListExcel<'a> {
       if let Some(x) = args.Desc {
         builder.add_Desc(x);
       }
-      if let Some(x) = args.InputTitle {
-        builder.add_InputTitle(x);
+      if let Some(x) = args.inputTitle {
+        builder.add_inputTitle(x);
       }
       if let Some(x) = args.cheatCode {
         builder.add_cheatCode(x);
@@ -66,7 +66,7 @@ impl<'a> CheatCodeListExcel<'a> {
     let cheatCode = self.cheatCode().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let InputTitle = self.InputTitle().map(|x| {
+    let inputTitle = self.inputTitle().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let Desc = self.Desc().map(|x| {
@@ -75,7 +75,7 @@ impl<'a> CheatCodeListExcel<'a> {
     CheatCodeListExcelT {
       Id,
       cheatCode,
-      InputTitle,
+      inputTitle,
       Desc,
     }
   }
@@ -95,7 +95,7 @@ impl<'a> CheatCodeListExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(CheatCodeListExcel::VT_CHEATCODE, None)}
   }
   #[inline]
-  pub fn InputTitle(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn inputTitle(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -119,7 +119,7 @@ impl flatbuffers::Verifiable for CheatCodeListExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("cheatCode", Self::VT_CHEATCODE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("InputTitle", Self::VT_INPUTTITLE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("inputTitle", Self::VT_INPUTTITLE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("Desc", Self::VT_DESC, false)?
      .finish();
     Ok(())
@@ -128,7 +128,7 @@ impl flatbuffers::Verifiable for CheatCodeListExcel<'_> {
 pub struct CheatCodeListExcelArgs<'a> {
     pub Id: i64,
     pub cheatCode: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub InputTitle: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub inputTitle: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub Desc: Option<flatbuffers::WIPOffset<&'a str>>,
 }
 impl<'a> Default for CheatCodeListExcelArgs<'a> {
@@ -137,7 +137,7 @@ impl<'a> Default for CheatCodeListExcelArgs<'a> {
     CheatCodeListExcelArgs {
       Id: 0,
       cheatCode: None,
-      InputTitle: None,
+      inputTitle: None,
       Desc: None,
     }
   }
@@ -155,10 +155,10 @@ impl Serialize for CheatCodeListExcel<'_> {
       } else {
         s.skip_field("cheatCode")?;
       }
-      if let Some(f) = self.InputTitle() {
-        s.serialize_field("InputTitle", &f)?;
+      if let Some(f) = self.inputTitle() {
+        s.serialize_field("inputTitle", &f)?;
       } else {
-        s.skip_field("InputTitle")?;
+        s.skip_field("inputTitle")?;
       }
       if let Some(f) = self.Desc() {
         s.serialize_field("Desc", &f)?;
@@ -183,8 +183,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CheatCodeListExcelBuilder<'a, '
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CheatCodeListExcel::VT_CHEATCODE, cheatCode);
   }
   #[inline]
-  pub fn add_InputTitle(&mut self, InputTitle: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CheatCodeListExcel::VT_INPUTTITLE, InputTitle);
+  pub fn add_inputTitle(&mut self, inputTitle: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CheatCodeListExcel::VT_INPUTTITLE, inputTitle);
   }
   #[inline]
   pub fn add_Desc(&mut self, Desc: flatbuffers::WIPOffset<&'b  str>) {
@@ -210,7 +210,7 @@ impl core::fmt::Debug for CheatCodeListExcel<'_> {
     let mut ds = f.debug_struct("CheatCodeListExcel");
       ds.field("Id", &self.Id());
       ds.field("cheatCode", &self.cheatCode());
-      ds.field("InputTitle", &self.InputTitle());
+      ds.field("inputTitle", &self.inputTitle());
       ds.field("Desc", &self.Desc());
       ds.finish()
   }
@@ -220,7 +220,7 @@ impl core::fmt::Debug for CheatCodeListExcel<'_> {
 pub struct CheatCodeListExcelT {
   pub Id: i64,
   pub cheatCode: Option<Vec<String>>,
-  pub InputTitle: Option<Vec<String>>,
+  pub inputTitle: Option<Vec<String>>,
   pub Desc: Option<String>,
 }
 impl Default for CheatCodeListExcelT {
@@ -228,7 +228,7 @@ impl Default for CheatCodeListExcelT {
     Self {
       Id: 0,
       cheatCode: None,
-      InputTitle: None,
+      inputTitle: None,
       Desc: None,
     }
   }
@@ -242,7 +242,7 @@ impl CheatCodeListExcelT {
     let cheatCode = self.cheatCode.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let InputTitle = self.InputTitle.as_ref().map(|x|{
+    let inputTitle = self.inputTitle.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let Desc = self.Desc.as_ref().map(|x|{
@@ -251,7 +251,7 @@ impl CheatCodeListExcelT {
     CheatCodeListExcel::create(_fbb, &CheatCodeListExcelArgs{
       Id,
       cheatCode,
-      InputTitle,
+      inputTitle,
       Desc,
     })
   }

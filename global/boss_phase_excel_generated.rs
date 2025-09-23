@@ -51,8 +51,8 @@ impl<'a> BossPhaseExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.useExSkill {
-        builder.add_useExSkill(x);
+      if let Some(x) = args.UseExSkill {
+        builder.add_UseExSkill(x);
       }
       if let Some(x) = args.NormalAttackSkillUniqueName {
         builder.add_NormalAttackSkillUniqueName(x);
@@ -67,14 +67,14 @@ impl<'a> BossPhaseExcel<'a> {
     let NormalAttackSkillUniqueName = self.NormalAttackSkillUniqueName().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let useExSkill = self.useExSkill().map(|x| {
+    let UseExSkill = self.UseExSkill().map(|x| {
       x.into_iter().collect()
     });
     BossPhaseExcelT {
       Id,
       AIPhase,
       NormalAttackSkillUniqueName,
-      useExSkill,
+      UseExSkill,
     }
   }
 
@@ -100,7 +100,7 @@ impl<'a> BossPhaseExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(BossPhaseExcel::VT_NORMALATTACKSKILLUNIQUENAME, None)}
   }
   #[inline]
-  pub fn useExSkill(&self) -> Option<flatbuffers::Vector<'a, bool>> {
+  pub fn UseExSkill(&self) -> Option<flatbuffers::Vector<'a, bool>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -118,7 +118,7 @@ impl flatbuffers::Verifiable for BossPhaseExcel<'_> {
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<i64>("AIPhase", Self::VT_AIPHASE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("NormalAttackSkillUniqueName", Self::VT_NORMALATTACKSKILLUNIQUENAME, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("useExSkill", Self::VT_USEEXSKILL, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("UseExSkill", Self::VT_USEEXSKILL, false)?
      .finish();
     Ok(())
   }
@@ -127,7 +127,7 @@ pub struct BossPhaseExcelArgs<'a> {
     pub Id: i64,
     pub AIPhase: i64,
     pub NormalAttackSkillUniqueName: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub useExSkill: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
+    pub UseExSkill: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
 }
 impl<'a> Default for BossPhaseExcelArgs<'a> {
   #[inline]
@@ -136,7 +136,7 @@ impl<'a> Default for BossPhaseExcelArgs<'a> {
       Id: 0,
       AIPhase: 0,
       NormalAttackSkillUniqueName: None,
-      useExSkill: None,
+      UseExSkill: None,
     }
   }
 }
@@ -154,10 +154,10 @@ impl Serialize for BossPhaseExcel<'_> {
       } else {
         s.skip_field("NormalAttackSkillUniqueName")?;
       }
-      if let Some(f) = self.useExSkill() {
-        s.serialize_field("useExSkill", &f)?;
+      if let Some(f) = self.UseExSkill() {
+        s.serialize_field("UseExSkill", &f)?;
       } else {
-        s.skip_field("useExSkill")?;
+        s.skip_field("UseExSkill")?;
       }
     s.end()
   }
@@ -181,8 +181,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> BossPhaseExcelBuilder<'a, 'b, A
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(BossPhaseExcel::VT_NORMALATTACKSKILLUNIQUENAME, NormalAttackSkillUniqueName);
   }
   #[inline]
-  pub fn add_useExSkill(&mut self, useExSkill: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(BossPhaseExcel::VT_USEEXSKILL, useExSkill);
+  pub fn add_UseExSkill(&mut self, UseExSkill: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(BossPhaseExcel::VT_USEEXSKILL, UseExSkill);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> BossPhaseExcelBuilder<'a, 'b, A> {
@@ -205,7 +205,7 @@ impl core::fmt::Debug for BossPhaseExcel<'_> {
       ds.field("Id", &self.Id());
       ds.field("AIPhase", &self.AIPhase());
       ds.field("NormalAttackSkillUniqueName", &self.NormalAttackSkillUniqueName());
-      ds.field("useExSkill", &self.useExSkill());
+      ds.field("UseExSkill", &self.UseExSkill());
       ds.finish()
   }
 }
@@ -215,7 +215,7 @@ pub struct BossPhaseExcelT {
   pub Id: i64,
   pub AIPhase: i64,
   pub NormalAttackSkillUniqueName: Option<String>,
-  pub useExSkill: Option<Vec<bool>>,
+  pub UseExSkill: Option<Vec<bool>>,
 }
 impl Default for BossPhaseExcelT {
   fn default() -> Self {
@@ -223,7 +223,7 @@ impl Default for BossPhaseExcelT {
       Id: 0,
       AIPhase: 0,
       NormalAttackSkillUniqueName: None,
-      useExSkill: None,
+      UseExSkill: None,
     }
   }
 }
@@ -237,14 +237,14 @@ impl BossPhaseExcelT {
     let NormalAttackSkillUniqueName = self.NormalAttackSkillUniqueName.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let useExSkill = self.useExSkill.as_ref().map(|x|{
+    let UseExSkill = self.UseExSkill.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     BossPhaseExcel::create(_fbb, &BossPhaseExcelArgs{
       Id,
       AIPhase,
       NormalAttackSkillUniqueName,
-      useExSkill,
+      UseExSkill,
     })
   }
 }

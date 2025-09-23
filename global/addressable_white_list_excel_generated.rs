@@ -50,8 +50,8 @@ impl<'a> AddressableWhiteListExcel<'a> {
       if let Some(x) = args.resourcePath {
         builder.add_resourcePath(x);
       }
-      if let Some(x) = args.FolderPath {
-        builder.add_FolderPath(x);
+      if let Some(x) = args.folderPath {
+        builder.add_folderPath(x);
       }
     builder.finish()
   }
@@ -59,7 +59,7 @@ impl<'a> AddressableWhiteListExcel<'a> {
   pub fn unpack(&self) -> AddressableWhiteListExcelT {
     let key = table_encryption_service::create_key(b"AddressableWhiteList");
       let Id = self.Id();
-    let FolderPath = self.FolderPath().map(|x| {
+    let folderPath = self.folderPath().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let resourcePath = self.resourcePath().map(|x| {
@@ -67,7 +67,7 @@ impl<'a> AddressableWhiteListExcel<'a> {
     });
     AddressableWhiteListExcelT {
       Id,
-      FolderPath,
+      folderPath,
       resourcePath,
     }
   }
@@ -80,7 +80,7 @@ impl<'a> AddressableWhiteListExcel<'a> {
     unsafe { self._tab.get::<i64>(AddressableWhiteListExcel::VT_ID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn FolderPath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn folderPath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -103,7 +103,7 @@ impl flatbuffers::Verifiable for AddressableWhiteListExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("FolderPath", Self::VT_FOLDERPATH, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("folderPath", Self::VT_FOLDERPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("resourcePath", Self::VT_RESOURCEPATH, false)?
      .finish();
     Ok(())
@@ -111,7 +111,7 @@ impl flatbuffers::Verifiable for AddressableWhiteListExcel<'_> {
 }
 pub struct AddressableWhiteListExcelArgs<'a> {
     pub Id: i64,
-    pub FolderPath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub folderPath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub resourcePath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
 }
 impl<'a> Default for AddressableWhiteListExcelArgs<'a> {
@@ -119,7 +119,7 @@ impl<'a> Default for AddressableWhiteListExcelArgs<'a> {
   fn default() -> Self {
     AddressableWhiteListExcelArgs {
       Id: 0,
-      FolderPath: None,
+      folderPath: None,
       resourcePath: None,
     }
   }
@@ -132,10 +132,10 @@ impl Serialize for AddressableWhiteListExcel<'_> {
   {
     let mut s = serializer.serialize_struct("AddressableWhiteListExcel", 3)?;
       s.serialize_field("Id", &self.Id())?;
-      if let Some(f) = self.FolderPath() {
-        s.serialize_field("FolderPath", &f)?;
+      if let Some(f) = self.folderPath() {
+        s.serialize_field("folderPath", &f)?;
       } else {
-        s.skip_field("FolderPath")?;
+        s.skip_field("folderPath")?;
       }
       if let Some(f) = self.resourcePath() {
         s.serialize_field("resourcePath", &f)?;
@@ -156,8 +156,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AddressableWhiteListExcelBuilde
     self.fbb_.push_slot::<i64>(AddressableWhiteListExcel::VT_ID, Id, 0);
   }
   #[inline]
-  pub fn add_FolderPath(&mut self, FolderPath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AddressableWhiteListExcel::VT_FOLDERPATH, FolderPath);
+  pub fn add_folderPath(&mut self, folderPath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AddressableWhiteListExcel::VT_FOLDERPATH, folderPath);
   }
   #[inline]
   pub fn add_resourcePath(&mut self, resourcePath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -182,7 +182,7 @@ impl core::fmt::Debug for AddressableWhiteListExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("AddressableWhiteListExcel");
       ds.field("Id", &self.Id());
-      ds.field("FolderPath", &self.FolderPath());
+      ds.field("folderPath", &self.folderPath());
       ds.field("resourcePath", &self.resourcePath());
       ds.finish()
   }
@@ -191,14 +191,14 @@ impl core::fmt::Debug for AddressableWhiteListExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct AddressableWhiteListExcelT {
   pub Id: i64,
-  pub FolderPath: Option<Vec<String>>,
+  pub folderPath: Option<Vec<String>>,
   pub resourcePath: Option<Vec<String>>,
 }
 impl Default for AddressableWhiteListExcelT {
   fn default() -> Self {
     Self {
       Id: 0,
-      FolderPath: None,
+      folderPath: None,
       resourcePath: None,
     }
   }
@@ -209,7 +209,7 @@ impl AddressableWhiteListExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<AddressableWhiteListExcel<'b>> {
     let Id = self.Id;
-    let FolderPath = self.FolderPath.as_ref().map(|x|{
+    let folderPath = self.folderPath.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let resourcePath = self.resourcePath.as_ref().map(|x|{
@@ -217,7 +217,7 @@ impl AddressableWhiteListExcelT {
     });
     AddressableWhiteListExcel::create(_fbb, &AddressableWhiteListExcelArgs{
       Id,
-      FolderPath,
+      folderPath,
       resourcePath,
     })
   }

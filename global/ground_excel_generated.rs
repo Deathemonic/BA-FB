@@ -73,18 +73,20 @@ impl<'a> GroundExcel<'a> {
   pub const VT_SHOWNPCSKILLCUTIN: flatbuffers::VOffsetT = 86;
   pub const VT_IMMUNEHITBEFORETIMEOUTEND: flatbuffers::VOffsetT = 88;
   pub const VT_UIBATTLEHIDEFROMSCRATCH: flatbuffers::VOffsetT = 90;
-  pub const VT_BATTLEREADYTIMELINEPATH: flatbuffers::VOffsetT = 92;
-  pub const VT_BEFOREVICTORYTIMELINEPATH: flatbuffers::VOffsetT = 94;
-  pub const VT_SKIPBATTLEEND: flatbuffers::VOffsetT = 96;
-  pub const VT_HIDENPCWHENBATTLEEND: flatbuffers::VOffsetT = 98;
-  pub const VT_COVERPOINTOFF: flatbuffers::VOffsetT = 100;
-  pub const VT_UIHPSCALE: flatbuffers::VOffsetT = 102;
-  pub const VT_UIEMOJISCALE: flatbuffers::VOffsetT = 104;
-  pub const VT_UISKILLMAINLOGSCALE: flatbuffers::VOffsetT = 106;
-  pub const VT_ALLYPASSIVESKILLID: flatbuffers::VOffsetT = 108;
-  pub const VT_ALLYPASSIVESKILLLEVEL: flatbuffers::VOffsetT = 110;
-  pub const VT_ENEMYPASSIVESKILLID: flatbuffers::VOffsetT = 112;
-  pub const VT_ENEMYPASSIVESKILLLEVEL: flatbuffers::VOffsetT = 114;
+  pub const VT_UIENEMYCOUNT: flatbuffers::VOffsetT = 92;
+  pub const VT_BATTLEREADYTIMELINEPATH: flatbuffers::VOffsetT = 94;
+  pub const VT_BEFOREVICTORYTIMELINEPATH: flatbuffers::VOffsetT = 96;
+  pub const VT_SKIPBATTLEEND: flatbuffers::VOffsetT = 98;
+  pub const VT_HIDENPCWHENBATTLEEND: flatbuffers::VOffsetT = 100;
+  pub const VT_COVERPOINTOFF: flatbuffers::VOffsetT = 102;
+  pub const VT_UIHPSCALE: flatbuffers::VOffsetT = 104;
+  pub const VT_UIEMOJISCALE: flatbuffers::VOffsetT = 106;
+  pub const VT_UISKILLMAINLOGSCALE: flatbuffers::VOffsetT = 108;
+  pub const VT_EFFECTCOUNTLIMIT: flatbuffers::VOffsetT = 110;
+  pub const VT_ALLYPASSIVESKILLID: flatbuffers::VOffsetT = 112;
+  pub const VT_ALLYPASSIVESKILLLEVEL: flatbuffers::VOffsetT = 114;
+  pub const VT_ENEMYPASSIVESKILLID: flatbuffers::VOffsetT = 116;
+  pub const VT_ENEMYPASSIVESKILLLEVEL: flatbuffers::VOffsetT = 118;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -196,6 +198,9 @@ impl<'a> GroundExcel<'a> {
       if let Some(x) = args.AllyPassiveSkillId {
         builder.add_AllyPassiveSkillId(x);
       }
+      let x = args.EffectCountLimit;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
+      builder.add_EffectCountLimit(x);
       let x = args.UISkillMainLogScale;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::encrypt_float(x, &key) } else { x };
       builder.add_UISkillMainLogScale(x);
@@ -211,6 +216,9 @@ impl<'a> GroundExcel<'a> {
       if let Some(x) = args.BattleReadyTimelinePath {
         builder.add_BattleReadyTimelinePath(x);
       }
+      let x = args.UIEnemyCount;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_UIEnemyCount(x);
       let x = args.ShowNPCSkillCutIn;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ShowNPCSkillCutIn(x);
@@ -322,6 +330,11 @@ impl<'a> GroundExcel<'a> {
       };
       let ImmuneHitBeforeTimeOutEnd = self.ImmuneHitBeforeTimeOutEnd();
       let UIBattleHideFromScratch = self.UIBattleHideFromScratch();
+      let UIEnemyCount = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.UIEnemyCount(), &key)
+      } else {
+        self.UIEnemyCount()
+      };
     let BattleReadyTimelinePath = self.BattleReadyTimelinePath().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -346,6 +359,7 @@ impl<'a> GroundExcel<'a> {
       } else {
         self.UISkillMainLogScale()
       };
+      let EffectCountLimit = self.EffectCountLimit();
     let AllyPassiveSkillId = self.AllyPassiveSkillId().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
@@ -403,6 +417,7 @@ impl<'a> GroundExcel<'a> {
       ShowNPCSkillCutIn,
       ImmuneHitBeforeTimeOutEnd,
       UIBattleHideFromScratch,
+      UIEnemyCount,
       BattleReadyTimelinePath,
       BeforeVictoryTimelinePath,
       SkipBattleEnd,
@@ -411,6 +426,7 @@ impl<'a> GroundExcel<'a> {
       UIHpScale,
       UIEmojiScale,
       UISkillMainLogScale,
+      EffectCountLimit,
       AllyPassiveSkillId,
       AllyPassiveSkillLevel,
       EnemyPassiveSkillId,
@@ -727,6 +743,13 @@ impl<'a> GroundExcel<'a> {
     unsafe { self._tab.get::<bool>(GroundExcel::VT_UIBATTLEHIDEFROMSCRATCH, Some(false)).unwrap()}
   }
   #[inline]
+  pub fn UIEnemyCount(&self) -> UIEnemyCountType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<UIEnemyCountType>(GroundExcel::VT_UIENEMYCOUNT, Some(UIEnemyCountType::Normal)).unwrap()}
+  }
+  #[inline]
   pub fn BattleReadyTimelinePath(&self) -> Option<&'a str> {
     // Safety:
     // Created from valid Table for this object
@@ -781,6 +804,13 @@ impl<'a> GroundExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<f32>(GroundExcel::VT_UISKILLMAINLOGSCALE, Some(0.0)).unwrap()}
+  }
+  #[inline]
+  pub fn EffectCountLimit(&self) -> i32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i32>(GroundExcel::VT_EFFECTCOUNTLIMIT, Some(0)).unwrap()}
   }
   #[inline]
   pub fn AllyPassiveSkillId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
@@ -863,6 +893,7 @@ impl flatbuffers::Verifiable for GroundExcel<'_> {
      .visit_field::<ShowSkillCutIn>("ShowNPCSkillCutIn", Self::VT_SHOWNPCSKILLCUTIN, false)?
      .visit_field::<bool>("ImmuneHitBeforeTimeOutEnd", Self::VT_IMMUNEHITBEFORETIMEOUTEND, false)?
      .visit_field::<bool>("UIBattleHideFromScratch", Self::VT_UIBATTLEHIDEFROMSCRATCH, false)?
+     .visit_field::<UIEnemyCountType>("UIEnemyCount", Self::VT_UIENEMYCOUNT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BattleReadyTimelinePath", Self::VT_BATTLEREADYTIMELINEPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BeforeVictoryTimelinePath", Self::VT_BEFOREVICTORYTIMELINEPATH, false)?
      .visit_field::<bool>("SkipBattleEnd", Self::VT_SKIPBATTLEEND, false)?
@@ -871,6 +902,7 @@ impl flatbuffers::Verifiable for GroundExcel<'_> {
      .visit_field::<f32>("UIHpScale", Self::VT_UIHPSCALE, false)?
      .visit_field::<f32>("UIEmojiScale", Self::VT_UIEMOJISCALE, false)?
      .visit_field::<f32>("UISkillMainLogScale", Self::VT_UISKILLMAINLOGSCALE, false)?
+     .visit_field::<i32>("EffectCountLimit", Self::VT_EFFECTCOUNTLIMIT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("AllyPassiveSkillId", Self::VT_ALLYPASSIVESKILLID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("AllyPassiveSkillLevel", Self::VT_ALLYPASSIVESKILLLEVEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("EnemyPassiveSkillId", Self::VT_ENEMYPASSIVESKILLID, false)?
@@ -924,6 +956,7 @@ pub struct GroundExcelArgs<'a> {
     pub ShowNPCSkillCutIn: ShowSkillCutIn,
     pub ImmuneHitBeforeTimeOutEnd: bool,
     pub UIBattleHideFromScratch: bool,
+    pub UIEnemyCount: UIEnemyCountType,
     pub BattleReadyTimelinePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub BeforeVictoryTimelinePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SkipBattleEnd: bool,
@@ -932,6 +965,7 @@ pub struct GroundExcelArgs<'a> {
     pub UIHpScale: f32,
     pub UIEmojiScale: f32,
     pub UISkillMainLogScale: f32,
+    pub EffectCountLimit: i32,
     pub AllyPassiveSkillId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub AllyPassiveSkillLevel: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub EnemyPassiveSkillId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
@@ -985,6 +1019,7 @@ impl<'a> Default for GroundExcelArgs<'a> {
       ShowNPCSkillCutIn: ShowSkillCutIn::None,
       ImmuneHitBeforeTimeOutEnd: false,
       UIBattleHideFromScratch: false,
+      UIEnemyCount: UIEnemyCountType::Normal,
       BattleReadyTimelinePath: None,
       BeforeVictoryTimelinePath: None,
       SkipBattleEnd: false,
@@ -993,6 +1028,7 @@ impl<'a> Default for GroundExcelArgs<'a> {
       UIHpScale: 0.0,
       UIEmojiScale: 0.0,
       UISkillMainLogScale: 0.0,
+      EffectCountLimit: 0,
       AllyPassiveSkillId: None,
       AllyPassiveSkillLevel: None,
       EnemyPassiveSkillId: None,
@@ -1006,7 +1042,7 @@ impl Serialize for GroundExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("GroundExcel", 56)?;
+    let mut s = serializer.serialize_struct("GroundExcel", 58)?;
       s.serialize_field("Id", &self.Id())?;
       if let Some(f) = self.StageFileName() {
         s.serialize_field("StageFileName", &f)?;
@@ -1059,6 +1095,7 @@ impl Serialize for GroundExcel<'_> {
       s.serialize_field("ShowNPCSkillCutIn", &self.ShowNPCSkillCutIn())?;
       s.serialize_field("ImmuneHitBeforeTimeOutEnd", &self.ImmuneHitBeforeTimeOutEnd())?;
       s.serialize_field("UIBattleHideFromScratch", &self.UIBattleHideFromScratch())?;
+      s.serialize_field("UIEnemyCount", &self.UIEnemyCount())?;
       if let Some(f) = self.BattleReadyTimelinePath() {
         s.serialize_field("BattleReadyTimelinePath", &f)?;
       } else {
@@ -1075,6 +1112,7 @@ impl Serialize for GroundExcel<'_> {
       s.serialize_field("UIHpScale", &self.UIHpScale())?;
       s.serialize_field("UIEmojiScale", &self.UIEmojiScale())?;
       s.serialize_field("UISkillMainLogScale", &self.UISkillMainLogScale())?;
+      s.serialize_field("EffectCountLimit", &self.EffectCountLimit())?;
       if let Some(f) = self.AllyPassiveSkillId() {
         s.serialize_field("AllyPassiveSkillId", &f)?;
       } else {
@@ -1281,6 +1319,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GroundExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<bool>(GroundExcel::VT_UIBATTLEHIDEFROMSCRATCH, UIBattleHideFromScratch, false);
   }
   #[inline]
+  pub fn add_UIEnemyCount(&mut self, UIEnemyCount: UIEnemyCountType) {
+    self.fbb_.push_slot::<UIEnemyCountType>(GroundExcel::VT_UIENEMYCOUNT, UIEnemyCount, UIEnemyCountType::Normal);
+  }
+  #[inline]
   pub fn add_BattleReadyTimelinePath(&mut self, BattleReadyTimelinePath: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GroundExcel::VT_BATTLEREADYTIMELINEPATH, BattleReadyTimelinePath);
   }
@@ -1311,6 +1353,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GroundExcelBuilder<'a, 'b, A> {
   #[inline]
   pub fn add_UISkillMainLogScale(&mut self, UISkillMainLogScale: f32) {
     self.fbb_.push_slot::<f32>(GroundExcel::VT_UISKILLMAINLOGSCALE, UISkillMainLogScale, 0.0);
+  }
+  #[inline]
+  pub fn add_EffectCountLimit(&mut self, EffectCountLimit: i32) {
+    self.fbb_.push_slot::<i32>(GroundExcel::VT_EFFECTCOUNTLIMIT, EffectCountLimit, 0);
   }
   #[inline]
   pub fn add_AllyPassiveSkillId(&mut self, AllyPassiveSkillId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -1390,6 +1436,7 @@ impl core::fmt::Debug for GroundExcel<'_> {
       ds.field("ShowNPCSkillCutIn", &self.ShowNPCSkillCutIn());
       ds.field("ImmuneHitBeforeTimeOutEnd", &self.ImmuneHitBeforeTimeOutEnd());
       ds.field("UIBattleHideFromScratch", &self.UIBattleHideFromScratch());
+      ds.field("UIEnemyCount", &self.UIEnemyCount());
       ds.field("BattleReadyTimelinePath", &self.BattleReadyTimelinePath());
       ds.field("BeforeVictoryTimelinePath", &self.BeforeVictoryTimelinePath());
       ds.field("SkipBattleEnd", &self.SkipBattleEnd());
@@ -1398,6 +1445,7 @@ impl core::fmt::Debug for GroundExcel<'_> {
       ds.field("UIHpScale", &self.UIHpScale());
       ds.field("UIEmojiScale", &self.UIEmojiScale());
       ds.field("UISkillMainLogScale", &self.UISkillMainLogScale());
+      ds.field("EffectCountLimit", &self.EffectCountLimit());
       ds.field("AllyPassiveSkillId", &self.AllyPassiveSkillId());
       ds.field("AllyPassiveSkillLevel", &self.AllyPassiveSkillLevel());
       ds.field("EnemyPassiveSkillId", &self.EnemyPassiveSkillId());
@@ -1452,6 +1500,7 @@ pub struct GroundExcelT {
   pub ShowNPCSkillCutIn: ShowSkillCutIn,
   pub ImmuneHitBeforeTimeOutEnd: bool,
   pub UIBattleHideFromScratch: bool,
+  pub UIEnemyCount: UIEnemyCountType,
   pub BattleReadyTimelinePath: Option<String>,
   pub BeforeVictoryTimelinePath: Option<String>,
   pub SkipBattleEnd: bool,
@@ -1460,6 +1509,7 @@ pub struct GroundExcelT {
   pub UIHpScale: f32,
   pub UIEmojiScale: f32,
   pub UISkillMainLogScale: f32,
+  pub EffectCountLimit: i32,
   pub AllyPassiveSkillId: Option<Vec<String>>,
   pub AllyPassiveSkillLevel: Option<Vec<i32>>,
   pub EnemyPassiveSkillId: Option<Vec<String>>,
@@ -1512,6 +1562,7 @@ impl Default for GroundExcelT {
       ShowNPCSkillCutIn: ShowSkillCutIn::None,
       ImmuneHitBeforeTimeOutEnd: false,
       UIBattleHideFromScratch: false,
+      UIEnemyCount: UIEnemyCountType::Normal,
       BattleReadyTimelinePath: None,
       BeforeVictoryTimelinePath: None,
       SkipBattleEnd: false,
@@ -1520,6 +1571,7 @@ impl Default for GroundExcelT {
       UIHpScale: 0.0,
       UIEmojiScale: 0.0,
       UISkillMainLogScale: 0.0,
+      EffectCountLimit: 0,
       AllyPassiveSkillId: None,
       AllyPassiveSkillLevel: None,
       EnemyPassiveSkillId: None,
@@ -1580,6 +1632,7 @@ impl GroundExcelT {
     let ShowNPCSkillCutIn = self.ShowNPCSkillCutIn;
     let ImmuneHitBeforeTimeOutEnd = self.ImmuneHitBeforeTimeOutEnd;
     let UIBattleHideFromScratch = self.UIBattleHideFromScratch;
+    let UIEnemyCount = self.UIEnemyCount;
     let BattleReadyTimelinePath = self.BattleReadyTimelinePath.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -1592,6 +1645,7 @@ impl GroundExcelT {
     let UIHpScale = self.UIHpScale;
     let UIEmojiScale = self.UIEmojiScale;
     let UISkillMainLogScale = self.UISkillMainLogScale;
+    let EffectCountLimit = self.EffectCountLimit;
     let AllyPassiveSkillId = self.AllyPassiveSkillId.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
@@ -1649,6 +1703,7 @@ impl GroundExcelT {
       ShowNPCSkillCutIn,
       ImmuneHitBeforeTimeOutEnd,
       UIBattleHideFromScratch,
+      UIEnemyCount,
       BattleReadyTimelinePath,
       BeforeVictoryTimelinePath,
       SkipBattleEnd,
@@ -1657,6 +1712,7 @@ impl GroundExcelT {
       UIHpScale,
       UIEmojiScale,
       UISkillMainLogScale,
+      EffectCountLimit,
       AllyPassiveSkillId,
       AllyPassiveSkillLevel,
       EnemyPassiveSkillId,

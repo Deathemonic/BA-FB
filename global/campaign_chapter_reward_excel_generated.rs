@@ -52,14 +52,14 @@ impl<'a> CampaignChapterRewardExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.chapterRewardAmount {
-        builder.add_chapterRewardAmount(x);
+      if let Some(x) = args.ChapterRewardAmount {
+        builder.add_ChapterRewardAmount(x);
       }
       if let Some(x) = args.ChapterRewardId {
         builder.add_ChapterRewardId(x);
       }
-      if let Some(x) = args.chapterRewardParcelType {
-        builder.add_chapterRewardParcelType(x);
+      if let Some(x) = args.ChapterRewardParcelType {
+        builder.add_ChapterRewardParcelType(x);
       }
     builder.finish()
   }
@@ -68,21 +68,21 @@ impl<'a> CampaignChapterRewardExcel<'a> {
     let key = table_encryption_service::create_key(b"CampaignChapterReward");
       let Id = self.Id();
       let CampaignChapterStar = self.CampaignChapterStar();
-    let chapterRewardParcelType = self.chapterRewardParcelType().map(|x| {
+    let ChapterRewardParcelType = self.ChapterRewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let ChapterRewardId = self.ChapterRewardId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let chapterRewardAmount = self.chapterRewardAmount().map(|x| {
+    let ChapterRewardAmount = self.ChapterRewardAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     CampaignChapterRewardExcelT {
       Id,
       CampaignChapterStar,
-      chapterRewardParcelType,
+      ChapterRewardParcelType,
       ChapterRewardId,
-      chapterRewardAmount,
+      ChapterRewardAmount,
     }
   }
 
@@ -101,7 +101,7 @@ impl<'a> CampaignChapterRewardExcel<'a> {
     unsafe { self._tab.get::<i64>(CampaignChapterRewardExcel::VT_CAMPAIGNCHAPTERSTAR, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn chapterRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn ChapterRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -115,7 +115,7 @@ impl<'a> CampaignChapterRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CampaignChapterRewardExcel::VT_CHAPTERREWARDID, None)}
   }
   #[inline]
-  pub fn chapterRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn ChapterRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -132,9 +132,9 @@ impl flatbuffers::Verifiable for CampaignChapterRewardExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<i64>("CampaignChapterStar", Self::VT_CAMPAIGNCHAPTERSTAR, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("chapterRewardParcelType", Self::VT_CHAPTERREWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ChapterRewardParcelType", Self::VT_CHAPTERREWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ChapterRewardId", Self::VT_CHAPTERREWARDID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("chapterRewardAmount", Self::VT_CHAPTERREWARDAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("ChapterRewardAmount", Self::VT_CHAPTERREWARDAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -142,9 +142,9 @@ impl flatbuffers::Verifiable for CampaignChapterRewardExcel<'_> {
 pub struct CampaignChapterRewardExcelArgs<'a> {
     pub Id: i64,
     pub CampaignChapterStar: i64,
-    pub chapterRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub ChapterRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub ChapterRewardId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub chapterRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub ChapterRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for CampaignChapterRewardExcelArgs<'a> {
   #[inline]
@@ -152,9 +152,9 @@ impl<'a> Default for CampaignChapterRewardExcelArgs<'a> {
     CampaignChapterRewardExcelArgs {
       Id: 0,
       CampaignChapterStar: 0,
-      chapterRewardParcelType: None,
+      ChapterRewardParcelType: None,
       ChapterRewardId: None,
-      chapterRewardAmount: None,
+      ChapterRewardAmount: None,
     }
   }
 }
@@ -167,20 +167,20 @@ impl Serialize for CampaignChapterRewardExcel<'_> {
     let mut s = serializer.serialize_struct("CampaignChapterRewardExcel", 5)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("CampaignChapterStar", &self.CampaignChapterStar())?;
-      if let Some(f) = self.chapterRewardParcelType() {
-        s.serialize_field("chapterRewardParcelType", &f)?;
+      if let Some(f) = self.ChapterRewardParcelType() {
+        s.serialize_field("ChapterRewardParcelType", &f)?;
       } else {
-        s.skip_field("chapterRewardParcelType")?;
+        s.skip_field("ChapterRewardParcelType")?;
       }
       if let Some(f) = self.ChapterRewardId() {
         s.serialize_field("ChapterRewardId", &f)?;
       } else {
         s.skip_field("ChapterRewardId")?;
       }
-      if let Some(f) = self.chapterRewardAmount() {
-        s.serialize_field("chapterRewardAmount", &f)?;
+      if let Some(f) = self.ChapterRewardAmount() {
+        s.serialize_field("ChapterRewardAmount", &f)?;
       } else {
-        s.skip_field("chapterRewardAmount")?;
+        s.skip_field("ChapterRewardAmount")?;
       }
     s.end()
   }
@@ -200,16 +200,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CampaignChapterRewardExcelBuild
     self.fbb_.push_slot::<i64>(CampaignChapterRewardExcel::VT_CAMPAIGNCHAPTERSTAR, CampaignChapterStar, 0);
   }
   #[inline]
-  pub fn add_chapterRewardParcelType(&mut self, chapterRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterRewardExcel::VT_CHAPTERREWARDPARCELTYPE, chapterRewardParcelType);
+  pub fn add_ChapterRewardParcelType(&mut self, ChapterRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterRewardExcel::VT_CHAPTERREWARDPARCELTYPE, ChapterRewardParcelType);
   }
   #[inline]
   pub fn add_ChapterRewardId(&mut self, ChapterRewardId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterRewardExcel::VT_CHAPTERREWARDID, ChapterRewardId);
   }
   #[inline]
-  pub fn add_chapterRewardAmount(&mut self, chapterRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterRewardExcel::VT_CHAPTERREWARDAMOUNT, chapterRewardAmount);
+  pub fn add_ChapterRewardAmount(&mut self, ChapterRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignChapterRewardExcel::VT_CHAPTERREWARDAMOUNT, ChapterRewardAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> CampaignChapterRewardExcelBuilder<'a, 'b, A> {
@@ -231,9 +231,9 @@ impl core::fmt::Debug for CampaignChapterRewardExcel<'_> {
     let mut ds = f.debug_struct("CampaignChapterRewardExcel");
       ds.field("Id", &self.Id());
       ds.field("CampaignChapterStar", &self.CampaignChapterStar());
-      ds.field("chapterRewardParcelType", &self.chapterRewardParcelType());
+      ds.field("ChapterRewardParcelType", &self.ChapterRewardParcelType());
       ds.field("ChapterRewardId", &self.ChapterRewardId());
-      ds.field("chapterRewardAmount", &self.chapterRewardAmount());
+      ds.field("ChapterRewardAmount", &self.ChapterRewardAmount());
       ds.finish()
   }
 }
@@ -242,18 +242,18 @@ impl core::fmt::Debug for CampaignChapterRewardExcel<'_> {
 pub struct CampaignChapterRewardExcelT {
   pub Id: i64,
   pub CampaignChapterStar: i64,
-  pub chapterRewardParcelType: Option<Vec<ParcelType>>,
+  pub ChapterRewardParcelType: Option<Vec<ParcelType>>,
   pub ChapterRewardId: Option<Vec<i64>>,
-  pub chapterRewardAmount: Option<Vec<i32>>,
+  pub ChapterRewardAmount: Option<Vec<i32>>,
 }
 impl Default for CampaignChapterRewardExcelT {
   fn default() -> Self {
     Self {
       Id: 0,
       CampaignChapterStar: 0,
-      chapterRewardParcelType: None,
+      ChapterRewardParcelType: None,
       ChapterRewardId: None,
-      chapterRewardAmount: None,
+      ChapterRewardAmount: None,
     }
   }
 }
@@ -264,21 +264,21 @@ impl CampaignChapterRewardExcelT {
   ) -> flatbuffers::WIPOffset<CampaignChapterRewardExcel<'b>> {
     let Id = self.Id;
     let CampaignChapterStar = self.CampaignChapterStar;
-    let chapterRewardParcelType = self.chapterRewardParcelType.as_ref().map(|x|{
+    let ChapterRewardParcelType = self.ChapterRewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ChapterRewardId = self.ChapterRewardId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let chapterRewardAmount = self.chapterRewardAmount.as_ref().map(|x|{
+    let ChapterRewardAmount = self.ChapterRewardAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     CampaignChapterRewardExcel::create(_fbb, &CampaignChapterRewardExcelArgs{
       Id,
       CampaignChapterStar,
-      chapterRewardParcelType,
+      ChapterRewardParcelType,
       ChapterRewardId,
-      chapterRewardAmount,
+      ChapterRewardAmount,
     })
   }
 }

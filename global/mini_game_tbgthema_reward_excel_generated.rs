@@ -52,14 +52,14 @@ impl<'a> MiniGameTBGThemaRewardExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.rewardParcelAmount {
-        builder.add_rewardParcelAmount(x);
+      if let Some(x) = args.RewardParcelAmount {
+        builder.add_RewardParcelAmount(x);
       }
       if let Some(x) = args.RewardParcelId {
         builder.add_RewardParcelId(x);
       }
-      if let Some(x) = args.rewardParcelType {
-        builder.add_rewardParcelType(x);
+      if let Some(x) = args.RewardParcelType {
+        builder.add_RewardParcelType(x);
       }
       let x = args.MiniGameTBGThemaRewardType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -85,13 +85,13 @@ impl<'a> MiniGameTBGThemaRewardExcel<'a> {
       } else {
         self.MiniGameTBGThemaRewardType()
       };
-    let rewardParcelType = self.rewardParcelType().map(|x| {
+    let RewardParcelType = self.RewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let RewardParcelId = self.RewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let rewardParcelAmount = self.rewardParcelAmount().map(|x| {
+    let RewardParcelAmount = self.RewardParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     MiniGameTBGThemaRewardExcelT {
@@ -100,9 +100,9 @@ impl<'a> MiniGameTBGThemaRewardExcel<'a> {
       ThemaUniqueId,
       IsLoop,
       MiniGameTBGThemaRewardType,
-      rewardParcelType,
+      RewardParcelType,
       RewardParcelId,
-      rewardParcelAmount,
+      RewardParcelAmount,
     }
   }
 
@@ -142,7 +142,7 @@ impl<'a> MiniGameTBGThemaRewardExcel<'a> {
     unsafe { self._tab.get::<MiniGameTBGThemaRewardType>(MiniGameTBGThemaRewardExcel::VT_MINIGAMETBGTHEMAREWARDTYPE, Some(MiniGameTBGThemaRewardType::TreasureReward)).unwrap()}
   }
   #[inline]
-  pub fn rewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn RewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -156,7 +156,7 @@ impl<'a> MiniGameTBGThemaRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(MiniGameTBGThemaRewardExcel::VT_REWARDPARCELID, None)}
   }
   #[inline]
-  pub fn rewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn RewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -176,9 +176,9 @@ impl flatbuffers::Verifiable for MiniGameTBGThemaRewardExcel<'_> {
      .visit_field::<i32>("ThemaUniqueId", Self::VT_THEMAUNIQUEID, false)?
      .visit_field::<bool>("IsLoop", Self::VT_ISLOOP, false)?
      .visit_field::<MiniGameTBGThemaRewardType>("MiniGameTBGThemaRewardType", Self::VT_MINIGAMETBGTHEMAREWARDTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("rewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -189,9 +189,9 @@ pub struct MiniGameTBGThemaRewardExcelArgs<'a> {
     pub ThemaUniqueId: i32,
     pub IsLoop: bool,
     pub MiniGameTBGThemaRewardType: MiniGameTBGThemaRewardType,
-    pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub rewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for MiniGameTBGThemaRewardExcelArgs<'a> {
   #[inline]
@@ -202,9 +202,9 @@ impl<'a> Default for MiniGameTBGThemaRewardExcelArgs<'a> {
       ThemaUniqueId: 0,
       IsLoop: false,
       MiniGameTBGThemaRewardType: MiniGameTBGThemaRewardType::TreasureReward,
-      rewardParcelType: None,
+      RewardParcelType: None,
       RewardParcelId: None,
-      rewardParcelAmount: None,
+      RewardParcelAmount: None,
     }
   }
 }
@@ -220,20 +220,20 @@ impl Serialize for MiniGameTBGThemaRewardExcel<'_> {
       s.serialize_field("ThemaUniqueId", &self.ThemaUniqueId())?;
       s.serialize_field("IsLoop", &self.IsLoop())?;
       s.serialize_field("MiniGameTBGThemaRewardType", &self.MiniGameTBGThemaRewardType())?;
-      if let Some(f) = self.rewardParcelType() {
-        s.serialize_field("rewardParcelType", &f)?;
+      if let Some(f) = self.RewardParcelType() {
+        s.serialize_field("RewardParcelType", &f)?;
       } else {
-        s.skip_field("rewardParcelType")?;
+        s.skip_field("RewardParcelType")?;
       }
       if let Some(f) = self.RewardParcelId() {
         s.serialize_field("RewardParcelId", &f)?;
       } else {
         s.skip_field("RewardParcelId")?;
       }
-      if let Some(f) = self.rewardParcelAmount() {
-        s.serialize_field("rewardParcelAmount", &f)?;
+      if let Some(f) = self.RewardParcelAmount() {
+        s.serialize_field("RewardParcelAmount", &f)?;
       } else {
-        s.skip_field("rewardParcelAmount")?;
+        s.skip_field("RewardParcelAmount")?;
       }
     s.end()
   }
@@ -265,16 +265,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameTBGThemaRewardExcelBuil
     self.fbb_.push_slot::<MiniGameTBGThemaRewardType>(MiniGameTBGThemaRewardExcel::VT_MINIGAMETBGTHEMAREWARDTYPE, MiniGameTBGThemaRewardType, MiniGameTBGThemaRewardType::TreasureReward);
   }
   #[inline]
-  pub fn add_rewardParcelType(&mut self, rewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameTBGThemaRewardExcel::VT_REWARDPARCELTYPE, rewardParcelType);
+  pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameTBGThemaRewardExcel::VT_REWARDPARCELTYPE, RewardParcelType);
   }
   #[inline]
   pub fn add_RewardParcelId(&mut self, RewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameTBGThemaRewardExcel::VT_REWARDPARCELID, RewardParcelId);
   }
   #[inline]
-  pub fn add_rewardParcelAmount(&mut self, rewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameTBGThemaRewardExcel::VT_REWARDPARCELAMOUNT, rewardParcelAmount);
+  pub fn add_RewardParcelAmount(&mut self, RewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameTBGThemaRewardExcel::VT_REWARDPARCELAMOUNT, RewardParcelAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> MiniGameTBGThemaRewardExcelBuilder<'a, 'b, A> {
@@ -299,9 +299,9 @@ impl core::fmt::Debug for MiniGameTBGThemaRewardExcel<'_> {
       ds.field("ThemaUniqueId", &self.ThemaUniqueId());
       ds.field("IsLoop", &self.IsLoop());
       ds.field("MiniGameTBGThemaRewardType", &self.MiniGameTBGThemaRewardType());
-      ds.field("rewardParcelType", &self.rewardParcelType());
+      ds.field("RewardParcelType", &self.RewardParcelType());
       ds.field("RewardParcelId", &self.RewardParcelId());
-      ds.field("rewardParcelAmount", &self.rewardParcelAmount());
+      ds.field("RewardParcelAmount", &self.RewardParcelAmount());
       ds.finish()
   }
 }
@@ -313,9 +313,9 @@ pub struct MiniGameTBGThemaRewardExcelT {
   pub ThemaUniqueId: i32,
   pub IsLoop: bool,
   pub MiniGameTBGThemaRewardType: MiniGameTBGThemaRewardType,
-  pub rewardParcelType: Option<Vec<ParcelType>>,
+  pub RewardParcelType: Option<Vec<ParcelType>>,
   pub RewardParcelId: Option<Vec<i64>>,
-  pub rewardParcelAmount: Option<Vec<i32>>,
+  pub RewardParcelAmount: Option<Vec<i32>>,
 }
 impl Default for MiniGameTBGThemaRewardExcelT {
   fn default() -> Self {
@@ -325,9 +325,9 @@ impl Default for MiniGameTBGThemaRewardExcelT {
       ThemaUniqueId: 0,
       IsLoop: false,
       MiniGameTBGThemaRewardType: MiniGameTBGThemaRewardType::TreasureReward,
-      rewardParcelType: None,
+      RewardParcelType: None,
       RewardParcelId: None,
-      rewardParcelAmount: None,
+      RewardParcelAmount: None,
     }
   }
 }
@@ -341,13 +341,13 @@ impl MiniGameTBGThemaRewardExcelT {
     let ThemaUniqueId = self.ThemaUniqueId;
     let IsLoop = self.IsLoop;
     let MiniGameTBGThemaRewardType = self.MiniGameTBGThemaRewardType;
-    let rewardParcelType = self.rewardParcelType.as_ref().map(|x|{
+    let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardParcelId = self.RewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardParcelAmount = self.rewardParcelAmount.as_ref().map(|x|{
+    let RewardParcelAmount = self.RewardParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     MiniGameTBGThemaRewardExcel::create(_fbb, &MiniGameTBGThemaRewardExcelArgs{
@@ -356,9 +356,9 @@ impl MiniGameTBGThemaRewardExcelT {
       ThemaUniqueId,
       IsLoop,
       MiniGameTBGThemaRewardType,
-      rewardParcelType,
+      RewardParcelType,
       RewardParcelId,
-      rewardParcelAmount,
+      RewardParcelAmount,
     })
   }
 }

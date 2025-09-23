@@ -82,14 +82,14 @@ impl<'a> CharacterWeaponExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.statValue {
-        builder.add_statValue(x);
+      if let Some(x) = args.StatValue {
+        builder.add_StatValue(x);
       }
-      if let Some(x) = args.statType {
-        builder.add_statType(x);
+      if let Some(x) = args.StatType {
+        builder.add_StatType(x);
       }
-      if let Some(x) = args.learnSkillSlot {
-        builder.add_learnSkillSlot(x);
+      if let Some(x) = args.LearnSkillSlot {
+        builder.add_LearnSkillSlot(x);
       }
       if let Some(x) = args.MaxLevel {
         builder.add_MaxLevel(x);
@@ -100,8 +100,8 @@ impl<'a> CharacterWeaponExcel<'a> {
       if let Some(x) = args.Unlock {
         builder.add_Unlock(x);
       }
-      if let Some(x) = args.tags {
-        builder.add_tags(x);
+      if let Some(x) = args.Tags {
+        builder.add_Tags(x);
       }
       let x = args.StatLevelUpType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -130,7 +130,7 @@ impl<'a> CharacterWeaponExcel<'a> {
       let MaxHP100 = self.MaxHP100();
       let HealPower = self.HealPower();
       let HealPower100 = self.HealPower100();
-    let tags = self.tags().map(|x| {
+    let Tags = self.Tags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let Unlock = self.Unlock().map(|x| {
@@ -142,13 +142,13 @@ impl<'a> CharacterWeaponExcel<'a> {
     let MaxLevel = self.MaxLevel().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
-    let learnSkillSlot = self.learnSkillSlot().map(|x| {
+    let LearnSkillSlot = self.LearnSkillSlot().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let statType = self.statType().map(|x| {
+    let StatType = self.StatType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let statValue = self.statValue().map(|x| {
+    let StatValue = self.StatValue().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     CharacterWeaponExcelT {
@@ -162,13 +162,13 @@ impl<'a> CharacterWeaponExcel<'a> {
       MaxHP100,
       HealPower,
       HealPower100,
-      tags,
+      Tags,
       Unlock,
       RecipeId,
       MaxLevel,
-      learnSkillSlot,
-      statType,
-      statValue,
+      LearnSkillSlot,
+      StatType,
+      StatValue,
     }
   }
 
@@ -243,7 +243,7 @@ impl<'a> CharacterWeaponExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterWeaponExcel::VT_HEALPOWER100, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn Tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -271,21 +271,21 @@ impl<'a> CharacterWeaponExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i32>>>(CharacterWeaponExcel::VT_MAXLEVEL, None)}
   }
   #[inline]
-  pub fn learnSkillSlot(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn LearnSkillSlot(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(CharacterWeaponExcel::VT_LEARNSKILLSLOT, None)}
   }
   #[inline]
-  pub fn statType(&self) -> Option<flatbuffers::Vector<'a, EquipmentOptionType>> {
+  pub fn StatType(&self) -> Option<flatbuffers::Vector<'a, EquipmentOptionType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, EquipmentOptionType>>>(CharacterWeaponExcel::VT_STATTYPE, None)}
   }
   #[inline]
-  pub fn statValue(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn StatValue(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -310,13 +310,13 @@ impl flatbuffers::Verifiable for CharacterWeaponExcel<'_> {
      .visit_field::<i64>("MaxHP100", Self::VT_MAXHP100, false)?
      .visit_field::<i64>("HealPower", Self::VT_HEALPOWER, false)?
      .visit_field::<i64>("HealPower100", Self::VT_HEALPOWER100, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("tags", Self::VT_TAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("Tags", Self::VT_TAGS, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("Unlock", Self::VT_UNLOCK, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RecipeId", Self::VT_RECIPEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("MaxLevel", Self::VT_MAXLEVEL, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("learnSkillSlot", Self::VT_LEARNSKILLSLOT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EquipmentOptionType>>>("statType", Self::VT_STATTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("statValue", Self::VT_STATVALUE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("LearnSkillSlot", Self::VT_LEARNSKILLSLOT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EquipmentOptionType>>>("StatType", Self::VT_STATTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StatValue", Self::VT_STATVALUE, false)?
      .finish();
     Ok(())
   }
@@ -332,13 +332,13 @@ pub struct CharacterWeaponExcelArgs<'a> {
     pub MaxHP100: i64,
     pub HealPower: i64,
     pub HealPower100: i64,
-    pub tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub Tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub Unlock: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
     pub RecipeId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub MaxLevel: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
-    pub learnSkillSlot: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub statType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EquipmentOptionType>>>,
-    pub statValue: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub LearnSkillSlot: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub StatType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EquipmentOptionType>>>,
+    pub StatValue: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for CharacterWeaponExcelArgs<'a> {
   #[inline]
@@ -354,13 +354,13 @@ impl<'a> Default for CharacterWeaponExcelArgs<'a> {
       MaxHP100: 0,
       HealPower: 0,
       HealPower100: 0,
-      tags: None,
+      Tags: None,
       Unlock: None,
       RecipeId: None,
       MaxLevel: None,
-      learnSkillSlot: None,
-      statType: None,
-      statValue: None,
+      LearnSkillSlot: None,
+      StatType: None,
+      StatValue: None,
     }
   }
 }
@@ -385,10 +385,10 @@ impl Serialize for CharacterWeaponExcel<'_> {
       s.serialize_field("MaxHP100", &self.MaxHP100())?;
       s.serialize_field("HealPower", &self.HealPower())?;
       s.serialize_field("HealPower100", &self.HealPower100())?;
-      if let Some(f) = self.tags() {
-        s.serialize_field("tags", &f)?;
+      if let Some(f) = self.Tags() {
+        s.serialize_field("Tags", &f)?;
       } else {
-        s.skip_field("tags")?;
+        s.skip_field("Tags")?;
       }
       if let Some(f) = self.Unlock() {
         s.serialize_field("Unlock", &f)?;
@@ -405,20 +405,20 @@ impl Serialize for CharacterWeaponExcel<'_> {
       } else {
         s.skip_field("MaxLevel")?;
       }
-      if let Some(f) = self.learnSkillSlot() {
-        s.serialize_field("learnSkillSlot", &f)?;
+      if let Some(f) = self.LearnSkillSlot() {
+        s.serialize_field("LearnSkillSlot", &f)?;
       } else {
-        s.skip_field("learnSkillSlot")?;
+        s.skip_field("LearnSkillSlot")?;
       }
-      if let Some(f) = self.statType() {
-        s.serialize_field("statType", &f)?;
+      if let Some(f) = self.StatType() {
+        s.serialize_field("StatType", &f)?;
       } else {
-        s.skip_field("statType")?;
+        s.skip_field("StatType")?;
       }
-      if let Some(f) = self.statValue() {
-        s.serialize_field("statValue", &f)?;
+      if let Some(f) = self.StatValue() {
+        s.serialize_field("StatValue", &f)?;
       } else {
-        s.skip_field("statValue")?;
+        s.skip_field("StatValue")?;
       }
     s.end()
   }
@@ -470,8 +470,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterWeaponExcelBuilder<'a,
     self.fbb_.push_slot::<i64>(CharacterWeaponExcel::VT_HEALPOWER100, HealPower100, 0);
   }
   #[inline]
-  pub fn add_tags(&mut self, tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_TAGS, tags);
+  pub fn add_Tags(&mut self, Tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_TAGS, Tags);
   }
   #[inline]
   pub fn add_Unlock(&mut self, Unlock: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
@@ -486,16 +486,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterWeaponExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_MAXLEVEL, MaxLevel);
   }
   #[inline]
-  pub fn add_learnSkillSlot(&mut self, learnSkillSlot: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_LEARNSKILLSLOT, learnSkillSlot);
+  pub fn add_LearnSkillSlot(&mut self, LearnSkillSlot: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_LEARNSKILLSLOT, LearnSkillSlot);
   }
   #[inline]
-  pub fn add_statType(&mut self, statType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , EquipmentOptionType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_STATTYPE, statType);
+  pub fn add_StatType(&mut self, StatType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , EquipmentOptionType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_STATTYPE, StatType);
   }
   #[inline]
-  pub fn add_statValue(&mut self, statValue: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_STATVALUE, statValue);
+  pub fn add_StatValue(&mut self, StatValue: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterWeaponExcel::VT_STATVALUE, StatValue);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> CharacterWeaponExcelBuilder<'a, 'b, A> {
@@ -525,13 +525,13 @@ impl core::fmt::Debug for CharacterWeaponExcel<'_> {
       ds.field("MaxHP100", &self.MaxHP100());
       ds.field("HealPower", &self.HealPower());
       ds.field("HealPower100", &self.HealPower100());
-      ds.field("tags", &self.tags());
+      ds.field("Tags", &self.Tags());
       ds.field("Unlock", &self.Unlock());
       ds.field("RecipeId", &self.RecipeId());
       ds.field("MaxLevel", &self.MaxLevel());
-      ds.field("learnSkillSlot", &self.learnSkillSlot());
-      ds.field("statType", &self.statType());
-      ds.field("statValue", &self.statValue());
+      ds.field("LearnSkillSlot", &self.LearnSkillSlot());
+      ds.field("StatType", &self.StatType());
+      ds.field("StatValue", &self.StatValue());
       ds.finish()
   }
 }
@@ -548,13 +548,13 @@ pub struct CharacterWeaponExcelT {
   pub MaxHP100: i64,
   pub HealPower: i64,
   pub HealPower100: i64,
-  pub tags: Option<Vec<Tag>>,
+  pub Tags: Option<Vec<Tag>>,
   pub Unlock: Option<Vec<bool>>,
   pub RecipeId: Option<Vec<i64>>,
   pub MaxLevel: Option<Vec<i32>>,
-  pub learnSkillSlot: Option<Vec<String>>,
-  pub statType: Option<Vec<EquipmentOptionType>>,
-  pub statValue: Option<Vec<i64>>,
+  pub LearnSkillSlot: Option<Vec<String>>,
+  pub StatType: Option<Vec<EquipmentOptionType>>,
+  pub StatValue: Option<Vec<i64>>,
 }
 impl Default for CharacterWeaponExcelT {
   fn default() -> Self {
@@ -569,13 +569,13 @@ impl Default for CharacterWeaponExcelT {
       MaxHP100: 0,
       HealPower: 0,
       HealPower100: 0,
-      tags: None,
+      Tags: None,
       Unlock: None,
       RecipeId: None,
       MaxLevel: None,
-      learnSkillSlot: None,
-      statType: None,
-      statValue: None,
+      LearnSkillSlot: None,
+      StatType: None,
+      StatValue: None,
     }
   }
 }
@@ -596,7 +596,7 @@ impl CharacterWeaponExcelT {
     let MaxHP100 = self.MaxHP100;
     let HealPower = self.HealPower;
     let HealPower100 = self.HealPower100;
-    let tags = self.tags.as_ref().map(|x|{
+    let Tags = self.Tags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let Unlock = self.Unlock.as_ref().map(|x|{
@@ -608,13 +608,13 @@ impl CharacterWeaponExcelT {
     let MaxLevel = self.MaxLevel.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let learnSkillSlot = self.learnSkillSlot.as_ref().map(|x|{
+    let LearnSkillSlot = self.LearnSkillSlot.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let statType = self.statType.as_ref().map(|x|{
+    let StatType = self.StatType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let statValue = self.statValue.as_ref().map(|x|{
+    let StatValue = self.StatValue.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     CharacterWeaponExcel::create(_fbb, &CharacterWeaponExcelArgs{
@@ -628,13 +628,13 @@ impl CharacterWeaponExcelT {
       MaxHP100,
       HealPower,
       HealPower100,
-      tags,
+      Tags,
       Unlock,
       RecipeId,
       MaxLevel,
-      learnSkillSlot,
-      statType,
-      statValue,
+      LearnSkillSlot,
+      StatType,
+      StatValue,
     })
   }
 }

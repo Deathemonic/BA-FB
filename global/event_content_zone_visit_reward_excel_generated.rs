@@ -65,11 +65,11 @@ impl<'a> EventContentZoneVisitRewardExcel<'a> {
       if let Some(x) = args.VisitRewardAmount {
         builder.add_VisitRewardAmount(x);
       }
-      if let Some(x) = args.VisitRewardParcelId {
-        builder.add_VisitRewardParcelId(x);
+      if let Some(x) = args.visitRewardParcelId {
+        builder.add_visitRewardParcelId(x);
       }
-      if let Some(x) = args.VisitRewardParcelType {
-        builder.add_VisitRewardParcelType(x);
+      if let Some(x) = args.visitRewardParcelType {
+        builder.add_visitRewardParcelType(x);
       }
       if let Some(x) = args.CharacterDevName {
         builder.add_CharacterDevName(x);
@@ -91,10 +91,10 @@ impl<'a> EventContentZoneVisitRewardExcel<'a> {
     let CharacterDevName = self.CharacterDevName().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let VisitRewardParcelType = self.VisitRewardParcelType().map(|x| {
+    let visitRewardParcelType = self.visitRewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let VisitRewardParcelId = self.VisitRewardParcelId().map(|x| {
+    let visitRewardParcelId = self.visitRewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let VisitRewardAmount = self.VisitRewardAmount().map(|x| {
@@ -109,8 +109,8 @@ impl<'a> EventContentZoneVisitRewardExcel<'a> {
       DevName,
       CharacterId,
       CharacterDevName,
-      VisitRewardParcelType,
-      VisitRewardParcelId,
+      visitRewardParcelType,
+      visitRewardParcelId,
       VisitRewardAmount,
       VisitRewardProb,
     }
@@ -152,14 +152,14 @@ impl<'a> EventContentZoneVisitRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentZoneVisitRewardExcel::VT_CHARACTERDEVNAME, None)}
   }
   #[inline]
-  pub fn VisitRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn visitRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(EventContentZoneVisitRewardExcel::VT_VISITREWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn VisitRewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn visitRewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -193,8 +193,8 @@ impl flatbuffers::Verifiable for EventContentZoneVisitRewardExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("DevName", Self::VT_DEVNAME, false)?
      .visit_field::<i64>("CharacterId", Self::VT_CHARACTERID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("CharacterDevName", Self::VT_CHARACTERDEVNAME, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("VisitRewardParcelType", Self::VT_VISITREWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("VisitRewardParcelId", Self::VT_VISITREWARDPARCELID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("visitRewardParcelType", Self::VT_VISITREWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("visitRewardParcelId", Self::VT_VISITREWARDPARCELID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("VisitRewardAmount", Self::VT_VISITREWARDAMOUNT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("VisitRewardProb", Self::VT_VISITREWARDPROB, false)?
      .finish();
@@ -207,8 +207,8 @@ pub struct EventContentZoneVisitRewardExcelArgs<'a> {
     pub DevName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub CharacterId: i64,
     pub CharacterDevName: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub VisitRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub VisitRewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub visitRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub visitRewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub VisitRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub VisitRewardProb: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
@@ -221,8 +221,8 @@ impl<'a> Default for EventContentZoneVisitRewardExcelArgs<'a> {
       DevName: None,
       CharacterId: 0,
       CharacterDevName: None,
-      VisitRewardParcelType: None,
-      VisitRewardParcelId: None,
+      visitRewardParcelType: None,
+      visitRewardParcelId: None,
       VisitRewardAmount: None,
       VisitRewardProb: None,
     }
@@ -248,15 +248,15 @@ impl Serialize for EventContentZoneVisitRewardExcel<'_> {
       } else {
         s.skip_field("CharacterDevName")?;
       }
-      if let Some(f) = self.VisitRewardParcelType() {
-        s.serialize_field("VisitRewardParcelType", &f)?;
+      if let Some(f) = self.visitRewardParcelType() {
+        s.serialize_field("visitRewardParcelType", &f)?;
       } else {
-        s.skip_field("VisitRewardParcelType")?;
+        s.skip_field("visitRewardParcelType")?;
       }
-      if let Some(f) = self.VisitRewardParcelId() {
-        s.serialize_field("VisitRewardParcelId", &f)?;
+      if let Some(f) = self.visitRewardParcelId() {
+        s.serialize_field("visitRewardParcelId", &f)?;
       } else {
-        s.skip_field("VisitRewardParcelId")?;
+        s.skip_field("visitRewardParcelId")?;
       }
       if let Some(f) = self.VisitRewardAmount() {
         s.serialize_field("VisitRewardAmount", &f)?;
@@ -298,12 +298,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentZoneVisitRewardExce
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneVisitRewardExcel::VT_CHARACTERDEVNAME, CharacterDevName);
   }
   #[inline]
-  pub fn add_VisitRewardParcelType(&mut self, VisitRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneVisitRewardExcel::VT_VISITREWARDPARCELTYPE, VisitRewardParcelType);
+  pub fn add_visitRewardParcelType(&mut self, visitRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneVisitRewardExcel::VT_VISITREWARDPARCELTYPE, visitRewardParcelType);
   }
   #[inline]
-  pub fn add_VisitRewardParcelId(&mut self, VisitRewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneVisitRewardExcel::VT_VISITREWARDPARCELID, VisitRewardParcelId);
+  pub fn add_visitRewardParcelId(&mut self, visitRewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneVisitRewardExcel::VT_VISITREWARDPARCELID, visitRewardParcelId);
   }
   #[inline]
   pub fn add_VisitRewardAmount(&mut self, VisitRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -336,8 +336,8 @@ impl core::fmt::Debug for EventContentZoneVisitRewardExcel<'_> {
       ds.field("DevName", &self.DevName());
       ds.field("CharacterId", &self.CharacterId());
       ds.field("CharacterDevName", &self.CharacterDevName());
-      ds.field("VisitRewardParcelType", &self.VisitRewardParcelType());
-      ds.field("VisitRewardParcelId", &self.VisitRewardParcelId());
+      ds.field("visitRewardParcelType", &self.visitRewardParcelType());
+      ds.field("visitRewardParcelId", &self.visitRewardParcelId());
       ds.field("VisitRewardAmount", &self.VisitRewardAmount());
       ds.field("VisitRewardProb", &self.VisitRewardProb());
       ds.finish()
@@ -351,8 +351,8 @@ pub struct EventContentZoneVisitRewardExcelT {
   pub DevName: Option<String>,
   pub CharacterId: i64,
   pub CharacterDevName: Option<String>,
-  pub VisitRewardParcelType: Option<Vec<ParcelType>>,
-  pub VisitRewardParcelId: Option<Vec<i64>>,
+  pub visitRewardParcelType: Option<Vec<ParcelType>>,
+  pub visitRewardParcelId: Option<Vec<i64>>,
   pub VisitRewardAmount: Option<Vec<i64>>,
   pub VisitRewardProb: Option<Vec<i64>>,
 }
@@ -364,8 +364,8 @@ impl Default for EventContentZoneVisitRewardExcelT {
       DevName: None,
       CharacterId: 0,
       CharacterDevName: None,
-      VisitRewardParcelType: None,
-      VisitRewardParcelId: None,
+      visitRewardParcelType: None,
+      visitRewardParcelId: None,
       VisitRewardAmount: None,
       VisitRewardProb: None,
     }
@@ -385,10 +385,10 @@ impl EventContentZoneVisitRewardExcelT {
     let CharacterDevName = self.CharacterDevName.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let VisitRewardParcelType = self.VisitRewardParcelType.as_ref().map(|x|{
+    let visitRewardParcelType = self.visitRewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let VisitRewardParcelId = self.VisitRewardParcelId.as_ref().map(|x|{
+    let visitRewardParcelId = self.visitRewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let VisitRewardAmount = self.VisitRewardAmount.as_ref().map(|x|{
@@ -403,8 +403,8 @@ impl EventContentZoneVisitRewardExcelT {
       DevName,
       CharacterId,
       CharacterDevName,
-      VisitRewardParcelType,
-      VisitRewardParcelId,
+      visitRewardParcelType,
+      visitRewardParcelId,
       VisitRewardAmount,
       VisitRewardProb,
     })

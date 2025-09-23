@@ -65,8 +65,8 @@ impl<'a> AcademyLocationExcel<'a> {
       if let Some(x) = args.OpenConditionCount {
         builder.add_OpenConditionCount(x);
       }
-      if let Some(x) = args.openCondition {
-        builder.add_openCondition(x);
+      if let Some(x) = args.OpenCondition {
+        builder.add_OpenCondition(x);
       }
       if let Some(x) = args.IconImagePath {
         builder.add_IconImagePath(x);
@@ -90,7 +90,7 @@ impl<'a> AcademyLocationExcel<'a> {
     let IconImagePath = self.IconImagePath().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let openCondition = self.openCondition().map(|x| {
+    let OpenCondition = self.OpenCondition().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let OpenConditionCount = self.OpenConditionCount().map(|x| {
@@ -108,7 +108,7 @@ impl<'a> AcademyLocationExcel<'a> {
       LocalizeEtcId,
       PrefabPath,
       IconImagePath,
-      openCondition,
+      OpenCondition,
       OpenConditionCount,
       RewardParcelType,
       RewardParcelId,
@@ -145,7 +145,7 @@ impl<'a> AcademyLocationExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(AcademyLocationExcel::VT_ICONIMAGEPATH, None)}
   }
   #[inline]
-  pub fn openCondition(&self) -> Option<flatbuffers::Vector<'a, School>> {
+  pub fn OpenCondition(&self) -> Option<flatbuffers::Vector<'a, School>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -192,7 +192,7 @@ impl flatbuffers::Verifiable for AcademyLocationExcel<'_> {
      .visit_field::<u32>("LocalizeEtcId", Self::VT_LOCALIZEETCID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PrefabPath", Self::VT_PREFABPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("IconImagePath", Self::VT_ICONIMAGEPATH, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, School>>>("openCondition", Self::VT_OPENCONDITION, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, School>>>("OpenCondition", Self::VT_OPENCONDITION, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("OpenConditionCount", Self::VT_OPENCONDITIONCOUNT, false)?
      .visit_field::<ParcelType>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<i64>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
@@ -206,7 +206,7 @@ pub struct AcademyLocationExcelArgs<'a> {
     pub LocalizeEtcId: u32,
     pub PrefabPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub IconImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub openCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, School>>>,
+    pub OpenCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, School>>>,
     pub OpenConditionCount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardParcelType: ParcelType,
     pub RewardParcelId: i64,
@@ -220,7 +220,7 @@ impl<'a> Default for AcademyLocationExcelArgs<'a> {
       LocalizeEtcId: 0,
       PrefabPath: None,
       IconImagePath: None,
-      openCondition: None,
+      OpenCondition: None,
       OpenConditionCount: None,
       RewardParcelType: ParcelType::None,
       RewardParcelId: 0,
@@ -247,10 +247,10 @@ impl Serialize for AcademyLocationExcel<'_> {
       } else {
         s.skip_field("IconImagePath")?;
       }
-      if let Some(f) = self.openCondition() {
-        s.serialize_field("openCondition", &f)?;
+      if let Some(f) = self.OpenCondition() {
+        s.serialize_field("OpenCondition", &f)?;
       } else {
-        s.skip_field("openCondition")?;
+        s.skip_field("OpenCondition")?;
       }
       if let Some(f) = self.OpenConditionCount() {
         s.serialize_field("OpenConditionCount", &f)?;
@@ -286,8 +286,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AcademyLocationExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyLocationExcel::VT_ICONIMAGEPATH, IconImagePath);
   }
   #[inline]
-  pub fn add_openCondition(&mut self, openCondition: flatbuffers::WIPOffset<flatbuffers::Vector<'b , School>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyLocationExcel::VT_OPENCONDITION, openCondition);
+  pub fn add_OpenCondition(&mut self, OpenCondition: flatbuffers::WIPOffset<flatbuffers::Vector<'b , School>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyLocationExcel::VT_OPENCONDITION, OpenCondition);
   }
   #[inline]
   pub fn add_OpenConditionCount(&mut self, OpenConditionCount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -327,7 +327,7 @@ impl core::fmt::Debug for AcademyLocationExcel<'_> {
       ds.field("LocalizeEtcId", &self.LocalizeEtcId());
       ds.field("PrefabPath", &self.PrefabPath());
       ds.field("IconImagePath", &self.IconImagePath());
-      ds.field("openCondition", &self.openCondition());
+      ds.field("OpenCondition", &self.OpenCondition());
       ds.field("OpenConditionCount", &self.OpenConditionCount());
       ds.field("RewardParcelType", &self.RewardParcelType());
       ds.field("RewardParcelId", &self.RewardParcelId());
@@ -342,7 +342,7 @@ pub struct AcademyLocationExcelT {
   pub LocalizeEtcId: u32,
   pub PrefabPath: Option<String>,
   pub IconImagePath: Option<String>,
-  pub openCondition: Option<Vec<School>>,
+  pub OpenCondition: Option<Vec<School>>,
   pub OpenConditionCount: Option<Vec<i64>>,
   pub RewardParcelType: ParcelType,
   pub RewardParcelId: i64,
@@ -355,7 +355,7 @@ impl Default for AcademyLocationExcelT {
       LocalizeEtcId: 0,
       PrefabPath: None,
       IconImagePath: None,
-      openCondition: None,
+      OpenCondition: None,
       OpenConditionCount: None,
       RewardParcelType: ParcelType::None,
       RewardParcelId: 0,
@@ -376,7 +376,7 @@ impl AcademyLocationExcelT {
     let IconImagePath = self.IconImagePath.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let openCondition = self.openCondition.as_ref().map(|x|{
+    let OpenCondition = self.OpenCondition.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let OpenConditionCount = self.OpenConditionCount.as_ref().map(|x|{
@@ -390,7 +390,7 @@ impl AcademyLocationExcelT {
       LocalizeEtcId,
       PrefabPath,
       IconImagePath,
-      openCondition,
+      OpenCondition,
       OpenConditionCount,
       RewardParcelType,
       RewardParcelId,

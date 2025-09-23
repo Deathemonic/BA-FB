@@ -121,11 +121,17 @@ impl<'a> ConstCombatExcel<'a> {
   pub const VT_ECHELONEXTENSIONENGAGEWITHSUPPORTERTIMELINEPATH: flatbuffers::VOffsetT = 182;
   pub const VT_ECHELONEXTENSIONVICTORYTIMELINEPATH: flatbuffers::VOffsetT = 184;
   pub const VT_ECHELONEXTENSIONECHELONMAXCOMMONCOST: flatbuffers::VOffsetT = 186;
-  pub const VT_ECHELONEXTENSIONECHELONINITCOMMONCOST: flatbuffers::VOffsetT = 188;
-  pub const VT_ECHELONEXTENSIONCOSTREGENRATIO: flatbuffers::VOffsetT = 190;
-  pub const VT_CHECKCHEATERMAXUSECOSTMULTIFLOORRAID: flatbuffers::VOffsetT = 192;
-  pub const VT_EXCESSIVETOUCHCHECKTIME: flatbuffers::VOffsetT = 194;
-  pub const VT_EXCESSIVETOUCHCHECKCOUNT: flatbuffers::VOffsetT = 196;
+  pub const VT_ECHELONMAXOVERLOADCOST: flatbuffers::VOffsetT = 188;
+  pub const VT_ECHELONEXTENSIONMAXOVERLOADCOST: flatbuffers::VOffsetT = 190;
+  pub const VT_ECHELONEXTENSIONECHELONINITCOMMONCOST: flatbuffers::VOffsetT = 192;
+  pub const VT_ECHELONEXTENSIONCOSTREGENRATIO: flatbuffers::VOffsetT = 194;
+  pub const VT_ECHELONOVERLOADCOSTREGENRATIO: flatbuffers::VOffsetT = 196;
+  pub const VT_ECHELONEXTENSIONOVERLOADCOSTREGENRATIO: flatbuffers::VOffsetT = 198;
+  pub const VT_CHECKCHEATERMAXUSECOSTMULTIFLOORRAID: flatbuffers::VOffsetT = 200;
+  pub const VT_EXCESSIVETOUCHCHECKTIME: flatbuffers::VOffsetT = 202;
+  pub const VT_EXCESSIVETOUCHCHECKCOUNT: flatbuffers::VOffsetT = 204;
+  pub const VT_CAMPAIGNALERTPOPUPLEVELGAP: flatbuffers::VOffsetT = 206;
+  pub const VT_MOVECORRECTIONSKIPRATIO: flatbuffers::VOffsetT = 208;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -138,9 +144,21 @@ impl<'a> ConstCombatExcel<'a> {
   ) -> flatbuffers::WIPOffset<ConstCombatExcel<'bldr>> {
     let mut builder = ConstCombatExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"ConstCombat");
+      let x = args.EchelonExtensionOverloadCostRegenRatio;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_EchelonExtensionOverloadCostRegenRatio(x);
+      let x = args.EchelonOverloadCostRegenRatio;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_EchelonOverloadCostRegenRatio(x);
       let x = args.EchelonExtensionCostRegenRatio;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EchelonExtensionCostRegenRatio(x);
+      let x = args.EchelonExtensionMaxOverloadCost;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_EchelonExtensionMaxOverloadCost(x);
+      let x = args.EchelonMaxOverloadCost;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_EchelonMaxOverloadCost(x);
       let x = args.VictoryInteractionRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_VictoryInteractionRate(x);
@@ -312,6 +330,12 @@ impl<'a> ConstCombatExcel<'a> {
       let x = args.MaxRaidTicketCount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_MaxRaidTicketCount(x);
+      let x = args.MoveCorrectionSkipRatio;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
+      builder.add_MoveCorrectionSkipRatio(x);
+      let x = args.CampaignAlertPopupLevelGap;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
+      builder.add_CampaignAlertPopupLevelGap(x);
       let x = args.ExcessiveTouchCheckCount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_ExcessiveTouchCheckCount(x);
@@ -556,8 +580,12 @@ impl<'a> ConstCombatExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let EchelonExtensionEchelonMaxCommonCost = self.EchelonExtensionEchelonMaxCommonCost();
+      let EchelonMaxOverloadCost = self.EchelonMaxOverloadCost();
+      let EchelonExtensionMaxOverloadCost = self.EchelonExtensionMaxOverloadCost();
       let EchelonExtensionEchelonInitCommonCost = self.EchelonExtensionEchelonInitCommonCost();
       let EchelonExtensionCostRegenRatio = self.EchelonExtensionCostRegenRatio();
+      let EchelonOverloadCostRegenRatio = self.EchelonOverloadCostRegenRatio();
+      let EchelonExtensionOverloadCostRegenRatio = self.EchelonExtensionOverloadCostRegenRatio();
       let CheckCheaterMaxUseCostMultiFloorRaid = self.CheckCheaterMaxUseCostMultiFloorRaid();
       let ExcessiveTouchCheckTime = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_float(self.ExcessiveTouchCheckTime(), &key)
@@ -565,6 +593,8 @@ impl<'a> ConstCombatExcel<'a> {
         self.ExcessiveTouchCheckTime()
       };
       let ExcessiveTouchCheckCount = self.ExcessiveTouchCheckCount();
+      let CampaignAlertPopupLevelGap = self.CampaignAlertPopupLevelGap();
+      let MoveCorrectionSkipRatio = self.MoveCorrectionSkipRatio();
     ConstCombatExcelT {
       SkillHandCount,
       DyingTime,
@@ -658,11 +688,17 @@ impl<'a> ConstCombatExcel<'a> {
       EchelonExtensionEngageWithSupporterTimelinePath,
       EchelonExtensionVictoryTimelinePath,
       EchelonExtensionEchelonMaxCommonCost,
+      EchelonMaxOverloadCost,
+      EchelonExtensionMaxOverloadCost,
       EchelonExtensionEchelonInitCommonCost,
       EchelonExtensionCostRegenRatio,
+      EchelonOverloadCostRegenRatio,
+      EchelonExtensionOverloadCostRegenRatio,
       CheckCheaterMaxUseCostMultiFloorRaid,
       ExcessiveTouchCheckTime,
       ExcessiveTouchCheckCount,
+      CampaignAlertPopupLevelGap,
+      MoveCorrectionSkipRatio,
     }
   }
 
@@ -1311,6 +1347,20 @@ impl<'a> ConstCombatExcel<'a> {
     unsafe { self._tab.get::<i32>(ConstCombatExcel::VT_ECHELONEXTENSIONECHELONMAXCOMMONCOST, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn EchelonMaxOverloadCost(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ConstCombatExcel::VT_ECHELONMAXOVERLOADCOST, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn EchelonExtensionMaxOverloadCost(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ConstCombatExcel::VT_ECHELONEXTENSIONMAXOVERLOADCOST, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn EchelonExtensionEchelonInitCommonCost(&self) -> i32 {
     // Safety:
     // Created from valid Table for this object
@@ -1323,6 +1373,20 @@ impl<'a> ConstCombatExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(ConstCombatExcel::VT_ECHELONEXTENSIONCOSTREGENRATIO, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn EchelonOverloadCostRegenRatio(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ConstCombatExcel::VT_ECHELONOVERLOADCOSTREGENRATIO, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn EchelonExtensionOverloadCostRegenRatio(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ConstCombatExcel::VT_ECHELONEXTENSIONOVERLOADCOSTREGENRATIO, Some(0)).unwrap()}
   }
   #[inline]
   pub fn CheckCheaterMaxUseCostMultiFloorRaid(&self) -> i32 {
@@ -1344,6 +1408,20 @@ impl<'a> ConstCombatExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i32>(ConstCombatExcel::VT_EXCESSIVETOUCHCHECKCOUNT, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn CampaignAlertPopupLevelGap(&self) -> i32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i32>(ConstCombatExcel::VT_CAMPAIGNALERTPOPUPLEVELGAP, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn MoveCorrectionSkipRatio(&self) -> i32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i32>(ConstCombatExcel::VT_MOVECORRECTIONSKIPRATIO, Some(0)).unwrap()}
   }
 }
 
@@ -1446,11 +1524,17 @@ impl flatbuffers::Verifiable for ConstCombatExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EchelonExtensionEngageWithSupporterTimelinePath", Self::VT_ECHELONEXTENSIONENGAGEWITHSUPPORTERTIMELINEPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EchelonExtensionVictoryTimelinePath", Self::VT_ECHELONEXTENSIONVICTORYTIMELINEPATH, false)?
      .visit_field::<i32>("EchelonExtensionEchelonMaxCommonCost", Self::VT_ECHELONEXTENSIONECHELONMAXCOMMONCOST, false)?
+     .visit_field::<i64>("EchelonMaxOverloadCost", Self::VT_ECHELONMAXOVERLOADCOST, false)?
+     .visit_field::<i64>("EchelonExtensionMaxOverloadCost", Self::VT_ECHELONEXTENSIONMAXOVERLOADCOST, false)?
      .visit_field::<i32>("EchelonExtensionEchelonInitCommonCost", Self::VT_ECHELONEXTENSIONECHELONINITCOMMONCOST, false)?
      .visit_field::<i64>("EchelonExtensionCostRegenRatio", Self::VT_ECHELONEXTENSIONCOSTREGENRATIO, false)?
+     .visit_field::<i64>("EchelonOverloadCostRegenRatio", Self::VT_ECHELONOVERLOADCOSTREGENRATIO, false)?
+     .visit_field::<i64>("EchelonExtensionOverloadCostRegenRatio", Self::VT_ECHELONEXTENSIONOVERLOADCOSTREGENRATIO, false)?
      .visit_field::<i32>("CheckCheaterMaxUseCostMultiFloorRaid", Self::VT_CHECKCHEATERMAXUSECOSTMULTIFLOORRAID, false)?
      .visit_field::<f32>("ExcessiveTouchCheckTime", Self::VT_EXCESSIVETOUCHCHECKTIME, false)?
      .visit_field::<i32>("ExcessiveTouchCheckCount", Self::VT_EXCESSIVETOUCHCHECKCOUNT, false)?
+     .visit_field::<i32>("CampaignAlertPopupLevelGap", Self::VT_CAMPAIGNALERTPOPUPLEVELGAP, false)?
+     .visit_field::<i32>("MoveCorrectionSkipRatio", Self::VT_MOVECORRECTIONSKIPRATIO, false)?
      .finish();
     Ok(())
   }
@@ -1548,11 +1632,17 @@ pub struct ConstCombatExcelArgs<'a> {
     pub EchelonExtensionEngageWithSupporterTimelinePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EchelonExtensionVictoryTimelinePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EchelonExtensionEchelonMaxCommonCost: i32,
+    pub EchelonMaxOverloadCost: i64,
+    pub EchelonExtensionMaxOverloadCost: i64,
     pub EchelonExtensionEchelonInitCommonCost: i32,
     pub EchelonExtensionCostRegenRatio: i64,
+    pub EchelonOverloadCostRegenRatio: i64,
+    pub EchelonExtensionOverloadCostRegenRatio: i64,
     pub CheckCheaterMaxUseCostMultiFloorRaid: i32,
     pub ExcessiveTouchCheckTime: f32,
     pub ExcessiveTouchCheckCount: i32,
+    pub CampaignAlertPopupLevelGap: i32,
+    pub MoveCorrectionSkipRatio: i32,
 }
 impl<'a> Default for ConstCombatExcelArgs<'a> {
   #[inline]
@@ -1650,11 +1740,17 @@ impl<'a> Default for ConstCombatExcelArgs<'a> {
       EchelonExtensionEngageWithSupporterTimelinePath: None,
       EchelonExtensionVictoryTimelinePath: None,
       EchelonExtensionEchelonMaxCommonCost: 0,
+      EchelonMaxOverloadCost: 0,
+      EchelonExtensionMaxOverloadCost: 0,
       EchelonExtensionEchelonInitCommonCost: 0,
       EchelonExtensionCostRegenRatio: 0,
+      EchelonOverloadCostRegenRatio: 0,
+      EchelonExtensionOverloadCostRegenRatio: 0,
       CheckCheaterMaxUseCostMultiFloorRaid: 0,
       ExcessiveTouchCheckTime: 0.0,
       ExcessiveTouchCheckCount: 0,
+      CampaignAlertPopupLevelGap: 0,
+      MoveCorrectionSkipRatio: 0,
     }
   }
 }
@@ -1664,7 +1760,7 @@ impl Serialize for ConstCombatExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ConstCombatExcel", 97)?;
+    let mut s = serializer.serialize_struct("ConstCombatExcel", 103)?;
       s.serialize_field("SkillHandCount", &self.SkillHandCount())?;
       s.serialize_field("DyingTime", &self.DyingTime())?;
       s.serialize_field("BuffIconBlinkTime", &self.BuffIconBlinkTime())?;
@@ -1793,11 +1889,17 @@ impl Serialize for ConstCombatExcel<'_> {
         s.skip_field("EchelonExtensionVictoryTimelinePath")?;
       }
       s.serialize_field("EchelonExtensionEchelonMaxCommonCost", &self.EchelonExtensionEchelonMaxCommonCost())?;
+      s.serialize_field("EchelonMaxOverloadCost", &self.EchelonMaxOverloadCost())?;
+      s.serialize_field("EchelonExtensionMaxOverloadCost", &self.EchelonExtensionMaxOverloadCost())?;
       s.serialize_field("EchelonExtensionEchelonInitCommonCost", &self.EchelonExtensionEchelonInitCommonCost())?;
       s.serialize_field("EchelonExtensionCostRegenRatio", &self.EchelonExtensionCostRegenRatio())?;
+      s.serialize_field("EchelonOverloadCostRegenRatio", &self.EchelonOverloadCostRegenRatio())?;
+      s.serialize_field("EchelonExtensionOverloadCostRegenRatio", &self.EchelonExtensionOverloadCostRegenRatio())?;
       s.serialize_field("CheckCheaterMaxUseCostMultiFloorRaid", &self.CheckCheaterMaxUseCostMultiFloorRaid())?;
       s.serialize_field("ExcessiveTouchCheckTime", &self.ExcessiveTouchCheckTime())?;
       s.serialize_field("ExcessiveTouchCheckCount", &self.ExcessiveTouchCheckCount())?;
+      s.serialize_field("CampaignAlertPopupLevelGap", &self.CampaignAlertPopupLevelGap())?;
+      s.serialize_field("MoveCorrectionSkipRatio", &self.MoveCorrectionSkipRatio())?;
     s.end()
   }
 }
@@ -2176,12 +2278,28 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConstCombatExcelBuilder<'a, 'b,
     self.fbb_.push_slot::<i32>(ConstCombatExcel::VT_ECHELONEXTENSIONECHELONMAXCOMMONCOST, EchelonExtensionEchelonMaxCommonCost, 0);
   }
   #[inline]
+  pub fn add_EchelonMaxOverloadCost(&mut self, EchelonMaxOverloadCost: i64) {
+    self.fbb_.push_slot::<i64>(ConstCombatExcel::VT_ECHELONMAXOVERLOADCOST, EchelonMaxOverloadCost, 0);
+  }
+  #[inline]
+  pub fn add_EchelonExtensionMaxOverloadCost(&mut self, EchelonExtensionMaxOverloadCost: i64) {
+    self.fbb_.push_slot::<i64>(ConstCombatExcel::VT_ECHELONEXTENSIONMAXOVERLOADCOST, EchelonExtensionMaxOverloadCost, 0);
+  }
+  #[inline]
   pub fn add_EchelonExtensionEchelonInitCommonCost(&mut self, EchelonExtensionEchelonInitCommonCost: i32) {
     self.fbb_.push_slot::<i32>(ConstCombatExcel::VT_ECHELONEXTENSIONECHELONINITCOMMONCOST, EchelonExtensionEchelonInitCommonCost, 0);
   }
   #[inline]
   pub fn add_EchelonExtensionCostRegenRatio(&mut self, EchelonExtensionCostRegenRatio: i64) {
     self.fbb_.push_slot::<i64>(ConstCombatExcel::VT_ECHELONEXTENSIONCOSTREGENRATIO, EchelonExtensionCostRegenRatio, 0);
+  }
+  #[inline]
+  pub fn add_EchelonOverloadCostRegenRatio(&mut self, EchelonOverloadCostRegenRatio: i64) {
+    self.fbb_.push_slot::<i64>(ConstCombatExcel::VT_ECHELONOVERLOADCOSTREGENRATIO, EchelonOverloadCostRegenRatio, 0);
+  }
+  #[inline]
+  pub fn add_EchelonExtensionOverloadCostRegenRatio(&mut self, EchelonExtensionOverloadCostRegenRatio: i64) {
+    self.fbb_.push_slot::<i64>(ConstCombatExcel::VT_ECHELONEXTENSIONOVERLOADCOSTREGENRATIO, EchelonExtensionOverloadCostRegenRatio, 0);
   }
   #[inline]
   pub fn add_CheckCheaterMaxUseCostMultiFloorRaid(&mut self, CheckCheaterMaxUseCostMultiFloorRaid: i32) {
@@ -2194,6 +2312,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConstCombatExcelBuilder<'a, 'b,
   #[inline]
   pub fn add_ExcessiveTouchCheckCount(&mut self, ExcessiveTouchCheckCount: i32) {
     self.fbb_.push_slot::<i32>(ConstCombatExcel::VT_EXCESSIVETOUCHCHECKCOUNT, ExcessiveTouchCheckCount, 0);
+  }
+  #[inline]
+  pub fn add_CampaignAlertPopupLevelGap(&mut self, CampaignAlertPopupLevelGap: i32) {
+    self.fbb_.push_slot::<i32>(ConstCombatExcel::VT_CAMPAIGNALERTPOPUPLEVELGAP, CampaignAlertPopupLevelGap, 0);
+  }
+  #[inline]
+  pub fn add_MoveCorrectionSkipRatio(&mut self, MoveCorrectionSkipRatio: i32) {
+    self.fbb_.push_slot::<i32>(ConstCombatExcel::VT_MOVECORRECTIONSKIPRATIO, MoveCorrectionSkipRatio, 0);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ConstCombatExcelBuilder<'a, 'b, A> {
@@ -2305,11 +2431,17 @@ impl core::fmt::Debug for ConstCombatExcel<'_> {
       ds.field("EchelonExtensionEngageWithSupporterTimelinePath", &self.EchelonExtensionEngageWithSupporterTimelinePath());
       ds.field("EchelonExtensionVictoryTimelinePath", &self.EchelonExtensionVictoryTimelinePath());
       ds.field("EchelonExtensionEchelonMaxCommonCost", &self.EchelonExtensionEchelonMaxCommonCost());
+      ds.field("EchelonMaxOverloadCost", &self.EchelonMaxOverloadCost());
+      ds.field("EchelonExtensionMaxOverloadCost", &self.EchelonExtensionMaxOverloadCost());
       ds.field("EchelonExtensionEchelonInitCommonCost", &self.EchelonExtensionEchelonInitCommonCost());
       ds.field("EchelonExtensionCostRegenRatio", &self.EchelonExtensionCostRegenRatio());
+      ds.field("EchelonOverloadCostRegenRatio", &self.EchelonOverloadCostRegenRatio());
+      ds.field("EchelonExtensionOverloadCostRegenRatio", &self.EchelonExtensionOverloadCostRegenRatio());
       ds.field("CheckCheaterMaxUseCostMultiFloorRaid", &self.CheckCheaterMaxUseCostMultiFloorRaid());
       ds.field("ExcessiveTouchCheckTime", &self.ExcessiveTouchCheckTime());
       ds.field("ExcessiveTouchCheckCount", &self.ExcessiveTouchCheckCount());
+      ds.field("CampaignAlertPopupLevelGap", &self.CampaignAlertPopupLevelGap());
+      ds.field("MoveCorrectionSkipRatio", &self.MoveCorrectionSkipRatio());
       ds.finish()
   }
 }
@@ -2408,11 +2540,17 @@ pub struct ConstCombatExcelT {
   pub EchelonExtensionEngageWithSupporterTimelinePath: Option<String>,
   pub EchelonExtensionVictoryTimelinePath: Option<String>,
   pub EchelonExtensionEchelonMaxCommonCost: i32,
+  pub EchelonMaxOverloadCost: i64,
+  pub EchelonExtensionMaxOverloadCost: i64,
   pub EchelonExtensionEchelonInitCommonCost: i32,
   pub EchelonExtensionCostRegenRatio: i64,
+  pub EchelonOverloadCostRegenRatio: i64,
+  pub EchelonExtensionOverloadCostRegenRatio: i64,
   pub CheckCheaterMaxUseCostMultiFloorRaid: i32,
   pub ExcessiveTouchCheckTime: f32,
   pub ExcessiveTouchCheckCount: i32,
+  pub CampaignAlertPopupLevelGap: i32,
+  pub MoveCorrectionSkipRatio: i32,
 }
 impl Default for ConstCombatExcelT {
   fn default() -> Self {
@@ -2509,11 +2647,17 @@ impl Default for ConstCombatExcelT {
       EchelonExtensionEngageWithSupporterTimelinePath: None,
       EchelonExtensionVictoryTimelinePath: None,
       EchelonExtensionEchelonMaxCommonCost: 0,
+      EchelonMaxOverloadCost: 0,
+      EchelonExtensionMaxOverloadCost: 0,
       EchelonExtensionEchelonInitCommonCost: 0,
       EchelonExtensionCostRegenRatio: 0,
+      EchelonOverloadCostRegenRatio: 0,
+      EchelonExtensionOverloadCostRegenRatio: 0,
       CheckCheaterMaxUseCostMultiFloorRaid: 0,
       ExcessiveTouchCheckTime: 0.0,
       ExcessiveTouchCheckCount: 0,
+      CampaignAlertPopupLevelGap: 0,
+      MoveCorrectionSkipRatio: 0,
     }
   }
 }
@@ -2632,11 +2776,17 @@ impl ConstCombatExcelT {
       _fbb.create_string(x)
     });
     let EchelonExtensionEchelonMaxCommonCost = self.EchelonExtensionEchelonMaxCommonCost;
+    let EchelonMaxOverloadCost = self.EchelonMaxOverloadCost;
+    let EchelonExtensionMaxOverloadCost = self.EchelonExtensionMaxOverloadCost;
     let EchelonExtensionEchelonInitCommonCost = self.EchelonExtensionEchelonInitCommonCost;
     let EchelonExtensionCostRegenRatio = self.EchelonExtensionCostRegenRatio;
+    let EchelonOverloadCostRegenRatio = self.EchelonOverloadCostRegenRatio;
+    let EchelonExtensionOverloadCostRegenRatio = self.EchelonExtensionOverloadCostRegenRatio;
     let CheckCheaterMaxUseCostMultiFloorRaid = self.CheckCheaterMaxUseCostMultiFloorRaid;
     let ExcessiveTouchCheckTime = self.ExcessiveTouchCheckTime;
     let ExcessiveTouchCheckCount = self.ExcessiveTouchCheckCount;
+    let CampaignAlertPopupLevelGap = self.CampaignAlertPopupLevelGap;
+    let MoveCorrectionSkipRatio = self.MoveCorrectionSkipRatio;
     ConstCombatExcel::create(_fbb, &ConstCombatExcelArgs{
       SkillHandCount,
       DyingTime,
@@ -2730,11 +2880,17 @@ impl ConstCombatExcelT {
       EchelonExtensionEngageWithSupporterTimelinePath,
       EchelonExtensionVictoryTimelinePath,
       EchelonExtensionEchelonMaxCommonCost,
+      EchelonMaxOverloadCost,
+      EchelonExtensionMaxOverloadCost,
       EchelonExtensionEchelonInitCommonCost,
       EchelonExtensionCostRegenRatio,
+      EchelonOverloadCostRegenRatio,
+      EchelonExtensionOverloadCostRegenRatio,
       CheckCheaterMaxUseCostMultiFloorRaid,
       ExcessiveTouchCheckTime,
       ExcessiveTouchCheckCount,
+      CampaignAlertPopupLevelGap,
+      MoveCorrectionSkipRatio,
     })
   }
 }

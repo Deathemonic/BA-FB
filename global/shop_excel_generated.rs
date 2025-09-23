@@ -33,17 +33,18 @@ impl<'a> ShopExcel<'a> {
   pub const VT_LOCALIZEETCID: flatbuffers::VOffsetT = 6;
   pub const VT_CATEGORYTYPE: flatbuffers::VOffsetT = 8;
   pub const VT_ISLEGACY: flatbuffers::VOffsetT = 10;
-  pub const VT_GOODSID: flatbuffers::VOffsetT = 12;
-  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 14;
-  pub const VT_SALEPERIODFROM: flatbuffers::VOffsetT = 16;
-  pub const VT_SALEPERIODTO: flatbuffers::VOffsetT = 18;
-  pub const VT_PURCHASECOOLTIMEMIN: flatbuffers::VOffsetT = 20;
-  pub const VT_PURCHASECOUNTLIMIT: flatbuffers::VOffsetT = 22;
-  pub const VT_PURCHASECOUNTRESETTYPE: flatbuffers::VOffsetT = 24;
-  pub const VT_BUYREPORTEVENTNAME: flatbuffers::VOffsetT = 26;
-  pub const VT_RESTRICTBUYWHENINVENTORYFULL: flatbuffers::VOffsetT = 28;
-  pub const VT_DISPLAYTAG: flatbuffers::VOffsetT = 30;
-  pub const VT_SHOPUPDATEGROUPID: flatbuffers::VOffsetT = 32;
+  pub const VT_USEBIGPOPUP: flatbuffers::VOffsetT = 12;
+  pub const VT_GOODSID: flatbuffers::VOffsetT = 14;
+  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 16;
+  pub const VT_SALEPERIODFROM: flatbuffers::VOffsetT = 18;
+  pub const VT_SALEPERIODTO: flatbuffers::VOffsetT = 20;
+  pub const VT_PURCHASECOOLTIMEMIN: flatbuffers::VOffsetT = 22;
+  pub const VT_PURCHASECOUNTLIMIT: flatbuffers::VOffsetT = 24;
+  pub const VT_PURCHASECOUNTRESETTYPE: flatbuffers::VOffsetT = 26;
+  pub const VT_BUYREPORTEVENTNAME: flatbuffers::VOffsetT = 28;
+  pub const VT_RESTRICTBUYWHENINVENTORYFULL: flatbuffers::VOffsetT = 30;
+  pub const VT_DISPLAYTAG: flatbuffers::VOffsetT = 32;
+  pub const VT_SHOPUPDATEGROUPID: flatbuffers::VOffsetT = 34;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -96,6 +97,7 @@ impl<'a> ShopExcel<'a> {
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_LocalizeEtcId(x);
       builder.add_RestrictBuyWhenInventoryFull(args.RestrictBuyWhenInventoryFull);
+      builder.add_UseBigPopup(args.UseBigPopup);
       builder.add_IsLegacy(args.IsLegacy);
     builder.finish()
   }
@@ -110,6 +112,7 @@ impl<'a> ShopExcel<'a> {
         self.CategoryType()
       };
       let IsLegacy = self.IsLegacy();
+      let UseBigPopup = self.UseBigPopup();
     let GoodsId = self.GoodsId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
@@ -142,6 +145,7 @@ impl<'a> ShopExcel<'a> {
       LocalizeEtcId,
       CategoryType,
       IsLegacy,
+      UseBigPopup,
       GoodsId,
       DisplayOrder,
       SalePeriodFrom,
@@ -183,6 +187,13 @@ impl<'a> ShopExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<bool>(ShopExcel::VT_ISLEGACY, Some(false)).unwrap()}
+  }
+  #[inline]
+  pub fn UseBigPopup(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(ShopExcel::VT_USEBIGPOPUP, Some(false)).unwrap()}
   }
   #[inline]
   pub fn GoodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
@@ -274,6 +285,7 @@ impl flatbuffers::Verifiable for ShopExcel<'_> {
      .visit_field::<u32>("LocalizeEtcId", Self::VT_LOCALIZEETCID, false)?
      .visit_field::<ShopCategoryType>("CategoryType", Self::VT_CATEGORYTYPE, false)?
      .visit_field::<bool>("IsLegacy", Self::VT_ISLEGACY, false)?
+     .visit_field::<bool>("UseBigPopup", Self::VT_USEBIGPOPUP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("GoodsId", Self::VT_GOODSID, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodFrom", Self::VT_SALEPERIODFROM, false)?
@@ -294,6 +306,7 @@ pub struct ShopExcelArgs<'a> {
     pub LocalizeEtcId: u32,
     pub CategoryType: ShopCategoryType,
     pub IsLegacy: bool,
+    pub UseBigPopup: bool,
     pub GoodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub DisplayOrder: i64,
     pub SalePeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -314,6 +327,7 @@ impl<'a> Default for ShopExcelArgs<'a> {
       LocalizeEtcId: 0,
       CategoryType: ShopCategoryType::General,
       IsLegacy: false,
+      UseBigPopup: false,
       GoodsId: None,
       DisplayOrder: 0,
       SalePeriodFrom: None,
@@ -334,11 +348,12 @@ impl Serialize for ShopExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShopExcel", 15)?;
+    let mut s = serializer.serialize_struct("ShopExcel", 16)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
       s.serialize_field("CategoryType", &self.CategoryType())?;
       s.serialize_field("IsLegacy", &self.IsLegacy())?;
+      s.serialize_field("UseBigPopup", &self.UseBigPopup())?;
       if let Some(f) = self.GoodsId() {
         s.serialize_field("GoodsId", &f)?;
       } else {
@@ -390,6 +405,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopExcelBuilder<'a, 'b, A> {
   #[inline]
   pub fn add_IsLegacy(&mut self, IsLegacy: bool) {
     self.fbb_.push_slot::<bool>(ShopExcel::VT_ISLEGACY, IsLegacy, false);
+  }
+  #[inline]
+  pub fn add_UseBigPopup(&mut self, UseBigPopup: bool) {
+    self.fbb_.push_slot::<bool>(ShopExcel::VT_USEBIGPOPUP, UseBigPopup, false);
   }
   #[inline]
   pub fn add_GoodsId(&mut self, GoodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -457,6 +476,7 @@ impl core::fmt::Debug for ShopExcel<'_> {
       ds.field("LocalizeEtcId", &self.LocalizeEtcId());
       ds.field("CategoryType", &self.CategoryType());
       ds.field("IsLegacy", &self.IsLegacy());
+      ds.field("UseBigPopup", &self.UseBigPopup());
       ds.field("GoodsId", &self.GoodsId());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.field("SalePeriodFrom", &self.SalePeriodFrom());
@@ -478,6 +498,7 @@ pub struct ShopExcelT {
   pub LocalizeEtcId: u32,
   pub CategoryType: ShopCategoryType,
   pub IsLegacy: bool,
+  pub UseBigPopup: bool,
   pub GoodsId: Option<Vec<i64>>,
   pub DisplayOrder: i64,
   pub SalePeriodFrom: Option<String>,
@@ -497,6 +518,7 @@ impl Default for ShopExcelT {
       LocalizeEtcId: 0,
       CategoryType: ShopCategoryType::General,
       IsLegacy: false,
+      UseBigPopup: false,
       GoodsId: None,
       DisplayOrder: 0,
       SalePeriodFrom: None,
@@ -520,6 +542,7 @@ impl ShopExcelT {
     let LocalizeEtcId = self.LocalizeEtcId;
     let CategoryType = self.CategoryType;
     let IsLegacy = self.IsLegacy;
+    let UseBigPopup = self.UseBigPopup;
     let GoodsId = self.GoodsId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
@@ -544,6 +567,7 @@ impl ShopExcelT {
       LocalizeEtcId,
       CategoryType,
       IsLegacy,
+      UseBigPopup,
       GoodsId,
       DisplayOrder,
       SalePeriodFrom,

@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_GACHA_DISPLAY_TAG: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_GACHA_DISPLAY_TAG: i32 = 7;
+pub const ENUM_MAX_GACHA_DISPLAY_TAG: i32 = 8;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_GACHA_DISPLAY_TAG: [GachaDisplayTag; 8] = [
+pub const ENUM_VALUES_GACHA_DISPLAY_TAG: [GachaDisplayTag; 9] = [
   GachaDisplayTag::None,
   GachaDisplayTag::Limited,
   GachaDisplayTag::TwoStar,
@@ -28,6 +28,7 @@ pub const ENUM_VALUES_GACHA_DISPLAY_TAG: [GachaDisplayTag; 8] = [
   GachaDisplayTag::New,
   GachaDisplayTag::Fes,
   GachaDisplayTag::SelectRecruit,
+  GachaDisplayTag::LimitedThreeStar,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -43,9 +44,10 @@ impl GachaDisplayTag {
   pub const New: Self = Self(5);
   pub const Fes: Self = Self(6);
   pub const SelectRecruit: Self = Self(7);
+  pub const LimitedThreeStar: Self = Self(8);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 7;
+  pub const ENUM_MAX: i32 = 8;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Limited,
@@ -55,6 +57,7 @@ impl GachaDisplayTag {
     Self::New,
     Self::Fes,
     Self::SelectRecruit,
+    Self::LimitedThreeStar,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -67,6 +70,7 @@ impl GachaDisplayTag {
       Self::New => Some("New"),
       Self::Fes => Some("Fes"),
       Self::SelectRecruit => Some("SelectRecruit"),
+      Self::LimitedThreeStar => Some("LimitedThreeStar"),
       _ => None,
     }
   }

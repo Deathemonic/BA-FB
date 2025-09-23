@@ -77,20 +77,17 @@ impl<'a> GoodsExcel<'a> {
       let x = args.ProductIdAOS;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ProductIdAOS(x);
-      let x = args.ConsumeGachaTicketTypeAmount;
-      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
-      builder.add_ConsumeGachaTicketTypeAmount(x);
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.parcelAmount {
-        builder.add_parcelAmount(x);
+      if let Some(x) = args.ParcelAmount {
+        builder.add_ParcelAmount(x);
       }
-      if let Some(x) = args.parcelId {
-        builder.add_parcelId(x);
+      if let Some(x) = args.ParcelId {
+        builder.add_ParcelId(x);
       }
-      if let Some(x) = args.parcelType {
-        builder.add_parcelType(x);
+      if let Some(x) = args.ParcelType {
+        builder.add_ParcelType(x);
       }
       let x = args.State;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -98,12 +95,15 @@ impl<'a> GoodsExcel<'a> {
       if let Some(x) = args.ConsumeExtraAmount {
         builder.add_ConsumeExtraAmount(x);
       }
-      if let Some(x) = args.consumeExtraStep {
-        builder.add_consumeExtraStep(x);
+      if let Some(x) = args.ConsumeExtraStep {
+        builder.add_ConsumeExtraStep(x);
       }
-      let x = args.ConsumeGachaTicketType;
-      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
-      builder.add_ConsumeGachaTicketType(x);
+      if let Some(x) = args.ConsumeGachaTicketTypeAmount {
+        builder.add_ConsumeGachaTicketTypeAmount(x);
+      }
+      if let Some(x) = args.ConsumeGachaTicketType {
+        builder.add_ConsumeGachaTicketType(x);
+      }
       if let Some(x) = args.ConsumeCondition {
         builder.add_ConsumeCondition(x);
       }
@@ -113,8 +113,8 @@ impl<'a> GoodsExcel<'a> {
       if let Some(x) = args.ConsumeParcelId {
         builder.add_ConsumeParcelId(x);
       }
-      if let Some(x) = args.consumeParcelType {
-        builder.add_consumeParcelType(x);
+      if let Some(x) = args.ConsumeParcelType {
+        builder.add_ConsumeParcelType(x);
       }
       if let Some(x) = args.IconPath {
         builder.add_IconPath(x);
@@ -140,7 +140,7 @@ impl<'a> GoodsExcel<'a> {
     let IconPath = self.IconPath().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let consumeParcelType = self.consumeParcelType().map(|x| {
+    let ConsumeParcelType = self.ConsumeParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let ConsumeParcelId = self.ConsumeParcelId().map(|x| {
@@ -152,31 +152,31 @@ impl<'a> GoodsExcel<'a> {
     let ConsumeCondition = self.ConsumeCondition().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-      let ConsumeGachaTicketType = if table_encryption_service::use_encryption() {
-        table_encryption_service::convert_enum(self.ConsumeGachaTicketType(), &key)
-      } else {
-        self.ConsumeGachaTicketType()
-      };
-      let ConsumeGachaTicketTypeAmount = self.ConsumeGachaTicketTypeAmount();
+    let ConsumeGachaTicketType = self.ConsumeGachaTicketType().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
+    });
+    let ConsumeGachaTicketTypeAmount = self.ConsumeGachaTicketTypeAmount().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
+    });
       let ProductIdAOS = self.ProductIdAOS();
       let ProductIdiOS = self.ProductIdiOS();
       let ProductIdONE = self.ProductIdONE();
       let ProductIdSGS = self.ProductIdSGS();
       let ProductIdSTEAM = self.ProductIdSTEAM();
-    let consumeExtraStep = self.consumeExtraStep().map(|x| {
+    let ConsumeExtraStep = self.ConsumeExtraStep().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let ConsumeExtraAmount = self.ConsumeExtraAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let State = self.State();
-    let parcelType = self.parcelType().map(|x| {
+    let ParcelType = self.ParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let parcelId = self.parcelId().map(|x| {
+    let ParcelId = self.ParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let parcelAmount = self.parcelAmount().map(|x| {
+    let ParcelAmount = self.ParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     GoodsExcelT {
@@ -184,7 +184,7 @@ impl<'a> GoodsExcel<'a> {
       Type,
       Rarity,
       IconPath,
-      consumeParcelType,
+      ConsumeParcelType,
       ConsumeParcelId,
       ConsumeParcelAmount,
       ConsumeCondition,
@@ -195,12 +195,12 @@ impl<'a> GoodsExcel<'a> {
       ProductIdONE,
       ProductIdSGS,
       ProductIdSTEAM,
-      consumeExtraStep,
+      ConsumeExtraStep,
       ConsumeExtraAmount,
       State,
-      parcelType,
-      parcelId,
-      parcelAmount,
+      ParcelType,
+      ParcelId,
+      ParcelAmount,
     }
   }
 
@@ -233,7 +233,7 @@ impl<'a> GoodsExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(GoodsExcel::VT_ICONPATH, None)}
   }
   #[inline]
-  pub fn consumeParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn ConsumeParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -261,18 +261,18 @@ impl<'a> GoodsExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ConsumeCondition>>>(GoodsExcel::VT_CONSUMECONDITION, None)}
   }
   #[inline]
-  pub fn ConsumeGachaTicketType(&self) -> GachaTicketType {
+  pub fn ConsumeGachaTicketType(&self) -> Option<flatbuffers::Vector<'a, GachaTicketType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<GachaTicketType>(GoodsExcel::VT_CONSUMEGACHATICKETTYPE, Some(GachaTicketType::None)).unwrap()}
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, GachaTicketType>>>(GoodsExcel::VT_CONSUMEGACHATICKETTYPE, None)}
   }
   #[inline]
-  pub fn ConsumeGachaTicketTypeAmount(&self) -> i64 {
+  pub fn ConsumeGachaTicketTypeAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(GoodsExcel::VT_CONSUMEGACHATICKETTYPEAMOUNT, Some(0)).unwrap()}
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(GoodsExcel::VT_CONSUMEGACHATICKETTYPEAMOUNT, None)}
   }
   #[inline]
   pub fn ProductIdAOS(&self) -> i64 {
@@ -310,7 +310,7 @@ impl<'a> GoodsExcel<'a> {
     unsafe { self._tab.get::<i64>(GoodsExcel::VT_PRODUCTIDSTEAM, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn consumeExtraStep(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ConsumeExtraStep(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -331,21 +331,21 @@ impl<'a> GoodsExcel<'a> {
     unsafe { self._tab.get::<i32>(GoodsExcel::VT_STATE, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn parcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn ParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(GoodsExcel::VT_PARCELTYPE, None)}
   }
   #[inline]
-  pub fn parcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(GoodsExcel::VT_PARCELID, None)}
   }
   #[inline]
-  pub fn parcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -364,23 +364,23 @@ impl flatbuffers::Verifiable for GoodsExcel<'_> {
      .visit_field::<i32>("Type", Self::VT_TYPE, false)?
      .visit_field::<Rarity>("Rarity", Self::VT_RARITY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("IconPath", Self::VT_ICONPATH, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("consumeParcelType", Self::VT_CONSUMEPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ConsumeParcelType", Self::VT_CONSUMEPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConsumeParcelId", Self::VT_CONSUMEPARCELID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConsumeParcelAmount", Self::VT_CONSUMEPARCELAMOUNT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ConsumeCondition>>>("ConsumeCondition", Self::VT_CONSUMECONDITION, false)?
-     .visit_field::<GachaTicketType>("ConsumeGachaTicketType", Self::VT_CONSUMEGACHATICKETTYPE, false)?
-     .visit_field::<i64>("ConsumeGachaTicketTypeAmount", Self::VT_CONSUMEGACHATICKETTYPEAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, GachaTicketType>>>("ConsumeGachaTicketType", Self::VT_CONSUMEGACHATICKETTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConsumeGachaTicketTypeAmount", Self::VT_CONSUMEGACHATICKETTYPEAMOUNT, false)?
      .visit_field::<i64>("ProductIdAOS", Self::VT_PRODUCTIDAOS, false)?
      .visit_field::<i64>("ProductIdiOS", Self::VT_PRODUCTIDIOS, false)?
      .visit_field::<i64>("ProductIdONE", Self::VT_PRODUCTIDONE, false)?
      .visit_field::<i64>("ProductIdSGS", Self::VT_PRODUCTIDSGS, false)?
      .visit_field::<i64>("ProductIdSTEAM", Self::VT_PRODUCTIDSTEAM, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("consumeExtraStep", Self::VT_CONSUMEEXTRASTEP, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConsumeExtraStep", Self::VT_CONSUMEEXTRASTEP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConsumeExtraAmount", Self::VT_CONSUMEEXTRAAMOUNT, false)?
      .visit_field::<i32>("State", Self::VT_STATE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("parcelType", Self::VT_PARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("parcelId", Self::VT_PARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("parcelAmount", Self::VT_PARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ParcelType", Self::VT_PARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ParcelId", Self::VT_PARCELID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ParcelAmount", Self::VT_PARCELAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -390,23 +390,23 @@ pub struct GoodsExcelArgs<'a> {
     pub Type: i32,
     pub Rarity: Rarity,
     pub IconPath: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub consumeParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub ConsumeParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub ConsumeParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ConsumeParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ConsumeCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ConsumeCondition>>>,
-    pub ConsumeGachaTicketType: GachaTicketType,
-    pub ConsumeGachaTicketTypeAmount: i64,
+    pub ConsumeGachaTicketType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, GachaTicketType>>>,
+    pub ConsumeGachaTicketTypeAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ProductIdAOS: i64,
     pub ProductIdiOS: i64,
     pub ProductIdONE: i64,
     pub ProductIdSGS: i64,
     pub ProductIdSTEAM: i64,
-    pub consumeExtraStep: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ConsumeExtraStep: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ConsumeExtraAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub State: i32,
-    pub parcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub parcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub parcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub ParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for GoodsExcelArgs<'a> {
   #[inline]
@@ -416,23 +416,23 @@ impl<'a> Default for GoodsExcelArgs<'a> {
       Type: 0,
       Rarity: Rarity::N,
       IconPath: None,
-      consumeParcelType: None,
+      ConsumeParcelType: None,
       ConsumeParcelId: None,
       ConsumeParcelAmount: None,
       ConsumeCondition: None,
-      ConsumeGachaTicketType: GachaTicketType::None,
-      ConsumeGachaTicketTypeAmount: 0,
+      ConsumeGachaTicketType: None,
+      ConsumeGachaTicketTypeAmount: None,
       ProductIdAOS: 0,
       ProductIdiOS: 0,
       ProductIdONE: 0,
       ProductIdSGS: 0,
       ProductIdSTEAM: 0,
-      consumeExtraStep: None,
+      ConsumeExtraStep: None,
       ConsumeExtraAmount: None,
       State: 0,
-      parcelType: None,
-      parcelId: None,
-      parcelAmount: None,
+      ParcelType: None,
+      ParcelId: None,
+      ParcelAmount: None,
     }
   }
 }
@@ -451,10 +451,10 @@ impl Serialize for GoodsExcel<'_> {
       } else {
         s.skip_field("IconPath")?;
       }
-      if let Some(f) = self.consumeParcelType() {
-        s.serialize_field("consumeParcelType", &f)?;
+      if let Some(f) = self.ConsumeParcelType() {
+        s.serialize_field("ConsumeParcelType", &f)?;
       } else {
-        s.skip_field("consumeParcelType")?;
+        s.skip_field("ConsumeParcelType")?;
       }
       if let Some(f) = self.ConsumeParcelId() {
         s.serialize_field("ConsumeParcelId", &f)?;
@@ -471,17 +471,25 @@ impl Serialize for GoodsExcel<'_> {
       } else {
         s.skip_field("ConsumeCondition")?;
       }
-      s.serialize_field("ConsumeGachaTicketType", &self.ConsumeGachaTicketType())?;
-      s.serialize_field("ConsumeGachaTicketTypeAmount", &self.ConsumeGachaTicketTypeAmount())?;
+      if let Some(f) = self.ConsumeGachaTicketType() {
+        s.serialize_field("ConsumeGachaTicketType", &f)?;
+      } else {
+        s.skip_field("ConsumeGachaTicketType")?;
+      }
+      if let Some(f) = self.ConsumeGachaTicketTypeAmount() {
+        s.serialize_field("ConsumeGachaTicketTypeAmount", &f)?;
+      } else {
+        s.skip_field("ConsumeGachaTicketTypeAmount")?;
+      }
       s.serialize_field("ProductIdAOS", &self.ProductIdAOS())?;
       s.serialize_field("ProductIdiOS", &self.ProductIdiOS())?;
       s.serialize_field("ProductIdONE", &self.ProductIdONE())?;
       s.serialize_field("ProductIdSGS", &self.ProductIdSGS())?;
       s.serialize_field("ProductIdSTEAM", &self.ProductIdSTEAM())?;
-      if let Some(f) = self.consumeExtraStep() {
-        s.serialize_field("consumeExtraStep", &f)?;
+      if let Some(f) = self.ConsumeExtraStep() {
+        s.serialize_field("ConsumeExtraStep", &f)?;
       } else {
-        s.skip_field("consumeExtraStep")?;
+        s.skip_field("ConsumeExtraStep")?;
       }
       if let Some(f) = self.ConsumeExtraAmount() {
         s.serialize_field("ConsumeExtraAmount", &f)?;
@@ -489,20 +497,20 @@ impl Serialize for GoodsExcel<'_> {
         s.skip_field("ConsumeExtraAmount")?;
       }
       s.serialize_field("State", &self.State())?;
-      if let Some(f) = self.parcelType() {
-        s.serialize_field("parcelType", &f)?;
+      if let Some(f) = self.ParcelType() {
+        s.serialize_field("ParcelType", &f)?;
       } else {
-        s.skip_field("parcelType")?;
+        s.skip_field("ParcelType")?;
       }
-      if let Some(f) = self.parcelId() {
-        s.serialize_field("parcelId", &f)?;
+      if let Some(f) = self.ParcelId() {
+        s.serialize_field("ParcelId", &f)?;
       } else {
-        s.skip_field("parcelId")?;
+        s.skip_field("ParcelId")?;
       }
-      if let Some(f) = self.parcelAmount() {
-        s.serialize_field("parcelAmount", &f)?;
+      if let Some(f) = self.ParcelAmount() {
+        s.serialize_field("ParcelAmount", &f)?;
       } else {
-        s.skip_field("parcelAmount")?;
+        s.skip_field("ParcelAmount")?;
       }
     s.end()
   }
@@ -530,8 +538,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GoodsExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_ICONPATH, IconPath);
   }
   #[inline]
-  pub fn add_consumeParcelType(&mut self, consumeParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_CONSUMEPARCELTYPE, consumeParcelType);
+  pub fn add_ConsumeParcelType(&mut self, ConsumeParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_CONSUMEPARCELTYPE, ConsumeParcelType);
   }
   #[inline]
   pub fn add_ConsumeParcelId(&mut self, ConsumeParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -546,12 +554,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GoodsExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_CONSUMECONDITION, ConsumeCondition);
   }
   #[inline]
-  pub fn add_ConsumeGachaTicketType(&mut self, ConsumeGachaTicketType: GachaTicketType) {
-    self.fbb_.push_slot::<GachaTicketType>(GoodsExcel::VT_CONSUMEGACHATICKETTYPE, ConsumeGachaTicketType, GachaTicketType::None);
+  pub fn add_ConsumeGachaTicketType(&mut self, ConsumeGachaTicketType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , GachaTicketType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_CONSUMEGACHATICKETTYPE, ConsumeGachaTicketType);
   }
   #[inline]
-  pub fn add_ConsumeGachaTicketTypeAmount(&mut self, ConsumeGachaTicketTypeAmount: i64) {
-    self.fbb_.push_slot::<i64>(GoodsExcel::VT_CONSUMEGACHATICKETTYPEAMOUNT, ConsumeGachaTicketTypeAmount, 0);
+  pub fn add_ConsumeGachaTicketTypeAmount(&mut self, ConsumeGachaTicketTypeAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_CONSUMEGACHATICKETTYPEAMOUNT, ConsumeGachaTicketTypeAmount);
   }
   #[inline]
   pub fn add_ProductIdAOS(&mut self, ProductIdAOS: i64) {
@@ -574,8 +582,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GoodsExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<i64>(GoodsExcel::VT_PRODUCTIDSTEAM, ProductIdSTEAM, 0);
   }
   #[inline]
-  pub fn add_consumeExtraStep(&mut self, consumeExtraStep: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_CONSUMEEXTRASTEP, consumeExtraStep);
+  pub fn add_ConsumeExtraStep(&mut self, ConsumeExtraStep: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_CONSUMEEXTRASTEP, ConsumeExtraStep);
   }
   #[inline]
   pub fn add_ConsumeExtraAmount(&mut self, ConsumeExtraAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -586,16 +594,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GoodsExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<i32>(GoodsExcel::VT_STATE, State, 0);
   }
   #[inline]
-  pub fn add_parcelType(&mut self, parcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_PARCELTYPE, parcelType);
+  pub fn add_ParcelType(&mut self, ParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_PARCELTYPE, ParcelType);
   }
   #[inline]
-  pub fn add_parcelId(&mut self, parcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_PARCELID, parcelId);
+  pub fn add_ParcelId(&mut self, ParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_PARCELID, ParcelId);
   }
   #[inline]
-  pub fn add_parcelAmount(&mut self, parcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_PARCELAMOUNT, parcelAmount);
+  pub fn add_ParcelAmount(&mut self, ParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_PARCELAMOUNT, ParcelAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> GoodsExcelBuilder<'a, 'b, A> {
@@ -619,7 +627,7 @@ impl core::fmt::Debug for GoodsExcel<'_> {
       ds.field("Type", &self.Type());
       ds.field("Rarity", &self.Rarity());
       ds.field("IconPath", &self.IconPath());
-      ds.field("consumeParcelType", &self.consumeParcelType());
+      ds.field("ConsumeParcelType", &self.ConsumeParcelType());
       ds.field("ConsumeParcelId", &self.ConsumeParcelId());
       ds.field("ConsumeParcelAmount", &self.ConsumeParcelAmount());
       ds.field("ConsumeCondition", &self.ConsumeCondition());
@@ -630,12 +638,12 @@ impl core::fmt::Debug for GoodsExcel<'_> {
       ds.field("ProductIdONE", &self.ProductIdONE());
       ds.field("ProductIdSGS", &self.ProductIdSGS());
       ds.field("ProductIdSTEAM", &self.ProductIdSTEAM());
-      ds.field("consumeExtraStep", &self.consumeExtraStep());
+      ds.field("ConsumeExtraStep", &self.ConsumeExtraStep());
       ds.field("ConsumeExtraAmount", &self.ConsumeExtraAmount());
       ds.field("State", &self.State());
-      ds.field("parcelType", &self.parcelType());
-      ds.field("parcelId", &self.parcelId());
-      ds.field("parcelAmount", &self.parcelAmount());
+      ds.field("ParcelType", &self.ParcelType());
+      ds.field("ParcelId", &self.ParcelId());
+      ds.field("ParcelAmount", &self.ParcelAmount());
       ds.finish()
   }
 }
@@ -646,23 +654,23 @@ pub struct GoodsExcelT {
   pub Type: i32,
   pub Rarity: Rarity,
   pub IconPath: Option<String>,
-  pub consumeParcelType: Option<Vec<ParcelType>>,
+  pub ConsumeParcelType: Option<Vec<ParcelType>>,
   pub ConsumeParcelId: Option<Vec<i64>>,
   pub ConsumeParcelAmount: Option<Vec<i64>>,
   pub ConsumeCondition: Option<Vec<ConsumeCondition>>,
-  pub ConsumeGachaTicketType: GachaTicketType,
-  pub ConsumeGachaTicketTypeAmount: i64,
+  pub ConsumeGachaTicketType: Option<Vec<GachaTicketType>>,
+  pub ConsumeGachaTicketTypeAmount: Option<Vec<i64>>,
   pub ProductIdAOS: i64,
   pub ProductIdiOS: i64,
   pub ProductIdONE: i64,
   pub ProductIdSGS: i64,
   pub ProductIdSTEAM: i64,
-  pub consumeExtraStep: Option<Vec<i64>>,
+  pub ConsumeExtraStep: Option<Vec<i64>>,
   pub ConsumeExtraAmount: Option<Vec<i64>>,
   pub State: i32,
-  pub parcelType: Option<Vec<ParcelType>>,
-  pub parcelId: Option<Vec<i64>>,
-  pub parcelAmount: Option<Vec<i64>>,
+  pub ParcelType: Option<Vec<ParcelType>>,
+  pub ParcelId: Option<Vec<i64>>,
+  pub ParcelAmount: Option<Vec<i64>>,
 }
 impl Default for GoodsExcelT {
   fn default() -> Self {
@@ -671,23 +679,23 @@ impl Default for GoodsExcelT {
       Type: 0,
       Rarity: Rarity::N,
       IconPath: None,
-      consumeParcelType: None,
+      ConsumeParcelType: None,
       ConsumeParcelId: None,
       ConsumeParcelAmount: None,
       ConsumeCondition: None,
-      ConsumeGachaTicketType: GachaTicketType::None,
-      ConsumeGachaTicketTypeAmount: 0,
+      ConsumeGachaTicketType: None,
+      ConsumeGachaTicketTypeAmount: None,
       ProductIdAOS: 0,
       ProductIdiOS: 0,
       ProductIdONE: 0,
       ProductIdSGS: 0,
       ProductIdSTEAM: 0,
-      consumeExtraStep: None,
+      ConsumeExtraStep: None,
       ConsumeExtraAmount: None,
       State: 0,
-      parcelType: None,
-      parcelId: None,
-      parcelAmount: None,
+      ParcelType: None,
+      ParcelId: None,
+      ParcelAmount: None,
     }
   }
 }
@@ -702,7 +710,7 @@ impl GoodsExcelT {
     let IconPath = self.IconPath.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let consumeParcelType = self.consumeParcelType.as_ref().map(|x|{
+    let ConsumeParcelType = self.ConsumeParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ConsumeParcelId = self.ConsumeParcelId.as_ref().map(|x|{
@@ -714,27 +722,31 @@ impl GoodsExcelT {
     let ConsumeCondition = self.ConsumeCondition.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ConsumeGachaTicketType = self.ConsumeGachaTicketType;
-    let ConsumeGachaTicketTypeAmount = self.ConsumeGachaTicketTypeAmount;
+    let ConsumeGachaTicketType = self.ConsumeGachaTicketType.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
+    let ConsumeGachaTicketTypeAmount = self.ConsumeGachaTicketTypeAmount.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
     let ProductIdAOS = self.ProductIdAOS;
     let ProductIdiOS = self.ProductIdiOS;
     let ProductIdONE = self.ProductIdONE;
     let ProductIdSGS = self.ProductIdSGS;
     let ProductIdSTEAM = self.ProductIdSTEAM;
-    let consumeExtraStep = self.consumeExtraStep.as_ref().map(|x|{
+    let ConsumeExtraStep = self.ConsumeExtraStep.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ConsumeExtraAmount = self.ConsumeExtraAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let State = self.State;
-    let parcelType = self.parcelType.as_ref().map(|x|{
+    let ParcelType = self.ParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let parcelId = self.parcelId.as_ref().map(|x|{
+    let ParcelId = self.ParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let parcelAmount = self.parcelAmount.as_ref().map(|x|{
+    let ParcelAmount = self.ParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     GoodsExcel::create(_fbb, &GoodsExcelArgs{
@@ -742,7 +754,7 @@ impl GoodsExcelT {
       Type,
       Rarity,
       IconPath,
-      consumeParcelType,
+      ConsumeParcelType,
       ConsumeParcelId,
       ConsumeParcelAmount,
       ConsumeCondition,
@@ -753,12 +765,12 @@ impl GoodsExcelT {
       ProductIdONE,
       ProductIdSGS,
       ProductIdSTEAM,
-      consumeExtraStep,
+      ConsumeExtraStep,
       ConsumeExtraAmount,
       State,
-      parcelType,
-      parcelId,
-      parcelAmount,
+      ParcelType,
+      ParcelId,
+      ParcelAmount,
     })
   }
 }

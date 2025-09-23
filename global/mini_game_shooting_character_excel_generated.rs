@@ -96,8 +96,8 @@ impl<'a> MiniGameShootingCharacterExcel<'a> {
       if let Some(x) = args.DeathSkillData {
         builder.add_DeathSkillData(x);
       }
-      if let Some(x) = args.publicSkillData {
-        builder.add_publicSkillData(x);
+      if let Some(x) = args.PublicSkillData {
+        builder.add_PublicSkillData(x);
       }
       if let Some(x) = args.NormalAttackSkillData {
         builder.add_NormalAttackSkillData(x);
@@ -133,7 +133,7 @@ impl<'a> MiniGameShootingCharacterExcel<'a> {
     let NormalAttackSkillData = self.NormalAttackSkillData().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let publicSkillData = self.publicSkillData().map(|x| {
+    let PublicSkillData = self.PublicSkillData().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let DeathSkillData = self.DeathSkillData().map(|x| {
@@ -161,7 +161,7 @@ impl<'a> MiniGameShootingCharacterExcel<'a> {
       BodyRadius,
       ModelPrefabName,
       NormalAttackSkillData,
-      publicSkillData,
+      PublicSkillData,
       DeathSkillData,
       MaxHP,
       AttackPower,
@@ -214,7 +214,7 @@ impl<'a> MiniGameShootingCharacterExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(MiniGameShootingCharacterExcel::VT_NORMALATTACKSKILLDATA, None)}
   }
   #[inline]
-  pub fn publicSkillData(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn PublicSkillData(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -325,7 +325,7 @@ impl flatbuffers::Verifiable for MiniGameShootingCharacterExcel<'_> {
      .visit_field::<f32>("BodyRadius", Self::VT_BODYRADIUS, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ModelPrefabName", Self::VT_MODELPREFABNAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("NormalAttackSkillData", Self::VT_NORMALATTACKSKILLDATA, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("publicSkillData", Self::VT_PUBLICSKILLDATA, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("PublicSkillData", Self::VT_PUBLICSKILLDATA, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("DeathSkillData", Self::VT_DEATHSKILLDATA, false)?
      .visit_field::<i64>("MaxHP", Self::VT_MAXHP, false)?
      .visit_field::<i64>("AttackPower", Self::VT_ATTACKPOWER, false)?
@@ -349,7 +349,7 @@ pub struct MiniGameShootingCharacterExcelArgs<'a> {
     pub BodyRadius: f32,
     pub ModelPrefabName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub NormalAttackSkillData: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub publicSkillData: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub PublicSkillData: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub DeathSkillData: Option<flatbuffers::WIPOffset<&'a str>>,
     pub MaxHP: i64,
     pub AttackPower: i64,
@@ -373,7 +373,7 @@ impl<'a> Default for MiniGameShootingCharacterExcelArgs<'a> {
       BodyRadius: 0.0,
       ModelPrefabName: None,
       NormalAttackSkillData: None,
-      publicSkillData: None,
+      PublicSkillData: None,
       DeathSkillData: None,
       MaxHP: 0,
       AttackPower: 0,
@@ -414,10 +414,10 @@ impl Serialize for MiniGameShootingCharacterExcel<'_> {
       } else {
         s.skip_field("NormalAttackSkillData")?;
       }
-      if let Some(f) = self.publicSkillData() {
-        s.serialize_field("publicSkillData", &f)?;
+      if let Some(f) = self.PublicSkillData() {
+        s.serialize_field("PublicSkillData", &f)?;
       } else {
-        s.skip_field("publicSkillData")?;
+        s.skip_field("PublicSkillData")?;
       }
       if let Some(f) = self.DeathSkillData() {
         s.serialize_field("DeathSkillData", &f)?;
@@ -466,8 +466,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameShootingCharacterExcelB
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameShootingCharacterExcel::VT_NORMALATTACKSKILLDATA, NormalAttackSkillData);
   }
   #[inline]
-  pub fn add_publicSkillData(&mut self, publicSkillData: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameShootingCharacterExcel::VT_PUBLICSKILLDATA, publicSkillData);
+  pub fn add_PublicSkillData(&mut self, PublicSkillData: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameShootingCharacterExcel::VT_PUBLICSKILLDATA, PublicSkillData);
   }
   #[inline]
   pub fn add_DeathSkillData(&mut self, DeathSkillData: flatbuffers::WIPOffset<&'b  str>) {
@@ -544,7 +544,7 @@ impl core::fmt::Debug for MiniGameShootingCharacterExcel<'_> {
       ds.field("BodyRadius", &self.BodyRadius());
       ds.field("ModelPrefabName", &self.ModelPrefabName());
       ds.field("NormalAttackSkillData", &self.NormalAttackSkillData());
-      ds.field("publicSkillData", &self.publicSkillData());
+      ds.field("PublicSkillData", &self.PublicSkillData());
       ds.field("DeathSkillData", &self.DeathSkillData());
       ds.field("MaxHP", &self.MaxHP());
       ds.field("AttackPower", &self.AttackPower());
@@ -569,7 +569,7 @@ pub struct MiniGameShootingCharacterExcelT {
   pub BodyRadius: f32,
   pub ModelPrefabName: Option<String>,
   pub NormalAttackSkillData: Option<String>,
-  pub publicSkillData: Option<Vec<String>>,
+  pub PublicSkillData: Option<Vec<String>>,
   pub DeathSkillData: Option<String>,
   pub MaxHP: i64,
   pub AttackPower: i64,
@@ -592,7 +592,7 @@ impl Default for MiniGameShootingCharacterExcelT {
       BodyRadius: 0.0,
       ModelPrefabName: None,
       NormalAttackSkillData: None,
-      publicSkillData: None,
+      PublicSkillData: None,
       DeathSkillData: None,
       MaxHP: 0,
       AttackPower: 0,
@@ -625,7 +625,7 @@ impl MiniGameShootingCharacterExcelT {
     let NormalAttackSkillData = self.NormalAttackSkillData.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let publicSkillData = self.publicSkillData.as_ref().map(|x|{
+    let PublicSkillData = self.PublicSkillData.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let DeathSkillData = self.DeathSkillData.as_ref().map(|x|{
@@ -649,7 +649,7 @@ impl MiniGameShootingCharacterExcelT {
       BodyRadius,
       ModelPrefabName,
       NormalAttackSkillData,
-      publicSkillData,
+      PublicSkillData,
       DeathSkillData,
       MaxHP,
       AttackPower,

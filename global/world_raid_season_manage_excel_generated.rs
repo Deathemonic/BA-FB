@@ -79,8 +79,8 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
       if let Some(x) = args.WorldRaidMapEnterOperator {
         builder.add_WorldRaidMapEnterOperator(x);
       }
-      if let Some(x) = args.conditionScenarioGroupid {
-        builder.add_conditionScenarioGroupid(x);
+      if let Some(x) = args.ConditionScenarioGroupid {
+        builder.add_ConditionScenarioGroupid(x);
       }
       if let Some(x) = args.ScenarioOutputConditionId {
         builder.add_ScenarioOutputConditionId(x);
@@ -91,8 +91,8 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
       if let Some(x) = args.BossSpawnTime {
         builder.add_BossSpawnTime(x);
       }
-      if let Some(x) = args.openRaidBossGroupId {
-        builder.add_openRaidBossGroupId(x);
+      if let Some(x) = args.OpenRaidBossGroupId {
+        builder.add_OpenRaidBossGroupId(x);
       }
       if let Some(x) = args.WorldRaidUniqueThemeName {
         builder.add_WorldRaidUniqueThemeName(x);
@@ -150,7 +150,7 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
       let HideWorldRaidTicketUI = self.HideWorldRaidTicketUI();
       let HideWorldRaidBossCompleteRewardUI = self.HideWorldRaidBossCompleteRewardUI();
       let UseWorldRaidCommonToast = self.UseWorldRaidCommonToast();
-    let openRaidBossGroupId = self.openRaidBossGroupId().map(|x| {
+    let OpenRaidBossGroupId = self.OpenRaidBossGroupId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let BossSpawnTime = self.BossSpawnTime().map(|x| {
@@ -162,7 +162,7 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
     let ScenarioOutputConditionId = self.ScenarioOutputConditionId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let conditionScenarioGroupid = self.conditionScenarioGroupid().map(|x| {
+    let ConditionScenarioGroupid = self.ConditionScenarioGroupid().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let WorldRaidMapEnterOperator = self.WorldRaidMapEnterOperator().map(|x| {
@@ -186,11 +186,11 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
       HideWorldRaidTicketUI,
       HideWorldRaidBossCompleteRewardUI,
       UseWorldRaidCommonToast,
-      openRaidBossGroupId,
+      OpenRaidBossGroupId,
       BossSpawnTime,
       EliminateTime,
       ScenarioOutputConditionId,
-      conditionScenarioGroupid,
+      ConditionScenarioGroupid,
       WorldRaidMapEnterOperator,
       UseFavorRankBuff,
     }
@@ -309,7 +309,7 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
     unsafe { self._tab.get::<bool>(WorldRaidSeasonManageExcel::VT_USEWORLDRAIDCOMMONTOAST, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn openRaidBossGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn OpenRaidBossGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -337,7 +337,7 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(WorldRaidSeasonManageExcel::VT_SCENARIOOUTPUTCONDITIONID, None)}
   }
   #[inline]
-  pub fn conditionScenarioGroupid(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ConditionScenarioGroupid(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -382,11 +382,11 @@ impl flatbuffers::Verifiable for WorldRaidSeasonManageExcel<'_> {
      .visit_field::<bool>("HideWorldRaidTicketUI", Self::VT_HIDEWORLDRAIDTICKETUI, false)?
      .visit_field::<bool>("HideWorldRaidBossCompleteRewardUI", Self::VT_HIDEWORLDRAIDBOSSCOMPLETEREWARDUI, false)?
      .visit_field::<bool>("UseWorldRaidCommonToast", Self::VT_USEWORLDRAIDCOMMONTOAST, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("openRaidBossGroupId", Self::VT_OPENRAIDBOSSGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("OpenRaidBossGroupId", Self::VT_OPENRAIDBOSSGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("BossSpawnTime", Self::VT_BOSSSPAWNTIME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("EliminateTime", Self::VT_ELIMINATETIME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ScenarioOutputConditionId", Self::VT_SCENARIOOUTPUTCONDITIONID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("conditionScenarioGroupid", Self::VT_CONDITIONSCENARIOGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConditionScenarioGroupid", Self::VT_CONDITIONSCENARIOGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("WorldRaidMapEnterOperator", Self::VT_WORLDRAIDMAPENTEROPERATOR, false)?
      .visit_field::<bool>("UseFavorRankBuff", Self::VT_USEFAVORRANKBUFF, false)?
      .finish();
@@ -410,11 +410,11 @@ pub struct WorldRaidSeasonManageExcelArgs<'a> {
     pub HideWorldRaidTicketUI: bool,
     pub HideWorldRaidBossCompleteRewardUI: bool,
     pub UseWorldRaidCommonToast: bool,
-    pub openRaidBossGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub OpenRaidBossGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub BossSpawnTime: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub EliminateTime: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub ScenarioOutputConditionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub conditionScenarioGroupid: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ConditionScenarioGroupid: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub WorldRaidMapEnterOperator: Option<flatbuffers::WIPOffset<&'a str>>,
     pub UseFavorRankBuff: bool,
 }
@@ -438,11 +438,11 @@ impl<'a> Default for WorldRaidSeasonManageExcelArgs<'a> {
       HideWorldRaidTicketUI: false,
       HideWorldRaidBossCompleteRewardUI: false,
       UseWorldRaidCommonToast: false,
-      openRaidBossGroupId: None,
+      OpenRaidBossGroupId: None,
       BossSpawnTime: None,
       EliminateTime: None,
       ScenarioOutputConditionId: None,
-      conditionScenarioGroupid: None,
+      ConditionScenarioGroupid: None,
       WorldRaidMapEnterOperator: None,
       UseFavorRankBuff: false,
     }
@@ -487,10 +487,10 @@ impl Serialize for WorldRaidSeasonManageExcel<'_> {
       s.serialize_field("HideWorldRaidTicketUI", &self.HideWorldRaidTicketUI())?;
       s.serialize_field("HideWorldRaidBossCompleteRewardUI", &self.HideWorldRaidBossCompleteRewardUI())?;
       s.serialize_field("UseWorldRaidCommonToast", &self.UseWorldRaidCommonToast())?;
-      if let Some(f) = self.openRaidBossGroupId() {
-        s.serialize_field("openRaidBossGroupId", &f)?;
+      if let Some(f) = self.OpenRaidBossGroupId() {
+        s.serialize_field("OpenRaidBossGroupId", &f)?;
       } else {
-        s.skip_field("openRaidBossGroupId")?;
+        s.skip_field("OpenRaidBossGroupId")?;
       }
       if let Some(f) = self.BossSpawnTime() {
         s.serialize_field("BossSpawnTime", &f)?;
@@ -507,10 +507,10 @@ impl Serialize for WorldRaidSeasonManageExcel<'_> {
       } else {
         s.skip_field("ScenarioOutputConditionId")?;
       }
-      if let Some(f) = self.conditionScenarioGroupid() {
-        s.serialize_field("conditionScenarioGroupid", &f)?;
+      if let Some(f) = self.ConditionScenarioGroupid() {
+        s.serialize_field("ConditionScenarioGroupid", &f)?;
       } else {
-        s.skip_field("conditionScenarioGroupid")?;
+        s.skip_field("ConditionScenarioGroupid")?;
       }
       if let Some(f) = self.WorldRaidMapEnterOperator() {
         s.serialize_field("WorldRaidMapEnterOperator", &f)?;
@@ -592,8 +592,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> WorldRaidSeasonManageExcelBuild
     self.fbb_.push_slot::<bool>(WorldRaidSeasonManageExcel::VT_USEWORLDRAIDCOMMONTOAST, UseWorldRaidCommonToast, false);
   }
   #[inline]
-  pub fn add_openRaidBossGroupId(&mut self, openRaidBossGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidSeasonManageExcel::VT_OPENRAIDBOSSGROUPID, openRaidBossGroupId);
+  pub fn add_OpenRaidBossGroupId(&mut self, OpenRaidBossGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidSeasonManageExcel::VT_OPENRAIDBOSSGROUPID, OpenRaidBossGroupId);
   }
   #[inline]
   pub fn add_BossSpawnTime(&mut self, BossSpawnTime: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -608,8 +608,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> WorldRaidSeasonManageExcelBuild
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidSeasonManageExcel::VT_SCENARIOOUTPUTCONDITIONID, ScenarioOutputConditionId);
   }
   #[inline]
-  pub fn add_conditionScenarioGroupid(&mut self, conditionScenarioGroupid: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidSeasonManageExcel::VT_CONDITIONSCENARIOGROUPID, conditionScenarioGroupid);
+  pub fn add_ConditionScenarioGroupid(&mut self, ConditionScenarioGroupid: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidSeasonManageExcel::VT_CONDITIONSCENARIOGROUPID, ConditionScenarioGroupid);
   }
   #[inline]
   pub fn add_WorldRaidMapEnterOperator(&mut self, WorldRaidMapEnterOperator: flatbuffers::WIPOffset<&'b  str>) {
@@ -653,11 +653,11 @@ impl core::fmt::Debug for WorldRaidSeasonManageExcel<'_> {
       ds.field("HideWorldRaidTicketUI", &self.HideWorldRaidTicketUI());
       ds.field("HideWorldRaidBossCompleteRewardUI", &self.HideWorldRaidBossCompleteRewardUI());
       ds.field("UseWorldRaidCommonToast", &self.UseWorldRaidCommonToast());
-      ds.field("openRaidBossGroupId", &self.openRaidBossGroupId());
+      ds.field("OpenRaidBossGroupId", &self.OpenRaidBossGroupId());
       ds.field("BossSpawnTime", &self.BossSpawnTime());
       ds.field("EliminateTime", &self.EliminateTime());
       ds.field("ScenarioOutputConditionId", &self.ScenarioOutputConditionId());
-      ds.field("conditionScenarioGroupid", &self.conditionScenarioGroupid());
+      ds.field("ConditionScenarioGroupid", &self.ConditionScenarioGroupid());
       ds.field("WorldRaidMapEnterOperator", &self.WorldRaidMapEnterOperator());
       ds.field("UseFavorRankBuff", &self.UseFavorRankBuff());
       ds.finish()
@@ -682,11 +682,11 @@ pub struct WorldRaidSeasonManageExcelT {
   pub HideWorldRaidTicketUI: bool,
   pub HideWorldRaidBossCompleteRewardUI: bool,
   pub UseWorldRaidCommonToast: bool,
-  pub openRaidBossGroupId: Option<Vec<i64>>,
+  pub OpenRaidBossGroupId: Option<Vec<i64>>,
   pub BossSpawnTime: Option<Vec<String>>,
   pub EliminateTime: Option<Vec<String>>,
   pub ScenarioOutputConditionId: Option<Vec<i64>>,
-  pub conditionScenarioGroupid: Option<Vec<i64>>,
+  pub ConditionScenarioGroupid: Option<Vec<i64>>,
   pub WorldRaidMapEnterOperator: Option<String>,
   pub UseFavorRankBuff: bool,
 }
@@ -709,11 +709,11 @@ impl Default for WorldRaidSeasonManageExcelT {
       HideWorldRaidTicketUI: false,
       HideWorldRaidBossCompleteRewardUI: false,
       UseWorldRaidCommonToast: false,
-      openRaidBossGroupId: None,
+      OpenRaidBossGroupId: None,
       BossSpawnTime: None,
       EliminateTime: None,
       ScenarioOutputConditionId: None,
-      conditionScenarioGroupid: None,
+      ConditionScenarioGroupid: None,
       WorldRaidMapEnterOperator: None,
       UseFavorRankBuff: false,
     }
@@ -748,7 +748,7 @@ impl WorldRaidSeasonManageExcelT {
     let HideWorldRaidTicketUI = self.HideWorldRaidTicketUI;
     let HideWorldRaidBossCompleteRewardUI = self.HideWorldRaidBossCompleteRewardUI;
     let UseWorldRaidCommonToast = self.UseWorldRaidCommonToast;
-    let openRaidBossGroupId = self.openRaidBossGroupId.as_ref().map(|x|{
+    let OpenRaidBossGroupId = self.OpenRaidBossGroupId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let BossSpawnTime = self.BossSpawnTime.as_ref().map(|x|{
@@ -760,7 +760,7 @@ impl WorldRaidSeasonManageExcelT {
     let ScenarioOutputConditionId = self.ScenarioOutputConditionId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let conditionScenarioGroupid = self.conditionScenarioGroupid.as_ref().map(|x|{
+    let ConditionScenarioGroupid = self.ConditionScenarioGroupid.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let WorldRaidMapEnterOperator = self.WorldRaidMapEnterOperator.as_ref().map(|x|{
@@ -784,11 +784,11 @@ impl WorldRaidSeasonManageExcelT {
       HideWorldRaidTicketUI,
       HideWorldRaidBossCompleteRewardUI,
       UseWorldRaidCommonToast,
-      openRaidBossGroupId,
+      OpenRaidBossGroupId,
       BossSpawnTime,
       EliminateTime,
       ScenarioOutputConditionId,
-      conditionScenarioGroupid,
+      ConditionScenarioGroupid,
       WorldRaidMapEnterOperator,
       UseFavorRankBuff,
     })

@@ -69,8 +69,8 @@ impl<'a> CafeRankExcel<'a> {
       if let Some(x) = args.CafeVisitWeightTagBonus {
         builder.add_CafeVisitWeightTagBonus(x);
       }
-      if let Some(x) = args.cafeVisitWeightTagBonusStep {
-        builder.add_cafeVisitWeightTagBonusStep(x);
+      if let Some(x) = args.CafeVisitWeightTagBonusStep {
+        builder.add_CafeVisitWeightTagBonusStep(x);
       }
       let x = args.CafeVisitWeightBase;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -94,7 +94,7 @@ impl<'a> CafeRankExcel<'a> {
       let CharacterVisitMin = self.CharacterVisitMin();
       let CharacterVisitMax = self.CharacterVisitMax();
       let CafeVisitWeightBase = self.CafeVisitWeightBase();
-    let cafeVisitWeightTagBonusStep = self.cafeVisitWeightTagBonusStep().map(|x| {
+    let CafeVisitWeightTagBonusStep = self.CafeVisitWeightTagBonusStep().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     let CafeVisitWeightTagBonus = self.CafeVisitWeightTagBonus().map(|x| {
@@ -109,7 +109,7 @@ impl<'a> CafeRankExcel<'a> {
       CharacterVisitMin,
       CharacterVisitMax,
       CafeVisitWeightBase,
-      cafeVisitWeightTagBonusStep,
+      CafeVisitWeightTagBonusStep,
       CafeVisitWeightTagBonus,
     }
   }
@@ -171,7 +171,7 @@ impl<'a> CafeRankExcel<'a> {
     unsafe { self._tab.get::<i32>(CafeRankExcel::VT_CAFEVISITWEIGHTBASE, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn cafeVisitWeightTagBonusStep(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn CafeVisitWeightTagBonusStep(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -201,7 +201,7 @@ impl flatbuffers::Verifiable for CafeRankExcel<'_> {
      .visit_field::<i32>("CharacterVisitMin", Self::VT_CHARACTERVISITMIN, false)?
      .visit_field::<i32>("CharacterVisitMax", Self::VT_CHARACTERVISITMAX, false)?
      .visit_field::<i32>("CafeVisitWeightBase", Self::VT_CAFEVISITWEIGHTBASE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("cafeVisitWeightTagBonusStep", Self::VT_CAFEVISITWEIGHTTAGBONUSSTEP, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("CafeVisitWeightTagBonusStep", Self::VT_CAFEVISITWEIGHTTAGBONUSSTEP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("CafeVisitWeightTagBonus", Self::VT_CAFEVISITWEIGHTTAGBONUS, false)?
      .finish();
     Ok(())
@@ -216,7 +216,7 @@ pub struct CafeRankExcelArgs<'a> {
     pub CharacterVisitMin: i32,
     pub CharacterVisitMax: i32,
     pub CafeVisitWeightBase: i32,
-    pub cafeVisitWeightTagBonusStep: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub CafeVisitWeightTagBonusStep: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub CafeVisitWeightTagBonus: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for CafeRankExcelArgs<'a> {
@@ -231,7 +231,7 @@ impl<'a> Default for CafeRankExcelArgs<'a> {
       CharacterVisitMin: 0,
       CharacterVisitMax: 0,
       CafeVisitWeightBase: 0,
-      cafeVisitWeightTagBonusStep: None,
+      CafeVisitWeightTagBonusStep: None,
       CafeVisitWeightTagBonus: None,
     }
   }
@@ -251,10 +251,10 @@ impl Serialize for CafeRankExcel<'_> {
       s.serialize_field("CharacterVisitMin", &self.CharacterVisitMin())?;
       s.serialize_field("CharacterVisitMax", &self.CharacterVisitMax())?;
       s.serialize_field("CafeVisitWeightBase", &self.CafeVisitWeightBase())?;
-      if let Some(f) = self.cafeVisitWeightTagBonusStep() {
-        s.serialize_field("cafeVisitWeightTagBonusStep", &f)?;
+      if let Some(f) = self.CafeVisitWeightTagBonusStep() {
+        s.serialize_field("CafeVisitWeightTagBonusStep", &f)?;
       } else {
-        s.skip_field("cafeVisitWeightTagBonusStep")?;
+        s.skip_field("CafeVisitWeightTagBonusStep")?;
       }
       if let Some(f) = self.CafeVisitWeightTagBonus() {
         s.serialize_field("CafeVisitWeightTagBonus", &f)?;
@@ -303,8 +303,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CafeRankExcelBuilder<'a, 'b, A>
     self.fbb_.push_slot::<i32>(CafeRankExcel::VT_CAFEVISITWEIGHTBASE, CafeVisitWeightBase, 0);
   }
   #[inline]
-  pub fn add_cafeVisitWeightTagBonusStep(&mut self, cafeVisitWeightTagBonusStep: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CafeRankExcel::VT_CAFEVISITWEIGHTTAGBONUSSTEP, cafeVisitWeightTagBonusStep);
+  pub fn add_CafeVisitWeightTagBonusStep(&mut self, CafeVisitWeightTagBonusStep: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CafeRankExcel::VT_CAFEVISITWEIGHTTAGBONUSSTEP, CafeVisitWeightTagBonusStep);
   }
   #[inline]
   pub fn add_CafeVisitWeightTagBonus(&mut self, CafeVisitWeightTagBonus: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
@@ -336,7 +336,7 @@ impl core::fmt::Debug for CafeRankExcel<'_> {
       ds.field("CharacterVisitMin", &self.CharacterVisitMin());
       ds.field("CharacterVisitMax", &self.CharacterVisitMax());
       ds.field("CafeVisitWeightBase", &self.CafeVisitWeightBase());
-      ds.field("cafeVisitWeightTagBonusStep", &self.cafeVisitWeightTagBonusStep());
+      ds.field("CafeVisitWeightTagBonusStep", &self.CafeVisitWeightTagBonusStep());
       ds.field("CafeVisitWeightTagBonus", &self.CafeVisitWeightTagBonus());
       ds.finish()
   }
@@ -352,7 +352,7 @@ pub struct CafeRankExcelT {
   pub CharacterVisitMin: i32,
   pub CharacterVisitMax: i32,
   pub CafeVisitWeightBase: i32,
-  pub cafeVisitWeightTagBonusStep: Option<Vec<i32>>,
+  pub CafeVisitWeightTagBonusStep: Option<Vec<i32>>,
   pub CafeVisitWeightTagBonus: Option<Vec<i32>>,
 }
 impl Default for CafeRankExcelT {
@@ -366,7 +366,7 @@ impl Default for CafeRankExcelT {
       CharacterVisitMin: 0,
       CharacterVisitMax: 0,
       CafeVisitWeightBase: 0,
-      cafeVisitWeightTagBonusStep: None,
+      CafeVisitWeightTagBonusStep: None,
       CafeVisitWeightTagBonus: None,
     }
   }
@@ -384,7 +384,7 @@ impl CafeRankExcelT {
     let CharacterVisitMin = self.CharacterVisitMin;
     let CharacterVisitMax = self.CharacterVisitMax;
     let CafeVisitWeightBase = self.CafeVisitWeightBase;
-    let cafeVisitWeightTagBonusStep = self.cafeVisitWeightTagBonusStep.as_ref().map(|x|{
+    let CafeVisitWeightTagBonusStep = self.CafeVisitWeightTagBonusStep.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CafeVisitWeightTagBonus = self.CafeVisitWeightTagBonus.as_ref().map(|x|{
@@ -399,7 +399,7 @@ impl CafeRankExcelT {
       CharacterVisitMin,
       CharacterVisitMax,
       CafeVisitWeightBase,
-      cafeVisitWeightTagBonusStep,
+      CafeVisitWeightTagBonusStep,
       CafeVisitWeightTagBonus,
     })
   }

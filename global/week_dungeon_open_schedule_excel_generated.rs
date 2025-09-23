@@ -43,8 +43,8 @@ impl<'a> WeekDungeonOpenScheduleExcel<'a> {
   ) -> flatbuffers::WIPOffset<WeekDungeonOpenScheduleExcel<'bldr>> {
     let mut builder = WeekDungeonOpenScheduleExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"WeekDungeonOpenSchedule");
-      if let Some(x) = args.open {
-        builder.add_open(x);
+      if let Some(x) = args.Open {
+        builder.add_Open(x);
       }
       let x = args.WeekDay;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -59,12 +59,12 @@ impl<'a> WeekDungeonOpenScheduleExcel<'a> {
       } else {
         self.WeekDay()
       };
-    let open = self.open().map(|x| {
+    let Open = self.Open().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     WeekDungeonOpenScheduleExcelT {
       WeekDay,
-      open,
+      Open,
     }
   }
 
@@ -76,7 +76,7 @@ impl<'a> WeekDungeonOpenScheduleExcel<'a> {
     unsafe { self._tab.get::<WeekDay>(WeekDungeonOpenScheduleExcel::VT_WEEKDAY, Some(WeekDay::Sunday)).unwrap()}
   }
   #[inline]
-  pub fn open(&self) -> Option<flatbuffers::Vector<'a, WeekDungeonType>> {
+  pub fn Open(&self) -> Option<flatbuffers::Vector<'a, WeekDungeonType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -92,21 +92,21 @@ impl flatbuffers::Verifiable for WeekDungeonOpenScheduleExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<WeekDay>("WeekDay", Self::VT_WEEKDAY, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, WeekDungeonType>>>("open", Self::VT_OPEN, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, WeekDungeonType>>>("Open", Self::VT_OPEN, false)?
      .finish();
     Ok(())
   }
 }
 pub struct WeekDungeonOpenScheduleExcelArgs<'a> {
     pub WeekDay: WeekDay,
-    pub open: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, WeekDungeonType>>>,
+    pub Open: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, WeekDungeonType>>>,
 }
 impl<'a> Default for WeekDungeonOpenScheduleExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     WeekDungeonOpenScheduleExcelArgs {
       WeekDay: WeekDay::Sunday,
-      open: None,
+      Open: None,
     }
   }
 }
@@ -118,10 +118,10 @@ impl Serialize for WeekDungeonOpenScheduleExcel<'_> {
   {
     let mut s = serializer.serialize_struct("WeekDungeonOpenScheduleExcel", 2)?;
       s.serialize_field("WeekDay", &self.WeekDay())?;
-      if let Some(f) = self.open() {
-        s.serialize_field("open", &f)?;
+      if let Some(f) = self.Open() {
+        s.serialize_field("Open", &f)?;
       } else {
-        s.skip_field("open")?;
+        s.skip_field("Open")?;
       }
     s.end()
   }
@@ -137,8 +137,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> WeekDungeonOpenScheduleExcelBui
     self.fbb_.push_slot::<WeekDay>(WeekDungeonOpenScheduleExcel::VT_WEEKDAY, WeekDay, WeekDay::Sunday);
   }
   #[inline]
-  pub fn add_open(&mut self, open: flatbuffers::WIPOffset<flatbuffers::Vector<'b , WeekDungeonType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WeekDungeonOpenScheduleExcel::VT_OPEN, open);
+  pub fn add_Open(&mut self, Open: flatbuffers::WIPOffset<flatbuffers::Vector<'b , WeekDungeonType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WeekDungeonOpenScheduleExcel::VT_OPEN, Open);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> WeekDungeonOpenScheduleExcelBuilder<'a, 'b, A> {
@@ -159,7 +159,7 @@ impl core::fmt::Debug for WeekDungeonOpenScheduleExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("WeekDungeonOpenScheduleExcel");
       ds.field("WeekDay", &self.WeekDay());
-      ds.field("open", &self.open());
+      ds.field("Open", &self.Open());
       ds.finish()
   }
 }
@@ -167,13 +167,13 @@ impl core::fmt::Debug for WeekDungeonOpenScheduleExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct WeekDungeonOpenScheduleExcelT {
   pub WeekDay: WeekDay,
-  pub open: Option<Vec<WeekDungeonType>>,
+  pub Open: Option<Vec<WeekDungeonType>>,
 }
 impl Default for WeekDungeonOpenScheduleExcelT {
   fn default() -> Self {
     Self {
       WeekDay: WeekDay::Sunday,
-      open: None,
+      Open: None,
     }
   }
 }
@@ -183,12 +183,12 @@ impl WeekDungeonOpenScheduleExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<WeekDungeonOpenScheduleExcel<'b>> {
     let WeekDay = self.WeekDay;
-    let open = self.open.as_ref().map(|x|{
+    let Open = self.Open.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     WeekDungeonOpenScheduleExcel::create(_fbb, &WeekDungeonOpenScheduleExcelArgs{
       WeekDay,
-      open,
+      Open,
     })
   }
 }

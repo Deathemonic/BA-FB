@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_MISSION_COMPLETE_CONDITION_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_MISSION_COMPLETE_CONDITION_TYPE: i32 = 174;
+pub const ENUM_MAX_MISSION_COMPLETE_CONDITION_TYPE: i32 = 183;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteConditionType; 175] = [
+pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteConditionType; 184] = [
   MissionCompleteConditionType::None,
   MissionCompleteConditionType::Reset_DailyLogin,
   MissionCompleteConditionType::Reset_DailyLoginCount,
@@ -45,7 +45,7 @@ pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteCondition
   MissionCompleteConditionType::Achieve_GetItem,
   MissionCompleteConditionType::Reset_GetFavorLevel,
   MissionCompleteConditionType::Reset___Deprecated_EquipmentAtSpecificLevelCount,
-  MissionCompleteConditionType::Reset_EquipmentAtSpecificTierUpCount,
+  MissionCompleteConditionType::Achieve_EquipmentAtSpecificTierUpCount,
   MissionCompleteConditionType::Reset_CharacterAtSpecificLevelCount,
   MissionCompleteConditionType::Reset_CharacterAtSpecificTranscendenceCount,
   MissionCompleteConditionType::Achieve_CharacterSkillLevelUpCount,
@@ -195,6 +195,15 @@ pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteCondition
   MissionCompleteConditionType::Reset_RoadpuzzleTileCount,
   MissionCompleteConditionType::Reset_ClearSpecificRoundRoadpuzzle,
   MissionCompleteConditionType::Reset_ClearCountRoadpuzzle,
+  MissionCompleteConditionType::Reset_CCGResultCount,
+  MissionCompleteConditionType::Reset_CCGCompleteCount,
+  MissionCompleteConditionType::Reset_CCGUseCostCount,
+  MissionCompleteConditionType::Reset_CCGTotalDamageCount,
+  MissionCompleteConditionType::Reset_CCGRetreatCount,
+  MissionCompleteConditionType::Reset_CCGSkillWithTagCount,
+  MissionCompleteConditionType::Reset_CCGActivatePerkCount,
+  MissionCompleteConditionType::Reset_ClearMultiFloorRaid,
+  MissionCompleteConditionType::Reset_DayCompleteMission,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -227,7 +236,7 @@ impl MissionCompleteConditionType {
   pub const Achieve_GetItem: Self = Self(22);
   pub const Reset_GetFavorLevel: Self = Self(23);
   pub const Reset___Deprecated_EquipmentAtSpecificLevelCount: Self = Self(24);
-  pub const Reset_EquipmentAtSpecificTierUpCount: Self = Self(25);
+  pub const Achieve_EquipmentAtSpecificTierUpCount: Self = Self(25);
   pub const Reset_CharacterAtSpecificLevelCount: Self = Self(26);
   pub const Reset_CharacterAtSpecificTranscendenceCount: Self = Self(27);
   pub const Achieve_CharacterSkillLevelUpCount: Self = Self(28);
@@ -377,9 +386,18 @@ impl MissionCompleteConditionType {
   pub const Reset_RoadpuzzleTileCount: Self = Self(172);
   pub const Reset_ClearSpecificRoundRoadpuzzle: Self = Self(173);
   pub const Reset_ClearCountRoadpuzzle: Self = Self(174);
+  pub const Reset_CCGResultCount: Self = Self(175);
+  pub const Reset_CCGCompleteCount: Self = Self(176);
+  pub const Reset_CCGUseCostCount: Self = Self(177);
+  pub const Reset_CCGTotalDamageCount: Self = Self(178);
+  pub const Reset_CCGRetreatCount: Self = Self(179);
+  pub const Reset_CCGSkillWithTagCount: Self = Self(180);
+  pub const Reset_CCGActivatePerkCount: Self = Self(181);
+  pub const Reset_ClearMultiFloorRaid: Self = Self(182);
+  pub const Reset_DayCompleteMission: Self = Self(183);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 174;
+  pub const ENUM_MAX: i32 = 183;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Reset_DailyLogin,
@@ -406,7 +424,7 @@ impl MissionCompleteConditionType {
     Self::Achieve_GetItem,
     Self::Reset_GetFavorLevel,
     Self::Reset___Deprecated_EquipmentAtSpecificLevelCount,
-    Self::Reset_EquipmentAtSpecificTierUpCount,
+    Self::Achieve_EquipmentAtSpecificTierUpCount,
     Self::Reset_CharacterAtSpecificLevelCount,
     Self::Reset_CharacterAtSpecificTranscendenceCount,
     Self::Achieve_CharacterSkillLevelUpCount,
@@ -556,6 +574,15 @@ impl MissionCompleteConditionType {
     Self::Reset_RoadpuzzleTileCount,
     Self::Reset_ClearSpecificRoundRoadpuzzle,
     Self::Reset_ClearCountRoadpuzzle,
+    Self::Reset_CCGResultCount,
+    Self::Reset_CCGCompleteCount,
+    Self::Reset_CCGUseCostCount,
+    Self::Reset_CCGTotalDamageCount,
+    Self::Reset_CCGRetreatCount,
+    Self::Reset_CCGSkillWithTagCount,
+    Self::Reset_CCGActivatePerkCount,
+    Self::Reset_ClearMultiFloorRaid,
+    Self::Reset_DayCompleteMission,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -585,7 +612,7 @@ impl MissionCompleteConditionType {
       Self::Achieve_GetItem => Some("Achieve_GetItem"),
       Self::Reset_GetFavorLevel => Some("Reset_GetFavorLevel"),
       Self::Reset___Deprecated_EquipmentAtSpecificLevelCount => Some("Reset___Deprecated_EquipmentAtSpecificLevelCount"),
-      Self::Reset_EquipmentAtSpecificTierUpCount => Some("Reset_EquipmentAtSpecificTierUpCount"),
+      Self::Achieve_EquipmentAtSpecificTierUpCount => Some("Achieve_EquipmentAtSpecificTierUpCount"),
       Self::Reset_CharacterAtSpecificLevelCount => Some("Reset_CharacterAtSpecificLevelCount"),
       Self::Reset_CharacterAtSpecificTranscendenceCount => Some("Reset_CharacterAtSpecificTranscendenceCount"),
       Self::Achieve_CharacterSkillLevelUpCount => Some("Achieve_CharacterSkillLevelUpCount"),
@@ -735,6 +762,15 @@ impl MissionCompleteConditionType {
       Self::Reset_RoadpuzzleTileCount => Some("Reset_RoadpuzzleTileCount"),
       Self::Reset_ClearSpecificRoundRoadpuzzle => Some("Reset_ClearSpecificRoundRoadpuzzle"),
       Self::Reset_ClearCountRoadpuzzle => Some("Reset_ClearCountRoadpuzzle"),
+      Self::Reset_CCGResultCount => Some("Reset_CCGResultCount"),
+      Self::Reset_CCGCompleteCount => Some("Reset_CCGCompleteCount"),
+      Self::Reset_CCGUseCostCount => Some("Reset_CCGUseCostCount"),
+      Self::Reset_CCGTotalDamageCount => Some("Reset_CCGTotalDamageCount"),
+      Self::Reset_CCGRetreatCount => Some("Reset_CCGRetreatCount"),
+      Self::Reset_CCGSkillWithTagCount => Some("Reset_CCGSkillWithTagCount"),
+      Self::Reset_CCGActivatePerkCount => Some("Reset_CCGActivatePerkCount"),
+      Self::Reset_ClearMultiFloorRaid => Some("Reset_ClearMultiFloorRaid"),
+      Self::Reset_DayCompleteMission => Some("Reset_DayCompleteMission"),
       _ => None,
     }
   }

@@ -74,15 +74,15 @@ impl<'a> ScenarioExcel<'a> {
       if let Some(x) = args.idle {
         builder.add_idle(x);
       }
-      if let Some(x) = args.none {
-        builder.add_none(x);
+      if let Some(x) = args.None {
+        builder.add_None(x);
       }
     builder.finish()
   }
 
   pub fn unpack(&self) -> ScenarioExcelT {
     let key = table_encryption_service::create_key(b"Scenario");
-    let none = self.none().map(|x| {
+    let None = self.None().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let idle = self.idle().map(|x| {
@@ -124,7 +124,7 @@ impl<'a> ScenarioExcel<'a> {
         self.Prologue()
       };
     ScenarioExcelT {
-      none,
+      None,
       idle,
       Cafe,
       Talk,
@@ -137,7 +137,7 @@ impl<'a> ScenarioExcel<'a> {
   }
 
   #[inline]
-  pub fn none(&self) -> Option<flatbuffers::Vector<'a, ScenarioBGType>> {
+  pub fn None(&self) -> Option<flatbuffers::Vector<'a, ScenarioBGType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -208,7 +208,7 @@ impl flatbuffers::Verifiable for ScenarioExcel<'_> {
   ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ScenarioBGType>>>("none", Self::VT_NONE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ScenarioBGType>>>("None", Self::VT_NONE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ScenarioCharacterAction>>>("idle", Self::VT_IDLE, false)?
      .visit_field::<DialogCategory>("Cafe", Self::VT_CAFE, false)?
      .visit_field::<DialogType>("Talk", Self::VT_TALK, false)?
@@ -222,7 +222,7 @@ impl flatbuffers::Verifiable for ScenarioExcel<'_> {
   }
 }
 pub struct ScenarioExcelArgs<'a> {
-    pub none: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ScenarioBGType>>>,
+    pub None: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ScenarioBGType>>>,
     pub idle: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ScenarioCharacterAction>>>,
     pub Cafe: DialogCategory,
     pub Talk: DialogType,
@@ -236,7 +236,7 @@ impl<'a> Default for ScenarioExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     ScenarioExcelArgs {
-      none: None,
+      None: None,
       idle: None,
       Cafe: DialogCategory::Cafe,
       Talk: DialogType::Talk,
@@ -255,10 +255,10 @@ impl Serialize for ScenarioExcel<'_> {
     S: Serializer,
   {
     let mut s = serializer.serialize_struct("ScenarioExcel", 9)?;
-      if let Some(f) = self.none() {
-        s.serialize_field("none", &f)?;
+      if let Some(f) = self.None() {
+        s.serialize_field("None", &f)?;
       } else {
-        s.skip_field("none")?;
+        s.skip_field("None")?;
       }
       if let Some(f) = self.idle() {
         s.serialize_field("idle", &f)?;
@@ -282,8 +282,8 @@ pub struct ScenarioExcelBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
 }
 impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ScenarioExcelBuilder<'a, 'b, A> {
   #[inline]
-  pub fn add_none(&mut self, none: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ScenarioBGType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ScenarioExcel::VT_NONE, none);
+  pub fn add_None(&mut self, None: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ScenarioBGType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ScenarioExcel::VT_NONE, None);
   }
   #[inline]
   pub fn add_idle(&mut self, idle: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ScenarioCharacterAction>>) {
@@ -335,7 +335,7 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ScenarioExcelBuilder<'a, 'b, A>
 impl core::fmt::Debug for ScenarioExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("ScenarioExcel");
-      ds.field("none", &self.none());
+      ds.field("None", &self.None());
       ds.field("idle", &self.idle());
       ds.field("Cafe", &self.Cafe());
       ds.field("Talk", &self.Talk());
@@ -350,7 +350,7 @@ impl core::fmt::Debug for ScenarioExcel<'_> {
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
 pub struct ScenarioExcelT {
-  pub none: Option<Vec<ScenarioBGType>>,
+  pub None: Option<Vec<ScenarioBGType>>,
   pub idle: Option<Vec<ScenarioCharacterAction>>,
   pub Cafe: DialogCategory,
   pub Talk: DialogType,
@@ -363,7 +363,7 @@ pub struct ScenarioExcelT {
 impl Default for ScenarioExcelT {
   fn default() -> Self {
     Self {
-      none: None,
+      None: None,
       idle: None,
       Cafe: DialogCategory::Cafe,
       Talk: DialogType::Talk,
@@ -380,7 +380,7 @@ impl ScenarioExcelT {
     &self,
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<ScenarioExcel<'b>> {
-    let none = self.none.as_ref().map(|x|{
+    let None = self.None.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let idle = self.idle.as_ref().map(|x|{
@@ -394,7 +394,7 @@ impl ScenarioExcelT {
     let Instant = self.Instant;
     let Prologue = self.Prologue;
     ScenarioExcel::create(_fbb, &ScenarioExcelArgs{
-      none,
+      None,
       idle,
       Cafe,
       Talk,

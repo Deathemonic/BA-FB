@@ -88,8 +88,8 @@ impl<'a> AcademyRewardExcel<'a> {
       let x = args.ScheduleGroupId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ScheduleGroupId(x);
-      if let Some(x) = args.rewardAmount {
-        builder.add_rewardAmount(x);
+      if let Some(x) = args.RewardAmount {
+        builder.add_RewardAmount(x);
       }
       if let Some(x) = args.RewardParcelId {
         builder.add_RewardParcelId(x);
@@ -97,14 +97,14 @@ impl<'a> AcademyRewardExcel<'a> {
       if let Some(x) = args.RewardParcelType {
         builder.add_RewardParcelType(x);
       }
-      if let Some(x) = args.isExtraRewardDisplayed {
-        builder.add_isExtraRewardDisplayed(x);
+      if let Some(x) = args.IsExtraRewardDisplayed {
+        builder.add_IsExtraRewardDisplayed(x);
       }
-      if let Some(x) = args.extraRewardProb {
-        builder.add_extraRewardProb(x);
+      if let Some(x) = args.ExtraRewardProb {
+        builder.add_ExtraRewardProb(x);
       }
-      if let Some(x) = args.extraRewardAmount {
-        builder.add_extraRewardAmount(x);
+      if let Some(x) = args.ExtraRewardAmount {
+        builder.add_ExtraRewardAmount(x);
       }
       if let Some(x) = args.ExtraRewardParcelId {
         builder.add_ExtraRewardParcelId(x);
@@ -148,13 +148,13 @@ impl<'a> AcademyRewardExcel<'a> {
     let ExtraRewardParcelId = self.ExtraRewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let extraRewardAmount = self.extraRewardAmount().map(|x| {
+    let ExtraRewardAmount = self.ExtraRewardAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let extraRewardProb = self.extraRewardProb().map(|x| {
+    let ExtraRewardProb = self.ExtraRewardProb().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let isExtraRewardDisplayed = self.isExtraRewardDisplayed().map(|x| {
+    let IsExtraRewardDisplayed = self.IsExtraRewardDisplayed().map(|x| {
       x.into_iter().collect()
     });
     let RewardParcelType = self.RewardParcelType().map(|x| {
@@ -163,7 +163,7 @@ impl<'a> AcademyRewardExcel<'a> {
     let RewardParcelId = self.RewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let rewardAmount = self.rewardAmount().map(|x| {
+    let RewardAmount = self.RewardAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     AcademyRewardExcelT {
@@ -181,12 +181,12 @@ impl<'a> AcademyRewardExcel<'a> {
       ExtraFavorExpProb,
       ExtraRewardParcelType,
       ExtraRewardParcelId,
-      extraRewardAmount,
-      extraRewardProb,
-      isExtraRewardDisplayed,
+      ExtraRewardAmount,
+      ExtraRewardProb,
+      IsExtraRewardDisplayed,
       RewardParcelType,
       RewardParcelId,
-      rewardAmount,
+      RewardAmount,
     }
   }
 
@@ -289,21 +289,21 @@ impl<'a> AcademyRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(AcademyRewardExcel::VT_EXTRAREWARDPARCELID, None)}
   }
   #[inline]
-  pub fn extraRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ExtraRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(AcademyRewardExcel::VT_EXTRAREWARDAMOUNT, None)}
   }
   #[inline]
-  pub fn extraRewardProb(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ExtraRewardProb(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(AcademyRewardExcel::VT_EXTRAREWARDPROB, None)}
   }
   #[inline]
-  pub fn isExtraRewardDisplayed(&self) -> Option<flatbuffers::Vector<'a, bool>> {
+  pub fn IsExtraRewardDisplayed(&self) -> Option<flatbuffers::Vector<'a, bool>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -324,7 +324,7 @@ impl<'a> AcademyRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(AcademyRewardExcel::VT_REWARDPARCELID, None)}
   }
   #[inline]
-  pub fn rewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -353,12 +353,12 @@ impl flatbuffers::Verifiable for AcademyRewardExcel<'_> {
      .visit_field::<i64>("ExtraFavorExpProb", Self::VT_EXTRAFAVOREXPPROB, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ExtraRewardParcelType", Self::VT_EXTRAREWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExtraRewardParcelId", Self::VT_EXTRAREWARDPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("extraRewardAmount", Self::VT_EXTRAREWARDAMOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("extraRewardProb", Self::VT_EXTRAREWARDPROB, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("isExtraRewardDisplayed", Self::VT_ISEXTRAREWARDDISPLAYED, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExtraRewardAmount", Self::VT_EXTRAREWARDAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ExtraRewardProb", Self::VT_EXTRAREWARDPROB, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("IsExtraRewardDisplayed", Self::VT_ISEXTRAREWARDDISPLAYED, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardAmount", Self::VT_REWARDAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardAmount", Self::VT_REWARDAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -378,12 +378,12 @@ pub struct AcademyRewardExcelArgs<'a> {
     pub ExtraFavorExpProb: i64,
     pub ExtraRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub ExtraRewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub extraRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub extraRewardProb: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub isExtraRewardDisplayed: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
+    pub ExtraRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ExtraRewardProb: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub IsExtraRewardDisplayed: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
     pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub rewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for AcademyRewardExcelArgs<'a> {
   #[inline]
@@ -403,12 +403,12 @@ impl<'a> Default for AcademyRewardExcelArgs<'a> {
       ExtraFavorExpProb: 0,
       ExtraRewardParcelType: None,
       ExtraRewardParcelId: None,
-      extraRewardAmount: None,
-      extraRewardProb: None,
-      isExtraRewardDisplayed: None,
+      ExtraRewardAmount: None,
+      ExtraRewardProb: None,
+      IsExtraRewardDisplayed: None,
       RewardParcelType: None,
       RewardParcelId: None,
-      rewardAmount: None,
+      RewardAmount: None,
     }
   }
 }
@@ -449,20 +449,20 @@ impl Serialize for AcademyRewardExcel<'_> {
       } else {
         s.skip_field("ExtraRewardParcelId")?;
       }
-      if let Some(f) = self.extraRewardAmount() {
-        s.serialize_field("extraRewardAmount", &f)?;
+      if let Some(f) = self.ExtraRewardAmount() {
+        s.serialize_field("ExtraRewardAmount", &f)?;
       } else {
-        s.skip_field("extraRewardAmount")?;
+        s.skip_field("ExtraRewardAmount")?;
       }
-      if let Some(f) = self.extraRewardProb() {
-        s.serialize_field("extraRewardProb", &f)?;
+      if let Some(f) = self.ExtraRewardProb() {
+        s.serialize_field("ExtraRewardProb", &f)?;
       } else {
-        s.skip_field("extraRewardProb")?;
+        s.skip_field("ExtraRewardProb")?;
       }
-      if let Some(f) = self.isExtraRewardDisplayed() {
-        s.serialize_field("isExtraRewardDisplayed", &f)?;
+      if let Some(f) = self.IsExtraRewardDisplayed() {
+        s.serialize_field("IsExtraRewardDisplayed", &f)?;
       } else {
-        s.skip_field("isExtraRewardDisplayed")?;
+        s.skip_field("IsExtraRewardDisplayed")?;
       }
       if let Some(f) = self.RewardParcelType() {
         s.serialize_field("RewardParcelType", &f)?;
@@ -474,10 +474,10 @@ impl Serialize for AcademyRewardExcel<'_> {
       } else {
         s.skip_field("RewardParcelId")?;
       }
-      if let Some(f) = self.rewardAmount() {
-        s.serialize_field("rewardAmount", &f)?;
+      if let Some(f) = self.RewardAmount() {
+        s.serialize_field("RewardAmount", &f)?;
       } else {
-        s.skip_field("rewardAmount")?;
+        s.skip_field("RewardAmount")?;
       }
     s.end()
   }
@@ -545,16 +545,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AcademyRewardExcelBuilder<'a, '
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_EXTRAREWARDPARCELID, ExtraRewardParcelId);
   }
   #[inline]
-  pub fn add_extraRewardAmount(&mut self, extraRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_EXTRAREWARDAMOUNT, extraRewardAmount);
+  pub fn add_ExtraRewardAmount(&mut self, ExtraRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_EXTRAREWARDAMOUNT, ExtraRewardAmount);
   }
   #[inline]
-  pub fn add_extraRewardProb(&mut self, extraRewardProb: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_EXTRAREWARDPROB, extraRewardProb);
+  pub fn add_ExtraRewardProb(&mut self, ExtraRewardProb: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_EXTRAREWARDPROB, ExtraRewardProb);
   }
   #[inline]
-  pub fn add_isExtraRewardDisplayed(&mut self, isExtraRewardDisplayed: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_ISEXTRAREWARDDISPLAYED, isExtraRewardDisplayed);
+  pub fn add_IsExtraRewardDisplayed(&mut self, IsExtraRewardDisplayed: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_ISEXTRAREWARDDISPLAYED, IsExtraRewardDisplayed);
   }
   #[inline]
   pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
@@ -565,8 +565,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AcademyRewardExcelBuilder<'a, '
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_REWARDPARCELID, RewardParcelId);
   }
   #[inline]
-  pub fn add_rewardAmount(&mut self, rewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_REWARDAMOUNT, rewardAmount);
+  pub fn add_RewardAmount(&mut self, RewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AcademyRewardExcel::VT_REWARDAMOUNT, RewardAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> AcademyRewardExcelBuilder<'a, 'b, A> {
@@ -600,12 +600,12 @@ impl core::fmt::Debug for AcademyRewardExcel<'_> {
       ds.field("ExtraFavorExpProb", &self.ExtraFavorExpProb());
       ds.field("ExtraRewardParcelType", &self.ExtraRewardParcelType());
       ds.field("ExtraRewardParcelId", &self.ExtraRewardParcelId());
-      ds.field("extraRewardAmount", &self.extraRewardAmount());
-      ds.field("extraRewardProb", &self.extraRewardProb());
-      ds.field("isExtraRewardDisplayed", &self.isExtraRewardDisplayed());
+      ds.field("ExtraRewardAmount", &self.ExtraRewardAmount());
+      ds.field("ExtraRewardProb", &self.ExtraRewardProb());
+      ds.field("IsExtraRewardDisplayed", &self.IsExtraRewardDisplayed());
       ds.field("RewardParcelType", &self.RewardParcelType());
       ds.field("RewardParcelId", &self.RewardParcelId());
-      ds.field("rewardAmount", &self.rewardAmount());
+      ds.field("RewardAmount", &self.RewardAmount());
       ds.finish()
   }
 }
@@ -626,12 +626,12 @@ pub struct AcademyRewardExcelT {
   pub ExtraFavorExpProb: i64,
   pub ExtraRewardParcelType: Option<Vec<ParcelType>>,
   pub ExtraRewardParcelId: Option<Vec<i64>>,
-  pub extraRewardAmount: Option<Vec<i64>>,
-  pub extraRewardProb: Option<Vec<i64>>,
-  pub isExtraRewardDisplayed: Option<Vec<bool>>,
+  pub ExtraRewardAmount: Option<Vec<i64>>,
+  pub ExtraRewardProb: Option<Vec<i64>>,
+  pub IsExtraRewardDisplayed: Option<Vec<bool>>,
   pub RewardParcelType: Option<Vec<ParcelType>>,
   pub RewardParcelId: Option<Vec<i64>>,
-  pub rewardAmount: Option<Vec<i64>>,
+  pub RewardAmount: Option<Vec<i64>>,
 }
 impl Default for AcademyRewardExcelT {
   fn default() -> Self {
@@ -650,12 +650,12 @@ impl Default for AcademyRewardExcelT {
       ExtraFavorExpProb: 0,
       ExtraRewardParcelType: None,
       ExtraRewardParcelId: None,
-      extraRewardAmount: None,
-      extraRewardProb: None,
-      isExtraRewardDisplayed: None,
+      ExtraRewardAmount: None,
+      ExtraRewardProb: None,
+      IsExtraRewardDisplayed: None,
       RewardParcelType: None,
       RewardParcelId: None,
-      rewardAmount: None,
+      RewardAmount: None,
     }
   }
 }
@@ -686,13 +686,13 @@ impl AcademyRewardExcelT {
     let ExtraRewardParcelId = self.ExtraRewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let extraRewardAmount = self.extraRewardAmount.as_ref().map(|x|{
+    let ExtraRewardAmount = self.ExtraRewardAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let extraRewardProb = self.extraRewardProb.as_ref().map(|x|{
+    let ExtraRewardProb = self.ExtraRewardProb.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let isExtraRewardDisplayed = self.isExtraRewardDisplayed.as_ref().map(|x|{
+    let IsExtraRewardDisplayed = self.IsExtraRewardDisplayed.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
@@ -701,7 +701,7 @@ impl AcademyRewardExcelT {
     let RewardParcelId = self.RewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardAmount = self.rewardAmount.as_ref().map(|x|{
+    let RewardAmount = self.RewardAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     AcademyRewardExcel::create(_fbb, &AcademyRewardExcelArgs{
@@ -719,12 +719,12 @@ impl AcademyRewardExcelT {
       ExtraFavorExpProb,
       ExtraRewardParcelType,
       ExtraRewardParcelId,
-      extraRewardAmount,
-      extraRewardProb,
-      isExtraRewardDisplayed,
+      ExtraRewardAmount,
+      ExtraRewardProb,
+      IsExtraRewardDisplayed,
       RewardParcelType,
       RewardParcelId,
-      rewardAmount,
+      RewardAmount,
     })
   }
 }

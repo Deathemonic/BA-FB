@@ -108,8 +108,8 @@ impl<'a> RaidRankingRewardExcel<'a> {
       if let Some(x) = args.RewardParcelUniqueName {
         builder.add_RewardParcelUniqueName(x);
       }
-      if let Some(x) = args.rewardParcelUniqueId {
-        builder.add_rewardParcelUniqueId(x);
+      if let Some(x) = args.RewardParcelUniqueId {
+        builder.add_RewardParcelUniqueId(x);
       }
       if let Some(x) = args.RewardParcelType {
         builder.add_RewardParcelType(x);
@@ -140,7 +140,7 @@ impl<'a> RaidRankingRewardExcel<'a> {
     let RewardParcelType = self.RewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let rewardParcelUniqueId = self.rewardParcelUniqueId().map(|x| {
+    let RewardParcelUniqueId = self.RewardParcelUniqueId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let RewardParcelUniqueName = self.RewardParcelUniqueName().map(|x| {
@@ -166,7 +166,7 @@ impl<'a> RaidRankingRewardExcel<'a> {
       PercentRankEnd,
       Tier,
       RewardParcelType,
-      rewardParcelUniqueId,
+      RewardParcelUniqueId,
       RewardParcelUniqueName,
       RewardParcelAmount,
     }
@@ -285,7 +285,7 @@ impl<'a> RaidRankingRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(RaidRankingRewardExcel::VT_REWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn rewardParcelUniqueId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardParcelUniqueId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -330,7 +330,7 @@ impl flatbuffers::Verifiable for RaidRankingRewardExcel<'_> {
      .visit_field::<i64>("PercentRankEnd", Self::VT_PERCENTRANKEND, false)?
      .visit_field::<i32>("Tier", Self::VT_TIER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelUniqueId", Self::VT_REWARDPARCELUNIQUEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelUniqueId", Self::VT_REWARDPARCELUNIQUEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("RewardParcelUniqueName", Self::VT_REWARDPARCELUNIQUENAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
@@ -354,7 +354,7 @@ pub struct RaidRankingRewardExcelArgs<'a> {
     pub PercentRankEnd: i64,
     pub Tier: i32,
     pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub rewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardParcelUniqueName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
@@ -378,7 +378,7 @@ impl<'a> Default for RaidRankingRewardExcelArgs<'a> {
       PercentRankEnd: 0,
       Tier: 0,
       RewardParcelType: None,
-      rewardParcelUniqueId: None,
+      RewardParcelUniqueId: None,
       RewardParcelUniqueName: None,
       RewardParcelAmount: None,
     }
@@ -411,10 +411,10 @@ impl Serialize for RaidRankingRewardExcel<'_> {
       } else {
         s.skip_field("RewardParcelType")?;
       }
-      if let Some(f) = self.rewardParcelUniqueId() {
-        s.serialize_field("rewardParcelUniqueId", &f)?;
+      if let Some(f) = self.RewardParcelUniqueId() {
+        s.serialize_field("RewardParcelUniqueId", &f)?;
       } else {
-        s.skip_field("rewardParcelUniqueId")?;
+        s.skip_field("RewardParcelUniqueId")?;
       }
       if let Some(f) = self.RewardParcelUniqueName() {
         s.serialize_field("RewardParcelUniqueName", &f)?;
@@ -500,8 +500,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> RaidRankingRewardExcelBuilder<'
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RaidRankingRewardExcel::VT_REWARDPARCELTYPE, RewardParcelType);
   }
   #[inline]
-  pub fn add_rewardParcelUniqueId(&mut self, rewardParcelUniqueId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RaidRankingRewardExcel::VT_REWARDPARCELUNIQUEID, rewardParcelUniqueId);
+  pub fn add_RewardParcelUniqueId(&mut self, RewardParcelUniqueId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RaidRankingRewardExcel::VT_REWARDPARCELUNIQUEID, RewardParcelUniqueId);
   }
   #[inline]
   pub fn add_RewardParcelUniqueName(&mut self, RewardParcelUniqueName: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -545,7 +545,7 @@ impl core::fmt::Debug for RaidRankingRewardExcel<'_> {
       ds.field("PercentRankEnd", &self.PercentRankEnd());
       ds.field("Tier", &self.Tier());
       ds.field("RewardParcelType", &self.RewardParcelType());
-      ds.field("rewardParcelUniqueId", &self.rewardParcelUniqueId());
+      ds.field("RewardParcelUniqueId", &self.RewardParcelUniqueId());
       ds.field("RewardParcelUniqueName", &self.RewardParcelUniqueName());
       ds.field("RewardParcelAmount", &self.RewardParcelAmount());
       ds.finish()
@@ -570,7 +570,7 @@ pub struct RaidRankingRewardExcelT {
   pub PercentRankEnd: i64,
   pub Tier: i32,
   pub RewardParcelType: Option<Vec<ParcelType>>,
-  pub rewardParcelUniqueId: Option<Vec<i64>>,
+  pub RewardParcelUniqueId: Option<Vec<i64>>,
   pub RewardParcelUniqueName: Option<Vec<String>>,
   pub RewardParcelAmount: Option<Vec<i64>>,
 }
@@ -593,7 +593,7 @@ impl Default for RaidRankingRewardExcelT {
       PercentRankEnd: 0,
       Tier: 0,
       RewardParcelType: None,
-      rewardParcelUniqueId: None,
+      RewardParcelUniqueId: None,
       RewardParcelUniqueName: None,
       RewardParcelAmount: None,
     }
@@ -622,7 +622,7 @@ impl RaidRankingRewardExcelT {
     let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardParcelUniqueId = self.rewardParcelUniqueId.as_ref().map(|x|{
+    let RewardParcelUniqueId = self.RewardParcelUniqueId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardParcelUniqueName = self.RewardParcelUniqueName.as_ref().map(|x|{
@@ -648,7 +648,7 @@ impl RaidRankingRewardExcelT {
       PercentRankEnd,
       Tier,
       RewardParcelType,
-      rewardParcelUniqueId,
+      RewardParcelUniqueId,
       RewardParcelUniqueName,
       RewardParcelAmount,
     })

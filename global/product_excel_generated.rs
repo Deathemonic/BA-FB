@@ -61,14 +61,14 @@ impl<'a> ProductExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.parcelAmount {
-        builder.add_parcelAmount(x);
+      if let Some(x) = args.ParcelAmount {
+        builder.add_ParcelAmount(x);
       }
       if let Some(x) = args.ParcelId {
         builder.add_ParcelId(x);
       }
-      if let Some(x) = args.parcelType {
-        builder.add_parcelType(x);
+      if let Some(x) = args.ParcelType {
+        builder.add_ParcelType(x);
       }
       let x = args.PurchasePeriodType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -112,13 +112,13 @@ impl<'a> ProductExcel<'a> {
         self.PurchasePeriodType()
       };
       let PurchasePeriodLimit = self.PurchasePeriodLimit();
-    let parcelType = self.parcelType().map(|x| {
+    let ParcelType = self.ParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let ParcelId = self.ParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let parcelAmount = self.parcelAmount().map(|x| {
+    let ParcelAmount = self.ParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     ProductExcelT {
@@ -130,9 +130,9 @@ impl<'a> ProductExcel<'a> {
       PriceReference,
       PurchasePeriodType,
       PurchasePeriodLimit,
-      parcelType,
+      ParcelType,
       ParcelId,
-      parcelAmount,
+      ParcelAmount,
     }
   }
 
@@ -193,7 +193,7 @@ impl<'a> ProductExcel<'a> {
     unsafe { self._tab.get::<i64>(ProductExcel::VT_PURCHASEPERIODLIMIT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn parcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn ParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -207,7 +207,7 @@ impl<'a> ProductExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ProductExcel::VT_PARCELID, None)}
   }
   #[inline]
-  pub fn parcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -230,9 +230,9 @@ impl flatbuffers::Verifiable for ProductExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PriceReference", Self::VT_PRICEREFERENCE, false)?
      .visit_field::<PurchasePeriodType>("PurchasePeriodType", Self::VT_PURCHASEPERIODTYPE, false)?
      .visit_field::<i64>("PurchasePeriodLimit", Self::VT_PURCHASEPERIODLIMIT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("parcelType", Self::VT_PARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ParcelType", Self::VT_PARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ParcelId", Self::VT_PARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("parcelAmount", Self::VT_PARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ParcelAmount", Self::VT_PARCELAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -246,9 +246,9 @@ pub struct ProductExcelArgs<'a> {
     pub PriceReference: Option<flatbuffers::WIPOffset<&'a str>>,
     pub PurchasePeriodType: PurchasePeriodType,
     pub PurchasePeriodLimit: i64,
-    pub parcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub ParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub ParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub parcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for ProductExcelArgs<'a> {
   #[inline]
@@ -262,9 +262,9 @@ impl<'a> Default for ProductExcelArgs<'a> {
       PriceReference: None,
       PurchasePeriodType: PurchasePeriodType::None,
       PurchasePeriodLimit: 0,
-      parcelType: None,
+      ParcelType: None,
       ParcelId: None,
-      parcelAmount: None,
+      ParcelAmount: None,
     }
   }
 }
@@ -295,20 +295,20 @@ impl Serialize for ProductExcel<'_> {
       }
       s.serialize_field("PurchasePeriodType", &self.PurchasePeriodType())?;
       s.serialize_field("PurchasePeriodLimit", &self.PurchasePeriodLimit())?;
-      if let Some(f) = self.parcelType() {
-        s.serialize_field("parcelType", &f)?;
+      if let Some(f) = self.ParcelType() {
+        s.serialize_field("ParcelType", &f)?;
       } else {
-        s.skip_field("parcelType")?;
+        s.skip_field("ParcelType")?;
       }
       if let Some(f) = self.ParcelId() {
         s.serialize_field("ParcelId", &f)?;
       } else {
         s.skip_field("ParcelId")?;
       }
-      if let Some(f) = self.parcelAmount() {
-        s.serialize_field("parcelAmount", &f)?;
+      if let Some(f) = self.ParcelAmount() {
+        s.serialize_field("ParcelAmount", &f)?;
       } else {
-        s.skip_field("parcelAmount")?;
+        s.skip_field("ParcelAmount")?;
       }
     s.end()
   }
@@ -352,16 +352,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ProductExcelBuilder<'a, 'b, A> 
     self.fbb_.push_slot::<i64>(ProductExcel::VT_PURCHASEPERIODLIMIT, PurchasePeriodLimit, 0);
   }
   #[inline]
-  pub fn add_parcelType(&mut self, parcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductExcel::VT_PARCELTYPE, parcelType);
+  pub fn add_ParcelType(&mut self, ParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductExcel::VT_PARCELTYPE, ParcelType);
   }
   #[inline]
   pub fn add_ParcelId(&mut self, ParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductExcel::VT_PARCELID, ParcelId);
   }
   #[inline]
-  pub fn add_parcelAmount(&mut self, parcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductExcel::VT_PARCELAMOUNT, parcelAmount);
+  pub fn add_ParcelAmount(&mut self, ParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductExcel::VT_PARCELAMOUNT, ParcelAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ProductExcelBuilder<'a, 'b, A> {
@@ -389,9 +389,9 @@ impl core::fmt::Debug for ProductExcel<'_> {
       ds.field("PriceReference", &self.PriceReference());
       ds.field("PurchasePeriodType", &self.PurchasePeriodType());
       ds.field("PurchasePeriodLimit", &self.PurchasePeriodLimit());
-      ds.field("parcelType", &self.parcelType());
+      ds.field("ParcelType", &self.ParcelType());
       ds.field("ParcelId", &self.ParcelId());
-      ds.field("parcelAmount", &self.parcelAmount());
+      ds.field("ParcelAmount", &self.ParcelAmount());
       ds.finish()
   }
 }
@@ -406,9 +406,9 @@ pub struct ProductExcelT {
   pub PriceReference: Option<String>,
   pub PurchasePeriodType: PurchasePeriodType,
   pub PurchasePeriodLimit: i64,
-  pub parcelType: Option<Vec<ParcelType>>,
+  pub ParcelType: Option<Vec<ParcelType>>,
   pub ParcelId: Option<Vec<i64>>,
-  pub parcelAmount: Option<Vec<i64>>,
+  pub ParcelAmount: Option<Vec<i64>>,
 }
 impl Default for ProductExcelT {
   fn default() -> Self {
@@ -421,9 +421,9 @@ impl Default for ProductExcelT {
       PriceReference: None,
       PurchasePeriodType: PurchasePeriodType::None,
       PurchasePeriodLimit: 0,
-      parcelType: None,
+      ParcelType: None,
       ParcelId: None,
-      parcelAmount: None,
+      ParcelAmount: None,
     }
   }
 }
@@ -446,13 +446,13 @@ impl ProductExcelT {
     });
     let PurchasePeriodType = self.PurchasePeriodType;
     let PurchasePeriodLimit = self.PurchasePeriodLimit;
-    let parcelType = self.parcelType.as_ref().map(|x|{
+    let ParcelType = self.ParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ParcelId = self.ParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let parcelAmount = self.parcelAmount.as_ref().map(|x|{
+    let ParcelAmount = self.ParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     ProductExcel::create(_fbb, &ProductExcelArgs{
@@ -464,9 +464,9 @@ impl ProductExcelT {
       PriceReference,
       PurchasePeriodType,
       PurchasePeriodLimit,
-      parcelType,
+      ParcelType,
       ParcelId,
-      parcelAmount,
+      ParcelAmount,
     })
   }
 }

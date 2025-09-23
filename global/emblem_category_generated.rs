@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_EMBLEM_CATEGORY: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_EMBLEM_CATEGORY: i32 = 11;
+pub const ENUM_MAX_EMBLEM_CATEGORY: i32 = 12;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_EMBLEM_CATEGORY: [EmblemCategory; 12] = [
+pub const ENUM_VALUES_EMBLEM_CATEGORY: [EmblemCategory; 13] = [
   EmblemCategory::None,
   EmblemCategory::Default,
   EmblemCategory::Mission,
@@ -32,6 +32,7 @@ pub const ENUM_VALUES_EMBLEM_CATEGORY: [EmblemCategory; 12] = [
   EmblemCategory::Etc_Anniversary,
   EmblemCategory::MultiFloorRaid,
   EmblemCategory::Potential,
+  EmblemCategory::BattlePass,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -51,9 +52,10 @@ impl EmblemCategory {
   pub const Etc_Anniversary: Self = Self(9);
   pub const MultiFloorRaid: Self = Self(10);
   pub const Potential: Self = Self(11);
+  pub const BattlePass: Self = Self(12);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 11;
+  pub const ENUM_MAX: i32 = 12;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Default,
@@ -67,6 +69,7 @@ impl EmblemCategory {
     Self::Etc_Anniversary,
     Self::MultiFloorRaid,
     Self::Potential,
+    Self::BattlePass,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -83,6 +86,7 @@ impl EmblemCategory {
       Self::Etc_Anniversary => Some("Etc_Anniversary"),
       Self::MultiFloorRaid => Some("MultiFloorRaid"),
       Self::Potential => Some("Potential"),
+      Self::BattlePass => Some("BattlePass"),
       _ => None,
     }
   }

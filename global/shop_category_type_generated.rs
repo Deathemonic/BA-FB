@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_SHOP_CATEGORY_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_SHOP_CATEGORY_TYPE: i32 = 34;
+pub const ENUM_MAX_SHOP_CATEGORY_TYPE: i32 = 37;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_SHOP_CATEGORY_TYPE: [ShopCategoryType; 35] = [
+pub const ENUM_VALUES_SHOP_CATEGORY_TYPE: [ShopCategoryType; 38] = [
   ShopCategoryType::General,
   ShopCategoryType::SecretStone,
   ShopCategoryType::Raid,
@@ -55,6 +55,9 @@ pub const ENUM_VALUES_SHOP_CATEGORY_TYPE: [ShopCategoryType; 35] = [
   ShopCategoryType::BeforehandGacha,
   ShopCategoryType::EliminateRaid,
   ShopCategoryType::GlobalSpecialGacha,
+  ShopCategoryType::SelectPickupGacha,
+  ShopCategoryType::GemDaily,
+  ShopCategoryType::GemWeekly,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -97,9 +100,12 @@ impl ShopCategoryType {
   pub const BeforehandGacha: Self = Self(32);
   pub const EliminateRaid: Self = Self(33);
   pub const GlobalSpecialGacha: Self = Self(34);
+  pub const SelectPickupGacha: Self = Self(35);
+  pub const GemDaily: Self = Self(36);
+  pub const GemWeekly: Self = Self(37);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 34;
+  pub const ENUM_MAX: i32 = 37;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::General,
     Self::SecretStone,
@@ -136,6 +142,9 @@ impl ShopCategoryType {
     Self::BeforehandGacha,
     Self::EliminateRaid,
     Self::GlobalSpecialGacha,
+    Self::SelectPickupGacha,
+    Self::GemDaily,
+    Self::GemWeekly,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -175,6 +184,9 @@ impl ShopCategoryType {
       Self::BeforehandGacha => Some("BeforehandGacha"),
       Self::EliminateRaid => Some("EliminateRaid"),
       Self::GlobalSpecialGacha => Some("GlobalSpecialGacha"),
+      Self::SelectPickupGacha => Some("SelectPickupGacha"),
+      Self::GemDaily => Some("GemDaily"),
+      Self::GemWeekly => Some("GemWeekly"),
       _ => None,
     }
   }

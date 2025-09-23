@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_SHOP_FILTER_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_SHOP_FILTER_TYPE: i32 = 36;
+pub const ENUM_MAX_SHOP_FILTER_TYPE: i32 = 37;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_SHOP_FILTER_TYPE: [ShopFilterType; 37] = [
+pub const ENUM_VALUES_SHOP_FILTER_TYPE: [ShopFilterType; 38] = [
   ShopFilterType::GachaTicket,
   ShopFilterType::SecretStone,
   ShopFilterType::SecretStone_1,
@@ -57,6 +57,7 @@ pub const ENUM_VALUES_SHOP_FILTER_TYPE: [ShopFilterType; 37] = [
   ShopFilterType::ShopFilterDUMMY_7,
   ShopFilterType::ETC,
   ShopFilterType::Bundle,
+  ShopFilterType::FavorItem,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -101,9 +102,10 @@ impl ShopFilterType {
   pub const ShopFilterDUMMY_7: Self = Self(34);
   pub const ETC: Self = Self(35);
   pub const Bundle: Self = Self(36);
+  pub const FavorItem: Self = Self(37);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 36;
+  pub const ENUM_MAX: i32 = 37;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::GachaTicket,
     Self::SecretStone,
@@ -142,6 +144,7 @@ impl ShopFilterType {
     Self::ShopFilterDUMMY_7,
     Self::ETC,
     Self::Bundle,
+    Self::FavorItem,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -183,6 +186,7 @@ impl ShopFilterType {
       Self::ShopFilterDUMMY_7 => Some("ShopFilterDUMMY_7"),
       Self::ETC => Some("ETC"),
       Self::Bundle => Some("Bundle"),
+      Self::FavorItem => Some("FavorItem"),
       _ => None,
     }
   }

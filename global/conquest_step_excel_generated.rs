@@ -74,8 +74,8 @@ impl<'a> ConquestStepExcel<'a> {
       if let Some(x) = args.UnexpectedEventPrefab {
         builder.add_UnexpectedEventPrefab(x);
       }
-      if let Some(x) = args.unexpectedEventUnitId {
-        builder.add_unexpectedEventUnitId(x);
+      if let Some(x) = args.UnexpectedEventUnitId {
+        builder.add_UnexpectedEventUnitId(x);
       }
       let x = args.StepEnterItemType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -112,7 +112,7 @@ impl<'a> ConquestStepExcel<'a> {
       };
       let StepEnterItemUniqueId = self.StepEnterItemUniqueId();
       let StepEnterItemAmount = self.StepEnterItemAmount();
-    let unexpectedEventUnitId = self.unexpectedEventUnitId().map(|x| {
+    let UnexpectedEventUnitId = self.UnexpectedEventUnitId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let UnexpectedEventPrefab = self.UnexpectedEventPrefab().map(|x| {
@@ -129,7 +129,7 @@ impl<'a> ConquestStepExcel<'a> {
       StepEnterItemType,
       StepEnterItemUniqueId,
       StepEnterItemAmount,
-      unexpectedEventUnitId,
+      UnexpectedEventUnitId,
       UnexpectedEventPrefab,
       TreasureBoxObjectId,
       TreasureBoxCountPerStepOpen,
@@ -193,7 +193,7 @@ impl<'a> ConquestStepExcel<'a> {
     unsafe { self._tab.get::<i64>(ConquestStepExcel::VT_STEPENTERITEMAMOUNT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn unexpectedEventUnitId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn UnexpectedEventUnitId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -237,7 +237,7 @@ impl flatbuffers::Verifiable for ConquestStepExcel<'_> {
      .visit_field::<ParcelType>("StepEnterItemType", Self::VT_STEPENTERITEMTYPE, false)?
      .visit_field::<i64>("StepEnterItemUniqueId", Self::VT_STEPENTERITEMUNIQUEID, false)?
      .visit_field::<i64>("StepEnterItemAmount", Self::VT_STEPENTERITEMAMOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("unexpectedEventUnitId", Self::VT_UNEXPECTEDEVENTUNITID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("UnexpectedEventUnitId", Self::VT_UNEXPECTEDEVENTUNITID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("UnexpectedEventPrefab", Self::VT_UNEXPECTEDEVENTPREFAB, false)?
      .visit_field::<i64>("TreasureBoxObjectId", Self::VT_TREASUREBOXOBJECTID, false)?
      .visit_field::<i32>("TreasureBoxCountPerStepOpen", Self::VT_TREASUREBOXCOUNTPERSTEPOPEN, false)?
@@ -254,7 +254,7 @@ pub struct ConquestStepExcelArgs<'a> {
     pub StepEnterItemType: ParcelType,
     pub StepEnterItemUniqueId: i64,
     pub StepEnterItemAmount: i64,
-    pub unexpectedEventUnitId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub UnexpectedEventUnitId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub UnexpectedEventPrefab: Option<flatbuffers::WIPOffset<&'a str>>,
     pub TreasureBoxObjectId: i64,
     pub TreasureBoxCountPerStepOpen: i32,
@@ -271,7 +271,7 @@ impl<'a> Default for ConquestStepExcelArgs<'a> {
       StepEnterItemType: ParcelType::None,
       StepEnterItemUniqueId: 0,
       StepEnterItemAmount: 0,
-      unexpectedEventUnitId: None,
+      UnexpectedEventUnitId: None,
       UnexpectedEventPrefab: None,
       TreasureBoxObjectId: 0,
       TreasureBoxCountPerStepOpen: 0,
@@ -297,10 +297,10 @@ impl Serialize for ConquestStepExcel<'_> {
       s.serialize_field("StepEnterItemType", &self.StepEnterItemType())?;
       s.serialize_field("StepEnterItemUniqueId", &self.StepEnterItemUniqueId())?;
       s.serialize_field("StepEnterItemAmount", &self.StepEnterItemAmount())?;
-      if let Some(f) = self.unexpectedEventUnitId() {
-        s.serialize_field("unexpectedEventUnitId", &f)?;
+      if let Some(f) = self.UnexpectedEventUnitId() {
+        s.serialize_field("UnexpectedEventUnitId", &f)?;
       } else {
-        s.skip_field("unexpectedEventUnitId")?;
+        s.skip_field("UnexpectedEventUnitId")?;
       }
       if let Some(f) = self.UnexpectedEventPrefab() {
         s.serialize_field("UnexpectedEventPrefab", &f)?;
@@ -351,8 +351,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConquestStepExcelBuilder<'a, 'b
     self.fbb_.push_slot::<i64>(ConquestStepExcel::VT_STEPENTERITEMAMOUNT, StepEnterItemAmount, 0);
   }
   #[inline]
-  pub fn add_unexpectedEventUnitId(&mut self, unexpectedEventUnitId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestStepExcel::VT_UNEXPECTEDEVENTUNITID, unexpectedEventUnitId);
+  pub fn add_UnexpectedEventUnitId(&mut self, UnexpectedEventUnitId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestStepExcel::VT_UNEXPECTEDEVENTUNITID, UnexpectedEventUnitId);
   }
   #[inline]
   pub fn add_UnexpectedEventPrefab(&mut self, UnexpectedEventPrefab: flatbuffers::WIPOffset<&'b  str>) {
@@ -392,7 +392,7 @@ impl core::fmt::Debug for ConquestStepExcel<'_> {
       ds.field("StepEnterItemType", &self.StepEnterItemType());
       ds.field("StepEnterItemUniqueId", &self.StepEnterItemUniqueId());
       ds.field("StepEnterItemAmount", &self.StepEnterItemAmount());
-      ds.field("unexpectedEventUnitId", &self.unexpectedEventUnitId());
+      ds.field("UnexpectedEventUnitId", &self.UnexpectedEventUnitId());
       ds.field("UnexpectedEventPrefab", &self.UnexpectedEventPrefab());
       ds.field("TreasureBoxObjectId", &self.TreasureBoxObjectId());
       ds.field("TreasureBoxCountPerStepOpen", &self.TreasureBoxCountPerStepOpen());
@@ -410,7 +410,7 @@ pub struct ConquestStepExcelT {
   pub StepEnterItemType: ParcelType,
   pub StepEnterItemUniqueId: i64,
   pub StepEnterItemAmount: i64,
-  pub unexpectedEventUnitId: Option<Vec<i64>>,
+  pub UnexpectedEventUnitId: Option<Vec<i64>>,
   pub UnexpectedEventPrefab: Option<String>,
   pub TreasureBoxObjectId: i64,
   pub TreasureBoxCountPerStepOpen: i32,
@@ -426,7 +426,7 @@ impl Default for ConquestStepExcelT {
       StepEnterItemType: ParcelType::None,
       StepEnterItemUniqueId: 0,
       StepEnterItemAmount: 0,
-      unexpectedEventUnitId: None,
+      UnexpectedEventUnitId: None,
       UnexpectedEventPrefab: None,
       TreasureBoxObjectId: 0,
       TreasureBoxCountPerStepOpen: 0,
@@ -448,7 +448,7 @@ impl ConquestStepExcelT {
     let StepEnterItemType = self.StepEnterItemType;
     let StepEnterItemUniqueId = self.StepEnterItemUniqueId;
     let StepEnterItemAmount = self.StepEnterItemAmount;
-    let unexpectedEventUnitId = self.unexpectedEventUnitId.as_ref().map(|x|{
+    let UnexpectedEventUnitId = self.UnexpectedEventUnitId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let UnexpectedEventPrefab = self.UnexpectedEventPrefab.as_ref().map(|x|{
@@ -465,7 +465,7 @@ impl ConquestStepExcelT {
       StepEnterItemType,
       StepEnterItemUniqueId,
       StepEnterItemAmount,
-      unexpectedEventUnitId,
+      UnexpectedEventUnitId,
       UnexpectedEventPrefab,
       TreasureBoxObjectId,
       TreasureBoxCountPerStepOpen,

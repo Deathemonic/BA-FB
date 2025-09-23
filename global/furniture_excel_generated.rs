@@ -71,6 +71,7 @@ impl<'a> FurnitureExcel<'a> {
   pub const VT_CAFECHARACTERSTATEADD: flatbuffers::VOffsetT = 82;
   pub const VT_CAFECHARACTERSTATEMAKE: flatbuffers::VOffsetT = 84;
   pub const VT_CAFECHARACTERSTATEONLY: flatbuffers::VOffsetT = 86;
+  pub const VT_HIDECRAFTSHORTCUT: flatbuffers::VOffsetT = 88;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -137,20 +138,20 @@ impl<'a> FurnitureExcel<'a> {
       if let Some(x) = args.CafeCharacterStateMake {
         builder.add_CafeCharacterStateMake(x);
       }
-      if let Some(x) = args.cafeCharacterStateAdd {
-        builder.add_cafeCharacterStateAdd(x);
+      if let Some(x) = args.CafeCharacterStateAdd {
+        builder.add_CafeCharacterStateAdd(x);
       }
       if let Some(x) = args.CafeCharacterStateReq {
         builder.add_CafeCharacterStateReq(x);
       }
-      if let Some(x) = args.furnitureFunctionParameter {
-        builder.add_furnitureFunctionParameter(x);
+      if let Some(x) = args.FurnitureFunctionParameter {
+        builder.add_FurnitureFunctionParameter(x);
       }
       let x = args.FurnitureFunctionType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_FurnitureFunctionType(x);
-      if let Some(x) = args.tags {
-        builder.add_tags(x);
+      if let Some(x) = args.Tags {
+        builder.add_Tags(x);
       }
       if let Some(x) = args.CornerPrefab {
         builder.add_CornerPrefab(x);
@@ -200,6 +201,7 @@ impl<'a> FurnitureExcel<'a> {
       let x = args.ProductionStep;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ProductionStep(x);
+      builder.add_HideCraftShortcut(args.HideCraftShortcut);
       builder.add_ReverseRotation(args.ReverseRotation);
       builder.add_Enable(args.Enable);
       builder.add_CheckFloorDecoration(args.CheckFloorDecoration);
@@ -263,7 +265,7 @@ impl<'a> FurnitureExcel<'a> {
       let ComfortBonus = self.ComfortBonus();
       let VisitOperationType = self.VisitOperationType();
       let VisitBonusOperationType = self.VisitBonusOperationType();
-    let tags = self.tags().map(|x| {
+    let Tags = self.Tags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let CraftQualityTier0 = self.CraftQualityTier0();
@@ -275,7 +277,7 @@ impl<'a> FurnitureExcel<'a> {
       } else {
         self.FurnitureFunctionType()
       };
-    let furnitureFunctionParameter = self.furnitureFunctionParameter().map(|x| {
+    let FurnitureFunctionParameter = self.FurnitureFunctionParameter().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let VideoId = self.VideoId();
@@ -285,7 +287,7 @@ impl<'a> FurnitureExcel<'a> {
     let CafeCharacterStateReq = self.CafeCharacterStateReq().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let cafeCharacterStateAdd = self.cafeCharacterStateAdd().map(|x| {
+    let CafeCharacterStateAdd = self.CafeCharacterStateAdd().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let CafeCharacterStateMake = self.CafeCharacterStateMake().map(|x| {
@@ -294,6 +296,7 @@ impl<'a> FurnitureExcel<'a> {
     let CafeCharacterStateOnly = self.CafeCharacterStateOnly().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
+      let HideCraftShortcut = self.HideCraftShortcut();
     FurnitureExcelT {
       Id,
       ProductionStep,
@@ -322,21 +325,22 @@ impl<'a> FurnitureExcel<'a> {
       ComfortBonus,
       VisitOperationType,
       VisitBonusOperationType,
-      tags,
+      Tags,
       CraftQualityTier0,
       CraftQualityTier1,
       CraftQualityTier2,
       ShiftingCraftQuality,
       FurnitureFunctionType,
-      furnitureFunctionParameter,
+      FurnitureFunctionParameter,
       VideoId,
       EventCollectionId,
       FurnitureBubbleOffsetX,
       FurnitureBubbleOffsetY,
       CafeCharacterStateReq,
-      cafeCharacterStateAdd,
+      CafeCharacterStateAdd,
       CafeCharacterStateMake,
       CafeCharacterStateOnly,
+      HideCraftShortcut,
     }
   }
 
@@ -530,7 +534,7 @@ impl<'a> FurnitureExcel<'a> {
     unsafe { self._tab.get::<i64>(FurnitureExcel::VT_VISITBONUSOPERATIONTYPE, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn Tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -572,7 +576,7 @@ impl<'a> FurnitureExcel<'a> {
     unsafe { self._tab.get::<FurnitureFunctionType>(FurnitureExcel::VT_FURNITUREFUNCTIONTYPE, Some(FurnitureFunctionType::None)).unwrap()}
   }
   #[inline]
-  pub fn furnitureFunctionParameter(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn FurnitureFunctionParameter(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -614,7 +618,7 @@ impl<'a> FurnitureExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(FurnitureExcel::VT_CAFECHARACTERSTATEREQ, None)}
   }
   #[inline]
-  pub fn cafeCharacterStateAdd(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn CafeCharacterStateAdd(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -633,6 +637,13 @@ impl<'a> FurnitureExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(FurnitureExcel::VT_CAFECHARACTERSTATEONLY, None)}
+  }
+  #[inline]
+  pub fn HideCraftShortcut(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(FurnitureExcel::VT_HIDECRAFTSHORTCUT, Some(false)).unwrap()}
   }
 }
 
@@ -670,21 +681,22 @@ impl flatbuffers::Verifiable for FurnitureExcel<'_> {
      .visit_field::<i64>("ComfortBonus", Self::VT_COMFORTBONUS, false)?
      .visit_field::<i64>("VisitOperationType", Self::VT_VISITOPERATIONTYPE, false)?
      .visit_field::<i64>("VisitBonusOperationType", Self::VT_VISITBONUSOPERATIONTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("tags", Self::VT_TAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("Tags", Self::VT_TAGS, false)?
      .visit_field::<i64>("CraftQualityTier0", Self::VT_CRAFTQUALITYTIER0, false)?
      .visit_field::<i64>("CraftQualityTier1", Self::VT_CRAFTQUALITYTIER1, false)?
      .visit_field::<i64>("CraftQualityTier2", Self::VT_CRAFTQUALITYTIER2, false)?
      .visit_field::<i64>("ShiftingCraftQuality", Self::VT_SHIFTINGCRAFTQUALITY, false)?
      .visit_field::<FurnitureFunctionType>("FurnitureFunctionType", Self::VT_FURNITUREFUNCTIONTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("furnitureFunctionParameter", Self::VT_FURNITUREFUNCTIONPARAMETER, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("FurnitureFunctionParameter", Self::VT_FURNITUREFUNCTIONPARAMETER, false)?
      .visit_field::<i64>("VideoId", Self::VT_VIDEOID, false)?
      .visit_field::<i64>("EventCollectionId", Self::VT_EVENTCOLLECTIONID, false)?
      .visit_field::<i64>("FurnitureBubbleOffsetX", Self::VT_FURNITUREBUBBLEOFFSETX, false)?
      .visit_field::<i64>("FurnitureBubbleOffsetY", Self::VT_FURNITUREBUBBLEOFFSETY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("CafeCharacterStateReq", Self::VT_CAFECHARACTERSTATEREQ, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("cafeCharacterStateAdd", Self::VT_CAFECHARACTERSTATEADD, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("CafeCharacterStateAdd", Self::VT_CAFECHARACTERSTATEADD, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("CafeCharacterStateMake", Self::VT_CAFECHARACTERSTATEMAKE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("CafeCharacterStateOnly", Self::VT_CAFECHARACTERSTATEONLY, false)?
+     .visit_field::<bool>("HideCraftShortcut", Self::VT_HIDECRAFTSHORTCUT, false)?
      .finish();
     Ok(())
   }
@@ -717,21 +729,22 @@ pub struct FurnitureExcelArgs<'a> {
     pub ComfortBonus: i64,
     pub VisitOperationType: i64,
     pub VisitBonusOperationType: i64,
-    pub tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub Tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub CraftQualityTier0: i64,
     pub CraftQualityTier1: i64,
     pub CraftQualityTier2: i64,
     pub ShiftingCraftQuality: i64,
     pub FurnitureFunctionType: FurnitureFunctionType,
-    pub furnitureFunctionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub FurnitureFunctionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub VideoId: i64,
     pub EventCollectionId: i64,
     pub FurnitureBubbleOffsetX: i64,
     pub FurnitureBubbleOffsetY: i64,
     pub CafeCharacterStateReq: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub cafeCharacterStateAdd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub CafeCharacterStateAdd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub CafeCharacterStateMake: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub CafeCharacterStateOnly: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub HideCraftShortcut: bool,
 }
 impl<'a> Default for FurnitureExcelArgs<'a> {
   #[inline]
@@ -764,21 +777,22 @@ impl<'a> Default for FurnitureExcelArgs<'a> {
       ComfortBonus: 0,
       VisitOperationType: 0,
       VisitBonusOperationType: 0,
-      tags: None,
+      Tags: None,
       CraftQualityTier0: 0,
       CraftQualityTier1: 0,
       CraftQualityTier2: 0,
       ShiftingCraftQuality: 0,
       FurnitureFunctionType: FurnitureFunctionType::None,
-      furnitureFunctionParameter: None,
+      FurnitureFunctionParameter: None,
       VideoId: 0,
       EventCollectionId: 0,
       FurnitureBubbleOffsetX: 0,
       FurnitureBubbleOffsetY: 0,
       CafeCharacterStateReq: None,
-      cafeCharacterStateAdd: None,
+      CafeCharacterStateAdd: None,
       CafeCharacterStateMake: None,
       CafeCharacterStateOnly: None,
+      HideCraftShortcut: false,
     }
   }
 }
@@ -788,7 +802,7 @@ impl Serialize for FurnitureExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("FurnitureExcel", 42)?;
+    let mut s = serializer.serialize_struct("FurnitureExcel", 43)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("ProductionStep", &self.ProductionStep())?;
       s.serialize_field("Rarity", &self.Rarity())?;
@@ -840,20 +854,20 @@ impl Serialize for FurnitureExcel<'_> {
       s.serialize_field("ComfortBonus", &self.ComfortBonus())?;
       s.serialize_field("VisitOperationType", &self.VisitOperationType())?;
       s.serialize_field("VisitBonusOperationType", &self.VisitBonusOperationType())?;
-      if let Some(f) = self.tags() {
-        s.serialize_field("tags", &f)?;
+      if let Some(f) = self.Tags() {
+        s.serialize_field("Tags", &f)?;
       } else {
-        s.skip_field("tags")?;
+        s.skip_field("Tags")?;
       }
       s.serialize_field("CraftQualityTier0", &self.CraftQualityTier0())?;
       s.serialize_field("CraftQualityTier1", &self.CraftQualityTier1())?;
       s.serialize_field("CraftQualityTier2", &self.CraftQualityTier2())?;
       s.serialize_field("ShiftingCraftQuality", &self.ShiftingCraftQuality())?;
       s.serialize_field("FurnitureFunctionType", &self.FurnitureFunctionType())?;
-      if let Some(f) = self.furnitureFunctionParameter() {
-        s.serialize_field("furnitureFunctionParameter", &f)?;
+      if let Some(f) = self.FurnitureFunctionParameter() {
+        s.serialize_field("FurnitureFunctionParameter", &f)?;
       } else {
-        s.skip_field("furnitureFunctionParameter")?;
+        s.skip_field("FurnitureFunctionParameter")?;
       }
       s.serialize_field("VideoId", &self.VideoId())?;
       s.serialize_field("EventCollectionId", &self.EventCollectionId())?;
@@ -864,10 +878,10 @@ impl Serialize for FurnitureExcel<'_> {
       } else {
         s.skip_field("CafeCharacterStateReq")?;
       }
-      if let Some(f) = self.cafeCharacterStateAdd() {
-        s.serialize_field("cafeCharacterStateAdd", &f)?;
+      if let Some(f) = self.CafeCharacterStateAdd() {
+        s.serialize_field("CafeCharacterStateAdd", &f)?;
       } else {
-        s.skip_field("cafeCharacterStateAdd")?;
+        s.skip_field("CafeCharacterStateAdd")?;
       }
       if let Some(f) = self.CafeCharacterStateMake() {
         s.serialize_field("CafeCharacterStateMake", &f)?;
@@ -879,6 +893,7 @@ impl Serialize for FurnitureExcel<'_> {
       } else {
         s.skip_field("CafeCharacterStateOnly")?;
       }
+      s.serialize_field("HideCraftShortcut", &self.HideCraftShortcut())?;
     s.end()
   }
 }
@@ -997,8 +1012,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FurnitureExcelBuilder<'a, 'b, A
     self.fbb_.push_slot::<i64>(FurnitureExcel::VT_VISITBONUSOPERATIONTYPE, VisitBonusOperationType, 0);
   }
   #[inline]
-  pub fn add_tags(&mut self, tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureExcel::VT_TAGS, tags);
+  pub fn add_Tags(&mut self, Tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureExcel::VT_TAGS, Tags);
   }
   #[inline]
   pub fn add_CraftQualityTier0(&mut self, CraftQualityTier0: i64) {
@@ -1021,8 +1036,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FurnitureExcelBuilder<'a, 'b, A
     self.fbb_.push_slot::<FurnitureFunctionType>(FurnitureExcel::VT_FURNITUREFUNCTIONTYPE, FurnitureFunctionType, FurnitureFunctionType::None);
   }
   #[inline]
-  pub fn add_furnitureFunctionParameter(&mut self, furnitureFunctionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureExcel::VT_FURNITUREFUNCTIONPARAMETER, furnitureFunctionParameter);
+  pub fn add_FurnitureFunctionParameter(&mut self, FurnitureFunctionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureExcel::VT_FURNITUREFUNCTIONPARAMETER, FurnitureFunctionParameter);
   }
   #[inline]
   pub fn add_VideoId(&mut self, VideoId: i64) {
@@ -1045,8 +1060,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FurnitureExcelBuilder<'a, 'b, A
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureExcel::VT_CAFECHARACTERSTATEREQ, CafeCharacterStateReq);
   }
   #[inline]
-  pub fn add_cafeCharacterStateAdd(&mut self, cafeCharacterStateAdd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureExcel::VT_CAFECHARACTERSTATEADD, cafeCharacterStateAdd);
+  pub fn add_CafeCharacterStateAdd(&mut self, CafeCharacterStateAdd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureExcel::VT_CAFECHARACTERSTATEADD, CafeCharacterStateAdd);
   }
   #[inline]
   pub fn add_CafeCharacterStateMake(&mut self, CafeCharacterStateMake: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -1055,6 +1070,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FurnitureExcelBuilder<'a, 'b, A
   #[inline]
   pub fn add_CafeCharacterStateOnly(&mut self, CafeCharacterStateOnly: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureExcel::VT_CAFECHARACTERSTATEONLY, CafeCharacterStateOnly);
+  }
+  #[inline]
+  pub fn add_HideCraftShortcut(&mut self, HideCraftShortcut: bool) {
+    self.fbb_.push_slot::<bool>(FurnitureExcel::VT_HIDECRAFTSHORTCUT, HideCraftShortcut, false);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> FurnitureExcelBuilder<'a, 'b, A> {
@@ -1101,21 +1120,22 @@ impl core::fmt::Debug for FurnitureExcel<'_> {
       ds.field("ComfortBonus", &self.ComfortBonus());
       ds.field("VisitOperationType", &self.VisitOperationType());
       ds.field("VisitBonusOperationType", &self.VisitBonusOperationType());
-      ds.field("tags", &self.tags());
+      ds.field("Tags", &self.Tags());
       ds.field("CraftQualityTier0", &self.CraftQualityTier0());
       ds.field("CraftQualityTier1", &self.CraftQualityTier1());
       ds.field("CraftQualityTier2", &self.CraftQualityTier2());
       ds.field("ShiftingCraftQuality", &self.ShiftingCraftQuality());
       ds.field("FurnitureFunctionType", &self.FurnitureFunctionType());
-      ds.field("furnitureFunctionParameter", &self.furnitureFunctionParameter());
+      ds.field("FurnitureFunctionParameter", &self.FurnitureFunctionParameter());
       ds.field("VideoId", &self.VideoId());
       ds.field("EventCollectionId", &self.EventCollectionId());
       ds.field("FurnitureBubbleOffsetX", &self.FurnitureBubbleOffsetX());
       ds.field("FurnitureBubbleOffsetY", &self.FurnitureBubbleOffsetY());
       ds.field("CafeCharacterStateReq", &self.CafeCharacterStateReq());
-      ds.field("cafeCharacterStateAdd", &self.cafeCharacterStateAdd());
+      ds.field("CafeCharacterStateAdd", &self.CafeCharacterStateAdd());
       ds.field("CafeCharacterStateMake", &self.CafeCharacterStateMake());
       ds.field("CafeCharacterStateOnly", &self.CafeCharacterStateOnly());
+      ds.field("HideCraftShortcut", &self.HideCraftShortcut());
       ds.finish()
   }
 }
@@ -1149,21 +1169,22 @@ pub struct FurnitureExcelT {
   pub ComfortBonus: i64,
   pub VisitOperationType: i64,
   pub VisitBonusOperationType: i64,
-  pub tags: Option<Vec<Tag>>,
+  pub Tags: Option<Vec<Tag>>,
   pub CraftQualityTier0: i64,
   pub CraftQualityTier1: i64,
   pub CraftQualityTier2: i64,
   pub ShiftingCraftQuality: i64,
   pub FurnitureFunctionType: FurnitureFunctionType,
-  pub furnitureFunctionParameter: Option<Vec<i64>>,
+  pub FurnitureFunctionParameter: Option<Vec<i64>>,
   pub VideoId: i64,
   pub EventCollectionId: i64,
   pub FurnitureBubbleOffsetX: i64,
   pub FurnitureBubbleOffsetY: i64,
   pub CafeCharacterStateReq: Option<Vec<String>>,
-  pub cafeCharacterStateAdd: Option<Vec<String>>,
+  pub CafeCharacterStateAdd: Option<Vec<String>>,
   pub CafeCharacterStateMake: Option<Vec<String>>,
   pub CafeCharacterStateOnly: Option<Vec<String>>,
+  pub HideCraftShortcut: bool,
 }
 impl Default for FurnitureExcelT {
   fn default() -> Self {
@@ -1195,21 +1216,22 @@ impl Default for FurnitureExcelT {
       ComfortBonus: 0,
       VisitOperationType: 0,
       VisitBonusOperationType: 0,
-      tags: None,
+      Tags: None,
       CraftQualityTier0: 0,
       CraftQualityTier1: 0,
       CraftQualityTier2: 0,
       ShiftingCraftQuality: 0,
       FurnitureFunctionType: FurnitureFunctionType::None,
-      furnitureFunctionParameter: None,
+      FurnitureFunctionParameter: None,
       VideoId: 0,
       EventCollectionId: 0,
       FurnitureBubbleOffsetX: 0,
       FurnitureBubbleOffsetY: 0,
       CafeCharacterStateReq: None,
-      cafeCharacterStateAdd: None,
+      CafeCharacterStateAdd: None,
       CafeCharacterStateMake: None,
       CafeCharacterStateOnly: None,
+      HideCraftShortcut: false,
     }
   }
 }
@@ -1257,7 +1279,7 @@ impl FurnitureExcelT {
     let ComfortBonus = self.ComfortBonus;
     let VisitOperationType = self.VisitOperationType;
     let VisitBonusOperationType = self.VisitBonusOperationType;
-    let tags = self.tags.as_ref().map(|x|{
+    let Tags = self.Tags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CraftQualityTier0 = self.CraftQualityTier0;
@@ -1265,7 +1287,7 @@ impl FurnitureExcelT {
     let CraftQualityTier2 = self.CraftQualityTier2;
     let ShiftingCraftQuality = self.ShiftingCraftQuality;
     let FurnitureFunctionType = self.FurnitureFunctionType;
-    let furnitureFunctionParameter = self.furnitureFunctionParameter.as_ref().map(|x|{
+    let FurnitureFunctionParameter = self.FurnitureFunctionParameter.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let VideoId = self.VideoId;
@@ -1275,7 +1297,7 @@ impl FurnitureExcelT {
     let CafeCharacterStateReq = self.CafeCharacterStateReq.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let cafeCharacterStateAdd = self.cafeCharacterStateAdd.as_ref().map(|x|{
+    let CafeCharacterStateAdd = self.CafeCharacterStateAdd.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let CafeCharacterStateMake = self.CafeCharacterStateMake.as_ref().map(|x|{
@@ -1284,6 +1306,7 @@ impl FurnitureExcelT {
     let CafeCharacterStateOnly = self.CafeCharacterStateOnly.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
+    let HideCraftShortcut = self.HideCraftShortcut;
     FurnitureExcel::create(_fbb, &FurnitureExcelArgs{
       Id,
       ProductionStep,
@@ -1312,21 +1335,22 @@ impl FurnitureExcelT {
       ComfortBonus,
       VisitOperationType,
       VisitBonusOperationType,
-      tags,
+      Tags,
       CraftQualityTier0,
       CraftQualityTier1,
       CraftQualityTier2,
       ShiftingCraftQuality,
       FurnitureFunctionType,
-      furnitureFunctionParameter,
+      FurnitureFunctionParameter,
       VideoId,
       EventCollectionId,
       FurnitureBubbleOffsetX,
       FurnitureBubbleOffsetY,
       CafeCharacterStateReq,
-      cafeCharacterStateAdd,
+      CafeCharacterStateAdd,
       CafeCharacterStateMake,
       CafeCharacterStateOnly,
+      HideCraftShortcut,
     })
   }
 }

@@ -16,16 +16,18 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_PRODUCT_CATEGORY: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_PRODUCT_CATEGORY: i32 = 5;
+pub const ENUM_MAX_PRODUCT_CATEGORY: i32 = 7;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_PRODUCT_CATEGORY: [ProductCategory; 6] = [
+pub const ENUM_VALUES_PRODUCT_CATEGORY: [ProductCategory; 8] = [
   ProductCategory::None,
   ProductCategory::Gem,
   ProductCategory::Monthly,
   ProductCategory::Package,
   ProductCategory::GachaDirect_DontUseGlobal,
   ProductCategory::TimeLimit,
+  ProductCategory::BattlePass,
+  ProductCategory::GooglePoint,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -39,9 +41,11 @@ impl ProductCategory {
   pub const Package: Self = Self(3);
   pub const GachaDirect_DontUseGlobal: Self = Self(4);
   pub const TimeLimit: Self = Self(5);
+  pub const BattlePass: Self = Self(6);
+  pub const GooglePoint: Self = Self(7);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 5;
+  pub const ENUM_MAX: i32 = 7;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Gem,
@@ -49,6 +53,8 @@ impl ProductCategory {
     Self::Package,
     Self::GachaDirect_DontUseGlobal,
     Self::TimeLimit,
+    Self::BattlePass,
+    Self::GooglePoint,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -59,6 +65,8 @@ impl ProductCategory {
       Self::Package => Some("Package"),
       Self::GachaDirect_DontUseGlobal => Some("GachaDirect_DontUseGlobal"),
       Self::TimeLimit => Some("TimeLimit"),
+      Self::BattlePass => Some("BattlePass"),
+      Self::GooglePoint => Some("GooglePoint"),
       _ => None,
     }
   }

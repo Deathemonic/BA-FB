@@ -73,8 +73,8 @@ impl<'a> ProductMonthlyExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.dailyParcelAmount {
-        builder.add_dailyParcelAmount(x);
+      if let Some(x) = args.DailyParcelAmount {
+        builder.add_DailyParcelAmount(x);
       }
       if let Some(x) = args.DailyParcelId {
         builder.add_DailyParcelId(x);
@@ -82,14 +82,14 @@ impl<'a> ProductMonthlyExcel<'a> {
       if let Some(x) = args.DailyParcelType {
         builder.add_DailyParcelType(x);
       }
-      if let Some(x) = args.parcelAmount {
-        builder.add_parcelAmount(x);
+      if let Some(x) = args.ParcelAmount {
+        builder.add_ParcelAmount(x);
       }
       if let Some(x) = args.ParcelId {
         builder.add_ParcelId(x);
       }
-      if let Some(x) = args.parcelType {
-        builder.add_parcelType(x);
+      if let Some(x) = args.ParcelType {
+        builder.add_ParcelType(x);
       }
       let x = args.ProductTagType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -136,13 +136,13 @@ impl<'a> ProductMonthlyExcel<'a> {
       let MonthlyDays = self.MonthlyDays();
       let UseMonthlyProductCheck = self.UseMonthlyProductCheck();
       let PurchaseCountLimit = self.PurchaseCountLimit();
-    let parcelType = self.parcelType().map(|x| {
+    let ParcelType = self.ParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let ParcelId = self.ParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let parcelAmount = self.parcelAmount().map(|x| {
+    let ParcelAmount = self.ParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let EnterCostReduceGroupId = self.EnterCostReduceGroupId();
@@ -152,7 +152,7 @@ impl<'a> ProductMonthlyExcel<'a> {
     let DailyParcelId = self.DailyParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let dailyParcelAmount = self.dailyParcelAmount().map(|x| {
+    let DailyParcelAmount = self.DailyParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     ProductMonthlyExcelT {
@@ -166,13 +166,13 @@ impl<'a> ProductMonthlyExcel<'a> {
       MonthlyDays,
       UseMonthlyProductCheck,
       PurchaseCountLimit,
-      parcelType,
+      ParcelType,
       ParcelId,
-      parcelAmount,
+      ParcelAmount,
       EnterCostReduceGroupId,
       DailyParcelType,
       DailyParcelId,
-      dailyParcelAmount,
+      DailyParcelAmount,
     }
   }
 
@@ -247,7 +247,7 @@ impl<'a> ProductMonthlyExcel<'a> {
     unsafe { self._tab.get::<i64>(ProductMonthlyExcel::VT_PURCHASECOUNTLIMIT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn parcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn ParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -261,7 +261,7 @@ impl<'a> ProductMonthlyExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ProductMonthlyExcel::VT_PARCELID, None)}
   }
   #[inline]
-  pub fn parcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -289,7 +289,7 @@ impl<'a> ProductMonthlyExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ProductMonthlyExcel::VT_DAILYPARCELID, None)}
   }
   #[inline]
-  pub fn dailyParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn DailyParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -314,13 +314,13 @@ impl flatbuffers::Verifiable for ProductMonthlyExcel<'_> {
      .visit_field::<i64>("MonthlyDays", Self::VT_MONTHLYDAYS, false)?
      .visit_field::<bool>("UseMonthlyProductCheck", Self::VT_USEMONTHLYPRODUCTCHECK, false)?
      .visit_field::<i64>("PurchaseCountLimit", Self::VT_PURCHASECOUNTLIMIT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("parcelType", Self::VT_PARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ParcelType", Self::VT_PARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ParcelId", Self::VT_PARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("parcelAmount", Self::VT_PARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ParcelAmount", Self::VT_PARCELAMOUNT, false)?
      .visit_field::<i64>("EnterCostReduceGroupId", Self::VT_ENTERCOSTREDUCEGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("DailyParcelType", Self::VT_DAILYPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("DailyParcelId", Self::VT_DAILYPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("dailyParcelAmount", Self::VT_DAILYPARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("DailyParcelAmount", Self::VT_DAILYPARCELAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -336,13 +336,13 @@ pub struct ProductMonthlyExcelArgs<'a> {
     pub MonthlyDays: i64,
     pub UseMonthlyProductCheck: bool,
     pub PurchaseCountLimit: i64,
-    pub parcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub ParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub ParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub parcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub EnterCostReduceGroupId: i64,
     pub DailyParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub DailyParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub dailyParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub DailyParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for ProductMonthlyExcelArgs<'a> {
   #[inline]
@@ -358,13 +358,13 @@ impl<'a> Default for ProductMonthlyExcelArgs<'a> {
       MonthlyDays: 0,
       UseMonthlyProductCheck: false,
       PurchaseCountLimit: 0,
-      parcelType: None,
+      ParcelType: None,
       ParcelId: None,
-      parcelAmount: None,
+      ParcelAmount: None,
       EnterCostReduceGroupId: 0,
       DailyParcelType: None,
       DailyParcelId: None,
-      dailyParcelAmount: None,
+      DailyParcelAmount: None,
     }
   }
 }
@@ -397,20 +397,20 @@ impl Serialize for ProductMonthlyExcel<'_> {
       s.serialize_field("MonthlyDays", &self.MonthlyDays())?;
       s.serialize_field("UseMonthlyProductCheck", &self.UseMonthlyProductCheck())?;
       s.serialize_field("PurchaseCountLimit", &self.PurchaseCountLimit())?;
-      if let Some(f) = self.parcelType() {
-        s.serialize_field("parcelType", &f)?;
+      if let Some(f) = self.ParcelType() {
+        s.serialize_field("ParcelType", &f)?;
       } else {
-        s.skip_field("parcelType")?;
+        s.skip_field("ParcelType")?;
       }
       if let Some(f) = self.ParcelId() {
         s.serialize_field("ParcelId", &f)?;
       } else {
         s.skip_field("ParcelId")?;
       }
-      if let Some(f) = self.parcelAmount() {
-        s.serialize_field("parcelAmount", &f)?;
+      if let Some(f) = self.ParcelAmount() {
+        s.serialize_field("ParcelAmount", &f)?;
       } else {
-        s.skip_field("parcelAmount")?;
+        s.skip_field("ParcelAmount")?;
       }
       s.serialize_field("EnterCostReduceGroupId", &self.EnterCostReduceGroupId())?;
       if let Some(f) = self.DailyParcelType() {
@@ -423,10 +423,10 @@ impl Serialize for ProductMonthlyExcel<'_> {
       } else {
         s.skip_field("DailyParcelId")?;
       }
-      if let Some(f) = self.dailyParcelAmount() {
-        s.serialize_field("dailyParcelAmount", &f)?;
+      if let Some(f) = self.DailyParcelAmount() {
+        s.serialize_field("DailyParcelAmount", &f)?;
       } else {
-        s.skip_field("dailyParcelAmount")?;
+        s.skip_field("DailyParcelAmount")?;
       }
     s.end()
   }
@@ -478,16 +478,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ProductMonthlyExcelBuilder<'a, 
     self.fbb_.push_slot::<i64>(ProductMonthlyExcel::VT_PURCHASECOUNTLIMIT, PurchaseCountLimit, 0);
   }
   #[inline]
-  pub fn add_parcelType(&mut self, parcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductMonthlyExcel::VT_PARCELTYPE, parcelType);
+  pub fn add_ParcelType(&mut self, ParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductMonthlyExcel::VT_PARCELTYPE, ParcelType);
   }
   #[inline]
   pub fn add_ParcelId(&mut self, ParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductMonthlyExcel::VT_PARCELID, ParcelId);
   }
   #[inline]
-  pub fn add_parcelAmount(&mut self, parcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductMonthlyExcel::VT_PARCELAMOUNT, parcelAmount);
+  pub fn add_ParcelAmount(&mut self, ParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductMonthlyExcel::VT_PARCELAMOUNT, ParcelAmount);
   }
   #[inline]
   pub fn add_EnterCostReduceGroupId(&mut self, EnterCostReduceGroupId: i64) {
@@ -502,8 +502,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ProductMonthlyExcelBuilder<'a, 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductMonthlyExcel::VT_DAILYPARCELID, DailyParcelId);
   }
   #[inline]
-  pub fn add_dailyParcelAmount(&mut self, dailyParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductMonthlyExcel::VT_DAILYPARCELAMOUNT, dailyParcelAmount);
+  pub fn add_DailyParcelAmount(&mut self, DailyParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ProductMonthlyExcel::VT_DAILYPARCELAMOUNT, DailyParcelAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ProductMonthlyExcelBuilder<'a, 'b, A> {
@@ -533,13 +533,13 @@ impl core::fmt::Debug for ProductMonthlyExcel<'_> {
       ds.field("MonthlyDays", &self.MonthlyDays());
       ds.field("UseMonthlyProductCheck", &self.UseMonthlyProductCheck());
       ds.field("PurchaseCountLimit", &self.PurchaseCountLimit());
-      ds.field("parcelType", &self.parcelType());
+      ds.field("ParcelType", &self.ParcelType());
       ds.field("ParcelId", &self.ParcelId());
-      ds.field("parcelAmount", &self.parcelAmount());
+      ds.field("ParcelAmount", &self.ParcelAmount());
       ds.field("EnterCostReduceGroupId", &self.EnterCostReduceGroupId());
       ds.field("DailyParcelType", &self.DailyParcelType());
       ds.field("DailyParcelId", &self.DailyParcelId());
-      ds.field("dailyParcelAmount", &self.dailyParcelAmount());
+      ds.field("DailyParcelAmount", &self.DailyParcelAmount());
       ds.finish()
   }
 }
@@ -556,13 +556,13 @@ pub struct ProductMonthlyExcelT {
   pub MonthlyDays: i64,
   pub UseMonthlyProductCheck: bool,
   pub PurchaseCountLimit: i64,
-  pub parcelType: Option<Vec<ParcelType>>,
+  pub ParcelType: Option<Vec<ParcelType>>,
   pub ParcelId: Option<Vec<i64>>,
-  pub parcelAmount: Option<Vec<i64>>,
+  pub ParcelAmount: Option<Vec<i64>>,
   pub EnterCostReduceGroupId: i64,
   pub DailyParcelType: Option<Vec<ParcelType>>,
   pub DailyParcelId: Option<Vec<i64>>,
-  pub dailyParcelAmount: Option<Vec<i64>>,
+  pub DailyParcelAmount: Option<Vec<i64>>,
 }
 impl Default for ProductMonthlyExcelT {
   fn default() -> Self {
@@ -577,13 +577,13 @@ impl Default for ProductMonthlyExcelT {
       MonthlyDays: 0,
       UseMonthlyProductCheck: false,
       PurchaseCountLimit: 0,
-      parcelType: None,
+      ParcelType: None,
       ParcelId: None,
-      parcelAmount: None,
+      ParcelAmount: None,
       EnterCostReduceGroupId: 0,
       DailyParcelType: None,
       DailyParcelId: None,
-      dailyParcelAmount: None,
+      DailyParcelAmount: None,
     }
   }
 }
@@ -608,13 +608,13 @@ impl ProductMonthlyExcelT {
     let MonthlyDays = self.MonthlyDays;
     let UseMonthlyProductCheck = self.UseMonthlyProductCheck;
     let PurchaseCountLimit = self.PurchaseCountLimit;
-    let parcelType = self.parcelType.as_ref().map(|x|{
+    let ParcelType = self.ParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ParcelId = self.ParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let parcelAmount = self.parcelAmount.as_ref().map(|x|{
+    let ParcelAmount = self.ParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let EnterCostReduceGroupId = self.EnterCostReduceGroupId;
@@ -624,7 +624,7 @@ impl ProductMonthlyExcelT {
     let DailyParcelId = self.DailyParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let dailyParcelAmount = self.dailyParcelAmount.as_ref().map(|x|{
+    let DailyParcelAmount = self.DailyParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     ProductMonthlyExcel::create(_fbb, &ProductMonthlyExcelArgs{
@@ -638,13 +638,13 @@ impl ProductMonthlyExcelT {
       MonthlyDays,
       UseMonthlyProductCheck,
       PurchaseCountLimit,
-      parcelType,
+      ParcelType,
       ParcelId,
-      parcelAmount,
+      ParcelAmount,
       EnterCostReduceGroupId,
       DailyParcelType,
       DailyParcelId,
-      dailyParcelAmount,
+      DailyParcelAmount,
     })
   }
 }

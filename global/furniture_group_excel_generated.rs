@@ -52,8 +52,8 @@ impl<'a> FurnitureGroupExcel<'a> {
       if let Some(x) = args.ComfortBonus {
         builder.add_ComfortBonus(x);
       }
-      if let Some(x) = args.requiredFurnitureCount {
-        builder.add_requiredFurnitureCount(x);
+      if let Some(x) = args.RequiredFurnitureCount {
+        builder.add_RequiredFurnitureCount(x);
       }
       let x = args.LocalizeEtcId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
@@ -69,7 +69,7 @@ impl<'a> FurnitureGroupExcel<'a> {
       let Id = self.Id();
       let GroupNameLocalize = self.GroupNameLocalize();
       let LocalizeEtcId = self.LocalizeEtcId();
-    let requiredFurnitureCount = self.requiredFurnitureCount().map(|x| {
+    let RequiredFurnitureCount = self.RequiredFurnitureCount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     let ComfortBonus = self.ComfortBonus().map(|x| {
@@ -79,7 +79,7 @@ impl<'a> FurnitureGroupExcel<'a> {
       Id,
       GroupNameLocalize,
       LocalizeEtcId,
-      requiredFurnitureCount,
+      RequiredFurnitureCount,
       ComfortBonus,
     }
   }
@@ -106,7 +106,7 @@ impl<'a> FurnitureGroupExcel<'a> {
     unsafe { self._tab.get::<u32>(FurnitureGroupExcel::VT_LOCALIZEETCID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn requiredFurnitureCount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn RequiredFurnitureCount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -131,7 +131,7 @@ impl flatbuffers::Verifiable for FurnitureGroupExcel<'_> {
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<u32>("GroupNameLocalize", Self::VT_GROUPNAMELOCALIZE, false)?
      .visit_field::<u32>("LocalizeEtcId", Self::VT_LOCALIZEETCID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("requiredFurnitureCount", Self::VT_REQUIREDFURNITURECOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("RequiredFurnitureCount", Self::VT_REQUIREDFURNITURECOUNT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ComfortBonus", Self::VT_COMFORTBONUS, false)?
      .finish();
     Ok(())
@@ -141,7 +141,7 @@ pub struct FurnitureGroupExcelArgs<'a> {
     pub Id: i64,
     pub GroupNameLocalize: u32,
     pub LocalizeEtcId: u32,
-    pub requiredFurnitureCount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub RequiredFurnitureCount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub ComfortBonus: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for FurnitureGroupExcelArgs<'a> {
@@ -151,7 +151,7 @@ impl<'a> Default for FurnitureGroupExcelArgs<'a> {
       Id: 0,
       GroupNameLocalize: 0,
       LocalizeEtcId: 0,
-      requiredFurnitureCount: None,
+      RequiredFurnitureCount: None,
       ComfortBonus: None,
     }
   }
@@ -166,10 +166,10 @@ impl Serialize for FurnitureGroupExcel<'_> {
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("GroupNameLocalize", &self.GroupNameLocalize())?;
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
-      if let Some(f) = self.requiredFurnitureCount() {
-        s.serialize_field("requiredFurnitureCount", &f)?;
+      if let Some(f) = self.RequiredFurnitureCount() {
+        s.serialize_field("RequiredFurnitureCount", &f)?;
       } else {
-        s.skip_field("requiredFurnitureCount")?;
+        s.skip_field("RequiredFurnitureCount")?;
       }
       if let Some(f) = self.ComfortBonus() {
         s.serialize_field("ComfortBonus", &f)?;
@@ -198,8 +198,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FurnitureGroupExcelBuilder<'a, 
     self.fbb_.push_slot::<u32>(FurnitureGroupExcel::VT_LOCALIZEETCID, LocalizeEtcId, 0);
   }
   #[inline]
-  pub fn add_requiredFurnitureCount(&mut self, requiredFurnitureCount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureGroupExcel::VT_REQUIREDFURNITURECOUNT, requiredFurnitureCount);
+  pub fn add_RequiredFurnitureCount(&mut self, RequiredFurnitureCount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FurnitureGroupExcel::VT_REQUIREDFURNITURECOUNT, RequiredFurnitureCount);
   }
   #[inline]
   pub fn add_ComfortBonus(&mut self, ComfortBonus: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -226,7 +226,7 @@ impl core::fmt::Debug for FurnitureGroupExcel<'_> {
       ds.field("Id", &self.Id());
       ds.field("GroupNameLocalize", &self.GroupNameLocalize());
       ds.field("LocalizeEtcId", &self.LocalizeEtcId());
-      ds.field("requiredFurnitureCount", &self.requiredFurnitureCount());
+      ds.field("RequiredFurnitureCount", &self.RequiredFurnitureCount());
       ds.field("ComfortBonus", &self.ComfortBonus());
       ds.finish()
   }
@@ -237,7 +237,7 @@ pub struct FurnitureGroupExcelT {
   pub Id: i64,
   pub GroupNameLocalize: u32,
   pub LocalizeEtcId: u32,
-  pub requiredFurnitureCount: Option<Vec<i32>>,
+  pub RequiredFurnitureCount: Option<Vec<i32>>,
   pub ComfortBonus: Option<Vec<i64>>,
 }
 impl Default for FurnitureGroupExcelT {
@@ -246,7 +246,7 @@ impl Default for FurnitureGroupExcelT {
       Id: 0,
       GroupNameLocalize: 0,
       LocalizeEtcId: 0,
-      requiredFurnitureCount: None,
+      RequiredFurnitureCount: None,
       ComfortBonus: None,
     }
   }
@@ -259,7 +259,7 @@ impl FurnitureGroupExcelT {
     let Id = self.Id;
     let GroupNameLocalize = self.GroupNameLocalize;
     let LocalizeEtcId = self.LocalizeEtcId;
-    let requiredFurnitureCount = self.requiredFurnitureCount.as_ref().map(|x|{
+    let RequiredFurnitureCount = self.RequiredFurnitureCount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ComfortBonus = self.ComfortBonus.as_ref().map(|x|{
@@ -269,7 +269,7 @@ impl FurnitureGroupExcelT {
       Id,
       GroupNameLocalize,
       LocalizeEtcId,
-      requiredFurnitureCount,
+      RequiredFurnitureCount,
       ComfortBonus,
     })
   }

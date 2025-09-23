@@ -58,17 +58,17 @@ impl<'a> RecipeExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.resultAmountMax {
-        builder.add_resultAmountMax(x);
+      if let Some(x) = args.ResultAmountMax {
+        builder.add_ResultAmountMax(x);
       }
       if let Some(x) = args.ResultAmountMin {
         builder.add_ResultAmountMin(x);
       }
-      if let Some(x) = args.parcelId {
-        builder.add_parcelId(x);
+      if let Some(x) = args.ParcelId {
+        builder.add_ParcelId(x);
       }
-      if let Some(x) = args.parcelType {
-        builder.add_parcelType(x);
+      if let Some(x) = args.ParcelType {
+        builder.add_ParcelType(x);
       }
       let x = args.RecipeType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -86,16 +86,16 @@ impl<'a> RecipeExcel<'a> {
       };
       let RecipeIngredientId = self.RecipeIngredientId();
       let RecipeSelectionGroupId = self.RecipeSelectionGroupId();
-    let parcelType = self.parcelType().map(|x| {
+    let ParcelType = self.ParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let parcelId = self.parcelId().map(|x| {
+    let ParcelId = self.ParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let ResultAmountMin = self.ResultAmountMin().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let resultAmountMax = self.resultAmountMax().map(|x| {
+    let ResultAmountMax = self.ResultAmountMax().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     RecipeExcelT {
@@ -103,10 +103,10 @@ impl<'a> RecipeExcel<'a> {
       RecipeType,
       RecipeIngredientId,
       RecipeSelectionGroupId,
-      parcelType,
-      parcelId,
+      ParcelType,
+      ParcelId,
       ResultAmountMin,
-      resultAmountMax,
+      ResultAmountMax,
     }
   }
 
@@ -139,14 +139,14 @@ impl<'a> RecipeExcel<'a> {
     unsafe { self._tab.get::<i64>(RecipeExcel::VT_RECIPESELECTIONGROUPID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn parcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn ParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(RecipeExcel::VT_PARCELTYPE, None)}
   }
   #[inline]
-  pub fn parcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -160,7 +160,7 @@ impl<'a> RecipeExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(RecipeExcel::VT_RESULTAMOUNTMIN, None)}
   }
   #[inline]
-  pub fn resultAmountMax(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ResultAmountMax(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -179,10 +179,10 @@ impl flatbuffers::Verifiable for RecipeExcel<'_> {
      .visit_field::<RecipeType>("RecipeType", Self::VT_RECIPETYPE, false)?
      .visit_field::<i64>("RecipeIngredientId", Self::VT_RECIPEINGREDIENTID, false)?
      .visit_field::<i64>("RecipeSelectionGroupId", Self::VT_RECIPESELECTIONGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("parcelType", Self::VT_PARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("parcelId", Self::VT_PARCELID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ParcelType", Self::VT_PARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ParcelId", Self::VT_PARCELID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ResultAmountMin", Self::VT_RESULTAMOUNTMIN, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("resultAmountMax", Self::VT_RESULTAMOUNTMAX, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ResultAmountMax", Self::VT_RESULTAMOUNTMAX, false)?
      .finish();
     Ok(())
   }
@@ -192,10 +192,10 @@ pub struct RecipeExcelArgs<'a> {
     pub RecipeType: RecipeType,
     pub RecipeIngredientId: i64,
     pub RecipeSelectionGroupId: i64,
-    pub parcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub parcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub ParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ResultAmountMin: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub resultAmountMax: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ResultAmountMax: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for RecipeExcelArgs<'a> {
   #[inline]
@@ -205,10 +205,10 @@ impl<'a> Default for RecipeExcelArgs<'a> {
       RecipeType: RecipeType::None,
       RecipeIngredientId: 0,
       RecipeSelectionGroupId: 0,
-      parcelType: None,
-      parcelId: None,
+      ParcelType: None,
+      ParcelId: None,
       ResultAmountMin: None,
-      resultAmountMax: None,
+      ResultAmountMax: None,
     }
   }
 }
@@ -223,25 +223,25 @@ impl Serialize for RecipeExcel<'_> {
       s.serialize_field("RecipeType", &self.RecipeType())?;
       s.serialize_field("RecipeIngredientId", &self.RecipeIngredientId())?;
       s.serialize_field("RecipeSelectionGroupId", &self.RecipeSelectionGroupId())?;
-      if let Some(f) = self.parcelType() {
-        s.serialize_field("parcelType", &f)?;
+      if let Some(f) = self.ParcelType() {
+        s.serialize_field("ParcelType", &f)?;
       } else {
-        s.skip_field("parcelType")?;
+        s.skip_field("ParcelType")?;
       }
-      if let Some(f) = self.parcelId() {
-        s.serialize_field("parcelId", &f)?;
+      if let Some(f) = self.ParcelId() {
+        s.serialize_field("ParcelId", &f)?;
       } else {
-        s.skip_field("parcelId")?;
+        s.skip_field("ParcelId")?;
       }
       if let Some(f) = self.ResultAmountMin() {
         s.serialize_field("ResultAmountMin", &f)?;
       } else {
         s.skip_field("ResultAmountMin")?;
       }
-      if let Some(f) = self.resultAmountMax() {
-        s.serialize_field("resultAmountMax", &f)?;
+      if let Some(f) = self.ResultAmountMax() {
+        s.serialize_field("ResultAmountMax", &f)?;
       } else {
-        s.skip_field("resultAmountMax")?;
+        s.skip_field("ResultAmountMax")?;
       }
     s.end()
   }
@@ -269,20 +269,20 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> RecipeExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<i64>(RecipeExcel::VT_RECIPESELECTIONGROUPID, RecipeSelectionGroupId, 0);
   }
   #[inline]
-  pub fn add_parcelType(&mut self, parcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeExcel::VT_PARCELTYPE, parcelType);
+  pub fn add_ParcelType(&mut self, ParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeExcel::VT_PARCELTYPE, ParcelType);
   }
   #[inline]
-  pub fn add_parcelId(&mut self, parcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeExcel::VT_PARCELID, parcelId);
+  pub fn add_ParcelId(&mut self, ParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeExcel::VT_PARCELID, ParcelId);
   }
   #[inline]
   pub fn add_ResultAmountMin(&mut self, ResultAmountMin: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeExcel::VT_RESULTAMOUNTMIN, ResultAmountMin);
   }
   #[inline]
-  pub fn add_resultAmountMax(&mut self, resultAmountMax: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeExcel::VT_RESULTAMOUNTMAX, resultAmountMax);
+  pub fn add_ResultAmountMax(&mut self, ResultAmountMax: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeExcel::VT_RESULTAMOUNTMAX, ResultAmountMax);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> RecipeExcelBuilder<'a, 'b, A> {
@@ -306,10 +306,10 @@ impl core::fmt::Debug for RecipeExcel<'_> {
       ds.field("RecipeType", &self.RecipeType());
       ds.field("RecipeIngredientId", &self.RecipeIngredientId());
       ds.field("RecipeSelectionGroupId", &self.RecipeSelectionGroupId());
-      ds.field("parcelType", &self.parcelType());
-      ds.field("parcelId", &self.parcelId());
+      ds.field("ParcelType", &self.ParcelType());
+      ds.field("ParcelId", &self.ParcelId());
       ds.field("ResultAmountMin", &self.ResultAmountMin());
-      ds.field("resultAmountMax", &self.resultAmountMax());
+      ds.field("ResultAmountMax", &self.ResultAmountMax());
       ds.finish()
   }
 }
@@ -320,10 +320,10 @@ pub struct RecipeExcelT {
   pub RecipeType: RecipeType,
   pub RecipeIngredientId: i64,
   pub RecipeSelectionGroupId: i64,
-  pub parcelType: Option<Vec<ParcelType>>,
-  pub parcelId: Option<Vec<i64>>,
+  pub ParcelType: Option<Vec<ParcelType>>,
+  pub ParcelId: Option<Vec<i64>>,
   pub ResultAmountMin: Option<Vec<i64>>,
-  pub resultAmountMax: Option<Vec<i64>>,
+  pub ResultAmountMax: Option<Vec<i64>>,
 }
 impl Default for RecipeExcelT {
   fn default() -> Self {
@@ -332,10 +332,10 @@ impl Default for RecipeExcelT {
       RecipeType: RecipeType::None,
       RecipeIngredientId: 0,
       RecipeSelectionGroupId: 0,
-      parcelType: None,
-      parcelId: None,
+      ParcelType: None,
+      ParcelId: None,
       ResultAmountMin: None,
-      resultAmountMax: None,
+      ResultAmountMax: None,
     }
   }
 }
@@ -348,16 +348,16 @@ impl RecipeExcelT {
     let RecipeType = self.RecipeType;
     let RecipeIngredientId = self.RecipeIngredientId;
     let RecipeSelectionGroupId = self.RecipeSelectionGroupId;
-    let parcelType = self.parcelType.as_ref().map(|x|{
+    let ParcelType = self.ParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let parcelId = self.parcelId.as_ref().map(|x|{
+    let ParcelId = self.ParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ResultAmountMin = self.ResultAmountMin.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let resultAmountMax = self.resultAmountMax.as_ref().map(|x|{
+    let ResultAmountMax = self.ResultAmountMax.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     RecipeExcel::create(_fbb, &RecipeExcelArgs{
@@ -365,10 +365,10 @@ impl RecipeExcelT {
       RecipeType,
       RecipeIngredientId,
       RecipeSelectionGroupId,
-      parcelType,
-      parcelId,
+      ParcelType,
+      ParcelId,
       ResultAmountMin,
-      resultAmountMax,
+      ResultAmountMax,
     })
   }
 }

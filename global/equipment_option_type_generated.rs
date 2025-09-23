@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_EQUIPMENT_OPTION_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_EQUIPMENT_OPTION_TYPE: i32 = 88;
+pub const ENUM_MAX_EQUIPMENT_OPTION_TYPE: i32 = 89;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_EQUIPMENT_OPTION_TYPE: [EquipmentOptionType; 89] = [
+pub const ENUM_VALUES_EQUIPMENT_OPTION_TYPE: [EquipmentOptionType; 90] = [
   EquipmentOptionType::None,
   EquipmentOptionType::MaxHP_Base,
   EquipmentOptionType::MaxHP_Coefficient,
@@ -109,6 +109,7 @@ pub const ENUM_VALUES_EQUIPMENT_OPTION_TYPE: [EquipmentOptionType; 89] = [
   EquipmentOptionType::AmmoCost_Base,
   EquipmentOptionType::RegenCost_Base,
   EquipmentOptionType::RegenCost_Coefficient,
+  EquipmentOptionType::MaxCostIncrease_Base,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -205,9 +206,10 @@ impl EquipmentOptionType {
   pub const AmmoCost_Base: Self = Self(86);
   pub const RegenCost_Base: Self = Self(87);
   pub const RegenCost_Coefficient: Self = Self(88);
+  pub const MaxCostIncrease_Base: Self = Self(89);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 88;
+  pub const ENUM_MAX: i32 = 89;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::MaxHP_Base,
@@ -298,6 +300,7 @@ impl EquipmentOptionType {
     Self::AmmoCost_Base,
     Self::RegenCost_Base,
     Self::RegenCost_Coefficient,
+    Self::MaxCostIncrease_Base,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -391,6 +394,7 @@ impl EquipmentOptionType {
       Self::AmmoCost_Base => Some("AmmoCost_Base"),
       Self::RegenCost_Base => Some("RegenCost_Base"),
       Self::RegenCost_Coefficient => Some("RegenCost_Coefficient"),
+      Self::MaxCostIncrease_Base => Some("MaxCostIncrease_Base"),
       _ => None,
     }
   }

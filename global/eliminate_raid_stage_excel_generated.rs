@@ -140,14 +140,14 @@ impl<'a> EliminateRaidStageExcel<'a> {
       if let Some(x) = args.VictoryTimelinePath {
         builder.add_VictoryTimelinePath(x);
       }
-      if let Some(x) = args.battleReadyTimelinePhaseEnd {
-        builder.add_battleReadyTimelinePhaseEnd(x);
+      if let Some(x) = args.BattleReadyTimelinePhaseEnd {
+        builder.add_BattleReadyTimelinePhaseEnd(x);
       }
       if let Some(x) = args.BattleReadyTimelinePhaseStart {
         builder.add_BattleReadyTimelinePhaseStart(x);
       }
-      if let Some(x) = args.battleReadyTimelinePath {
-        builder.add_battleReadyTimelinePath(x);
+      if let Some(x) = args.BattleReadyTimelinePath {
+        builder.add_BattleReadyTimelinePath(x);
       }
       let x = args.TacticEnvironment;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -164,8 +164,8 @@ impl<'a> EliminateRaidStageExcel<'a> {
       let x = args.Difficulty;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_Difficulty(x);
-      if let Some(x) = args.bossCharacterId {
-        builder.add_bossCharacterId(x);
+      if let Some(x) = args.BossCharacterId {
+        builder.add_BossCharacterId(x);
       }
       if let Some(x) = args.BGPath {
         builder.add_BGPath(x);
@@ -217,7 +217,7 @@ impl<'a> EliminateRaidStageExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let RaidCharacterId = self.RaidCharacterId();
-    let bossCharacterId = self.bossCharacterId().map(|x| {
+    let BossCharacterId = self.BossCharacterId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let Difficulty = if table_encryption_service::use_encryption() {
@@ -248,13 +248,13 @@ impl<'a> EliminateRaidStageExcel<'a> {
       let MinimumAcquisitionScore = self.MinimumAcquisitionScore();
       let MaximumAcquisitionScore = self.MaximumAcquisitionScore();
       let RaidRewardGroupId = self.RaidRewardGroupId();
-    let battleReadyTimelinePath = self.battleReadyTimelinePath().map(|x| {
+    let BattleReadyTimelinePath = self.BattleReadyTimelinePath().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let BattleReadyTimelinePhaseStart = self.BattleReadyTimelinePhaseStart().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
-    let battleReadyTimelinePhaseEnd = self.battleReadyTimelinePhaseEnd().map(|x| {
+    let BattleReadyTimelinePhaseEnd = self.BattleReadyTimelinePhaseEnd().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     let VictoryTimelinePath = self.VictoryTimelinePath().map(|x| {
@@ -285,7 +285,7 @@ impl<'a> EliminateRaidStageExcel<'a> {
       PortraitPath,
       BGPath,
       RaidCharacterId,
-      bossCharacterId,
+      BossCharacterId,
       Difficulty,
       IsOpen,
       MaxPlayerCount,
@@ -302,9 +302,9 @@ impl<'a> EliminateRaidStageExcel<'a> {
       MinimumAcquisitionScore,
       MaximumAcquisitionScore,
       RaidRewardGroupId,
-      battleReadyTimelinePath,
+      BattleReadyTimelinePath,
       BattleReadyTimelinePhaseStart,
-      battleReadyTimelinePhaseEnd,
+      BattleReadyTimelinePhaseEnd,
       VictoryTimelinePath,
       PhaseChangeTimelinePath,
       TimeLinePhase,
@@ -394,7 +394,7 @@ impl<'a> EliminateRaidStageExcel<'a> {
     unsafe { self._tab.get::<i64>(EliminateRaidStageExcel::VT_RAIDCHARACTERID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn bossCharacterId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn BossCharacterId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -513,7 +513,7 @@ impl<'a> EliminateRaidStageExcel<'a> {
     unsafe { self._tab.get::<i64>(EliminateRaidStageExcel::VT_RAIDREWARDGROUPID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn battleReadyTimelinePath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn BattleReadyTimelinePath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -527,7 +527,7 @@ impl<'a> EliminateRaidStageExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i32>>>(EliminateRaidStageExcel::VT_BATTLEREADYTIMELINEPHASESTART, None)}
   }
   #[inline]
-  pub fn battleReadyTimelinePhaseEnd(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn BattleReadyTimelinePhaseEnd(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -609,7 +609,7 @@ impl flatbuffers::Verifiable for EliminateRaidStageExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PortraitPath", Self::VT_PORTRAITPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BGPath", Self::VT_BGPATH, false)?
      .visit_field::<i64>("RaidCharacterId", Self::VT_RAIDCHARACTERID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("bossCharacterId", Self::VT_BOSSCHARACTERID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("BossCharacterId", Self::VT_BOSSCHARACTERID, false)?
      .visit_field::<Difficulty>("Difficulty", Self::VT_DIFFICULTY, false)?
      .visit_field::<bool>("IsOpen", Self::VT_ISOPEN, false)?
      .visit_field::<i64>("MaxPlayerCount", Self::VT_MAXPLAYERCOUNT, false)?
@@ -626,9 +626,9 @@ impl flatbuffers::Verifiable for EliminateRaidStageExcel<'_> {
      .visit_field::<i64>("MinimumAcquisitionScore", Self::VT_MINIMUMACQUISITIONSCORE, false)?
      .visit_field::<i64>("MaximumAcquisitionScore", Self::VT_MAXIMUMACQUISITIONSCORE, false)?
      .visit_field::<i64>("RaidRewardGroupId", Self::VT_RAIDREWARDGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("battleReadyTimelinePath", Self::VT_BATTLEREADYTIMELINEPATH, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("BattleReadyTimelinePath", Self::VT_BATTLEREADYTIMELINEPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("BattleReadyTimelinePhaseStart", Self::VT_BATTLEREADYTIMELINEPHASESTART, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("battleReadyTimelinePhaseEnd", Self::VT_BATTLEREADYTIMELINEPHASEEND, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("BattleReadyTimelinePhaseEnd", Self::VT_BATTLEREADYTIMELINEPHASEEND, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("VictoryTimelinePath", Self::VT_VICTORYTIMELINEPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PhaseChangeTimelinePath", Self::VT_PHASECHANGETIMELINEPATH, false)?
      .visit_field::<i64>("TimeLinePhase", Self::VT_TIMELINEPHASE, false)?
@@ -653,7 +653,7 @@ pub struct EliminateRaidStageExcelArgs<'a> {
     pub PortraitPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub BGPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub RaidCharacterId: i64,
-    pub bossCharacterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub BossCharacterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub Difficulty: Difficulty,
     pub IsOpen: bool,
     pub MaxPlayerCount: i64,
@@ -670,9 +670,9 @@ pub struct EliminateRaidStageExcelArgs<'a> {
     pub MinimumAcquisitionScore: i64,
     pub MaximumAcquisitionScore: i64,
     pub RaidRewardGroupId: i64,
-    pub battleReadyTimelinePath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub BattleReadyTimelinePath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub BattleReadyTimelinePhaseStart: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
-    pub battleReadyTimelinePhaseEnd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub BattleReadyTimelinePhaseEnd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub VictoryTimelinePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub PhaseChangeTimelinePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub TimeLinePhase: i64,
@@ -697,7 +697,7 @@ impl<'a> Default for EliminateRaidStageExcelArgs<'a> {
       PortraitPath: None,
       BGPath: None,
       RaidCharacterId: 0,
-      bossCharacterId: None,
+      BossCharacterId: None,
       Difficulty: Difficulty::Normal,
       IsOpen: false,
       MaxPlayerCount: 0,
@@ -714,9 +714,9 @@ impl<'a> Default for EliminateRaidStageExcelArgs<'a> {
       MinimumAcquisitionScore: 0,
       MaximumAcquisitionScore: 0,
       RaidRewardGroupId: 0,
-      battleReadyTimelinePath: None,
+      BattleReadyTimelinePath: None,
       BattleReadyTimelinePhaseStart: None,
-      battleReadyTimelinePhaseEnd: None,
+      BattleReadyTimelinePhaseEnd: None,
       VictoryTimelinePath: None,
       PhaseChangeTimelinePath: None,
       TimeLinePhase: 0,
@@ -762,10 +762,10 @@ impl Serialize for EliminateRaidStageExcel<'_> {
         s.skip_field("BGPath")?;
       }
       s.serialize_field("RaidCharacterId", &self.RaidCharacterId())?;
-      if let Some(f) = self.bossCharacterId() {
-        s.serialize_field("bossCharacterId", &f)?;
+      if let Some(f) = self.BossCharacterId() {
+        s.serialize_field("BossCharacterId", &f)?;
       } else {
-        s.skip_field("bossCharacterId")?;
+        s.skip_field("BossCharacterId")?;
       }
       s.serialize_field("Difficulty", &self.Difficulty())?;
       s.serialize_field("IsOpen", &self.IsOpen())?;
@@ -791,20 +791,20 @@ impl Serialize for EliminateRaidStageExcel<'_> {
       s.serialize_field("MinimumAcquisitionScore", &self.MinimumAcquisitionScore())?;
       s.serialize_field("MaximumAcquisitionScore", &self.MaximumAcquisitionScore())?;
       s.serialize_field("RaidRewardGroupId", &self.RaidRewardGroupId())?;
-      if let Some(f) = self.battleReadyTimelinePath() {
-        s.serialize_field("battleReadyTimelinePath", &f)?;
+      if let Some(f) = self.BattleReadyTimelinePath() {
+        s.serialize_field("BattleReadyTimelinePath", &f)?;
       } else {
-        s.skip_field("battleReadyTimelinePath")?;
+        s.skip_field("BattleReadyTimelinePath")?;
       }
       if let Some(f) = self.BattleReadyTimelinePhaseStart() {
         s.serialize_field("BattleReadyTimelinePhaseStart", &f)?;
       } else {
         s.skip_field("BattleReadyTimelinePhaseStart")?;
       }
-      if let Some(f) = self.battleReadyTimelinePhaseEnd() {
-        s.serialize_field("battleReadyTimelinePhaseEnd", &f)?;
+      if let Some(f) = self.BattleReadyTimelinePhaseEnd() {
+        s.serialize_field("BattleReadyTimelinePhaseEnd", &f)?;
       } else {
-        s.skip_field("battleReadyTimelinePhaseEnd")?;
+        s.skip_field("BattleReadyTimelinePhaseEnd")?;
       }
       if let Some(f) = self.VictoryTimelinePath() {
         s.serialize_field("VictoryTimelinePath", &f)?;
@@ -876,8 +876,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EliminateRaidStageExcelBuilder<
     self.fbb_.push_slot::<i64>(EliminateRaidStageExcel::VT_RAIDCHARACTERID, RaidCharacterId, 0);
   }
   #[inline]
-  pub fn add_bossCharacterId(&mut self, bossCharacterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageExcel::VT_BOSSCHARACTERID, bossCharacterId);
+  pub fn add_BossCharacterId(&mut self, BossCharacterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageExcel::VT_BOSSCHARACTERID, BossCharacterId);
   }
   #[inline]
   pub fn add_Difficulty(&mut self, Difficulty: Difficulty) {
@@ -944,16 +944,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EliminateRaidStageExcelBuilder<
     self.fbb_.push_slot::<i64>(EliminateRaidStageExcel::VT_RAIDREWARDGROUPID, RaidRewardGroupId, 0);
   }
   #[inline]
-  pub fn add_battleReadyTimelinePath(&mut self, battleReadyTimelinePath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageExcel::VT_BATTLEREADYTIMELINEPATH, battleReadyTimelinePath);
+  pub fn add_BattleReadyTimelinePath(&mut self, BattleReadyTimelinePath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageExcel::VT_BATTLEREADYTIMELINEPATH, BattleReadyTimelinePath);
   }
   #[inline]
   pub fn add_BattleReadyTimelinePhaseStart(&mut self, BattleReadyTimelinePhaseStart: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageExcel::VT_BATTLEREADYTIMELINEPHASESTART, BattleReadyTimelinePhaseStart);
   }
   #[inline]
-  pub fn add_battleReadyTimelinePhaseEnd(&mut self, battleReadyTimelinePhaseEnd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageExcel::VT_BATTLEREADYTIMELINEPHASEEND, battleReadyTimelinePhaseEnd);
+  pub fn add_BattleReadyTimelinePhaseEnd(&mut self, BattleReadyTimelinePhaseEnd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageExcel::VT_BATTLEREADYTIMELINEPHASEEND, BattleReadyTimelinePhaseEnd);
   }
   #[inline]
   pub fn add_VictoryTimelinePath(&mut self, VictoryTimelinePath: flatbuffers::WIPOffset<&'b  str>) {
@@ -1016,7 +1016,7 @@ impl core::fmt::Debug for EliminateRaidStageExcel<'_> {
       ds.field("PortraitPath", &self.PortraitPath());
       ds.field("BGPath", &self.BGPath());
       ds.field("RaidCharacterId", &self.RaidCharacterId());
-      ds.field("bossCharacterId", &self.bossCharacterId());
+      ds.field("BossCharacterId", &self.BossCharacterId());
       ds.field("Difficulty", &self.Difficulty());
       ds.field("IsOpen", &self.IsOpen());
       ds.field("MaxPlayerCount", &self.MaxPlayerCount());
@@ -1033,9 +1033,9 @@ impl core::fmt::Debug for EliminateRaidStageExcel<'_> {
       ds.field("MinimumAcquisitionScore", &self.MinimumAcquisitionScore());
       ds.field("MaximumAcquisitionScore", &self.MaximumAcquisitionScore());
       ds.field("RaidRewardGroupId", &self.RaidRewardGroupId());
-      ds.field("battleReadyTimelinePath", &self.battleReadyTimelinePath());
+      ds.field("BattleReadyTimelinePath", &self.BattleReadyTimelinePath());
       ds.field("BattleReadyTimelinePhaseStart", &self.BattleReadyTimelinePhaseStart());
-      ds.field("battleReadyTimelinePhaseEnd", &self.battleReadyTimelinePhaseEnd());
+      ds.field("BattleReadyTimelinePhaseEnd", &self.BattleReadyTimelinePhaseEnd());
       ds.field("VictoryTimelinePath", &self.VictoryTimelinePath());
       ds.field("PhaseChangeTimelinePath", &self.PhaseChangeTimelinePath());
       ds.field("TimeLinePhase", &self.TimeLinePhase());
@@ -1061,7 +1061,7 @@ pub struct EliminateRaidStageExcelT {
   pub PortraitPath: Option<String>,
   pub BGPath: Option<String>,
   pub RaidCharacterId: i64,
-  pub bossCharacterId: Option<Vec<i64>>,
+  pub BossCharacterId: Option<Vec<i64>>,
   pub Difficulty: Difficulty,
   pub IsOpen: bool,
   pub MaxPlayerCount: i64,
@@ -1078,9 +1078,9 @@ pub struct EliminateRaidStageExcelT {
   pub MinimumAcquisitionScore: i64,
   pub MaximumAcquisitionScore: i64,
   pub RaidRewardGroupId: i64,
-  pub battleReadyTimelinePath: Option<Vec<String>>,
+  pub BattleReadyTimelinePath: Option<Vec<String>>,
   pub BattleReadyTimelinePhaseStart: Option<Vec<i32>>,
-  pub battleReadyTimelinePhaseEnd: Option<Vec<i32>>,
+  pub BattleReadyTimelinePhaseEnd: Option<Vec<i32>>,
   pub VictoryTimelinePath: Option<String>,
   pub PhaseChangeTimelinePath: Option<String>,
   pub TimeLinePhase: i64,
@@ -1104,7 +1104,7 @@ impl Default for EliminateRaidStageExcelT {
       PortraitPath: None,
       BGPath: None,
       RaidCharacterId: 0,
-      bossCharacterId: None,
+      BossCharacterId: None,
       Difficulty: Difficulty::Normal,
       IsOpen: false,
       MaxPlayerCount: 0,
@@ -1121,9 +1121,9 @@ impl Default for EliminateRaidStageExcelT {
       MinimumAcquisitionScore: 0,
       MaximumAcquisitionScore: 0,
       RaidRewardGroupId: 0,
-      battleReadyTimelinePath: None,
+      BattleReadyTimelinePath: None,
       BattleReadyTimelinePhaseStart: None,
-      battleReadyTimelinePhaseEnd: None,
+      BattleReadyTimelinePhaseEnd: None,
       VictoryTimelinePath: None,
       PhaseChangeTimelinePath: None,
       TimeLinePhase: 0,
@@ -1159,7 +1159,7 @@ impl EliminateRaidStageExcelT {
       _fbb.create_string(x)
     });
     let RaidCharacterId = self.RaidCharacterId;
-    let bossCharacterId = self.bossCharacterId.as_ref().map(|x|{
+    let BossCharacterId = self.BossCharacterId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let Difficulty = self.Difficulty;
@@ -1182,13 +1182,13 @@ impl EliminateRaidStageExcelT {
     let MinimumAcquisitionScore = self.MinimumAcquisitionScore;
     let MaximumAcquisitionScore = self.MaximumAcquisitionScore;
     let RaidRewardGroupId = self.RaidRewardGroupId;
-    let battleReadyTimelinePath = self.battleReadyTimelinePath.as_ref().map(|x|{
+    let BattleReadyTimelinePath = self.BattleReadyTimelinePath.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let BattleReadyTimelinePhaseStart = self.BattleReadyTimelinePhaseStart.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let battleReadyTimelinePhaseEnd = self.battleReadyTimelinePhaseEnd.as_ref().map(|x|{
+    let BattleReadyTimelinePhaseEnd = self.BattleReadyTimelinePhaseEnd.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let VictoryTimelinePath = self.VictoryTimelinePath.as_ref().map(|x|{
@@ -1215,7 +1215,7 @@ impl EliminateRaidStageExcelT {
       PortraitPath,
       BGPath,
       RaidCharacterId,
-      bossCharacterId,
+      BossCharacterId,
       Difficulty,
       IsOpen,
       MaxPlayerCount,
@@ -1232,9 +1232,9 @@ impl EliminateRaidStageExcelT {
       MinimumAcquisitionScore,
       MaximumAcquisitionScore,
       RaidRewardGroupId,
-      battleReadyTimelinePath,
+      BattleReadyTimelinePath,
       BattleReadyTimelinePhaseStart,
-      battleReadyTimelinePhaseEnd,
+      BattleReadyTimelinePhaseEnd,
       VictoryTimelinePath,
       PhaseChangeTimelinePath,
       TimeLinePhase,

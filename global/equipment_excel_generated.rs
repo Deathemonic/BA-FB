@@ -84,11 +84,11 @@ impl<'a> EquipmentExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.shopCategory {
-        builder.add_shopCategory(x);
+      if let Some(x) = args.ShopCategory {
+        builder.add_ShopCategory(x);
       }
-      if let Some(x) = args.tags {
-        builder.add_tags(x);
+      if let Some(x) = args.Tags {
+        builder.add_Tags(x);
       }
       if let Some(x) = args.ImageName {
         builder.add_ImageName(x);
@@ -144,14 +144,14 @@ impl<'a> EquipmentExcel<'a> {
     let ImageName = self.ImageName().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let tags = self.tags().map(|x| {
+    let Tags = self.Tags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let CraftQualityTier0 = self.CraftQualityTier0();
       let CraftQualityTier1 = self.CraftQualityTier1();
       let CraftQualityTier2 = self.CraftQualityTier2();
       let ShiftingCraftQuality = self.ShiftingCraftQuality();
-    let shopCategory = self.shopCategory().map(|x| {
+    let ShopCategory = self.ShopCategory().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let ShortcutTypeId = self.ShortcutTypeId();
@@ -168,12 +168,12 @@ impl<'a> EquipmentExcel<'a> {
       StackableMax,
       Icon,
       ImageName,
-      tags,
+      Tags,
       CraftQualityTier0,
       CraftQualityTier1,
       CraftQualityTier2,
       ShiftingCraftQuality,
-      shopCategory,
+      ShopCategory,
       ShortcutTypeId,
     }
   }
@@ -263,7 +263,7 @@ impl<'a> EquipmentExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EquipmentExcel::VT_IMAGENAME, None)}
   }
   #[inline]
-  pub fn tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn Tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -298,7 +298,7 @@ impl<'a> EquipmentExcel<'a> {
     unsafe { self._tab.get::<i64>(EquipmentExcel::VT_SHIFTINGCRAFTQUALITY, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn shopCategory(&self) -> Option<flatbuffers::Vector<'a, ShopCategoryType>> {
+  pub fn ShopCategory(&self) -> Option<flatbuffers::Vector<'a, ShopCategoryType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -332,12 +332,12 @@ impl flatbuffers::Verifiable for EquipmentExcel<'_> {
      .visit_field::<i32>("StackableMax", Self::VT_STACKABLEMAX, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("Icon", Self::VT_ICON, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ImageName", Self::VT_IMAGENAME, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("tags", Self::VT_TAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("Tags", Self::VT_TAGS, false)?
      .visit_field::<i64>("CraftQualityTier0", Self::VT_CRAFTQUALITYTIER0, false)?
      .visit_field::<i64>("CraftQualityTier1", Self::VT_CRAFTQUALITYTIER1, false)?
      .visit_field::<i64>("CraftQualityTier2", Self::VT_CRAFTQUALITYTIER2, false)?
      .visit_field::<i64>("ShiftingCraftQuality", Self::VT_SHIFTINGCRAFTQUALITY, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ShopCategoryType>>>("shopCategory", Self::VT_SHOPCATEGORY, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ShopCategoryType>>>("ShopCategory", Self::VT_SHOPCATEGORY, false)?
      .visit_field::<i64>("ShortcutTypeId", Self::VT_SHORTCUTTYPEID, false)?
      .finish();
     Ok(())
@@ -356,12 +356,12 @@ pub struct EquipmentExcelArgs<'a> {
     pub StackableMax: i32,
     pub Icon: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ImageName: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub Tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub CraftQualityTier0: i64,
     pub CraftQualityTier1: i64,
     pub CraftQualityTier2: i64,
     pub ShiftingCraftQuality: i64,
-    pub shopCategory: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ShopCategoryType>>>,
+    pub ShopCategory: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ShopCategoryType>>>,
     pub ShortcutTypeId: i64,
 }
 impl<'a> Default for EquipmentExcelArgs<'a> {
@@ -380,12 +380,12 @@ impl<'a> Default for EquipmentExcelArgs<'a> {
       StackableMax: 0,
       Icon: None,
       ImageName: None,
-      tags: None,
+      Tags: None,
       CraftQualityTier0: 0,
       CraftQualityTier1: 0,
       CraftQualityTier2: 0,
       ShiftingCraftQuality: 0,
-      shopCategory: None,
+      ShopCategory: None,
       ShortcutTypeId: 0,
     }
   }
@@ -417,19 +417,19 @@ impl Serialize for EquipmentExcel<'_> {
       } else {
         s.skip_field("ImageName")?;
       }
-      if let Some(f) = self.tags() {
-        s.serialize_field("tags", &f)?;
+      if let Some(f) = self.Tags() {
+        s.serialize_field("Tags", &f)?;
       } else {
-        s.skip_field("tags")?;
+        s.skip_field("Tags")?;
       }
       s.serialize_field("CraftQualityTier0", &self.CraftQualityTier0())?;
       s.serialize_field("CraftQualityTier1", &self.CraftQualityTier1())?;
       s.serialize_field("CraftQualityTier2", &self.CraftQualityTier2())?;
       s.serialize_field("ShiftingCraftQuality", &self.ShiftingCraftQuality())?;
-      if let Some(f) = self.shopCategory() {
-        s.serialize_field("shopCategory", &f)?;
+      if let Some(f) = self.ShopCategory() {
+        s.serialize_field("ShopCategory", &f)?;
       } else {
-        s.skip_field("shopCategory")?;
+        s.skip_field("ShopCategory")?;
       }
       s.serialize_field("ShortcutTypeId", &self.ShortcutTypeId())?;
     s.end()
@@ -490,8 +490,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EquipmentExcelBuilder<'a, 'b, A
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentExcel::VT_IMAGENAME, ImageName);
   }
   #[inline]
-  pub fn add_tags(&mut self, tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentExcel::VT_TAGS, tags);
+  pub fn add_Tags(&mut self, Tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentExcel::VT_TAGS, Tags);
   }
   #[inline]
   pub fn add_CraftQualityTier0(&mut self, CraftQualityTier0: i64) {
@@ -510,8 +510,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EquipmentExcelBuilder<'a, 'b, A
     self.fbb_.push_slot::<i64>(EquipmentExcel::VT_SHIFTINGCRAFTQUALITY, ShiftingCraftQuality, 0);
   }
   #[inline]
-  pub fn add_shopCategory(&mut self, shopCategory: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ShopCategoryType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentExcel::VT_SHOPCATEGORY, shopCategory);
+  pub fn add_ShopCategory(&mut self, ShopCategory: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ShopCategoryType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EquipmentExcel::VT_SHOPCATEGORY, ShopCategory);
   }
   #[inline]
   pub fn add_ShortcutTypeId(&mut self, ShortcutTypeId: i64) {
@@ -547,12 +547,12 @@ impl core::fmt::Debug for EquipmentExcel<'_> {
       ds.field("StackableMax", &self.StackableMax());
       ds.field("Icon", &self.Icon());
       ds.field("ImageName", &self.ImageName());
-      ds.field("tags", &self.tags());
+      ds.field("Tags", &self.Tags());
       ds.field("CraftQualityTier0", &self.CraftQualityTier0());
       ds.field("CraftQualityTier1", &self.CraftQualityTier1());
       ds.field("CraftQualityTier2", &self.CraftQualityTier2());
       ds.field("ShiftingCraftQuality", &self.ShiftingCraftQuality());
-      ds.field("shopCategory", &self.shopCategory());
+      ds.field("ShopCategory", &self.ShopCategory());
       ds.field("ShortcutTypeId", &self.ShortcutTypeId());
       ds.finish()
   }
@@ -572,12 +572,12 @@ pub struct EquipmentExcelT {
   pub StackableMax: i32,
   pub Icon: Option<String>,
   pub ImageName: Option<String>,
-  pub tags: Option<Vec<Tag>>,
+  pub Tags: Option<Vec<Tag>>,
   pub CraftQualityTier0: i64,
   pub CraftQualityTier1: i64,
   pub CraftQualityTier2: i64,
   pub ShiftingCraftQuality: i64,
-  pub shopCategory: Option<Vec<ShopCategoryType>>,
+  pub ShopCategory: Option<Vec<ShopCategoryType>>,
   pub ShortcutTypeId: i64,
 }
 impl Default for EquipmentExcelT {
@@ -595,12 +595,12 @@ impl Default for EquipmentExcelT {
       StackableMax: 0,
       Icon: None,
       ImageName: None,
-      tags: None,
+      Tags: None,
       CraftQualityTier0: 0,
       CraftQualityTier1: 0,
       CraftQualityTier2: 0,
       ShiftingCraftQuality: 0,
-      shopCategory: None,
+      ShopCategory: None,
       ShortcutTypeId: 0,
     }
   }
@@ -626,14 +626,14 @@ impl EquipmentExcelT {
     let ImageName = self.ImageName.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let tags = self.tags.as_ref().map(|x|{
+    let Tags = self.Tags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CraftQualityTier0 = self.CraftQualityTier0;
     let CraftQualityTier1 = self.CraftQualityTier1;
     let CraftQualityTier2 = self.CraftQualityTier2;
     let ShiftingCraftQuality = self.ShiftingCraftQuality;
-    let shopCategory = self.shopCategory.as_ref().map(|x|{
+    let ShopCategory = self.ShopCategory.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ShortcutTypeId = self.ShortcutTypeId;
@@ -650,12 +650,12 @@ impl EquipmentExcelT {
       StackableMax,
       Icon,
       ImageName,
-      tags,
+      Tags,
       CraftQualityTier0,
       CraftQualityTier1,
       CraftQualityTier2,
       ShiftingCraftQuality,
-      shopCategory,
+      ShopCategory,
       ShortcutTypeId,
     })
   }

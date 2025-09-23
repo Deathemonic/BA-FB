@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_PARCEL_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_PARCEL_TYPE: i32 = 23;
+pub const ENUM_MAX_PARCEL_TYPE: i32 = 28;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_PARCEL_TYPE: [ParcelType; 24] = [
+pub const ENUM_VALUES_PARCEL_TYPE: [ParcelType; 29] = [
   ParcelType::None,
   ParcelType::Character,
   ParcelType::Currency,
@@ -44,6 +44,11 @@ pub const ENUM_VALUES_PARCEL_TYPE: [ParcelType; 24] = [
   ParcelType::Emblem,
   ParcelType::Sticker,
   ParcelType::Costume,
+  ParcelType::PossessionCheck,
+  ParcelType::BattlePassExp,
+  ParcelType::SelectedCharacter,
+  ParcelType::UnSelectedCharacter,
+  ParcelType::ProductBattlePass,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -75,9 +80,14 @@ impl ParcelType {
   pub const Emblem: Self = Self(21);
   pub const Sticker: Self = Self(22);
   pub const Costume: Self = Self(23);
+  pub const PossessionCheck: Self = Self(24);
+  pub const BattlePassExp: Self = Self(25);
+  pub const SelectedCharacter: Self = Self(26);
+  pub const UnSelectedCharacter: Self = Self(27);
+  pub const ProductBattlePass: Self = Self(28);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 23;
+  pub const ENUM_MAX: i32 = 28;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Character,
@@ -103,6 +113,11 @@ impl ParcelType {
     Self::Emblem,
     Self::Sticker,
     Self::Costume,
+    Self::PossessionCheck,
+    Self::BattlePassExp,
+    Self::SelectedCharacter,
+    Self::UnSelectedCharacter,
+    Self::ProductBattlePass,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -131,6 +146,11 @@ impl ParcelType {
       Self::Emblem => Some("Emblem"),
       Self::Sticker => Some("Sticker"),
       Self::Costume => Some("Costume"),
+      Self::PossessionCheck => Some("PossessionCheck"),
+      Self::BattlePassExp => Some("BattlePassExp"),
+      Self::SelectedCharacter => Some("SelectedCharacter"),
+      Self::UnSelectedCharacter => Some("UnSelectedCharacter"),
+      Self::ProductBattlePass => Some("ProductBattlePass"),
       _ => None,
     }
   }

@@ -61,8 +61,8 @@ impl<'a> RaidSeasonManageExcel<'a> {
       let x = args.SeasonId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_SeasonId(x);
-      if let Some(x) = args.seasonRewardId {
-        builder.add_seasonRewardId(x);
+      if let Some(x) = args.SeasonRewardId {
+        builder.add_SeasonRewardId(x);
       }
       if let Some(x) = args.StackedSeasonRewardGauge {
         builder.add_StackedSeasonRewardGauge(x);
@@ -112,7 +112,7 @@ impl<'a> RaidSeasonManageExcel<'a> {
     let StackedSeasonRewardGauge = self.StackedSeasonRewardGauge().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let seasonRewardId = self.seasonRewardId().map(|x| {
+    let SeasonRewardId = self.SeasonRewardId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     RaidSeasonManageExcelT {
@@ -126,7 +126,7 @@ impl<'a> RaidSeasonManageExcel<'a> {
       RankingRewardGroupId,
       MaxSeasonRewardGauage,
       StackedSeasonRewardGauge,
-      seasonRewardId,
+      SeasonRewardId,
     }
   }
 
@@ -201,7 +201,7 @@ impl<'a> RaidSeasonManageExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(RaidSeasonManageExcel::VT_STACKEDSEASONREWARDGAUGE, None)}
   }
   #[inline]
-  pub fn seasonRewardId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn SeasonRewardId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -226,7 +226,7 @@ impl flatbuffers::Verifiable for RaidSeasonManageExcel<'_> {
      .visit_field::<i64>("RankingRewardGroupId", Self::VT_RANKINGREWARDGROUPID, false)?
      .visit_field::<i32>("MaxSeasonRewardGauage", Self::VT_MAXSEASONREWARDGAUAGE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StackedSeasonRewardGauge", Self::VT_STACKEDSEASONREWARDGAUGE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("seasonRewardId", Self::VT_SEASONREWARDID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("SeasonRewardId", Self::VT_SEASONREWARDID, false)?
      .finish();
     Ok(())
   }
@@ -242,7 +242,7 @@ pub struct RaidSeasonManageExcelArgs<'a> {
     pub RankingRewardGroupId: i64,
     pub MaxSeasonRewardGauage: i32,
     pub StackedSeasonRewardGauge: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub seasonRewardId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub SeasonRewardId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for RaidSeasonManageExcelArgs<'a> {
   #[inline]
@@ -258,7 +258,7 @@ impl<'a> Default for RaidSeasonManageExcelArgs<'a> {
       RankingRewardGroupId: 0,
       MaxSeasonRewardGauage: 0,
       StackedSeasonRewardGauge: None,
-      seasonRewardId: None,
+      SeasonRewardId: None,
     }
   }
 }
@@ -303,10 +303,10 @@ impl Serialize for RaidSeasonManageExcel<'_> {
       } else {
         s.skip_field("StackedSeasonRewardGauge")?;
       }
-      if let Some(f) = self.seasonRewardId() {
-        s.serialize_field("seasonRewardId", &f)?;
+      if let Some(f) = self.SeasonRewardId() {
+        s.serialize_field("SeasonRewardId", &f)?;
       } else {
-        s.skip_field("seasonRewardId")?;
+        s.skip_field("SeasonRewardId")?;
       }
     s.end()
   }
@@ -358,8 +358,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> RaidSeasonManageExcelBuilder<'a
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RaidSeasonManageExcel::VT_STACKEDSEASONREWARDGAUGE, StackedSeasonRewardGauge);
   }
   #[inline]
-  pub fn add_seasonRewardId(&mut self, seasonRewardId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RaidSeasonManageExcel::VT_SEASONREWARDID, seasonRewardId);
+  pub fn add_SeasonRewardId(&mut self, SeasonRewardId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RaidSeasonManageExcel::VT_SEASONREWARDID, SeasonRewardId);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> RaidSeasonManageExcelBuilder<'a, 'b, A> {
@@ -389,7 +389,7 @@ impl core::fmt::Debug for RaidSeasonManageExcel<'_> {
       ds.field("RankingRewardGroupId", &self.RankingRewardGroupId());
       ds.field("MaxSeasonRewardGauage", &self.MaxSeasonRewardGauage());
       ds.field("StackedSeasonRewardGauge", &self.StackedSeasonRewardGauge());
-      ds.field("seasonRewardId", &self.seasonRewardId());
+      ds.field("SeasonRewardId", &self.SeasonRewardId());
       ds.finish()
   }
 }
@@ -406,7 +406,7 @@ pub struct RaidSeasonManageExcelT {
   pub RankingRewardGroupId: i64,
   pub MaxSeasonRewardGauage: i32,
   pub StackedSeasonRewardGauge: Option<Vec<i64>>,
-  pub seasonRewardId: Option<Vec<i64>>,
+  pub SeasonRewardId: Option<Vec<i64>>,
 }
 impl Default for RaidSeasonManageExcelT {
   fn default() -> Self {
@@ -421,7 +421,7 @@ impl Default for RaidSeasonManageExcelT {
       RankingRewardGroupId: 0,
       MaxSeasonRewardGauage: 0,
       StackedSeasonRewardGauge: None,
-      seasonRewardId: None,
+      SeasonRewardId: None,
     }
   }
 }
@@ -452,7 +452,7 @@ impl RaidSeasonManageExcelT {
     let StackedSeasonRewardGauge = self.StackedSeasonRewardGauge.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let seasonRewardId = self.seasonRewardId.as_ref().map(|x|{
+    let SeasonRewardId = self.SeasonRewardId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     RaidSeasonManageExcel::create(_fbb, &RaidSeasonManageExcelArgs{
@@ -466,7 +466,7 @@ impl RaidSeasonManageExcelT {
       RankingRewardGroupId,
       MaxSeasonRewardGauage,
       StackedSeasonRewardGauge,
-      seasonRewardId,
+      SeasonRewardId,
     })
   }
 }

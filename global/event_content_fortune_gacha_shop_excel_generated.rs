@@ -68,8 +68,8 @@ impl<'a> EventContentFortuneGachaShopExcel<'a> {
       if let Some(x) = args.RewardParcelId {
         builder.add_RewardParcelId(x);
       }
-      if let Some(x) = args.RewardParcelType {
-        builder.add_RewardParcelType(x);
+      if let Some(x) = args.rewardParcelType {
+        builder.add_rewardParcelType(x);
       }
       let x = args.ProbModifyLimit;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -101,7 +101,7 @@ impl<'a> EventContentFortuneGachaShopExcel<'a> {
       let Prob = self.Prob();
       let ProbModifyValue = self.ProbModifyValue();
       let ProbModifyLimit = self.ProbModifyLimit();
-    let RewardParcelType = self.RewardParcelType().map(|x| {
+    let rewardParcelType = self.rewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let RewardParcelId = self.RewardParcelId().map(|x| {
@@ -120,7 +120,7 @@ impl<'a> EventContentFortuneGachaShopExcel<'a> {
       Prob,
       ProbModifyValue,
       ProbModifyLimit,
-      RewardParcelType,
+      rewardParcelType,
       RewardParcelId,
       RewardParcelAmount,
     }
@@ -190,7 +190,7 @@ impl<'a> EventContentFortuneGachaShopExcel<'a> {
     unsafe { self._tab.get::<i32>(EventContentFortuneGachaShopExcel::VT_PROBMODIFYLIMIT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn RewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn rewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -228,7 +228,7 @@ impl flatbuffers::Verifiable for EventContentFortuneGachaShopExcel<'_> {
      .visit_field::<i32>("Prob", Self::VT_PROB, false)?
      .visit_field::<i32>("ProbModifyValue", Self::VT_PROBMODIFYVALUE, false)?
      .visit_field::<i32>("ProbModifyLimit", Self::VT_PROBMODIFYLIMIT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
@@ -245,7 +245,7 @@ pub struct EventContentFortuneGachaShopExcelArgs<'a> {
     pub Prob: i32,
     pub ProbModifyValue: i32,
     pub ProbModifyLimit: i32,
-    pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
@@ -262,7 +262,7 @@ impl<'a> Default for EventContentFortuneGachaShopExcelArgs<'a> {
       Prob: 0,
       ProbModifyValue: 0,
       ProbModifyLimit: 0,
-      RewardParcelType: None,
+      rewardParcelType: None,
       RewardParcelId: None,
       RewardParcelAmount: None,
     }
@@ -284,10 +284,10 @@ impl Serialize for EventContentFortuneGachaShopExcel<'_> {
       s.serialize_field("Prob", &self.Prob())?;
       s.serialize_field("ProbModifyValue", &self.ProbModifyValue())?;
       s.serialize_field("ProbModifyLimit", &self.ProbModifyLimit())?;
-      if let Some(f) = self.RewardParcelType() {
-        s.serialize_field("RewardParcelType", &f)?;
+      if let Some(f) = self.rewardParcelType() {
+        s.serialize_field("rewardParcelType", &f)?;
       } else {
-        s.skip_field("RewardParcelType")?;
+        s.skip_field("rewardParcelType")?;
       }
       if let Some(f) = self.RewardParcelId() {
         s.serialize_field("RewardParcelId", &f)?;
@@ -345,8 +345,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentFortuneGachaShopExc
     self.fbb_.push_slot::<i32>(EventContentFortuneGachaShopExcel::VT_PROBMODIFYLIMIT, ProbModifyLimit, 0);
   }
   #[inline]
-  pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentFortuneGachaShopExcel::VT_REWARDPARCELTYPE, RewardParcelType);
+  pub fn add_rewardParcelType(&mut self, rewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentFortuneGachaShopExcel::VT_REWARDPARCELTYPE, rewardParcelType);
   }
   #[inline]
   pub fn add_RewardParcelId(&mut self, RewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -383,7 +383,7 @@ impl core::fmt::Debug for EventContentFortuneGachaShopExcel<'_> {
       ds.field("Prob", &self.Prob());
       ds.field("ProbModifyValue", &self.ProbModifyValue());
       ds.field("ProbModifyLimit", &self.ProbModifyLimit());
-      ds.field("RewardParcelType", &self.RewardParcelType());
+      ds.field("rewardParcelType", &self.rewardParcelType());
       ds.field("RewardParcelId", &self.RewardParcelId());
       ds.field("RewardParcelAmount", &self.RewardParcelAmount());
       ds.finish()
@@ -401,7 +401,7 @@ pub struct EventContentFortuneGachaShopExcelT {
   pub Prob: i32,
   pub ProbModifyValue: i32,
   pub ProbModifyLimit: i32,
-  pub RewardParcelType: Option<Vec<ParcelType>>,
+  pub rewardParcelType: Option<Vec<ParcelType>>,
   pub RewardParcelId: Option<Vec<i64>>,
   pub RewardParcelAmount: Option<Vec<i64>>,
 }
@@ -417,7 +417,7 @@ impl Default for EventContentFortuneGachaShopExcelT {
       Prob: 0,
       ProbModifyValue: 0,
       ProbModifyLimit: 0,
-      RewardParcelType: None,
+      rewardParcelType: None,
       RewardParcelId: None,
       RewardParcelAmount: None,
     }
@@ -437,7 +437,7 @@ impl EventContentFortuneGachaShopExcelT {
     let Prob = self.Prob;
     let ProbModifyValue = self.ProbModifyValue;
     let ProbModifyLimit = self.ProbModifyLimit;
-    let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
+    let rewardParcelType = self.rewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardParcelId = self.RewardParcelId.as_ref().map(|x|{
@@ -456,7 +456,7 @@ impl EventContentFortuneGachaShopExcelT {
       Prob,
       ProbModifyValue,
       ProbModifyLimit,
-      RewardParcelType,
+      rewardParcelType,
       RewardParcelId,
       RewardParcelAmount,
     })

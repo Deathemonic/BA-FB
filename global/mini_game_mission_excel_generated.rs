@@ -50,9 +50,14 @@ impl<'a> MiniGameMissionExcel<'a> {
   pub const VT_COMPLETECONDITIONPARAMETER: flatbuffers::VOffsetT = 40;
   pub const VT_COMPLETECONDITIONPARAMETERTAG: flatbuffers::VOffsetT = 42;
   pub const VT_REWARDICON: flatbuffers::VOffsetT = 44;
-  pub const VT_MISSIONREWARDPARCELTYPE: flatbuffers::VOffsetT = 46;
-  pub const VT_MISSIONREWARDPARCELID: flatbuffers::VOffsetT = 48;
-  pub const VT_MISSIONREWARDAMOUNT: flatbuffers::VOffsetT = 50;
+  pub const VT_COMPLETECONDITIONMISSIONID: flatbuffers::VOffsetT = 46;
+  pub const VT_COMPLETECONDITIONMISSIONCOUNT: flatbuffers::VOffsetT = 48;
+  pub const VT_MISSIONREWARDPARCELTYPE: flatbuffers::VOffsetT = 50;
+  pub const VT_MISSIONREWARDPARCELID: flatbuffers::VOffsetT = 52;
+  pub const VT_MISSIONREWARDAMOUNT: flatbuffers::VOffsetT = 54;
+  pub const VT_CONDITIONREWARDPARCELTYPE: flatbuffers::VOffsetT = 56;
+  pub const VT_CONDITIONREWARDPARCELID: flatbuffers::VOffsetT = 58;
+  pub const VT_CONDITIONREWARDAMOUNT: flatbuffers::VOffsetT = 60;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -65,6 +70,9 @@ impl<'a> MiniGameMissionExcel<'a> {
   ) -> flatbuffers::WIPOffset<MiniGameMissionExcel<'bldr>> {
     let mut builder = MiniGameMissionExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"MiniGameMission");
+      let x = args.CompleteConditionMissionCount;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_CompleteConditionMissionCount(x);
       let x = args.CompleteConditionCount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_CompleteConditionCount(x);
@@ -80,17 +88,29 @@ impl<'a> MiniGameMissionExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      let x = args.id;
+      let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
-      builder.add_id(x);
+      builder.add_Id(x);
+      if let Some(x) = args.ConditionRewardAmount {
+        builder.add_ConditionRewardAmount(x);
+      }
+      if let Some(x) = args.ConditionRewardParcelId {
+        builder.add_ConditionRewardParcelId(x);
+      }
+      if let Some(x) = args.ConditionRewardParcelType {
+        builder.add_ConditionRewardParcelType(x);
+      }
       if let Some(x) = args.MissionRewardAmount {
         builder.add_MissionRewardAmount(x);
       }
       if let Some(x) = args.MissionRewardParcelId {
         builder.add_MissionRewardParcelId(x);
       }
-      if let Some(x) = args.missionRewardParcelType {
-        builder.add_missionRewardParcelType(x);
+      if let Some(x) = args.MissionRewardParcelType {
+        builder.add_MissionRewardParcelType(x);
+      }
+      if let Some(x) = args.CompleteConditionMissionId {
+        builder.add_CompleteConditionMissionId(x);
       }
       if let Some(x) = args.RewardIcon {
         builder.add_RewardIcon(x);
@@ -98,20 +118,20 @@ impl<'a> MiniGameMissionExcel<'a> {
       if let Some(x) = args.CompleteConditionParameterTag {
         builder.add_CompleteConditionParameterTag(x);
       }
-      if let Some(x) = args.completeConditionParameter {
-        builder.add_completeConditionParameter(x);
+      if let Some(x) = args.CompleteConditionParameter {
+        builder.add_CompleteConditionParameter(x);
       }
       let x = args.CompleteConditionType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_CompleteConditionType(x);
-      if let Some(x) = args.shortcutUI {
-        builder.add_shortcutUI(x);
+      if let Some(x) = args.ShortcutUI {
+        builder.add_ShortcutUI(x);
       }
       let x = args.AccountType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_AccountType(x);
-      if let Some(x) = args.preMissionId {
-        builder.add_preMissionId(x);
+      if let Some(x) = args.PreMissionId {
+        builder.add_PreMissionId(x);
       }
       if let Some(x) = args.ToastImagePath {
         builder.add_ToastImagePath(x);
@@ -138,7 +158,7 @@ impl<'a> MiniGameMissionExcel<'a> {
 
   pub fn unpack(&self) -> MiniGameMissionExcelT {
     let key = table_encryption_service::create_key(b"MiniGameMission");
-      let id = self.id();
+      let Id = self.Id();
       let EventContentId = self.EventContentId();
       let GroupId = self.GroupId();
     let GroupName = self.GroupName().map(|x| {
@@ -165,7 +185,7 @@ impl<'a> MiniGameMissionExcel<'a> {
     });
       let ViewFlag = self.ViewFlag();
       let DisplayOrder = self.DisplayOrder();
-    let preMissionId = self.preMissionId().map(|x| {
+    let PreMissionId = self.PreMissionId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let AccountType = if table_encryption_service::use_encryption() {
@@ -174,7 +194,7 @@ impl<'a> MiniGameMissionExcel<'a> {
         self.AccountType()
       };
       let AccountLevel = self.AccountLevel();
-    let shortcutUI = self.shortcutUI().map(|x| {
+    let ShortcutUI = self.ShortcutUI().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
       let CompleteConditionType = if table_encryption_service::use_encryption() {
@@ -184,7 +204,7 @@ impl<'a> MiniGameMissionExcel<'a> {
       };
       let IsCompleteExtensionTime = self.IsCompleteExtensionTime();
       let CompleteConditionCount = self.CompleteConditionCount();
-    let completeConditionParameter = self.completeConditionParameter().map(|x| {
+    let CompleteConditionParameter = self.CompleteConditionParameter().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let CompleteConditionParameterTag = self.CompleteConditionParameterTag().map(|x| {
@@ -193,7 +213,11 @@ impl<'a> MiniGameMissionExcel<'a> {
     let RewardIcon = self.RewardIcon().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let missionRewardParcelType = self.missionRewardParcelType().map(|x| {
+    let CompleteConditionMissionId = self.CompleteConditionMissionId().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
+    });
+      let CompleteConditionMissionCount = self.CompleteConditionMissionCount();
+    let MissionRewardParcelType = self.MissionRewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let MissionRewardParcelId = self.MissionRewardParcelId().map(|x| {
@@ -202,8 +226,17 @@ impl<'a> MiniGameMissionExcel<'a> {
     let MissionRewardAmount = self.MissionRewardAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
+    let ConditionRewardParcelType = self.ConditionRewardParcelType().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
+    });
+    let ConditionRewardParcelId = self.ConditionRewardParcelId().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
+    });
+    let ConditionRewardAmount = self.ConditionRewardAmount().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
+    });
     MiniGameMissionExcelT {
-      id,
+      Id,
       EventContentId,
       GroupId,
       GroupName,
@@ -214,24 +247,29 @@ impl<'a> MiniGameMissionExcel<'a> {
       ToastImagePath,
       ViewFlag,
       DisplayOrder,
-      preMissionId,
+      PreMissionId,
       AccountType,
       AccountLevel,
-      shortcutUI,
+      ShortcutUI,
       CompleteConditionType,
       IsCompleteExtensionTime,
       CompleteConditionCount,
-      completeConditionParameter,
+      CompleteConditionParameter,
       CompleteConditionParameterTag,
       RewardIcon,
-      missionRewardParcelType,
+      CompleteConditionMissionId,
+      CompleteConditionMissionCount,
+      MissionRewardParcelType,
       MissionRewardParcelId,
       MissionRewardAmount,
+      ConditionRewardParcelType,
+      ConditionRewardParcelId,
+      ConditionRewardAmount,
     }
   }
 
   #[inline]
-  pub fn id(&self) -> i64 {
+  pub fn Id(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -308,7 +346,7 @@ impl<'a> MiniGameMissionExcel<'a> {
     unsafe { self._tab.get::<i64>(MiniGameMissionExcel::VT_DISPLAYORDER, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn preMissionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn PreMissionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -329,7 +367,7 @@ impl<'a> MiniGameMissionExcel<'a> {
     unsafe { self._tab.get::<i64>(MiniGameMissionExcel::VT_ACCOUNTLEVEL, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn shortcutUI(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn ShortcutUI(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -357,7 +395,7 @@ impl<'a> MiniGameMissionExcel<'a> {
     unsafe { self._tab.get::<i64>(MiniGameMissionExcel::VT_COMPLETECONDITIONCOUNT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn completeConditionParameter(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn CompleteConditionParameter(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -378,7 +416,21 @@ impl<'a> MiniGameMissionExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(MiniGameMissionExcel::VT_REWARDICON, None)}
   }
   #[inline]
-  pub fn missionRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn CompleteConditionMissionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(MiniGameMissionExcel::VT_COMPLETECONDITIONMISSIONID, None)}
+  }
+  #[inline]
+  pub fn CompleteConditionMissionCount(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(MiniGameMissionExcel::VT_COMPLETECONDITIONMISSIONCOUNT, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn MissionRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -398,6 +450,27 @@ impl<'a> MiniGameMissionExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i32>>>(MiniGameMissionExcel::VT_MISSIONREWARDAMOUNT, None)}
   }
+  #[inline]
+  pub fn ConditionRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(MiniGameMissionExcel::VT_CONDITIONREWARDPARCELTYPE, None)}
+  }
+  #[inline]
+  pub fn ConditionRewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(MiniGameMissionExcel::VT_CONDITIONREWARDPARCELID, None)}
+  }
+  #[inline]
+  pub fn ConditionRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i32>>>(MiniGameMissionExcel::VT_CONDITIONREWARDAMOUNT, None)}
+  }
 }
 
 impl flatbuffers::Verifiable for MiniGameMissionExcel<'_> {
@@ -407,7 +480,7 @@ impl flatbuffers::Verifiable for MiniGameMissionExcel<'_> {
   ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
-     .visit_field::<i64>("id", Self::VT_ID, false)?
+     .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
      .visit_field::<i64>("GroupId", Self::VT_GROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("GroupName", Self::VT_GROUPNAME, false)?
@@ -418,25 +491,30 @@ impl flatbuffers::Verifiable for MiniGameMissionExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ToastImagePath", Self::VT_TOASTIMAGEPATH, false)?
      .visit_field::<bool>("ViewFlag", Self::VT_VIEWFLAG, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("preMissionId", Self::VT_PREMISSIONID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("PreMissionId", Self::VT_PREMISSIONID, false)?
      .visit_field::<AccountState>("AccountType", Self::VT_ACCOUNTTYPE, false)?
      .visit_field::<i64>("AccountLevel", Self::VT_ACCOUNTLEVEL, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("shortcutUI", Self::VT_SHORTCUTUI, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ShortcutUI", Self::VT_SHORTCUTUI, false)?
      .visit_field::<MissionCompleteConditionType>("CompleteConditionType", Self::VT_COMPLETECONDITIONTYPE, false)?
      .visit_field::<bool>("IsCompleteExtensionTime", Self::VT_ISCOMPLETEEXTENSIONTIME, false)?
      .visit_field::<i64>("CompleteConditionCount", Self::VT_COMPLETECONDITIONCOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("completeConditionParameter", Self::VT_COMPLETECONDITIONPARAMETER, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("CompleteConditionParameter", Self::VT_COMPLETECONDITIONPARAMETER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("CompleteConditionParameterTag", Self::VT_COMPLETECONDITIONPARAMETERTAG, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("RewardIcon", Self::VT_REWARDICON, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("missionRewardParcelType", Self::VT_MISSIONREWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("CompleteConditionMissionId", Self::VT_COMPLETECONDITIONMISSIONID, false)?
+     .visit_field::<i64>("CompleteConditionMissionCount", Self::VT_COMPLETECONDITIONMISSIONCOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("MissionRewardParcelType", Self::VT_MISSIONREWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("MissionRewardParcelId", Self::VT_MISSIONREWARDPARCELID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("MissionRewardAmount", Self::VT_MISSIONREWARDAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ConditionRewardParcelType", Self::VT_CONDITIONREWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConditionRewardParcelId", Self::VT_CONDITIONREWARDPARCELID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("ConditionRewardAmount", Self::VT_CONDITIONREWARDAMOUNT, false)?
      .finish();
     Ok(())
   }
 }
 pub struct MiniGameMissionExcelArgs<'a> {
-    pub id: i64,
+    pub Id: i64,
     pub EventContentId: i64,
     pub GroupId: i64,
     pub GroupName: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -447,25 +525,30 @@ pub struct MiniGameMissionExcelArgs<'a> {
     pub ToastImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ViewFlag: bool,
     pub DisplayOrder: i64,
-    pub preMissionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub PreMissionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub AccountType: AccountState,
     pub AccountLevel: i64,
-    pub shortcutUI: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub ShortcutUI: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub CompleteConditionType: MissionCompleteConditionType,
     pub IsCompleteExtensionTime: bool,
     pub CompleteConditionCount: i64,
-    pub completeConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub CompleteConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub CompleteConditionParameterTag: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub RewardIcon: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub missionRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub CompleteConditionMissionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub CompleteConditionMissionCount: i64,
+    pub MissionRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub MissionRewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub MissionRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub ConditionRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub ConditionRewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ConditionRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for MiniGameMissionExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     MiniGameMissionExcelArgs {
-      id: 0,
+      Id: 0,
       EventContentId: 0,
       GroupId: 0,
       GroupName: None,
@@ -476,19 +559,24 @@ impl<'a> Default for MiniGameMissionExcelArgs<'a> {
       ToastImagePath: None,
       ViewFlag: false,
       DisplayOrder: 0,
-      preMissionId: None,
+      PreMissionId: None,
       AccountType: AccountState::WaitingSignIn,
       AccountLevel: 0,
-      shortcutUI: None,
+      ShortcutUI: None,
       CompleteConditionType: MissionCompleteConditionType::None,
       IsCompleteExtensionTime: false,
       CompleteConditionCount: 0,
-      completeConditionParameter: None,
+      CompleteConditionParameter: None,
       CompleteConditionParameterTag: None,
       RewardIcon: None,
-      missionRewardParcelType: None,
+      CompleteConditionMissionId: None,
+      CompleteConditionMissionCount: 0,
+      MissionRewardParcelType: None,
       MissionRewardParcelId: None,
       MissionRewardAmount: None,
+      ConditionRewardParcelType: None,
+      ConditionRewardParcelId: None,
+      ConditionRewardAmount: None,
     }
   }
 }
@@ -498,8 +586,8 @@ impl Serialize for MiniGameMissionExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("MiniGameMissionExcel", 24)?;
-      s.serialize_field("id", &self.id())?;
+    let mut s = serializer.serialize_struct("MiniGameMissionExcel", 29)?;
+      s.serialize_field("Id", &self.Id())?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("GroupId", &self.GroupId())?;
       if let Some(f) = self.GroupName() {
@@ -518,25 +606,25 @@ impl Serialize for MiniGameMissionExcel<'_> {
       }
       s.serialize_field("ViewFlag", &self.ViewFlag())?;
       s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
-      if let Some(f) = self.preMissionId() {
-        s.serialize_field("preMissionId", &f)?;
+      if let Some(f) = self.PreMissionId() {
+        s.serialize_field("PreMissionId", &f)?;
       } else {
-        s.skip_field("preMissionId")?;
+        s.skip_field("PreMissionId")?;
       }
       s.serialize_field("AccountType", &self.AccountType())?;
       s.serialize_field("AccountLevel", &self.AccountLevel())?;
-      if let Some(f) = self.shortcutUI() {
-        s.serialize_field("shortcutUI", &f)?;
+      if let Some(f) = self.ShortcutUI() {
+        s.serialize_field("ShortcutUI", &f)?;
       } else {
-        s.skip_field("shortcutUI")?;
+        s.skip_field("ShortcutUI")?;
       }
       s.serialize_field("CompleteConditionType", &self.CompleteConditionType())?;
       s.serialize_field("IsCompleteExtensionTime", &self.IsCompleteExtensionTime())?;
       s.serialize_field("CompleteConditionCount", &self.CompleteConditionCount())?;
-      if let Some(f) = self.completeConditionParameter() {
-        s.serialize_field("completeConditionParameter", &f)?;
+      if let Some(f) = self.CompleteConditionParameter() {
+        s.serialize_field("CompleteConditionParameter", &f)?;
       } else {
-        s.skip_field("completeConditionParameter")?;
+        s.skip_field("CompleteConditionParameter")?;
       }
       if let Some(f) = self.CompleteConditionParameterTag() {
         s.serialize_field("CompleteConditionParameterTag", &f)?;
@@ -548,10 +636,16 @@ impl Serialize for MiniGameMissionExcel<'_> {
       } else {
         s.skip_field("RewardIcon")?;
       }
-      if let Some(f) = self.missionRewardParcelType() {
-        s.serialize_field("missionRewardParcelType", &f)?;
+      if let Some(f) = self.CompleteConditionMissionId() {
+        s.serialize_field("CompleteConditionMissionId", &f)?;
       } else {
-        s.skip_field("missionRewardParcelType")?;
+        s.skip_field("CompleteConditionMissionId")?;
+      }
+      s.serialize_field("CompleteConditionMissionCount", &self.CompleteConditionMissionCount())?;
+      if let Some(f) = self.MissionRewardParcelType() {
+        s.serialize_field("MissionRewardParcelType", &f)?;
+      } else {
+        s.skip_field("MissionRewardParcelType")?;
       }
       if let Some(f) = self.MissionRewardParcelId() {
         s.serialize_field("MissionRewardParcelId", &f)?;
@@ -563,6 +657,21 @@ impl Serialize for MiniGameMissionExcel<'_> {
       } else {
         s.skip_field("MissionRewardAmount")?;
       }
+      if let Some(f) = self.ConditionRewardParcelType() {
+        s.serialize_field("ConditionRewardParcelType", &f)?;
+      } else {
+        s.skip_field("ConditionRewardParcelType")?;
+      }
+      if let Some(f) = self.ConditionRewardParcelId() {
+        s.serialize_field("ConditionRewardParcelId", &f)?;
+      } else {
+        s.skip_field("ConditionRewardParcelId")?;
+      }
+      if let Some(f) = self.ConditionRewardAmount() {
+        s.serialize_field("ConditionRewardAmount", &f)?;
+      } else {
+        s.skip_field("ConditionRewardAmount")?;
+      }
     s.end()
   }
 }
@@ -573,8 +682,8 @@ pub struct MiniGameMissionExcelBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + '
 }
 impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameMissionExcelBuilder<'a, 'b, A> {
   #[inline]
-  pub fn add_id(&mut self, id: i64) {
-    self.fbb_.push_slot::<i64>(MiniGameMissionExcel::VT_ID, id, 0);
+  pub fn add_Id(&mut self, Id: i64) {
+    self.fbb_.push_slot::<i64>(MiniGameMissionExcel::VT_ID, Id, 0);
   }
   #[inline]
   pub fn add_EventContentId(&mut self, EventContentId: i64) {
@@ -617,8 +726,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameMissionExcelBuilder<'a,
     self.fbb_.push_slot::<i64>(MiniGameMissionExcel::VT_DISPLAYORDER, DisplayOrder, 0);
   }
   #[inline]
-  pub fn add_preMissionId(&mut self, preMissionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_PREMISSIONID, preMissionId);
+  pub fn add_PreMissionId(&mut self, PreMissionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_PREMISSIONID, PreMissionId);
   }
   #[inline]
   pub fn add_AccountType(&mut self, AccountType: AccountState) {
@@ -629,8 +738,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameMissionExcelBuilder<'a,
     self.fbb_.push_slot::<i64>(MiniGameMissionExcel::VT_ACCOUNTLEVEL, AccountLevel, 0);
   }
   #[inline]
-  pub fn add_shortcutUI(&mut self, shortcutUI: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_SHORTCUTUI, shortcutUI);
+  pub fn add_ShortcutUI(&mut self, ShortcutUI: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_SHORTCUTUI, ShortcutUI);
   }
   #[inline]
   pub fn add_CompleteConditionType(&mut self, CompleteConditionType: MissionCompleteConditionType) {
@@ -645,8 +754,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameMissionExcelBuilder<'a,
     self.fbb_.push_slot::<i64>(MiniGameMissionExcel::VT_COMPLETECONDITIONCOUNT, CompleteConditionCount, 0);
   }
   #[inline]
-  pub fn add_completeConditionParameter(&mut self, completeConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_COMPLETECONDITIONPARAMETER, completeConditionParameter);
+  pub fn add_CompleteConditionParameter(&mut self, CompleteConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_COMPLETECONDITIONPARAMETER, CompleteConditionParameter);
   }
   #[inline]
   pub fn add_CompleteConditionParameterTag(&mut self, CompleteConditionParameterTag: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
@@ -657,8 +766,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameMissionExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_REWARDICON, RewardIcon);
   }
   #[inline]
-  pub fn add_missionRewardParcelType(&mut self, missionRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_MISSIONREWARDPARCELTYPE, missionRewardParcelType);
+  pub fn add_CompleteConditionMissionId(&mut self, CompleteConditionMissionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_COMPLETECONDITIONMISSIONID, CompleteConditionMissionId);
+  }
+  #[inline]
+  pub fn add_CompleteConditionMissionCount(&mut self, CompleteConditionMissionCount: i64) {
+    self.fbb_.push_slot::<i64>(MiniGameMissionExcel::VT_COMPLETECONDITIONMISSIONCOUNT, CompleteConditionMissionCount, 0);
+  }
+  #[inline]
+  pub fn add_MissionRewardParcelType(&mut self, MissionRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_MISSIONREWARDPARCELTYPE, MissionRewardParcelType);
   }
   #[inline]
   pub fn add_MissionRewardParcelId(&mut self, MissionRewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -667,6 +784,18 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameMissionExcelBuilder<'a,
   #[inline]
   pub fn add_MissionRewardAmount(&mut self, MissionRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_MISSIONREWARDAMOUNT, MissionRewardAmount);
+  }
+  #[inline]
+  pub fn add_ConditionRewardParcelType(&mut self, ConditionRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_CONDITIONREWARDPARCELTYPE, ConditionRewardParcelType);
+  }
+  #[inline]
+  pub fn add_ConditionRewardParcelId(&mut self, ConditionRewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_CONDITIONREWARDPARCELID, ConditionRewardParcelId);
+  }
+  #[inline]
+  pub fn add_ConditionRewardAmount(&mut self, ConditionRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_CONDITIONREWARDAMOUNT, ConditionRewardAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> MiniGameMissionExcelBuilder<'a, 'b, A> {
@@ -686,7 +815,7 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameMissionExcelBuilder<'a,
 impl core::fmt::Debug for MiniGameMissionExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("MiniGameMissionExcel");
-      ds.field("id", &self.id());
+      ds.field("Id", &self.Id());
       ds.field("EventContentId", &self.EventContentId());
       ds.field("GroupId", &self.GroupId());
       ds.field("GroupName", &self.GroupName());
@@ -697,26 +826,31 @@ impl core::fmt::Debug for MiniGameMissionExcel<'_> {
       ds.field("ToastImagePath", &self.ToastImagePath());
       ds.field("ViewFlag", &self.ViewFlag());
       ds.field("DisplayOrder", &self.DisplayOrder());
-      ds.field("preMissionId", &self.preMissionId());
+      ds.field("PreMissionId", &self.PreMissionId());
       ds.field("AccountType", &self.AccountType());
       ds.field("AccountLevel", &self.AccountLevel());
-      ds.field("shortcutUI", &self.shortcutUI());
+      ds.field("ShortcutUI", &self.ShortcutUI());
       ds.field("CompleteConditionType", &self.CompleteConditionType());
       ds.field("IsCompleteExtensionTime", &self.IsCompleteExtensionTime());
       ds.field("CompleteConditionCount", &self.CompleteConditionCount());
-      ds.field("completeConditionParameter", &self.completeConditionParameter());
+      ds.field("CompleteConditionParameter", &self.CompleteConditionParameter());
       ds.field("CompleteConditionParameterTag", &self.CompleteConditionParameterTag());
       ds.field("RewardIcon", &self.RewardIcon());
-      ds.field("missionRewardParcelType", &self.missionRewardParcelType());
+      ds.field("CompleteConditionMissionId", &self.CompleteConditionMissionId());
+      ds.field("CompleteConditionMissionCount", &self.CompleteConditionMissionCount());
+      ds.field("MissionRewardParcelType", &self.MissionRewardParcelType());
       ds.field("MissionRewardParcelId", &self.MissionRewardParcelId());
       ds.field("MissionRewardAmount", &self.MissionRewardAmount());
+      ds.field("ConditionRewardParcelType", &self.ConditionRewardParcelType());
+      ds.field("ConditionRewardParcelId", &self.ConditionRewardParcelId());
+      ds.field("ConditionRewardAmount", &self.ConditionRewardAmount());
       ds.finish()
   }
 }
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
 pub struct MiniGameMissionExcelT {
-  pub id: i64,
+  pub Id: i64,
   pub EventContentId: i64,
   pub GroupId: i64,
   pub GroupName: Option<String>,
@@ -727,24 +861,29 @@ pub struct MiniGameMissionExcelT {
   pub ToastImagePath: Option<String>,
   pub ViewFlag: bool,
   pub DisplayOrder: i64,
-  pub preMissionId: Option<Vec<i64>>,
+  pub PreMissionId: Option<Vec<i64>>,
   pub AccountType: AccountState,
   pub AccountLevel: i64,
-  pub shortcutUI: Option<Vec<String>>,
+  pub ShortcutUI: Option<Vec<String>>,
   pub CompleteConditionType: MissionCompleteConditionType,
   pub IsCompleteExtensionTime: bool,
   pub CompleteConditionCount: i64,
-  pub completeConditionParameter: Option<Vec<i64>>,
+  pub CompleteConditionParameter: Option<Vec<i64>>,
   pub CompleteConditionParameterTag: Option<Vec<Tag>>,
   pub RewardIcon: Option<String>,
-  pub missionRewardParcelType: Option<Vec<ParcelType>>,
+  pub CompleteConditionMissionId: Option<Vec<i64>>,
+  pub CompleteConditionMissionCount: i64,
+  pub MissionRewardParcelType: Option<Vec<ParcelType>>,
   pub MissionRewardParcelId: Option<Vec<i64>>,
   pub MissionRewardAmount: Option<Vec<i32>>,
+  pub ConditionRewardParcelType: Option<Vec<ParcelType>>,
+  pub ConditionRewardParcelId: Option<Vec<i64>>,
+  pub ConditionRewardAmount: Option<Vec<i32>>,
 }
 impl Default for MiniGameMissionExcelT {
   fn default() -> Self {
     Self {
-      id: 0,
+      Id: 0,
       EventContentId: 0,
       GroupId: 0,
       GroupName: None,
@@ -755,19 +894,24 @@ impl Default for MiniGameMissionExcelT {
       ToastImagePath: None,
       ViewFlag: false,
       DisplayOrder: 0,
-      preMissionId: None,
+      PreMissionId: None,
       AccountType: AccountState::WaitingSignIn,
       AccountLevel: 0,
-      shortcutUI: None,
+      ShortcutUI: None,
       CompleteConditionType: MissionCompleteConditionType::None,
       IsCompleteExtensionTime: false,
       CompleteConditionCount: 0,
-      completeConditionParameter: None,
+      CompleteConditionParameter: None,
       CompleteConditionParameterTag: None,
       RewardIcon: None,
-      missionRewardParcelType: None,
+      CompleteConditionMissionId: None,
+      CompleteConditionMissionCount: 0,
+      MissionRewardParcelType: None,
       MissionRewardParcelId: None,
       MissionRewardAmount: None,
+      ConditionRewardParcelType: None,
+      ConditionRewardParcelId: None,
+      ConditionRewardAmount: None,
     }
   }
 }
@@ -776,7 +920,7 @@ impl MiniGameMissionExcelT {
     &self,
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<MiniGameMissionExcel<'b>> {
-    let id = self.id;
+    let Id = self.Id;
     let EventContentId = self.EventContentId;
     let GroupId = self.GroupId;
     let GroupName = self.GroupName.as_ref().map(|x|{
@@ -791,18 +935,18 @@ impl MiniGameMissionExcelT {
     });
     let ViewFlag = self.ViewFlag;
     let DisplayOrder = self.DisplayOrder;
-    let preMissionId = self.preMissionId.as_ref().map(|x|{
+    let PreMissionId = self.PreMissionId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let AccountType = self.AccountType;
     let AccountLevel = self.AccountLevel;
-    let shortcutUI = self.shortcutUI.as_ref().map(|x|{
+    let ShortcutUI = self.ShortcutUI.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let CompleteConditionType = self.CompleteConditionType;
     let IsCompleteExtensionTime = self.IsCompleteExtensionTime;
     let CompleteConditionCount = self.CompleteConditionCount;
-    let completeConditionParameter = self.completeConditionParameter.as_ref().map(|x|{
+    let CompleteConditionParameter = self.CompleteConditionParameter.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CompleteConditionParameterTag = self.CompleteConditionParameterTag.as_ref().map(|x|{
@@ -811,7 +955,11 @@ impl MiniGameMissionExcelT {
     let RewardIcon = self.RewardIcon.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let missionRewardParcelType = self.missionRewardParcelType.as_ref().map(|x|{
+    let CompleteConditionMissionId = self.CompleteConditionMissionId.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
+    let CompleteConditionMissionCount = self.CompleteConditionMissionCount;
+    let MissionRewardParcelType = self.MissionRewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let MissionRewardParcelId = self.MissionRewardParcelId.as_ref().map(|x|{
@@ -820,8 +968,17 @@ impl MiniGameMissionExcelT {
     let MissionRewardAmount = self.MissionRewardAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
+    let ConditionRewardParcelType = self.ConditionRewardParcelType.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
+    let ConditionRewardParcelId = self.ConditionRewardParcelId.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
+    let ConditionRewardAmount = self.ConditionRewardAmount.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
     MiniGameMissionExcel::create(_fbb, &MiniGameMissionExcelArgs{
-      id,
+      Id,
       EventContentId,
       GroupId,
       GroupName,
@@ -832,19 +989,24 @@ impl MiniGameMissionExcelT {
       ToastImagePath,
       ViewFlag,
       DisplayOrder,
-      preMissionId,
+      PreMissionId,
       AccountType,
       AccountLevel,
-      shortcutUI,
+      ShortcutUI,
       CompleteConditionType,
       IsCompleteExtensionTime,
       CompleteConditionCount,
-      completeConditionParameter,
+      CompleteConditionParameter,
       CompleteConditionParameterTag,
       RewardIcon,
-      missionRewardParcelType,
+      CompleteConditionMissionId,
+      CompleteConditionMissionCount,
+      MissionRewardParcelType,
       MissionRewardParcelId,
       MissionRewardAmount,
+      ConditionRewardParcelType,
+      ConditionRewardParcelId,
+      ConditionRewardAmount,
     })
   }
 }

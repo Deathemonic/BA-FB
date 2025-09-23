@@ -35,28 +35,31 @@ impl<'a> ShopInfoExcel<'a> {
   pub const VT_COSTPARCELTYPE: flatbuffers::VOffsetT = 10;
   pub const VT_COSTPARCELID: flatbuffers::VOffsetT = 12;
   pub const VT_AUTOREFRESHCOOLTIME: flatbuffers::VOffsetT = 14;
-  pub const VT_REFRESHABLECOUNT: flatbuffers::VOffsetT = 16;
-  pub const VT_GOODSID: flatbuffers::VOffsetT = 18;
-  pub const VT_OPENPERIODFROM: flatbuffers::VOffsetT = 20;
-  pub const VT_OPENPERIODTO: flatbuffers::VOffsetT = 22;
-  pub const VT_SHOPPRODUCTUPDATETIME: flatbuffers::VOffsetT = 24;
-  pub const VT_DISPLAYPARCELTYPE: flatbuffers::VOffsetT = 26;
-  pub const VT_DISPLAYPARCELID: flatbuffers::VOffsetT = 28;
-  pub const VT_ISSHOPVISIBLE: flatbuffers::VOffsetT = 30;
-  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 32;
-  pub const VT_SHOPUPDATEDATE: flatbuffers::VOffsetT = 34;
-  pub const VT_SHOPUPDATEGROUPID1: flatbuffers::VOffsetT = 36;
-  pub const VT_SHOPUPDATEGROUPID2: flatbuffers::VOffsetT = 38;
-  pub const VT_SHOPUPDATEGROUPID3: flatbuffers::VOffsetT = 40;
-  pub const VT_SHOPUPDATEGROUPID4: flatbuffers::VOffsetT = 42;
-  pub const VT_SHOPUPDATEGROUPID5: flatbuffers::VOffsetT = 44;
-  pub const VT_SHOPUPDATEGROUPID6: flatbuffers::VOffsetT = 46;
-  pub const VT_SHOPUPDATEGROUPID7: flatbuffers::VOffsetT = 48;
-  pub const VT_SHOPUPDATEGROUPID8: flatbuffers::VOffsetT = 50;
-  pub const VT_SHOPUPDATEGROUPID9: flatbuffers::VOffsetT = 52;
-  pub const VT_SHOPUPDATEGROUPID10: flatbuffers::VOffsetT = 54;
-  pub const VT_SHOPUPDATEGROUPID11: flatbuffers::VOffsetT = 56;
-  pub const VT_SHOPUPDATEGROUPID12: flatbuffers::VOffsetT = 58;
+  pub const VT_SHOPREFRESHERTYPE: flatbuffers::VOffsetT = 16;
+  pub const VT_SHOPREFRESHPERIODTYPE: flatbuffers::VOffsetT = 18;
+  pub const VT_REFRESHABLECOUNT: flatbuffers::VOffsetT = 20;
+  pub const VT_GOODSID: flatbuffers::VOffsetT = 22;
+  pub const VT_OPENPERIODFROM: flatbuffers::VOffsetT = 24;
+  pub const VT_OPENPERIODTO: flatbuffers::VOffsetT = 26;
+  pub const VT_REFRESHPERIODBASETIME: flatbuffers::VOffsetT = 28;
+  pub const VT_SHOPPRODUCTUPDATETIME: flatbuffers::VOffsetT = 30;
+  pub const VT_DISPLAYPARCELTYPE: flatbuffers::VOffsetT = 32;
+  pub const VT_DISPLAYPARCELID: flatbuffers::VOffsetT = 34;
+  pub const VT_ISSHOPVISIBLE: flatbuffers::VOffsetT = 36;
+  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 38;
+  pub const VT_SHOPUPDATEDATE: flatbuffers::VOffsetT = 40;
+  pub const VT_SHOPUPDATEGROUPID1: flatbuffers::VOffsetT = 42;
+  pub const VT_SHOPUPDATEGROUPID2: flatbuffers::VOffsetT = 44;
+  pub const VT_SHOPUPDATEGROUPID3: flatbuffers::VOffsetT = 46;
+  pub const VT_SHOPUPDATEGROUPID4: flatbuffers::VOffsetT = 48;
+  pub const VT_SHOPUPDATEGROUPID5: flatbuffers::VOffsetT = 50;
+  pub const VT_SHOPUPDATEGROUPID6: flatbuffers::VOffsetT = 52;
+  pub const VT_SHOPUPDATEGROUPID7: flatbuffers::VOffsetT = 54;
+  pub const VT_SHOPUPDATEGROUPID8: flatbuffers::VOffsetT = 56;
+  pub const VT_SHOPUPDATEGROUPID9: flatbuffers::VOffsetT = 58;
+  pub const VT_SHOPUPDATEGROUPID10: flatbuffers::VOffsetT = 60;
+  pub const VT_SHOPUPDATEGROUPID11: flatbuffers::VOffsetT = 62;
+  pub const VT_SHOPUPDATEGROUPID12: flatbuffers::VOffsetT = 64;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -126,6 +129,9 @@ impl<'a> ShopInfoExcel<'a> {
       if let Some(x) = args.ShopProductUpdateTime {
         builder.add_ShopProductUpdateTime(x);
       }
+      if let Some(x) = args.RefreshPeriodBaseTime {
+        builder.add_RefreshPeriodBaseTime(x);
+      }
       if let Some(x) = args.OpenPeriodTo {
         builder.add_OpenPeriodTo(x);
       }
@@ -135,11 +141,17 @@ impl<'a> ShopInfoExcel<'a> {
       if let Some(x) = args.GoodsId {
         builder.add_GoodsId(x);
       }
+      let x = args.ShopRefreshPeriodType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_ShopRefreshPeriodType(x);
+      let x = args.ShopRefresherType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_ShopRefresherType(x);
       if let Some(x) = args.CostParcelId {
         builder.add_CostParcelId(x);
       }
-      if let Some(x) = args.costParcelType {
-        builder.add_costParcelType(x);
+      if let Some(x) = args.CostParcelType {
+        builder.add_CostParcelType(x);
       }
       let x = args.CategoryType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -159,13 +171,23 @@ impl<'a> ShopInfoExcel<'a> {
       };
       let IsRefresh = self.IsRefresh();
       let IsSoldOutDimmed = self.IsSoldOutDimmed();
-    let costParcelType = self.costParcelType().map(|x| {
+    let CostParcelType = self.CostParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let CostParcelId = self.CostParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let AutoRefreshCoolTime = self.AutoRefreshCoolTime();
+      let ShopRefresherType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.ShopRefresherType(), &key)
+      } else {
+        self.ShopRefresherType()
+      };
+      let ShopRefreshPeriodType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.ShopRefreshPeriodType(), &key)
+      } else {
+        self.ShopRefreshPeriodType()
+      };
       let RefreshAbleCount = self.RefreshAbleCount();
     let GoodsId = self.GoodsId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
@@ -174,6 +196,9 @@ impl<'a> ShopInfoExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
     let OpenPeriodTo = self.OpenPeriodTo().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
+    let RefreshPeriodBaseTime = self.RefreshPeriodBaseTime().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
     let ShopProductUpdateTime = self.ShopProductUpdateTime().map(|x| {
@@ -204,13 +229,16 @@ impl<'a> ShopInfoExcel<'a> {
       CategoryType,
       IsRefresh,
       IsSoldOutDimmed,
-      costParcelType,
+      CostParcelType,
       CostParcelId,
       AutoRefreshCoolTime,
+      ShopRefresherType,
+      ShopRefreshPeriodType,
       RefreshAbleCount,
       GoodsId,
       OpenPeriodFrom,
       OpenPeriodTo,
+      RefreshPeriodBaseTime,
       ShopProductUpdateTime,
       DisplayParcelType,
       DisplayParcelId,
@@ -254,7 +282,7 @@ impl<'a> ShopInfoExcel<'a> {
     unsafe { self._tab.get::<bool>(ShopInfoExcel::VT_ISSOLDOUTDIMMED, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn costParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn CostParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -273,6 +301,20 @@ impl<'a> ShopInfoExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(ShopInfoExcel::VT_AUTOREFRESHCOOLTIME, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn ShopRefresherType(&self) -> ShopRefresherType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ShopRefresherType>(ShopInfoExcel::VT_SHOPREFRESHERTYPE, Some(ShopRefresherType::None)).unwrap()}
+  }
+  #[inline]
+  pub fn ShopRefreshPeriodType(&self) -> ShopRefreshPeriodType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ShopRefreshPeriodType>(ShopInfoExcel::VT_SHOPREFRESHPERIODTYPE, Some(ShopRefreshPeriodType::None)).unwrap()}
   }
   #[inline]
   pub fn RefreshAbleCount(&self) -> i64 {
@@ -301,6 +343,13 @@ impl<'a> ShopInfoExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ShopInfoExcel::VT_OPENPERIODTO, None)}
+  }
+  #[inline]
+  pub fn RefreshPeriodBaseTime(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ShopInfoExcel::VT_REFRESHPERIODBASETIME, None)}
   }
   #[inline]
   pub fn ShopProductUpdateTime(&self) -> Option<&'a str> {
@@ -440,13 +489,16 @@ impl flatbuffers::Verifiable for ShopInfoExcel<'_> {
      .visit_field::<ShopCategoryType>("CategoryType", Self::VT_CATEGORYTYPE, false)?
      .visit_field::<bool>("IsRefresh", Self::VT_ISREFRESH, false)?
      .visit_field::<bool>("IsSoldOutDimmed", Self::VT_ISSOLDOUTDIMMED, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("costParcelType", Self::VT_COSTPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("CostParcelType", Self::VT_COSTPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("CostParcelId", Self::VT_COSTPARCELID, false)?
      .visit_field::<i64>("AutoRefreshCoolTime", Self::VT_AUTOREFRESHCOOLTIME, false)?
+     .visit_field::<ShopRefresherType>("ShopRefresherType", Self::VT_SHOPREFRESHERTYPE, false)?
+     .visit_field::<ShopRefreshPeriodType>("ShopRefreshPeriodType", Self::VT_SHOPREFRESHPERIODTYPE, false)?
      .visit_field::<i64>("RefreshAbleCount", Self::VT_REFRESHABLECOUNT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("GoodsId", Self::VT_GOODSID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("OpenPeriodFrom", Self::VT_OPENPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("OpenPeriodTo", Self::VT_OPENPERIODTO, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("RefreshPeriodBaseTime", Self::VT_REFRESHPERIODBASETIME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ShopProductUpdateTime", Self::VT_SHOPPRODUCTUPDATETIME, false)?
      .visit_field::<ParcelType>("DisplayParcelType", Self::VT_DISPLAYPARCELTYPE, false)?
      .visit_field::<i64>("DisplayParcelId", Self::VT_DISPLAYPARCELID, false)?
@@ -473,13 +525,16 @@ pub struct ShopInfoExcelArgs<'a> {
     pub CategoryType: ShopCategoryType,
     pub IsRefresh: bool,
     pub IsSoldOutDimmed: bool,
-    pub costParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub CostParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub CostParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub AutoRefreshCoolTime: i64,
+    pub ShopRefresherType: ShopRefresherType,
+    pub ShopRefreshPeriodType: ShopRefreshPeriodType,
     pub RefreshAbleCount: i64,
     pub GoodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub OpenPeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub OpenPeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub RefreshPeriodBaseTime: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ShopProductUpdateTime: Option<flatbuffers::WIPOffset<&'a str>>,
     pub DisplayParcelType: ParcelType,
     pub DisplayParcelId: i64,
@@ -506,13 +561,16 @@ impl<'a> Default for ShopInfoExcelArgs<'a> {
       CategoryType: ShopCategoryType::General,
       IsRefresh: false,
       IsSoldOutDimmed: false,
-      costParcelType: None,
+      CostParcelType: None,
       CostParcelId: None,
       AutoRefreshCoolTime: 0,
+      ShopRefresherType: ShopRefresherType::None,
+      ShopRefreshPeriodType: ShopRefreshPeriodType::None,
       RefreshAbleCount: 0,
       GoodsId: None,
       OpenPeriodFrom: None,
       OpenPeriodTo: None,
+      RefreshPeriodBaseTime: None,
       ShopProductUpdateTime: None,
       DisplayParcelType: ParcelType::None,
       DisplayParcelId: 0,
@@ -540,14 +598,14 @@ impl Serialize for ShopInfoExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShopInfoExcel", 28)?;
+    let mut s = serializer.serialize_struct("ShopInfoExcel", 31)?;
       s.serialize_field("CategoryType", &self.CategoryType())?;
       s.serialize_field("IsRefresh", &self.IsRefresh())?;
       s.serialize_field("IsSoldOutDimmed", &self.IsSoldOutDimmed())?;
-      if let Some(f) = self.costParcelType() {
-        s.serialize_field("costParcelType", &f)?;
+      if let Some(f) = self.CostParcelType() {
+        s.serialize_field("CostParcelType", &f)?;
       } else {
-        s.skip_field("costParcelType")?;
+        s.skip_field("CostParcelType")?;
       }
       if let Some(f) = self.CostParcelId() {
         s.serialize_field("CostParcelId", &f)?;
@@ -555,6 +613,8 @@ impl Serialize for ShopInfoExcel<'_> {
         s.skip_field("CostParcelId")?;
       }
       s.serialize_field("AutoRefreshCoolTime", &self.AutoRefreshCoolTime())?;
+      s.serialize_field("ShopRefresherType", &self.ShopRefresherType())?;
+      s.serialize_field("ShopRefreshPeriodType", &self.ShopRefreshPeriodType())?;
       s.serialize_field("RefreshAbleCount", &self.RefreshAbleCount())?;
       if let Some(f) = self.GoodsId() {
         s.serialize_field("GoodsId", &f)?;
@@ -570,6 +630,11 @@ impl Serialize for ShopInfoExcel<'_> {
         s.serialize_field("OpenPeriodTo", &f)?;
       } else {
         s.skip_field("OpenPeriodTo")?;
+      }
+      if let Some(f) = self.RefreshPeriodBaseTime() {
+        s.serialize_field("RefreshPeriodBaseTime", &f)?;
+      } else {
+        s.skip_field("RefreshPeriodBaseTime")?;
       }
       if let Some(f) = self.ShopProductUpdateTime() {
         s.serialize_field("ShopProductUpdateTime", &f)?;
@@ -615,8 +680,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopInfoExcelBuilder<'a, 'b, A>
     self.fbb_.push_slot::<bool>(ShopInfoExcel::VT_ISSOLDOUTDIMMED, IsSoldOutDimmed, false);
   }
   #[inline]
-  pub fn add_costParcelType(&mut self, costParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopInfoExcel::VT_COSTPARCELTYPE, costParcelType);
+  pub fn add_CostParcelType(&mut self, CostParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopInfoExcel::VT_COSTPARCELTYPE, CostParcelType);
   }
   #[inline]
   pub fn add_CostParcelId(&mut self, CostParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -625,6 +690,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopInfoExcelBuilder<'a, 'b, A>
   #[inline]
   pub fn add_AutoRefreshCoolTime(&mut self, AutoRefreshCoolTime: i64) {
     self.fbb_.push_slot::<i64>(ShopInfoExcel::VT_AUTOREFRESHCOOLTIME, AutoRefreshCoolTime, 0);
+  }
+  #[inline]
+  pub fn add_ShopRefresherType(&mut self, ShopRefresherType: ShopRefresherType) {
+    self.fbb_.push_slot::<ShopRefresherType>(ShopInfoExcel::VT_SHOPREFRESHERTYPE, ShopRefresherType, ShopRefresherType::None);
+  }
+  #[inline]
+  pub fn add_ShopRefreshPeriodType(&mut self, ShopRefreshPeriodType: ShopRefreshPeriodType) {
+    self.fbb_.push_slot::<ShopRefreshPeriodType>(ShopInfoExcel::VT_SHOPREFRESHPERIODTYPE, ShopRefreshPeriodType, ShopRefreshPeriodType::None);
   }
   #[inline]
   pub fn add_RefreshAbleCount(&mut self, RefreshAbleCount: i64) {
@@ -641,6 +714,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopInfoExcelBuilder<'a, 'b, A>
   #[inline]
   pub fn add_OpenPeriodTo(&mut self, OpenPeriodTo: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopInfoExcel::VT_OPENPERIODTO, OpenPeriodTo);
+  }
+  #[inline]
+  pub fn add_RefreshPeriodBaseTime(&mut self, RefreshPeriodBaseTime: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopInfoExcel::VT_REFRESHPERIODBASETIME, RefreshPeriodBaseTime);
   }
   #[inline]
   pub fn add_ShopProductUpdateTime(&mut self, ShopProductUpdateTime: flatbuffers::WIPOffset<&'b  str>) {
@@ -735,13 +812,16 @@ impl core::fmt::Debug for ShopInfoExcel<'_> {
       ds.field("CategoryType", &self.CategoryType());
       ds.field("IsRefresh", &self.IsRefresh());
       ds.field("IsSoldOutDimmed", &self.IsSoldOutDimmed());
-      ds.field("costParcelType", &self.costParcelType());
+      ds.field("CostParcelType", &self.CostParcelType());
       ds.field("CostParcelId", &self.CostParcelId());
       ds.field("AutoRefreshCoolTime", &self.AutoRefreshCoolTime());
+      ds.field("ShopRefresherType", &self.ShopRefresherType());
+      ds.field("ShopRefreshPeriodType", &self.ShopRefreshPeriodType());
       ds.field("RefreshAbleCount", &self.RefreshAbleCount());
       ds.field("GoodsId", &self.GoodsId());
       ds.field("OpenPeriodFrom", &self.OpenPeriodFrom());
       ds.field("OpenPeriodTo", &self.OpenPeriodTo());
+      ds.field("RefreshPeriodBaseTime", &self.RefreshPeriodBaseTime());
       ds.field("ShopProductUpdateTime", &self.ShopProductUpdateTime());
       ds.field("DisplayParcelType", &self.DisplayParcelType());
       ds.field("DisplayParcelId", &self.DisplayParcelId());
@@ -769,13 +849,16 @@ pub struct ShopInfoExcelT {
   pub CategoryType: ShopCategoryType,
   pub IsRefresh: bool,
   pub IsSoldOutDimmed: bool,
-  pub costParcelType: Option<Vec<ParcelType>>,
+  pub CostParcelType: Option<Vec<ParcelType>>,
   pub CostParcelId: Option<Vec<i64>>,
   pub AutoRefreshCoolTime: i64,
+  pub ShopRefresherType: ShopRefresherType,
+  pub ShopRefreshPeriodType: ShopRefreshPeriodType,
   pub RefreshAbleCount: i64,
   pub GoodsId: Option<Vec<i64>>,
   pub OpenPeriodFrom: Option<String>,
   pub OpenPeriodTo: Option<String>,
+  pub RefreshPeriodBaseTime: Option<String>,
   pub ShopProductUpdateTime: Option<String>,
   pub DisplayParcelType: ParcelType,
   pub DisplayParcelId: i64,
@@ -801,13 +884,16 @@ impl Default for ShopInfoExcelT {
       CategoryType: ShopCategoryType::General,
       IsRefresh: false,
       IsSoldOutDimmed: false,
-      costParcelType: None,
+      CostParcelType: None,
       CostParcelId: None,
       AutoRefreshCoolTime: 0,
+      ShopRefresherType: ShopRefresherType::None,
+      ShopRefreshPeriodType: ShopRefreshPeriodType::None,
       RefreshAbleCount: 0,
       GoodsId: None,
       OpenPeriodFrom: None,
       OpenPeriodTo: None,
+      RefreshPeriodBaseTime: None,
       ShopProductUpdateTime: None,
       DisplayParcelType: ParcelType::None,
       DisplayParcelId: 0,
@@ -837,13 +923,15 @@ impl ShopInfoExcelT {
     let CategoryType = self.CategoryType;
     let IsRefresh = self.IsRefresh;
     let IsSoldOutDimmed = self.IsSoldOutDimmed;
-    let costParcelType = self.costParcelType.as_ref().map(|x|{
+    let CostParcelType = self.CostParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CostParcelId = self.CostParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let AutoRefreshCoolTime = self.AutoRefreshCoolTime;
+    let ShopRefresherType = self.ShopRefresherType;
+    let ShopRefreshPeriodType = self.ShopRefreshPeriodType;
     let RefreshAbleCount = self.RefreshAbleCount;
     let GoodsId = self.GoodsId.as_ref().map(|x|{
       _fbb.create_vector(x)
@@ -852,6 +940,9 @@ impl ShopInfoExcelT {
       _fbb.create_string(x)
     });
     let OpenPeriodTo = self.OpenPeriodTo.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
+    let RefreshPeriodBaseTime = self.RefreshPeriodBaseTime.as_ref().map(|x|{
       _fbb.create_string(x)
     });
     let ShopProductUpdateTime = self.ShopProductUpdateTime.as_ref().map(|x|{
@@ -878,13 +969,16 @@ impl ShopInfoExcelT {
       CategoryType,
       IsRefresh,
       IsSoldOutDimmed,
-      costParcelType,
+      CostParcelType,
       CostParcelId,
       AutoRefreshCoolTime,
+      ShopRefresherType,
+      ShopRefreshPeriodType,
       RefreshAbleCount,
       GoodsId,
       OpenPeriodFrom,
       OpenPeriodTo,
+      RefreshPeriodBaseTime,
       ShopProductUpdateTime,
       DisplayParcelType,
       DisplayParcelId,

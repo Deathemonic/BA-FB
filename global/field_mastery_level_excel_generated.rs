@@ -49,8 +49,8 @@ impl<'a> FieldMasteryLevelExcel<'a> {
       if let Some(x) = args.RewardId {
         builder.add_RewardId(x);
       }
-      if let Some(x) = args.totalExp {
-        builder.add_totalExp(x);
+      if let Some(x) = args.TotalExp {
+        builder.add_TotalExp(x);
       }
       if let Some(x) = args.Exp {
         builder.add_Exp(x);
@@ -73,7 +73,7 @@ impl<'a> FieldMasteryLevelExcel<'a> {
     let Exp = self.Exp().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let totalExp = self.totalExp().map(|x| {
+    let TotalExp = self.TotalExp().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let RewardId = self.RewardId().map(|x| {
@@ -83,7 +83,7 @@ impl<'a> FieldMasteryLevelExcel<'a> {
       Level,
       id,
       Exp,
-      totalExp,
+      TotalExp,
       RewardId,
     }
   }
@@ -110,7 +110,7 @@ impl<'a> FieldMasteryLevelExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(FieldMasteryLevelExcel::VT_EXP, None)}
   }
   #[inline]
-  pub fn totalExp(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn TotalExp(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -135,7 +135,7 @@ impl flatbuffers::Verifiable for FieldMasteryLevelExcel<'_> {
      .visit_field::<i32>("Level", Self::VT_LEVEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("id", Self::VT_ID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("Exp", Self::VT_EXP, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("totalExp", Self::VT_TOTALEXP, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("TotalExp", Self::VT_TOTALEXP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardId", Self::VT_REWARDID, false)?
      .finish();
     Ok(())
@@ -145,7 +145,7 @@ pub struct FieldMasteryLevelExcelArgs<'a> {
     pub Level: i32,
     pub id: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub Exp: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub totalExp: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub TotalExp: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for FieldMasteryLevelExcelArgs<'a> {
@@ -155,7 +155,7 @@ impl<'a> Default for FieldMasteryLevelExcelArgs<'a> {
       Level: 0,
       id: None,
       Exp: None,
-      totalExp: None,
+      TotalExp: None,
       RewardId: None,
     }
   }
@@ -178,10 +178,10 @@ impl Serialize for FieldMasteryLevelExcel<'_> {
       } else {
         s.skip_field("Exp")?;
       }
-      if let Some(f) = self.totalExp() {
-        s.serialize_field("totalExp", &f)?;
+      if let Some(f) = self.TotalExp() {
+        s.serialize_field("TotalExp", &f)?;
       } else {
-        s.skip_field("totalExp")?;
+        s.skip_field("TotalExp")?;
       }
       if let Some(f) = self.RewardId() {
         s.serialize_field("RewardId", &f)?;
@@ -210,8 +210,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FieldMasteryLevelExcelBuilder<'
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldMasteryLevelExcel::VT_EXP, Exp);
   }
   #[inline]
-  pub fn add_totalExp(&mut self, totalExp: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldMasteryLevelExcel::VT_TOTALEXP, totalExp);
+  pub fn add_TotalExp(&mut self, TotalExp: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldMasteryLevelExcel::VT_TOTALEXP, TotalExp);
   }
   #[inline]
   pub fn add_RewardId(&mut self, RewardId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -238,7 +238,7 @@ impl core::fmt::Debug for FieldMasteryLevelExcel<'_> {
       ds.field("Level", &self.Level());
       ds.field("id", &self.id());
       ds.field("Exp", &self.Exp());
-      ds.field("totalExp", &self.totalExp());
+      ds.field("TotalExp", &self.TotalExp());
       ds.field("RewardId", &self.RewardId());
       ds.finish()
   }
@@ -249,7 +249,7 @@ pub struct FieldMasteryLevelExcelT {
   pub Level: i32,
   pub id: Option<Vec<i64>>,
   pub Exp: Option<Vec<i64>>,
-  pub totalExp: Option<Vec<i64>>,
+  pub TotalExp: Option<Vec<i64>>,
   pub RewardId: Option<Vec<i64>>,
 }
 impl Default for FieldMasteryLevelExcelT {
@@ -258,7 +258,7 @@ impl Default for FieldMasteryLevelExcelT {
       Level: 0,
       id: None,
       Exp: None,
-      totalExp: None,
+      TotalExp: None,
       RewardId: None,
     }
   }
@@ -275,7 +275,7 @@ impl FieldMasteryLevelExcelT {
     let Exp = self.Exp.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let totalExp = self.totalExp.as_ref().map(|x|{
+    let TotalExp = self.TotalExp.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardId = self.RewardId.as_ref().map(|x|{
@@ -285,7 +285,7 @@ impl FieldMasteryLevelExcelT {
       Level,
       id,
       Exp,
-      totalExp,
+      TotalExp,
       RewardId,
     })
   }

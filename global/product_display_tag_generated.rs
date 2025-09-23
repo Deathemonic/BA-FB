@@ -16,15 +16,16 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_PRODUCT_DISPLAY_TAG: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_PRODUCT_DISPLAY_TAG: i32 = 4;
+pub const ENUM_MAX_PRODUCT_DISPLAY_TAG: i32 = 5;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_PRODUCT_DISPLAY_TAG: [ProductDisplayTag; 5] = [
+pub const ENUM_VALUES_PRODUCT_DISPLAY_TAG: [ProductDisplayTag; 6] = [
   ProductDisplayTag::None,
   ProductDisplayTag::New,
   ProductDisplayTag::Hot,
   ProductDisplayTag::Sale,
   ProductDisplayTag::Limited,
+  ProductDisplayTag::Free,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -37,15 +38,17 @@ impl ProductDisplayTag {
   pub const Hot: Self = Self(2);
   pub const Sale: Self = Self(3);
   pub const Limited: Self = Self(4);
+  pub const Free: Self = Self(5);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 4;
+  pub const ENUM_MAX: i32 = 5;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::New,
     Self::Hot,
     Self::Sale,
     Self::Limited,
+    Self::Free,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -55,6 +58,7 @@ impl ProductDisplayTag {
       Self::Hot => Some("Hot"),
       Self::Sale => Some("Sale"),
       Self::Limited => Some("Limited"),
+      Self::Free => Some("Free"),
       _ => None,
     }
   }

@@ -34,13 +34,15 @@ impl<'a> ShopRefreshExcel<'a> {
   pub const VT_ISLEGACY: flatbuffers::VOffsetT = 8;
   pub const VT_GOODSID: flatbuffers::VOffsetT = 10;
   pub const VT_ISBUNDLE: flatbuffers::VOffsetT = 12;
-  pub const VT_VISIBLEAMOUNT: flatbuffers::VOffsetT = 14;
-  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 16;
-  pub const VT_CATEGORYTYPE: flatbuffers::VOffsetT = 18;
-  pub const VT_REFRESHGROUP: flatbuffers::VOffsetT = 20;
-  pub const VT_PROB: flatbuffers::VOffsetT = 22;
-  pub const VT_BUYREPORTEVENTNAME: flatbuffers::VOffsetT = 24;
-  pub const VT_DISPLAYTAG: flatbuffers::VOffsetT = 26;
+  pub const VT_SHOPPURCHASEPOPUPTYPE: flatbuffers::VOffsetT = 14;
+  pub const VT_VISIBLEAMOUNT: flatbuffers::VOffsetT = 16;
+  pub const VT_PURCHASECOUNTLIMIT: flatbuffers::VOffsetT = 18;
+  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 20;
+  pub const VT_CATEGORYTYPE: flatbuffers::VOffsetT = 22;
+  pub const VT_REFRESHGROUP: flatbuffers::VOffsetT = 24;
+  pub const VT_PROB: flatbuffers::VOffsetT = 26;
+  pub const VT_BUYREPORTEVENTNAME: flatbuffers::VOffsetT = 28;
+  pub const VT_DISPLAYTAG: flatbuffers::VOffsetT = 30;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -56,6 +58,9 @@ impl<'a> ShopRefreshExcel<'a> {
       let x = args.DisplayOrder;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_DisplayOrder(x);
+      let x = args.PurchaseCountLimit;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_PurchaseCountLimit(x);
       let x = args.VisibleAmount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_VisibleAmount(x);
@@ -80,6 +85,9 @@ impl<'a> ShopRefreshExcel<'a> {
       let x = args.CategoryType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_CategoryType(x);
+      let x = args.ShopPurchasePopupType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_ShopPurchasePopupType(x);
       let x = args.LocalizeEtcId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_LocalizeEtcId(x);
@@ -95,7 +103,13 @@ impl<'a> ShopRefreshExcel<'a> {
       let IsLegacy = self.IsLegacy();
       let GoodsId = self.GoodsId();
       let IsBundle = self.IsBundle();
+      let ShopPurchasePopupType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.ShopPurchasePopupType(), &key)
+      } else {
+        self.ShopPurchasePopupType()
+      };
       let VisibleAmount = self.VisibleAmount();
+      let PurchaseCountLimit = self.PurchaseCountLimit();
       let DisplayOrder = self.DisplayOrder();
       let CategoryType = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_enum(self.CategoryType(), &key)
@@ -118,7 +132,9 @@ impl<'a> ShopRefreshExcel<'a> {
       IsLegacy,
       GoodsId,
       IsBundle,
+      ShopPurchasePopupType,
       VisibleAmount,
+      PurchaseCountLimit,
       DisplayOrder,
       CategoryType,
       RefreshGroup,
@@ -164,11 +180,25 @@ impl<'a> ShopRefreshExcel<'a> {
     unsafe { self._tab.get::<bool>(ShopRefreshExcel::VT_ISBUNDLE, Some(false)).unwrap()}
   }
   #[inline]
+  pub fn ShopPurchasePopupType(&self) -> ShopPurchasePopupType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ShopPurchasePopupType>(ShopRefreshExcel::VT_SHOPPURCHASEPOPUPTYPE, Some(ShopPurchasePopupType::None)).unwrap()}
+  }
+  #[inline]
   pub fn VisibleAmount(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(ShopRefreshExcel::VT_VISIBLEAMOUNT, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn PurchaseCountLimit(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ShopRefreshExcel::VT_PURCHASECOUNTLIMIT, Some(0)).unwrap()}
   }
   #[inline]
   pub fn DisplayOrder(&self) -> i64 {
@@ -226,7 +256,9 @@ impl flatbuffers::Verifiable for ShopRefreshExcel<'_> {
      .visit_field::<bool>("IsLegacy", Self::VT_ISLEGACY, false)?
      .visit_field::<i64>("GoodsId", Self::VT_GOODSID, false)?
      .visit_field::<bool>("IsBundle", Self::VT_ISBUNDLE, false)?
+     .visit_field::<ShopPurchasePopupType>("ShopPurchasePopupType", Self::VT_SHOPPURCHASEPOPUPTYPE, false)?
      .visit_field::<i64>("VisibleAmount", Self::VT_VISIBLEAMOUNT, false)?
+     .visit_field::<i64>("PurchaseCountLimit", Self::VT_PURCHASECOUNTLIMIT, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .visit_field::<ShopCategoryType>("CategoryType", Self::VT_CATEGORYTYPE, false)?
      .visit_field::<i32>("RefreshGroup", Self::VT_REFRESHGROUP, false)?
@@ -243,7 +275,9 @@ pub struct ShopRefreshExcelArgs<'a> {
     pub IsLegacy: bool,
     pub GoodsId: i64,
     pub IsBundle: bool,
+    pub ShopPurchasePopupType: ShopPurchasePopupType,
     pub VisibleAmount: i64,
+    pub PurchaseCountLimit: i64,
     pub DisplayOrder: i64,
     pub CategoryType: ShopCategoryType,
     pub RefreshGroup: i32,
@@ -260,7 +294,9 @@ impl<'a> Default for ShopRefreshExcelArgs<'a> {
       IsLegacy: false,
       GoodsId: 0,
       IsBundle: false,
+      ShopPurchasePopupType: ShopPurchasePopupType::None,
       VisibleAmount: 0,
+      PurchaseCountLimit: 0,
       DisplayOrder: 0,
       CategoryType: ShopCategoryType::General,
       RefreshGroup: 0,
@@ -276,13 +312,15 @@ impl Serialize for ShopRefreshExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShopRefreshExcel", 12)?;
+    let mut s = serializer.serialize_struct("ShopRefreshExcel", 14)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
       s.serialize_field("IsLegacy", &self.IsLegacy())?;
       s.serialize_field("GoodsId", &self.GoodsId())?;
       s.serialize_field("IsBundle", &self.IsBundle())?;
+      s.serialize_field("ShopPurchasePopupType", &self.ShopPurchasePopupType())?;
       s.serialize_field("VisibleAmount", &self.VisibleAmount())?;
+      s.serialize_field("PurchaseCountLimit", &self.PurchaseCountLimit())?;
       s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
       s.serialize_field("CategoryType", &self.CategoryType())?;
       s.serialize_field("RefreshGroup", &self.RefreshGroup())?;
@@ -323,8 +361,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopRefreshExcelBuilder<'a, 'b,
     self.fbb_.push_slot::<bool>(ShopRefreshExcel::VT_ISBUNDLE, IsBundle, false);
   }
   #[inline]
+  pub fn add_ShopPurchasePopupType(&mut self, ShopPurchasePopupType: ShopPurchasePopupType) {
+    self.fbb_.push_slot::<ShopPurchasePopupType>(ShopRefreshExcel::VT_SHOPPURCHASEPOPUPTYPE, ShopPurchasePopupType, ShopPurchasePopupType::None);
+  }
+  #[inline]
   pub fn add_VisibleAmount(&mut self, VisibleAmount: i64) {
     self.fbb_.push_slot::<i64>(ShopRefreshExcel::VT_VISIBLEAMOUNT, VisibleAmount, 0);
+  }
+  #[inline]
+  pub fn add_PurchaseCountLimit(&mut self, PurchaseCountLimit: i64) {
+    self.fbb_.push_slot::<i64>(ShopRefreshExcel::VT_PURCHASECOUNTLIMIT, PurchaseCountLimit, 0);
   }
   #[inline]
   pub fn add_DisplayOrder(&mut self, DisplayOrder: i64) {
@@ -373,7 +419,9 @@ impl core::fmt::Debug for ShopRefreshExcel<'_> {
       ds.field("IsLegacy", &self.IsLegacy());
       ds.field("GoodsId", &self.GoodsId());
       ds.field("IsBundle", &self.IsBundle());
+      ds.field("ShopPurchasePopupType", &self.ShopPurchasePopupType());
       ds.field("VisibleAmount", &self.VisibleAmount());
+      ds.field("PurchaseCountLimit", &self.PurchaseCountLimit());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.field("CategoryType", &self.CategoryType());
       ds.field("RefreshGroup", &self.RefreshGroup());
@@ -391,7 +439,9 @@ pub struct ShopRefreshExcelT {
   pub IsLegacy: bool,
   pub GoodsId: i64,
   pub IsBundle: bool,
+  pub ShopPurchasePopupType: ShopPurchasePopupType,
   pub VisibleAmount: i64,
+  pub PurchaseCountLimit: i64,
   pub DisplayOrder: i64,
   pub CategoryType: ShopCategoryType,
   pub RefreshGroup: i32,
@@ -407,7 +457,9 @@ impl Default for ShopRefreshExcelT {
       IsLegacy: false,
       GoodsId: 0,
       IsBundle: false,
+      ShopPurchasePopupType: ShopPurchasePopupType::None,
       VisibleAmount: 0,
+      PurchaseCountLimit: 0,
       DisplayOrder: 0,
       CategoryType: ShopCategoryType::General,
       RefreshGroup: 0,
@@ -427,7 +479,9 @@ impl ShopRefreshExcelT {
     let IsLegacy = self.IsLegacy;
     let GoodsId = self.GoodsId;
     let IsBundle = self.IsBundle;
+    let ShopPurchasePopupType = self.ShopPurchasePopupType;
     let VisibleAmount = self.VisibleAmount;
+    let PurchaseCountLimit = self.PurchaseCountLimit;
     let DisplayOrder = self.DisplayOrder;
     let CategoryType = self.CategoryType;
     let RefreshGroup = self.RefreshGroup;
@@ -442,7 +496,9 @@ impl ShopRefreshExcelT {
       IsLegacy,
       GoodsId,
       IsBundle,
+      ShopPurchasePopupType,
       VisibleAmount,
+      PurchaseCountLimit,
       DisplayOrder,
       CategoryType,
       RefreshGroup,

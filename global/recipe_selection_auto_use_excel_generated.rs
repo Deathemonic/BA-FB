@@ -51,8 +51,8 @@ impl<'a> RecipeSelectionAutoUseExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.priority {
-        builder.add_priority(x);
+      if let Some(x) = args.Priority {
+        builder.add_Priority(x);
       }
       let x = args.ParcelType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -69,14 +69,14 @@ impl<'a> RecipeSelectionAutoUseExcel<'a> {
         self.ParcelType()
       };
       let TargetItemId = self.TargetItemId();
-    let priority = self.priority().map(|x| {
+    let Priority = self.Priority().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     RecipeSelectionAutoUseExcelT {
       Id,
       ParcelType,
       TargetItemId,
-      priority,
+      Priority,
     }
   }
 
@@ -102,7 +102,7 @@ impl<'a> RecipeSelectionAutoUseExcel<'a> {
     unsafe { self._tab.get::<i64>(RecipeSelectionAutoUseExcel::VT_TARGETITEMID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn priority(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn Priority(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -120,7 +120,7 @@ impl flatbuffers::Verifiable for RecipeSelectionAutoUseExcel<'_> {
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<ParcelType>("ParcelType", Self::VT_PARCELTYPE, false)?
      .visit_field::<i64>("TargetItemId", Self::VT_TARGETITEMID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("priority", Self::VT_PRIORITY, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("Priority", Self::VT_PRIORITY, false)?
      .finish();
     Ok(())
   }
@@ -129,7 +129,7 @@ pub struct RecipeSelectionAutoUseExcelArgs<'a> {
     pub Id: i64,
     pub ParcelType: ParcelType,
     pub TargetItemId: i64,
-    pub priority: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub Priority: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for RecipeSelectionAutoUseExcelArgs<'a> {
   #[inline]
@@ -138,7 +138,7 @@ impl<'a> Default for RecipeSelectionAutoUseExcelArgs<'a> {
       Id: 0,
       ParcelType: ParcelType::None,
       TargetItemId: 0,
-      priority: None,
+      Priority: None,
     }
   }
 }
@@ -152,10 +152,10 @@ impl Serialize for RecipeSelectionAutoUseExcel<'_> {
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("ParcelType", &self.ParcelType())?;
       s.serialize_field("TargetItemId", &self.TargetItemId())?;
-      if let Some(f) = self.priority() {
-        s.serialize_field("priority", &f)?;
+      if let Some(f) = self.Priority() {
+        s.serialize_field("Priority", &f)?;
       } else {
-        s.skip_field("priority")?;
+        s.skip_field("Priority")?;
       }
     s.end()
   }
@@ -179,8 +179,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> RecipeSelectionAutoUseExcelBuil
     self.fbb_.push_slot::<i64>(RecipeSelectionAutoUseExcel::VT_TARGETITEMID, TargetItemId, 0);
   }
   #[inline]
-  pub fn add_priority(&mut self, priority: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeSelectionAutoUseExcel::VT_PRIORITY, priority);
+  pub fn add_Priority(&mut self, Priority: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeSelectionAutoUseExcel::VT_PRIORITY, Priority);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> RecipeSelectionAutoUseExcelBuilder<'a, 'b, A> {
@@ -203,7 +203,7 @@ impl core::fmt::Debug for RecipeSelectionAutoUseExcel<'_> {
       ds.field("Id", &self.Id());
       ds.field("ParcelType", &self.ParcelType());
       ds.field("TargetItemId", &self.TargetItemId());
-      ds.field("priority", &self.priority());
+      ds.field("Priority", &self.Priority());
       ds.finish()
   }
 }
@@ -213,7 +213,7 @@ pub struct RecipeSelectionAutoUseExcelT {
   pub Id: i64,
   pub ParcelType: ParcelType,
   pub TargetItemId: i64,
-  pub priority: Option<Vec<i64>>,
+  pub Priority: Option<Vec<i64>>,
 }
 impl Default for RecipeSelectionAutoUseExcelT {
   fn default() -> Self {
@@ -221,7 +221,7 @@ impl Default for RecipeSelectionAutoUseExcelT {
       Id: 0,
       ParcelType: ParcelType::None,
       TargetItemId: 0,
-      priority: None,
+      Priority: None,
     }
   }
 }
@@ -233,14 +233,14 @@ impl RecipeSelectionAutoUseExcelT {
     let Id = self.Id;
     let ParcelType = self.ParcelType;
     let TargetItemId = self.TargetItemId;
-    let priority = self.priority.as_ref().map(|x|{
+    let Priority = self.Priority.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     RecipeSelectionAutoUseExcel::create(_fbb, &RecipeSelectionAutoUseExcelArgs{
       Id,
       ParcelType,
       TargetItemId,
-      priority,
+      Priority,
     })
   }
 }

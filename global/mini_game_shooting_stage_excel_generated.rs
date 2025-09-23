@@ -82,8 +82,8 @@ impl<'a> MiniGameShootingStageExcel<'a> {
       let x = args.Difficulty;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_Difficulty(x);
-      if let Some(x) = args.bgmId {
-        builder.add_bgmId(x);
+      if let Some(x) = args.BgmId {
+        builder.add_BgmId(x);
       }
     builder.finish()
   }
@@ -91,7 +91,7 @@ impl<'a> MiniGameShootingStageExcel<'a> {
   pub fn unpack(&self) -> MiniGameShootingStageExcelT {
     let key = table_encryption_service::create_key(b"MiniGameShootingStage");
       let UniqueId = self.UniqueId();
-    let bgmId = self.bgmId().map(|x| {
+    let BgmId = self.BgmId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let CostGoodsId = self.CostGoodsId();
@@ -119,7 +119,7 @@ impl<'a> MiniGameShootingStageExcel<'a> {
       let EventContentStageRewardId = self.EventContentStageRewardId();
     MiniGameShootingStageExcelT {
       UniqueId,
-      bgmId,
+      BgmId,
       CostGoodsId,
       Difficulty,
       DesignLevel,
@@ -140,7 +140,7 @@ impl<'a> MiniGameShootingStageExcel<'a> {
     unsafe { self._tab.get::<i64>(MiniGameShootingStageExcel::VT_UNIQUEID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn bgmId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn BgmId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -219,7 +219,7 @@ impl flatbuffers::Verifiable for MiniGameShootingStageExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("UniqueId", Self::VT_UNIQUEID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("bgmId", Self::VT_BGMID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("BgmId", Self::VT_BGMID, false)?
      .visit_field::<i64>("CostGoodsId", Self::VT_COSTGOODSID, false)?
      .visit_field::<Difficulty>("Difficulty", Self::VT_DIFFICULTY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("DesignLevel", Self::VT_DESIGNLEVEL, false)?
@@ -235,7 +235,7 @@ impl flatbuffers::Verifiable for MiniGameShootingStageExcel<'_> {
 }
 pub struct MiniGameShootingStageExcelArgs<'a> {
     pub UniqueId: i64,
-    pub bgmId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub BgmId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub CostGoodsId: i64,
     pub Difficulty: Difficulty,
     pub DesignLevel: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -251,7 +251,7 @@ impl<'a> Default for MiniGameShootingStageExcelArgs<'a> {
   fn default() -> Self {
     MiniGameShootingStageExcelArgs {
       UniqueId: 0,
-      bgmId: None,
+      BgmId: None,
       CostGoodsId: 0,
       Difficulty: Difficulty::Normal,
       DesignLevel: None,
@@ -272,10 +272,10 @@ impl Serialize for MiniGameShootingStageExcel<'_> {
   {
     let mut s = serializer.serialize_struct("MiniGameShootingStageExcel", 11)?;
       s.serialize_field("UniqueId", &self.UniqueId())?;
-      if let Some(f) = self.bgmId() {
-        s.serialize_field("bgmId", &f)?;
+      if let Some(f) = self.BgmId() {
+        s.serialize_field("BgmId", &f)?;
       } else {
-        s.skip_field("bgmId")?;
+        s.skip_field("BgmId")?;
       }
       s.serialize_field("CostGoodsId", &self.CostGoodsId())?;
       s.serialize_field("Difficulty", &self.Difficulty())?;
@@ -312,8 +312,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameShootingStageExcelBuild
     self.fbb_.push_slot::<i64>(MiniGameShootingStageExcel::VT_UNIQUEID, UniqueId, 0);
   }
   #[inline]
-  pub fn add_bgmId(&mut self, bgmId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameShootingStageExcel::VT_BGMID, bgmId);
+  pub fn add_BgmId(&mut self, BgmId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameShootingStageExcel::VT_BGMID, BgmId);
   }
   #[inline]
   pub fn add_CostGoodsId(&mut self, CostGoodsId: i64) {
@@ -370,7 +370,7 @@ impl core::fmt::Debug for MiniGameShootingStageExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("MiniGameShootingStageExcel");
       ds.field("UniqueId", &self.UniqueId());
-      ds.field("bgmId", &self.bgmId());
+      ds.field("BgmId", &self.BgmId());
       ds.field("CostGoodsId", &self.CostGoodsId());
       ds.field("Difficulty", &self.Difficulty());
       ds.field("DesignLevel", &self.DesignLevel());
@@ -387,7 +387,7 @@ impl core::fmt::Debug for MiniGameShootingStageExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct MiniGameShootingStageExcelT {
   pub UniqueId: i64,
-  pub bgmId: Option<Vec<i64>>,
+  pub BgmId: Option<Vec<i64>>,
   pub CostGoodsId: i64,
   pub Difficulty: Difficulty,
   pub DesignLevel: Option<String>,
@@ -402,7 +402,7 @@ impl Default for MiniGameShootingStageExcelT {
   fn default() -> Self {
     Self {
       UniqueId: 0,
-      bgmId: None,
+      BgmId: None,
       CostGoodsId: 0,
       Difficulty: Difficulty::Normal,
       DesignLevel: None,
@@ -421,7 +421,7 @@ impl MiniGameShootingStageExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<MiniGameShootingStageExcel<'b>> {
     let UniqueId = self.UniqueId;
-    let bgmId = self.bgmId.as_ref().map(|x|{
+    let BgmId = self.BgmId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CostGoodsId = self.CostGoodsId;
@@ -441,7 +441,7 @@ impl MiniGameShootingStageExcelT {
     let EventContentStageRewardId = self.EventContentStageRewardId;
     MiniGameShootingStageExcel::create(_fbb, &MiniGameShootingStageExcelArgs{
       UniqueId,
-      bgmId,
+      BgmId,
       CostGoodsId,
       Difficulty,
       DesignLevel,

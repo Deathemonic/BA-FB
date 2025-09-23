@@ -54,8 +54,8 @@ impl<'a> ConquestGroupBuffExcel<'a> {
       let x = args.RecommandLocalizeEtcId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_RecommandLocalizeEtcId(x);
-      if let Some(x) = args.school {
-        builder.add_school(x);
+      if let Some(x) = args.School {
+        builder.add_School(x);
       }
     builder.finish()
   }
@@ -63,7 +63,7 @@ impl<'a> ConquestGroupBuffExcel<'a> {
   pub fn unpack(&self) -> ConquestGroupBuffExcelT {
     let key = table_encryption_service::create_key(b"ConquestGroupBuff");
       let ConquestBuffId = self.ConquestBuffId();
-    let school = self.school().map(|x| {
+    let School = self.School().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let RecommandLocalizeEtcId = self.RecommandLocalizeEtcId();
@@ -72,7 +72,7 @@ impl<'a> ConquestGroupBuffExcel<'a> {
     });
     ConquestGroupBuffExcelT {
       ConquestBuffId,
-      school,
+      School,
       RecommandLocalizeEtcId,
       SkillGroupId,
     }
@@ -86,7 +86,7 @@ impl<'a> ConquestGroupBuffExcel<'a> {
     unsafe { self._tab.get::<i64>(ConquestGroupBuffExcel::VT_CONQUESTBUFFID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn school(&self) -> Option<flatbuffers::Vector<'a, School>> {
+  pub fn School(&self) -> Option<flatbuffers::Vector<'a, School>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -116,7 +116,7 @@ impl flatbuffers::Verifiable for ConquestGroupBuffExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("ConquestBuffId", Self::VT_CONQUESTBUFFID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, School>>>("school", Self::VT_SCHOOL, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, School>>>("School", Self::VT_SCHOOL, false)?
      .visit_field::<u32>("RecommandLocalizeEtcId", Self::VT_RECOMMANDLOCALIZEETCID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SkillGroupId", Self::VT_SKILLGROUPID, false)?
      .finish();
@@ -125,7 +125,7 @@ impl flatbuffers::Verifiable for ConquestGroupBuffExcel<'_> {
 }
 pub struct ConquestGroupBuffExcelArgs<'a> {
     pub ConquestBuffId: i64,
-    pub school: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, School>>>,
+    pub School: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, School>>>,
     pub RecommandLocalizeEtcId: u32,
     pub SkillGroupId: Option<flatbuffers::WIPOffset<&'a str>>,
 }
@@ -134,7 +134,7 @@ impl<'a> Default for ConquestGroupBuffExcelArgs<'a> {
   fn default() -> Self {
     ConquestGroupBuffExcelArgs {
       ConquestBuffId: 0,
-      school: None,
+      School: None,
       RecommandLocalizeEtcId: 0,
       SkillGroupId: None,
     }
@@ -148,10 +148,10 @@ impl Serialize for ConquestGroupBuffExcel<'_> {
   {
     let mut s = serializer.serialize_struct("ConquestGroupBuffExcel", 4)?;
       s.serialize_field("ConquestBuffId", &self.ConquestBuffId())?;
-      if let Some(f) = self.school() {
-        s.serialize_field("school", &f)?;
+      if let Some(f) = self.School() {
+        s.serialize_field("School", &f)?;
       } else {
-        s.skip_field("school")?;
+        s.skip_field("School")?;
       }
       s.serialize_field("RecommandLocalizeEtcId", &self.RecommandLocalizeEtcId())?;
       if let Some(f) = self.SkillGroupId() {
@@ -173,8 +173,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConquestGroupBuffExcelBuilder<'
     self.fbb_.push_slot::<i64>(ConquestGroupBuffExcel::VT_CONQUESTBUFFID, ConquestBuffId, 0);
   }
   #[inline]
-  pub fn add_school(&mut self, school: flatbuffers::WIPOffset<flatbuffers::Vector<'b , School>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestGroupBuffExcel::VT_SCHOOL, school);
+  pub fn add_School(&mut self, School: flatbuffers::WIPOffset<flatbuffers::Vector<'b , School>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestGroupBuffExcel::VT_SCHOOL, School);
   }
   #[inline]
   pub fn add_RecommandLocalizeEtcId(&mut self, RecommandLocalizeEtcId: u32) {
@@ -203,7 +203,7 @@ impl core::fmt::Debug for ConquestGroupBuffExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("ConquestGroupBuffExcel");
       ds.field("ConquestBuffId", &self.ConquestBuffId());
-      ds.field("school", &self.school());
+      ds.field("School", &self.School());
       ds.field("RecommandLocalizeEtcId", &self.RecommandLocalizeEtcId());
       ds.field("SkillGroupId", &self.SkillGroupId());
       ds.finish()
@@ -213,7 +213,7 @@ impl core::fmt::Debug for ConquestGroupBuffExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct ConquestGroupBuffExcelT {
   pub ConquestBuffId: i64,
-  pub school: Option<Vec<School>>,
+  pub School: Option<Vec<School>>,
   pub RecommandLocalizeEtcId: u32,
   pub SkillGroupId: Option<String>,
 }
@@ -221,7 +221,7 @@ impl Default for ConquestGroupBuffExcelT {
   fn default() -> Self {
     Self {
       ConquestBuffId: 0,
-      school: None,
+      School: None,
       RecommandLocalizeEtcId: 0,
       SkillGroupId: None,
     }
@@ -233,7 +233,7 @@ impl ConquestGroupBuffExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<ConquestGroupBuffExcel<'b>> {
     let ConquestBuffId = self.ConquestBuffId;
-    let school = self.school.as_ref().map(|x|{
+    let School = self.School.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RecommandLocalizeEtcId = self.RecommandLocalizeEtcId;
@@ -242,7 +242,7 @@ impl ConquestGroupBuffExcelT {
     });
     ConquestGroupBuffExcel::create(_fbb, &ConquestGroupBuffExcelArgs{
       ConquestBuffId,
-      school,
+      School,
       RecommandLocalizeEtcId,
       SkillGroupId,
     })

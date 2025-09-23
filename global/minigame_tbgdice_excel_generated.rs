@@ -55,14 +55,14 @@ impl<'a> MinigameTBGDiceExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.probModifyLimit {
-        builder.add_probModifyLimit(x);
+      if let Some(x) = args.ProbModifyLimit {
+        builder.add_ProbModifyLimit(x);
       }
       if let Some(x) = args.ProbModifyValue {
         builder.add_ProbModifyValue(x);
       }
-      if let Some(x) = args.probModifyCondition {
-        builder.add_probModifyCondition(x);
+      if let Some(x) = args.ProbModifyCondition {
+        builder.add_ProbModifyCondition(x);
       }
       let x = args.Prob;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -83,13 +83,13 @@ impl<'a> MinigameTBGDiceExcel<'a> {
       let DiceGroup = self.DiceGroup();
       let DiceResult = self.DiceResult();
       let Prob = self.Prob();
-    let probModifyCondition = self.probModifyCondition().map(|x| {
+    let ProbModifyCondition = self.ProbModifyCondition().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let ProbModifyValue = self.ProbModifyValue().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
-    let probModifyLimit = self.probModifyLimit().map(|x| {
+    let ProbModifyLimit = self.ProbModifyLimit().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     MinigameTBGDiceExcelT {
@@ -98,9 +98,9 @@ impl<'a> MinigameTBGDiceExcel<'a> {
       DiceGroup,
       DiceResult,
       Prob,
-      probModifyCondition,
+      ProbModifyCondition,
       ProbModifyValue,
-      probModifyLimit,
+      ProbModifyLimit,
     }
   }
 
@@ -140,7 +140,7 @@ impl<'a> MinigameTBGDiceExcel<'a> {
     unsafe { self._tab.get::<i32>(MinigameTBGDiceExcel::VT_PROB, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn probModifyCondition(&self) -> Option<flatbuffers::Vector<'a, TBGProbModifyCondition>> {
+  pub fn ProbModifyCondition(&self) -> Option<flatbuffers::Vector<'a, TBGProbModifyCondition>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -154,7 +154,7 @@ impl<'a> MinigameTBGDiceExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i32>>>(MinigameTBGDiceExcel::VT_PROBMODIFYVALUE, None)}
   }
   #[inline]
-  pub fn probModifyLimit(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn ProbModifyLimit(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -174,9 +174,9 @@ impl flatbuffers::Verifiable for MinigameTBGDiceExcel<'_> {
      .visit_field::<i32>("DiceGroup", Self::VT_DICEGROUP, false)?
      .visit_field::<i32>("DiceResult", Self::VT_DICERESULT, false)?
      .visit_field::<i32>("Prob", Self::VT_PROB, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, TBGProbModifyCondition>>>("probModifyCondition", Self::VT_PROBMODIFYCONDITION, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, TBGProbModifyCondition>>>("ProbModifyCondition", Self::VT_PROBMODIFYCONDITION, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("ProbModifyValue", Self::VT_PROBMODIFYVALUE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("probModifyLimit", Self::VT_PROBMODIFYLIMIT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("ProbModifyLimit", Self::VT_PROBMODIFYLIMIT, false)?
      .finish();
     Ok(())
   }
@@ -187,9 +187,9 @@ pub struct MinigameTBGDiceExcelArgs<'a> {
     pub DiceGroup: i32,
     pub DiceResult: i32,
     pub Prob: i32,
-    pub probModifyCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, TBGProbModifyCondition>>>,
+    pub ProbModifyCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, TBGProbModifyCondition>>>,
     pub ProbModifyValue: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
-    pub probModifyLimit: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub ProbModifyLimit: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for MinigameTBGDiceExcelArgs<'a> {
   #[inline]
@@ -200,9 +200,9 @@ impl<'a> Default for MinigameTBGDiceExcelArgs<'a> {
       DiceGroup: 0,
       DiceResult: 0,
       Prob: 0,
-      probModifyCondition: None,
+      ProbModifyCondition: None,
       ProbModifyValue: None,
-      probModifyLimit: None,
+      ProbModifyLimit: None,
     }
   }
 }
@@ -218,20 +218,20 @@ impl Serialize for MinigameTBGDiceExcel<'_> {
       s.serialize_field("DiceGroup", &self.DiceGroup())?;
       s.serialize_field("DiceResult", &self.DiceResult())?;
       s.serialize_field("Prob", &self.Prob())?;
-      if let Some(f) = self.probModifyCondition() {
-        s.serialize_field("probModifyCondition", &f)?;
+      if let Some(f) = self.ProbModifyCondition() {
+        s.serialize_field("ProbModifyCondition", &f)?;
       } else {
-        s.skip_field("probModifyCondition")?;
+        s.skip_field("ProbModifyCondition")?;
       }
       if let Some(f) = self.ProbModifyValue() {
         s.serialize_field("ProbModifyValue", &f)?;
       } else {
         s.skip_field("ProbModifyValue")?;
       }
-      if let Some(f) = self.probModifyLimit() {
-        s.serialize_field("probModifyLimit", &f)?;
+      if let Some(f) = self.ProbModifyLimit() {
+        s.serialize_field("ProbModifyLimit", &f)?;
       } else {
-        s.skip_field("probModifyLimit")?;
+        s.skip_field("ProbModifyLimit")?;
       }
     s.end()
   }
@@ -263,16 +263,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MinigameTBGDiceExcelBuilder<'a,
     self.fbb_.push_slot::<i32>(MinigameTBGDiceExcel::VT_PROB, Prob, 0);
   }
   #[inline]
-  pub fn add_probModifyCondition(&mut self, probModifyCondition: flatbuffers::WIPOffset<flatbuffers::Vector<'b , TBGProbModifyCondition>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGDiceExcel::VT_PROBMODIFYCONDITION, probModifyCondition);
+  pub fn add_ProbModifyCondition(&mut self, ProbModifyCondition: flatbuffers::WIPOffset<flatbuffers::Vector<'b , TBGProbModifyCondition>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGDiceExcel::VT_PROBMODIFYCONDITION, ProbModifyCondition);
   }
   #[inline]
   pub fn add_ProbModifyValue(&mut self, ProbModifyValue: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGDiceExcel::VT_PROBMODIFYVALUE, ProbModifyValue);
   }
   #[inline]
-  pub fn add_probModifyLimit(&mut self, probModifyLimit: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGDiceExcel::VT_PROBMODIFYLIMIT, probModifyLimit);
+  pub fn add_ProbModifyLimit(&mut self, ProbModifyLimit: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGDiceExcel::VT_PROBMODIFYLIMIT, ProbModifyLimit);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> MinigameTBGDiceExcelBuilder<'a, 'b, A> {
@@ -297,9 +297,9 @@ impl core::fmt::Debug for MinigameTBGDiceExcel<'_> {
       ds.field("DiceGroup", &self.DiceGroup());
       ds.field("DiceResult", &self.DiceResult());
       ds.field("Prob", &self.Prob());
-      ds.field("probModifyCondition", &self.probModifyCondition());
+      ds.field("ProbModifyCondition", &self.ProbModifyCondition());
       ds.field("ProbModifyValue", &self.ProbModifyValue());
-      ds.field("probModifyLimit", &self.probModifyLimit());
+      ds.field("ProbModifyLimit", &self.ProbModifyLimit());
       ds.finish()
   }
 }
@@ -311,9 +311,9 @@ pub struct MinigameTBGDiceExcelT {
   pub DiceGroup: i32,
   pub DiceResult: i32,
   pub Prob: i32,
-  pub probModifyCondition: Option<Vec<TBGProbModifyCondition>>,
+  pub ProbModifyCondition: Option<Vec<TBGProbModifyCondition>>,
   pub ProbModifyValue: Option<Vec<i32>>,
-  pub probModifyLimit: Option<Vec<i32>>,
+  pub ProbModifyLimit: Option<Vec<i32>>,
 }
 impl Default for MinigameTBGDiceExcelT {
   fn default() -> Self {
@@ -323,9 +323,9 @@ impl Default for MinigameTBGDiceExcelT {
       DiceGroup: 0,
       DiceResult: 0,
       Prob: 0,
-      probModifyCondition: None,
+      ProbModifyCondition: None,
       ProbModifyValue: None,
-      probModifyLimit: None,
+      ProbModifyLimit: None,
     }
   }
 }
@@ -339,13 +339,13 @@ impl MinigameTBGDiceExcelT {
     let DiceGroup = self.DiceGroup;
     let DiceResult = self.DiceResult;
     let Prob = self.Prob;
-    let probModifyCondition = self.probModifyCondition.as_ref().map(|x|{
+    let ProbModifyCondition = self.ProbModifyCondition.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ProbModifyValue = self.ProbModifyValue.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let probModifyLimit = self.probModifyLimit.as_ref().map(|x|{
+    let ProbModifyLimit = self.ProbModifyLimit.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     MinigameTBGDiceExcel::create(_fbb, &MinigameTBGDiceExcelArgs{
@@ -354,9 +354,9 @@ impl MinigameTBGDiceExcelT {
       DiceGroup,
       DiceResult,
       Prob,
-      probModifyCondition,
+      ProbModifyCondition,
       ProbModifyValue,
-      probModifyLimit,
+      ProbModifyLimit,
     })
   }
 }

@@ -70,6 +70,7 @@ impl<'a> ScenarioModeExcel<'a> {
   pub const VT_COMPLETEREPORTEVENTNAME: flatbuffers::VOffsetT = 80;
   pub const VT_ECHELONEXTENSIONTYPE: flatbuffers::VOffsetT = 82;
   pub const VT_COLLECTIONGROUPID: flatbuffers::VOffsetT = 84;
+  pub const VT_FIRSTCLEARFUNNELMESSAGE: flatbuffers::VOffsetT = 86;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -130,6 +131,9 @@ impl<'a> ScenarioModeExcel<'a> {
       let x = args.ModeId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ModeId(x);
+      if let Some(x) = args.FirstClearFunnelMessage {
+        builder.add_FirstClearFunnelMessage(x);
+      }
       let x = args.EchelonExtensionType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_EchelonExtensionType(x);
@@ -283,6 +287,9 @@ impl<'a> ScenarioModeExcel<'a> {
         self.EchelonExtensionType()
       };
       let CollectionGroupId = self.CollectionGroupId();
+    let FirstClearFunnelMessage = self.FirstClearFunnelMessage().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
     ScenarioModeExcelT {
       ModeId,
       ModeType,
@@ -325,6 +332,7 @@ impl<'a> ScenarioModeExcel<'a> {
       CompleteReportEventName,
       EchelonExtensionType,
       CollectionGroupId,
+      FirstClearFunnelMessage,
     }
   }
 
@@ -615,6 +623,13 @@ impl<'a> ScenarioModeExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(ScenarioModeExcel::VT_COLLECTIONGROUPID, Some(0)).unwrap()}
   }
+  #[inline]
+  pub fn FirstClearFunnelMessage(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ScenarioModeExcel::VT_FIRSTCLEARFUNNELMESSAGE, None)}
+  }
 }
 
 impl flatbuffers::Verifiable for ScenarioModeExcel<'_> {
@@ -665,6 +680,7 @@ impl flatbuffers::Verifiable for ScenarioModeExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("CompleteReportEventName", Self::VT_COMPLETEREPORTEVENTNAME, false)?
      .visit_field::<EchelonExtensionType>("EchelonExtensionType", Self::VT_ECHELONEXTENSIONTYPE, false)?
      .visit_field::<i64>("CollectionGroupId", Self::VT_COLLECTIONGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FirstClearFunnelMessage", Self::VT_FIRSTCLEARFUNNELMESSAGE, false)?
      .finish();
     Ok(())
   }
@@ -711,6 +727,7 @@ pub struct ScenarioModeExcelArgs<'a> {
     pub CompleteReportEventName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EchelonExtensionType: EchelonExtensionType,
     pub CollectionGroupId: i64,
+    pub FirstClearFunnelMessage: Option<flatbuffers::WIPOffset<&'a str>>,
 }
 impl<'a> Default for ScenarioModeExcelArgs<'a> {
   #[inline]
@@ -757,6 +774,7 @@ impl<'a> Default for ScenarioModeExcelArgs<'a> {
       CompleteReportEventName: None,
       EchelonExtensionType: EchelonExtensionType::Base,
       CollectionGroupId: 0,
+      FirstClearFunnelMessage: None,
     }
   }
 }
@@ -766,7 +784,7 @@ impl Serialize for ScenarioModeExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ScenarioModeExcel", 41)?;
+    let mut s = serializer.serialize_struct("ScenarioModeExcel", 42)?;
       s.serialize_field("ModeId", &self.ModeId())?;
       s.serialize_field("ModeType", &self.ModeType())?;
       s.serialize_field("SubType", &self.SubType())?;
@@ -840,6 +858,11 @@ impl Serialize for ScenarioModeExcel<'_> {
       }
       s.serialize_field("EchelonExtensionType", &self.EchelonExtensionType())?;
       s.serialize_field("CollectionGroupId", &self.CollectionGroupId())?;
+      if let Some(f) = self.FirstClearFunnelMessage() {
+        s.serialize_field("FirstClearFunnelMessage", &f)?;
+      } else {
+        s.skip_field("FirstClearFunnelMessage")?;
+      }
     s.end()
   }
 }
@@ -1014,6 +1037,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ScenarioModeExcelBuilder<'a, 'b
     self.fbb_.push_slot::<i64>(ScenarioModeExcel::VT_COLLECTIONGROUPID, CollectionGroupId, 0);
   }
   #[inline]
+  pub fn add_FirstClearFunnelMessage(&mut self, FirstClearFunnelMessage: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ScenarioModeExcel::VT_FIRSTCLEARFUNNELMESSAGE, FirstClearFunnelMessage);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ScenarioModeExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     ScenarioModeExcelBuilder {
@@ -1072,6 +1099,7 @@ impl core::fmt::Debug for ScenarioModeExcel<'_> {
       ds.field("CompleteReportEventName", &self.CompleteReportEventName());
       ds.field("EchelonExtensionType", &self.EchelonExtensionType());
       ds.field("CollectionGroupId", &self.CollectionGroupId());
+      ds.field("FirstClearFunnelMessage", &self.FirstClearFunnelMessage());
       ds.finish()
   }
 }
@@ -1119,6 +1147,7 @@ pub struct ScenarioModeExcelT {
   pub CompleteReportEventName: Option<String>,
   pub EchelonExtensionType: EchelonExtensionType,
   pub CollectionGroupId: i64,
+  pub FirstClearFunnelMessage: Option<String>,
 }
 impl Default for ScenarioModeExcelT {
   fn default() -> Self {
@@ -1164,6 +1193,7 @@ impl Default for ScenarioModeExcelT {
       CompleteReportEventName: None,
       EchelonExtensionType: EchelonExtensionType::Base,
       CollectionGroupId: 0,
+      FirstClearFunnelMessage: None,
     }
   }
 }
@@ -1229,6 +1259,9 @@ impl ScenarioModeExcelT {
     });
     let EchelonExtensionType = self.EchelonExtensionType;
     let CollectionGroupId = self.CollectionGroupId;
+    let FirstClearFunnelMessage = self.FirstClearFunnelMessage.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     ScenarioModeExcel::create(_fbb, &ScenarioModeExcelArgs{
       ModeId,
       ModeType,
@@ -1271,6 +1304,7 @@ impl ScenarioModeExcelT {
       CompleteReportEventName,
       EchelonExtensionType,
       CollectionGroupId,
+      FirstClearFunnelMessage,
     })
   }
 }

@@ -56,14 +56,14 @@ impl<'a> EventContentStageTotalRewardExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.rewardParcelAmount {
-        builder.add_rewardParcelAmount(x);
+      if let Some(x) = args.RewardParcelAmount {
+        builder.add_RewardParcelAmount(x);
       }
-      if let Some(x) = args.rewardParcelId {
-        builder.add_rewardParcelId(x);
+      if let Some(x) = args.RewardParcelId {
+        builder.add_RewardParcelId(x);
       }
-      if let Some(x) = args.RewardParcelType {
-        builder.add_RewardParcelType(x);
+      if let Some(x) = args.rewardParcelType {
+        builder.add_rewardParcelType(x);
       }
     builder.finish()
   }
@@ -73,22 +73,22 @@ impl<'a> EventContentStageTotalRewardExcel<'a> {
       let Id = self.Id();
       let EventContentId = self.EventContentId();
       let RequiredEventItemAmount = self.RequiredEventItemAmount();
-    let RewardParcelType = self.RewardParcelType().map(|x| {
+    let rewardParcelType = self.rewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let rewardParcelId = self.rewardParcelId().map(|x| {
+    let RewardParcelId = self.RewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let rewardParcelAmount = self.rewardParcelAmount().map(|x| {
+    let RewardParcelAmount = self.RewardParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     EventContentStageTotalRewardExcelT {
       Id,
       EventContentId,
       RequiredEventItemAmount,
-      RewardParcelType,
-      rewardParcelId,
-      rewardParcelAmount,
+      rewardParcelType,
+      RewardParcelId,
+      RewardParcelAmount,
     }
   }
 
@@ -114,21 +114,21 @@ impl<'a> EventContentStageTotalRewardExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentStageTotalRewardExcel::VT_REQUIREDEVENTITEMAMOUNT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn RewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn rewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(EventContentStageTotalRewardExcel::VT_REWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn rewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EventContentStageTotalRewardExcel::VT_REWARDPARCELID, None)}
   }
   #[inline]
-  pub fn rewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -146,9 +146,9 @@ impl flatbuffers::Verifiable for EventContentStageTotalRewardExcel<'_> {
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
      .visit_field::<i64>("RequiredEventItemAmount", Self::VT_REQUIREDEVENTITEMAMOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelId", Self::VT_REWARDPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -157,9 +157,9 @@ pub struct EventContentStageTotalRewardExcelArgs<'a> {
     pub Id: i64,
     pub EventContentId: i64,
     pub RequiredEventItemAmount: i64,
-    pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub rewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub rewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EventContentStageTotalRewardExcelArgs<'a> {
   #[inline]
@@ -168,9 +168,9 @@ impl<'a> Default for EventContentStageTotalRewardExcelArgs<'a> {
       Id: 0,
       EventContentId: 0,
       RequiredEventItemAmount: 0,
-      RewardParcelType: None,
-      rewardParcelId: None,
-      rewardParcelAmount: None,
+      rewardParcelType: None,
+      RewardParcelId: None,
+      RewardParcelAmount: None,
     }
   }
 }
@@ -184,20 +184,20 @@ impl Serialize for EventContentStageTotalRewardExcel<'_> {
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("RequiredEventItemAmount", &self.RequiredEventItemAmount())?;
-      if let Some(f) = self.RewardParcelType() {
-        s.serialize_field("RewardParcelType", &f)?;
+      if let Some(f) = self.rewardParcelType() {
+        s.serialize_field("rewardParcelType", &f)?;
       } else {
-        s.skip_field("RewardParcelType")?;
+        s.skip_field("rewardParcelType")?;
       }
-      if let Some(f) = self.rewardParcelId() {
-        s.serialize_field("rewardParcelId", &f)?;
+      if let Some(f) = self.RewardParcelId() {
+        s.serialize_field("RewardParcelId", &f)?;
       } else {
-        s.skip_field("rewardParcelId")?;
+        s.skip_field("RewardParcelId")?;
       }
-      if let Some(f) = self.rewardParcelAmount() {
-        s.serialize_field("rewardParcelAmount", &f)?;
+      if let Some(f) = self.RewardParcelAmount() {
+        s.serialize_field("RewardParcelAmount", &f)?;
       } else {
-        s.skip_field("rewardParcelAmount")?;
+        s.skip_field("RewardParcelAmount")?;
       }
     s.end()
   }
@@ -221,16 +221,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentStageTotalRewardExc
     self.fbb_.push_slot::<i64>(EventContentStageTotalRewardExcel::VT_REQUIREDEVENTITEMAMOUNT, RequiredEventItemAmount, 0);
   }
   #[inline]
-  pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageTotalRewardExcel::VT_REWARDPARCELTYPE, RewardParcelType);
+  pub fn add_rewardParcelType(&mut self, rewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageTotalRewardExcel::VT_REWARDPARCELTYPE, rewardParcelType);
   }
   #[inline]
-  pub fn add_rewardParcelId(&mut self, rewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageTotalRewardExcel::VT_REWARDPARCELID, rewardParcelId);
+  pub fn add_RewardParcelId(&mut self, RewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageTotalRewardExcel::VT_REWARDPARCELID, RewardParcelId);
   }
   #[inline]
-  pub fn add_rewardParcelAmount(&mut self, rewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageTotalRewardExcel::VT_REWARDPARCELAMOUNT, rewardParcelAmount);
+  pub fn add_RewardParcelAmount(&mut self, RewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageTotalRewardExcel::VT_REWARDPARCELAMOUNT, RewardParcelAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentStageTotalRewardExcelBuilder<'a, 'b, A> {
@@ -253,9 +253,9 @@ impl core::fmt::Debug for EventContentStageTotalRewardExcel<'_> {
       ds.field("Id", &self.Id());
       ds.field("EventContentId", &self.EventContentId());
       ds.field("RequiredEventItemAmount", &self.RequiredEventItemAmount());
-      ds.field("RewardParcelType", &self.RewardParcelType());
-      ds.field("rewardParcelId", &self.rewardParcelId());
-      ds.field("rewardParcelAmount", &self.rewardParcelAmount());
+      ds.field("rewardParcelType", &self.rewardParcelType());
+      ds.field("RewardParcelId", &self.RewardParcelId());
+      ds.field("RewardParcelAmount", &self.RewardParcelAmount());
       ds.finish()
   }
 }
@@ -265,9 +265,9 @@ pub struct EventContentStageTotalRewardExcelT {
   pub Id: i64,
   pub EventContentId: i64,
   pub RequiredEventItemAmount: i64,
-  pub RewardParcelType: Option<Vec<ParcelType>>,
-  pub rewardParcelId: Option<Vec<i64>>,
-  pub rewardParcelAmount: Option<Vec<i64>>,
+  pub rewardParcelType: Option<Vec<ParcelType>>,
+  pub RewardParcelId: Option<Vec<i64>>,
+  pub RewardParcelAmount: Option<Vec<i64>>,
 }
 impl Default for EventContentStageTotalRewardExcelT {
   fn default() -> Self {
@@ -275,9 +275,9 @@ impl Default for EventContentStageTotalRewardExcelT {
       Id: 0,
       EventContentId: 0,
       RequiredEventItemAmount: 0,
-      RewardParcelType: None,
-      rewardParcelId: None,
-      rewardParcelAmount: None,
+      rewardParcelType: None,
+      RewardParcelId: None,
+      RewardParcelAmount: None,
     }
   }
 }
@@ -289,22 +289,22 @@ impl EventContentStageTotalRewardExcelT {
     let Id = self.Id;
     let EventContentId = self.EventContentId;
     let RequiredEventItemAmount = self.RequiredEventItemAmount;
-    let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
+    let rewardParcelType = self.rewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardParcelId = self.rewardParcelId.as_ref().map(|x|{
+    let RewardParcelId = self.RewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardParcelAmount = self.rewardParcelAmount.as_ref().map(|x|{
+    let RewardParcelAmount = self.RewardParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     EventContentStageTotalRewardExcel::create(_fbb, &EventContentStageTotalRewardExcelArgs{
       Id,
       EventContentId,
       RequiredEventItemAmount,
-      RewardParcelType,
-      rewardParcelId,
-      rewardParcelAmount,
+      rewardParcelType,
+      RewardParcelId,
+      RewardParcelAmount,
     })
   }
 }

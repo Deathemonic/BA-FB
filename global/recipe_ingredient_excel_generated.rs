@@ -56,20 +56,20 @@ impl<'a> RecipeIngredientExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.ingredientAmount {
-        builder.add_ingredientAmount(x);
+      if let Some(x) = args.IngredientAmount {
+        builder.add_IngredientAmount(x);
       }
-      if let Some(x) = args.ingredientId {
-        builder.add_ingredientId(x);
+      if let Some(x) = args.IngredientId {
+        builder.add_IngredientId(x);
       }
-      if let Some(x) = args.ingredientParcelType {
-        builder.add_ingredientParcelType(x);
+      if let Some(x) = args.IngredientParcelType {
+        builder.add_IngredientParcelType(x);
       }
-      if let Some(x) = args.costAmount {
-        builder.add_costAmount(x);
+      if let Some(x) = args.CostAmount {
+        builder.add_CostAmount(x);
       }
-      if let Some(x) = args.costId {
-        builder.add_costId(x);
+      if let Some(x) = args.CostId {
+        builder.add_CostId(x);
       }
       if let Some(x) = args.CostParcelType {
         builder.add_CostParcelType(x);
@@ -91,19 +91,19 @@ impl<'a> RecipeIngredientExcel<'a> {
     let CostParcelType = self.CostParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let costId = self.costId().map(|x| {
+    let CostId = self.CostId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let costAmount = self.costAmount().map(|x| {
+    let CostAmount = self.CostAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let ingredientParcelType = self.ingredientParcelType().map(|x| {
+    let IngredientParcelType = self.IngredientParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let ingredientId = self.ingredientId().map(|x| {
+    let IngredientId = self.IngredientId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let ingredientAmount = self.ingredientAmount().map(|x| {
+    let IngredientAmount = self.IngredientAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let CostTimeInSecond = self.CostTimeInSecond();
@@ -111,11 +111,11 @@ impl<'a> RecipeIngredientExcel<'a> {
       Id,
       RecipeType,
       CostParcelType,
-      costId,
-      costAmount,
-      ingredientParcelType,
-      ingredientId,
-      ingredientAmount,
+      CostId,
+      CostAmount,
+      IngredientParcelType,
+      IngredientId,
+      IngredientAmount,
       CostTimeInSecond,
     }
   }
@@ -142,35 +142,35 @@ impl<'a> RecipeIngredientExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(RecipeIngredientExcel::VT_COSTPARCELTYPE, None)}
   }
   #[inline]
-  pub fn costId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn CostId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(RecipeIngredientExcel::VT_COSTID, None)}
   }
   #[inline]
-  pub fn costAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn CostAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(RecipeIngredientExcel::VT_COSTAMOUNT, None)}
   }
   #[inline]
-  pub fn ingredientParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn IngredientParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(RecipeIngredientExcel::VT_INGREDIENTPARCELTYPE, None)}
   }
   #[inline]
-  pub fn ingredientId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn IngredientId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(RecipeIngredientExcel::VT_INGREDIENTID, None)}
   }
   #[inline]
-  pub fn ingredientAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn IngredientAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -195,11 +195,11 @@ impl flatbuffers::Verifiable for RecipeIngredientExcel<'_> {
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<RecipeType>("RecipeType", Self::VT_RECIPETYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("CostParcelType", Self::VT_COSTPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("costId", Self::VT_COSTID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("costAmount", Self::VT_COSTAMOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("ingredientParcelType", Self::VT_INGREDIENTPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ingredientId", Self::VT_INGREDIENTID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ingredientAmount", Self::VT_INGREDIENTAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("CostId", Self::VT_COSTID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("CostAmount", Self::VT_COSTAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("IngredientParcelType", Self::VT_INGREDIENTPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("IngredientId", Self::VT_INGREDIENTID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("IngredientAmount", Self::VT_INGREDIENTAMOUNT, false)?
      .visit_field::<i64>("CostTimeInSecond", Self::VT_COSTTIMEINSECOND, false)?
      .finish();
     Ok(())
@@ -209,11 +209,11 @@ pub struct RecipeIngredientExcelArgs<'a> {
     pub Id: i64,
     pub RecipeType: RecipeType,
     pub CostParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub costId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub costAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub ingredientParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub ingredientId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub ingredientAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub CostId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub CostAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub IngredientParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub IngredientId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub IngredientAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub CostTimeInSecond: i64,
 }
 impl<'a> Default for RecipeIngredientExcelArgs<'a> {
@@ -223,11 +223,11 @@ impl<'a> Default for RecipeIngredientExcelArgs<'a> {
       Id: 0,
       RecipeType: RecipeType::None,
       CostParcelType: None,
-      costId: None,
-      costAmount: None,
-      ingredientParcelType: None,
-      ingredientId: None,
-      ingredientAmount: None,
+      CostId: None,
+      CostAmount: None,
+      IngredientParcelType: None,
+      IngredientId: None,
+      IngredientAmount: None,
       CostTimeInSecond: 0,
     }
   }
@@ -246,30 +246,30 @@ impl Serialize for RecipeIngredientExcel<'_> {
       } else {
         s.skip_field("CostParcelType")?;
       }
-      if let Some(f) = self.costId() {
-        s.serialize_field("costId", &f)?;
+      if let Some(f) = self.CostId() {
+        s.serialize_field("CostId", &f)?;
       } else {
-        s.skip_field("costId")?;
+        s.skip_field("CostId")?;
       }
-      if let Some(f) = self.costAmount() {
-        s.serialize_field("costAmount", &f)?;
+      if let Some(f) = self.CostAmount() {
+        s.serialize_field("CostAmount", &f)?;
       } else {
-        s.skip_field("costAmount")?;
+        s.skip_field("CostAmount")?;
       }
-      if let Some(f) = self.ingredientParcelType() {
-        s.serialize_field("ingredientParcelType", &f)?;
+      if let Some(f) = self.IngredientParcelType() {
+        s.serialize_field("IngredientParcelType", &f)?;
       } else {
-        s.skip_field("ingredientParcelType")?;
+        s.skip_field("IngredientParcelType")?;
       }
-      if let Some(f) = self.ingredientId() {
-        s.serialize_field("ingredientId", &f)?;
+      if let Some(f) = self.IngredientId() {
+        s.serialize_field("IngredientId", &f)?;
       } else {
-        s.skip_field("ingredientId")?;
+        s.skip_field("IngredientId")?;
       }
-      if let Some(f) = self.ingredientAmount() {
-        s.serialize_field("ingredientAmount", &f)?;
+      if let Some(f) = self.IngredientAmount() {
+        s.serialize_field("IngredientAmount", &f)?;
       } else {
-        s.skip_field("ingredientAmount")?;
+        s.skip_field("IngredientAmount")?;
       }
       s.serialize_field("CostTimeInSecond", &self.CostTimeInSecond())?;
     s.end()
@@ -294,24 +294,24 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> RecipeIngredientExcelBuilder<'a
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_COSTPARCELTYPE, CostParcelType);
   }
   #[inline]
-  pub fn add_costId(&mut self, costId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_COSTID, costId);
+  pub fn add_CostId(&mut self, CostId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_COSTID, CostId);
   }
   #[inline]
-  pub fn add_costAmount(&mut self, costAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_COSTAMOUNT, costAmount);
+  pub fn add_CostAmount(&mut self, CostAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_COSTAMOUNT, CostAmount);
   }
   #[inline]
-  pub fn add_ingredientParcelType(&mut self, ingredientParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_INGREDIENTPARCELTYPE, ingredientParcelType);
+  pub fn add_IngredientParcelType(&mut self, IngredientParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_INGREDIENTPARCELTYPE, IngredientParcelType);
   }
   #[inline]
-  pub fn add_ingredientId(&mut self, ingredientId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_INGREDIENTID, ingredientId);
+  pub fn add_IngredientId(&mut self, IngredientId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_INGREDIENTID, IngredientId);
   }
   #[inline]
-  pub fn add_ingredientAmount(&mut self, ingredientAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_INGREDIENTAMOUNT, ingredientAmount);
+  pub fn add_IngredientAmount(&mut self, IngredientAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RecipeIngredientExcel::VT_INGREDIENTAMOUNT, IngredientAmount);
   }
   #[inline]
   pub fn add_CostTimeInSecond(&mut self, CostTimeInSecond: i64) {
@@ -338,11 +338,11 @@ impl core::fmt::Debug for RecipeIngredientExcel<'_> {
       ds.field("Id", &self.Id());
       ds.field("RecipeType", &self.RecipeType());
       ds.field("CostParcelType", &self.CostParcelType());
-      ds.field("costId", &self.costId());
-      ds.field("costAmount", &self.costAmount());
-      ds.field("ingredientParcelType", &self.ingredientParcelType());
-      ds.field("ingredientId", &self.ingredientId());
-      ds.field("ingredientAmount", &self.ingredientAmount());
+      ds.field("CostId", &self.CostId());
+      ds.field("CostAmount", &self.CostAmount());
+      ds.field("IngredientParcelType", &self.IngredientParcelType());
+      ds.field("IngredientId", &self.IngredientId());
+      ds.field("IngredientAmount", &self.IngredientAmount());
       ds.field("CostTimeInSecond", &self.CostTimeInSecond());
       ds.finish()
   }
@@ -353,11 +353,11 @@ pub struct RecipeIngredientExcelT {
   pub Id: i64,
   pub RecipeType: RecipeType,
   pub CostParcelType: Option<Vec<ParcelType>>,
-  pub costId: Option<Vec<i64>>,
-  pub costAmount: Option<Vec<i64>>,
-  pub ingredientParcelType: Option<Vec<ParcelType>>,
-  pub ingredientId: Option<Vec<i64>>,
-  pub ingredientAmount: Option<Vec<i64>>,
+  pub CostId: Option<Vec<i64>>,
+  pub CostAmount: Option<Vec<i64>>,
+  pub IngredientParcelType: Option<Vec<ParcelType>>,
+  pub IngredientId: Option<Vec<i64>>,
+  pub IngredientAmount: Option<Vec<i64>>,
   pub CostTimeInSecond: i64,
 }
 impl Default for RecipeIngredientExcelT {
@@ -366,11 +366,11 @@ impl Default for RecipeIngredientExcelT {
       Id: 0,
       RecipeType: RecipeType::None,
       CostParcelType: None,
-      costId: None,
-      costAmount: None,
-      ingredientParcelType: None,
-      ingredientId: None,
-      ingredientAmount: None,
+      CostId: None,
+      CostAmount: None,
+      IngredientParcelType: None,
+      IngredientId: None,
+      IngredientAmount: None,
       CostTimeInSecond: 0,
     }
   }
@@ -385,19 +385,19 @@ impl RecipeIngredientExcelT {
     let CostParcelType = self.CostParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let costId = self.costId.as_ref().map(|x|{
+    let CostId = self.CostId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let costAmount = self.costAmount.as_ref().map(|x|{
+    let CostAmount = self.CostAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ingredientParcelType = self.ingredientParcelType.as_ref().map(|x|{
+    let IngredientParcelType = self.IngredientParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ingredientId = self.ingredientId.as_ref().map(|x|{
+    let IngredientId = self.IngredientId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ingredientAmount = self.ingredientAmount.as_ref().map(|x|{
+    let IngredientAmount = self.IngredientAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CostTimeInSecond = self.CostTimeInSecond;
@@ -405,11 +405,11 @@ impl RecipeIngredientExcelT {
       Id,
       RecipeType,
       CostParcelType,
-      costId,
-      costAmount,
-      ingredientParcelType,
-      ingredientId,
-      ingredientAmount,
+      CostId,
+      CostAmount,
+      IngredientParcelType,
+      IngredientId,
+      IngredientAmount,
       CostTimeInSecond,
     })
   }

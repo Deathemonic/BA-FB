@@ -39,15 +39,16 @@ impl<'a> CharacterSkillListExcel<'a> {
   pub const VT_TSAINTERACTIONID: flatbuffers::VOffsetT = 18;
   pub const VT_NORMALSKILLGROUPID: flatbuffers::VOffsetT = 20;
   pub const VT_NORMALSKILLTIMELINEINDEX: flatbuffers::VOffsetT = 22;
-  pub const VT_EXSKILLGROUPID: flatbuffers::VOffsetT = 24;
-  pub const VT_EXSKILLCUTINTIMELINEINDEX: flatbuffers::VOffsetT = 26;
-  pub const VT_EXSKILLLEVELTIMELINEINDEX: flatbuffers::VOffsetT = 28;
-  pub const VT_PUBLICSKILLGROUPID: flatbuffers::VOffsetT = 30;
-  pub const VT_PUBLICSKILLTIMELINEINDEX: flatbuffers::VOffsetT = 32;
-  pub const VT_PASSIVESKILLGROUPID: flatbuffers::VOffsetT = 34;
-  pub const VT_LEADERSKILLGROUPID: flatbuffers::VOffsetT = 36;
-  pub const VT_EXTRAPASSIVESKILLGROUPID: flatbuffers::VOffsetT = 38;
-  pub const VT_HIDDENPASSIVESKILLGROUPID: flatbuffers::VOffsetT = 40;
+  pub const VT_SELECTEXSKILLACTIONSKILLSLOT: flatbuffers::VOffsetT = 24;
+  pub const VT_EXSKILLGROUPID: flatbuffers::VOffsetT = 26;
+  pub const VT_EXSKILLCUTINTIMELINEINDEX: flatbuffers::VOffsetT = 28;
+  pub const VT_EXSKILLLEVELTIMELINEINDEX: flatbuffers::VOffsetT = 30;
+  pub const VT_PUBLICSKILLGROUPID: flatbuffers::VOffsetT = 32;
+  pub const VT_PUBLICSKILLTIMELINEINDEX: flatbuffers::VOffsetT = 34;
+  pub const VT_PASSIVESKILLGROUPID: flatbuffers::VOffsetT = 36;
+  pub const VT_LEADERSKILLGROUPID: flatbuffers::VOffsetT = 38;
+  pub const VT_EXTRAPASSIVESKILLGROUPID: flatbuffers::VOffsetT = 40;
+  pub const VT_HIDDENPASSIVESKILLGROUPID: flatbuffers::VOffsetT = 42;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -69,14 +70,14 @@ impl<'a> CharacterSkillListExcel<'a> {
       if let Some(x) = args.HiddenPassiveSkillGroupId {
         builder.add_HiddenPassiveSkillGroupId(x);
       }
-      if let Some(x) = args.ExtraPassiveSkillGroupId {
-        builder.add_ExtraPassiveSkillGroupId(x);
+      if let Some(x) = args.extraPassiveSkillGroupId {
+        builder.add_extraPassiveSkillGroupId(x);
       }
-      if let Some(x) = args.LeaderSkillGroupId {
-        builder.add_LeaderSkillGroupId(x);
+      if let Some(x) = args.leaderSkillGroupId {
+        builder.add_leaderSkillGroupId(x);
       }
-      if let Some(x) = args.PassiveSkillGroupId {
-        builder.add_PassiveSkillGroupId(x);
+      if let Some(x) = args.passiveSkillGroupId {
+        builder.add_passiveSkillGroupId(x);
       }
       if let Some(x) = args.PublicSkillTimeLineIndex {
         builder.add_PublicSkillTimeLineIndex(x);
@@ -84,8 +85,8 @@ impl<'a> CharacterSkillListExcel<'a> {
       if let Some(x) = args.publicSkillGroupId {
         builder.add_publicSkillGroupId(x);
       }
-      if let Some(x) = args.ExSkillLevelTimeLineIndex {
-        builder.add_ExSkillLevelTimeLineIndex(x);
+      if let Some(x) = args.exSkillLevelTimeLineIndex {
+        builder.add_exSkillLevelTimeLineIndex(x);
       }
       if let Some(x) = args.ExSkillCutInTimeLineIndex {
         builder.add_ExSkillCutInTimeLineIndex(x);
@@ -93,6 +94,9 @@ impl<'a> CharacterSkillListExcel<'a> {
       if let Some(x) = args.exSkillGroupId {
         builder.add_exSkillGroupId(x);
       }
+      let x = args.SelectExSkillActionSkillSlot;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
+      builder.add_SelectExSkillActionSkillSlot(x);
       if let Some(x) = args.normalSkillTimeLineIndex {
         builder.add_normalSkillTimeLineIndex(x);
       }
@@ -130,13 +134,14 @@ impl<'a> CharacterSkillListExcel<'a> {
     let normalSkillTimeLineIndex = self.normalSkillTimeLineIndex().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
+      let SelectExSkillActionSkillSlot = self.SelectExSkillActionSkillSlot();
     let exSkillGroupId = self.exSkillGroupId().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let ExSkillCutInTimeLineIndex = self.ExSkillCutInTimeLineIndex().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let ExSkillLevelTimeLineIndex = self.ExSkillLevelTimeLineIndex().map(|x| {
+    let exSkillLevelTimeLineIndex = self.exSkillLevelTimeLineIndex().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let publicSkillGroupId = self.publicSkillGroupId().map(|x| {
@@ -145,13 +150,13 @@ impl<'a> CharacterSkillListExcel<'a> {
     let PublicSkillTimeLineIndex = self.PublicSkillTimeLineIndex().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
-    let PassiveSkillGroupId = self.PassiveSkillGroupId().map(|x| {
+    let passiveSkillGroupId = self.passiveSkillGroupId().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let LeaderSkillGroupId = self.LeaderSkillGroupId().map(|x| {
+    let leaderSkillGroupId = self.leaderSkillGroupId().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let ExtraPassiveSkillGroupId = self.ExtraPassiveSkillGroupId().map(|x| {
+    let extraPassiveSkillGroupId = self.extraPassiveSkillGroupId().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let HiddenPassiveSkillGroupId = self.HiddenPassiveSkillGroupId().map(|x| {
@@ -168,14 +173,15 @@ impl<'a> CharacterSkillListExcel<'a> {
       TSAInteractionId,
       NormalSkillGroupId,
       normalSkillTimeLineIndex,
+      SelectExSkillActionSkillSlot,
       exSkillGroupId,
       ExSkillCutInTimeLineIndex,
-      ExSkillLevelTimeLineIndex,
+      exSkillLevelTimeLineIndex,
       publicSkillGroupId,
       PublicSkillTimeLineIndex,
-      PassiveSkillGroupId,
-      LeaderSkillGroupId,
-      ExtraPassiveSkillGroupId,
+      passiveSkillGroupId,
+      leaderSkillGroupId,
+      extraPassiveSkillGroupId,
       HiddenPassiveSkillGroupId,
     }
   }
@@ -251,6 +257,13 @@ impl<'a> CharacterSkillListExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i32>>>(CharacterSkillListExcel::VT_NORMALSKILLTIMELINEINDEX, None)}
   }
   #[inline]
+  pub fn SelectExSkillActionSkillSlot(&self) -> i32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i32>(CharacterSkillListExcel::VT_SELECTEXSKILLACTIONSKILLSLOT, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn exSkillGroupId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
@@ -265,7 +278,7 @@ impl<'a> CharacterSkillListExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(CharacterSkillListExcel::VT_EXSKILLCUTINTIMELINEINDEX, None)}
   }
   #[inline]
-  pub fn ExSkillLevelTimeLineIndex(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn exSkillLevelTimeLineIndex(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -286,21 +299,21 @@ impl<'a> CharacterSkillListExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i32>>>(CharacterSkillListExcel::VT_PUBLICSKILLTIMELINEINDEX, None)}
   }
   #[inline]
-  pub fn PassiveSkillGroupId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn passiveSkillGroupId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(CharacterSkillListExcel::VT_PASSIVESKILLGROUPID, None)}
   }
   #[inline]
-  pub fn LeaderSkillGroupId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn leaderSkillGroupId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(CharacterSkillListExcel::VT_LEADERSKILLGROUPID, None)}
   }
   #[inline]
-  pub fn ExtraPassiveSkillGroupId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn extraPassiveSkillGroupId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -332,14 +345,15 @@ impl flatbuffers::Verifiable for CharacterSkillListExcel<'_> {
      .visit_field::<i64>("TSAInteractionId", Self::VT_TSAINTERACTIONID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("NormalSkillGroupId", Self::VT_NORMALSKILLGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("normalSkillTimeLineIndex", Self::VT_NORMALSKILLTIMELINEINDEX, false)?
+     .visit_field::<i32>("SelectExSkillActionSkillSlot", Self::VT_SELECTEXSKILLACTIONSKILLSLOT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("exSkillGroupId", Self::VT_EXSKILLGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ExSkillCutInTimeLineIndex", Self::VT_EXSKILLCUTINTIMELINEINDEX, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ExSkillLevelTimeLineIndex", Self::VT_EXSKILLLEVELTIMELINEINDEX, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("exSkillLevelTimeLineIndex", Self::VT_EXSKILLLEVELTIMELINEINDEX, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("publicSkillGroupId", Self::VT_PUBLICSKILLGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("PublicSkillTimeLineIndex", Self::VT_PUBLICSKILLTIMELINEINDEX, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("PassiveSkillGroupId", Self::VT_PASSIVESKILLGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("LeaderSkillGroupId", Self::VT_LEADERSKILLGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ExtraPassiveSkillGroupId", Self::VT_EXTRAPASSIVESKILLGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("passiveSkillGroupId", Self::VT_PASSIVESKILLGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("leaderSkillGroupId", Self::VT_LEADERSKILLGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("extraPassiveSkillGroupId", Self::VT_EXTRAPASSIVESKILLGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("HiddenPassiveSkillGroupId", Self::VT_HIDDENPASSIVESKILLGROUPID, false)?
      .finish();
     Ok(())
@@ -356,14 +370,15 @@ pub struct CharacterSkillListExcelArgs<'a> {
     pub TSAInteractionId: i64,
     pub NormalSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub normalSkillTimeLineIndex: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub SelectExSkillActionSkillSlot: i32,
     pub exSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub ExSkillCutInTimeLineIndex: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub ExSkillLevelTimeLineIndex: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub exSkillLevelTimeLineIndex: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub publicSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub PublicSkillTimeLineIndex: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
-    pub PassiveSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub LeaderSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub ExtraPassiveSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub passiveSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub leaderSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub extraPassiveSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub HiddenPassiveSkillGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
 }
 impl<'a> Default for CharacterSkillListExcelArgs<'a> {
@@ -380,14 +395,15 @@ impl<'a> Default for CharacterSkillListExcelArgs<'a> {
       TSAInteractionId: 0,
       NormalSkillGroupId: None,
       normalSkillTimeLineIndex: None,
+      SelectExSkillActionSkillSlot: 0,
       exSkillGroupId: None,
       ExSkillCutInTimeLineIndex: None,
-      ExSkillLevelTimeLineIndex: None,
+      exSkillLevelTimeLineIndex: None,
       publicSkillGroupId: None,
       PublicSkillTimeLineIndex: None,
-      PassiveSkillGroupId: None,
-      LeaderSkillGroupId: None,
-      ExtraPassiveSkillGroupId: None,
+      passiveSkillGroupId: None,
+      leaderSkillGroupId: None,
+      extraPassiveSkillGroupId: None,
       HiddenPassiveSkillGroupId: None,
     }
   }
@@ -398,7 +414,7 @@ impl Serialize for CharacterSkillListExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("CharacterSkillListExcel", 19)?;
+    let mut s = serializer.serialize_struct("CharacterSkillListExcel", 20)?;
       s.serialize_field("CharacterSkillListGroupId", &self.CharacterSkillListGroupId())?;
       s.serialize_field("MinimumGradeCharacterWeapon", &self.MinimumGradeCharacterWeapon())?;
       s.serialize_field("MinimumTierCharacterGear", &self.MinimumTierCharacterGear())?;
@@ -417,6 +433,7 @@ impl Serialize for CharacterSkillListExcel<'_> {
       } else {
         s.skip_field("normalSkillTimeLineIndex")?;
       }
+      s.serialize_field("SelectExSkillActionSkillSlot", &self.SelectExSkillActionSkillSlot())?;
       if let Some(f) = self.exSkillGroupId() {
         s.serialize_field("exSkillGroupId", &f)?;
       } else {
@@ -427,10 +444,10 @@ impl Serialize for CharacterSkillListExcel<'_> {
       } else {
         s.skip_field("ExSkillCutInTimeLineIndex")?;
       }
-      if let Some(f) = self.ExSkillLevelTimeLineIndex() {
-        s.serialize_field("ExSkillLevelTimeLineIndex", &f)?;
+      if let Some(f) = self.exSkillLevelTimeLineIndex() {
+        s.serialize_field("exSkillLevelTimeLineIndex", &f)?;
       } else {
-        s.skip_field("ExSkillLevelTimeLineIndex")?;
+        s.skip_field("exSkillLevelTimeLineIndex")?;
       }
       if let Some(f) = self.publicSkillGroupId() {
         s.serialize_field("publicSkillGroupId", &f)?;
@@ -442,20 +459,20 @@ impl Serialize for CharacterSkillListExcel<'_> {
       } else {
         s.skip_field("PublicSkillTimeLineIndex")?;
       }
-      if let Some(f) = self.PassiveSkillGroupId() {
-        s.serialize_field("PassiveSkillGroupId", &f)?;
+      if let Some(f) = self.passiveSkillGroupId() {
+        s.serialize_field("passiveSkillGroupId", &f)?;
       } else {
-        s.skip_field("PassiveSkillGroupId")?;
+        s.skip_field("passiveSkillGroupId")?;
       }
-      if let Some(f) = self.LeaderSkillGroupId() {
-        s.serialize_field("LeaderSkillGroupId", &f)?;
+      if let Some(f) = self.leaderSkillGroupId() {
+        s.serialize_field("leaderSkillGroupId", &f)?;
       } else {
-        s.skip_field("LeaderSkillGroupId")?;
+        s.skip_field("leaderSkillGroupId")?;
       }
-      if let Some(f) = self.ExtraPassiveSkillGroupId() {
-        s.serialize_field("ExtraPassiveSkillGroupId", &f)?;
+      if let Some(f) = self.extraPassiveSkillGroupId() {
+        s.serialize_field("extraPassiveSkillGroupId", &f)?;
       } else {
-        s.skip_field("ExtraPassiveSkillGroupId")?;
+        s.skip_field("extraPassiveSkillGroupId")?;
       }
       if let Some(f) = self.HiddenPassiveSkillGroupId() {
         s.serialize_field("HiddenPassiveSkillGroupId", &f)?;
@@ -512,6 +529,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterSkillListExcelBuilder<
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_NORMALSKILLTIMELINEINDEX, normalSkillTimeLineIndex);
   }
   #[inline]
+  pub fn add_SelectExSkillActionSkillSlot(&mut self, SelectExSkillActionSkillSlot: i32) {
+    self.fbb_.push_slot::<i32>(CharacterSkillListExcel::VT_SELECTEXSKILLACTIONSKILLSLOT, SelectExSkillActionSkillSlot, 0);
+  }
+  #[inline]
   pub fn add_exSkillGroupId(&mut self, exSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_EXSKILLGROUPID, exSkillGroupId);
   }
@@ -520,8 +541,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterSkillListExcelBuilder<
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_EXSKILLCUTINTIMELINEINDEX, ExSkillCutInTimeLineIndex);
   }
   #[inline]
-  pub fn add_ExSkillLevelTimeLineIndex(&mut self, ExSkillLevelTimeLineIndex: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_EXSKILLLEVELTIMELINEINDEX, ExSkillLevelTimeLineIndex);
+  pub fn add_exSkillLevelTimeLineIndex(&mut self, exSkillLevelTimeLineIndex: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_EXSKILLLEVELTIMELINEINDEX, exSkillLevelTimeLineIndex);
   }
   #[inline]
   pub fn add_publicSkillGroupId(&mut self, publicSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -532,16 +553,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterSkillListExcelBuilder<
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_PUBLICSKILLTIMELINEINDEX, PublicSkillTimeLineIndex);
   }
   #[inline]
-  pub fn add_PassiveSkillGroupId(&mut self, PassiveSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_PASSIVESKILLGROUPID, PassiveSkillGroupId);
+  pub fn add_passiveSkillGroupId(&mut self, passiveSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_PASSIVESKILLGROUPID, passiveSkillGroupId);
   }
   #[inline]
-  pub fn add_LeaderSkillGroupId(&mut self, LeaderSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_LEADERSKILLGROUPID, LeaderSkillGroupId);
+  pub fn add_leaderSkillGroupId(&mut self, leaderSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_LEADERSKILLGROUPID, leaderSkillGroupId);
   }
   #[inline]
-  pub fn add_ExtraPassiveSkillGroupId(&mut self, ExtraPassiveSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_EXTRAPASSIVESKILLGROUPID, ExtraPassiveSkillGroupId);
+  pub fn add_extraPassiveSkillGroupId(&mut self, extraPassiveSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterSkillListExcel::VT_EXTRAPASSIVESKILLGROUPID, extraPassiveSkillGroupId);
   }
   #[inline]
   pub fn add_HiddenPassiveSkillGroupId(&mut self, HiddenPassiveSkillGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -575,14 +596,15 @@ impl core::fmt::Debug for CharacterSkillListExcel<'_> {
       ds.field("TSAInteractionId", &self.TSAInteractionId());
       ds.field("NormalSkillGroupId", &self.NormalSkillGroupId());
       ds.field("normalSkillTimeLineIndex", &self.normalSkillTimeLineIndex());
+      ds.field("SelectExSkillActionSkillSlot", &self.SelectExSkillActionSkillSlot());
       ds.field("exSkillGroupId", &self.exSkillGroupId());
       ds.field("ExSkillCutInTimeLineIndex", &self.ExSkillCutInTimeLineIndex());
-      ds.field("ExSkillLevelTimeLineIndex", &self.ExSkillLevelTimeLineIndex());
+      ds.field("exSkillLevelTimeLineIndex", &self.exSkillLevelTimeLineIndex());
       ds.field("publicSkillGroupId", &self.publicSkillGroupId());
       ds.field("PublicSkillTimeLineIndex", &self.PublicSkillTimeLineIndex());
-      ds.field("PassiveSkillGroupId", &self.PassiveSkillGroupId());
-      ds.field("LeaderSkillGroupId", &self.LeaderSkillGroupId());
-      ds.field("ExtraPassiveSkillGroupId", &self.ExtraPassiveSkillGroupId());
+      ds.field("passiveSkillGroupId", &self.passiveSkillGroupId());
+      ds.field("leaderSkillGroupId", &self.leaderSkillGroupId());
+      ds.field("extraPassiveSkillGroupId", &self.extraPassiveSkillGroupId());
       ds.field("HiddenPassiveSkillGroupId", &self.HiddenPassiveSkillGroupId());
       ds.finish()
   }
@@ -600,14 +622,15 @@ pub struct CharacterSkillListExcelT {
   pub TSAInteractionId: i64,
   pub NormalSkillGroupId: Option<Vec<String>>,
   pub normalSkillTimeLineIndex: Option<Vec<i32>>,
+  pub SelectExSkillActionSkillSlot: i32,
   pub exSkillGroupId: Option<Vec<String>>,
   pub ExSkillCutInTimeLineIndex: Option<Vec<String>>,
-  pub ExSkillLevelTimeLineIndex: Option<Vec<String>>,
+  pub exSkillLevelTimeLineIndex: Option<Vec<String>>,
   pub publicSkillGroupId: Option<Vec<String>>,
   pub PublicSkillTimeLineIndex: Option<Vec<i32>>,
-  pub PassiveSkillGroupId: Option<Vec<String>>,
-  pub LeaderSkillGroupId: Option<Vec<String>>,
-  pub ExtraPassiveSkillGroupId: Option<Vec<String>>,
+  pub passiveSkillGroupId: Option<Vec<String>>,
+  pub leaderSkillGroupId: Option<Vec<String>>,
+  pub extraPassiveSkillGroupId: Option<Vec<String>>,
   pub HiddenPassiveSkillGroupId: Option<Vec<String>>,
 }
 impl Default for CharacterSkillListExcelT {
@@ -623,14 +646,15 @@ impl Default for CharacterSkillListExcelT {
       TSAInteractionId: 0,
       NormalSkillGroupId: None,
       normalSkillTimeLineIndex: None,
+      SelectExSkillActionSkillSlot: 0,
       exSkillGroupId: None,
       ExSkillCutInTimeLineIndex: None,
-      ExSkillLevelTimeLineIndex: None,
+      exSkillLevelTimeLineIndex: None,
       publicSkillGroupId: None,
       PublicSkillTimeLineIndex: None,
-      PassiveSkillGroupId: None,
-      LeaderSkillGroupId: None,
-      ExtraPassiveSkillGroupId: None,
+      passiveSkillGroupId: None,
+      leaderSkillGroupId: None,
+      extraPassiveSkillGroupId: None,
       HiddenPassiveSkillGroupId: None,
     }
   }
@@ -654,13 +678,14 @@ impl CharacterSkillListExcelT {
     let normalSkillTimeLineIndex = self.normalSkillTimeLineIndex.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
+    let SelectExSkillActionSkillSlot = self.SelectExSkillActionSkillSlot;
     let exSkillGroupId = self.exSkillGroupId.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let ExSkillCutInTimeLineIndex = self.ExSkillCutInTimeLineIndex.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let ExSkillLevelTimeLineIndex = self.ExSkillLevelTimeLineIndex.as_ref().map(|x|{
+    let exSkillLevelTimeLineIndex = self.exSkillLevelTimeLineIndex.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let publicSkillGroupId = self.publicSkillGroupId.as_ref().map(|x|{
@@ -669,13 +694,13 @@ impl CharacterSkillListExcelT {
     let PublicSkillTimeLineIndex = self.PublicSkillTimeLineIndex.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let PassiveSkillGroupId = self.PassiveSkillGroupId.as_ref().map(|x|{
+    let passiveSkillGroupId = self.passiveSkillGroupId.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let LeaderSkillGroupId = self.LeaderSkillGroupId.as_ref().map(|x|{
+    let leaderSkillGroupId = self.leaderSkillGroupId.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let ExtraPassiveSkillGroupId = self.ExtraPassiveSkillGroupId.as_ref().map(|x|{
+    let extraPassiveSkillGroupId = self.extraPassiveSkillGroupId.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let HiddenPassiveSkillGroupId = self.HiddenPassiveSkillGroupId.as_ref().map(|x|{
@@ -692,14 +717,15 @@ impl CharacterSkillListExcelT {
       TSAInteractionId,
       NormalSkillGroupId,
       normalSkillTimeLineIndex,
+      SelectExSkillActionSkillSlot,
       exSkillGroupId,
       ExSkillCutInTimeLineIndex,
-      ExSkillLevelTimeLineIndex,
+      exSkillLevelTimeLineIndex,
       publicSkillGroupId,
       PublicSkillTimeLineIndex,
-      PassiveSkillGroupId,
-      LeaderSkillGroupId,
-      ExtraPassiveSkillGroupId,
+      passiveSkillGroupId,
+      leaderSkillGroupId,
+      extraPassiveSkillGroupId,
       HiddenPassiveSkillGroupId,
     })
   }

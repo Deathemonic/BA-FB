@@ -53,17 +53,17 @@ impl<'a> CharacterAcademyTagsExcel<'a> {
       if let Some(x) = args.ZoneWhiteListTags {
         builder.add_ZoneWhiteListTags(x);
       }
-      if let Some(x) = args.forbiddenTags {
-        builder.add_forbiddenTags(x);
+      if let Some(x) = args.ForbiddenTags {
+        builder.add_ForbiddenTags(x);
       }
       if let Some(x) = args.FavorItemUniqueTags {
         builder.add_FavorItemUniqueTags(x);
       }
-      if let Some(x) = args.favorItemTags {
-        builder.add_favorItemTags(x);
+      if let Some(x) = args.FavorItemTags {
+        builder.add_FavorItemTags(x);
       }
-      if let Some(x) = args.favorTags {
-        builder.add_favorTags(x);
+      if let Some(x) = args.FavorTags {
+        builder.add_FavorTags(x);
       }
     builder.finish()
   }
@@ -71,16 +71,16 @@ impl<'a> CharacterAcademyTagsExcel<'a> {
   pub fn unpack(&self) -> CharacterAcademyTagsExcelT {
     let key = table_encryption_service::create_key(b"CharacterAcademyTags");
       let Id = self.Id();
-    let favorTags = self.favorTags().map(|x| {
+    let FavorTags = self.FavorTags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let favorItemTags = self.favorItemTags().map(|x| {
+    let FavorItemTags = self.FavorItemTags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let FavorItemUniqueTags = self.FavorItemUniqueTags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let forbiddenTags = self.forbiddenTags().map(|x| {
+    let ForbiddenTags = self.ForbiddenTags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let ZoneWhiteListTags = self.ZoneWhiteListTags().map(|x| {
@@ -88,10 +88,10 @@ impl<'a> CharacterAcademyTagsExcel<'a> {
     });
     CharacterAcademyTagsExcelT {
       Id,
-      favorTags,
-      favorItemTags,
+      FavorTags,
+      FavorItemTags,
       FavorItemUniqueTags,
-      forbiddenTags,
+      ForbiddenTags,
       ZoneWhiteListTags,
     }
   }
@@ -104,14 +104,14 @@ impl<'a> CharacterAcademyTagsExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterAcademyTagsExcel::VT_ID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn favorTags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn FavorTags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, Tag>>>(CharacterAcademyTagsExcel::VT_FAVORTAGS, None)}
   }
   #[inline]
-  pub fn favorItemTags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn FavorItemTags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -125,7 +125,7 @@ impl<'a> CharacterAcademyTagsExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, Tag>>>(CharacterAcademyTagsExcel::VT_FAVORITEMUNIQUETAGS, None)}
   }
   #[inline]
-  pub fn forbiddenTags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn ForbiddenTags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -148,10 +148,10 @@ impl flatbuffers::Verifiable for CharacterAcademyTagsExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("favorTags", Self::VT_FAVORTAGS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("favorItemTags", Self::VT_FAVORITEMTAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("FavorTags", Self::VT_FAVORTAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("FavorItemTags", Self::VT_FAVORITEMTAGS, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("FavorItemUniqueTags", Self::VT_FAVORITEMUNIQUETAGS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("forbiddenTags", Self::VT_FORBIDDENTAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("ForbiddenTags", Self::VT_FORBIDDENTAGS, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("ZoneWhiteListTags", Self::VT_ZONEWHITELISTTAGS, false)?
      .finish();
     Ok(())
@@ -159,10 +159,10 @@ impl flatbuffers::Verifiable for CharacterAcademyTagsExcel<'_> {
 }
 pub struct CharacterAcademyTagsExcelArgs<'a> {
     pub Id: i64,
-    pub favorTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
-    pub favorItemTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub FavorTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub FavorItemTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub FavorItemUniqueTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
-    pub forbiddenTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub ForbiddenTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub ZoneWhiteListTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
 }
 impl<'a> Default for CharacterAcademyTagsExcelArgs<'a> {
@@ -170,10 +170,10 @@ impl<'a> Default for CharacterAcademyTagsExcelArgs<'a> {
   fn default() -> Self {
     CharacterAcademyTagsExcelArgs {
       Id: 0,
-      favorTags: None,
-      favorItemTags: None,
+      FavorTags: None,
+      FavorItemTags: None,
       FavorItemUniqueTags: None,
-      forbiddenTags: None,
+      ForbiddenTags: None,
       ZoneWhiteListTags: None,
     }
   }
@@ -186,25 +186,25 @@ impl Serialize for CharacterAcademyTagsExcel<'_> {
   {
     let mut s = serializer.serialize_struct("CharacterAcademyTagsExcel", 6)?;
       s.serialize_field("Id", &self.Id())?;
-      if let Some(f) = self.favorTags() {
-        s.serialize_field("favorTags", &f)?;
+      if let Some(f) = self.FavorTags() {
+        s.serialize_field("FavorTags", &f)?;
       } else {
-        s.skip_field("favorTags")?;
+        s.skip_field("FavorTags")?;
       }
-      if let Some(f) = self.favorItemTags() {
-        s.serialize_field("favorItemTags", &f)?;
+      if let Some(f) = self.FavorItemTags() {
+        s.serialize_field("FavorItemTags", &f)?;
       } else {
-        s.skip_field("favorItemTags")?;
+        s.skip_field("FavorItemTags")?;
       }
       if let Some(f) = self.FavorItemUniqueTags() {
         s.serialize_field("FavorItemUniqueTags", &f)?;
       } else {
         s.skip_field("FavorItemUniqueTags")?;
       }
-      if let Some(f) = self.forbiddenTags() {
-        s.serialize_field("forbiddenTags", &f)?;
+      if let Some(f) = self.ForbiddenTags() {
+        s.serialize_field("ForbiddenTags", &f)?;
       } else {
-        s.skip_field("forbiddenTags")?;
+        s.skip_field("ForbiddenTags")?;
       }
       if let Some(f) = self.ZoneWhiteListTags() {
         s.serialize_field("ZoneWhiteListTags", &f)?;
@@ -225,20 +225,20 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterAcademyTagsExcelBuilde
     self.fbb_.push_slot::<i64>(CharacterAcademyTagsExcel::VT_ID, Id, 0);
   }
   #[inline]
-  pub fn add_favorTags(&mut self, favorTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterAcademyTagsExcel::VT_FAVORTAGS, favorTags);
+  pub fn add_FavorTags(&mut self, FavorTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterAcademyTagsExcel::VT_FAVORTAGS, FavorTags);
   }
   #[inline]
-  pub fn add_favorItemTags(&mut self, favorItemTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterAcademyTagsExcel::VT_FAVORITEMTAGS, favorItemTags);
+  pub fn add_FavorItemTags(&mut self, FavorItemTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterAcademyTagsExcel::VT_FAVORITEMTAGS, FavorItemTags);
   }
   #[inline]
   pub fn add_FavorItemUniqueTags(&mut self, FavorItemUniqueTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterAcademyTagsExcel::VT_FAVORITEMUNIQUETAGS, FavorItemUniqueTags);
   }
   #[inline]
-  pub fn add_forbiddenTags(&mut self, forbiddenTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterAcademyTagsExcel::VT_FORBIDDENTAGS, forbiddenTags);
+  pub fn add_ForbiddenTags(&mut self, ForbiddenTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterAcademyTagsExcel::VT_FORBIDDENTAGS, ForbiddenTags);
   }
   #[inline]
   pub fn add_ZoneWhiteListTags(&mut self, ZoneWhiteListTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
@@ -263,10 +263,10 @@ impl core::fmt::Debug for CharacterAcademyTagsExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("CharacterAcademyTagsExcel");
       ds.field("Id", &self.Id());
-      ds.field("favorTags", &self.favorTags());
-      ds.field("favorItemTags", &self.favorItemTags());
+      ds.field("FavorTags", &self.FavorTags());
+      ds.field("FavorItemTags", &self.FavorItemTags());
       ds.field("FavorItemUniqueTags", &self.FavorItemUniqueTags());
-      ds.field("forbiddenTags", &self.forbiddenTags());
+      ds.field("ForbiddenTags", &self.ForbiddenTags());
       ds.field("ZoneWhiteListTags", &self.ZoneWhiteListTags());
       ds.finish()
   }
@@ -275,20 +275,20 @@ impl core::fmt::Debug for CharacterAcademyTagsExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct CharacterAcademyTagsExcelT {
   pub Id: i64,
-  pub favorTags: Option<Vec<Tag>>,
-  pub favorItemTags: Option<Vec<Tag>>,
+  pub FavorTags: Option<Vec<Tag>>,
+  pub FavorItemTags: Option<Vec<Tag>>,
   pub FavorItemUniqueTags: Option<Vec<Tag>>,
-  pub forbiddenTags: Option<Vec<Tag>>,
+  pub ForbiddenTags: Option<Vec<Tag>>,
   pub ZoneWhiteListTags: Option<Vec<Tag>>,
 }
 impl Default for CharacterAcademyTagsExcelT {
   fn default() -> Self {
     Self {
       Id: 0,
-      favorTags: None,
-      favorItemTags: None,
+      FavorTags: None,
+      FavorItemTags: None,
       FavorItemUniqueTags: None,
-      forbiddenTags: None,
+      ForbiddenTags: None,
       ZoneWhiteListTags: None,
     }
   }
@@ -299,16 +299,16 @@ impl CharacterAcademyTagsExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<CharacterAcademyTagsExcel<'b>> {
     let Id = self.Id;
-    let favorTags = self.favorTags.as_ref().map(|x|{
+    let FavorTags = self.FavorTags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let favorItemTags = self.favorItemTags.as_ref().map(|x|{
+    let FavorItemTags = self.FavorItemTags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let FavorItemUniqueTags = self.FavorItemUniqueTags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let forbiddenTags = self.forbiddenTags.as_ref().map(|x|{
+    let ForbiddenTags = self.ForbiddenTags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ZoneWhiteListTags = self.ZoneWhiteListTags.as_ref().map(|x|{
@@ -316,10 +316,10 @@ impl CharacterAcademyTagsExcelT {
     });
     CharacterAcademyTagsExcel::create(_fbb, &CharacterAcademyTagsExcelArgs{
       Id,
-      favorTags,
-      favorItemTags,
+      FavorTags,
+      FavorItemTags,
       FavorItemUniqueTags,
-      forbiddenTags,
+      ForbiddenTags,
       ZoneWhiteListTags,
     })
   }

@@ -148,8 +148,8 @@ impl<'a> CharacterExcel<'a> {
       let x = args.SecretStoneItemAmount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_SecretStoneItemAmount(x);
-      if let Some(x) = args.Tags {
-        builder.add_Tags(x);
+      if let Some(x) = args.tags {
+        builder.add_tags(x);
       }
       let x = args.AppearFrame;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -415,7 +415,7 @@ impl<'a> CharacterExcel<'a> {
       let IgnoreObstacle = self.IgnoreObstacle();
       let IsAirUnit = self.IsAirUnit();
       let AirUnitHeight = self.AirUnitHeight();
-    let Tags = self.Tags().map(|x| {
+    let tags = self.tags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let SecretStoneItemId = self.SecretStoneItemId();
@@ -483,7 +483,7 @@ impl<'a> CharacterExcel<'a> {
       IgnoreObstacle,
       IsAirUnit,
       AirUnitHeight,
-      Tags,
+      tags,
       SecretStoneItemId,
       SecretStoneItemAmount,
       CharacterPieceItemId,
@@ -906,7 +906,7 @@ impl<'a> CharacterExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterExcel::VT_AIRUNITHEIGHT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn Tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -1015,7 +1015,7 @@ impl flatbuffers::Verifiable for CharacterExcel<'_> {
      .visit_field::<bool>("IgnoreObstacle", Self::VT_IGNOREOBSTACLE, false)?
      .visit_field::<bool>("IsAirUnit", Self::VT_ISAIRUNIT, false)?
      .visit_field::<i64>("AirUnitHeight", Self::VT_AIRUNITHEIGHT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("Tags", Self::VT_TAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("tags", Self::VT_TAGS, false)?
      .visit_field::<i64>("SecretStoneItemId", Self::VT_SECRETSTONEITEMID, false)?
      .visit_field::<i32>("SecretStoneItemAmount", Self::VT_SECRETSTONEITEMAMOUNT, false)?
      .visit_field::<i64>("CharacterPieceItemId", Self::VT_CHARACTERPIECEITEMID, false)?
@@ -1085,7 +1085,7 @@ pub struct CharacterExcelArgs<'a> {
     pub IgnoreObstacle: bool,
     pub IsAirUnit: bool,
     pub AirUnitHeight: i64,
-    pub Tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub SecretStoneItemId: i64,
     pub SecretStoneItemAmount: i32,
     pub CharacterPieceItemId: i64,
@@ -1155,7 +1155,7 @@ impl<'a> Default for CharacterExcelArgs<'a> {
       IgnoreObstacle: false,
       IsAirUnit: false,
       AirUnitHeight: 0,
-      Tags: None,
+      tags: None,
       SecretStoneItemId: 0,
       SecretStoneItemAmount: 0,
       CharacterPieceItemId: 0,
@@ -1254,10 +1254,10 @@ impl Serialize for CharacterExcel<'_> {
       s.serialize_field("IgnoreObstacle", &self.IgnoreObstacle())?;
       s.serialize_field("IsAirUnit", &self.IsAirUnit())?;
       s.serialize_field("AirUnitHeight", &self.AirUnitHeight())?;
-      if let Some(f) = self.Tags() {
-        s.serialize_field("Tags", &f)?;
+      if let Some(f) = self.tags() {
+        s.serialize_field("tags", &f)?;
       } else {
-        s.skip_field("Tags")?;
+        s.skip_field("tags")?;
       }
       s.serialize_field("SecretStoneItemId", &self.SecretStoneItemId())?;
       s.serialize_field("SecretStoneItemAmount", &self.SecretStoneItemAmount())?;
@@ -1510,8 +1510,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterExcelBuilder<'a, 'b, A
     self.fbb_.push_slot::<i64>(CharacterExcel::VT_AIRUNITHEIGHT, AirUnitHeight, 0);
   }
   #[inline]
-  pub fn add_Tags(&mut self, Tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterExcel::VT_TAGS, Tags);
+  pub fn add_tags(&mut self, tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterExcel::VT_TAGS, tags);
   }
   #[inline]
   pub fn add_SecretStoneItemId(&mut self, SecretStoneItemId: i64) {
@@ -1610,7 +1610,7 @@ impl core::fmt::Debug for CharacterExcel<'_> {
       ds.field("IgnoreObstacle", &self.IgnoreObstacle());
       ds.field("IsAirUnit", &self.IsAirUnit());
       ds.field("AirUnitHeight", &self.AirUnitHeight());
-      ds.field("Tags", &self.Tags());
+      ds.field("tags", &self.tags());
       ds.field("SecretStoneItemId", &self.SecretStoneItemId());
       ds.field("SecretStoneItemAmount", &self.SecretStoneItemAmount());
       ds.field("CharacterPieceItemId", &self.CharacterPieceItemId());
@@ -1681,7 +1681,7 @@ pub struct CharacterExcelT {
   pub IgnoreObstacle: bool,
   pub IsAirUnit: bool,
   pub AirUnitHeight: i64,
-  pub Tags: Option<Vec<Tag>>,
+  pub tags: Option<Vec<Tag>>,
   pub SecretStoneItemId: i64,
   pub SecretStoneItemAmount: i32,
   pub CharacterPieceItemId: i64,
@@ -1750,7 +1750,7 @@ impl Default for CharacterExcelT {
       IgnoreObstacle: false,
       IsAirUnit: false,
       AirUnitHeight: 0,
-      Tags: None,
+      tags: None,
       SecretStoneItemId: 0,
       SecretStoneItemAmount: 0,
       CharacterPieceItemId: 0,
@@ -1835,7 +1835,7 @@ impl CharacterExcelT {
     let IgnoreObstacle = self.IgnoreObstacle;
     let IsAirUnit = self.IsAirUnit;
     let AirUnitHeight = self.AirUnitHeight;
-    let Tags = self.Tags.as_ref().map(|x|{
+    let tags = self.tags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let SecretStoneItemId = self.SecretStoneItemId;
@@ -1903,7 +1903,7 @@ impl CharacterExcelT {
       IgnoreObstacle,
       IsAirUnit,
       AirUnitHeight,
-      Tags,
+      tags,
       SecretStoneItemId,
       SecretStoneItemAmount,
       CharacterPieceItemId,

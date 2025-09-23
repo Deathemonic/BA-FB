@@ -120,8 +120,8 @@ impl<'a> ConstStrategyExcel<'a> {
       let x = args.CanHealHpRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_CanHealHpRate(x);
-      if let Some(x) = args.HealCostAmount {
-        builder.add_HealCostAmount(x);
+      if let Some(x) = args.healCostAmount {
+        builder.add_healCostAmount(x);
       }
       let x = args.HealCostType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -176,7 +176,7 @@ impl<'a> ConstStrategyExcel<'a> {
       } else {
         self.HealCostType()
       };
-    let HealCostAmount = self.HealCostAmount().map(|x| {
+    let healCostAmount = self.healCostAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let CanHealHpRate = self.CanHealHpRate();
@@ -204,7 +204,7 @@ impl<'a> ConstStrategyExcel<'a> {
       CameraZoomMin,
       CameraZoomDefault,
       HealCostType,
-      HealCostAmount,
+      healCostAmount,
       CanHealHpRate,
       PlayTimeLimitInSeconds,
       AdventureEchelonCount,
@@ -269,7 +269,7 @@ impl<'a> ConstStrategyExcel<'a> {
     unsafe { self._tab.get::<CurrencyTypes>(ConstStrategyExcel::VT_HEALCOSTTYPE, Some(CurrencyTypes::Invalid)).unwrap()}
   }
   #[inline]
-  pub fn HealCostAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn healCostAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -416,7 +416,7 @@ impl flatbuffers::Verifiable for ConstStrategyExcel<'_> {
      .visit_field::<f32>("CameraZoomMin", Self::VT_CAMERAZOOMMIN, false)?
      .visit_field::<f32>("CameraZoomDefault", Self::VT_CAMERAZOOMDEFAULT, false)?
      .visit_field::<CurrencyTypes>("HealCostType", Self::VT_HEALCOSTTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("HealCostAmount", Self::VT_HEALCOSTAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("healCostAmount", Self::VT_HEALCOSTAMOUNT, false)?
      .visit_field::<i32>("CanHealHpRate", Self::VT_CANHEALHPRATE, false)?
      .visit_field::<i64>("PlayTimeLimitInSeconds", Self::VT_PLAYTIMELIMITINSECONDS, false)?
      .visit_field::<i32>("AdventureEchelonCount", Self::VT_ADVENTUREECHELONCOUNT, false)?
@@ -446,7 +446,7 @@ pub struct ConstStrategyExcelArgs<'a> {
     pub CameraZoomMin: f32,
     pub CameraZoomDefault: f32,
     pub HealCostType: CurrencyTypes,
-    pub HealCostAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub healCostAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub CanHealHpRate: i32,
     pub PlayTimeLimitInSeconds: i64,
     pub AdventureEchelonCount: i32,
@@ -476,7 +476,7 @@ impl<'a> Default for ConstStrategyExcelArgs<'a> {
       CameraZoomMin: 0.0,
       CameraZoomDefault: 0.0,
       HealCostType: CurrencyTypes::Invalid,
-      HealCostAmount: None,
+      healCostAmount: None,
       CanHealHpRate: 0,
       PlayTimeLimitInSeconds: 0,
       AdventureEchelonCount: 0,
@@ -511,10 +511,10 @@ impl Serialize for ConstStrategyExcel<'_> {
       s.serialize_field("CameraZoomMin", &self.CameraZoomMin())?;
       s.serialize_field("CameraZoomDefault", &self.CameraZoomDefault())?;
       s.serialize_field("HealCostType", &self.HealCostType())?;
-      if let Some(f) = self.HealCostAmount() {
-        s.serialize_field("HealCostAmount", &f)?;
+      if let Some(f) = self.healCostAmount() {
+        s.serialize_field("healCostAmount", &f)?;
       } else {
-        s.skip_field("HealCostAmount")?;
+        s.skip_field("healCostAmount")?;
       }
       s.serialize_field("CanHealHpRate", &self.CanHealHpRate())?;
       s.serialize_field("PlayTimeLimitInSeconds", &self.PlayTimeLimitInSeconds())?;
@@ -568,8 +568,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConstStrategyExcelBuilder<'a, '
     self.fbb_.push_slot::<CurrencyTypes>(ConstStrategyExcel::VT_HEALCOSTTYPE, HealCostType, CurrencyTypes::Invalid);
   }
   #[inline]
-  pub fn add_HealCostAmount(&mut self, HealCostAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstStrategyExcel::VT_HEALCOSTAMOUNT, HealCostAmount);
+  pub fn add_healCostAmount(&mut self, healCostAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstStrategyExcel::VT_HEALCOSTAMOUNT, healCostAmount);
   }
   #[inline]
   pub fn add_CanHealHpRate(&mut self, CanHealHpRate: i32) {
@@ -667,7 +667,7 @@ impl core::fmt::Debug for ConstStrategyExcel<'_> {
       ds.field("CameraZoomMin", &self.CameraZoomMin());
       ds.field("CameraZoomDefault", &self.CameraZoomDefault());
       ds.field("HealCostType", &self.HealCostType());
-      ds.field("HealCostAmount", &self.HealCostAmount());
+      ds.field("healCostAmount", &self.healCostAmount());
       ds.field("CanHealHpRate", &self.CanHealHpRate());
       ds.field("PlayTimeLimitInSeconds", &self.PlayTimeLimitInSeconds());
       ds.field("AdventureEchelonCount", &self.AdventureEchelonCount());
@@ -698,7 +698,7 @@ pub struct ConstStrategyExcelT {
   pub CameraZoomMin: f32,
   pub CameraZoomDefault: f32,
   pub HealCostType: CurrencyTypes,
-  pub HealCostAmount: Option<Vec<i64>>,
+  pub healCostAmount: Option<Vec<i64>>,
   pub CanHealHpRate: i32,
   pub PlayTimeLimitInSeconds: i64,
   pub AdventureEchelonCount: i32,
@@ -727,7 +727,7 @@ impl Default for ConstStrategyExcelT {
       CameraZoomMin: 0.0,
       CameraZoomDefault: 0.0,
       HealCostType: CurrencyTypes::Invalid,
-      HealCostAmount: None,
+      healCostAmount: None,
       CanHealHpRate: 0,
       PlayTimeLimitInSeconds: 0,
       AdventureEchelonCount: 0,
@@ -760,7 +760,7 @@ impl ConstStrategyExcelT {
     let CameraZoomMin = self.CameraZoomMin;
     let CameraZoomDefault = self.CameraZoomDefault;
     let HealCostType = self.HealCostType;
-    let HealCostAmount = self.HealCostAmount.as_ref().map(|x|{
+    let healCostAmount = self.healCostAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CanHealHpRate = self.CanHealHpRate;
@@ -788,7 +788,7 @@ impl ConstStrategyExcelT {
       CameraZoomMin,
       CameraZoomDefault,
       HealCostType,
-      HealCostAmount,
+      healCostAmount,
       CanHealHpRate,
       PlayTimeLimitInSeconds,
       AdventureEchelonCount,

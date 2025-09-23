@@ -138,8 +138,8 @@ impl<'a> EventContentSeasonExcel<'a> {
       if let Some(x) = args.MainBannerImagePath {
         builder.add_MainBannerImagePath(x);
       }
-      if let Some(x) = args.BeforehandScenarioGroupId {
-        builder.add_BeforehandScenarioGroupId(x);
+      if let Some(x) = args.beforehandScenarioGroupId {
+        builder.add_beforehandScenarioGroupId(x);
       }
       if let Some(x) = args.BeforehandBgImagePath {
         builder.add_BeforehandBgImagePath(x);
@@ -235,7 +235,7 @@ impl<'a> EventContentSeasonExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let MinigamePrologScenarioGroupId = self.MinigamePrologScenarioGroupId();
-    let BeforehandScenarioGroupId = self.BeforehandScenarioGroupId().map(|x| {
+    let beforehandScenarioGroupId = self.beforehandScenarioGroupId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let MainBannerImagePath = self.MainBannerImagePath().map(|x| {
@@ -299,7 +299,7 @@ impl<'a> EventContentSeasonExcel<'a> {
       SubIconParcelPath,
       BeforehandBgImagePath,
       MinigamePrologScenarioGroupId,
-      BeforehandScenarioGroupId,
+      beforehandScenarioGroupId,
       MainBannerImagePath,
       MainBgImagePath,
       ShiftTriggerStageId,
@@ -466,7 +466,7 @@ impl<'a> EventContentSeasonExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentSeasonExcel::VT_MINIGAMEPROLOGSCENARIOGROUPID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn BeforehandScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn beforehandScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -607,7 +607,7 @@ impl flatbuffers::Verifiable for EventContentSeasonExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SubIconParcelPath", Self::VT_SUBICONPARCELPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BeforehandBgImagePath", Self::VT_BEFOREHANDBGIMAGEPATH, false)?
      .visit_field::<i64>("MinigamePrologScenarioGroupId", Self::VT_MINIGAMEPROLOGSCENARIOGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("BeforehandScenarioGroupId", Self::VT_BEFOREHANDSCENARIOGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("beforehandScenarioGroupId", Self::VT_BEFOREHANDSCENARIOGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MainBannerImagePath", Self::VT_MAINBANNERIMAGEPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MainBgImagePath", Self::VT_MAINBGIMAGEPATH, false)?
      .visit_field::<i64>("ShiftTriggerStageId", Self::VT_SHIFTTRIGGERSTAGEID, false)?
@@ -649,7 +649,7 @@ pub struct EventContentSeasonExcelArgs<'a> {
     pub SubIconParcelPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub BeforehandBgImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub MinigamePrologScenarioGroupId: i64,
-    pub BeforehandScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub beforehandScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub MainBannerImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub MainBgImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ShiftTriggerStageId: i64,
@@ -691,7 +691,7 @@ impl<'a> Default for EventContentSeasonExcelArgs<'a> {
       SubIconParcelPath: None,
       BeforehandBgImagePath: None,
       MinigamePrologScenarioGroupId: 0,
-      BeforehandScenarioGroupId: None,
+      beforehandScenarioGroupId: None,
       MainBannerImagePath: None,
       MainBgImagePath: None,
       ShiftTriggerStageId: 0,
@@ -770,10 +770,10 @@ impl Serialize for EventContentSeasonExcel<'_> {
         s.skip_field("BeforehandBgImagePath")?;
       }
       s.serialize_field("MinigamePrologScenarioGroupId", &self.MinigamePrologScenarioGroupId())?;
-      if let Some(f) = self.BeforehandScenarioGroupId() {
-        s.serialize_field("BeforehandScenarioGroupId", &f)?;
+      if let Some(f) = self.beforehandScenarioGroupId() {
+        s.serialize_field("beforehandScenarioGroupId", &f)?;
       } else {
-        s.skip_field("BeforehandScenarioGroupId")?;
+        s.skip_field("beforehandScenarioGroupId")?;
       }
       if let Some(f) = self.MainBannerImagePath() {
         s.serialize_field("MainBannerImagePath", &f)?;
@@ -916,8 +916,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentSeasonExcelBuilder<
     self.fbb_.push_slot::<i64>(EventContentSeasonExcel::VT_MINIGAMEPROLOGSCENARIOGROUPID, MinigamePrologScenarioGroupId, 0);
   }
   #[inline]
-  pub fn add_BeforehandScenarioGroupId(&mut self, BeforehandScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSeasonExcel::VT_BEFOREHANDSCENARIOGROUPID, BeforehandScenarioGroupId);
+  pub fn add_beforehandScenarioGroupId(&mut self, beforehandScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSeasonExcel::VT_BEFOREHANDSCENARIOGROUPID, beforehandScenarioGroupId);
   }
   #[inline]
   pub fn add_MainBannerImagePath(&mut self, MainBannerImagePath: flatbuffers::WIPOffset<&'b  str>) {
@@ -1018,7 +1018,7 @@ impl core::fmt::Debug for EventContentSeasonExcel<'_> {
       ds.field("SubIconParcelPath", &self.SubIconParcelPath());
       ds.field("BeforehandBgImagePath", &self.BeforehandBgImagePath());
       ds.field("MinigamePrologScenarioGroupId", &self.MinigamePrologScenarioGroupId());
-      ds.field("BeforehandScenarioGroupId", &self.BeforehandScenarioGroupId());
+      ds.field("beforehandScenarioGroupId", &self.beforehandScenarioGroupId());
       ds.field("MainBannerImagePath", &self.MainBannerImagePath());
       ds.field("MainBgImagePath", &self.MainBgImagePath());
       ds.field("ShiftTriggerStageId", &self.ShiftTriggerStageId());
@@ -1061,7 +1061,7 @@ pub struct EventContentSeasonExcelT {
   pub SubIconParcelPath: Option<String>,
   pub BeforehandBgImagePath: Option<String>,
   pub MinigamePrologScenarioGroupId: i64,
-  pub BeforehandScenarioGroupId: Option<Vec<i64>>,
+  pub beforehandScenarioGroupId: Option<Vec<i64>>,
   pub MainBannerImagePath: Option<String>,
   pub MainBgImagePath: Option<String>,
   pub ShiftTriggerStageId: i64,
@@ -1102,7 +1102,7 @@ impl Default for EventContentSeasonExcelT {
       SubIconParcelPath: None,
       BeforehandBgImagePath: None,
       MinigamePrologScenarioGroupId: 0,
-      BeforehandScenarioGroupId: None,
+      beforehandScenarioGroupId: None,
       MainBannerImagePath: None,
       MainBgImagePath: None,
       ShiftTriggerStageId: 0,
@@ -1163,7 +1163,7 @@ impl EventContentSeasonExcelT {
       _fbb.create_string(x)
     });
     let MinigamePrologScenarioGroupId = self.MinigamePrologScenarioGroupId;
-    let BeforehandScenarioGroupId = self.BeforehandScenarioGroupId.as_ref().map(|x|{
+    let beforehandScenarioGroupId = self.beforehandScenarioGroupId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let MainBannerImagePath = self.MainBannerImagePath.as_ref().map(|x|{
@@ -1219,7 +1219,7 @@ impl EventContentSeasonExcelT {
       SubIconParcelPath,
       BeforehandBgImagePath,
       MinigamePrologScenarioGroupId,
-      BeforehandScenarioGroupId,
+      beforehandScenarioGroupId,
       MainBannerImagePath,
       MainBgImagePath,
       ShiftTriggerStageId,

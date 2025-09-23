@@ -73,8 +73,8 @@ impl<'a> ConquestErosionExcel<'a> {
       let x = args.ErosionBattleConditionParcelType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ErosionBattleConditionParcelType(x);
-      if let Some(x) = args.phaseBeforeExposeConditionParameter {
-        builder.add_phaseBeforeExposeConditionParameter(x);
+      if let Some(x) = args.PhaseBeforeExposeConditionParameter {
+        builder.add_PhaseBeforeExposeConditionParameter(x);
       }
       if let Some(x) = args.PhaseBeforeExposeConditionType {
         builder.add_PhaseBeforeExposeConditionType(x);
@@ -119,7 +119,7 @@ impl<'a> ConquestErosionExcel<'a> {
     let PhaseBeforeExposeConditionType = self.PhaseBeforeExposeConditionType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let phaseBeforeExposeConditionParameter = self.phaseBeforeExposeConditionParameter().map(|x| {
+    let PhaseBeforeExposeConditionParameter = self.PhaseBeforeExposeConditionParameter().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
       let ErosionBattleConditionParcelType = if table_encryption_service::use_encryption() {
@@ -140,7 +140,7 @@ impl<'a> ConquestErosionExcel<'a> {
       PhaseStartConditionType,
       PhaseStartConditionParameter,
       PhaseBeforeExposeConditionType,
-      phaseBeforeExposeConditionParameter,
+      PhaseBeforeExposeConditionParameter,
       ErosionBattleConditionParcelType,
       ErosionBattleConditionParcelUniqueId,
       ErosionBattleConditionParcelAmount,
@@ -212,7 +212,7 @@ impl<'a> ConquestErosionExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ConquestConditionType>>>(ConquestErosionExcel::VT_PHASEBEFOREEXPOSECONDITIONTYPE, None)}
   }
   #[inline]
-  pub fn phaseBeforeExposeConditionParameter(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn PhaseBeforeExposeConditionParameter(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -264,7 +264,7 @@ impl flatbuffers::Verifiable for ConquestErosionExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ConquestConditionType>>>("PhaseStartConditionType", Self::VT_PHASESTARTCONDITIONTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("PhaseStartConditionParameter", Self::VT_PHASESTARTCONDITIONPARAMETER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ConquestConditionType>>>("PhaseBeforeExposeConditionType", Self::VT_PHASEBEFOREEXPOSECONDITIONTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("phaseBeforeExposeConditionParameter", Self::VT_PHASEBEFOREEXPOSECONDITIONPARAMETER, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("PhaseBeforeExposeConditionParameter", Self::VT_PHASEBEFOREEXPOSECONDITIONPARAMETER, false)?
      .visit_field::<ParcelType>("ErosionBattleConditionParcelType", Self::VT_EROSIONBATTLECONDITIONPARCELTYPE, false)?
      .visit_field::<i64>("ErosionBattleConditionParcelUniqueId", Self::VT_EROSIONBATTLECONDITIONPARCELUNIQUEID, false)?
      .visit_field::<i64>("ErosionBattleConditionParcelAmount", Self::VT_EROSIONBATTLECONDITIONPARCELAMOUNT, false)?
@@ -283,7 +283,7 @@ pub struct ConquestErosionExcelArgs<'a> {
     pub PhaseStartConditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ConquestConditionType>>>,
     pub PhaseStartConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub PhaseBeforeExposeConditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ConquestConditionType>>>,
-    pub phaseBeforeExposeConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub PhaseBeforeExposeConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub ErosionBattleConditionParcelType: ParcelType,
     pub ErosionBattleConditionParcelUniqueId: i64,
     pub ErosionBattleConditionParcelAmount: i64,
@@ -302,7 +302,7 @@ impl<'a> Default for ConquestErosionExcelArgs<'a> {
       PhaseStartConditionType: None,
       PhaseStartConditionParameter: None,
       PhaseBeforeExposeConditionType: None,
-      phaseBeforeExposeConditionParameter: None,
+      PhaseBeforeExposeConditionParameter: None,
       ErosionBattleConditionParcelType: ParcelType::None,
       ErosionBattleConditionParcelUniqueId: 0,
       ErosionBattleConditionParcelAmount: 0,
@@ -338,10 +338,10 @@ impl Serialize for ConquestErosionExcel<'_> {
       } else {
         s.skip_field("PhaseBeforeExposeConditionType")?;
       }
-      if let Some(f) = self.phaseBeforeExposeConditionParameter() {
-        s.serialize_field("phaseBeforeExposeConditionParameter", &f)?;
+      if let Some(f) = self.PhaseBeforeExposeConditionParameter() {
+        s.serialize_field("PhaseBeforeExposeConditionParameter", &f)?;
       } else {
-        s.skip_field("phaseBeforeExposeConditionParameter")?;
+        s.skip_field("PhaseBeforeExposeConditionParameter")?;
       }
       s.serialize_field("ErosionBattleConditionParcelType", &self.ErosionBattleConditionParcelType())?;
       s.serialize_field("ErosionBattleConditionParcelUniqueId", &self.ErosionBattleConditionParcelUniqueId())?;
@@ -393,8 +393,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConquestErosionExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestErosionExcel::VT_PHASEBEFOREEXPOSECONDITIONTYPE, PhaseBeforeExposeConditionType);
   }
   #[inline]
-  pub fn add_phaseBeforeExposeConditionParameter(&mut self, phaseBeforeExposeConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestErosionExcel::VT_PHASEBEFOREEXPOSECONDITIONPARAMETER, phaseBeforeExposeConditionParameter);
+  pub fn add_PhaseBeforeExposeConditionParameter(&mut self, PhaseBeforeExposeConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestErosionExcel::VT_PHASEBEFOREEXPOSECONDITIONPARAMETER, PhaseBeforeExposeConditionParameter);
   }
   #[inline]
   pub fn add_ErosionBattleConditionParcelType(&mut self, ErosionBattleConditionParcelType: ParcelType) {
@@ -439,7 +439,7 @@ impl core::fmt::Debug for ConquestErosionExcel<'_> {
       ds.field("PhaseStartConditionType", &self.PhaseStartConditionType());
       ds.field("PhaseStartConditionParameter", &self.PhaseStartConditionParameter());
       ds.field("PhaseBeforeExposeConditionType", &self.PhaseBeforeExposeConditionType());
-      ds.field("phaseBeforeExposeConditionParameter", &self.phaseBeforeExposeConditionParameter());
+      ds.field("PhaseBeforeExposeConditionParameter", &self.PhaseBeforeExposeConditionParameter());
       ds.field("ErosionBattleConditionParcelType", &self.ErosionBattleConditionParcelType());
       ds.field("ErosionBattleConditionParcelUniqueId", &self.ErosionBattleConditionParcelUniqueId());
       ds.field("ErosionBattleConditionParcelAmount", &self.ErosionBattleConditionParcelAmount());
@@ -459,7 +459,7 @@ pub struct ConquestErosionExcelT {
   pub PhaseStartConditionType: Option<Vec<ConquestConditionType>>,
   pub PhaseStartConditionParameter: Option<Vec<String>>,
   pub PhaseBeforeExposeConditionType: Option<Vec<ConquestConditionType>>,
-  pub phaseBeforeExposeConditionParameter: Option<Vec<String>>,
+  pub PhaseBeforeExposeConditionParameter: Option<Vec<String>>,
   pub ErosionBattleConditionParcelType: ParcelType,
   pub ErosionBattleConditionParcelUniqueId: i64,
   pub ErosionBattleConditionParcelAmount: i64,
@@ -477,7 +477,7 @@ impl Default for ConquestErosionExcelT {
       PhaseStartConditionType: None,
       PhaseStartConditionParameter: None,
       PhaseBeforeExposeConditionType: None,
-      phaseBeforeExposeConditionParameter: None,
+      PhaseBeforeExposeConditionParameter: None,
       ErosionBattleConditionParcelType: ParcelType::None,
       ErosionBattleConditionParcelUniqueId: 0,
       ErosionBattleConditionParcelAmount: 0,
@@ -505,7 +505,7 @@ impl ConquestErosionExcelT {
     let PhaseBeforeExposeConditionType = self.PhaseBeforeExposeConditionType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let phaseBeforeExposeConditionParameter = self.phaseBeforeExposeConditionParameter.as_ref().map(|x|{
+    let PhaseBeforeExposeConditionParameter = self.PhaseBeforeExposeConditionParameter.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let ErosionBattleConditionParcelType = self.ErosionBattleConditionParcelType;
@@ -522,7 +522,7 @@ impl ConquestErosionExcelT {
       PhaseStartConditionType,
       PhaseStartConditionParameter,
       PhaseBeforeExposeConditionType,
-      phaseBeforeExposeConditionParameter,
+      PhaseBeforeExposeConditionParameter,
       ErosionBattleConditionParcelType,
       ErosionBattleConditionParcelUniqueId,
       ErosionBattleConditionParcelAmount,

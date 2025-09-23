@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_STAT_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_STAT_TYPE: i32 = 80;
+pub const ENUM_MAX_STAT_TYPE: i32 = 83;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_STAT_TYPE: [StatType; 81] = [
+pub const ENUM_VALUES_STAT_TYPE: [StatType; 84] = [
   StatType::None,
   StatType::MaxHP,
   StatType::AttackPower,
@@ -100,6 +100,9 @@ pub const ENUM_VALUES_STAT_TYPE: [StatType; 81] = [
   StatType::HealedMysticRate,
   StatType::HealedSonicRate,
   StatType::HealedNormalRate,
+  StatType::GrowthScore,
+  StatType::CharacterBulletTypeEnhanceRate,
+  StatType::MaxCostIncrease,
   StatType::Max,
 ];
 
@@ -188,10 +191,13 @@ impl StatType {
   pub const HealedMysticRate: Self = Self(77);
   pub const HealedSonicRate: Self = Self(78);
   pub const HealedNormalRate: Self = Self(79);
-  pub const Max: Self = Self(80);
+  pub const GrowthScore: Self = Self(80);
+  pub const CharacterBulletTypeEnhanceRate: Self = Self(81);
+  pub const MaxCostIncrease: Self = Self(82);
+  pub const Max: Self = Self(83);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 80;
+  pub const ENUM_MAX: i32 = 83;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::MaxHP,
@@ -273,6 +279,9 @@ impl StatType {
     Self::HealedMysticRate,
     Self::HealedSonicRate,
     Self::HealedNormalRate,
+    Self::GrowthScore,
+    Self::CharacterBulletTypeEnhanceRate,
+    Self::MaxCostIncrease,
     Self::Max,
   ];
   /// Returns the variant's name or "" if unknown.
@@ -358,6 +367,9 @@ impl StatType {
       Self::HealedMysticRate => Some("HealedMysticRate"),
       Self::HealedSonicRate => Some("HealedSonicRate"),
       Self::HealedNormalRate => Some("HealedNormalRate"),
+      Self::GrowthScore => Some("GrowthScore"),
+      Self::CharacterBulletTypeEnhanceRate => Some("CharacterBulletTypeEnhanceRate"),
+      Self::MaxCostIncrease => Some("MaxCostIncrease"),
       Self::Max => Some("Max"),
       _ => None,
     }

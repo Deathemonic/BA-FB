@@ -54,8 +54,8 @@ impl<'a> EventContentDiceRaceTotalRewardExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.rewardParcelAmount {
-        builder.add_rewardParcelAmount(x);
+      if let Some(x) = args.RewardParcelAmount {
+        builder.add_RewardParcelAmount(x);
       }
       if let Some(x) = args.rewardParcelId {
         builder.add_rewardParcelId(x);
@@ -84,7 +84,7 @@ impl<'a> EventContentDiceRaceTotalRewardExcel<'a> {
     let rewardParcelId = self.rewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let rewardParcelAmount = self.rewardParcelAmount().map(|x| {
+    let RewardParcelAmount = self.RewardParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     EventContentDiceRaceTotalRewardExcelT {
@@ -94,7 +94,7 @@ impl<'a> EventContentDiceRaceTotalRewardExcel<'a> {
       DisplayLapFinishCount,
       rewardParcelType,
       rewardParcelId,
-      rewardParcelAmount,
+      RewardParcelAmount,
     }
   }
 
@@ -141,7 +141,7 @@ impl<'a> EventContentDiceRaceTotalRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EventContentDiceRaceTotalRewardExcel::VT_REWARDPARCELID, None)}
   }
   #[inline]
-  pub fn rewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -162,7 +162,7 @@ impl flatbuffers::Verifiable for EventContentDiceRaceTotalRewardExcel<'_> {
      .visit_field::<i32>("DisplayLapFinishCount", Self::VT_DISPLAYLAPFINISHCOUNT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelId", Self::VT_REWARDPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -174,7 +174,7 @@ pub struct EventContentDiceRaceTotalRewardExcelArgs<'a> {
     pub DisplayLapFinishCount: i32,
     pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub rewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub rewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EventContentDiceRaceTotalRewardExcelArgs<'a> {
   #[inline]
@@ -186,7 +186,7 @@ impl<'a> Default for EventContentDiceRaceTotalRewardExcelArgs<'a> {
       DisplayLapFinishCount: 0,
       rewardParcelType: None,
       rewardParcelId: None,
-      rewardParcelAmount: None,
+      RewardParcelAmount: None,
     }
   }
 }
@@ -211,10 +211,10 @@ impl Serialize for EventContentDiceRaceTotalRewardExcel<'_> {
       } else {
         s.skip_field("rewardParcelId")?;
       }
-      if let Some(f) = self.rewardParcelAmount() {
-        s.serialize_field("rewardParcelAmount", &f)?;
+      if let Some(f) = self.RewardParcelAmount() {
+        s.serialize_field("RewardParcelAmount", &f)?;
       } else {
-        s.skip_field("rewardParcelAmount")?;
+        s.skip_field("RewardParcelAmount")?;
       }
     s.end()
   }
@@ -250,8 +250,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentDiceRaceTotalReward
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceTotalRewardExcel::VT_REWARDPARCELID, rewardParcelId);
   }
   #[inline]
-  pub fn add_rewardParcelAmount(&mut self, rewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceTotalRewardExcel::VT_REWARDPARCELAMOUNT, rewardParcelAmount);
+  pub fn add_RewardParcelAmount(&mut self, RewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceTotalRewardExcel::VT_REWARDPARCELAMOUNT, RewardParcelAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentDiceRaceTotalRewardExcelBuilder<'a, 'b, A> {
@@ -277,7 +277,7 @@ impl core::fmt::Debug for EventContentDiceRaceTotalRewardExcel<'_> {
       ds.field("DisplayLapFinishCount", &self.DisplayLapFinishCount());
       ds.field("rewardParcelType", &self.rewardParcelType());
       ds.field("rewardParcelId", &self.rewardParcelId());
-      ds.field("rewardParcelAmount", &self.rewardParcelAmount());
+      ds.field("RewardParcelAmount", &self.RewardParcelAmount());
       ds.finish()
   }
 }
@@ -290,7 +290,7 @@ pub struct EventContentDiceRaceTotalRewardExcelT {
   pub DisplayLapFinishCount: i32,
   pub rewardParcelType: Option<Vec<ParcelType>>,
   pub rewardParcelId: Option<Vec<i64>>,
-  pub rewardParcelAmount: Option<Vec<i64>>,
+  pub RewardParcelAmount: Option<Vec<i64>>,
 }
 impl Default for EventContentDiceRaceTotalRewardExcelT {
   fn default() -> Self {
@@ -301,7 +301,7 @@ impl Default for EventContentDiceRaceTotalRewardExcelT {
       DisplayLapFinishCount: 0,
       rewardParcelType: None,
       rewardParcelId: None,
-      rewardParcelAmount: None,
+      RewardParcelAmount: None,
     }
   }
 }
@@ -320,7 +320,7 @@ impl EventContentDiceRaceTotalRewardExcelT {
     let rewardParcelId = self.rewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardParcelAmount = self.rewardParcelAmount.as_ref().map(|x|{
+    let RewardParcelAmount = self.RewardParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     EventContentDiceRaceTotalRewardExcel::create(_fbb, &EventContentDiceRaceTotalRewardExcelArgs{
@@ -330,7 +330,7 @@ impl EventContentDiceRaceTotalRewardExcelT {
       DisplayLapFinishCount,
       rewardParcelType,
       rewardParcelId,
-      rewardParcelAmount,
+      RewardParcelAmount,
     })
   }
 }

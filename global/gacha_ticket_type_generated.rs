@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_GACHA_TICKET_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_GACHA_TICKET_TYPE: i32 = 10;
+pub const ENUM_MAX_GACHA_TICKET_TYPE: i32 = 13;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_GACHA_TICKET_TYPE: [GachaTicketType; 11] = [
+pub const ENUM_VALUES_GACHA_TICKET_TYPE: [GachaTicketType; 14] = [
   GachaTicketType::None,
   GachaTicketType::PackageThreeStar,
   GachaTicketType::ThreeStar,
@@ -31,6 +31,9 @@ pub const ENUM_VALUES_GACHA_TICKET_TYPE: [GachaTicketType; 11] = [
   GachaTicketType::PackagePropertyThreeStar,
   GachaTicketType::Temp_1,
   GachaTicketType::PackageAcademyThreeStar,
+  GachaTicketType::SelectPickup,
+  GachaTicketType::SelectPickupOnce,
+  GachaTicketType::PackageLimitedThreeStar,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -49,9 +52,12 @@ impl GachaTicketType {
   pub const PackagePropertyThreeStar: Self = Self(8);
   pub const Temp_1: Self = Self(9);
   pub const PackageAcademyThreeStar: Self = Self(10);
+  pub const SelectPickup: Self = Self(11);
+  pub const SelectPickupOnce: Self = Self(12);
+  pub const PackageLimitedThreeStar: Self = Self(13);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 10;
+  pub const ENUM_MAX: i32 = 13;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::PackageThreeStar,
@@ -64,6 +70,9 @@ impl GachaTicketType {
     Self::PackagePropertyThreeStar,
     Self::Temp_1,
     Self::PackageAcademyThreeStar,
+    Self::SelectPickup,
+    Self::SelectPickupOnce,
+    Self::PackageLimitedThreeStar,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -79,6 +88,9 @@ impl GachaTicketType {
       Self::PackagePropertyThreeStar => Some("PackagePropertyThreeStar"),
       Self::Temp_1 => Some("Temp_1"),
       Self::PackageAcademyThreeStar => Some("PackageAcademyThreeStar"),
+      Self::SelectPickup => Some("SelectPickup"),
+      Self::SelectPickupOnce => Some("SelectPickupOnce"),
+      Self::PackageLimitedThreeStar => Some("PackageLimitedThreeStar"),
       _ => None,
     }
   }

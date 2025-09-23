@@ -51,11 +51,11 @@ impl<'a> EliminateRaidStageLimitedRewardExcel<'a> {
       if let Some(x) = args.LimitedRewardAmount {
         builder.add_LimitedRewardAmount(x);
       }
-      if let Some(x) = args.limitedRewardParcelUniqueId {
-        builder.add_limitedRewardParcelUniqueId(x);
+      if let Some(x) = args.LimitedRewardParcelUniqueId {
+        builder.add_LimitedRewardParcelUniqueId(x);
       }
-      if let Some(x) = args.limitedRewardParcelType {
-        builder.add_limitedRewardParcelType(x);
+      if let Some(x) = args.LimitedRewardParcelType {
+        builder.add_LimitedRewardParcelType(x);
       }
     builder.finish()
   }
@@ -63,10 +63,10 @@ impl<'a> EliminateRaidStageLimitedRewardExcel<'a> {
   pub fn unpack(&self) -> EliminateRaidStageLimitedRewardExcelT {
     let key = table_encryption_service::create_key(b"EliminateRaidStageLimitedReward");
       let LimitedRewardId = self.LimitedRewardId();
-    let limitedRewardParcelType = self.limitedRewardParcelType().map(|x| {
+    let LimitedRewardParcelType = self.LimitedRewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let limitedRewardParcelUniqueId = self.limitedRewardParcelUniqueId().map(|x| {
+    let LimitedRewardParcelUniqueId = self.LimitedRewardParcelUniqueId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let LimitedRewardAmount = self.LimitedRewardAmount().map(|x| {
@@ -74,8 +74,8 @@ impl<'a> EliminateRaidStageLimitedRewardExcel<'a> {
     });
     EliminateRaidStageLimitedRewardExcelT {
       LimitedRewardId,
-      limitedRewardParcelType,
-      limitedRewardParcelUniqueId,
+      LimitedRewardParcelType,
+      LimitedRewardParcelUniqueId,
       LimitedRewardAmount,
     }
   }
@@ -88,14 +88,14 @@ impl<'a> EliminateRaidStageLimitedRewardExcel<'a> {
     unsafe { self._tab.get::<i64>(EliminateRaidStageLimitedRewardExcel::VT_LIMITEDREWARDID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn limitedRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn LimitedRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(EliminateRaidStageLimitedRewardExcel::VT_LIMITEDREWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn limitedRewardParcelUniqueId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn LimitedRewardParcelUniqueId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -118,8 +118,8 @@ impl flatbuffers::Verifiable for EliminateRaidStageLimitedRewardExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("LimitedRewardId", Self::VT_LIMITEDREWARDID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("limitedRewardParcelType", Self::VT_LIMITEDREWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("limitedRewardParcelUniqueId", Self::VT_LIMITEDREWARDPARCELUNIQUEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("LimitedRewardParcelType", Self::VT_LIMITEDREWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("LimitedRewardParcelUniqueId", Self::VT_LIMITEDREWARDPARCELUNIQUEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("LimitedRewardAmount", Self::VT_LIMITEDREWARDAMOUNT, false)?
      .finish();
     Ok(())
@@ -127,8 +127,8 @@ impl flatbuffers::Verifiable for EliminateRaidStageLimitedRewardExcel<'_> {
 }
 pub struct EliminateRaidStageLimitedRewardExcelArgs<'a> {
     pub LimitedRewardId: i64,
-    pub limitedRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub limitedRewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub LimitedRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub LimitedRewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub LimitedRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EliminateRaidStageLimitedRewardExcelArgs<'a> {
@@ -136,8 +136,8 @@ impl<'a> Default for EliminateRaidStageLimitedRewardExcelArgs<'a> {
   fn default() -> Self {
     EliminateRaidStageLimitedRewardExcelArgs {
       LimitedRewardId: 0,
-      limitedRewardParcelType: None,
-      limitedRewardParcelUniqueId: None,
+      LimitedRewardParcelType: None,
+      LimitedRewardParcelUniqueId: None,
       LimitedRewardAmount: None,
     }
   }
@@ -150,15 +150,15 @@ impl Serialize for EliminateRaidStageLimitedRewardExcel<'_> {
   {
     let mut s = serializer.serialize_struct("EliminateRaidStageLimitedRewardExcel", 4)?;
       s.serialize_field("LimitedRewardId", &self.LimitedRewardId())?;
-      if let Some(f) = self.limitedRewardParcelType() {
-        s.serialize_field("limitedRewardParcelType", &f)?;
+      if let Some(f) = self.LimitedRewardParcelType() {
+        s.serialize_field("LimitedRewardParcelType", &f)?;
       } else {
-        s.skip_field("limitedRewardParcelType")?;
+        s.skip_field("LimitedRewardParcelType")?;
       }
-      if let Some(f) = self.limitedRewardParcelUniqueId() {
-        s.serialize_field("limitedRewardParcelUniqueId", &f)?;
+      if let Some(f) = self.LimitedRewardParcelUniqueId() {
+        s.serialize_field("LimitedRewardParcelUniqueId", &f)?;
       } else {
-        s.skip_field("limitedRewardParcelUniqueId")?;
+        s.skip_field("LimitedRewardParcelUniqueId")?;
       }
       if let Some(f) = self.LimitedRewardAmount() {
         s.serialize_field("LimitedRewardAmount", &f)?;
@@ -179,12 +179,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EliminateRaidStageLimitedReward
     self.fbb_.push_slot::<i64>(EliminateRaidStageLimitedRewardExcel::VT_LIMITEDREWARDID, LimitedRewardId, 0);
   }
   #[inline]
-  pub fn add_limitedRewardParcelType(&mut self, limitedRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageLimitedRewardExcel::VT_LIMITEDREWARDPARCELTYPE, limitedRewardParcelType);
+  pub fn add_LimitedRewardParcelType(&mut self, LimitedRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageLimitedRewardExcel::VT_LIMITEDREWARDPARCELTYPE, LimitedRewardParcelType);
   }
   #[inline]
-  pub fn add_limitedRewardParcelUniqueId(&mut self, limitedRewardParcelUniqueId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageLimitedRewardExcel::VT_LIMITEDREWARDPARCELUNIQUEID, limitedRewardParcelUniqueId);
+  pub fn add_LimitedRewardParcelUniqueId(&mut self, LimitedRewardParcelUniqueId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageLimitedRewardExcel::VT_LIMITEDREWARDPARCELUNIQUEID, LimitedRewardParcelUniqueId);
   }
   #[inline]
   pub fn add_LimitedRewardAmount(&mut self, LimitedRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -209,8 +209,8 @@ impl core::fmt::Debug for EliminateRaidStageLimitedRewardExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("EliminateRaidStageLimitedRewardExcel");
       ds.field("LimitedRewardId", &self.LimitedRewardId());
-      ds.field("limitedRewardParcelType", &self.limitedRewardParcelType());
-      ds.field("limitedRewardParcelUniqueId", &self.limitedRewardParcelUniqueId());
+      ds.field("LimitedRewardParcelType", &self.LimitedRewardParcelType());
+      ds.field("LimitedRewardParcelUniqueId", &self.LimitedRewardParcelUniqueId());
       ds.field("LimitedRewardAmount", &self.LimitedRewardAmount());
       ds.finish()
   }
@@ -219,16 +219,16 @@ impl core::fmt::Debug for EliminateRaidStageLimitedRewardExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct EliminateRaidStageLimitedRewardExcelT {
   pub LimitedRewardId: i64,
-  pub limitedRewardParcelType: Option<Vec<ParcelType>>,
-  pub limitedRewardParcelUniqueId: Option<Vec<i64>>,
+  pub LimitedRewardParcelType: Option<Vec<ParcelType>>,
+  pub LimitedRewardParcelUniqueId: Option<Vec<i64>>,
   pub LimitedRewardAmount: Option<Vec<i64>>,
 }
 impl Default for EliminateRaidStageLimitedRewardExcelT {
   fn default() -> Self {
     Self {
       LimitedRewardId: 0,
-      limitedRewardParcelType: None,
-      limitedRewardParcelUniqueId: None,
+      LimitedRewardParcelType: None,
+      LimitedRewardParcelUniqueId: None,
       LimitedRewardAmount: None,
     }
   }
@@ -239,10 +239,10 @@ impl EliminateRaidStageLimitedRewardExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<EliminateRaidStageLimitedRewardExcel<'b>> {
     let LimitedRewardId = self.LimitedRewardId;
-    let limitedRewardParcelType = self.limitedRewardParcelType.as_ref().map(|x|{
+    let LimitedRewardParcelType = self.LimitedRewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let limitedRewardParcelUniqueId = self.limitedRewardParcelUniqueId.as_ref().map(|x|{
+    let LimitedRewardParcelUniqueId = self.LimitedRewardParcelUniqueId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let LimitedRewardAmount = self.LimitedRewardAmount.as_ref().map(|x|{
@@ -250,8 +250,8 @@ impl EliminateRaidStageLimitedRewardExcelT {
     });
     EliminateRaidStageLimitedRewardExcel::create(_fbb, &EliminateRaidStageLimitedRewardExcelArgs{
       LimitedRewardId,
-      limitedRewardParcelType,
-      limitedRewardParcelUniqueId,
+      LimitedRewardParcelType,
+      LimitedRewardParcelUniqueId,
       LimitedRewardAmount,
     })
   }

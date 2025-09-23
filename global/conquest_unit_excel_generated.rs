@@ -133,8 +133,8 @@ impl<'a> ConquestUnitExcel<'a> {
       let x = args.StageEnterCostType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_StageEnterCostType(x);
-      if let Some(x) = args.starGoalAmount {
-        builder.add_starGoalAmount(x);
+      if let Some(x) = args.StarGoalAmount {
+        builder.add_StarGoalAmount(x);
       }
       if let Some(x) = args.StarGoal {
         builder.add_StarGoal(x);
@@ -218,7 +218,7 @@ impl<'a> ConquestUnitExcel<'a> {
     let StarGoal = self.StarGoal().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let starGoalAmount = self.starGoalAmount().map(|x| {
+    let StarGoalAmount = self.StarGoalAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
       let GroupBuffId = self.GroupBuffId();
@@ -269,7 +269,7 @@ impl<'a> ConquestUnitExcel<'a> {
       BattleDuration,
       GroundId,
       StarGoal,
-      starGoalAmount,
+      StarGoalAmount,
       GroupBuffId,
       StageEnterCostType,
       StageEnterCostId,
@@ -401,7 +401,7 @@ impl<'a> ConquestUnitExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, StarGoalType>>>(ConquestUnitExcel::VT_STARGOAL, None)}
   }
   #[inline]
-  pub fn starGoalAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn StarGoalAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -537,7 +537,7 @@ impl flatbuffers::Verifiable for ConquestUnitExcel<'_> {
      .visit_field::<i64>("BattleDuration", Self::VT_BATTLEDURATION, false)?
      .visit_field::<i64>("GroundId", Self::VT_GROUNDID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StarGoalType>>>("StarGoal", Self::VT_STARGOAL, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("starGoalAmount", Self::VT_STARGOALAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("StarGoalAmount", Self::VT_STARGOALAMOUNT, false)?
      .visit_field::<i64>("GroupBuffId", Self::VT_GROUPBUFFID, false)?
      .visit_field::<ParcelType>("StageEnterCostType", Self::VT_STAGEENTERCOSTTYPE, false)?
      .visit_field::<i64>("StageEnterCostId", Self::VT_STAGEENTERCOSTID, false)?
@@ -574,7 +574,7 @@ pub struct ConquestUnitExcelArgs<'a> {
     pub BattleDuration: i64,
     pub GroundId: i64,
     pub StarGoal: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StarGoalType>>>,
-    pub starGoalAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub StarGoalAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub GroupBuffId: i64,
     pub StageEnterCostType: ParcelType,
     pub StageEnterCostId: i64,
@@ -611,7 +611,7 @@ impl<'a> Default for ConquestUnitExcelArgs<'a> {
       BattleDuration: 0,
       GroundId: 0,
       StarGoal: None,
-      starGoalAmount: None,
+      StarGoalAmount: None,
       GroupBuffId: 0,
       StageEnterCostType: ParcelType::None,
       StageEnterCostId: 0,
@@ -677,10 +677,10 @@ impl Serialize for ConquestUnitExcel<'_> {
       } else {
         s.skip_field("StarGoal")?;
       }
-      if let Some(f) = self.starGoalAmount() {
-        s.serialize_field("starGoalAmount", &f)?;
+      if let Some(f) = self.StarGoalAmount() {
+        s.serialize_field("StarGoalAmount", &f)?;
       } else {
-        s.skip_field("starGoalAmount")?;
+        s.skip_field("StarGoalAmount")?;
       }
       s.serialize_field("GroupBuffId", &self.GroupBuffId())?;
       s.serialize_field("StageEnterCostType", &self.StageEnterCostType())?;
@@ -771,8 +771,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConquestUnitExcelBuilder<'a, 'b
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestUnitExcel::VT_STARGOAL, StarGoal);
   }
   #[inline]
-  pub fn add_starGoalAmount(&mut self, starGoalAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestUnitExcel::VT_STARGOALAMOUNT, starGoalAmount);
+  pub fn add_StarGoalAmount(&mut self, StarGoalAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestUnitExcel::VT_STARGOALAMOUNT, StarGoalAmount);
   }
   #[inline]
   pub fn add_GroupBuffId(&mut self, GroupBuffId: i64) {
@@ -868,7 +868,7 @@ impl core::fmt::Debug for ConquestUnitExcel<'_> {
       ds.field("BattleDuration", &self.BattleDuration());
       ds.field("GroundId", &self.GroundId());
       ds.field("StarGoal", &self.StarGoal());
-      ds.field("starGoalAmount", &self.starGoalAmount());
+      ds.field("StarGoalAmount", &self.StarGoalAmount());
       ds.field("GroupBuffId", &self.GroupBuffId());
       ds.field("StageEnterCostType", &self.StageEnterCostType());
       ds.field("StageEnterCostId", &self.StageEnterCostId());
@@ -906,7 +906,7 @@ pub struct ConquestUnitExcelT {
   pub BattleDuration: i64,
   pub GroundId: i64,
   pub StarGoal: Option<Vec<StarGoalType>>,
-  pub starGoalAmount: Option<Vec<i32>>,
+  pub StarGoalAmount: Option<Vec<i32>>,
   pub GroupBuffId: i64,
   pub StageEnterCostType: ParcelType,
   pub StageEnterCostId: i64,
@@ -942,7 +942,7 @@ impl Default for ConquestUnitExcelT {
       BattleDuration: 0,
       GroundId: 0,
       StarGoal: None,
-      starGoalAmount: None,
+      StarGoalAmount: None,
       GroupBuffId: 0,
       StageEnterCostType: ParcelType::None,
       StageEnterCostId: 0,
@@ -994,7 +994,7 @@ impl ConquestUnitExcelT {
     let StarGoal = self.StarGoal.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let starGoalAmount = self.starGoalAmount.as_ref().map(|x|{
+    let StarGoalAmount = self.StarGoalAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let GroupBuffId = self.GroupBuffId;
@@ -1029,7 +1029,7 @@ impl ConquestUnitExcelT {
       BattleDuration,
       GroundId,
       StarGoal,
-      starGoalAmount,
+      StarGoalAmount,
       GroupBuffId,
       StageEnterCostType,
       StageEnterCostId,

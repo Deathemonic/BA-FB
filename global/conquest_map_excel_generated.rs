@@ -78,8 +78,8 @@ impl<'a> ConquestMapExcel<'a> {
       if let Some(x) = args.StepOpenConditionParameter {
         builder.add_StepOpenConditionParameter(x);
       }
-      if let Some(x) = args.stepOpenConditionType {
-        builder.add_stepOpenConditionType(x);
+      if let Some(x) = args.StepOpenConditionType {
+        builder.add_StepOpenConditionType(x);
       }
       if let Some(x) = args.ConquestMap {
         builder.add_ConquestMap(x);
@@ -112,7 +112,7 @@ impl<'a> ConquestMapExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let StepEnterScenarioGroupId = self.StepEnterScenarioGroupId();
-    let stepOpenConditionType = self.stepOpenConditionType().map(|x| {
+    let StepOpenConditionType = self.StepOpenConditionType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let StepOpenConditionParameter = self.StepOpenConditionParameter().map(|x| {
@@ -138,7 +138,7 @@ impl<'a> ConquestMapExcel<'a> {
       StepIndex,
       ConquestMap,
       StepEnterScenarioGroupId,
-      stepOpenConditionType,
+      StepOpenConditionType,
       StepOpenConditionParameter,
       MapGoalLocalize,
       StepGoalLocalize,
@@ -191,7 +191,7 @@ impl<'a> ConquestMapExcel<'a> {
     unsafe { self._tab.get::<i64>(ConquestMapExcel::VT_STEPENTERSCENARIOGROUPID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn stepOpenConditionType(&self) -> Option<flatbuffers::Vector<'a, ConquestConditionType>> {
+  pub fn StepOpenConditionType(&self) -> Option<flatbuffers::Vector<'a, ConquestConditionType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -254,7 +254,7 @@ impl flatbuffers::Verifiable for ConquestMapExcel<'_> {
      .visit_field::<i32>("StepIndex", Self::VT_STEPINDEX, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ConquestMap", Self::VT_CONQUESTMAP, false)?
      .visit_field::<i64>("StepEnterScenarioGroupId", Self::VT_STEPENTERSCENARIOGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ConquestConditionType>>>("stepOpenConditionType", Self::VT_STEPOPENCONDITIONTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ConquestConditionType>>>("StepOpenConditionType", Self::VT_STEPOPENCONDITIONTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("StepOpenConditionParameter", Self::VT_STEPOPENCONDITIONPARAMETER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MapGoalLocalize", Self::VT_MAPGOALLOCALIZE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("StepGoalLocalize", Self::VT_STEPGOALLOCALIZE, false)?
@@ -272,7 +272,7 @@ pub struct ConquestMapExcelArgs<'a> {
     pub StepIndex: i32,
     pub ConquestMap: Option<flatbuffers::WIPOffset<&'a str>>,
     pub StepEnterScenarioGroupId: i64,
-    pub stepOpenConditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ConquestConditionType>>>,
+    pub StepOpenConditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ConquestConditionType>>>,
     pub StepOpenConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub MapGoalLocalize: Option<flatbuffers::WIPOffset<&'a str>>,
     pub StepGoalLocalize: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -290,7 +290,7 @@ impl<'a> Default for ConquestMapExcelArgs<'a> {
       StepIndex: 0,
       ConquestMap: None,
       StepEnterScenarioGroupId: 0,
-      stepOpenConditionType: None,
+      StepOpenConditionType: None,
       StepOpenConditionParameter: None,
       MapGoalLocalize: None,
       StepGoalLocalize: None,
@@ -321,10 +321,10 @@ impl Serialize for ConquestMapExcel<'_> {
         s.skip_field("ConquestMap")?;
       }
       s.serialize_field("StepEnterScenarioGroupId", &self.StepEnterScenarioGroupId())?;
-      if let Some(f) = self.stepOpenConditionType() {
-        s.serialize_field("stepOpenConditionType", &f)?;
+      if let Some(f) = self.StepOpenConditionType() {
+        s.serialize_field("StepOpenConditionType", &f)?;
       } else {
-        s.skip_field("stepOpenConditionType")?;
+        s.skip_field("StepOpenConditionType")?;
       }
       if let Some(f) = self.StepOpenConditionParameter() {
         s.serialize_field("StepOpenConditionParameter", &f)?;
@@ -386,8 +386,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConquestMapExcelBuilder<'a, 'b,
     self.fbb_.push_slot::<i64>(ConquestMapExcel::VT_STEPENTERSCENARIOGROUPID, StepEnterScenarioGroupId, 0);
   }
   #[inline]
-  pub fn add_stepOpenConditionType(&mut self, stepOpenConditionType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ConquestConditionType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestMapExcel::VT_STEPOPENCONDITIONTYPE, stepOpenConditionType);
+  pub fn add_StepOpenConditionType(&mut self, StepOpenConditionType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ConquestConditionType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestMapExcel::VT_STEPOPENCONDITIONTYPE, StepOpenConditionType);
   }
   #[inline]
   pub fn add_StepOpenConditionParameter(&mut self, StepOpenConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -437,7 +437,7 @@ impl core::fmt::Debug for ConquestMapExcel<'_> {
       ds.field("StepIndex", &self.StepIndex());
       ds.field("ConquestMap", &self.ConquestMap());
       ds.field("StepEnterScenarioGroupId", &self.StepEnterScenarioGroupId());
-      ds.field("stepOpenConditionType", &self.stepOpenConditionType());
+      ds.field("StepOpenConditionType", &self.StepOpenConditionType());
       ds.field("StepOpenConditionParameter", &self.StepOpenConditionParameter());
       ds.field("MapGoalLocalize", &self.MapGoalLocalize());
       ds.field("StepGoalLocalize", &self.StepGoalLocalize());
@@ -456,7 +456,7 @@ pub struct ConquestMapExcelT {
   pub StepIndex: i32,
   pub ConquestMap: Option<String>,
   pub StepEnterScenarioGroupId: i64,
-  pub stepOpenConditionType: Option<Vec<ConquestConditionType>>,
+  pub StepOpenConditionType: Option<Vec<ConquestConditionType>>,
   pub StepOpenConditionParameter: Option<Vec<String>>,
   pub MapGoalLocalize: Option<String>,
   pub StepGoalLocalize: Option<String>,
@@ -473,7 +473,7 @@ impl Default for ConquestMapExcelT {
       StepIndex: 0,
       ConquestMap: None,
       StepEnterScenarioGroupId: 0,
-      stepOpenConditionType: None,
+      StepOpenConditionType: None,
       StepOpenConditionParameter: None,
       MapGoalLocalize: None,
       StepGoalLocalize: None,
@@ -498,7 +498,7 @@ impl ConquestMapExcelT {
       _fbb.create_string(x)
     });
     let StepEnterScenarioGroupId = self.StepEnterScenarioGroupId;
-    let stepOpenConditionType = self.stepOpenConditionType.as_ref().map(|x|{
+    let StepOpenConditionType = self.StepOpenConditionType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let StepOpenConditionParameter = self.StepOpenConditionParameter.as_ref().map(|x|{
@@ -524,7 +524,7 @@ impl ConquestMapExcelT {
       StepIndex,
       ConquestMap,
       StepEnterScenarioGroupId,
-      stepOpenConditionType,
+      StepOpenConditionType,
       StepOpenConditionParameter,
       MapGoalLocalize,
       StepGoalLocalize,

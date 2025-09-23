@@ -48,11 +48,11 @@ impl<'a> FieldTutorialExcel<'a> {
       let x = args.SeasonId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_SeasonId(x);
-      if let Some(x) = args.ConditionId {
-        builder.add_ConditionId(x);
+      if let Some(x) = args.conditionId {
+        builder.add_conditionId(x);
       }
-      if let Some(x) = args.ConditionType {
-        builder.add_ConditionType(x);
+      if let Some(x) = args.conditionType {
+        builder.add_conditionType(x);
       }
       if let Some(x) = args.TutorialType {
         builder.add_TutorialType(x);
@@ -66,17 +66,17 @@ impl<'a> FieldTutorialExcel<'a> {
     let TutorialType = self.TutorialType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let ConditionType = self.ConditionType().map(|x| {
+    let conditionType = self.conditionType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let ConditionId = self.ConditionId().map(|x| {
+    let conditionId = self.conditionId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     FieldTutorialExcelT {
       SeasonId,
       TutorialType,
-      ConditionType,
-      ConditionId,
+      conditionType,
+      conditionId,
     }
   }
 
@@ -95,14 +95,14 @@ impl<'a> FieldTutorialExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, FieldTutorialType>>>(FieldTutorialExcel::VT_TUTORIALTYPE, None)}
   }
   #[inline]
-  pub fn ConditionType(&self) -> Option<flatbuffers::Vector<'a, FieldConditionType>> {
+  pub fn conditionType(&self) -> Option<flatbuffers::Vector<'a, FieldConditionType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, FieldConditionType>>>(FieldTutorialExcel::VT_CONDITIONTYPE, None)}
   }
   #[inline]
-  pub fn ConditionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn conditionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -119,8 +119,8 @@ impl flatbuffers::Verifiable for FieldTutorialExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("SeasonId", Self::VT_SEASONID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldTutorialType>>>("TutorialType", Self::VT_TUTORIALTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldConditionType>>>("ConditionType", Self::VT_CONDITIONTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConditionId", Self::VT_CONDITIONID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldConditionType>>>("conditionType", Self::VT_CONDITIONTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("conditionId", Self::VT_CONDITIONID, false)?
      .finish();
     Ok(())
   }
@@ -128,8 +128,8 @@ impl flatbuffers::Verifiable for FieldTutorialExcel<'_> {
 pub struct FieldTutorialExcelArgs<'a> {
     pub SeasonId: i64,
     pub TutorialType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldTutorialType>>>,
-    pub ConditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldConditionType>>>,
-    pub ConditionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub conditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldConditionType>>>,
+    pub conditionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for FieldTutorialExcelArgs<'a> {
   #[inline]
@@ -137,8 +137,8 @@ impl<'a> Default for FieldTutorialExcelArgs<'a> {
     FieldTutorialExcelArgs {
       SeasonId: 0,
       TutorialType: None,
-      ConditionType: None,
-      ConditionId: None,
+      conditionType: None,
+      conditionId: None,
     }
   }
 }
@@ -155,15 +155,15 @@ impl Serialize for FieldTutorialExcel<'_> {
       } else {
         s.skip_field("TutorialType")?;
       }
-      if let Some(f) = self.ConditionType() {
-        s.serialize_field("ConditionType", &f)?;
+      if let Some(f) = self.conditionType() {
+        s.serialize_field("conditionType", &f)?;
       } else {
-        s.skip_field("ConditionType")?;
+        s.skip_field("conditionType")?;
       }
-      if let Some(f) = self.ConditionId() {
-        s.serialize_field("ConditionId", &f)?;
+      if let Some(f) = self.conditionId() {
+        s.serialize_field("conditionId", &f)?;
       } else {
-        s.skip_field("ConditionId")?;
+        s.skip_field("conditionId")?;
       }
     s.end()
   }
@@ -183,12 +183,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FieldTutorialExcelBuilder<'a, '
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_TUTORIALTYPE, TutorialType);
   }
   #[inline]
-  pub fn add_ConditionType(&mut self, ConditionType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , FieldConditionType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_CONDITIONTYPE, ConditionType);
+  pub fn add_conditionType(&mut self, conditionType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , FieldConditionType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_CONDITIONTYPE, conditionType);
   }
   #[inline]
-  pub fn add_ConditionId(&mut self, ConditionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_CONDITIONID, ConditionId);
+  pub fn add_conditionId(&mut self, conditionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_CONDITIONID, conditionId);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> FieldTutorialExcelBuilder<'a, 'b, A> {
@@ -210,8 +210,8 @@ impl core::fmt::Debug for FieldTutorialExcel<'_> {
     let mut ds = f.debug_struct("FieldTutorialExcel");
       ds.field("SeasonId", &self.SeasonId());
       ds.field("TutorialType", &self.TutorialType());
-      ds.field("ConditionType", &self.ConditionType());
-      ds.field("ConditionId", &self.ConditionId());
+      ds.field("conditionType", &self.conditionType());
+      ds.field("conditionId", &self.conditionId());
       ds.finish()
   }
 }
@@ -220,16 +220,16 @@ impl core::fmt::Debug for FieldTutorialExcel<'_> {
 pub struct FieldTutorialExcelT {
   pub SeasonId: i64,
   pub TutorialType: Option<Vec<FieldTutorialType>>,
-  pub ConditionType: Option<Vec<FieldConditionType>>,
-  pub ConditionId: Option<Vec<i64>>,
+  pub conditionType: Option<Vec<FieldConditionType>>,
+  pub conditionId: Option<Vec<i64>>,
 }
 impl Default for FieldTutorialExcelT {
   fn default() -> Self {
     Self {
       SeasonId: 0,
       TutorialType: None,
-      ConditionType: None,
-      ConditionId: None,
+      conditionType: None,
+      conditionId: None,
     }
   }
 }
@@ -242,17 +242,17 @@ impl FieldTutorialExcelT {
     let TutorialType = self.TutorialType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ConditionType = self.ConditionType.as_ref().map(|x|{
+    let conditionType = self.conditionType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ConditionId = self.ConditionId.as_ref().map(|x|{
+    let conditionId = self.conditionId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     FieldTutorialExcel::create(_fbb, &FieldTutorialExcelArgs{
       SeasonId,
       TutorialType,
-      ConditionType,
-      ConditionId,
+      conditionType,
+      conditionId,
     })
   }
 }

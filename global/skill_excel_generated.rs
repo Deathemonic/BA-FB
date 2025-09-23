@@ -56,8 +56,9 @@ impl<'a> SkillExcel<'a> {
   pub const VT_ISSHOWSPEECHBUBBLE: flatbuffers::VOffsetT = 52;
   pub const VT_PUBLICSPEECHDURATION: flatbuffers::VOffsetT = 54;
   pub const VT_ADDITIONALTOOLTIPID: flatbuffers::VOffsetT = 56;
-  pub const VT_TEXTURESKILLCARDFORFORMCONVERSION: flatbuffers::VOffsetT = 58;
-  pub const VT_SKILLCARDLABELPATH: flatbuffers::VOffsetT = 60;
+  pub const VT_SELECTEXSKILLTOOLTIPID: flatbuffers::VOffsetT = 58;
+  pub const VT_TEXTURESKILLCARDFORFORMCONVERSION: flatbuffers::VOffsetT = 60;
+  pub const VT_SKILLCARDLABELPATH: flatbuffers::VOffsetT = 62;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -70,6 +71,9 @@ impl<'a> SkillExcel<'a> {
   ) -> flatbuffers::WIPOffset<SkillExcel<'bldr>> {
     let mut builder = SkillExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"Skill");
+      let x = args.SelectExSkillToolTipId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_SelectExSkillToolTipId(x);
       let x = args.AdditionalToolTipId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_AdditionalToolTipId(x);
@@ -197,6 +201,7 @@ impl<'a> SkillExcel<'a> {
       let IsShowSpeechbubble = self.IsShowSpeechbubble();
       let PublicSpeechDuration = self.PublicSpeechDuration();
       let AdditionalToolTipId = self.AdditionalToolTipId();
+      let SelectExSkillToolTipId = self.SelectExSkillToolTipId();
     let TextureSkillCardForFormConversion = self.TextureSkillCardForFormConversion().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -231,6 +236,7 @@ impl<'a> SkillExcel<'a> {
       IsShowSpeechbubble,
       PublicSpeechDuration,
       AdditionalToolTipId,
+      SelectExSkillToolTipId,
       TextureSkillCardForFormConversion,
       SkillCardLabelPath,
     }
@@ -426,6 +432,13 @@ impl<'a> SkillExcel<'a> {
     unsafe { self._tab.get::<i64>(SkillExcel::VT_ADDITIONALTOOLTIPID, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn SelectExSkillToolTipId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(SkillExcel::VT_SELECTEXSKILLTOOLTIPID, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn TextureSkillCardForFormConversion(&self) -> Option<&'a str> {
     // Safety:
     // Created from valid Table for this object
@@ -475,6 +488,7 @@ impl flatbuffers::Verifiable for SkillExcel<'_> {
      .visit_field::<bool>("IsShowSpeechbubble", Self::VT_ISSHOWSPEECHBUBBLE, false)?
      .visit_field::<i32>("PublicSpeechDuration", Self::VT_PUBLICSPEECHDURATION, false)?
      .visit_field::<i64>("AdditionalToolTipId", Self::VT_ADDITIONALTOOLTIPID, false)?
+     .visit_field::<i64>("SelectExSkillToolTipId", Self::VT_SELECTEXSKILLTOOLTIPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("TextureSkillCardForFormConversion", Self::VT_TEXTURESKILLCARDFORFORMCONVERSION, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SkillCardLabelPath", Self::VT_SKILLCARDLABELPATH, false)?
      .finish();
@@ -509,6 +523,7 @@ pub struct SkillExcelArgs<'a> {
     pub IsShowSpeechbubble: bool,
     pub PublicSpeechDuration: i32,
     pub AdditionalToolTipId: i64,
+    pub SelectExSkillToolTipId: i64,
     pub TextureSkillCardForFormConversion: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SkillCardLabelPath: Option<flatbuffers::WIPOffset<&'a str>>,
 }
@@ -543,6 +558,7 @@ impl<'a> Default for SkillExcelArgs<'a> {
       IsShowSpeechbubble: false,
       PublicSpeechDuration: 0,
       AdditionalToolTipId: 0,
+      SelectExSkillToolTipId: 0,
       TextureSkillCardForFormConversion: None,
       SkillCardLabelPath: None,
     }
@@ -554,7 +570,7 @@ impl Serialize for SkillExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("SkillExcel", 29)?;
+    let mut s = serializer.serialize_struct("SkillExcel", 30)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("LocalizeSkillId", &self.LocalizeSkillId())?;
       if let Some(f) = self.GroupId() {
@@ -598,6 +614,7 @@ impl Serialize for SkillExcel<'_> {
       s.serialize_field("IsShowSpeechbubble", &self.IsShowSpeechbubble())?;
       s.serialize_field("PublicSpeechDuration", &self.PublicSpeechDuration())?;
       s.serialize_field("AdditionalToolTipId", &self.AdditionalToolTipId())?;
+      s.serialize_field("SelectExSkillToolTipId", &self.SelectExSkillToolTipId())?;
       if let Some(f) = self.TextureSkillCardForFormConversion() {
         s.serialize_field("TextureSkillCardForFormConversion", &f)?;
       } else {
@@ -726,6 +743,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> SkillExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<i64>(SkillExcel::VT_ADDITIONALTOOLTIPID, AdditionalToolTipId, 0);
   }
   #[inline]
+  pub fn add_SelectExSkillToolTipId(&mut self, SelectExSkillToolTipId: i64) {
+    self.fbb_.push_slot::<i64>(SkillExcel::VT_SELECTEXSKILLTOOLTIPID, SelectExSkillToolTipId, 0);
+  }
+  #[inline]
   pub fn add_TextureSkillCardForFormConversion(&mut self, TextureSkillCardForFormConversion: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(SkillExcel::VT_TEXTURESKILLCARDFORFORMCONVERSION, TextureSkillCardForFormConversion);
   }
@@ -778,6 +799,7 @@ impl core::fmt::Debug for SkillExcel<'_> {
       ds.field("IsShowSpeechbubble", &self.IsShowSpeechbubble());
       ds.field("PublicSpeechDuration", &self.PublicSpeechDuration());
       ds.field("AdditionalToolTipId", &self.AdditionalToolTipId());
+      ds.field("SelectExSkillToolTipId", &self.SelectExSkillToolTipId());
       ds.field("TextureSkillCardForFormConversion", &self.TextureSkillCardForFormConversion());
       ds.field("SkillCardLabelPath", &self.SkillCardLabelPath());
       ds.finish()
@@ -813,6 +835,7 @@ pub struct SkillExcelT {
   pub IsShowSpeechbubble: bool,
   pub PublicSpeechDuration: i32,
   pub AdditionalToolTipId: i64,
+  pub SelectExSkillToolTipId: i64,
   pub TextureSkillCardForFormConversion: Option<String>,
   pub SkillCardLabelPath: Option<String>,
 }
@@ -846,6 +869,7 @@ impl Default for SkillExcelT {
       IsShowSpeechbubble: false,
       PublicSpeechDuration: 0,
       AdditionalToolTipId: 0,
+      SelectExSkillToolTipId: 0,
       TextureSkillCardForFormConversion: None,
       SkillCardLabelPath: None,
     }
@@ -891,6 +915,7 @@ impl SkillExcelT {
     let IsShowSpeechbubble = self.IsShowSpeechbubble;
     let PublicSpeechDuration = self.PublicSpeechDuration;
     let AdditionalToolTipId = self.AdditionalToolTipId;
+    let SelectExSkillToolTipId = self.SelectExSkillToolTipId;
     let TextureSkillCardForFormConversion = self.TextureSkillCardForFormConversion.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -925,6 +950,7 @@ impl SkillExcelT {
       IsShowSpeechbubble,
       PublicSpeechDuration,
       AdditionalToolTipId,
+      SelectExSkillToolTipId,
       TextureSkillCardForFormConversion,
       SkillCardLabelPath,
     })

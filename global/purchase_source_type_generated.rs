@@ -16,13 +16,16 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_PURCHASE_SOURCE_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_PURCHASE_SOURCE_TYPE: i32 = 2;
+pub const ENUM_MAX_PURCHASE_SOURCE_TYPE: i32 = 5;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_PURCHASE_SOURCE_TYPE: [PurchaseSourceType; 3] = [
+pub const ENUM_VALUES_PURCHASE_SOURCE_TYPE: [PurchaseSourceType; 6] = [
   PurchaseSourceType::None,
   PurchaseSourceType::Product,
   PurchaseSourceType::ProductMonthly,
+  PurchaseSourceType::ProductBattlePass,
+  PurchaseSourceType::ProductSelect,
+  PurchaseSourceType::ProductGooglePoint,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -33,13 +36,19 @@ impl PurchaseSourceType {
   pub const None: Self = Self(0);
   pub const Product: Self = Self(1);
   pub const ProductMonthly: Self = Self(2);
+  pub const ProductBattlePass: Self = Self(3);
+  pub const ProductSelect: Self = Self(4);
+  pub const ProductGooglePoint: Self = Self(5);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 2;
+  pub const ENUM_MAX: i32 = 5;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Product,
     Self::ProductMonthly,
+    Self::ProductBattlePass,
+    Self::ProductSelect,
+    Self::ProductGooglePoint,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -47,6 +56,9 @@ impl PurchaseSourceType {
       Self::None => Some("None"),
       Self::Product => Some("Product"),
       Self::ProductMonthly => Some("ProductMonthly"),
+      Self::ProductBattlePass => Some("ProductBattlePass"),
+      Self::ProductSelect => Some("ProductSelect"),
+      Self::ProductGooglePoint => Some("ProductGooglePoint"),
       _ => None,
     }
   }

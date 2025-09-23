@@ -46,13 +46,14 @@ impl<'a> EmblemExcel<'a> {
   pub const VT_EMBLEMBGPATHTH: flatbuffers::VOffsetT = 32;
   pub const VT_EMBLEMBGPATHTW: flatbuffers::VOffsetT = 34;
   pub const VT_EMBLEMBGPATHEN: flatbuffers::VOffsetT = 36;
-  pub const VT_DISPLAYTYPE: flatbuffers::VOffsetT = 38;
-  pub const VT_DISPLAYSTARTDATE: flatbuffers::VOffsetT = 40;
-  pub const VT_DISPLAYENDDATE: flatbuffers::VOffsetT = 42;
-  pub const VT_DISLPAYFAVORLEVEL: flatbuffers::VOffsetT = 44;
-  pub const VT_CHECKPASSTYPE: flatbuffers::VOffsetT = 46;
-  pub const VT_EMBLEMPARAMETER: flatbuffers::VOffsetT = 48;
-  pub const VT_CHECKPASSCOUNT: flatbuffers::VOffsetT = 50;
+  pub const VT_EMBLEMEFFECTPATH: flatbuffers::VOffsetT = 38;
+  pub const VT_DISPLAYTYPE: flatbuffers::VOffsetT = 40;
+  pub const VT_DISPLAYSTARTDATE: flatbuffers::VOffsetT = 42;
+  pub const VT_DISPLAYENDDATE: flatbuffers::VOffsetT = 44;
+  pub const VT_DISLPAYFAVORLEVEL: flatbuffers::VOffsetT = 46;
+  pub const VT_CHECKPASSTYPE: flatbuffers::VOffsetT = 48;
+  pub const VT_EMBLEMPARAMETER: flatbuffers::VOffsetT = 50;
+  pub const VT_CHECKPASSCOUNT: flatbuffers::VOffsetT = 52;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -95,6 +96,9 @@ impl<'a> EmblemExcel<'a> {
       let x = args.DisplayType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_DisplayType(x);
+      if let Some(x) = args.EmblemEffectPath {
+        builder.add_EmblemEffectPath(x);
+      }
       if let Some(x) = args.EmblemBGPathEn {
         builder.add_EmblemBGPathEn(x);
       }
@@ -181,6 +185,9 @@ impl<'a> EmblemExcel<'a> {
     let EmblemBGPathEn = self.EmblemBGPathEn().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+    let EmblemEffectPath = self.EmblemEffectPath().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
       let DisplayType = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_enum(self.DisplayType(), &key)
       } else {
@@ -218,6 +225,7 @@ impl<'a> EmblemExcel<'a> {
       EmblemBGPathTh,
       EmblemBGPathTw,
       EmblemBGPathEn,
+      EmblemEffectPath,
       DisplayType,
       DisplayStartDate,
       DisplayEndDate,
@@ -348,6 +356,13 @@ impl<'a> EmblemExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EmblemExcel::VT_EMBLEMBGPATHEN, None)}
   }
   #[inline]
+  pub fn EmblemEffectPath(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EmblemExcel::VT_EMBLEMEFFECTPATH, None)}
+  }
+  #[inline]
   pub fn DisplayType(&self) -> EmblemDisplayType {
     // Safety:
     // Created from valid Table for this object
@@ -422,6 +437,7 @@ impl flatbuffers::Verifiable for EmblemExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EmblemBGPathTh", Self::VT_EMBLEMBGPATHTH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EmblemBGPathTw", Self::VT_EMBLEMBGPATHTW, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EmblemBGPathEn", Self::VT_EMBLEMBGPATHEN, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EmblemEffectPath", Self::VT_EMBLEMEFFECTPATH, false)?
      .visit_field::<EmblemDisplayType>("DisplayType", Self::VT_DISPLAYTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("DisplayStartDate", Self::VT_DISPLAYSTARTDATE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("DisplayEndDate", Self::VT_DISPLAYENDDATE, false)?
@@ -451,6 +467,7 @@ pub struct EmblemExcelArgs<'a> {
     pub EmblemBGPathTh: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EmblemBGPathTw: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EmblemBGPathEn: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub EmblemEffectPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub DisplayType: EmblemDisplayType,
     pub DisplayStartDate: Option<flatbuffers::WIPOffset<&'a str>>,
     pub DisplayEndDate: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -480,6 +497,7 @@ impl<'a> Default for EmblemExcelArgs<'a> {
       EmblemBGPathTh: None,
       EmblemBGPathTw: None,
       EmblemBGPathEn: None,
+      EmblemEffectPath: None,
       DisplayType: EmblemDisplayType::Always,
       DisplayStartDate: None,
       DisplayEndDate: None,
@@ -496,7 +514,7 @@ impl Serialize for EmblemExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EmblemExcel", 24)?;
+    let mut s = serializer.serialize_struct("EmblemExcel", 25)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("Category", &self.Category())?;
       s.serialize_field("Rarity", &self.Rarity())?;
@@ -545,6 +563,11 @@ impl Serialize for EmblemExcel<'_> {
         s.serialize_field("EmblemBGPathEn", &f)?;
       } else {
         s.skip_field("EmblemBGPathEn")?;
+      }
+      if let Some(f) = self.EmblemEffectPath() {
+        s.serialize_field("EmblemEffectPath", &f)?;
+      } else {
+        s.skip_field("EmblemEffectPath")?;
       }
       s.serialize_field("DisplayType", &self.DisplayType())?;
       if let Some(f) = self.DisplayStartDate() {
@@ -639,6 +662,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EmblemExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EmblemExcel::VT_EMBLEMBGPATHEN, EmblemBGPathEn);
   }
   #[inline]
+  pub fn add_EmblemEffectPath(&mut self, EmblemEffectPath: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EmblemExcel::VT_EMBLEMEFFECTPATH, EmblemEffectPath);
+  }
+  #[inline]
   pub fn add_DisplayType(&mut self, DisplayType: EmblemDisplayType) {
     self.fbb_.push_slot::<EmblemDisplayType>(EmblemExcel::VT_DISPLAYTYPE, DisplayType, EmblemDisplayType::Always);
   }
@@ -701,6 +728,7 @@ impl core::fmt::Debug for EmblemExcel<'_> {
       ds.field("EmblemBGPathTh", &self.EmblemBGPathTh());
       ds.field("EmblemBGPathTw", &self.EmblemBGPathTw());
       ds.field("EmblemBGPathEn", &self.EmblemBGPathEn());
+      ds.field("EmblemEffectPath", &self.EmblemEffectPath());
       ds.field("DisplayType", &self.DisplayType());
       ds.field("DisplayStartDate", &self.DisplayStartDate());
       ds.field("DisplayEndDate", &self.DisplayEndDate());
@@ -731,6 +759,7 @@ pub struct EmblemExcelT {
   pub EmblemBGPathTh: Option<String>,
   pub EmblemBGPathTw: Option<String>,
   pub EmblemBGPathEn: Option<String>,
+  pub EmblemEffectPath: Option<String>,
   pub DisplayType: EmblemDisplayType,
   pub DisplayStartDate: Option<String>,
   pub DisplayEndDate: Option<String>,
@@ -759,6 +788,7 @@ impl Default for EmblemExcelT {
       EmblemBGPathTh: None,
       EmblemBGPathTw: None,
       EmblemBGPathEn: None,
+      EmblemEffectPath: None,
       DisplayType: EmblemDisplayType::Always,
       DisplayStartDate: None,
       DisplayEndDate: None,
@@ -807,6 +837,9 @@ impl EmblemExcelT {
     let EmblemBGPathEn = self.EmblemBGPathEn.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let EmblemEffectPath = self.EmblemEffectPath.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     let DisplayType = self.DisplayType;
     let DisplayStartDate = self.DisplayStartDate.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -836,6 +869,7 @@ impl EmblemExcelT {
       EmblemBGPathTh,
       EmblemBGPathTw,
       EmblemBGPathEn,
+      EmblemEffectPath,
       DisplayType,
       DisplayStartDate,
       DisplayEndDate,

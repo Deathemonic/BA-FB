@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_DIALOG_CONDITION: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_DIALOG_CONDITION: i32 = 28;
+pub const ENUM_MAX_DIALOG_CONDITION: i32 = 30;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_DIALOG_CONDITION: [DialogCondition; 29] = [
+pub const ENUM_VALUES_DIALOG_CONDITION: [DialogCondition; 31] = [
   DialogCondition::Idle,
   DialogCondition::Enter,
   DialogCondition::Exit,
@@ -49,6 +49,8 @@ pub const ENUM_VALUES_DIALOG_CONDITION: [DialogCondition; 29] = [
   DialogCondition::MiniGameDreamMakerEnough03,
   DialogCondition::MiniGameDreamMakerEnough04,
   DialogCondition::MiniGameDreamMakerDefault,
+  DialogCondition::PassLevelUp,
+  DialogCondition::UnlockPassReward,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -85,9 +87,11 @@ impl DialogCondition {
   pub const MiniGameDreamMakerEnough03: Self = Self(26);
   pub const MiniGameDreamMakerEnough04: Self = Self(27);
   pub const MiniGameDreamMakerDefault: Self = Self(28);
+  pub const PassLevelUp: Self = Self(29);
+  pub const UnlockPassReward: Self = Self(30);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 28;
+  pub const ENUM_MAX: i32 = 30;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Idle,
     Self::Enter,
@@ -118,6 +122,8 @@ impl DialogCondition {
     Self::MiniGameDreamMakerEnough03,
     Self::MiniGameDreamMakerEnough04,
     Self::MiniGameDreamMakerDefault,
+    Self::PassLevelUp,
+    Self::UnlockPassReward,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -151,6 +157,8 @@ impl DialogCondition {
       Self::MiniGameDreamMakerEnough03 => Some("MiniGameDreamMakerEnough03"),
       Self::MiniGameDreamMakerEnough04 => Some("MiniGameDreamMakerEnough04"),
       Self::MiniGameDreamMakerDefault => Some("MiniGameDreamMakerDefault"),
+      Self::PassLevelUp => Some("PassLevelUp"),
+      Self::UnlockPassReward => Some("UnlockPassReward"),
       _ => None,
     }
   }

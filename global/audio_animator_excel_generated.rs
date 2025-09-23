@@ -35,13 +35,14 @@ impl<'a> AudioAnimatorExcel<'a> {
   pub const VT_STATENAME: flatbuffers::VOffsetT = 10;
   pub const VT_IGNOREINTERRUPTDELAY: flatbuffers::VOffsetT = 12;
   pub const VT_IGNOREINTERRUPTPLAY: flatbuffers::VOffsetT = 14;
-  pub const VT_VOLUME: flatbuffers::VOffsetT = 16;
-  pub const VT_DELAY: flatbuffers::VOffsetT = 18;
-  pub const VT_RANDOMPITCHMIN: flatbuffers::VOffsetT = 20;
-  pub const VT_RANDOMPITCHMAX: flatbuffers::VOffsetT = 22;
-  pub const VT_AUDIOPRIORITY: flatbuffers::VOffsetT = 24;
-  pub const VT_AUDIOCLIPPATH: flatbuffers::VOffsetT = 26;
-  pub const VT_VOICEHASH: flatbuffers::VOffsetT = 28;
+  pub const VT_IGNOREVELOCITY: flatbuffers::VOffsetT = 16;
+  pub const VT_VOLUME: flatbuffers::VOffsetT = 18;
+  pub const VT_DELAY: flatbuffers::VOffsetT = 20;
+  pub const VT_RANDOMPITCHMIN: flatbuffers::VOffsetT = 22;
+  pub const VT_RANDOMPITCHMAX: flatbuffers::VOffsetT = 24;
+  pub const VT_AUDIOPRIORITY: flatbuffers::VOffsetT = 26;
+  pub const VT_AUDIOCLIPPATH: flatbuffers::VOffsetT = 28;
+  pub const VT_VOICEHASH: flatbuffers::VOffsetT = 30;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -87,6 +88,7 @@ impl<'a> AudioAnimatorExcel<'a> {
       let x = args.ControllerNameHash;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_ControllerNameHash(x);
+      builder.add_IgnoreVelocity(args.IgnoreVelocity);
       builder.add_IgnoreInterruptPlay(args.IgnoreInterruptPlay);
       builder.add_IgnoreInterruptDelay(args.IgnoreInterruptDelay);
     builder.finish()
@@ -104,6 +106,7 @@ impl<'a> AudioAnimatorExcel<'a> {
     });
       let IgnoreInterruptDelay = self.IgnoreInterruptDelay();
       let IgnoreInterruptPlay = self.IgnoreInterruptPlay();
+      let IgnoreVelocity = self.IgnoreVelocity();
       let Volume = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_float(self.Volume(), &key)
       } else {
@@ -130,6 +133,7 @@ impl<'a> AudioAnimatorExcel<'a> {
       StateName,
       IgnoreInterruptDelay,
       IgnoreInterruptPlay,
+      IgnoreVelocity,
       Volume,
       Delay,
       RandomPitchMin,
@@ -181,6 +185,13 @@ impl<'a> AudioAnimatorExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<bool>(AudioAnimatorExcel::VT_IGNOREINTERRUPTPLAY, Some(false)).unwrap()}
+  }
+  #[inline]
+  pub fn IgnoreVelocity(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(AudioAnimatorExcel::VT_IGNOREVELOCITY, Some(false)).unwrap()}
   }
   #[inline]
   pub fn Volume(&self) -> f32 {
@@ -246,6 +257,7 @@ impl flatbuffers::Verifiable for AudioAnimatorExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("StateName", Self::VT_STATENAME, false)?
      .visit_field::<bool>("IgnoreInterruptDelay", Self::VT_IGNOREINTERRUPTDELAY, false)?
      .visit_field::<bool>("IgnoreInterruptPlay", Self::VT_IGNOREINTERRUPTPLAY, false)?
+     .visit_field::<bool>("IgnoreVelocity", Self::VT_IGNOREVELOCITY, false)?
      .visit_field::<f32>("Volume", Self::VT_VOLUME, false)?
      .visit_field::<f32>("Delay", Self::VT_DELAY, false)?
      .visit_field::<i32>("RandomPitchMin", Self::VT_RANDOMPITCHMIN, false)?
@@ -264,6 +276,7 @@ pub struct AudioAnimatorExcelArgs<'a> {
     pub StateName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub IgnoreInterruptDelay: bool,
     pub IgnoreInterruptPlay: bool,
+    pub IgnoreVelocity: bool,
     pub Volume: f32,
     pub Delay: f32,
     pub RandomPitchMin: i32,
@@ -282,6 +295,7 @@ impl<'a> Default for AudioAnimatorExcelArgs<'a> {
       StateName: None,
       IgnoreInterruptDelay: false,
       IgnoreInterruptPlay: false,
+      IgnoreVelocity: false,
       Volume: 0.0,
       Delay: 0.0,
       RandomPitchMin: 0,
@@ -298,7 +312,7 @@ impl Serialize for AudioAnimatorExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("AudioAnimatorExcel", 13)?;
+    let mut s = serializer.serialize_struct("AudioAnimatorExcel", 14)?;
       s.serialize_field("ControllerNameHash", &self.ControllerNameHash())?;
       if let Some(f) = self.VoiceNamePrefix() {
         s.serialize_field("VoiceNamePrefix", &f)?;
@@ -313,6 +327,7 @@ impl Serialize for AudioAnimatorExcel<'_> {
       }
       s.serialize_field("IgnoreInterruptDelay", &self.IgnoreInterruptDelay())?;
       s.serialize_field("IgnoreInterruptPlay", &self.IgnoreInterruptPlay())?;
+      s.serialize_field("IgnoreVelocity", &self.IgnoreVelocity())?;
       s.serialize_field("Volume", &self.Volume())?;
       s.serialize_field("Delay", &self.Delay())?;
       s.serialize_field("RandomPitchMin", &self.RandomPitchMin())?;
@@ -360,6 +375,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AudioAnimatorExcelBuilder<'a, '
   #[inline]
   pub fn add_IgnoreInterruptPlay(&mut self, IgnoreInterruptPlay: bool) {
     self.fbb_.push_slot::<bool>(AudioAnimatorExcel::VT_IGNOREINTERRUPTPLAY, IgnoreInterruptPlay, false);
+  }
+  #[inline]
+  pub fn add_IgnoreVelocity(&mut self, IgnoreVelocity: bool) {
+    self.fbb_.push_slot::<bool>(AudioAnimatorExcel::VT_IGNOREVELOCITY, IgnoreVelocity, false);
   }
   #[inline]
   pub fn add_Volume(&mut self, Volume: f32) {
@@ -413,6 +432,7 @@ impl core::fmt::Debug for AudioAnimatorExcel<'_> {
       ds.field("StateName", &self.StateName());
       ds.field("IgnoreInterruptDelay", &self.IgnoreInterruptDelay());
       ds.field("IgnoreInterruptPlay", &self.IgnoreInterruptPlay());
+      ds.field("IgnoreVelocity", &self.IgnoreVelocity());
       ds.field("Volume", &self.Volume());
       ds.field("Delay", &self.Delay());
       ds.field("RandomPitchMin", &self.RandomPitchMin());
@@ -432,6 +452,7 @@ pub struct AudioAnimatorExcelT {
   pub StateName: Option<String>,
   pub IgnoreInterruptDelay: bool,
   pub IgnoreInterruptPlay: bool,
+  pub IgnoreVelocity: bool,
   pub Volume: f32,
   pub Delay: f32,
   pub RandomPitchMin: i32,
@@ -449,6 +470,7 @@ impl Default for AudioAnimatorExcelT {
       StateName: None,
       IgnoreInterruptDelay: false,
       IgnoreInterruptPlay: false,
+      IgnoreVelocity: false,
       Volume: 0.0,
       Delay: 0.0,
       RandomPitchMin: 0,
@@ -474,6 +496,7 @@ impl AudioAnimatorExcelT {
     });
     let IgnoreInterruptDelay = self.IgnoreInterruptDelay;
     let IgnoreInterruptPlay = self.IgnoreInterruptPlay;
+    let IgnoreVelocity = self.IgnoreVelocity;
     let Volume = self.Volume;
     let Delay = self.Delay;
     let RandomPitchMin = self.RandomPitchMin;
@@ -492,6 +515,7 @@ impl AudioAnimatorExcelT {
       StateName,
       IgnoreInterruptDelay,
       IgnoreInterruptPlay,
+      IgnoreVelocity,
       Volume,
       Delay,
       RandomPitchMin,

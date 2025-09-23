@@ -56,8 +56,8 @@ impl<'a> ConquestProgressResourceExcel<'a> {
       if let Some(x) = args.ProgressLocalizeCode {
         builder.add_ProgressLocalizeCode(x);
       }
-      if let Some(x) = args.voiceId {
-        builder.add_voiceId(x);
+      if let Some(x) = args.VoiceId {
+        builder.add_VoiceId(x);
       }
       if let Some(x) = args.ProgressResource {
         builder.add_ProgressResource(x);
@@ -80,7 +80,7 @@ impl<'a> ConquestProgressResourceExcel<'a> {
     let ProgressResource = self.ProgressResource().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let voiceId = self.voiceId().map(|x| {
+    let VoiceId = self.VoiceId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(*val, &key) } else { *val }).collect()
     });
     let ProgressLocalizeCode = self.ProgressLocalizeCode().map(|x| {
@@ -91,7 +91,7 @@ impl<'a> ConquestProgressResourceExcel<'a> {
       EventContentId,
       Group,
       ProgressResource,
-      voiceId,
+      VoiceId,
       ProgressLocalizeCode,
     }
   }
@@ -125,7 +125,7 @@ impl<'a> ConquestProgressResourceExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ConquestProgressResourceExcel::VT_PROGRESSRESOURCE, None)}
   }
   #[inline]
-  pub fn voiceId(&self) -> Option<flatbuffers::Vector<'a, u32>> {
+  pub fn VoiceId(&self) -> Option<flatbuffers::Vector<'a, u32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -151,7 +151,7 @@ impl flatbuffers::Verifiable for ConquestProgressResourceExcel<'_> {
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
      .visit_field::<ConquestProgressType>("Group", Self::VT_GROUP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ProgressResource", Self::VT_PROGRESSRESOURCE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, u32>>>("voiceId", Self::VT_VOICEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, u32>>>("VoiceId", Self::VT_VOICEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ProgressLocalizeCode", Self::VT_PROGRESSLOCALIZECODE, false)?
      .finish();
     Ok(())
@@ -162,7 +162,7 @@ pub struct ConquestProgressResourceExcelArgs<'a> {
     pub EventContentId: i64,
     pub Group: ConquestProgressType,
     pub ProgressResource: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub voiceId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, u32>>>,
+    pub VoiceId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, u32>>>,
     pub ProgressLocalizeCode: Option<flatbuffers::WIPOffset<&'a str>>,
 }
 impl<'a> Default for ConquestProgressResourceExcelArgs<'a> {
@@ -173,7 +173,7 @@ impl<'a> Default for ConquestProgressResourceExcelArgs<'a> {
       EventContentId: 0,
       Group: ConquestProgressType::None,
       ProgressResource: None,
-      voiceId: None,
+      VoiceId: None,
       ProgressLocalizeCode: None,
     }
   }
@@ -193,10 +193,10 @@ impl Serialize for ConquestProgressResourceExcel<'_> {
       } else {
         s.skip_field("ProgressResource")?;
       }
-      if let Some(f) = self.voiceId() {
-        s.serialize_field("voiceId", &f)?;
+      if let Some(f) = self.VoiceId() {
+        s.serialize_field("VoiceId", &f)?;
       } else {
-        s.skip_field("voiceId")?;
+        s.skip_field("VoiceId")?;
       }
       if let Some(f) = self.ProgressLocalizeCode() {
         s.serialize_field("ProgressLocalizeCode", &f)?;
@@ -229,8 +229,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConquestProgressResourceExcelBu
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestProgressResourceExcel::VT_PROGRESSRESOURCE, ProgressResource);
   }
   #[inline]
-  pub fn add_voiceId(&mut self, voiceId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , u32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestProgressResourceExcel::VT_VOICEID, voiceId);
+  pub fn add_VoiceId(&mut self, VoiceId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , u32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestProgressResourceExcel::VT_VOICEID, VoiceId);
   }
   #[inline]
   pub fn add_ProgressLocalizeCode(&mut self, ProgressLocalizeCode: flatbuffers::WIPOffset<&'b  str>) {
@@ -258,7 +258,7 @@ impl core::fmt::Debug for ConquestProgressResourceExcel<'_> {
       ds.field("EventContentId", &self.EventContentId());
       ds.field("Group", &self.Group());
       ds.field("ProgressResource", &self.ProgressResource());
-      ds.field("voiceId", &self.voiceId());
+      ds.field("VoiceId", &self.VoiceId());
       ds.field("ProgressLocalizeCode", &self.ProgressLocalizeCode());
       ds.finish()
   }
@@ -270,7 +270,7 @@ pub struct ConquestProgressResourceExcelT {
   pub EventContentId: i64,
   pub Group: ConquestProgressType,
   pub ProgressResource: Option<String>,
-  pub voiceId: Option<Vec<u32>>,
+  pub VoiceId: Option<Vec<u32>>,
   pub ProgressLocalizeCode: Option<String>,
 }
 impl Default for ConquestProgressResourceExcelT {
@@ -280,7 +280,7 @@ impl Default for ConquestProgressResourceExcelT {
       EventContentId: 0,
       Group: ConquestProgressType::None,
       ProgressResource: None,
-      voiceId: None,
+      VoiceId: None,
       ProgressLocalizeCode: None,
     }
   }
@@ -296,7 +296,7 @@ impl ConquestProgressResourceExcelT {
     let ProgressResource = self.ProgressResource.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let voiceId = self.voiceId.as_ref().map(|x|{
+    let VoiceId = self.VoiceId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ProgressLocalizeCode = self.ProgressLocalizeCode.as_ref().map(|x|{
@@ -307,7 +307,7 @@ impl ConquestProgressResourceExcelT {
       EventContentId,
       Group,
       ProgressResource,
-      voiceId,
+      VoiceId,
       ProgressLocalizeCode,
     })
   }

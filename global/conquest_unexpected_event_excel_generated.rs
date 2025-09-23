@@ -61,8 +61,8 @@ impl<'a> ConquestUnexpectedEventExcel<'a> {
       if let Some(x) = args.UnexpectedEventUnitId {
         builder.add_UnexpectedEventUnitId(x);
       }
-      if let Some(x) = args.unexpectedEventPrefab {
-        builder.add_unexpectedEventPrefab(x);
+      if let Some(x) = args.UnexpectedEventPrefab {
+        builder.add_UnexpectedEventPrefab(x);
       }
       let x = args.UnitCountPerStep;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -88,7 +88,7 @@ impl<'a> ConquestUnexpectedEventExcel<'a> {
       let UnexpectedEventConditionAmount = self.UnexpectedEventConditionAmount();
       let UnexpectedEventOccurDailyLimitCount = self.UnexpectedEventOccurDailyLimitCount();
       let UnitCountPerStep = self.UnitCountPerStep();
-    let unexpectedEventPrefab = self.unexpectedEventPrefab().map(|x| {
+    let UnexpectedEventPrefab = self.UnexpectedEventPrefab().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let UnexpectedEventUnitId = self.UnexpectedEventUnitId().map(|x| {
@@ -101,7 +101,7 @@ impl<'a> ConquestUnexpectedEventExcel<'a> {
       UnexpectedEventConditionAmount,
       UnexpectedEventOccurDailyLimitCount,
       UnitCountPerStep,
-      unexpectedEventPrefab,
+      UnexpectedEventPrefab,
       UnexpectedEventUnitId,
     }
   }
@@ -149,7 +149,7 @@ impl<'a> ConquestUnexpectedEventExcel<'a> {
     unsafe { self._tab.get::<i32>(ConquestUnexpectedEventExcel::VT_UNITCOUNTPERSTEP, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn unexpectedEventPrefab(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn UnexpectedEventPrefab(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -177,7 +177,7 @@ impl flatbuffers::Verifiable for ConquestUnexpectedEventExcel<'_> {
      .visit_field::<i64>("UnexpectedEventConditionAmount", Self::VT_UNEXPECTEDEVENTCONDITIONAMOUNT, false)?
      .visit_field::<i32>("UnexpectedEventOccurDailyLimitCount", Self::VT_UNEXPECTEDEVENTOCCURDAILYLIMITCOUNT, false)?
      .visit_field::<i32>("UnitCountPerStep", Self::VT_UNITCOUNTPERSTEP, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("unexpectedEventPrefab", Self::VT_UNEXPECTEDEVENTPREFAB, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("UnexpectedEventPrefab", Self::VT_UNEXPECTEDEVENTPREFAB, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("UnexpectedEventUnitId", Self::VT_UNEXPECTEDEVENTUNITID, false)?
      .finish();
     Ok(())
@@ -190,7 +190,7 @@ pub struct ConquestUnexpectedEventExcelArgs<'a> {
     pub UnexpectedEventConditionAmount: i64,
     pub UnexpectedEventOccurDailyLimitCount: i32,
     pub UnitCountPerStep: i32,
-    pub unexpectedEventPrefab: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub UnexpectedEventPrefab: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub UnexpectedEventUnitId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for ConquestUnexpectedEventExcelArgs<'a> {
@@ -203,7 +203,7 @@ impl<'a> Default for ConquestUnexpectedEventExcelArgs<'a> {
       UnexpectedEventConditionAmount: 0,
       UnexpectedEventOccurDailyLimitCount: 0,
       UnitCountPerStep: 0,
-      unexpectedEventPrefab: None,
+      UnexpectedEventPrefab: None,
       UnexpectedEventUnitId: None,
     }
   }
@@ -221,10 +221,10 @@ impl Serialize for ConquestUnexpectedEventExcel<'_> {
       s.serialize_field("UnexpectedEventConditionAmount", &self.UnexpectedEventConditionAmount())?;
       s.serialize_field("UnexpectedEventOccurDailyLimitCount", &self.UnexpectedEventOccurDailyLimitCount())?;
       s.serialize_field("UnitCountPerStep", &self.UnitCountPerStep())?;
-      if let Some(f) = self.unexpectedEventPrefab() {
-        s.serialize_field("unexpectedEventPrefab", &f)?;
+      if let Some(f) = self.UnexpectedEventPrefab() {
+        s.serialize_field("UnexpectedEventPrefab", &f)?;
       } else {
-        s.skip_field("unexpectedEventPrefab")?;
+        s.skip_field("UnexpectedEventPrefab")?;
       }
       if let Some(f) = self.UnexpectedEventUnitId() {
         s.serialize_field("UnexpectedEventUnitId", &f)?;
@@ -265,8 +265,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConquestUnexpectedEventExcelBui
     self.fbb_.push_slot::<i32>(ConquestUnexpectedEventExcel::VT_UNITCOUNTPERSTEP, UnitCountPerStep, 0);
   }
   #[inline]
-  pub fn add_unexpectedEventPrefab(&mut self, unexpectedEventPrefab: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestUnexpectedEventExcel::VT_UNEXPECTEDEVENTPREFAB, unexpectedEventPrefab);
+  pub fn add_UnexpectedEventPrefab(&mut self, UnexpectedEventPrefab: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConquestUnexpectedEventExcel::VT_UNEXPECTEDEVENTPREFAB, UnexpectedEventPrefab);
   }
   #[inline]
   pub fn add_UnexpectedEventUnitId(&mut self, UnexpectedEventUnitId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -296,7 +296,7 @@ impl core::fmt::Debug for ConquestUnexpectedEventExcel<'_> {
       ds.field("UnexpectedEventConditionAmount", &self.UnexpectedEventConditionAmount());
       ds.field("UnexpectedEventOccurDailyLimitCount", &self.UnexpectedEventOccurDailyLimitCount());
       ds.field("UnitCountPerStep", &self.UnitCountPerStep());
-      ds.field("unexpectedEventPrefab", &self.unexpectedEventPrefab());
+      ds.field("UnexpectedEventPrefab", &self.UnexpectedEventPrefab());
       ds.field("UnexpectedEventUnitId", &self.UnexpectedEventUnitId());
       ds.finish()
   }
@@ -310,7 +310,7 @@ pub struct ConquestUnexpectedEventExcelT {
   pub UnexpectedEventConditionAmount: i64,
   pub UnexpectedEventOccurDailyLimitCount: i32,
   pub UnitCountPerStep: i32,
-  pub unexpectedEventPrefab: Option<Vec<String>>,
+  pub UnexpectedEventPrefab: Option<Vec<String>>,
   pub UnexpectedEventUnitId: Option<Vec<i64>>,
 }
 impl Default for ConquestUnexpectedEventExcelT {
@@ -322,7 +322,7 @@ impl Default for ConquestUnexpectedEventExcelT {
       UnexpectedEventConditionAmount: 0,
       UnexpectedEventOccurDailyLimitCount: 0,
       UnitCountPerStep: 0,
-      unexpectedEventPrefab: None,
+      UnexpectedEventPrefab: None,
       UnexpectedEventUnitId: None,
     }
   }
@@ -338,7 +338,7 @@ impl ConquestUnexpectedEventExcelT {
     let UnexpectedEventConditionAmount = self.UnexpectedEventConditionAmount;
     let UnexpectedEventOccurDailyLimitCount = self.UnexpectedEventOccurDailyLimitCount;
     let UnitCountPerStep = self.UnitCountPerStep;
-    let unexpectedEventPrefab = self.unexpectedEventPrefab.as_ref().map(|x|{
+    let UnexpectedEventPrefab = self.UnexpectedEventPrefab.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let UnexpectedEventUnitId = self.UnexpectedEventUnitId.as_ref().map(|x|{
@@ -351,7 +351,7 @@ impl ConquestUnexpectedEventExcelT {
       UnexpectedEventConditionAmount,
       UnexpectedEventOccurDailyLimitCount,
       UnitCountPerStep,
-      unexpectedEventPrefab,
+      UnexpectedEventPrefab,
       UnexpectedEventUnitId,
     })
   }

@@ -49,18 +49,21 @@ impl<'a> CampaignStageExcel<'a> {
   pub const VT_MAXTURN: flatbuffers::VOffsetT = 38;
   pub const VT_STAGETOPOGRAPHY: flatbuffers::VOffsetT = 40;
   pub const VT_RECOMMANDLEVEL: flatbuffers::VOffsetT = 42;
-  pub const VT_BGMID: flatbuffers::VOffsetT = 44;
-  pub const VT_STRATEGYENVIRONMENT: flatbuffers::VOffsetT = 46;
-  pub const VT_GROUNDID: flatbuffers::VOffsetT = 48;
-  pub const VT_STRATEGYSKIPGROUNDID: flatbuffers::VOffsetT = 50;
-  pub const VT_CONTENTTYPE: flatbuffers::VOffsetT = 52;
-  pub const VT_BGMID: flatbuffers::VOffsetT = 54;
-  pub const VT_FIRSTCLEARREPORTEVENTNAME: flatbuffers::VOffsetT = 56;
-  pub const VT_FIRSTCLEARFUNNELMESSAGE: flatbuffers::VOffsetT = 58;
-  pub const VT_FIRSTCLEAREVENTMESSAGE: flatbuffers::VOffsetT = 60;
-  pub const VT_TACTICREWARDEXP: flatbuffers::VOffsetT = 62;
-  pub const VT_FIXEDECHELONID: flatbuffers::VOffsetT = 64;
-  pub const VT_ECHELONEXTENSIONTYPE: flatbuffers::VOffsetT = 66;
+  pub const VT_RECOMMANDLEVELGAPFORGUIDE: flatbuffers::VOffsetT = 44;
+  pub const VT_MINEQUIPMENTTIERFORGUIDE: flatbuffers::VOffsetT = 46;
+  pub const VT_MINSKILLLEVELFORGUIDE: flatbuffers::VOffsetT = 48;
+  pub const VT_BGMID: flatbuffers::VOffsetT = 50;
+  pub const VT_STRATEGYENVIRONMENT: flatbuffers::VOffsetT = 52;
+  pub const VT_GROUNDID: flatbuffers::VOffsetT = 54;
+  pub const VT_STRATEGYSKIPGROUNDID: flatbuffers::VOffsetT = 56;
+  pub const VT_CONTENTTYPE: flatbuffers::VOffsetT = 58;
+  pub const VT_BGMID: flatbuffers::VOffsetT = 60;
+  pub const VT_FIRSTCLEARREPORTEVENTNAME: flatbuffers::VOffsetT = 62;
+  pub const VT_FIRSTCLEARFUNNELMESSAGE: flatbuffers::VOffsetT = 64;
+  pub const VT_FIRSTCLEAREVENTMESSAGE: flatbuffers::VOffsetT = 66;
+  pub const VT_TACTICREWARDEXP: flatbuffers::VOffsetT = 68;
+  pub const VT_FIXEDECHELONID: flatbuffers::VOffsetT = 70;
+  pub const VT_ECHELONEXTENSIONTYPE: flatbuffers::VOffsetT = 72;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -130,6 +133,15 @@ impl<'a> CampaignStageExcel<'a> {
       if let Some(x) = args.BgmId {
         builder.add_BgmId(x);
       }
+      if let Some(x) = args.MinSkillLevelForGuide {
+        builder.add_MinSkillLevelForGuide(x);
+      }
+      if let Some(x) = args.MinEquipmentTierForGuide {
+        builder.add_MinEquipmentTierForGuide(x);
+      }
+      let x = args.RecommandLevelGapForGuide;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
+      builder.add_RecommandLevelGapForGuide(x);
       let x = args.RecommandLevel;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_RecommandLevel(x);
@@ -212,6 +224,13 @@ impl<'a> CampaignStageExcel<'a> {
         self.StageTopography()
       };
       let RecommandLevel = self.RecommandLevel();
+      let RecommandLevelGapForGuide = self.RecommandLevelGapForGuide();
+    let MinEquipmentTierForGuide = self.MinEquipmentTierForGuide().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
+    });
+    let MinSkillLevelForGuide = self.MinSkillLevelForGuide().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
+    });
     let BgmId = self.BgmId().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -265,6 +284,9 @@ impl<'a> CampaignStageExcel<'a> {
       MaxTurn,
       StageTopography,
       RecommandLevel,
+      RecommandLevelGapForGuide,
+      MinEquipmentTierForGuide,
+      MinSkillLevelForGuide,
       BgmId,
       StrategyEnvironment,
       GroundId,
@@ -421,6 +443,27 @@ impl<'a> CampaignStageExcel<'a> {
     unsafe { self._tab.get::<i32>(CampaignStageExcel::VT_RECOMMANDLEVEL, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn RecommandLevelGapForGuide(&self) -> i32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i32>(CampaignStageExcel::VT_RECOMMANDLEVELGAPFORGUIDE, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn MinEquipmentTierForGuide(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CampaignStageExcel::VT_MINEQUIPMENTTIERFORGUIDE, None)}
+  }
+  #[inline]
+  pub fn MinSkillLevelForGuide(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CampaignStageExcel::VT_MINSKILLLEVELFORGUIDE, None)}
+  }
+  #[inline]
   pub fn BgmId(&self) -> Option<&'a str> {
     // Safety:
     // Created from valid Table for this object
@@ -533,6 +576,9 @@ impl flatbuffers::Verifiable for CampaignStageExcel<'_> {
      .visit_field::<i32>("MaxTurn", Self::VT_MAXTURN, false)?
      .visit_field::<StageTopography>("StageTopography", Self::VT_STAGETOPOGRAPHY, false)?
      .visit_field::<i32>("RecommandLevel", Self::VT_RECOMMANDLEVEL, false)?
+     .visit_field::<i32>("RecommandLevelGapForGuide", Self::VT_RECOMMANDLEVELGAPFORGUIDE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("MinEquipmentTierForGuide", Self::VT_MINEQUIPMENTTIERFORGUIDE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("MinSkillLevelForGuide", Self::VT_MINSKILLLEVELFORGUIDE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BgmId", Self::VT_BGMID, false)?
      .visit_field::<StrategyEnvironment>("StrategyEnvironment", Self::VT_STRATEGYENVIRONMENT, false)?
      .visit_field::<i64>("GroundId", Self::VT_GROUNDID, false)?
@@ -570,6 +616,9 @@ pub struct CampaignStageExcelArgs<'a> {
     pub MaxTurn: i32,
     pub StageTopography: StageTopography,
     pub RecommandLevel: i32,
+    pub RecommandLevelGapForGuide: i32,
+    pub MinEquipmentTierForGuide: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub MinSkillLevelForGuide: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub BgmId: Option<flatbuffers::WIPOffset<&'a str>>,
     pub StrategyEnvironment: StrategyEnvironment,
     pub GroundId: i64,
@@ -607,6 +656,9 @@ impl<'a> Default for CampaignStageExcelArgs<'a> {
       MaxTurn: 0,
       StageTopography: StageTopography::Street,
       RecommandLevel: 0,
+      RecommandLevelGapForGuide: 0,
+      MinEquipmentTierForGuide: None,
+      MinSkillLevelForGuide: None,
       BgmId: None,
       StrategyEnvironment: StrategyEnvironment::None,
       GroundId: 0,
@@ -628,7 +680,7 @@ impl Serialize for CampaignStageExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("CampaignStageExcel", 32)?;
+    let mut s = serializer.serialize_struct("CampaignStageExcel", 35)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("Deprecated", &self.Deprecated())?;
       if let Some(f) = self.Name() {
@@ -673,6 +725,17 @@ impl Serialize for CampaignStageExcel<'_> {
       s.serialize_field("MaxTurn", &self.MaxTurn())?;
       s.serialize_field("StageTopography", &self.StageTopography())?;
       s.serialize_field("RecommandLevel", &self.RecommandLevel())?;
+      s.serialize_field("RecommandLevelGapForGuide", &self.RecommandLevelGapForGuide())?;
+      if let Some(f) = self.MinEquipmentTierForGuide() {
+        s.serialize_field("MinEquipmentTierForGuide", &f)?;
+      } else {
+        s.skip_field("MinEquipmentTierForGuide")?;
+      }
+      if let Some(f) = self.MinSkillLevelForGuide() {
+        s.serialize_field("MinSkillLevelForGuide", &f)?;
+      } else {
+        s.skip_field("MinSkillLevelForGuide")?;
+      }
       if let Some(f) = self.BgmId() {
         s.serialize_field("BgmId", &f)?;
       } else {
@@ -791,6 +854,18 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CampaignStageExcelBuilder<'a, '
     self.fbb_.push_slot::<i32>(CampaignStageExcel::VT_RECOMMANDLEVEL, RecommandLevel, 0);
   }
   #[inline]
+  pub fn add_RecommandLevelGapForGuide(&mut self, RecommandLevelGapForGuide: i32) {
+    self.fbb_.push_slot::<i32>(CampaignStageExcel::VT_RECOMMANDLEVELGAPFORGUIDE, RecommandLevelGapForGuide, 0);
+  }
+  #[inline]
+  pub fn add_MinEquipmentTierForGuide(&mut self, MinEquipmentTierForGuide: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignStageExcel::VT_MINEQUIPMENTTIERFORGUIDE, MinEquipmentTierForGuide);
+  }
+  #[inline]
+  pub fn add_MinSkillLevelForGuide(&mut self, MinSkillLevelForGuide: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignStageExcel::VT_MINSKILLLEVELFORGUIDE, MinSkillLevelForGuide);
+  }
+  #[inline]
   pub fn add_BgmId(&mut self, BgmId: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignStageExcel::VT_BGMID, BgmId);
   }
@@ -876,6 +951,9 @@ impl core::fmt::Debug for CampaignStageExcel<'_> {
       ds.field("MaxTurn", &self.MaxTurn());
       ds.field("StageTopography", &self.StageTopography());
       ds.field("RecommandLevel", &self.RecommandLevel());
+      ds.field("RecommandLevelGapForGuide", &self.RecommandLevelGapForGuide());
+      ds.field("MinEquipmentTierForGuide", &self.MinEquipmentTierForGuide());
+      ds.field("MinSkillLevelForGuide", &self.MinSkillLevelForGuide());
       ds.field("BgmId", &self.BgmId());
       ds.field("StrategyEnvironment", &self.StrategyEnvironment());
       ds.field("GroundId", &self.GroundId());
@@ -914,6 +992,9 @@ pub struct CampaignStageExcelT {
   pub MaxTurn: i32,
   pub StageTopography: StageTopography,
   pub RecommandLevel: i32,
+  pub RecommandLevelGapForGuide: i32,
+  pub MinEquipmentTierForGuide: Option<Vec<i64>>,
+  pub MinSkillLevelForGuide: Option<Vec<i64>>,
   pub BgmId: Option<String>,
   pub StrategyEnvironment: StrategyEnvironment,
   pub GroundId: i64,
@@ -950,6 +1031,9 @@ impl Default for CampaignStageExcelT {
       MaxTurn: 0,
       StageTopography: StageTopography::Street,
       RecommandLevel: 0,
+      RecommandLevelGapForGuide: 0,
+      MinEquipmentTierForGuide: None,
+      MinSkillLevelForGuide: None,
       BgmId: None,
       StrategyEnvironment: StrategyEnvironment::None,
       GroundId: 0,
@@ -1002,6 +1086,13 @@ impl CampaignStageExcelT {
     let MaxTurn = self.MaxTurn;
     let StageTopography = self.StageTopography;
     let RecommandLevel = self.RecommandLevel;
+    let RecommandLevelGapForGuide = self.RecommandLevelGapForGuide;
+    let MinEquipmentTierForGuide = self.MinEquipmentTierForGuide.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
+    let MinSkillLevelForGuide = self.MinSkillLevelForGuide.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
     let BgmId = self.BgmId.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -1043,6 +1134,9 @@ impl CampaignStageExcelT {
       MaxTurn,
       StageTopography,
       RecommandLevel,
+      RecommandLevelGapForGuide,
+      MinEquipmentTierForGuide,
+      MinSkillLevelForGuide,
       BgmId,
       StrategyEnvironment,
       GroundId,

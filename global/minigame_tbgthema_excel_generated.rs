@@ -80,11 +80,11 @@ impl<'a> MinigameTBGThemaExcel<'a> {
       if let Some(x) = args.ThemaNameLocalize {
         builder.add_ThemaNameLocalize(x);
       }
-      if let Some(x) = args.portalConditionParameter {
-        builder.add_portalConditionParameter(x);
+      if let Some(x) = args.PortalConditionParameter {
+        builder.add_PortalConditionParameter(x);
       }
-      if let Some(x) = args.portalCondition {
-        builder.add_portalCondition(x);
+      if let Some(x) = args.PortalCondition {
+        builder.add_PortalCondition(x);
       }
       if let Some(x) = args.ThemaMapBG {
         builder.add_ThemaMapBG(x);
@@ -118,10 +118,10 @@ impl<'a> MinigameTBGThemaExcel<'a> {
     let ThemaMapBG = self.ThemaMapBG().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let portalCondition = self.portalCondition().map(|x| {
+    let PortalCondition = self.PortalCondition().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let portalConditionParameter = self.portalConditionParameter().map(|x| {
+    let PortalConditionParameter = self.PortalConditionParameter().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let ThemaNameLocalize = self.ThemaNameLocalize().map(|x| {
@@ -146,8 +146,8 @@ impl<'a> MinigameTBGThemaExcel<'a> {
       ThemaType,
       ThemaMap,
       ThemaMapBG,
-      portalCondition,
-      portalConditionParameter,
+      PortalCondition,
+      PortalConditionParameter,
       ThemaNameLocalize,
       ThemaLoadingImage,
       ThemaPlayerPrefab,
@@ -201,14 +201,14 @@ impl<'a> MinigameTBGThemaExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(MinigameTBGThemaExcel::VT_THEMAMAPBG, None)}
   }
   #[inline]
-  pub fn portalCondition(&self) -> Option<flatbuffers::Vector<'a, TBGPortalCondition>> {
+  pub fn PortalCondition(&self) -> Option<flatbuffers::Vector<'a, TBGPortalCondition>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, TBGPortalCondition>>>(MinigameTBGThemaExcel::VT_PORTALCONDITION, None)}
   }
   #[inline]
-  pub fn portalConditionParameter(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn PortalConditionParameter(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -278,8 +278,8 @@ impl flatbuffers::Verifiable for MinigameTBGThemaExcel<'_> {
      .visit_field::<TBGThemaType>("ThemaType", Self::VT_THEMATYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ThemaMap", Self::VT_THEMAMAP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ThemaMapBG", Self::VT_THEMAMAPBG, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, TBGPortalCondition>>>("portalCondition", Self::VT_PORTALCONDITION, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("portalConditionParameter", Self::VT_PORTALCONDITIONPARAMETER, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, TBGPortalCondition>>>("PortalCondition", Self::VT_PORTALCONDITION, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("PortalConditionParameter", Self::VT_PORTALCONDITIONPARAMETER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ThemaNameLocalize", Self::VT_THEMANAMELOCALIZE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ThemaLoadingImage", Self::VT_THEMALOADINGIMAGE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ThemaPlayerPrefab", Self::VT_THEMAPLAYERPREFAB, false)?
@@ -298,8 +298,8 @@ pub struct MinigameTBGThemaExcelArgs<'a> {
     pub ThemaType: TBGThemaType,
     pub ThemaMap: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ThemaMapBG: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub portalCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, TBGPortalCondition>>>,
-    pub portalConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub PortalCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, TBGPortalCondition>>>,
+    pub PortalConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub ThemaNameLocalize: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ThemaLoadingImage: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ThemaPlayerPrefab: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -318,8 +318,8 @@ impl<'a> Default for MinigameTBGThemaExcelArgs<'a> {
       ThemaType: TBGThemaType::None,
       ThemaMap: None,
       ThemaMapBG: None,
-      portalCondition: None,
-      portalConditionParameter: None,
+      PortalCondition: None,
+      PortalConditionParameter: None,
       ThemaNameLocalize: None,
       ThemaLoadingImage: None,
       ThemaPlayerPrefab: None,
@@ -351,15 +351,15 @@ impl Serialize for MinigameTBGThemaExcel<'_> {
       } else {
         s.skip_field("ThemaMapBG")?;
       }
-      if let Some(f) = self.portalCondition() {
-        s.serialize_field("portalCondition", &f)?;
+      if let Some(f) = self.PortalCondition() {
+        s.serialize_field("PortalCondition", &f)?;
       } else {
-        s.skip_field("portalCondition")?;
+        s.skip_field("PortalCondition")?;
       }
-      if let Some(f) = self.portalConditionParameter() {
-        s.serialize_field("portalConditionParameter", &f)?;
+      if let Some(f) = self.PortalConditionParameter() {
+        s.serialize_field("PortalConditionParameter", &f)?;
       } else {
-        s.skip_field("portalConditionParameter")?;
+        s.skip_field("PortalConditionParameter")?;
       }
       if let Some(f) = self.ThemaNameLocalize() {
         s.serialize_field("ThemaNameLocalize", &f)?;
@@ -418,12 +418,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MinigameTBGThemaExcelBuilder<'a
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGThemaExcel::VT_THEMAMAPBG, ThemaMapBG);
   }
   #[inline]
-  pub fn add_portalCondition(&mut self, portalCondition: flatbuffers::WIPOffset<flatbuffers::Vector<'b , TBGPortalCondition>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGThemaExcel::VT_PORTALCONDITION, portalCondition);
+  pub fn add_PortalCondition(&mut self, PortalCondition: flatbuffers::WIPOffset<flatbuffers::Vector<'b , TBGPortalCondition>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGThemaExcel::VT_PORTALCONDITION, PortalCondition);
   }
   #[inline]
-  pub fn add_portalConditionParameter(&mut self, portalConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGThemaExcel::VT_PORTALCONDITIONPARAMETER, portalConditionParameter);
+  pub fn add_PortalConditionParameter(&mut self, PortalConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MinigameTBGThemaExcel::VT_PORTALCONDITIONPARAMETER, PortalConditionParameter);
   }
   #[inline]
   pub fn add_ThemaNameLocalize(&mut self, ThemaNameLocalize: flatbuffers::WIPOffset<&'b  str>) {
@@ -477,8 +477,8 @@ impl core::fmt::Debug for MinigameTBGThemaExcel<'_> {
       ds.field("ThemaType", &self.ThemaType());
       ds.field("ThemaMap", &self.ThemaMap());
       ds.field("ThemaMapBG", &self.ThemaMapBG());
-      ds.field("portalCondition", &self.portalCondition());
-      ds.field("portalConditionParameter", &self.portalConditionParameter());
+      ds.field("PortalCondition", &self.PortalCondition());
+      ds.field("PortalConditionParameter", &self.PortalConditionParameter());
       ds.field("ThemaNameLocalize", &self.ThemaNameLocalize());
       ds.field("ThemaLoadingImage", &self.ThemaLoadingImage());
       ds.field("ThemaPlayerPrefab", &self.ThemaPlayerPrefab());
@@ -498,8 +498,8 @@ pub struct MinigameTBGThemaExcelT {
   pub ThemaType: TBGThemaType,
   pub ThemaMap: Option<String>,
   pub ThemaMapBG: Option<String>,
-  pub portalCondition: Option<Vec<TBGPortalCondition>>,
-  pub portalConditionParameter: Option<Vec<String>>,
+  pub PortalCondition: Option<Vec<TBGPortalCondition>>,
+  pub PortalConditionParameter: Option<Vec<String>>,
   pub ThemaNameLocalize: Option<String>,
   pub ThemaLoadingImage: Option<String>,
   pub ThemaPlayerPrefab: Option<String>,
@@ -517,8 +517,8 @@ impl Default for MinigameTBGThemaExcelT {
       ThemaType: TBGThemaType::None,
       ThemaMap: None,
       ThemaMapBG: None,
-      portalCondition: None,
-      portalConditionParameter: None,
+      PortalCondition: None,
+      PortalConditionParameter: None,
       ThemaNameLocalize: None,
       ThemaLoadingImage: None,
       ThemaPlayerPrefab: None,
@@ -544,10 +544,10 @@ impl MinigameTBGThemaExcelT {
     let ThemaMapBG = self.ThemaMapBG.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let portalCondition = self.portalCondition.as_ref().map(|x|{
+    let PortalCondition = self.PortalCondition.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let portalConditionParameter = self.portalConditionParameter.as_ref().map(|x|{
+    let PortalConditionParameter = self.PortalConditionParameter.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let ThemaNameLocalize = self.ThemaNameLocalize.as_ref().map(|x|{
@@ -572,8 +572,8 @@ impl MinigameTBGThemaExcelT {
       ThemaType,
       ThemaMap,
       ThemaMapBG,
-      portalCondition,
-      portalConditionParameter,
+      PortalCondition,
+      PortalConditionParameter,
       ThemaNameLocalize,
       ThemaLoadingImage,
       ThemaPlayerPrefab,

@@ -146,8 +146,8 @@ impl<'a> ConstArenaExcel<'a> {
       if let Some(x) = args.NPCName {
         builder.add_NPCName(x);
       }
-      if let Some(x) = args.StatSumFactor {
-        builder.add_StatSumFactor(x);
+      if let Some(x) = args.statSumFactor {
+        builder.add_statSumFactor(x);
       }
       if let Some(x) = args.statMulFactor {
         builder.add_statMulFactor(x);
@@ -155,8 +155,8 @@ impl<'a> ConstArenaExcel<'a> {
       if let Some(x) = args.ModifiedStatType {
         builder.add_ModifiedStatType(x);
       }
-      if let Some(x) = args.RelativeOpponentRankEnd {
-        builder.add_RelativeOpponentRankEnd(x);
+      if let Some(x) = args.relativeOpponentRankEnd {
+        builder.add_relativeOpponentRankEnd(x);
       }
       if let Some(x) = args.RelativeOpponentRankStart {
         builder.add_RelativeOpponentRankStart(x);
@@ -204,7 +204,7 @@ impl<'a> ConstArenaExcel<'a> {
     let RelativeOpponentRankStart = self.RelativeOpponentRankStart().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let RelativeOpponentRankEnd = self.RelativeOpponentRankEnd().map(|x| {
+    let relativeOpponentRankEnd = self.relativeOpponentRankEnd().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let ModifiedStatType = self.ModifiedStatType().map(|x| {
@@ -213,7 +213,7 @@ impl<'a> ConstArenaExcel<'a> {
     let statMulFactor = self.statMulFactor().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let StatSumFactor = self.StatSumFactor().map(|x| {
+    let statSumFactor = self.statSumFactor().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let NPCName = self.NPCName().map(|x| {
@@ -254,10 +254,10 @@ impl<'a> ConstArenaExcel<'a> {
       characterSlotHideRank,
       MapSlotHideRank,
       RelativeOpponentRankStart,
-      RelativeOpponentRankEnd,
+      relativeOpponentRankEnd,
       ModifiedStatType,
       statMulFactor,
-      StatSumFactor,
+      statSumFactor,
       NPCName,
       NPCMainCharacterCount,
       NPCSupportCharacterCount,
@@ -375,7 +375,7 @@ impl<'a> ConstArenaExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ConstArenaExcel::VT_RELATIVEOPPONENTRANKSTART, None)}
   }
   #[inline]
-  pub fn RelativeOpponentRankEnd(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn relativeOpponentRankEnd(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -396,7 +396,7 @@ impl<'a> ConstArenaExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ConstArenaExcel::VT_STATMULFACTOR, None)}
   }
   #[inline]
-  pub fn StatSumFactor(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn statSumFactor(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -530,10 +530,10 @@ impl flatbuffers::Verifiable for ConstArenaExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("characterSlotHideRank", Self::VT_CHARACTERSLOTHIDERANK, false)?
      .visit_field::<i64>("MapSlotHideRank", Self::VT_MAPSLOTHIDERANK, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RelativeOpponentRankStart", Self::VT_RELATIVEOPPONENTRANKSTART, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RelativeOpponentRankEnd", Self::VT_RELATIVEOPPONENTRANKEND, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("relativeOpponentRankEnd", Self::VT_RELATIVEOPPONENTRANKEND, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StatType>>>("ModifiedStatType", Self::VT_MODIFIEDSTATTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("statMulFactor", Self::VT_STATMULFACTOR, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StatSumFactor", Self::VT_STATSUMFACTOR, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("statSumFactor", Self::VT_STATSUMFACTOR, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("NPCName", Self::VT_NPCNAME, false)?
      .visit_field::<i64>("NPCMainCharacterCount", Self::VT_NPCMAINCHARACTERCOUNT, false)?
      .visit_field::<i64>("NPCSupportCharacterCount", Self::VT_NPCSUPPORTCHARACTERCOUNT, false)?
@@ -568,10 +568,10 @@ pub struct ConstArenaExcelArgs<'a> {
     pub characterSlotHideRank: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub MapSlotHideRank: i64,
     pub RelativeOpponentRankStart: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub RelativeOpponentRankEnd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub relativeOpponentRankEnd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ModifiedStatType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StatType>>>,
     pub statMulFactor: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub StatSumFactor: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub statSumFactor: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub NPCName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub NPCMainCharacterCount: i64,
     pub NPCSupportCharacterCount: i64,
@@ -606,10 +606,10 @@ impl<'a> Default for ConstArenaExcelArgs<'a> {
       characterSlotHideRank: None,
       MapSlotHideRank: 0,
       RelativeOpponentRankStart: None,
-      RelativeOpponentRankEnd: None,
+      relativeOpponentRankEnd: None,
       ModifiedStatType: None,
       statMulFactor: None,
-      StatSumFactor: None,
+      statSumFactor: None,
       NPCName: None,
       NPCMainCharacterCount: 0,
       NPCSupportCharacterCount: 0,
@@ -665,10 +665,10 @@ impl Serialize for ConstArenaExcel<'_> {
       } else {
         s.skip_field("RelativeOpponentRankStart")?;
       }
-      if let Some(f) = self.RelativeOpponentRankEnd() {
-        s.serialize_field("RelativeOpponentRankEnd", &f)?;
+      if let Some(f) = self.relativeOpponentRankEnd() {
+        s.serialize_field("relativeOpponentRankEnd", &f)?;
       } else {
-        s.skip_field("RelativeOpponentRankEnd")?;
+        s.skip_field("relativeOpponentRankEnd")?;
       }
       if let Some(f) = self.ModifiedStatType() {
         s.serialize_field("ModifiedStatType", &f)?;
@@ -680,10 +680,10 @@ impl Serialize for ConstArenaExcel<'_> {
       } else {
         s.skip_field("statMulFactor")?;
       }
-      if let Some(f) = self.StatSumFactor() {
-        s.serialize_field("StatSumFactor", &f)?;
+      if let Some(f) = self.statSumFactor() {
+        s.serialize_field("statSumFactor", &f)?;
       } else {
-        s.skip_field("StatSumFactor")?;
+        s.skip_field("statSumFactor")?;
       }
       if let Some(f) = self.NPCName() {
         s.serialize_field("NPCName", &f)?;
@@ -782,8 +782,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConstArenaExcelBuilder<'a, 'b, 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_RELATIVEOPPONENTRANKSTART, RelativeOpponentRankStart);
   }
   #[inline]
-  pub fn add_RelativeOpponentRankEnd(&mut self, RelativeOpponentRankEnd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_RELATIVEOPPONENTRANKEND, RelativeOpponentRankEnd);
+  pub fn add_relativeOpponentRankEnd(&mut self, relativeOpponentRankEnd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_RELATIVEOPPONENTRANKEND, relativeOpponentRankEnd);
   }
   #[inline]
   pub fn add_ModifiedStatType(&mut self, ModifiedStatType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , StatType>>) {
@@ -794,8 +794,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConstArenaExcelBuilder<'a, 'b, 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_STATMULFACTOR, statMulFactor);
   }
   #[inline]
-  pub fn add_StatSumFactor(&mut self, StatSumFactor: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_STATSUMFACTOR, StatSumFactor);
+  pub fn add_statSumFactor(&mut self, statSumFactor: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_STATSUMFACTOR, statSumFactor);
   }
   #[inline]
   pub fn add_NPCName(&mut self, NPCName: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
@@ -889,10 +889,10 @@ impl core::fmt::Debug for ConstArenaExcel<'_> {
       ds.field("characterSlotHideRank", &self.characterSlotHideRank());
       ds.field("MapSlotHideRank", &self.MapSlotHideRank());
       ds.field("RelativeOpponentRankStart", &self.RelativeOpponentRankStart());
-      ds.field("RelativeOpponentRankEnd", &self.RelativeOpponentRankEnd());
+      ds.field("relativeOpponentRankEnd", &self.relativeOpponentRankEnd());
       ds.field("ModifiedStatType", &self.ModifiedStatType());
       ds.field("statMulFactor", &self.statMulFactor());
-      ds.field("StatSumFactor", &self.StatSumFactor());
+      ds.field("statSumFactor", &self.statSumFactor());
       ds.field("NPCName", &self.NPCName());
       ds.field("NPCMainCharacterCount", &self.NPCMainCharacterCount());
       ds.field("NPCSupportCharacterCount", &self.NPCSupportCharacterCount());
@@ -928,10 +928,10 @@ pub struct ConstArenaExcelT {
   pub characterSlotHideRank: Option<Vec<i64>>,
   pub MapSlotHideRank: i64,
   pub RelativeOpponentRankStart: Option<Vec<i64>>,
-  pub RelativeOpponentRankEnd: Option<Vec<i64>>,
+  pub relativeOpponentRankEnd: Option<Vec<i64>>,
   pub ModifiedStatType: Option<Vec<StatType>>,
   pub statMulFactor: Option<Vec<i64>>,
-  pub StatSumFactor: Option<Vec<i64>>,
+  pub statSumFactor: Option<Vec<i64>>,
   pub NPCName: Option<Vec<String>>,
   pub NPCMainCharacterCount: i64,
   pub NPCSupportCharacterCount: i64,
@@ -965,10 +965,10 @@ impl Default for ConstArenaExcelT {
       characterSlotHideRank: None,
       MapSlotHideRank: 0,
       RelativeOpponentRankStart: None,
-      RelativeOpponentRankEnd: None,
+      relativeOpponentRankEnd: None,
       ModifiedStatType: None,
       statMulFactor: None,
-      StatSumFactor: None,
+      statSumFactor: None,
       NPCName: None,
       NPCMainCharacterCount: 0,
       NPCSupportCharacterCount: 0,
@@ -1014,7 +1014,7 @@ impl ConstArenaExcelT {
     let RelativeOpponentRankStart = self.RelativeOpponentRankStart.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let RelativeOpponentRankEnd = self.RelativeOpponentRankEnd.as_ref().map(|x|{
+    let relativeOpponentRankEnd = self.relativeOpponentRankEnd.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ModifiedStatType = self.ModifiedStatType.as_ref().map(|x|{
@@ -1023,7 +1023,7 @@ impl ConstArenaExcelT {
     let statMulFactor = self.statMulFactor.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let StatSumFactor = self.StatSumFactor.as_ref().map(|x|{
+    let statSumFactor = self.statSumFactor.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let NPCName = self.NPCName.as_ref().map(|x|{
@@ -1064,10 +1064,10 @@ impl ConstArenaExcelT {
       characterSlotHideRank,
       MapSlotHideRank,
       RelativeOpponentRankStart,
-      RelativeOpponentRankEnd,
+      relativeOpponentRankEnd,
       ModifiedStatType,
       statMulFactor,
-      StatSumFactor,
+      statSumFactor,
       NPCName,
       NPCMainCharacterCount,
       NPCSupportCharacterCount,

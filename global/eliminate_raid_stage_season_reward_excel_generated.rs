@@ -49,17 +49,17 @@ impl<'a> EliminateRaidStageSeasonRewardExcel<'a> {
       let x = args.SeasonRewardId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_SeasonRewardId(x);
-      if let Some(x) = args.seasonRewardAmount {
-        builder.add_seasonRewardAmount(x);
+      if let Some(x) = args.SeasonRewardAmount {
+        builder.add_SeasonRewardAmount(x);
       }
-      if let Some(x) = args.seasonRewardParcelUniqueName {
-        builder.add_seasonRewardParcelUniqueName(x);
+      if let Some(x) = args.SeasonRewardParcelUniqueName {
+        builder.add_SeasonRewardParcelUniqueName(x);
       }
-      if let Some(x) = args.seasonRewardParcelUniqueId {
-        builder.add_seasonRewardParcelUniqueId(x);
+      if let Some(x) = args.SeasonRewardParcelUniqueId {
+        builder.add_SeasonRewardParcelUniqueId(x);
       }
-      if let Some(x) = args.seasonRewardParcelType {
-        builder.add_seasonRewardParcelType(x);
+      if let Some(x) = args.SeasonRewardParcelType {
+        builder.add_SeasonRewardParcelType(x);
       }
     builder.finish()
   }
@@ -67,24 +67,24 @@ impl<'a> EliminateRaidStageSeasonRewardExcel<'a> {
   pub fn unpack(&self) -> EliminateRaidStageSeasonRewardExcelT {
     let key = table_encryption_service::create_key(b"EliminateRaidStageSeasonReward");
       let SeasonRewardId = self.SeasonRewardId();
-    let seasonRewardParcelType = self.seasonRewardParcelType().map(|x| {
+    let SeasonRewardParcelType = self.SeasonRewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let seasonRewardParcelUniqueId = self.seasonRewardParcelUniqueId().map(|x| {
+    let SeasonRewardParcelUniqueId = self.SeasonRewardParcelUniqueId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let seasonRewardParcelUniqueName = self.seasonRewardParcelUniqueName().map(|x| {
+    let SeasonRewardParcelUniqueName = self.SeasonRewardParcelUniqueName().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let seasonRewardAmount = self.seasonRewardAmount().map(|x| {
+    let SeasonRewardAmount = self.SeasonRewardAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     EliminateRaidStageSeasonRewardExcelT {
       SeasonRewardId,
-      seasonRewardParcelType,
-      seasonRewardParcelUniqueId,
-      seasonRewardParcelUniqueName,
-      seasonRewardAmount,
+      SeasonRewardParcelType,
+      SeasonRewardParcelUniqueId,
+      SeasonRewardParcelUniqueName,
+      SeasonRewardAmount,
     }
   }
 
@@ -96,28 +96,28 @@ impl<'a> EliminateRaidStageSeasonRewardExcel<'a> {
     unsafe { self._tab.get::<i64>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn seasonRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn SeasonRewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn seasonRewardParcelUniqueId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn SeasonRewardParcelUniqueId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELUNIQUEID, None)}
   }
   #[inline]
-  pub fn seasonRewardParcelUniqueName(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn SeasonRewardParcelUniqueName(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELUNIQUENAME, None)}
   }
   #[inline]
-  pub fn seasonRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn SeasonRewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -133,30 +133,30 @@ impl flatbuffers::Verifiable for EliminateRaidStageSeasonRewardExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("SeasonRewardId", Self::VT_SEASONREWARDID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("seasonRewardParcelType", Self::VT_SEASONREWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("seasonRewardParcelUniqueId", Self::VT_SEASONREWARDPARCELUNIQUEID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("seasonRewardParcelUniqueName", Self::VT_SEASONREWARDPARCELUNIQUENAME, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("seasonRewardAmount", Self::VT_SEASONREWARDAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("SeasonRewardParcelType", Self::VT_SEASONREWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("SeasonRewardParcelUniqueId", Self::VT_SEASONREWARDPARCELUNIQUEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("SeasonRewardParcelUniqueName", Self::VT_SEASONREWARDPARCELUNIQUENAME, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("SeasonRewardAmount", Self::VT_SEASONREWARDAMOUNT, false)?
      .finish();
     Ok(())
   }
 }
 pub struct EliminateRaidStageSeasonRewardExcelArgs<'a> {
     pub SeasonRewardId: i64,
-    pub seasonRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub seasonRewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub seasonRewardParcelUniqueName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub seasonRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub SeasonRewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub SeasonRewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub SeasonRewardParcelUniqueName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub SeasonRewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EliminateRaidStageSeasonRewardExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     EliminateRaidStageSeasonRewardExcelArgs {
       SeasonRewardId: 0,
-      seasonRewardParcelType: None,
-      seasonRewardParcelUniqueId: None,
-      seasonRewardParcelUniqueName: None,
-      seasonRewardAmount: None,
+      SeasonRewardParcelType: None,
+      SeasonRewardParcelUniqueId: None,
+      SeasonRewardParcelUniqueName: None,
+      SeasonRewardAmount: None,
     }
   }
 }
@@ -168,25 +168,25 @@ impl Serialize for EliminateRaidStageSeasonRewardExcel<'_> {
   {
     let mut s = serializer.serialize_struct("EliminateRaidStageSeasonRewardExcel", 5)?;
       s.serialize_field("SeasonRewardId", &self.SeasonRewardId())?;
-      if let Some(f) = self.seasonRewardParcelType() {
-        s.serialize_field("seasonRewardParcelType", &f)?;
+      if let Some(f) = self.SeasonRewardParcelType() {
+        s.serialize_field("SeasonRewardParcelType", &f)?;
       } else {
-        s.skip_field("seasonRewardParcelType")?;
+        s.skip_field("SeasonRewardParcelType")?;
       }
-      if let Some(f) = self.seasonRewardParcelUniqueId() {
-        s.serialize_field("seasonRewardParcelUniqueId", &f)?;
+      if let Some(f) = self.SeasonRewardParcelUniqueId() {
+        s.serialize_field("SeasonRewardParcelUniqueId", &f)?;
       } else {
-        s.skip_field("seasonRewardParcelUniqueId")?;
+        s.skip_field("SeasonRewardParcelUniqueId")?;
       }
-      if let Some(f) = self.seasonRewardParcelUniqueName() {
-        s.serialize_field("seasonRewardParcelUniqueName", &f)?;
+      if let Some(f) = self.SeasonRewardParcelUniqueName() {
+        s.serialize_field("SeasonRewardParcelUniqueName", &f)?;
       } else {
-        s.skip_field("seasonRewardParcelUniqueName")?;
+        s.skip_field("SeasonRewardParcelUniqueName")?;
       }
-      if let Some(f) = self.seasonRewardAmount() {
-        s.serialize_field("seasonRewardAmount", &f)?;
+      if let Some(f) = self.SeasonRewardAmount() {
+        s.serialize_field("SeasonRewardAmount", &f)?;
       } else {
-        s.skip_field("seasonRewardAmount")?;
+        s.skip_field("SeasonRewardAmount")?;
       }
     s.end()
   }
@@ -202,20 +202,20 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EliminateRaidStageSeasonRewardE
     self.fbb_.push_slot::<i64>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDID, SeasonRewardId, 0);
   }
   #[inline]
-  pub fn add_seasonRewardParcelType(&mut self, seasonRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELTYPE, seasonRewardParcelType);
+  pub fn add_SeasonRewardParcelType(&mut self, SeasonRewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELTYPE, SeasonRewardParcelType);
   }
   #[inline]
-  pub fn add_seasonRewardParcelUniqueId(&mut self, seasonRewardParcelUniqueId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELUNIQUEID, seasonRewardParcelUniqueId);
+  pub fn add_SeasonRewardParcelUniqueId(&mut self, SeasonRewardParcelUniqueId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELUNIQUEID, SeasonRewardParcelUniqueId);
   }
   #[inline]
-  pub fn add_seasonRewardParcelUniqueName(&mut self, seasonRewardParcelUniqueName: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELUNIQUENAME, seasonRewardParcelUniqueName);
+  pub fn add_SeasonRewardParcelUniqueName(&mut self, SeasonRewardParcelUniqueName: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDPARCELUNIQUENAME, SeasonRewardParcelUniqueName);
   }
   #[inline]
-  pub fn add_seasonRewardAmount(&mut self, seasonRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDAMOUNT, seasonRewardAmount);
+  pub fn add_SeasonRewardAmount(&mut self, SeasonRewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageSeasonRewardExcel::VT_SEASONREWARDAMOUNT, SeasonRewardAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EliminateRaidStageSeasonRewardExcelBuilder<'a, 'b, A> {
@@ -236,10 +236,10 @@ impl core::fmt::Debug for EliminateRaidStageSeasonRewardExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("EliminateRaidStageSeasonRewardExcel");
       ds.field("SeasonRewardId", &self.SeasonRewardId());
-      ds.field("seasonRewardParcelType", &self.seasonRewardParcelType());
-      ds.field("seasonRewardParcelUniqueId", &self.seasonRewardParcelUniqueId());
-      ds.field("seasonRewardParcelUniqueName", &self.seasonRewardParcelUniqueName());
-      ds.field("seasonRewardAmount", &self.seasonRewardAmount());
+      ds.field("SeasonRewardParcelType", &self.SeasonRewardParcelType());
+      ds.field("SeasonRewardParcelUniqueId", &self.SeasonRewardParcelUniqueId());
+      ds.field("SeasonRewardParcelUniqueName", &self.SeasonRewardParcelUniqueName());
+      ds.field("SeasonRewardAmount", &self.SeasonRewardAmount());
       ds.finish()
   }
 }
@@ -247,19 +247,19 @@ impl core::fmt::Debug for EliminateRaidStageSeasonRewardExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct EliminateRaidStageSeasonRewardExcelT {
   pub SeasonRewardId: i64,
-  pub seasonRewardParcelType: Option<Vec<ParcelType>>,
-  pub seasonRewardParcelUniqueId: Option<Vec<i64>>,
-  pub seasonRewardParcelUniqueName: Option<Vec<String>>,
-  pub seasonRewardAmount: Option<Vec<i64>>,
+  pub SeasonRewardParcelType: Option<Vec<ParcelType>>,
+  pub SeasonRewardParcelUniqueId: Option<Vec<i64>>,
+  pub SeasonRewardParcelUniqueName: Option<Vec<String>>,
+  pub SeasonRewardAmount: Option<Vec<i64>>,
 }
 impl Default for EliminateRaidStageSeasonRewardExcelT {
   fn default() -> Self {
     Self {
       SeasonRewardId: 0,
-      seasonRewardParcelType: None,
-      seasonRewardParcelUniqueId: None,
-      seasonRewardParcelUniqueName: None,
-      seasonRewardAmount: None,
+      SeasonRewardParcelType: None,
+      SeasonRewardParcelUniqueId: None,
+      SeasonRewardParcelUniqueName: None,
+      SeasonRewardAmount: None,
     }
   }
 }
@@ -269,24 +269,24 @@ impl EliminateRaidStageSeasonRewardExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<EliminateRaidStageSeasonRewardExcel<'b>> {
     let SeasonRewardId = self.SeasonRewardId;
-    let seasonRewardParcelType = self.seasonRewardParcelType.as_ref().map(|x|{
+    let SeasonRewardParcelType = self.SeasonRewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let seasonRewardParcelUniqueId = self.seasonRewardParcelUniqueId.as_ref().map(|x|{
+    let SeasonRewardParcelUniqueId = self.SeasonRewardParcelUniqueId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let seasonRewardParcelUniqueName = self.seasonRewardParcelUniqueName.as_ref().map(|x|{
+    let SeasonRewardParcelUniqueName = self.SeasonRewardParcelUniqueName.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let seasonRewardAmount = self.seasonRewardAmount.as_ref().map(|x|{
+    let SeasonRewardAmount = self.SeasonRewardAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     EliminateRaidStageSeasonRewardExcel::create(_fbb, &EliminateRaidStageSeasonRewardExcelArgs{
       SeasonRewardId,
-      seasonRewardParcelType,
-      seasonRewardParcelUniqueId,
-      seasonRewardParcelUniqueName,
-      seasonRewardAmount,
+      SeasonRewardParcelType,
+      SeasonRewardParcelUniqueId,
+      SeasonRewardParcelUniqueName,
+      SeasonRewardAmount,
     })
   }
 }

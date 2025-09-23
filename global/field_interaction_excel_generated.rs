@@ -64,26 +64,26 @@ impl<'a> FieldInteractionExcel<'a> {
       let x = args.FieldSeasonId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_FieldSeasonId(x);
-      if let Some(x) = args.NegateCondition {
-        builder.add_NegateCondition(x);
+      if let Some(x) = args.negateCondition {
+        builder.add_negateCondition(x);
       }
-      if let Some(x) = args.conditionId {
-        builder.add_conditionId(x);
+      if let Some(x) = args.ConditionId {
+        builder.add_ConditionId(x);
       }
-      if let Some(x) = args.ConditionType {
-        builder.add_ConditionType(x);
+      if let Some(x) = args.conditionType {
+        builder.add_conditionType(x);
       }
-      if let Some(x) = args.ConditionIndex {
-        builder.add_ConditionIndex(x);
+      if let Some(x) = args.conditionIndex {
+        builder.add_conditionIndex(x);
       }
-      if let Some(x) = args.conditionClassParameters {
-        builder.add_conditionClassParameters(x);
+      if let Some(x) = args.ConditionClassParameters {
+        builder.add_ConditionClassParameters(x);
       }
       let x = args.ConditionClass;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ConditionClass(x);
-      if let Some(x) = args.interactionId {
-        builder.add_interactionId(x);
+      if let Some(x) = args.InteractionId {
+        builder.add_InteractionId(x);
       }
       if let Some(x) = args.interactionType {
         builder.add_interactionType(x);
@@ -108,7 +108,7 @@ impl<'a> FieldInteractionExcel<'a> {
     let interactionType = self.interactionType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let interactionId = self.interactionId().map(|x| {
+    let InteractionId = self.InteractionId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let ConditionClass = if table_encryption_service::use_encryption() {
@@ -116,20 +116,20 @@ impl<'a> FieldInteractionExcel<'a> {
       } else {
         self.ConditionClass()
       };
-    let conditionClassParameters = self.conditionClassParameters().map(|x| {
+    let ConditionClassParameters = self.ConditionClassParameters().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let OnceOnly = self.OnceOnly();
-    let ConditionIndex = self.ConditionIndex().map(|x| {
+    let conditionIndex = self.conditionIndex().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let ConditionType = self.ConditionType().map(|x| {
+    let conditionType = self.conditionType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let conditionId = self.conditionId().map(|x| {
+    let ConditionId = self.ConditionId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let NegateCondition = self.NegateCondition().map(|x| {
+    let negateCondition = self.negateCondition().map(|x| {
       x.into_iter().collect()
     });
     FieldInteractionExcelT {
@@ -139,14 +139,14 @@ impl<'a> FieldInteractionExcel<'a> {
       ShowEmoji,
       KeywordLocalize,
       interactionType,
-      interactionId,
+      InteractionId,
       ConditionClass,
-      conditionClassParameters,
+      ConditionClassParameters,
       OnceOnly,
-      ConditionIndex,
-      ConditionType,
-      conditionId,
-      NegateCondition,
+      conditionIndex,
+      conditionType,
+      ConditionId,
+      negateCondition,
     }
   }
 
@@ -193,7 +193,7 @@ impl<'a> FieldInteractionExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, FieldInteractionType>>>(FieldInteractionExcel::VT_INTERACTIONTYPE, None)}
   }
   #[inline]
-  pub fn interactionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn InteractionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -207,7 +207,7 @@ impl<'a> FieldInteractionExcel<'a> {
     unsafe { self._tab.get::<FieldConditionClass>(FieldInteractionExcel::VT_CONDITIONCLASS, Some(FieldConditionClass::AndOr)).unwrap()}
   }
   #[inline]
-  pub fn conditionClassParameters(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ConditionClassParameters(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -221,28 +221,28 @@ impl<'a> FieldInteractionExcel<'a> {
     unsafe { self._tab.get::<bool>(FieldInteractionExcel::VT_ONCEONLY, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn ConditionIndex(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn conditionIndex(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(FieldInteractionExcel::VT_CONDITIONINDEX, None)}
   }
   #[inline]
-  pub fn ConditionType(&self) -> Option<flatbuffers::Vector<'a, FieldConditionType>> {
+  pub fn conditionType(&self) -> Option<flatbuffers::Vector<'a, FieldConditionType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, FieldConditionType>>>(FieldInteractionExcel::VT_CONDITIONTYPE, None)}
   }
   #[inline]
-  pub fn conditionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ConditionId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(FieldInteractionExcel::VT_CONDITIONID, None)}
   }
   #[inline]
-  pub fn NegateCondition(&self) -> Option<flatbuffers::Vector<'a, bool>> {
+  pub fn negateCondition(&self) -> Option<flatbuffers::Vector<'a, bool>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -263,14 +263,14 @@ impl flatbuffers::Verifiable for FieldInteractionExcel<'_> {
      .visit_field::<bool>("ShowEmoji", Self::VT_SHOWEMOJI, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("KeywordLocalize", Self::VT_KEYWORDLOCALIZE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldInteractionType>>>("interactionType", Self::VT_INTERACTIONTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("interactionId", Self::VT_INTERACTIONID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("InteractionId", Self::VT_INTERACTIONID, false)?
      .visit_field::<FieldConditionClass>("ConditionClass", Self::VT_CONDITIONCLASS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("conditionClassParameters", Self::VT_CONDITIONCLASSPARAMETERS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConditionClassParameters", Self::VT_CONDITIONCLASSPARAMETERS, false)?
      .visit_field::<bool>("OnceOnly", Self::VT_ONCEONLY, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConditionIndex", Self::VT_CONDITIONINDEX, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldConditionType>>>("ConditionType", Self::VT_CONDITIONTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("conditionId", Self::VT_CONDITIONID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("NegateCondition", Self::VT_NEGATECONDITION, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("conditionIndex", Self::VT_CONDITIONINDEX, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldConditionType>>>("conditionType", Self::VT_CONDITIONTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConditionId", Self::VT_CONDITIONID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("negateCondition", Self::VT_NEGATECONDITION, false)?
      .finish();
     Ok(())
   }
@@ -282,14 +282,14 @@ pub struct FieldInteractionExcelArgs<'a> {
     pub ShowEmoji: bool,
     pub KeywordLocalize: Option<flatbuffers::WIPOffset<&'a str>>,
     pub interactionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldInteractionType>>>,
-    pub interactionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub InteractionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ConditionClass: FieldConditionClass,
-    pub conditionClassParameters: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ConditionClassParameters: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub OnceOnly: bool,
-    pub ConditionIndex: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub ConditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldConditionType>>>,
-    pub conditionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub NegateCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
+    pub conditionIndex: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub conditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldConditionType>>>,
+    pub ConditionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub negateCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
 }
 impl<'a> Default for FieldInteractionExcelArgs<'a> {
   #[inline]
@@ -301,14 +301,14 @@ impl<'a> Default for FieldInteractionExcelArgs<'a> {
       ShowEmoji: false,
       KeywordLocalize: None,
       interactionType: None,
-      interactionId: None,
+      InteractionId: None,
       ConditionClass: FieldConditionClass::AndOr,
-      conditionClassParameters: None,
+      ConditionClassParameters: None,
       OnceOnly: false,
-      ConditionIndex: None,
-      ConditionType: None,
-      conditionId: None,
-      NegateCondition: None,
+      conditionIndex: None,
+      conditionType: None,
+      ConditionId: None,
+      negateCondition: None,
     }
   }
 }
@@ -333,37 +333,37 @@ impl Serialize for FieldInteractionExcel<'_> {
       } else {
         s.skip_field("interactionType")?;
       }
-      if let Some(f) = self.interactionId() {
-        s.serialize_field("interactionId", &f)?;
+      if let Some(f) = self.InteractionId() {
+        s.serialize_field("InteractionId", &f)?;
       } else {
-        s.skip_field("interactionId")?;
+        s.skip_field("InteractionId")?;
       }
       s.serialize_field("ConditionClass", &self.ConditionClass())?;
-      if let Some(f) = self.conditionClassParameters() {
-        s.serialize_field("conditionClassParameters", &f)?;
+      if let Some(f) = self.ConditionClassParameters() {
+        s.serialize_field("ConditionClassParameters", &f)?;
       } else {
-        s.skip_field("conditionClassParameters")?;
+        s.skip_field("ConditionClassParameters")?;
       }
       s.serialize_field("OnceOnly", &self.OnceOnly())?;
-      if let Some(f) = self.ConditionIndex() {
-        s.serialize_field("ConditionIndex", &f)?;
+      if let Some(f) = self.conditionIndex() {
+        s.serialize_field("conditionIndex", &f)?;
       } else {
-        s.skip_field("ConditionIndex")?;
+        s.skip_field("conditionIndex")?;
       }
-      if let Some(f) = self.ConditionType() {
-        s.serialize_field("ConditionType", &f)?;
+      if let Some(f) = self.conditionType() {
+        s.serialize_field("conditionType", &f)?;
       } else {
-        s.skip_field("ConditionType")?;
+        s.skip_field("conditionType")?;
       }
-      if let Some(f) = self.conditionId() {
-        s.serialize_field("conditionId", &f)?;
+      if let Some(f) = self.ConditionId() {
+        s.serialize_field("ConditionId", &f)?;
       } else {
-        s.skip_field("conditionId")?;
+        s.skip_field("ConditionId")?;
       }
-      if let Some(f) = self.NegateCondition() {
-        s.serialize_field("NegateCondition", &f)?;
+      if let Some(f) = self.negateCondition() {
+        s.serialize_field("negateCondition", &f)?;
       } else {
-        s.skip_field("NegateCondition")?;
+        s.skip_field("negateCondition")?;
       }
     s.end()
   }
@@ -399,36 +399,36 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FieldInteractionExcelBuilder<'a
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_INTERACTIONTYPE, interactionType);
   }
   #[inline]
-  pub fn add_interactionId(&mut self, interactionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_INTERACTIONID, interactionId);
+  pub fn add_InteractionId(&mut self, InteractionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_INTERACTIONID, InteractionId);
   }
   #[inline]
   pub fn add_ConditionClass(&mut self, ConditionClass: FieldConditionClass) {
     self.fbb_.push_slot::<FieldConditionClass>(FieldInteractionExcel::VT_CONDITIONCLASS, ConditionClass, FieldConditionClass::AndOr);
   }
   #[inline]
-  pub fn add_conditionClassParameters(&mut self, conditionClassParameters: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_CONDITIONCLASSPARAMETERS, conditionClassParameters);
+  pub fn add_ConditionClassParameters(&mut self, ConditionClassParameters: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_CONDITIONCLASSPARAMETERS, ConditionClassParameters);
   }
   #[inline]
   pub fn add_OnceOnly(&mut self, OnceOnly: bool) {
     self.fbb_.push_slot::<bool>(FieldInteractionExcel::VT_ONCEONLY, OnceOnly, false);
   }
   #[inline]
-  pub fn add_ConditionIndex(&mut self, ConditionIndex: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_CONDITIONINDEX, ConditionIndex);
+  pub fn add_conditionIndex(&mut self, conditionIndex: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_CONDITIONINDEX, conditionIndex);
   }
   #[inline]
-  pub fn add_ConditionType(&mut self, ConditionType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , FieldConditionType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_CONDITIONTYPE, ConditionType);
+  pub fn add_conditionType(&mut self, conditionType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , FieldConditionType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_CONDITIONTYPE, conditionType);
   }
   #[inline]
-  pub fn add_conditionId(&mut self, conditionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_CONDITIONID, conditionId);
+  pub fn add_ConditionId(&mut self, ConditionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_CONDITIONID, ConditionId);
   }
   #[inline]
-  pub fn add_NegateCondition(&mut self, NegateCondition: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_NEGATECONDITION, NegateCondition);
+  pub fn add_negateCondition(&mut self, negateCondition: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldInteractionExcel::VT_NEGATECONDITION, negateCondition);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> FieldInteractionExcelBuilder<'a, 'b, A> {
@@ -454,14 +454,14 @@ impl core::fmt::Debug for FieldInteractionExcel<'_> {
       ds.field("ShowEmoji", &self.ShowEmoji());
       ds.field("KeywordLocalize", &self.KeywordLocalize());
       ds.field("interactionType", &self.interactionType());
-      ds.field("interactionId", &self.interactionId());
+      ds.field("InteractionId", &self.InteractionId());
       ds.field("ConditionClass", &self.ConditionClass());
-      ds.field("conditionClassParameters", &self.conditionClassParameters());
+      ds.field("ConditionClassParameters", &self.ConditionClassParameters());
       ds.field("OnceOnly", &self.OnceOnly());
-      ds.field("ConditionIndex", &self.ConditionIndex());
-      ds.field("ConditionType", &self.ConditionType());
-      ds.field("conditionId", &self.conditionId());
-      ds.field("NegateCondition", &self.NegateCondition());
+      ds.field("conditionIndex", &self.conditionIndex());
+      ds.field("conditionType", &self.conditionType());
+      ds.field("ConditionId", &self.ConditionId());
+      ds.field("negateCondition", &self.negateCondition());
       ds.finish()
   }
 }
@@ -474,14 +474,14 @@ pub struct FieldInteractionExcelT {
   pub ShowEmoji: bool,
   pub KeywordLocalize: Option<String>,
   pub interactionType: Option<Vec<FieldInteractionType>>,
-  pub interactionId: Option<Vec<i64>>,
+  pub InteractionId: Option<Vec<i64>>,
   pub ConditionClass: FieldConditionClass,
-  pub conditionClassParameters: Option<Vec<i64>>,
+  pub ConditionClassParameters: Option<Vec<i64>>,
   pub OnceOnly: bool,
-  pub ConditionIndex: Option<Vec<i64>>,
-  pub ConditionType: Option<Vec<FieldConditionType>>,
-  pub conditionId: Option<Vec<i64>>,
-  pub NegateCondition: Option<Vec<bool>>,
+  pub conditionIndex: Option<Vec<i64>>,
+  pub conditionType: Option<Vec<FieldConditionType>>,
+  pub ConditionId: Option<Vec<i64>>,
+  pub negateCondition: Option<Vec<bool>>,
 }
 impl Default for FieldInteractionExcelT {
   fn default() -> Self {
@@ -492,14 +492,14 @@ impl Default for FieldInteractionExcelT {
       ShowEmoji: false,
       KeywordLocalize: None,
       interactionType: None,
-      interactionId: None,
+      InteractionId: None,
       ConditionClass: FieldConditionClass::AndOr,
-      conditionClassParameters: None,
+      ConditionClassParameters: None,
       OnceOnly: false,
-      ConditionIndex: None,
-      ConditionType: None,
-      conditionId: None,
-      NegateCondition: None,
+      conditionIndex: None,
+      conditionType: None,
+      ConditionId: None,
+      negateCondition: None,
     }
   }
 }
@@ -518,24 +518,24 @@ impl FieldInteractionExcelT {
     let interactionType = self.interactionType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let interactionId = self.interactionId.as_ref().map(|x|{
+    let InteractionId = self.InteractionId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ConditionClass = self.ConditionClass;
-    let conditionClassParameters = self.conditionClassParameters.as_ref().map(|x|{
+    let ConditionClassParameters = self.ConditionClassParameters.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let OnceOnly = self.OnceOnly;
-    let ConditionIndex = self.ConditionIndex.as_ref().map(|x|{
+    let conditionIndex = self.conditionIndex.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let ConditionType = self.ConditionType.as_ref().map(|x|{
+    let conditionType = self.conditionType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let conditionId = self.conditionId.as_ref().map(|x|{
+    let ConditionId = self.ConditionId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let NegateCondition = self.NegateCondition.as_ref().map(|x|{
+    let negateCondition = self.negateCondition.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     FieldInteractionExcel::create(_fbb, &FieldInteractionExcelArgs{
@@ -545,14 +545,14 @@ impl FieldInteractionExcelT {
       ShowEmoji,
       KeywordLocalize,
       interactionType,
-      interactionId,
+      InteractionId,
       ConditionClass,
-      conditionClassParameters,
+      ConditionClassParameters,
       OnceOnly,
-      ConditionIndex,
-      ConditionType,
-      conditionId,
-      NegateCondition,
+      conditionIndex,
+      conditionType,
+      ConditionId,
+      negateCondition,
     })
   }
 }

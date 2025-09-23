@@ -69,8 +69,8 @@ impl<'a> CafeInteractionExcel<'a> {
       if let Some(x) = args.BubbleDuration {
         builder.add_BubbleDuration(x);
       }
-      if let Some(x) = args.bubbleType {
-        builder.add_bubbleType(x);
+      if let Some(x) = args.BubbleType {
+        builder.add_BubbleType(x);
       }
       if let Some(x) = args.IgnoreIfUnobtainedEndDate {
         builder.add_IgnoreIfUnobtainedEndDate(x);
@@ -92,7 +92,7 @@ impl<'a> CafeInteractionExcel<'a> {
     let IgnoreIfUnobtainedEndDate = self.IgnoreIfUnobtainedEndDate().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let bubbleType = self.bubbleType().map(|x| {
+    let BubbleType = self.BubbleType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let BubbleDuration = self.BubbleDuration().map(|x| {
@@ -113,7 +113,7 @@ impl<'a> CafeInteractionExcel<'a> {
       IgnoreIfUnobtained,
       IgnoreIfUnobtainedStartDate,
       IgnoreIfUnobtainedEndDate,
-      bubbleType,
+      BubbleType,
       BubbleDuration,
       FavorEmoticonRewardParcelType,
       FavorEmoticonRewardId,
@@ -151,7 +151,7 @@ impl<'a> CafeInteractionExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CafeInteractionExcel::VT_IGNOREIFUNOBTAINEDENDDATE, None)}
   }
   #[inline]
-  pub fn bubbleType(&self) -> Option<flatbuffers::Vector<'a, BubbleType>> {
+  pub fn BubbleType(&self) -> Option<flatbuffers::Vector<'a, BubbleType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -205,7 +205,7 @@ impl flatbuffers::Verifiable for CafeInteractionExcel<'_> {
      .visit_field::<bool>("IgnoreIfUnobtained", Self::VT_IGNOREIFUNOBTAINED, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("IgnoreIfUnobtainedStartDate", Self::VT_IGNOREIFUNOBTAINEDSTARTDATE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("IgnoreIfUnobtainedEndDate", Self::VT_IGNOREIFUNOBTAINEDENDDATE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, BubbleType>>>("bubbleType", Self::VT_BUBBLETYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, BubbleType>>>("BubbleType", Self::VT_BUBBLETYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("BubbleDuration", Self::VT_BUBBLEDURATION, false)?
      .visit_field::<ParcelType>("FavorEmoticonRewardParcelType", Self::VT_FAVOREMOTICONREWARDPARCELTYPE, false)?
      .visit_field::<i64>("FavorEmoticonRewardId", Self::VT_FAVOREMOTICONREWARDID, false)?
@@ -220,7 +220,7 @@ pub struct CafeInteractionExcelArgs<'a> {
     pub IgnoreIfUnobtained: bool,
     pub IgnoreIfUnobtainedStartDate: Option<flatbuffers::WIPOffset<&'a str>>,
     pub IgnoreIfUnobtainedEndDate: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub bubbleType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, BubbleType>>>,
+    pub BubbleType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, BubbleType>>>,
     pub BubbleDuration: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub FavorEmoticonRewardParcelType: ParcelType,
     pub FavorEmoticonRewardId: i64,
@@ -235,7 +235,7 @@ impl<'a> Default for CafeInteractionExcelArgs<'a> {
       IgnoreIfUnobtained: false,
       IgnoreIfUnobtainedStartDate: None,
       IgnoreIfUnobtainedEndDate: None,
-      bubbleType: None,
+      BubbleType: None,
       BubbleDuration: None,
       FavorEmoticonRewardParcelType: ParcelType::None,
       FavorEmoticonRewardId: 0,
@@ -263,10 +263,10 @@ impl Serialize for CafeInteractionExcel<'_> {
       } else {
         s.skip_field("IgnoreIfUnobtainedEndDate")?;
       }
-      if let Some(f) = self.bubbleType() {
-        s.serialize_field("bubbleType", &f)?;
+      if let Some(f) = self.BubbleType() {
+        s.serialize_field("BubbleType", &f)?;
       } else {
-        s.skip_field("bubbleType")?;
+        s.skip_field("BubbleType")?;
       }
       if let Some(f) = self.BubbleDuration() {
         s.serialize_field("BubbleDuration", &f)?;
@@ -307,8 +307,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CafeInteractionExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CafeInteractionExcel::VT_IGNOREIFUNOBTAINEDENDDATE, IgnoreIfUnobtainedEndDate);
   }
   #[inline]
-  pub fn add_bubbleType(&mut self, bubbleType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , BubbleType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CafeInteractionExcel::VT_BUBBLETYPE, bubbleType);
+  pub fn add_BubbleType(&mut self, BubbleType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , BubbleType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CafeInteractionExcel::VT_BUBBLETYPE, BubbleType);
   }
   #[inline]
   pub fn add_BubbleDuration(&mut self, BubbleDuration: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -352,7 +352,7 @@ impl core::fmt::Debug for CafeInteractionExcel<'_> {
       ds.field("IgnoreIfUnobtained", &self.IgnoreIfUnobtained());
       ds.field("IgnoreIfUnobtainedStartDate", &self.IgnoreIfUnobtainedStartDate());
       ds.field("IgnoreIfUnobtainedEndDate", &self.IgnoreIfUnobtainedEndDate());
-      ds.field("bubbleType", &self.bubbleType());
+      ds.field("BubbleType", &self.BubbleType());
       ds.field("BubbleDuration", &self.BubbleDuration());
       ds.field("FavorEmoticonRewardParcelType", &self.FavorEmoticonRewardParcelType());
       ds.field("FavorEmoticonRewardId", &self.FavorEmoticonRewardId());
@@ -368,7 +368,7 @@ pub struct CafeInteractionExcelT {
   pub IgnoreIfUnobtained: bool,
   pub IgnoreIfUnobtainedStartDate: Option<String>,
   pub IgnoreIfUnobtainedEndDate: Option<String>,
-  pub bubbleType: Option<Vec<BubbleType>>,
+  pub BubbleType: Option<Vec<BubbleType>>,
   pub BubbleDuration: Option<Vec<i64>>,
   pub FavorEmoticonRewardParcelType: ParcelType,
   pub FavorEmoticonRewardId: i64,
@@ -382,7 +382,7 @@ impl Default for CafeInteractionExcelT {
       IgnoreIfUnobtained: false,
       IgnoreIfUnobtainedStartDate: None,
       IgnoreIfUnobtainedEndDate: None,
-      bubbleType: None,
+      BubbleType: None,
       BubbleDuration: None,
       FavorEmoticonRewardParcelType: ParcelType::None,
       FavorEmoticonRewardId: 0,
@@ -404,7 +404,7 @@ impl CafeInteractionExcelT {
     let IgnoreIfUnobtainedEndDate = self.IgnoreIfUnobtainedEndDate.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let bubbleType = self.bubbleType.as_ref().map(|x|{
+    let BubbleType = self.BubbleType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let BubbleDuration = self.BubbleDuration.as_ref().map(|x|{
@@ -421,7 +421,7 @@ impl CafeInteractionExcelT {
       IgnoreIfUnobtained,
       IgnoreIfUnobtainedStartDate,
       IgnoreIfUnobtainedEndDate,
-      bubbleType,
+      BubbleType,
       BubbleDuration,
       FavorEmoticonRewardParcelType,
       FavorEmoticonRewardId,

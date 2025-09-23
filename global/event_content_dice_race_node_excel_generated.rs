@@ -57,8 +57,8 @@ impl<'a> EventContentDiceRaceNodeExcel<'a> {
       if let Some(x) = args.RewardAmount {
         builder.add_RewardAmount(x);
       }
-      if let Some(x) = args.RewardParcelId {
-        builder.add_RewardParcelId(x);
+      if let Some(x) = args.rewardParcelId {
+        builder.add_rewardParcelId(x);
       }
       if let Some(x) = args.rewardParcelType {
         builder.add_rewardParcelType(x);
@@ -85,7 +85,7 @@ impl<'a> EventContentDiceRaceNodeExcel<'a> {
     let rewardParcelType = self.rewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let RewardParcelId = self.RewardParcelId().map(|x| {
+    let rewardParcelId = self.rewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let RewardAmount = self.RewardAmount().map(|x| {
@@ -97,7 +97,7 @@ impl<'a> EventContentDiceRaceNodeExcel<'a> {
       EventContentDiceRaceNodeType,
       MoveForwardTypeArg,
       rewardParcelType,
-      RewardParcelId,
+      rewardParcelId,
       RewardAmount,
     }
   }
@@ -138,7 +138,7 @@ impl<'a> EventContentDiceRaceNodeExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(EventContentDiceRaceNodeExcel::VT_REWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn RewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn rewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -165,7 +165,7 @@ impl flatbuffers::Verifiable for EventContentDiceRaceNodeExcel<'_> {
      .visit_field::<EventContentDiceRaceNodeType>("EventContentDiceRaceNodeType", Self::VT_EVENTCONTENTDICERACENODETYPE, false)?
      .visit_field::<i32>("MoveForwardTypeArg", Self::VT_MOVEFORWARDTYPEARG, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelId", Self::VT_REWARDPARCELID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardAmount", Self::VT_REWARDAMOUNT, false)?
      .finish();
     Ok(())
@@ -177,7 +177,7 @@ pub struct EventContentDiceRaceNodeExcelArgs<'a> {
     pub EventContentDiceRaceNodeType: EventContentDiceRaceNodeType,
     pub MoveForwardTypeArg: i32,
     pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub rewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EventContentDiceRaceNodeExcelArgs<'a> {
@@ -189,7 +189,7 @@ impl<'a> Default for EventContentDiceRaceNodeExcelArgs<'a> {
       EventContentDiceRaceNodeType: EventContentDiceRaceNodeType::StartNode,
       MoveForwardTypeArg: 0,
       rewardParcelType: None,
-      RewardParcelId: None,
+      rewardParcelId: None,
       RewardAmount: None,
     }
   }
@@ -210,10 +210,10 @@ impl Serialize for EventContentDiceRaceNodeExcel<'_> {
       } else {
         s.skip_field("rewardParcelType")?;
       }
-      if let Some(f) = self.RewardParcelId() {
-        s.serialize_field("RewardParcelId", &f)?;
+      if let Some(f) = self.rewardParcelId() {
+        s.serialize_field("rewardParcelId", &f)?;
       } else {
-        s.skip_field("RewardParcelId")?;
+        s.skip_field("rewardParcelId")?;
       }
       if let Some(f) = self.RewardAmount() {
         s.serialize_field("RewardAmount", &f)?;
@@ -250,8 +250,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentDiceRaceNodeExcelBu
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceNodeExcel::VT_REWARDPARCELTYPE, rewardParcelType);
   }
   #[inline]
-  pub fn add_RewardParcelId(&mut self, RewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceNodeExcel::VT_REWARDPARCELID, RewardParcelId);
+  pub fn add_rewardParcelId(&mut self, rewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceNodeExcel::VT_REWARDPARCELID, rewardParcelId);
   }
   #[inline]
   pub fn add_RewardAmount(&mut self, RewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -280,7 +280,7 @@ impl core::fmt::Debug for EventContentDiceRaceNodeExcel<'_> {
       ds.field("EventContentDiceRaceNodeType", &self.EventContentDiceRaceNodeType());
       ds.field("MoveForwardTypeArg", &self.MoveForwardTypeArg());
       ds.field("rewardParcelType", &self.rewardParcelType());
-      ds.field("RewardParcelId", &self.RewardParcelId());
+      ds.field("rewardParcelId", &self.rewardParcelId());
       ds.field("RewardAmount", &self.RewardAmount());
       ds.finish()
   }
@@ -293,7 +293,7 @@ pub struct EventContentDiceRaceNodeExcelT {
   pub EventContentDiceRaceNodeType: EventContentDiceRaceNodeType,
   pub MoveForwardTypeArg: i32,
   pub rewardParcelType: Option<Vec<ParcelType>>,
-  pub RewardParcelId: Option<Vec<i64>>,
+  pub rewardParcelId: Option<Vec<i64>>,
   pub RewardAmount: Option<Vec<i64>>,
 }
 impl Default for EventContentDiceRaceNodeExcelT {
@@ -304,7 +304,7 @@ impl Default for EventContentDiceRaceNodeExcelT {
       EventContentDiceRaceNodeType: EventContentDiceRaceNodeType::StartNode,
       MoveForwardTypeArg: 0,
       rewardParcelType: None,
-      RewardParcelId: None,
+      rewardParcelId: None,
       RewardAmount: None,
     }
   }
@@ -321,7 +321,7 @@ impl EventContentDiceRaceNodeExcelT {
     let rewardParcelType = self.rewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let RewardParcelId = self.RewardParcelId.as_ref().map(|x|{
+    let rewardParcelId = self.rewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardAmount = self.RewardAmount.as_ref().map(|x|{
@@ -333,7 +333,7 @@ impl EventContentDiceRaceNodeExcelT {
       EventContentDiceRaceNodeType,
       MoveForwardTypeArg,
       rewardParcelType,
-      RewardParcelId,
+      rewardParcelId,
       RewardAmount,
     })
   }

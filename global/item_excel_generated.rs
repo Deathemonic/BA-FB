@@ -127,8 +127,8 @@ impl<'a> ItemExcel<'a> {
       let x = args.MaxGiftTags;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_MaxGiftTags(x);
-      if let Some(x) = args.tags {
-        builder.add_tags(x);
+      if let Some(x) = args.Tags {
+        builder.add_Tags(x);
       }
       let x = args.ExpiryChangeParcelType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -219,7 +219,7 @@ impl<'a> ItemExcel<'a> {
       let ExpiryChangeAmount = self.ExpiryChangeAmount();
       let CanTierUpgrade = self.CanTierUpgrade();
       let TierUpgradeRecipeCraftId = self.TierUpgradeRecipeCraftId();
-    let tags = self.tags().map(|x| {
+    let Tags = self.Tags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let CraftQualityTier0 = self.CraftQualityTier0();
@@ -262,7 +262,7 @@ impl<'a> ItemExcel<'a> {
       ExpiryChangeAmount,
       CanTierUpgrade,
       TierUpgradeRecipeCraftId,
-      tags,
+      Tags,
       CraftQualityTier0,
       CraftQualityTier1,
       CraftQualityTier2,
@@ -424,7 +424,7 @@ impl<'a> ItemExcel<'a> {
     unsafe { self._tab.get::<i64>(ItemExcel::VT_TIERUPGRADERECIPECRAFTID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn Tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -530,7 +530,7 @@ impl flatbuffers::Verifiable for ItemExcel<'_> {
      .visit_field::<i64>("ExpiryChangeAmount", Self::VT_EXPIRYCHANGEAMOUNT, false)?
      .visit_field::<bool>("CanTierUpgrade", Self::VT_CANTIERUPGRADE, false)?
      .visit_field::<i64>("TierUpgradeRecipeCraftId", Self::VT_TIERUPGRADERECIPECRAFTID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("tags", Self::VT_TAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("Tags", Self::VT_TAGS, false)?
      .visit_field::<i64>("CraftQualityTier0", Self::VT_CRAFTQUALITYTIER0, false)?
      .visit_field::<i64>("CraftQualityTier1", Self::VT_CRAFTQUALITYTIER1, false)?
      .visit_field::<i64>("CraftQualityTier2", Self::VT_CRAFTQUALITYTIER2, false)?
@@ -567,7 +567,7 @@ pub struct ItemExcelArgs<'a> {
     pub ExpiryChangeAmount: i64,
     pub CanTierUpgrade: bool,
     pub TierUpgradeRecipeCraftId: i64,
-    pub tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub Tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub CraftQualityTier0: i64,
     pub CraftQualityTier1: i64,
     pub CraftQualityTier2: i64,
@@ -604,7 +604,7 @@ impl<'a> Default for ItemExcelArgs<'a> {
       ExpiryChangeAmount: 0,
       CanTierUpgrade: false,
       TierUpgradeRecipeCraftId: 0,
-      tags: None,
+      Tags: None,
       CraftQualityTier0: 0,
       CraftQualityTier1: 0,
       CraftQualityTier2: 0,
@@ -654,10 +654,10 @@ impl Serialize for ItemExcel<'_> {
       s.serialize_field("ExpiryChangeAmount", &self.ExpiryChangeAmount())?;
       s.serialize_field("CanTierUpgrade", &self.CanTierUpgrade())?;
       s.serialize_field("TierUpgradeRecipeCraftId", &self.TierUpgradeRecipeCraftId())?;
-      if let Some(f) = self.tags() {
-        s.serialize_field("tags", &f)?;
+      if let Some(f) = self.Tags() {
+        s.serialize_field("Tags", &f)?;
       } else {
-        s.skip_field("tags")?;
+        s.skip_field("Tags")?;
       }
       s.serialize_field("CraftQualityTier0", &self.CraftQualityTier0())?;
       s.serialize_field("CraftQualityTier1", &self.CraftQualityTier1())?;
@@ -771,8 +771,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ItemExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<i64>(ItemExcel::VT_TIERUPGRADERECIPECRAFTID, TierUpgradeRecipeCraftId, 0);
   }
   #[inline]
-  pub fn add_tags(&mut self, tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ItemExcel::VT_TAGS, tags);
+  pub fn add_Tags(&mut self, Tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ItemExcel::VT_TAGS, Tags);
   }
   #[inline]
   pub fn add_CraftQualityTier0(&mut self, CraftQualityTier0: i64) {
@@ -853,7 +853,7 @@ impl core::fmt::Debug for ItemExcel<'_> {
       ds.field("ExpiryChangeAmount", &self.ExpiryChangeAmount());
       ds.field("CanTierUpgrade", &self.CanTierUpgrade());
       ds.field("TierUpgradeRecipeCraftId", &self.TierUpgradeRecipeCraftId());
-      ds.field("tags", &self.tags());
+      ds.field("Tags", &self.Tags());
       ds.field("CraftQualityTier0", &self.CraftQualityTier0());
       ds.field("CraftQualityTier1", &self.CraftQualityTier1());
       ds.field("CraftQualityTier2", &self.CraftQualityTier2());
@@ -891,7 +891,7 @@ pub struct ItemExcelT {
   pub ExpiryChangeAmount: i64,
   pub CanTierUpgrade: bool,
   pub TierUpgradeRecipeCraftId: i64,
-  pub tags: Option<Vec<Tag>>,
+  pub Tags: Option<Vec<Tag>>,
   pub CraftQualityTier0: i64,
   pub CraftQualityTier1: i64,
   pub CraftQualityTier2: i64,
@@ -927,7 +927,7 @@ impl Default for ItemExcelT {
       ExpiryChangeAmount: 0,
       CanTierUpgrade: false,
       TierUpgradeRecipeCraftId: 0,
-      tags: None,
+      Tags: None,
       CraftQualityTier0: 0,
       CraftQualityTier1: 0,
       CraftQualityTier2: 0,
@@ -971,7 +971,7 @@ impl ItemExcelT {
     let ExpiryChangeAmount = self.ExpiryChangeAmount;
     let CanTierUpgrade = self.CanTierUpgrade;
     let TierUpgradeRecipeCraftId = self.TierUpgradeRecipeCraftId;
-    let tags = self.tags.as_ref().map(|x|{
+    let Tags = self.Tags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let CraftQualityTier0 = self.CraftQualityTier0;
@@ -1010,7 +1010,7 @@ impl ItemExcelT {
       ExpiryChangeAmount,
       CanTierUpgrade,
       TierUpgradeRecipeCraftId,
-      tags,
+      Tags,
       CraftQualityTier0,
       CraftQualityTier1,
       CraftQualityTier2,

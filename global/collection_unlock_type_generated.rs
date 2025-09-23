@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_COLLECTION_UNLOCK_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_COLLECTION_UNLOCK_TYPE: i32 = 10;
+pub const ENUM_MAX_COLLECTION_UNLOCK_TYPE: i32 = 11;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_COLLECTION_UNLOCK_TYPE: [CollectionUnlockType; 11] = [
+pub const ENUM_VALUES_COLLECTION_UNLOCK_TYPE: [CollectionUnlockType; 12] = [
   CollectionUnlockType::None,
   CollectionUnlockType::ClearSpecificEventStage,
   CollectionUnlockType::ClearSpecificEventScenario,
@@ -31,6 +31,7 @@ pub const ENUM_VALUES_COLLECTION_UNLOCK_TYPE: [CollectionUnlockType; 11] = [
   CollectionUnlockType::MinigameEnter,
   CollectionUnlockType::MinigameDreamMakerParameter,
   CollectionUnlockType::ClearSpecificScenario,
+  CollectionUnlockType::MinigameCCGBuyPerk,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -49,9 +50,10 @@ impl CollectionUnlockType {
   pub const MinigameEnter: Self = Self(8);
   pub const MinigameDreamMakerParameter: Self = Self(9);
   pub const ClearSpecificScenario: Self = Self(10);
+  pub const MinigameCCGBuyPerk: Self = Self(11);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 10;
+  pub const ENUM_MAX: i32 = 11;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::ClearSpecificEventStage,
@@ -64,6 +66,7 @@ impl CollectionUnlockType {
     Self::MinigameEnter,
     Self::MinigameDreamMakerParameter,
     Self::ClearSpecificScenario,
+    Self::MinigameCCGBuyPerk,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -79,6 +82,7 @@ impl CollectionUnlockType {
       Self::MinigameEnter => Some("MinigameEnter"),
       Self::MinigameDreamMakerParameter => Some("MinigameDreamMakerParameter"),
       Self::ClearSpecificScenario => Some("ClearSpecificScenario"),
+      Self::MinigameCCGBuyPerk => Some("MinigameCCGBuyPerk"),
       _ => None,
     }
   }

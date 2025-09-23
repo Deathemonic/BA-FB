@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_ITEM_CATEGORY: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_ITEM_CATEGORY: i32 = 9;
+pub const ENUM_MAX_ITEM_CATEGORY: i32 = 10;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_ITEM_CATEGORY: [ItemCategory; 10] = [
+pub const ENUM_VALUES_ITEM_CATEGORY: [ItemCategory; 11] = [
   ItemCategory::Coin,
   ItemCategory::CharacterExpGrowth,
   ItemCategory::SecretStone,
@@ -30,6 +30,7 @@ pub const ENUM_VALUES_ITEM_CATEGORY: [ItemCategory; 10] = [
   ItemCategory::RecruitCoin,
   ItemCategory::MonthlyBonus,
   ItemCategory::InvisibleToken,
+  ItemCategory::BattlePass,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -47,9 +48,10 @@ impl ItemCategory {
   pub const RecruitCoin: Self = Self(7);
   pub const MonthlyBonus: Self = Self(8);
   pub const InvisibleToken: Self = Self(9);
+  pub const BattlePass: Self = Self(10);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 9;
+  pub const ENUM_MAX: i32 = 10;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Coin,
     Self::CharacterExpGrowth,
@@ -61,6 +63,7 @@ impl ItemCategory {
     Self::RecruitCoin,
     Self::MonthlyBonus,
     Self::InvisibleToken,
+    Self::BattlePass,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -75,6 +78,7 @@ impl ItemCategory {
       Self::RecruitCoin => Some("RecruitCoin"),
       Self::MonthlyBonus => Some("MonthlyBonus"),
       Self::InvisibleToken => Some("InvisibleToken"),
+      Self::BattlePass => Some("BattlePass"),
       _ => None,
     }
   }

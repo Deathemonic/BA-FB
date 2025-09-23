@@ -47,8 +47,8 @@ impl<'a> TrophyCollectionExcel<'a> {
       let x = args.GroupId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_GroupId(x);
-      if let Some(x) = args.furnitureId {
-        builder.add_furnitureId(x);
+      if let Some(x) = args.FurnitureId {
+        builder.add_FurnitureId(x);
       }
       let x = args.LocalizeCodeId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
@@ -60,13 +60,13 @@ impl<'a> TrophyCollectionExcel<'a> {
     let key = table_encryption_service::create_key(b"TrophyCollection");
       let GroupId = self.GroupId();
       let LocalizeCodeId = self.LocalizeCodeId();
-    let furnitureId = self.furnitureId().map(|x| {
+    let FurnitureId = self.FurnitureId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     TrophyCollectionExcelT {
       GroupId,
       LocalizeCodeId,
-      furnitureId,
+      FurnitureId,
     }
   }
 
@@ -85,7 +85,7 @@ impl<'a> TrophyCollectionExcel<'a> {
     unsafe { self._tab.get::<u32>(TrophyCollectionExcel::VT_LOCALIZECODEID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn furnitureId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn FurnitureId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -102,7 +102,7 @@ impl flatbuffers::Verifiable for TrophyCollectionExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("GroupId", Self::VT_GROUPID, false)?
      .visit_field::<u32>("LocalizeCodeId", Self::VT_LOCALIZECODEID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("furnitureId", Self::VT_FURNITUREID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("FurnitureId", Self::VT_FURNITUREID, false)?
      .finish();
     Ok(())
   }
@@ -110,7 +110,7 @@ impl flatbuffers::Verifiable for TrophyCollectionExcel<'_> {
 pub struct TrophyCollectionExcelArgs<'a> {
     pub GroupId: i64,
     pub LocalizeCodeId: u32,
-    pub furnitureId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub FurnitureId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for TrophyCollectionExcelArgs<'a> {
   #[inline]
@@ -118,7 +118,7 @@ impl<'a> Default for TrophyCollectionExcelArgs<'a> {
     TrophyCollectionExcelArgs {
       GroupId: 0,
       LocalizeCodeId: 0,
-      furnitureId: None,
+      FurnitureId: None,
     }
   }
 }
@@ -131,10 +131,10 @@ impl Serialize for TrophyCollectionExcel<'_> {
     let mut s = serializer.serialize_struct("TrophyCollectionExcel", 3)?;
       s.serialize_field("GroupId", &self.GroupId())?;
       s.serialize_field("LocalizeCodeId", &self.LocalizeCodeId())?;
-      if let Some(f) = self.furnitureId() {
-        s.serialize_field("furnitureId", &f)?;
+      if let Some(f) = self.FurnitureId() {
+        s.serialize_field("FurnitureId", &f)?;
       } else {
-        s.skip_field("furnitureId")?;
+        s.skip_field("FurnitureId")?;
       }
     s.end()
   }
@@ -154,8 +154,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> TrophyCollectionExcelBuilder<'a
     self.fbb_.push_slot::<u32>(TrophyCollectionExcel::VT_LOCALIZECODEID, LocalizeCodeId, 0);
   }
   #[inline]
-  pub fn add_furnitureId(&mut self, furnitureId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TrophyCollectionExcel::VT_FURNITUREID, furnitureId);
+  pub fn add_FurnitureId(&mut self, FurnitureId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TrophyCollectionExcel::VT_FURNITUREID, FurnitureId);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> TrophyCollectionExcelBuilder<'a, 'b, A> {
@@ -177,7 +177,7 @@ impl core::fmt::Debug for TrophyCollectionExcel<'_> {
     let mut ds = f.debug_struct("TrophyCollectionExcel");
       ds.field("GroupId", &self.GroupId());
       ds.field("LocalizeCodeId", &self.LocalizeCodeId());
-      ds.field("furnitureId", &self.furnitureId());
+      ds.field("FurnitureId", &self.FurnitureId());
       ds.finish()
   }
 }
@@ -186,14 +186,14 @@ impl core::fmt::Debug for TrophyCollectionExcel<'_> {
 pub struct TrophyCollectionExcelT {
   pub GroupId: i64,
   pub LocalizeCodeId: u32,
-  pub furnitureId: Option<Vec<i64>>,
+  pub FurnitureId: Option<Vec<i64>>,
 }
 impl Default for TrophyCollectionExcelT {
   fn default() -> Self {
     Self {
       GroupId: 0,
       LocalizeCodeId: 0,
-      furnitureId: None,
+      FurnitureId: None,
     }
   }
 }
@@ -204,13 +204,13 @@ impl TrophyCollectionExcelT {
   ) -> flatbuffers::WIPOffset<TrophyCollectionExcel<'b>> {
     let GroupId = self.GroupId;
     let LocalizeCodeId = self.LocalizeCodeId;
-    let furnitureId = self.furnitureId.as_ref().map(|x|{
+    let FurnitureId = self.FurnitureId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     TrophyCollectionExcel::create(_fbb, &TrophyCollectionExcelArgs{
       GroupId,
       LocalizeCodeId,
-      furnitureId,
+      FurnitureId,
     })
   }
 }

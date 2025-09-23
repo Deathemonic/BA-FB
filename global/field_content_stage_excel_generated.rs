@@ -92,8 +92,8 @@ impl<'a> FieldContentStageExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.starGoalAmount {
-        builder.add_starGoalAmount(x);
+      if let Some(x) = args.StarGoalAmount {
+        builder.add_StarGoalAmount(x);
       }
       if let Some(x) = args.starGoal {
         builder.add_starGoal(x);
@@ -160,7 +160,7 @@ impl<'a> FieldContentStageExcel<'a> {
     let starGoal = self.starGoal().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let starGoalAmount = self.starGoalAmount().map(|x| {
+    let StarGoalAmount = self.StarGoalAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     FieldContentStageExcelT {
@@ -184,7 +184,7 @@ impl<'a> FieldContentStageExcel<'a> {
       SkipFormationSettings,
       DailyLastPlay,
       starGoal,
-      starGoalAmount,
+      StarGoalAmount,
     }
   }
 
@@ -329,7 +329,7 @@ impl<'a> FieldContentStageExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, StarGoalType>>>(FieldContentStageExcel::VT_STARGOAL, None)}
   }
   #[inline]
-  pub fn starGoalAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn StarGoalAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -364,7 +364,7 @@ impl flatbuffers::Verifiable for FieldContentStageExcel<'_> {
      .visit_field::<bool>("SkipFormationSettings", Self::VT_SKIPFORMATIONSETTINGS, false)?
      .visit_field::<bool>("DailyLastPlay", Self::VT_DAILYLASTPLAY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StarGoalType>>>("starGoal", Self::VT_STARGOAL, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("starGoalAmount", Self::VT_STARGOALAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("StarGoalAmount", Self::VT_STARGOALAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -390,7 +390,7 @@ pub struct FieldContentStageExcelArgs<'a> {
     pub SkipFormationSettings: bool,
     pub DailyLastPlay: bool,
     pub starGoal: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StarGoalType>>>,
-    pub starGoalAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub StarGoalAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for FieldContentStageExcelArgs<'a> {
   #[inline]
@@ -416,7 +416,7 @@ impl<'a> Default for FieldContentStageExcelArgs<'a> {
       SkipFormationSettings: false,
       DailyLastPlay: false,
       starGoal: None,
-      starGoalAmount: None,
+      StarGoalAmount: None,
     }
   }
 }
@@ -455,10 +455,10 @@ impl Serialize for FieldContentStageExcel<'_> {
       } else {
         s.skip_field("starGoal")?;
       }
-      if let Some(f) = self.starGoalAmount() {
-        s.serialize_field("starGoalAmount", &f)?;
+      if let Some(f) = self.StarGoalAmount() {
+        s.serialize_field("StarGoalAmount", &f)?;
       } else {
-        s.skip_field("starGoalAmount")?;
+        s.skip_field("StarGoalAmount")?;
       }
     s.end()
   }
@@ -550,8 +550,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FieldContentStageExcelBuilder<'
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldContentStageExcel::VT_STARGOAL, starGoal);
   }
   #[inline]
-  pub fn add_starGoalAmount(&mut self, starGoalAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldContentStageExcel::VT_STARGOALAMOUNT, starGoalAmount);
+  pub fn add_StarGoalAmount(&mut self, StarGoalAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldContentStageExcel::VT_STARGOALAMOUNT, StarGoalAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> FieldContentStageExcelBuilder<'a, 'b, A> {
@@ -591,7 +591,7 @@ impl core::fmt::Debug for FieldContentStageExcel<'_> {
       ds.field("SkipFormationSettings", &self.SkipFormationSettings());
       ds.field("DailyLastPlay", &self.DailyLastPlay());
       ds.field("starGoal", &self.starGoal());
-      ds.field("starGoalAmount", &self.starGoalAmount());
+      ds.field("StarGoalAmount", &self.StarGoalAmount());
       ds.finish()
   }
 }
@@ -618,7 +618,7 @@ pub struct FieldContentStageExcelT {
   pub SkipFormationSettings: bool,
   pub DailyLastPlay: bool,
   pub starGoal: Option<Vec<StarGoalType>>,
-  pub starGoalAmount: Option<Vec<i32>>,
+  pub StarGoalAmount: Option<Vec<i32>>,
 }
 impl Default for FieldContentStageExcelT {
   fn default() -> Self {
@@ -643,7 +643,7 @@ impl Default for FieldContentStageExcelT {
       SkipFormationSettings: false,
       DailyLastPlay: false,
       starGoal: None,
-      starGoalAmount: None,
+      StarGoalAmount: None,
     }
   }
 }
@@ -676,7 +676,7 @@ impl FieldContentStageExcelT {
     let starGoal = self.starGoal.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let starGoalAmount = self.starGoalAmount.as_ref().map(|x|{
+    let StarGoalAmount = self.StarGoalAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     FieldContentStageExcel::create(_fbb, &FieldContentStageExcelArgs{
@@ -700,7 +700,7 @@ impl FieldContentStageExcelT {
       SkipFormationSettings,
       DailyLastPlay,
       starGoal,
-      starGoalAmount,
+      StarGoalAmount,
     })
   }
 }

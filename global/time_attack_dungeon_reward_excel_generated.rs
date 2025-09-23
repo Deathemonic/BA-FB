@@ -55,8 +55,8 @@ impl<'a> TimeAttackDungeonRewardExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.rewardParcelMaxAmount {
-        builder.add_rewardParcelMaxAmount(x);
+      if let Some(x) = args.RewardParcelMaxAmount {
+        builder.add_RewardParcelMaxAmount(x);
       }
       if let Some(x) = args.RewardParcelDefaultAmount {
         builder.add_RewardParcelDefaultAmount(x);
@@ -67,8 +67,8 @@ impl<'a> TimeAttackDungeonRewardExcel<'a> {
       if let Some(x) = args.RewardParcelType {
         builder.add_RewardParcelType(x);
       }
-      if let Some(x) = args.rewardMinPoint {
-        builder.add_rewardMinPoint(x);
+      if let Some(x) = args.RewardMinPoint {
+        builder.add_RewardMinPoint(x);
       }
       if let Some(x) = args.RewardType {
         builder.add_RewardType(x);
@@ -83,7 +83,7 @@ impl<'a> TimeAttackDungeonRewardExcel<'a> {
     let RewardType = self.RewardType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let rewardMinPoint = self.rewardMinPoint().map(|x| {
+    let RewardMinPoint = self.RewardMinPoint().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let RewardParcelType = self.RewardParcelType().map(|x| {
@@ -95,18 +95,18 @@ impl<'a> TimeAttackDungeonRewardExcel<'a> {
     let RewardParcelDefaultAmount = self.RewardParcelDefaultAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let rewardParcelMaxAmount = self.rewardParcelMaxAmount().map(|x| {
+    let RewardParcelMaxAmount = self.RewardParcelMaxAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     TimeAttackDungeonRewardExcelT {
       Id,
       RewardMaxPoint,
       RewardType,
-      rewardMinPoint,
+      RewardMinPoint,
       RewardParcelType,
       RewardParcelId,
       RewardParcelDefaultAmount,
-      rewardParcelMaxAmount,
+      RewardParcelMaxAmount,
     }
   }
 
@@ -132,7 +132,7 @@ impl<'a> TimeAttackDungeonRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, TimeAttackDungeonRewardType>>>(TimeAttackDungeonRewardExcel::VT_REWARDTYPE, None)}
   }
   #[inline]
-  pub fn rewardMinPoint(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardMinPoint(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -160,7 +160,7 @@ impl<'a> TimeAttackDungeonRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(TimeAttackDungeonRewardExcel::VT_REWARDPARCELDEFAULTAMOUNT, None)}
   }
   #[inline]
-  pub fn rewardParcelMaxAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardParcelMaxAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -178,11 +178,11 @@ impl flatbuffers::Verifiable for TimeAttackDungeonRewardExcel<'_> {
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<i64>("RewardMaxPoint", Self::VT_REWARDMAXPOINT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, TimeAttackDungeonRewardType>>>("RewardType", Self::VT_REWARDTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardMinPoint", Self::VT_REWARDMINPOINT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardMinPoint", Self::VT_REWARDMINPOINT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelDefaultAmount", Self::VT_REWARDPARCELDEFAULTAMOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelMaxAmount", Self::VT_REWARDPARCELMAXAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelMaxAmount", Self::VT_REWARDPARCELMAXAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -191,11 +191,11 @@ pub struct TimeAttackDungeonRewardExcelArgs<'a> {
     pub Id: i64,
     pub RewardMaxPoint: i64,
     pub RewardType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, TimeAttackDungeonRewardType>>>,
-    pub rewardMinPoint: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardMinPoint: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardParcelDefaultAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub rewardParcelMaxAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardParcelMaxAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for TimeAttackDungeonRewardExcelArgs<'a> {
   #[inline]
@@ -204,11 +204,11 @@ impl<'a> Default for TimeAttackDungeonRewardExcelArgs<'a> {
       Id: 0,
       RewardMaxPoint: 0,
       RewardType: None,
-      rewardMinPoint: None,
+      RewardMinPoint: None,
       RewardParcelType: None,
       RewardParcelId: None,
       RewardParcelDefaultAmount: None,
-      rewardParcelMaxAmount: None,
+      RewardParcelMaxAmount: None,
     }
   }
 }
@@ -226,10 +226,10 @@ impl Serialize for TimeAttackDungeonRewardExcel<'_> {
       } else {
         s.skip_field("RewardType")?;
       }
-      if let Some(f) = self.rewardMinPoint() {
-        s.serialize_field("rewardMinPoint", &f)?;
+      if let Some(f) = self.RewardMinPoint() {
+        s.serialize_field("RewardMinPoint", &f)?;
       } else {
-        s.skip_field("rewardMinPoint")?;
+        s.skip_field("RewardMinPoint")?;
       }
       if let Some(f) = self.RewardParcelType() {
         s.serialize_field("RewardParcelType", &f)?;
@@ -246,10 +246,10 @@ impl Serialize for TimeAttackDungeonRewardExcel<'_> {
       } else {
         s.skip_field("RewardParcelDefaultAmount")?;
       }
-      if let Some(f) = self.rewardParcelMaxAmount() {
-        s.serialize_field("rewardParcelMaxAmount", &f)?;
+      if let Some(f) = self.RewardParcelMaxAmount() {
+        s.serialize_field("RewardParcelMaxAmount", &f)?;
       } else {
-        s.skip_field("rewardParcelMaxAmount")?;
+        s.skip_field("RewardParcelMaxAmount")?;
       }
     s.end()
   }
@@ -273,8 +273,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> TimeAttackDungeonRewardExcelBui
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TimeAttackDungeonRewardExcel::VT_REWARDTYPE, RewardType);
   }
   #[inline]
-  pub fn add_rewardMinPoint(&mut self, rewardMinPoint: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TimeAttackDungeonRewardExcel::VT_REWARDMINPOINT, rewardMinPoint);
+  pub fn add_RewardMinPoint(&mut self, RewardMinPoint: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TimeAttackDungeonRewardExcel::VT_REWARDMINPOINT, RewardMinPoint);
   }
   #[inline]
   pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
@@ -289,8 +289,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> TimeAttackDungeonRewardExcelBui
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TimeAttackDungeonRewardExcel::VT_REWARDPARCELDEFAULTAMOUNT, RewardParcelDefaultAmount);
   }
   #[inline]
-  pub fn add_rewardParcelMaxAmount(&mut self, rewardParcelMaxAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TimeAttackDungeonRewardExcel::VT_REWARDPARCELMAXAMOUNT, rewardParcelMaxAmount);
+  pub fn add_RewardParcelMaxAmount(&mut self, RewardParcelMaxAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TimeAttackDungeonRewardExcel::VT_REWARDPARCELMAXAMOUNT, RewardParcelMaxAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> TimeAttackDungeonRewardExcelBuilder<'a, 'b, A> {
@@ -313,11 +313,11 @@ impl core::fmt::Debug for TimeAttackDungeonRewardExcel<'_> {
       ds.field("Id", &self.Id());
       ds.field("RewardMaxPoint", &self.RewardMaxPoint());
       ds.field("RewardType", &self.RewardType());
-      ds.field("rewardMinPoint", &self.rewardMinPoint());
+      ds.field("RewardMinPoint", &self.RewardMinPoint());
       ds.field("RewardParcelType", &self.RewardParcelType());
       ds.field("RewardParcelId", &self.RewardParcelId());
       ds.field("RewardParcelDefaultAmount", &self.RewardParcelDefaultAmount());
-      ds.field("rewardParcelMaxAmount", &self.rewardParcelMaxAmount());
+      ds.field("RewardParcelMaxAmount", &self.RewardParcelMaxAmount());
       ds.finish()
   }
 }
@@ -327,11 +327,11 @@ pub struct TimeAttackDungeonRewardExcelT {
   pub Id: i64,
   pub RewardMaxPoint: i64,
   pub RewardType: Option<Vec<TimeAttackDungeonRewardType>>,
-  pub rewardMinPoint: Option<Vec<i64>>,
+  pub RewardMinPoint: Option<Vec<i64>>,
   pub RewardParcelType: Option<Vec<ParcelType>>,
   pub RewardParcelId: Option<Vec<i64>>,
   pub RewardParcelDefaultAmount: Option<Vec<i64>>,
-  pub rewardParcelMaxAmount: Option<Vec<i64>>,
+  pub RewardParcelMaxAmount: Option<Vec<i64>>,
 }
 impl Default for TimeAttackDungeonRewardExcelT {
   fn default() -> Self {
@@ -339,11 +339,11 @@ impl Default for TimeAttackDungeonRewardExcelT {
       Id: 0,
       RewardMaxPoint: 0,
       RewardType: None,
-      rewardMinPoint: None,
+      RewardMinPoint: None,
       RewardParcelType: None,
       RewardParcelId: None,
       RewardParcelDefaultAmount: None,
-      rewardParcelMaxAmount: None,
+      RewardParcelMaxAmount: None,
     }
   }
 }
@@ -357,7 +357,7 @@ impl TimeAttackDungeonRewardExcelT {
     let RewardType = self.RewardType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardMinPoint = self.rewardMinPoint.as_ref().map(|x|{
+    let RewardMinPoint = self.RewardMinPoint.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
@@ -369,18 +369,18 @@ impl TimeAttackDungeonRewardExcelT {
     let RewardParcelDefaultAmount = self.RewardParcelDefaultAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardParcelMaxAmount = self.rewardParcelMaxAmount.as_ref().map(|x|{
+    let RewardParcelMaxAmount = self.RewardParcelMaxAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     TimeAttackDungeonRewardExcel::create(_fbb, &TimeAttackDungeonRewardExcelArgs{
       Id,
       RewardMaxPoint,
       RewardType,
-      rewardMinPoint,
+      RewardMinPoint,
       RewardParcelType,
       RewardParcelId,
       RewardParcelDefaultAmount,
-      rewardParcelMaxAmount,
+      RewardParcelMaxAmount,
     })
   }
 }

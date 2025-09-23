@@ -45,22 +45,23 @@ impl<'a> CostumeExcel<'a> {
   pub const VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION: flatbuffers::VOffsetT = 30;
   pub const VT_ENTITYMATERIALTYPE: flatbuffers::VOffsetT = 32;
   pub const VT_MODELPREFABNAME: flatbuffers::VOffsetT = 34;
-  pub const VT_CAFEMODELPREFABNAME: flatbuffers::VOffsetT = 36;
-  pub const VT_ECHELONMODELPREFABNAME: flatbuffers::VOffsetT = 38;
-  pub const VT_STRATEGYMODELPREFABNAME: flatbuffers::VOffsetT = 40;
-  pub const VT_TEXTUREDIR: flatbuffers::VOffsetT = 42;
-  pub const VT_COLLECTIONTEXTUREPATH: flatbuffers::VOffsetT = 44;
-  pub const VT_COLLECTIONBGTEXTUREPATH: flatbuffers::VOffsetT = 46;
-  pub const VT_COMBATSTYLETEXTUREPATH: flatbuffers::VOffsetT = 48;
-  pub const VT_USEOBJECTHPBAR: flatbuffers::VOffsetT = 50;
-  pub const VT_TEXTUREBOSS: flatbuffers::VOffsetT = 52;
-  pub const VT_TEXTURESKILLCARD: flatbuffers::VOffsetT = 54;
-  pub const VT_INFORMATIONPACEL: flatbuffers::VOffsetT = 56;
-  pub const VT_ANIMATIONSSR: flatbuffers::VOffsetT = 58;
-  pub const VT_ENTERSTRATEGYANIMATIONNAME: flatbuffers::VOffsetT = 60;
-  pub const VT_ANIMATIONVALIDATOR: flatbuffers::VOffsetT = 62;
-  pub const VT_CHARACTERVOICEGROUPID: flatbuffers::VOffsetT = 64;
-  pub const VT_SHOWOBJECTHPSTATUS: flatbuffers::VOffsetT = 66;
+  pub const VT_ANIMATORNAME: flatbuffers::VOffsetT = 36;
+  pub const VT_CAFEMODELPREFABNAME: flatbuffers::VOffsetT = 38;
+  pub const VT_ECHELONMODELPREFABNAME: flatbuffers::VOffsetT = 40;
+  pub const VT_STRATEGYMODELPREFABNAME: flatbuffers::VOffsetT = 42;
+  pub const VT_TEXTUREDIR: flatbuffers::VOffsetT = 44;
+  pub const VT_COLLECTIONTEXTUREPATH: flatbuffers::VOffsetT = 46;
+  pub const VT_COLLECTIONBGTEXTUREPATH: flatbuffers::VOffsetT = 48;
+  pub const VT_COMBATSTYLETEXTUREPATH: flatbuffers::VOffsetT = 50;
+  pub const VT_USEOBJECTHPBAR: flatbuffers::VOffsetT = 52;
+  pub const VT_TEXTUREBOSS: flatbuffers::VOffsetT = 54;
+  pub const VT_TEXTURESKILLCARD: flatbuffers::VOffsetT = 56;
+  pub const VT_INFORMATIONPACEL: flatbuffers::VOffsetT = 58;
+  pub const VT_ANIMATIONSSR: flatbuffers::VOffsetT = 60;
+  pub const VT_ENTERSTRATEGYANIMATIONNAME: flatbuffers::VOffsetT = 62;
+  pub const VT_ANIMATIONVALIDATOR: flatbuffers::VOffsetT = 64;
+  pub const VT_CHARACTERVOICEGROUPID: flatbuffers::VOffsetT = 66;
+  pub const VT_SHOWOBJECTHPSTATUS: flatbuffers::VOffsetT = 68;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -121,14 +122,17 @@ impl<'a> CostumeExcel<'a> {
       if let Some(x) = args.CafeModelPrefabName {
         builder.add_CafeModelPrefabName(x);
       }
+      if let Some(x) = args.AnimatorName {
+        builder.add_AnimatorName(x);
+      }
       if let Some(x) = args.ModelPrefabName {
         builder.add_ModelPrefabName(x);
       }
       let x = args.EntityMaterialType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_EntityMaterialType(x);
-      if let Some(x) = args.SpineResourceNameDioramaForFormConversion {
-        builder.add_SpineResourceNameDioramaForFormConversion(x);
+      if let Some(x) = args.spineResourceNameDioramaForFormConversion {
+        builder.add_spineResourceNameDioramaForFormConversion(x);
       }
       if let Some(x) = args.SpineResourceNameDiorama {
         builder.add_SpineResourceNameDiorama(x);
@@ -197,7 +201,7 @@ impl<'a> CostumeExcel<'a> {
     let SpineResourceNameDiorama = self.SpineResourceNameDiorama().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let SpineResourceNameDioramaForFormConversion = self.SpineResourceNameDioramaForFormConversion().map(|x| {
+    let spineResourceNameDioramaForFormConversion = self.spineResourceNameDioramaForFormConversion().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
       let EntityMaterialType = if table_encryption_service::use_encryption() {
@@ -206,6 +210,9 @@ impl<'a> CostumeExcel<'a> {
         self.EntityMaterialType()
       };
     let ModelPrefabName = self.ModelPrefabName().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
+    let AnimatorName = self.AnimatorName().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
     let CafeModelPrefabName = self.CafeModelPrefabName().map(|x| {
@@ -262,9 +269,10 @@ impl<'a> CostumeExcel<'a> {
       CharacterSkillListGroupId,
       SpineResourceName,
       SpineResourceNameDiorama,
-      SpineResourceNameDioramaForFormConversion,
+      spineResourceNameDioramaForFormConversion,
       EntityMaterialType,
       ModelPrefabName,
+      AnimatorName,
       CafeModelPrefabName,
       EchelonModelPrefabName,
       StrategyModelPrefabName,
@@ -376,7 +384,7 @@ impl<'a> CostumeExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CostumeExcel::VT_SPINERESOURCENAMEDIORAMA, None)}
   }
   #[inline]
-  pub fn SpineResourceNameDioramaForFormConversion(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn spineResourceNameDioramaForFormConversion(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -395,6 +403,13 @@ impl<'a> CostumeExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CostumeExcel::VT_MODELPREFABNAME, None)}
+  }
+  #[inline]
+  pub fn AnimatorName(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CostumeExcel::VT_ANIMATORNAME, None)}
   }
   #[inline]
   pub fn CafeModelPrefabName(&self) -> Option<&'a str> {
@@ -530,9 +545,10 @@ impl flatbuffers::Verifiable for CostumeExcel<'_> {
      .visit_field::<i64>("CharacterSkillListGroupId", Self::VT_CHARACTERSKILLLISTGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SpineResourceName", Self::VT_SPINERESOURCENAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SpineResourceNameDiorama", Self::VT_SPINERESOURCENAMEDIORAMA, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("SpineResourceNameDioramaForFormConversion", Self::VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("spineResourceNameDioramaForFormConversion", Self::VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION, false)?
      .visit_field::<EntityMaterialType>("EntityMaterialType", Self::VT_ENTITYMATERIALTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ModelPrefabName", Self::VT_MODELPREFABNAME, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("AnimatorName", Self::VT_ANIMATORNAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("CafeModelPrefabName", Self::VT_CAFEMODELPREFABNAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EchelonModelPrefabName", Self::VT_ECHELONMODELPREFABNAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("StrategyModelPrefabName", Self::VT_STRATEGYMODELPREFABNAME, false)?
@@ -567,9 +583,10 @@ pub struct CostumeExcelArgs<'a> {
     pub CharacterSkillListGroupId: i64,
     pub SpineResourceName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SpineResourceNameDiorama: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub SpineResourceNameDioramaForFormConversion: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub spineResourceNameDioramaForFormConversion: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub EntityMaterialType: EntityMaterialType,
     pub ModelPrefabName: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub AnimatorName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub CafeModelPrefabName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EchelonModelPrefabName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub StrategyModelPrefabName: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -604,9 +621,10 @@ impl<'a> Default for CostumeExcelArgs<'a> {
       CharacterSkillListGroupId: 0,
       SpineResourceName: None,
       SpineResourceNameDiorama: None,
-      SpineResourceNameDioramaForFormConversion: None,
+      spineResourceNameDioramaForFormConversion: None,
       EntityMaterialType: EntityMaterialType::Wood,
       ModelPrefabName: None,
+      AnimatorName: None,
       CafeModelPrefabName: None,
       EchelonModelPrefabName: None,
       StrategyModelPrefabName: None,
@@ -632,7 +650,7 @@ impl Serialize for CostumeExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("CostumeExcel", 32)?;
+    let mut s = serializer.serialize_struct("CostumeExcel", 33)?;
       s.serialize_field("CostumeGroupId", &self.CostumeGroupId())?;
       s.serialize_field("CostumeUniqueId", &self.CostumeUniqueId())?;
       if let Some(f) = self.DevName() {
@@ -670,16 +688,21 @@ impl Serialize for CostumeExcel<'_> {
       } else {
         s.skip_field("SpineResourceNameDiorama")?;
       }
-      if let Some(f) = self.SpineResourceNameDioramaForFormConversion() {
-        s.serialize_field("SpineResourceNameDioramaForFormConversion", &f)?;
+      if let Some(f) = self.spineResourceNameDioramaForFormConversion() {
+        s.serialize_field("spineResourceNameDioramaForFormConversion", &f)?;
       } else {
-        s.skip_field("SpineResourceNameDioramaForFormConversion")?;
+        s.skip_field("spineResourceNameDioramaForFormConversion")?;
       }
       s.serialize_field("EntityMaterialType", &self.EntityMaterialType())?;
       if let Some(f) = self.ModelPrefabName() {
         s.serialize_field("ModelPrefabName", &f)?;
       } else {
         s.skip_field("ModelPrefabName")?;
+      }
+      if let Some(f) = self.AnimatorName() {
+        s.serialize_field("AnimatorName", &f)?;
+      } else {
+        s.skip_field("AnimatorName")?;
       }
       if let Some(f) = self.CafeModelPrefabName() {
         s.serialize_field("CafeModelPrefabName", &f)?;
@@ -807,8 +830,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CostumeExcelBuilder<'a, 'b, A> 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_SPINERESOURCENAMEDIORAMA, SpineResourceNameDiorama);
   }
   #[inline]
-  pub fn add_SpineResourceNameDioramaForFormConversion(&mut self, SpineResourceNameDioramaForFormConversion: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION, SpineResourceNameDioramaForFormConversion);
+  pub fn add_spineResourceNameDioramaForFormConversion(&mut self, spineResourceNameDioramaForFormConversion: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION, spineResourceNameDioramaForFormConversion);
   }
   #[inline]
   pub fn add_EntityMaterialType(&mut self, EntityMaterialType: EntityMaterialType) {
@@ -817,6 +840,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CostumeExcelBuilder<'a, 'b, A> 
   #[inline]
   pub fn add_ModelPrefabName(&mut self, ModelPrefabName: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_MODELPREFABNAME, ModelPrefabName);
+  }
+  #[inline]
+  pub fn add_AnimatorName(&mut self, AnimatorName: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_ANIMATORNAME, AnimatorName);
   }
   #[inline]
   pub fn add_CafeModelPrefabName(&mut self, CafeModelPrefabName: flatbuffers::WIPOffset<&'b  str>) {
@@ -913,9 +940,10 @@ impl core::fmt::Debug for CostumeExcel<'_> {
       ds.field("CharacterSkillListGroupId", &self.CharacterSkillListGroupId());
       ds.field("SpineResourceName", &self.SpineResourceName());
       ds.field("SpineResourceNameDiorama", &self.SpineResourceNameDiorama());
-      ds.field("SpineResourceNameDioramaForFormConversion", &self.SpineResourceNameDioramaForFormConversion());
+      ds.field("spineResourceNameDioramaForFormConversion", &self.spineResourceNameDioramaForFormConversion());
       ds.field("EntityMaterialType", &self.EntityMaterialType());
       ds.field("ModelPrefabName", &self.ModelPrefabName());
+      ds.field("AnimatorName", &self.AnimatorName());
       ds.field("CafeModelPrefabName", &self.CafeModelPrefabName());
       ds.field("EchelonModelPrefabName", &self.EchelonModelPrefabName());
       ds.field("StrategyModelPrefabName", &self.StrategyModelPrefabName());
@@ -951,9 +979,10 @@ pub struct CostumeExcelT {
   pub CharacterSkillListGroupId: i64,
   pub SpineResourceName: Option<String>,
   pub SpineResourceNameDiorama: Option<String>,
-  pub SpineResourceNameDioramaForFormConversion: Option<Vec<String>>,
+  pub spineResourceNameDioramaForFormConversion: Option<Vec<String>>,
   pub EntityMaterialType: EntityMaterialType,
   pub ModelPrefabName: Option<String>,
+  pub AnimatorName: Option<String>,
   pub CafeModelPrefabName: Option<String>,
   pub EchelonModelPrefabName: Option<String>,
   pub StrategyModelPrefabName: Option<String>,
@@ -987,9 +1016,10 @@ impl Default for CostumeExcelT {
       CharacterSkillListGroupId: 0,
       SpineResourceName: None,
       SpineResourceNameDiorama: None,
-      SpineResourceNameDioramaForFormConversion: None,
+      spineResourceNameDioramaForFormConversion: None,
       EntityMaterialType: EntityMaterialType::Wood,
       ModelPrefabName: None,
+      AnimatorName: None,
       CafeModelPrefabName: None,
       EchelonModelPrefabName: None,
       StrategyModelPrefabName: None,
@@ -1039,11 +1069,14 @@ impl CostumeExcelT {
     let SpineResourceNameDiorama = self.SpineResourceNameDiorama.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let SpineResourceNameDioramaForFormConversion = self.SpineResourceNameDioramaForFormConversion.as_ref().map(|x|{
+    let spineResourceNameDioramaForFormConversion = self.spineResourceNameDioramaForFormConversion.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let EntityMaterialType = self.EntityMaterialType;
     let ModelPrefabName = self.ModelPrefabName.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
+    let AnimatorName = self.AnimatorName.as_ref().map(|x|{
       _fbb.create_string(x)
     });
     let CafeModelPrefabName = self.CafeModelPrefabName.as_ref().map(|x|{
@@ -1100,9 +1133,10 @@ impl CostumeExcelT {
       CharacterSkillListGroupId,
       SpineResourceName,
       SpineResourceNameDiorama,
-      SpineResourceNameDioramaForFormConversion,
+      spineResourceNameDioramaForFormConversion,
       EntityMaterialType,
       ModelPrefabName,
+      AnimatorName,
       CafeModelPrefabName,
       EchelonModelPrefabName,
       StrategyModelPrefabName,

@@ -127,8 +127,8 @@ impl<'a> WorldRaidStageExcel<'a> {
       if let Some(x) = args.AllyPassiveSkillLevel {
         builder.add_AllyPassiveSkillLevel(x);
       }
-      if let Some(x) = args.allyPassiveSkill {
-        builder.add_allyPassiveSkill(x);
+      if let Some(x) = args.AllyPassiveSkill {
+        builder.add_AllyPassiveSkill(x);
       }
       let x = args.BossBGInfoKey;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
@@ -142,11 +142,11 @@ impl<'a> WorldRaidStageExcel<'a> {
       if let Some(x) = args.BattleReadyTimelinePhaseEnd {
         builder.add_BattleReadyTimelinePhaseEnd(x);
       }
-      if let Some(x) = args.battleReadyTimelinePhaseStart {
-        builder.add_battleReadyTimelinePhaseStart(x);
+      if let Some(x) = args.BattleReadyTimelinePhaseStart {
+        builder.add_BattleReadyTimelinePhaseStart(x);
       }
-      if let Some(x) = args.battleReadyTimelinePath {
-        builder.add_battleReadyTimelinePath(x);
+      if let Some(x) = args.BattleReadyTimelinePath {
+        builder.add_BattleReadyTimelinePath(x);
       }
       let x = args.WorldRaidDifficulty;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -199,10 +199,10 @@ impl<'a> WorldRaidStageExcel<'a> {
       let GroundId = self.GroundId();
       let RaidBattleEndRewardGroupId = self.RaidBattleEndRewardGroupId();
       let RaidRewardGroupId = self.RaidRewardGroupId();
-    let battleReadyTimelinePath = self.battleReadyTimelinePath().map(|x| {
+    let BattleReadyTimelinePath = self.BattleReadyTimelinePath().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let battleReadyTimelinePhaseStart = self.battleReadyTimelinePhaseStart().map(|x| {
+    let BattleReadyTimelinePhaseStart = self.BattleReadyTimelinePhaseStart().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     let BattleReadyTimelinePhaseEnd = self.BattleReadyTimelinePhaseEnd().map(|x| {
@@ -223,7 +223,7 @@ impl<'a> WorldRaidStageExcel<'a> {
       let ShowSkillCard = self.ShowSkillCard();
       let BossBGInfoKey = self.BossBGInfoKey();
       let DamageToWorldBoss = self.DamageToWorldBoss();
-    let allyPassiveSkill = self.allyPassiveSkill().map(|x| {
+    let AllyPassiveSkill = self.AllyPassiveSkill().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let AllyPassiveSkillLevel = self.AllyPassiveSkillLevel().map(|x| {
@@ -253,8 +253,8 @@ impl<'a> WorldRaidStageExcel<'a> {
       GroundId,
       RaidBattleEndRewardGroupId,
       RaidRewardGroupId,
-      battleReadyTimelinePath,
-      battleReadyTimelinePhaseStart,
+      BattleReadyTimelinePath,
+      BattleReadyTimelinePhaseStart,
       BattleReadyTimelinePhaseEnd,
       VictoryTimelinePath,
       PhaseChangeTimelinePath,
@@ -267,7 +267,7 @@ impl<'a> WorldRaidStageExcel<'a> {
       ShowSkillCard,
       BossBGInfoKey,
       DamageToWorldBoss,
-      allyPassiveSkill,
+      AllyPassiveSkill,
       AllyPassiveSkillLevel,
       SaveCurrentLocalBossHP,
       EchelonExtensionType,
@@ -394,14 +394,14 @@ impl<'a> WorldRaidStageExcel<'a> {
     unsafe { self._tab.get::<i64>(WorldRaidStageExcel::VT_RAIDREWARDGROUPID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn battleReadyTimelinePath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn BattleReadyTimelinePath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(WorldRaidStageExcel::VT_BATTLEREADYTIMELINEPATH, None)}
   }
   #[inline]
-  pub fn battleReadyTimelinePhaseStart(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn BattleReadyTimelinePhaseStart(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -492,7 +492,7 @@ impl<'a> WorldRaidStageExcel<'a> {
     unsafe { self._tab.get::<i64>(WorldRaidStageExcel::VT_DAMAGETOWORLDBOSS, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn allyPassiveSkill(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn AllyPassiveSkill(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -545,8 +545,8 @@ impl flatbuffers::Verifiable for WorldRaidStageExcel<'_> {
      .visit_field::<i64>("GroundId", Self::VT_GROUNDID, false)?
      .visit_field::<i64>("RaidBattleEndRewardGroupId", Self::VT_RAIDBATTLEENDREWARDGROUPID, false)?
      .visit_field::<i64>("RaidRewardGroupId", Self::VT_RAIDREWARDGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("battleReadyTimelinePath", Self::VT_BATTLEREADYTIMELINEPATH, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("battleReadyTimelinePhaseStart", Self::VT_BATTLEREADYTIMELINEPHASESTART, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("BattleReadyTimelinePath", Self::VT_BATTLEREADYTIMELINEPATH, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("BattleReadyTimelinePhaseStart", Self::VT_BATTLEREADYTIMELINEPHASESTART, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("BattleReadyTimelinePhaseEnd", Self::VT_BATTLEREADYTIMELINEPHASEEND, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("VictoryTimelinePath", Self::VT_VICTORYTIMELINEPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PhaseChangeTimelinePath", Self::VT_PHASECHANGETIMELINEPATH, false)?
@@ -559,7 +559,7 @@ impl flatbuffers::Verifiable for WorldRaidStageExcel<'_> {
      .visit_field::<bool>("ShowSkillCard", Self::VT_SHOWSKILLCARD, false)?
      .visit_field::<u32>("BossBGInfoKey", Self::VT_BOSSBGINFOKEY, false)?
      .visit_field::<i64>("DamageToWorldBoss", Self::VT_DAMAGETOWORLDBOSS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("allyPassiveSkill", Self::VT_ALLYPASSIVESKILL, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("AllyPassiveSkill", Self::VT_ALLYPASSIVESKILL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("AllyPassiveSkillLevel", Self::VT_ALLYPASSIVESKILLLEVEL, false)?
      .visit_field::<bool>("SaveCurrentLocalBossHP", Self::VT_SAVECURRENTLOCALBOSSHP, false)?
      .visit_field::<EchelonExtensionType>("EchelonExtensionType", Self::VT_ECHELONEXTENSIONTYPE, false)?
@@ -585,8 +585,8 @@ pub struct WorldRaidStageExcelArgs<'a> {
     pub GroundId: i64,
     pub RaidBattleEndRewardGroupId: i64,
     pub RaidRewardGroupId: i64,
-    pub battleReadyTimelinePath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub battleReadyTimelinePhaseStart: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub BattleReadyTimelinePath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub BattleReadyTimelinePhaseStart: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub BattleReadyTimelinePhaseEnd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub VictoryTimelinePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub PhaseChangeTimelinePath: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -599,7 +599,7 @@ pub struct WorldRaidStageExcelArgs<'a> {
     pub ShowSkillCard: bool,
     pub BossBGInfoKey: u32,
     pub DamageToWorldBoss: i64,
-    pub allyPassiveSkill: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub AllyPassiveSkill: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub AllyPassiveSkillLevel: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub SaveCurrentLocalBossHP: bool,
     pub EchelonExtensionType: EchelonExtensionType,
@@ -625,8 +625,8 @@ impl<'a> Default for WorldRaidStageExcelArgs<'a> {
       GroundId: 0,
       RaidBattleEndRewardGroupId: 0,
       RaidRewardGroupId: 0,
-      battleReadyTimelinePath: None,
-      battleReadyTimelinePhaseStart: None,
+      BattleReadyTimelinePath: None,
+      BattleReadyTimelinePhaseStart: None,
       BattleReadyTimelinePhaseEnd: None,
       VictoryTimelinePath: None,
       PhaseChangeTimelinePath: None,
@@ -639,7 +639,7 @@ impl<'a> Default for WorldRaidStageExcelArgs<'a> {
       ShowSkillCard: false,
       BossBGInfoKey: 0,
       DamageToWorldBoss: 0,
-      allyPassiveSkill: None,
+      AllyPassiveSkill: None,
       AllyPassiveSkillLevel: None,
       SaveCurrentLocalBossHP: false,
       EchelonExtensionType: EchelonExtensionType::Base,
@@ -682,15 +682,15 @@ impl Serialize for WorldRaidStageExcel<'_> {
       s.serialize_field("GroundId", &self.GroundId())?;
       s.serialize_field("RaidBattleEndRewardGroupId", &self.RaidBattleEndRewardGroupId())?;
       s.serialize_field("RaidRewardGroupId", &self.RaidRewardGroupId())?;
-      if let Some(f) = self.battleReadyTimelinePath() {
-        s.serialize_field("battleReadyTimelinePath", &f)?;
+      if let Some(f) = self.BattleReadyTimelinePath() {
+        s.serialize_field("BattleReadyTimelinePath", &f)?;
       } else {
-        s.skip_field("battleReadyTimelinePath")?;
+        s.skip_field("BattleReadyTimelinePath")?;
       }
-      if let Some(f) = self.battleReadyTimelinePhaseStart() {
-        s.serialize_field("battleReadyTimelinePhaseStart", &f)?;
+      if let Some(f) = self.BattleReadyTimelinePhaseStart() {
+        s.serialize_field("BattleReadyTimelinePhaseStart", &f)?;
       } else {
-        s.skip_field("battleReadyTimelinePhaseStart")?;
+        s.skip_field("BattleReadyTimelinePhaseStart")?;
       }
       if let Some(f) = self.BattleReadyTimelinePhaseEnd() {
         s.serialize_field("BattleReadyTimelinePhaseEnd", &f)?;
@@ -716,10 +716,10 @@ impl Serialize for WorldRaidStageExcel<'_> {
       s.serialize_field("ShowSkillCard", &self.ShowSkillCard())?;
       s.serialize_field("BossBGInfoKey", &self.BossBGInfoKey())?;
       s.serialize_field("DamageToWorldBoss", &self.DamageToWorldBoss())?;
-      if let Some(f) = self.allyPassiveSkill() {
-        s.serialize_field("allyPassiveSkill", &f)?;
+      if let Some(f) = self.AllyPassiveSkill() {
+        s.serialize_field("AllyPassiveSkill", &f)?;
       } else {
-        s.skip_field("allyPassiveSkill")?;
+        s.skip_field("AllyPassiveSkill")?;
       }
       if let Some(f) = self.AllyPassiveSkillLevel() {
         s.serialize_field("AllyPassiveSkillLevel", &f)?;
@@ -806,12 +806,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> WorldRaidStageExcelBuilder<'a, 
     self.fbb_.push_slot::<i64>(WorldRaidStageExcel::VT_RAIDREWARDGROUPID, RaidRewardGroupId, 0);
   }
   #[inline]
-  pub fn add_battleReadyTimelinePath(&mut self, battleReadyTimelinePath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidStageExcel::VT_BATTLEREADYTIMELINEPATH, battleReadyTimelinePath);
+  pub fn add_BattleReadyTimelinePath(&mut self, BattleReadyTimelinePath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidStageExcel::VT_BATTLEREADYTIMELINEPATH, BattleReadyTimelinePath);
   }
   #[inline]
-  pub fn add_battleReadyTimelinePhaseStart(&mut self, battleReadyTimelinePhaseStart: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidStageExcel::VT_BATTLEREADYTIMELINEPHASESTART, battleReadyTimelinePhaseStart);
+  pub fn add_BattleReadyTimelinePhaseStart(&mut self, BattleReadyTimelinePhaseStart: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidStageExcel::VT_BATTLEREADYTIMELINEPHASESTART, BattleReadyTimelinePhaseStart);
   }
   #[inline]
   pub fn add_BattleReadyTimelinePhaseEnd(&mut self, BattleReadyTimelinePhaseEnd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
@@ -862,8 +862,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> WorldRaidStageExcelBuilder<'a, 
     self.fbb_.push_slot::<i64>(WorldRaidStageExcel::VT_DAMAGETOWORLDBOSS, DamageToWorldBoss, 0);
   }
   #[inline]
-  pub fn add_allyPassiveSkill(&mut self, allyPassiveSkill: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidStageExcel::VT_ALLYPASSIVESKILL, allyPassiveSkill);
+  pub fn add_AllyPassiveSkill(&mut self, AllyPassiveSkill: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WorldRaidStageExcel::VT_ALLYPASSIVESKILL, AllyPassiveSkill);
   }
   #[inline]
   pub fn add_AllyPassiveSkillLevel(&mut self, AllyPassiveSkillLevel: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
@@ -912,8 +912,8 @@ impl core::fmt::Debug for WorldRaidStageExcel<'_> {
       ds.field("GroundId", &self.GroundId());
       ds.field("RaidBattleEndRewardGroupId", &self.RaidBattleEndRewardGroupId());
       ds.field("RaidRewardGroupId", &self.RaidRewardGroupId());
-      ds.field("battleReadyTimelinePath", &self.battleReadyTimelinePath());
-      ds.field("battleReadyTimelinePhaseStart", &self.battleReadyTimelinePhaseStart());
+      ds.field("BattleReadyTimelinePath", &self.BattleReadyTimelinePath());
+      ds.field("BattleReadyTimelinePhaseStart", &self.BattleReadyTimelinePhaseStart());
       ds.field("BattleReadyTimelinePhaseEnd", &self.BattleReadyTimelinePhaseEnd());
       ds.field("VictoryTimelinePath", &self.VictoryTimelinePath());
       ds.field("PhaseChangeTimelinePath", &self.PhaseChangeTimelinePath());
@@ -926,7 +926,7 @@ impl core::fmt::Debug for WorldRaidStageExcel<'_> {
       ds.field("ShowSkillCard", &self.ShowSkillCard());
       ds.field("BossBGInfoKey", &self.BossBGInfoKey());
       ds.field("DamageToWorldBoss", &self.DamageToWorldBoss());
-      ds.field("allyPassiveSkill", &self.allyPassiveSkill());
+      ds.field("AllyPassiveSkill", &self.AllyPassiveSkill());
       ds.field("AllyPassiveSkillLevel", &self.AllyPassiveSkillLevel());
       ds.field("SaveCurrentLocalBossHP", &self.SaveCurrentLocalBossHP());
       ds.field("EchelonExtensionType", &self.EchelonExtensionType());
@@ -953,8 +953,8 @@ pub struct WorldRaidStageExcelT {
   pub GroundId: i64,
   pub RaidBattleEndRewardGroupId: i64,
   pub RaidRewardGroupId: i64,
-  pub battleReadyTimelinePath: Option<Vec<String>>,
-  pub battleReadyTimelinePhaseStart: Option<Vec<i32>>,
+  pub BattleReadyTimelinePath: Option<Vec<String>>,
+  pub BattleReadyTimelinePhaseStart: Option<Vec<i32>>,
   pub BattleReadyTimelinePhaseEnd: Option<Vec<i32>>,
   pub VictoryTimelinePath: Option<String>,
   pub PhaseChangeTimelinePath: Option<String>,
@@ -967,7 +967,7 @@ pub struct WorldRaidStageExcelT {
   pub ShowSkillCard: bool,
   pub BossBGInfoKey: u32,
   pub DamageToWorldBoss: i64,
-  pub allyPassiveSkill: Option<Vec<String>>,
+  pub AllyPassiveSkill: Option<Vec<String>>,
   pub AllyPassiveSkillLevel: Option<Vec<i32>>,
   pub SaveCurrentLocalBossHP: bool,
   pub EchelonExtensionType: EchelonExtensionType,
@@ -992,8 +992,8 @@ impl Default for WorldRaidStageExcelT {
       GroundId: 0,
       RaidBattleEndRewardGroupId: 0,
       RaidRewardGroupId: 0,
-      battleReadyTimelinePath: None,
-      battleReadyTimelinePhaseStart: None,
+      BattleReadyTimelinePath: None,
+      BattleReadyTimelinePhaseStart: None,
       BattleReadyTimelinePhaseEnd: None,
       VictoryTimelinePath: None,
       PhaseChangeTimelinePath: None,
@@ -1006,7 +1006,7 @@ impl Default for WorldRaidStageExcelT {
       ShowSkillCard: false,
       BossBGInfoKey: 0,
       DamageToWorldBoss: 0,
-      allyPassiveSkill: None,
+      AllyPassiveSkill: None,
       AllyPassiveSkillLevel: None,
       SaveCurrentLocalBossHP: false,
       EchelonExtensionType: EchelonExtensionType::Base,
@@ -1041,10 +1041,10 @@ impl WorldRaidStageExcelT {
     let GroundId = self.GroundId;
     let RaidBattleEndRewardGroupId = self.RaidBattleEndRewardGroupId;
     let RaidRewardGroupId = self.RaidRewardGroupId;
-    let battleReadyTimelinePath = self.battleReadyTimelinePath.as_ref().map(|x|{
+    let BattleReadyTimelinePath = self.BattleReadyTimelinePath.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let battleReadyTimelinePhaseStart = self.battleReadyTimelinePhaseStart.as_ref().map(|x|{
+    let BattleReadyTimelinePhaseStart = self.BattleReadyTimelinePhaseStart.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let BattleReadyTimelinePhaseEnd = self.BattleReadyTimelinePhaseEnd.as_ref().map(|x|{
@@ -1065,7 +1065,7 @@ impl WorldRaidStageExcelT {
     let ShowSkillCard = self.ShowSkillCard;
     let BossBGInfoKey = self.BossBGInfoKey;
     let DamageToWorldBoss = self.DamageToWorldBoss;
-    let allyPassiveSkill = self.allyPassiveSkill.as_ref().map(|x|{
+    let AllyPassiveSkill = self.AllyPassiveSkill.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let AllyPassiveSkillLevel = self.AllyPassiveSkillLevel.as_ref().map(|x|{
@@ -1091,8 +1091,8 @@ impl WorldRaidStageExcelT {
       GroundId,
       RaidBattleEndRewardGroupId,
       RaidRewardGroupId,
-      battleReadyTimelinePath,
-      battleReadyTimelinePhaseStart,
+      BattleReadyTimelinePath,
+      BattleReadyTimelinePhaseStart,
       BattleReadyTimelinePhaseEnd,
       VictoryTimelinePath,
       PhaseChangeTimelinePath,
@@ -1105,7 +1105,7 @@ impl WorldRaidStageExcelT {
       ShowSkillCard,
       BossBGInfoKey,
       DamageToWorldBoss,
-      allyPassiveSkill,
+      AllyPassiveSkill,
       AllyPassiveSkillLevel,
       SaveCurrentLocalBossHP,
       EchelonExtensionType,

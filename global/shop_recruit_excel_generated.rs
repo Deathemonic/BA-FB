@@ -41,21 +41,24 @@ impl<'a> ShopRecruitExcel<'a> {
   pub const VT_VIDEOID: flatbuffers::VOffsetT = 22;
   pub const VT_LINKEDROBBYBANNERID: flatbuffers::VOffsetT = 24;
   pub const VT_INFOCHARACTERID: flatbuffers::VOffsetT = 26;
-  pub const VT_SALEPERIODFROM: flatbuffers::VOffsetT = 28;
-  pub const VT_SALEPERIODTO: flatbuffers::VOffsetT = 30;
-  pub const VT_RECRUITCOINID: flatbuffers::VOffsetT = 32;
-  pub const VT_RECRUITSELLECTIONSHOPID: flatbuffers::VOffsetT = 34;
-  pub const VT_PURCHASECOOLTIMEMIN: flatbuffers::VOffsetT = 36;
-  pub const VT_PURCHASECOUNTLIMIT: flatbuffers::VOffsetT = 38;
-  pub const VT_PURCHASECOUNTRESETTYPE: flatbuffers::VOffsetT = 40;
-  pub const VT_ISNEWBIE: flatbuffers::VOffsetT = 42;
-  pub const VT_ISSELECTRECRUIT: flatbuffers::VOffsetT = 44;
-  pub const VT_DIRECTPAYINVISIBLETOKENID: flatbuffers::VOffsetT = 46;
-  pub const VT_DIRECTPAYANDROIDSHOPCASHID: flatbuffers::VOffsetT = 48;
-  pub const VT_DIRECTPAYAPPLESHOPCASHID: flatbuffers::VOffsetT = 50;
-  pub const VT_DIRECTPAYONESTORESHOPCASHID: flatbuffers::VOffsetT = 52;
-  pub const VT_PROBABILITYURLDEV: flatbuffers::VOffsetT = 54;
-  pub const VT_PROBABILITYURLLIVE: flatbuffers::VOffsetT = 56;
+  pub const VT_SALEPERIODVISIBLE: flatbuffers::VOffsetT = 28;
+  pub const VT_SALEPERIODFROM: flatbuffers::VOffsetT = 30;
+  pub const VT_SALEPERIODTO: flatbuffers::VOffsetT = 32;
+  pub const VT_RECRUITCOINID: flatbuffers::VOffsetT = 34;
+  pub const VT_RECRUITSELLECTIONSHOPID: flatbuffers::VOffsetT = 36;
+  pub const VT_PURCHASECOOLTIMEMIN: flatbuffers::VOffsetT = 38;
+  pub const VT_PURCHASECOUNTLIMIT: flatbuffers::VOffsetT = 40;
+  pub const VT_PURCHASECOUNTRESETTYPE: flatbuffers::VOffsetT = 42;
+  pub const VT_ISNEWBIE: flatbuffers::VOffsetT = 44;
+  pub const VT_ISSELECTRECRUIT: flatbuffers::VOffsetT = 46;
+  pub const VT_DIRECTPAYINVISIBLETOKENID: flatbuffers::VOffsetT = 48;
+  pub const VT_DIRECTPAYANDROIDSHOPCASHID: flatbuffers::VOffsetT = 50;
+  pub const VT_DIRECTPAYAPPLESHOPCASHID: flatbuffers::VOffsetT = 52;
+  pub const VT_SELECTABLEGACHAGROUPID: flatbuffers::VOffsetT = 54;
+  pub const VT_MAXSELECTCHARACTERNUM: flatbuffers::VOffsetT = 56;
+  pub const VT_DIRECTPAYONESTORESHOPCASHID: flatbuffers::VOffsetT = 58;
+  pub const VT_PROBABILITYURLDEV: flatbuffers::VOffsetT = 60;
+  pub const VT_PROBABILITYURLLIVE: flatbuffers::VOffsetT = 62;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -71,6 +74,12 @@ impl<'a> ShopRecruitExcel<'a> {
       let x = args.DirectPayOneStoreShopCashId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_DirectPayOneStoreShopCashId(x);
+      let x = args.MaxSelectCharacterNum;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_MaxSelectCharacterNum(x);
+      let x = args.SelectAbleGachaGroupId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_SelectAbleGachaGroupId(x);
       let x = args.DirectPayAppleShopCashId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_DirectPayAppleShopCashId(x);
@@ -122,8 +131,8 @@ impl<'a> ShopRecruitExcel<'a> {
       if let Some(x) = args.SalePeriodFrom {
         builder.add_SalePeriodFrom(x);
       }
-      if let Some(x) = args.infoCharacterId {
-        builder.add_infoCharacterId(x);
+      if let Some(x) = args.InfoCharacterId {
+        builder.add_InfoCharacterId(x);
       }
       if let Some(x) = args.VideoId {
         builder.add_VideoId(x);
@@ -142,6 +151,7 @@ impl<'a> ShopRecruitExcel<'a> {
       builder.add_CategoryType(x);
       builder.add_IsSelectRecruit(args.IsSelectRecruit);
       builder.add_IsNewbie(args.IsNewbie);
+      builder.add_SalePeriodVisible(args.SalePeriodVisible);
       builder.add_IsLegacy(args.IsLegacy);
     builder.finish()
   }
@@ -173,9 +183,10 @@ impl<'a> ShopRecruitExcel<'a> {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let LinkedRobbyBannerId = self.LinkedRobbyBannerId();
-    let infoCharacterId = self.infoCharacterId().map(|x| {
+    let InfoCharacterId = self.InfoCharacterId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
+      let SalePeriodVisible = self.SalePeriodVisible();
     let SalePeriodFrom = self.SalePeriodFrom().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -196,6 +207,8 @@ impl<'a> ShopRecruitExcel<'a> {
       let DirectPayInvisibleTokenId = self.DirectPayInvisibleTokenId();
       let DirectPayAndroidShopCashId = self.DirectPayAndroidShopCashId();
       let DirectPayAppleShopCashId = self.DirectPayAppleShopCashId();
+      let SelectAbleGachaGroupId = self.SelectAbleGachaGroupId();
+      let MaxSelectCharacterNum = self.MaxSelectCharacterNum();
       let DirectPayOneStoreShopCashId = self.DirectPayOneStoreShopCashId();
     let ProbabilityUrlDev = self.ProbabilityUrlDev().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
@@ -215,7 +228,8 @@ impl<'a> ShopRecruitExcel<'a> {
       GachaBannerPath,
       VideoId,
       LinkedRobbyBannerId,
-      infoCharacterId,
+      InfoCharacterId,
+      SalePeriodVisible,
       SalePeriodFrom,
       SalePeriodTo,
       RecruitCoinId,
@@ -228,6 +242,8 @@ impl<'a> ShopRecruitExcel<'a> {
       DirectPayInvisibleTokenId,
       DirectPayAndroidShopCashId,
       DirectPayAppleShopCashId,
+      SelectAbleGachaGroupId,
+      MaxSelectCharacterNum,
       DirectPayOneStoreShopCashId,
       ProbabilityUrlDev,
       ProbabilityUrlLive,
@@ -312,11 +328,18 @@ impl<'a> ShopRecruitExcel<'a> {
     unsafe { self._tab.get::<i64>(ShopRecruitExcel::VT_LINKEDROBBYBANNERID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn infoCharacterId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn InfoCharacterId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ShopRecruitExcel::VT_INFOCHARACTERID, None)}
+  }
+  #[inline]
+  pub fn SalePeriodVisible(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(ShopRecruitExcel::VT_SALEPERIODVISIBLE, Some(false)).unwrap()}
   }
   #[inline]
   pub fn SalePeriodFrom(&self) -> Option<&'a str> {
@@ -403,6 +426,20 @@ impl<'a> ShopRecruitExcel<'a> {
     unsafe { self._tab.get::<i64>(ShopRecruitExcel::VT_DIRECTPAYAPPLESHOPCASHID, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn SelectAbleGachaGroupId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ShopRecruitExcel::VT_SELECTABLEGACHAGROUPID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn MaxSelectCharacterNum(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ShopRecruitExcel::VT_MAXSELECTCHARACTERNUM, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn DirectPayOneStoreShopCashId(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
@@ -443,7 +480,8 @@ impl flatbuffers::Verifiable for ShopRecruitExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("GachaBannerPath", Self::VT_GACHABANNERPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("VideoId", Self::VT_VIDEOID, false)?
      .visit_field::<i64>("LinkedRobbyBannerId", Self::VT_LINKEDROBBYBANNERID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("infoCharacterId", Self::VT_INFOCHARACTERID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("InfoCharacterId", Self::VT_INFOCHARACTERID, false)?
+     .visit_field::<bool>("SalePeriodVisible", Self::VT_SALEPERIODVISIBLE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodFrom", Self::VT_SALEPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodTo", Self::VT_SALEPERIODTO, false)?
      .visit_field::<i64>("RecruitCoinId", Self::VT_RECRUITCOINID, false)?
@@ -456,6 +494,8 @@ impl flatbuffers::Verifiable for ShopRecruitExcel<'_> {
      .visit_field::<i64>("DirectPayInvisibleTokenId", Self::VT_DIRECTPAYINVISIBLETOKENID, false)?
      .visit_field::<i64>("DirectPayAndroidShopCashId", Self::VT_DIRECTPAYANDROIDSHOPCASHID, false)?
      .visit_field::<i64>("DirectPayAppleShopCashId", Self::VT_DIRECTPAYAPPLESHOPCASHID, false)?
+     .visit_field::<i64>("SelectAbleGachaGroupId", Self::VT_SELECTABLEGACHAGROUPID, false)?
+     .visit_field::<i64>("MaxSelectCharacterNum", Self::VT_MAXSELECTCHARACTERNUM, false)?
      .visit_field::<i64>("DirectPayOneStoreShopCashId", Self::VT_DIRECTPAYONESTORESHOPCASHID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ProbabilityUrlDev", Self::VT_PROBABILITYURLDEV, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ProbabilityUrlLive", Self::VT_PROBABILITYURLLIVE, false)?
@@ -475,7 +515,8 @@ pub struct ShopRecruitExcelArgs<'a> {
     pub GachaBannerPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub VideoId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub LinkedRobbyBannerId: i64,
-    pub infoCharacterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub InfoCharacterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub SalePeriodVisible: bool,
     pub SalePeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SalePeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
     pub RecruitCoinId: i64,
@@ -488,6 +529,8 @@ pub struct ShopRecruitExcelArgs<'a> {
     pub DirectPayInvisibleTokenId: i64,
     pub DirectPayAndroidShopCashId: i64,
     pub DirectPayAppleShopCashId: i64,
+    pub SelectAbleGachaGroupId: i64,
+    pub MaxSelectCharacterNum: i64,
     pub DirectPayOneStoreShopCashId: i64,
     pub ProbabilityUrlDev: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ProbabilityUrlLive: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -507,7 +550,8 @@ impl<'a> Default for ShopRecruitExcelArgs<'a> {
       GachaBannerPath: None,
       VideoId: None,
       LinkedRobbyBannerId: 0,
-      infoCharacterId: None,
+      InfoCharacterId: None,
+      SalePeriodVisible: false,
       SalePeriodFrom: None,
       SalePeriodTo: None,
       RecruitCoinId: 0,
@@ -520,6 +564,8 @@ impl<'a> Default for ShopRecruitExcelArgs<'a> {
       DirectPayInvisibleTokenId: 0,
       DirectPayAndroidShopCashId: 0,
       DirectPayAppleShopCashId: 0,
+      SelectAbleGachaGroupId: 0,
+      MaxSelectCharacterNum: 0,
       DirectPayOneStoreShopCashId: 0,
       ProbabilityUrlDev: None,
       ProbabilityUrlLive: None,
@@ -532,7 +578,7 @@ impl Serialize for ShopRecruitExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShopRecruitExcel", 27)?;
+    let mut s = serializer.serialize_struct("ShopRecruitExcel", 30)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("CategoryType", &self.CategoryType())?;
       s.serialize_field("IsLegacy", &self.IsLegacy())?;
@@ -556,11 +602,12 @@ impl Serialize for ShopRecruitExcel<'_> {
         s.skip_field("VideoId")?;
       }
       s.serialize_field("LinkedRobbyBannerId", &self.LinkedRobbyBannerId())?;
-      if let Some(f) = self.infoCharacterId() {
-        s.serialize_field("infoCharacterId", &f)?;
+      if let Some(f) = self.InfoCharacterId() {
+        s.serialize_field("InfoCharacterId", &f)?;
       } else {
-        s.skip_field("infoCharacterId")?;
+        s.skip_field("InfoCharacterId")?;
       }
+      s.serialize_field("SalePeriodVisible", &self.SalePeriodVisible())?;
       if let Some(f) = self.SalePeriodFrom() {
         s.serialize_field("SalePeriodFrom", &f)?;
       } else {
@@ -581,6 +628,8 @@ impl Serialize for ShopRecruitExcel<'_> {
       s.serialize_field("DirectPayInvisibleTokenId", &self.DirectPayInvisibleTokenId())?;
       s.serialize_field("DirectPayAndroidShopCashId", &self.DirectPayAndroidShopCashId())?;
       s.serialize_field("DirectPayAppleShopCashId", &self.DirectPayAppleShopCashId())?;
+      s.serialize_field("SelectAbleGachaGroupId", &self.SelectAbleGachaGroupId())?;
+      s.serialize_field("MaxSelectCharacterNum", &self.MaxSelectCharacterNum())?;
       s.serialize_field("DirectPayOneStoreShopCashId", &self.DirectPayOneStoreShopCashId())?;
       if let Some(f) = self.ProbabilityUrlDev() {
         s.serialize_field("ProbabilityUrlDev", &f)?;
@@ -646,8 +695,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopRecruitExcelBuilder<'a, 'b,
     self.fbb_.push_slot::<i64>(ShopRecruitExcel::VT_LINKEDROBBYBANNERID, LinkedRobbyBannerId, 0);
   }
   #[inline]
-  pub fn add_infoCharacterId(&mut self, infoCharacterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopRecruitExcel::VT_INFOCHARACTERID, infoCharacterId);
+  pub fn add_InfoCharacterId(&mut self, InfoCharacterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopRecruitExcel::VT_INFOCHARACTERID, InfoCharacterId);
+  }
+  #[inline]
+  pub fn add_SalePeriodVisible(&mut self, SalePeriodVisible: bool) {
+    self.fbb_.push_slot::<bool>(ShopRecruitExcel::VT_SALEPERIODVISIBLE, SalePeriodVisible, false);
   }
   #[inline]
   pub fn add_SalePeriodFrom(&mut self, SalePeriodFrom: flatbuffers::WIPOffset<&'b  str>) {
@@ -698,6 +751,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopRecruitExcelBuilder<'a, 'b,
     self.fbb_.push_slot::<i64>(ShopRecruitExcel::VT_DIRECTPAYAPPLESHOPCASHID, DirectPayAppleShopCashId, 0);
   }
   #[inline]
+  pub fn add_SelectAbleGachaGroupId(&mut self, SelectAbleGachaGroupId: i64) {
+    self.fbb_.push_slot::<i64>(ShopRecruitExcel::VT_SELECTABLEGACHAGROUPID, SelectAbleGachaGroupId, 0);
+  }
+  #[inline]
+  pub fn add_MaxSelectCharacterNum(&mut self, MaxSelectCharacterNum: i64) {
+    self.fbb_.push_slot::<i64>(ShopRecruitExcel::VT_MAXSELECTCHARACTERNUM, MaxSelectCharacterNum, 0);
+  }
+  #[inline]
   pub fn add_DirectPayOneStoreShopCashId(&mut self, DirectPayOneStoreShopCashId: i64) {
     self.fbb_.push_slot::<i64>(ShopRecruitExcel::VT_DIRECTPAYONESTORESHOPCASHID, DirectPayOneStoreShopCashId, 0);
   }
@@ -738,7 +799,8 @@ impl core::fmt::Debug for ShopRecruitExcel<'_> {
       ds.field("GachaBannerPath", &self.GachaBannerPath());
       ds.field("VideoId", &self.VideoId());
       ds.field("LinkedRobbyBannerId", &self.LinkedRobbyBannerId());
-      ds.field("infoCharacterId", &self.infoCharacterId());
+      ds.field("InfoCharacterId", &self.InfoCharacterId());
+      ds.field("SalePeriodVisible", &self.SalePeriodVisible());
       ds.field("SalePeriodFrom", &self.SalePeriodFrom());
       ds.field("SalePeriodTo", &self.SalePeriodTo());
       ds.field("RecruitCoinId", &self.RecruitCoinId());
@@ -751,6 +813,8 @@ impl core::fmt::Debug for ShopRecruitExcel<'_> {
       ds.field("DirectPayInvisibleTokenId", &self.DirectPayInvisibleTokenId());
       ds.field("DirectPayAndroidShopCashId", &self.DirectPayAndroidShopCashId());
       ds.field("DirectPayAppleShopCashId", &self.DirectPayAppleShopCashId());
+      ds.field("SelectAbleGachaGroupId", &self.SelectAbleGachaGroupId());
+      ds.field("MaxSelectCharacterNum", &self.MaxSelectCharacterNum());
       ds.field("DirectPayOneStoreShopCashId", &self.DirectPayOneStoreShopCashId());
       ds.field("ProbabilityUrlDev", &self.ProbabilityUrlDev());
       ds.field("ProbabilityUrlLive", &self.ProbabilityUrlLive());
@@ -771,7 +835,8 @@ pub struct ShopRecruitExcelT {
   pub GachaBannerPath: Option<String>,
   pub VideoId: Option<Vec<i64>>,
   pub LinkedRobbyBannerId: i64,
-  pub infoCharacterId: Option<Vec<i64>>,
+  pub InfoCharacterId: Option<Vec<i64>>,
+  pub SalePeriodVisible: bool,
   pub SalePeriodFrom: Option<String>,
   pub SalePeriodTo: Option<String>,
   pub RecruitCoinId: i64,
@@ -784,6 +849,8 @@ pub struct ShopRecruitExcelT {
   pub DirectPayInvisibleTokenId: i64,
   pub DirectPayAndroidShopCashId: i64,
   pub DirectPayAppleShopCashId: i64,
+  pub SelectAbleGachaGroupId: i64,
+  pub MaxSelectCharacterNum: i64,
   pub DirectPayOneStoreShopCashId: i64,
   pub ProbabilityUrlDev: Option<String>,
   pub ProbabilityUrlLive: Option<String>,
@@ -802,7 +869,8 @@ impl Default for ShopRecruitExcelT {
       GachaBannerPath: None,
       VideoId: None,
       LinkedRobbyBannerId: 0,
-      infoCharacterId: None,
+      InfoCharacterId: None,
+      SalePeriodVisible: false,
       SalePeriodFrom: None,
       SalePeriodTo: None,
       RecruitCoinId: 0,
@@ -815,6 +883,8 @@ impl Default for ShopRecruitExcelT {
       DirectPayInvisibleTokenId: 0,
       DirectPayAndroidShopCashId: 0,
       DirectPayAppleShopCashId: 0,
+      SelectAbleGachaGroupId: 0,
+      MaxSelectCharacterNum: 0,
       DirectPayOneStoreShopCashId: 0,
       ProbabilityUrlDev: None,
       ProbabilityUrlLive: None,
@@ -843,9 +913,10 @@ impl ShopRecruitExcelT {
       _fbb.create_vector(x)
     });
     let LinkedRobbyBannerId = self.LinkedRobbyBannerId;
-    let infoCharacterId = self.infoCharacterId.as_ref().map(|x|{
+    let InfoCharacterId = self.InfoCharacterId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
+    let SalePeriodVisible = self.SalePeriodVisible;
     let SalePeriodFrom = self.SalePeriodFrom.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -862,6 +933,8 @@ impl ShopRecruitExcelT {
     let DirectPayInvisibleTokenId = self.DirectPayInvisibleTokenId;
     let DirectPayAndroidShopCashId = self.DirectPayAndroidShopCashId;
     let DirectPayAppleShopCashId = self.DirectPayAppleShopCashId;
+    let SelectAbleGachaGroupId = self.SelectAbleGachaGroupId;
+    let MaxSelectCharacterNum = self.MaxSelectCharacterNum;
     let DirectPayOneStoreShopCashId = self.DirectPayOneStoreShopCashId;
     let ProbabilityUrlDev = self.ProbabilityUrlDev.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -881,7 +954,8 @@ impl ShopRecruitExcelT {
       GachaBannerPath,
       VideoId,
       LinkedRobbyBannerId,
-      infoCharacterId,
+      InfoCharacterId,
+      SalePeriodVisible,
       SalePeriodFrom,
       SalePeriodTo,
       RecruitCoinId,
@@ -894,6 +968,8 @@ impl ShopRecruitExcelT {
       DirectPayInvisibleTokenId,
       DirectPayAndroidShopCashId,
       DirectPayAppleShopCashId,
+      SelectAbleGachaGroupId,
+      MaxSelectCharacterNum,
       DirectPayOneStoreShopCashId,
       ProbabilityUrlDev,
       ProbabilityUrlLive,

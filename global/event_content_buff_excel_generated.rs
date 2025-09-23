@@ -65,8 +65,8 @@ impl<'a> EventContentBuffExcel<'a> {
       if let Some(x) = args.SkillGroupId {
         builder.add_SkillGroupId(x);
       }
-      if let Some(x) = args.EnumTypeValue {
-        builder.add_EnumTypeValue(x);
+      if let Some(x) = args.enumTypeValue {
+        builder.add_enumTypeValue(x);
       }
       let x = args.EnumType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -92,7 +92,7 @@ impl<'a> EventContentBuffExcel<'a> {
       } else {
         self.EnumType()
       };
-    let EnumTypeValue = self.EnumTypeValue().map(|x| {
+    let enumTypeValue = self.enumTypeValue().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let SkillGroupId = self.SkillGroupId().map(|x| {
@@ -112,7 +112,7 @@ impl<'a> EventContentBuffExcel<'a> {
       IsBuff,
       CharacterTag,
       EnumType,
-      EnumTypeValue,
+      enumTypeValue,
       SkillGroupId,
       IconPath,
       SpriteName,
@@ -149,7 +149,7 @@ impl<'a> EventContentBuffExcel<'a> {
     unsafe { self._tab.get::<EventContentBuffFindRule>(EventContentBuffExcel::VT_ENUMTYPE, Some(EventContentBuffFindRule::None)).unwrap()}
   }
   #[inline]
-  pub fn EnumTypeValue(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn enumTypeValue(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -196,7 +196,7 @@ impl flatbuffers::Verifiable for EventContentBuffExcel<'_> {
      .visit_field::<bool>("IsBuff", Self::VT_ISBUFF, false)?
      .visit_field::<Tag>("CharacterTag", Self::VT_CHARACTERTAG, false)?
      .visit_field::<EventContentBuffFindRule>("EnumType", Self::VT_ENUMTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("EnumTypeValue", Self::VT_ENUMTYPEVALUE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("enumTypeValue", Self::VT_ENUMTYPEVALUE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SkillGroupId", Self::VT_SKILLGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("IconPath", Self::VT_ICONPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SpriteName", Self::VT_SPRITENAME, false)?
@@ -210,7 +210,7 @@ pub struct EventContentBuffExcelArgs<'a> {
     pub IsBuff: bool,
     pub CharacterTag: Tag,
     pub EnumType: EventContentBuffFindRule,
-    pub EnumTypeValue: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub enumTypeValue: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub SkillGroupId: Option<flatbuffers::WIPOffset<&'a str>>,
     pub IconPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SpriteName: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -224,7 +224,7 @@ impl<'a> Default for EventContentBuffExcelArgs<'a> {
       IsBuff: false,
       CharacterTag: Tag::A,
       EnumType: EventContentBuffFindRule::None,
-      EnumTypeValue: None,
+      enumTypeValue: None,
       SkillGroupId: None,
       IconPath: None,
       SpriteName: None,
@@ -243,10 +243,10 @@ impl Serialize for EventContentBuffExcel<'_> {
       s.serialize_field("IsBuff", &self.IsBuff())?;
       s.serialize_field("CharacterTag", &self.CharacterTag())?;
       s.serialize_field("EnumType", &self.EnumType())?;
-      if let Some(f) = self.EnumTypeValue() {
-        s.serialize_field("EnumTypeValue", &f)?;
+      if let Some(f) = self.enumTypeValue() {
+        s.serialize_field("enumTypeValue", &f)?;
       } else {
-        s.skip_field("EnumTypeValue")?;
+        s.skip_field("enumTypeValue")?;
       }
       if let Some(f) = self.SkillGroupId() {
         s.serialize_field("SkillGroupId", &f)?;
@@ -294,8 +294,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentBuffExcelBuilder<'a
     self.fbb_.push_slot::<EventContentBuffFindRule>(EventContentBuffExcel::VT_ENUMTYPE, EnumType, EventContentBuffFindRule::None);
   }
   #[inline]
-  pub fn add_EnumTypeValue(&mut self, EnumTypeValue: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentBuffExcel::VT_ENUMTYPEVALUE, EnumTypeValue);
+  pub fn add_enumTypeValue(&mut self, enumTypeValue: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentBuffExcel::VT_ENUMTYPEVALUE, enumTypeValue);
   }
   #[inline]
   pub fn add_SkillGroupId(&mut self, SkillGroupId: flatbuffers::WIPOffset<&'b  str>) {
@@ -335,7 +335,7 @@ impl core::fmt::Debug for EventContentBuffExcel<'_> {
       ds.field("IsBuff", &self.IsBuff());
       ds.field("CharacterTag", &self.CharacterTag());
       ds.field("EnumType", &self.EnumType());
-      ds.field("EnumTypeValue", &self.EnumTypeValue());
+      ds.field("enumTypeValue", &self.enumTypeValue());
       ds.field("SkillGroupId", &self.SkillGroupId());
       ds.field("IconPath", &self.IconPath());
       ds.field("SpriteName", &self.SpriteName());
@@ -350,7 +350,7 @@ pub struct EventContentBuffExcelT {
   pub IsBuff: bool,
   pub CharacterTag: Tag,
   pub EnumType: EventContentBuffFindRule,
-  pub EnumTypeValue: Option<Vec<String>>,
+  pub enumTypeValue: Option<Vec<String>>,
   pub SkillGroupId: Option<String>,
   pub IconPath: Option<String>,
   pub SpriteName: Option<String>,
@@ -363,7 +363,7 @@ impl Default for EventContentBuffExcelT {
       IsBuff: false,
       CharacterTag: Tag::A,
       EnumType: EventContentBuffFindRule::None,
-      EnumTypeValue: None,
+      enumTypeValue: None,
       SkillGroupId: None,
       IconPath: None,
       SpriteName: None,
@@ -380,7 +380,7 @@ impl EventContentBuffExcelT {
     let IsBuff = self.IsBuff;
     let CharacterTag = self.CharacterTag;
     let EnumType = self.EnumType;
-    let EnumTypeValue = self.EnumTypeValue.as_ref().map(|x|{
+    let enumTypeValue = self.enumTypeValue.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let SkillGroupId = self.SkillGroupId.as_ref().map(|x|{
@@ -400,7 +400,7 @@ impl EventContentBuffExcelT {
       IsBuff,
       CharacterTag,
       EnumType,
-      EnumTypeValue,
+      enumTypeValue,
       SkillGroupId,
       IconPath,
       SpriteName,
