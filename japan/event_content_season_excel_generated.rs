@@ -44,28 +44,29 @@ impl<'a> EventContentSeasonExcel<'a> {
   pub const VT_EVENTCHANGEOPENCONDITION: flatbuffers::VOffsetT = 28;
   pub const VT_BEFOREHANDEXPOSEDTIME: flatbuffers::VOffsetT = 30;
   pub const VT_EVENTCONTENTOPENTIME: flatbuffers::VOffsetT = 32;
-  pub const VT_EVENTCONTENTCLOSETIME: flatbuffers::VOffsetT = 34;
-  pub const VT_EXTENSIONTIME: flatbuffers::VOffsetT = 36;
-  pub const VT_MAINICONPARCELPATH: flatbuffers::VOffsetT = 38;
-  pub const VT_SUBICONPARCELPATH: flatbuffers::VOffsetT = 40;
-  pub const VT_BEFOREHANDBGIMAGEPATH: flatbuffers::VOffsetT = 42;
-  pub const VT_MINIGAMEPROLOGSCENARIOGROUPID: flatbuffers::VOffsetT = 44;
-  pub const VT_BEFOREHANDSCENARIOGROUPID: flatbuffers::VOffsetT = 46;
-  pub const VT_MAINBANNERIMAGEPATH: flatbuffers::VOffsetT = 48;
-  pub const VT_MAINBGIMAGEPATH: flatbuffers::VOffsetT = 50;
-  pub const VT_SHIFTTRIGGERSTAGEID: flatbuffers::VOffsetT = 52;
-  pub const VT_SHIFTMAINBGIMAGEPATH: flatbuffers::VOffsetT = 54;
-  pub const VT_MINIGAMELOBBYPREFABNAME: flatbuffers::VOffsetT = 56;
-  pub const VT_MINIGAMEVICTORYPREFABNAME: flatbuffers::VOffsetT = 58;
-  pub const VT_MINIGAMEMISSIONBGPREFABNAME: flatbuffers::VOffsetT = 60;
-  pub const VT_MINIGAMEMISSIONBGIMAGEPATH: flatbuffers::VOffsetT = 62;
-  pub const VT_CARDBGIMAGEPATH: flatbuffers::VOffsetT = 64;
-  pub const VT_EVENTASSIST: flatbuffers::VOffsetT = 66;
-  pub const VT_EVENTCONTENTRELEASETYPE: flatbuffers::VOffsetT = 68;
-  pub const VT_EVENTCONTENTSTAGEREWARDIDPERMANENT: flatbuffers::VOffsetT = 70;
-  pub const VT_REWARDTAGPERMANENT: flatbuffers::VOffsetT = 72;
-  pub const VT_MINIEVENTSHORTCUTSCENARIOMODEID: flatbuffers::VOffsetT = 74;
-  pub const VT_SCENARIOCONTENTCOLLECTIONGROUPID: flatbuffers::VOffsetT = 76;
+  pub const VT_EVENTCONTENTCLOSENOTETIME: flatbuffers::VOffsetT = 34;
+  pub const VT_EVENTCONTENTCLOSETIME: flatbuffers::VOffsetT = 36;
+  pub const VT_EXTENSIONTIME: flatbuffers::VOffsetT = 38;
+  pub const VT_MAINICONPARCELPATH: flatbuffers::VOffsetT = 40;
+  pub const VT_SUBICONPARCELPATH: flatbuffers::VOffsetT = 42;
+  pub const VT_BEFOREHANDBGIMAGEPATH: flatbuffers::VOffsetT = 44;
+  pub const VT_MINIGAMEPROLOGSCENARIOGROUPID: flatbuffers::VOffsetT = 46;
+  pub const VT_BEFOREHANDSCENARIOGROUPID: flatbuffers::VOffsetT = 48;
+  pub const VT_MAINBANNERIMAGEPATH: flatbuffers::VOffsetT = 50;
+  pub const VT_MAINBGIMAGEPATH: flatbuffers::VOffsetT = 52;
+  pub const VT_SHIFTTRIGGERSTAGEID: flatbuffers::VOffsetT = 54;
+  pub const VT_SHIFTMAINBGIMAGEPATH: flatbuffers::VOffsetT = 56;
+  pub const VT_MINIGAMELOBBYPREFABNAME: flatbuffers::VOffsetT = 58;
+  pub const VT_MINIGAMEVICTORYPREFABNAME: flatbuffers::VOffsetT = 60;
+  pub const VT_MINIGAMEMISSIONBGPREFABNAME: flatbuffers::VOffsetT = 62;
+  pub const VT_MINIGAMEMISSIONBGIMAGEPATH: flatbuffers::VOffsetT = 64;
+  pub const VT_CARDBGIMAGEPATH: flatbuffers::VOffsetT = 66;
+  pub const VT_EVENTASSIST: flatbuffers::VOffsetT = 68;
+  pub const VT_EVENTCONTENTRELEASETYPE: flatbuffers::VOffsetT = 70;
+  pub const VT_EVENTCONTENTSTAGEREWARDIDPERMANENT: flatbuffers::VOffsetT = 72;
+  pub const VT_REWARDTAGPERMANENT: flatbuffers::VOffsetT = 74;
+  pub const VT_MINIEVENTSHORTCUTSCENARIOMODEID: flatbuffers::VOffsetT = 76;
+  pub const VT_SCENARIOCONTENTCOLLECTIONGROUPID: flatbuffers::VOffsetT = 78;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -138,8 +139,8 @@ impl<'a> EventContentSeasonExcel<'a> {
       if let Some(x) = args.MainBannerImagePath {
         builder.add_MainBannerImagePath(x);
       }
-      if let Some(x) = args.beforehandScenarioGroupId {
-        builder.add_beforehandScenarioGroupId(x);
+      if let Some(x) = args.BeforehandScenarioGroupId {
+        builder.add_BeforehandScenarioGroupId(x);
       }
       if let Some(x) = args.BeforehandBgImagePath {
         builder.add_BeforehandBgImagePath(x);
@@ -155,6 +156,9 @@ impl<'a> EventContentSeasonExcel<'a> {
       }
       if let Some(x) = args.EventContentCloseTime {
         builder.add_EventContentCloseTime(x);
+      }
+      if let Some(x) = args.EventContentCloseNoteTime {
+        builder.add_EventContentCloseNoteTime(x);
       }
       if let Some(x) = args.EventContentOpenTime {
         builder.add_EventContentOpenTime(x);
@@ -219,6 +223,9 @@ impl<'a> EventContentSeasonExcel<'a> {
     let EventContentOpenTime = self.EventContentOpenTime().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+    let EventContentCloseNoteTime = self.EventContentCloseNoteTime().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
     let EventContentCloseTime = self.EventContentCloseTime().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -235,7 +242,7 @@ impl<'a> EventContentSeasonExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let MinigamePrologScenarioGroupId = self.MinigamePrologScenarioGroupId();
-    let beforehandScenarioGroupId = self.beforehandScenarioGroupId().map(|x| {
+    let BeforehandScenarioGroupId = self.BeforehandScenarioGroupId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let MainBannerImagePath = self.MainBannerImagePath().map(|x| {
@@ -293,13 +300,14 @@ impl<'a> EventContentSeasonExcel<'a> {
       EventChangeOpenCondition,
       BeforehandExposedTime,
       EventContentOpenTime,
+      EventContentCloseNoteTime,
       EventContentCloseTime,
       ExtensionTime,
       MainIconParcelPath,
       SubIconParcelPath,
       BeforehandBgImagePath,
       MinigamePrologScenarioGroupId,
-      beforehandScenarioGroupId,
+      BeforehandScenarioGroupId,
       MainBannerImagePath,
       MainBgImagePath,
       ShiftTriggerStageId,
@@ -424,6 +432,13 @@ impl<'a> EventContentSeasonExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentSeasonExcel::VT_EVENTCONTENTOPENTIME, None)}
   }
   #[inline]
+  pub fn EventContentCloseNoteTime(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentSeasonExcel::VT_EVENTCONTENTCLOSENOTETIME, None)}
+  }
+  #[inline]
   pub fn EventContentCloseTime(&self) -> Option<&'a str> {
     // Safety:
     // Created from valid Table for this object
@@ -466,7 +481,7 @@ impl<'a> EventContentSeasonExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentSeasonExcel::VT_MINIGAMEPROLOGSCENARIOGROUPID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn beforehandScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn BeforehandScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -601,13 +616,14 @@ impl flatbuffers::Verifiable for EventContentSeasonExcel<'_> {
      .visit_field::<i64>("EventChangeOpenCondition", Self::VT_EVENTCHANGEOPENCONDITION, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BeforehandExposedTime", Self::VT_BEFOREHANDEXPOSEDTIME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EventContentOpenTime", Self::VT_EVENTCONTENTOPENTIME, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EventContentCloseNoteTime", Self::VT_EVENTCONTENTCLOSENOTETIME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EventContentCloseTime", Self::VT_EVENTCONTENTCLOSETIME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ExtensionTime", Self::VT_EXTENSIONTIME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MainIconParcelPath", Self::VT_MAINICONPARCELPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SubIconParcelPath", Self::VT_SUBICONPARCELPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BeforehandBgImagePath", Self::VT_BEFOREHANDBGIMAGEPATH, false)?
      .visit_field::<i64>("MinigamePrologScenarioGroupId", Self::VT_MINIGAMEPROLOGSCENARIOGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("beforehandScenarioGroupId", Self::VT_BEFOREHANDSCENARIOGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("BeforehandScenarioGroupId", Self::VT_BEFOREHANDSCENARIOGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MainBannerImagePath", Self::VT_MAINBANNERIMAGEPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MainBgImagePath", Self::VT_MAINBGIMAGEPATH, false)?
      .visit_field::<i64>("ShiftTriggerStageId", Self::VT_SHIFTTRIGGERSTAGEID, false)?
@@ -643,13 +659,14 @@ pub struct EventContentSeasonExcelArgs<'a> {
     pub EventChangeOpenCondition: i64,
     pub BeforehandExposedTime: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EventContentOpenTime: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub EventContentCloseNoteTime: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EventContentCloseTime: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ExtensionTime: Option<flatbuffers::WIPOffset<&'a str>>,
     pub MainIconParcelPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SubIconParcelPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub BeforehandBgImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub MinigamePrologScenarioGroupId: i64,
-    pub beforehandScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub BeforehandScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub MainBannerImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub MainBgImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ShiftTriggerStageId: i64,
@@ -685,13 +702,14 @@ impl<'a> Default for EventContentSeasonExcelArgs<'a> {
       EventChangeOpenCondition: 0,
       BeforehandExposedTime: None,
       EventContentOpenTime: None,
+      EventContentCloseNoteTime: None,
       EventContentCloseTime: None,
       ExtensionTime: None,
       MainIconParcelPath: None,
       SubIconParcelPath: None,
       BeforehandBgImagePath: None,
       MinigamePrologScenarioGroupId: 0,
-      beforehandScenarioGroupId: None,
+      BeforehandScenarioGroupId: None,
       MainBannerImagePath: None,
       MainBgImagePath: None,
       ShiftTriggerStageId: 0,
@@ -716,7 +734,7 @@ impl Serialize for EventContentSeasonExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EventContentSeasonExcel", 37)?;
+    let mut s = serializer.serialize_struct("EventContentSeasonExcel", 38)?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("OriginalEventContentId", &self.OriginalEventContentId())?;
       s.serialize_field("IsReturn", &self.IsReturn())?;
@@ -744,6 +762,11 @@ impl Serialize for EventContentSeasonExcel<'_> {
       } else {
         s.skip_field("EventContentOpenTime")?;
       }
+      if let Some(f) = self.EventContentCloseNoteTime() {
+        s.serialize_field("EventContentCloseNoteTime", &f)?;
+      } else {
+        s.skip_field("EventContentCloseNoteTime")?;
+      }
       if let Some(f) = self.EventContentCloseTime() {
         s.serialize_field("EventContentCloseTime", &f)?;
       } else {
@@ -770,10 +793,10 @@ impl Serialize for EventContentSeasonExcel<'_> {
         s.skip_field("BeforehandBgImagePath")?;
       }
       s.serialize_field("MinigamePrologScenarioGroupId", &self.MinigamePrologScenarioGroupId())?;
-      if let Some(f) = self.beforehandScenarioGroupId() {
-        s.serialize_field("beforehandScenarioGroupId", &f)?;
+      if let Some(f) = self.BeforehandScenarioGroupId() {
+        s.serialize_field("BeforehandScenarioGroupId", &f)?;
       } else {
-        s.skip_field("beforehandScenarioGroupId")?;
+        s.skip_field("BeforehandScenarioGroupId")?;
       }
       if let Some(f) = self.MainBannerImagePath() {
         s.serialize_field("MainBannerImagePath", &f)?;
@@ -892,6 +915,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentSeasonExcelBuilder<
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSeasonExcel::VT_EVENTCONTENTOPENTIME, EventContentOpenTime);
   }
   #[inline]
+  pub fn add_EventContentCloseNoteTime(&mut self, EventContentCloseNoteTime: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSeasonExcel::VT_EVENTCONTENTCLOSENOTETIME, EventContentCloseNoteTime);
+  }
+  #[inline]
   pub fn add_EventContentCloseTime(&mut self, EventContentCloseTime: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSeasonExcel::VT_EVENTCONTENTCLOSETIME, EventContentCloseTime);
   }
@@ -916,8 +943,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentSeasonExcelBuilder<
     self.fbb_.push_slot::<i64>(EventContentSeasonExcel::VT_MINIGAMEPROLOGSCENARIOGROUPID, MinigamePrologScenarioGroupId, 0);
   }
   #[inline]
-  pub fn add_beforehandScenarioGroupId(&mut self, beforehandScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSeasonExcel::VT_BEFOREHANDSCENARIOGROUPID, beforehandScenarioGroupId);
+  pub fn add_BeforehandScenarioGroupId(&mut self, BeforehandScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSeasonExcel::VT_BEFOREHANDSCENARIOGROUPID, BeforehandScenarioGroupId);
   }
   #[inline]
   pub fn add_MainBannerImagePath(&mut self, MainBannerImagePath: flatbuffers::WIPOffset<&'b  str>) {
@@ -1012,13 +1039,14 @@ impl core::fmt::Debug for EventContentSeasonExcel<'_> {
       ds.field("EventChangeOpenCondition", &self.EventChangeOpenCondition());
       ds.field("BeforehandExposedTime", &self.BeforehandExposedTime());
       ds.field("EventContentOpenTime", &self.EventContentOpenTime());
+      ds.field("EventContentCloseNoteTime", &self.EventContentCloseNoteTime());
       ds.field("EventContentCloseTime", &self.EventContentCloseTime());
       ds.field("ExtensionTime", &self.ExtensionTime());
       ds.field("MainIconParcelPath", &self.MainIconParcelPath());
       ds.field("SubIconParcelPath", &self.SubIconParcelPath());
       ds.field("BeforehandBgImagePath", &self.BeforehandBgImagePath());
       ds.field("MinigamePrologScenarioGroupId", &self.MinigamePrologScenarioGroupId());
-      ds.field("beforehandScenarioGroupId", &self.beforehandScenarioGroupId());
+      ds.field("BeforehandScenarioGroupId", &self.BeforehandScenarioGroupId());
       ds.field("MainBannerImagePath", &self.MainBannerImagePath());
       ds.field("MainBgImagePath", &self.MainBgImagePath());
       ds.field("ShiftTriggerStageId", &self.ShiftTriggerStageId());
@@ -1055,13 +1083,14 @@ pub struct EventContentSeasonExcelT {
   pub EventChangeOpenCondition: i64,
   pub BeforehandExposedTime: Option<String>,
   pub EventContentOpenTime: Option<String>,
+  pub EventContentCloseNoteTime: Option<String>,
   pub EventContentCloseTime: Option<String>,
   pub ExtensionTime: Option<String>,
   pub MainIconParcelPath: Option<String>,
   pub SubIconParcelPath: Option<String>,
   pub BeforehandBgImagePath: Option<String>,
   pub MinigamePrologScenarioGroupId: i64,
-  pub beforehandScenarioGroupId: Option<Vec<i64>>,
+  pub BeforehandScenarioGroupId: Option<Vec<i64>>,
   pub MainBannerImagePath: Option<String>,
   pub MainBgImagePath: Option<String>,
   pub ShiftTriggerStageId: i64,
@@ -1096,13 +1125,14 @@ impl Default for EventContentSeasonExcelT {
       EventChangeOpenCondition: 0,
       BeforehandExposedTime: None,
       EventContentOpenTime: None,
+      EventContentCloseNoteTime: None,
       EventContentCloseTime: None,
       ExtensionTime: None,
       MainIconParcelPath: None,
       SubIconParcelPath: None,
       BeforehandBgImagePath: None,
       MinigamePrologScenarioGroupId: 0,
-      beforehandScenarioGroupId: None,
+      BeforehandScenarioGroupId: None,
       MainBannerImagePath: None,
       MainBgImagePath: None,
       ShiftTriggerStageId: 0,
@@ -1147,6 +1177,9 @@ impl EventContentSeasonExcelT {
     let EventContentOpenTime = self.EventContentOpenTime.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let EventContentCloseNoteTime = self.EventContentCloseNoteTime.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     let EventContentCloseTime = self.EventContentCloseTime.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -1163,7 +1196,7 @@ impl EventContentSeasonExcelT {
       _fbb.create_string(x)
     });
     let MinigamePrologScenarioGroupId = self.MinigamePrologScenarioGroupId;
-    let beforehandScenarioGroupId = self.beforehandScenarioGroupId.as_ref().map(|x|{
+    let BeforehandScenarioGroupId = self.BeforehandScenarioGroupId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let MainBannerImagePath = self.MainBannerImagePath.as_ref().map(|x|{
@@ -1213,13 +1246,14 @@ impl EventContentSeasonExcelT {
       EventChangeOpenCondition,
       BeforehandExposedTime,
       EventContentOpenTime,
+      EventContentCloseNoteTime,
       EventContentCloseTime,
       ExtensionTime,
       MainIconParcelPath,
       SubIconParcelPath,
       BeforehandBgImagePath,
       MinigamePrologScenarioGroupId,
-      beforehandScenarioGroupId,
+      BeforehandScenarioGroupId,
       MainBannerImagePath,
       MainBgImagePath,
       ShiftTriggerStageId,

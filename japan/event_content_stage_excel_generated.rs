@@ -144,11 +144,11 @@ impl<'a> EventContentStageExcel<'a> {
       let x = args.StageHint;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_StageHint(x);
-      if let Some(x) = args.starGoalAmount {
-        builder.add_starGoalAmount(x);
+      if let Some(x) = args.StarGoalAmount {
+        builder.add_StarGoalAmount(x);
       }
-      if let Some(x) = args.starGoal {
-        builder.add_starGoal(x);
+      if let Some(x) = args.StarGoal {
+        builder.add_StarGoal(x);
       }
       let x = args.ContentType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -174,11 +174,11 @@ impl<'a> EventContentStageExcel<'a> {
       if let Some(x) = args.StrategyMap {
         builder.add_StrategyMap(x);
       }
-      if let Some(x) = args.clearScenarioGroupId {
-        builder.add_clearScenarioGroupId(x);
+      if let Some(x) = args.ClearScenarioGroupId {
+        builder.add_ClearScenarioGroupId(x);
       }
-      if let Some(x) = args.enterScenarioGroupId {
-        builder.add_enterScenarioGroupId(x);
+      if let Some(x) = args.EnterScenarioGroupId {
+        builder.add_EnterScenarioGroupId(x);
       }
       let x = args.StageEnterEchelonCount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -249,10 +249,10 @@ impl<'a> EventContentStageExcel<'a> {
       let StageEnterEchelonCount = self.StageEnterEchelonCount();
       let StarConditionTacticRankSCount = self.StarConditionTacticRankSCount();
       let StarConditionTurnCount = self.StarConditionTurnCount();
-    let enterScenarioGroupId = self.enterScenarioGroupId().map(|x| {
+    let EnterScenarioGroupId = self.EnterScenarioGroupId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let clearScenarioGroupId = self.clearScenarioGroupId().map(|x| {
+    let ClearScenarioGroupId = self.ClearScenarioGroupId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let StrategyMap = self.StrategyMap().map(|x| {
@@ -288,10 +288,10 @@ impl<'a> EventContentStageExcel<'a> {
       let BuffContentId = self.BuffContentId();
       let FixedEchelonId = self.FixedEchelonId();
       let ChallengeDisplay = self.ChallengeDisplay();
-    let starGoal = self.starGoal().map(|x| {
+    let StarGoal = self.StarGoal().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let starGoalAmount = self.starGoalAmount().map(|x| {
+    let StarGoalAmount = self.StarGoalAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
       let IsDefeatBattle = self.IsDefeatBattle();
@@ -323,8 +323,8 @@ impl<'a> EventContentStageExcel<'a> {
       StageEnterEchelonCount,
       StarConditionTacticRankSCount,
       StarConditionTurnCount,
-      enterScenarioGroupId,
-      clearScenarioGroupId,
+      EnterScenarioGroupId,
+      ClearScenarioGroupId,
       StrategyMap,
       StrategyMapBG,
       EventContentStageRewardId,
@@ -340,8 +340,8 @@ impl<'a> EventContentStageExcel<'a> {
       BuffContentId,
       FixedEchelonId,
       ChallengeDisplay,
-      starGoal,
-      starGoalAmount,
+      StarGoal,
+      StarGoalAmount,
       IsDefeatBattle,
       StageHint,
       EchelonExtensionType,
@@ -496,14 +496,14 @@ impl<'a> EventContentStageExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentStageExcel::VT_STARCONDITIONTURNCOUNT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn enterScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn EnterScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EventContentStageExcel::VT_ENTERSCENARIOGROUPID, None)}
   }
   #[inline]
-  pub fn clearScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ClearScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -615,14 +615,14 @@ impl<'a> EventContentStageExcel<'a> {
     unsafe { self._tab.get::<bool>(EventContentStageExcel::VT_CHALLENGEDISPLAY, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn starGoal(&self) -> Option<flatbuffers::Vector<'a, StarGoalType>> {
+  pub fn StarGoal(&self) -> Option<flatbuffers::Vector<'a, StarGoalType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, StarGoalType>>>(EventContentStageExcel::VT_STARGOAL, None)}
   }
   #[inline]
-  pub fn starGoalAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn StarGoalAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -679,8 +679,8 @@ impl flatbuffers::Verifiable for EventContentStageExcel<'_> {
      .visit_field::<i32>("StageEnterEchelonCount", Self::VT_STAGEENTERECHELONCOUNT, false)?
      .visit_field::<i64>("StarConditionTacticRankSCount", Self::VT_STARCONDITIONTACTICRANKSCOUNT, false)?
      .visit_field::<i64>("StarConditionTurnCount", Self::VT_STARCONDITIONTURNCOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("enterScenarioGroupId", Self::VT_ENTERSCENARIOGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("clearScenarioGroupId", Self::VT_CLEARSCENARIOGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("EnterScenarioGroupId", Self::VT_ENTERSCENARIOGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ClearScenarioGroupId", Self::VT_CLEARSCENARIOGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("StrategyMap", Self::VT_STRATEGYMAP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("StrategyMapBG", Self::VT_STRATEGYMAPBG, false)?
      .visit_field::<i64>("EventContentStageRewardId", Self::VT_EVENTCONTENTSTAGEREWARDID, false)?
@@ -696,8 +696,8 @@ impl flatbuffers::Verifiable for EventContentStageExcel<'_> {
      .visit_field::<i64>("BuffContentId", Self::VT_BUFFCONTENTID, false)?
      .visit_field::<i64>("FixedEchelonId", Self::VT_FIXEDECHELONID, false)?
      .visit_field::<bool>("ChallengeDisplay", Self::VT_CHALLENGEDISPLAY, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StarGoalType>>>("starGoal", Self::VT_STARGOAL, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("starGoalAmount", Self::VT_STARGOALAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StarGoalType>>>("StarGoal", Self::VT_STARGOAL, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("StarGoalAmount", Self::VT_STARGOALAMOUNT, false)?
      .visit_field::<bool>("IsDefeatBattle", Self::VT_ISDEFEATBATTLE, false)?
      .visit_field::<u32>("StageHint", Self::VT_STAGEHINT, false)?
      .visit_field::<EchelonExtensionType>("EchelonExtensionType", Self::VT_ECHELONEXTENSIONTYPE, false)?
@@ -727,8 +727,8 @@ pub struct EventContentStageExcelArgs<'a> {
     pub StageEnterEchelonCount: i32,
     pub StarConditionTacticRankSCount: i64,
     pub StarConditionTurnCount: i64,
-    pub enterScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub clearScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub EnterScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ClearScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub StrategyMap: Option<flatbuffers::WIPOffset<&'a str>>,
     pub StrategyMapBG: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EventContentStageRewardId: i64,
@@ -744,8 +744,8 @@ pub struct EventContentStageExcelArgs<'a> {
     pub BuffContentId: i64,
     pub FixedEchelonId: i64,
     pub ChallengeDisplay: bool,
-    pub starGoal: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StarGoalType>>>,
-    pub starGoalAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub StarGoal: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StarGoalType>>>,
+    pub StarGoalAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub IsDefeatBattle: bool,
     pub StageHint: u32,
     pub EchelonExtensionType: EchelonExtensionType,
@@ -775,8 +775,8 @@ impl<'a> Default for EventContentStageExcelArgs<'a> {
       StageEnterEchelonCount: 0,
       StarConditionTacticRankSCount: 0,
       StarConditionTurnCount: 0,
-      enterScenarioGroupId: None,
-      clearScenarioGroupId: None,
+      EnterScenarioGroupId: None,
+      ClearScenarioGroupId: None,
       StrategyMap: None,
       StrategyMapBG: None,
       EventContentStageRewardId: 0,
@@ -792,8 +792,8 @@ impl<'a> Default for EventContentStageExcelArgs<'a> {
       BuffContentId: 0,
       FixedEchelonId: 0,
       ChallengeDisplay: false,
-      starGoal: None,
-      starGoalAmount: None,
+      StarGoal: None,
+      StarGoalAmount: None,
       IsDefeatBattle: false,
       StageHint: 0,
       EchelonExtensionType: EchelonExtensionType::Base,
@@ -836,15 +836,15 @@ impl Serialize for EventContentStageExcel<'_> {
       s.serialize_field("StageEnterEchelonCount", &self.StageEnterEchelonCount())?;
       s.serialize_field("StarConditionTacticRankSCount", &self.StarConditionTacticRankSCount())?;
       s.serialize_field("StarConditionTurnCount", &self.StarConditionTurnCount())?;
-      if let Some(f) = self.enterScenarioGroupId() {
-        s.serialize_field("enterScenarioGroupId", &f)?;
+      if let Some(f) = self.EnterScenarioGroupId() {
+        s.serialize_field("EnterScenarioGroupId", &f)?;
       } else {
-        s.skip_field("enterScenarioGroupId")?;
+        s.skip_field("EnterScenarioGroupId")?;
       }
-      if let Some(f) = self.clearScenarioGroupId() {
-        s.serialize_field("clearScenarioGroupId", &f)?;
+      if let Some(f) = self.ClearScenarioGroupId() {
+        s.serialize_field("ClearScenarioGroupId", &f)?;
       } else {
-        s.skip_field("clearScenarioGroupId")?;
+        s.skip_field("ClearScenarioGroupId")?;
       }
       if let Some(f) = self.StrategyMap() {
         s.serialize_field("StrategyMap", &f)?;
@@ -873,15 +873,15 @@ impl Serialize for EventContentStageExcel<'_> {
       s.serialize_field("BuffContentId", &self.BuffContentId())?;
       s.serialize_field("FixedEchelonId", &self.FixedEchelonId())?;
       s.serialize_field("ChallengeDisplay", &self.ChallengeDisplay())?;
-      if let Some(f) = self.starGoal() {
-        s.serialize_field("starGoal", &f)?;
+      if let Some(f) = self.StarGoal() {
+        s.serialize_field("StarGoal", &f)?;
       } else {
-        s.skip_field("starGoal")?;
+        s.skip_field("StarGoal")?;
       }
-      if let Some(f) = self.starGoalAmount() {
-        s.serialize_field("starGoalAmount", &f)?;
+      if let Some(f) = self.StarGoalAmount() {
+        s.serialize_field("StarGoalAmount", &f)?;
       } else {
-        s.skip_field("starGoalAmount")?;
+        s.skip_field("StarGoalAmount")?;
       }
       s.serialize_field("IsDefeatBattle", &self.IsDefeatBattle())?;
       s.serialize_field("StageHint", &self.StageHint())?;
@@ -980,12 +980,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentStageExcelBuilder<'
     self.fbb_.push_slot::<i64>(EventContentStageExcel::VT_STARCONDITIONTURNCOUNT, StarConditionTurnCount, 0);
   }
   #[inline]
-  pub fn add_enterScenarioGroupId(&mut self, enterScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageExcel::VT_ENTERSCENARIOGROUPID, enterScenarioGroupId);
+  pub fn add_EnterScenarioGroupId(&mut self, EnterScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageExcel::VT_ENTERSCENARIOGROUPID, EnterScenarioGroupId);
   }
   #[inline]
-  pub fn add_clearScenarioGroupId(&mut self, clearScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageExcel::VT_CLEARSCENARIOGROUPID, clearScenarioGroupId);
+  pub fn add_ClearScenarioGroupId(&mut self, ClearScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageExcel::VT_CLEARSCENARIOGROUPID, ClearScenarioGroupId);
   }
   #[inline]
   pub fn add_StrategyMap(&mut self, StrategyMap: flatbuffers::WIPOffset<&'b  str>) {
@@ -1048,12 +1048,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentStageExcelBuilder<'
     self.fbb_.push_slot::<bool>(EventContentStageExcel::VT_CHALLENGEDISPLAY, ChallengeDisplay, false);
   }
   #[inline]
-  pub fn add_starGoal(&mut self, starGoal: flatbuffers::WIPOffset<flatbuffers::Vector<'b , StarGoalType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageExcel::VT_STARGOAL, starGoal);
+  pub fn add_StarGoal(&mut self, StarGoal: flatbuffers::WIPOffset<flatbuffers::Vector<'b , StarGoalType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageExcel::VT_STARGOAL, StarGoal);
   }
   #[inline]
-  pub fn add_starGoalAmount(&mut self, starGoalAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageExcel::VT_STARGOALAMOUNT, starGoalAmount);
+  pub fn add_StarGoalAmount(&mut self, StarGoalAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentStageExcel::VT_STARGOALAMOUNT, StarGoalAmount);
   }
   #[inline]
   pub fn add_IsDefeatBattle(&mut self, IsDefeatBattle: bool) {
@@ -1106,8 +1106,8 @@ impl core::fmt::Debug for EventContentStageExcel<'_> {
       ds.field("StageEnterEchelonCount", &self.StageEnterEchelonCount());
       ds.field("StarConditionTacticRankSCount", &self.StarConditionTacticRankSCount());
       ds.field("StarConditionTurnCount", &self.StarConditionTurnCount());
-      ds.field("enterScenarioGroupId", &self.enterScenarioGroupId());
-      ds.field("clearScenarioGroupId", &self.clearScenarioGroupId());
+      ds.field("EnterScenarioGroupId", &self.EnterScenarioGroupId());
+      ds.field("ClearScenarioGroupId", &self.ClearScenarioGroupId());
       ds.field("StrategyMap", &self.StrategyMap());
       ds.field("StrategyMapBG", &self.StrategyMapBG());
       ds.field("EventContentStageRewardId", &self.EventContentStageRewardId());
@@ -1123,8 +1123,8 @@ impl core::fmt::Debug for EventContentStageExcel<'_> {
       ds.field("BuffContentId", &self.BuffContentId());
       ds.field("FixedEchelonId", &self.FixedEchelonId());
       ds.field("ChallengeDisplay", &self.ChallengeDisplay());
-      ds.field("starGoal", &self.starGoal());
-      ds.field("starGoalAmount", &self.starGoalAmount());
+      ds.field("StarGoal", &self.StarGoal());
+      ds.field("StarGoalAmount", &self.StarGoalAmount());
       ds.field("IsDefeatBattle", &self.IsDefeatBattle());
       ds.field("StageHint", &self.StageHint());
       ds.field("EchelonExtensionType", &self.EchelonExtensionType());
@@ -1155,8 +1155,8 @@ pub struct EventContentStageExcelT {
   pub StageEnterEchelonCount: i32,
   pub StarConditionTacticRankSCount: i64,
   pub StarConditionTurnCount: i64,
-  pub enterScenarioGroupId: Option<Vec<i64>>,
-  pub clearScenarioGroupId: Option<Vec<i64>>,
+  pub EnterScenarioGroupId: Option<Vec<i64>>,
+  pub ClearScenarioGroupId: Option<Vec<i64>>,
   pub StrategyMap: Option<String>,
   pub StrategyMapBG: Option<String>,
   pub EventContentStageRewardId: i64,
@@ -1172,8 +1172,8 @@ pub struct EventContentStageExcelT {
   pub BuffContentId: i64,
   pub FixedEchelonId: i64,
   pub ChallengeDisplay: bool,
-  pub starGoal: Option<Vec<StarGoalType>>,
-  pub starGoalAmount: Option<Vec<i32>>,
+  pub StarGoal: Option<Vec<StarGoalType>>,
+  pub StarGoalAmount: Option<Vec<i32>>,
   pub IsDefeatBattle: bool,
   pub StageHint: u32,
   pub EchelonExtensionType: EchelonExtensionType,
@@ -1202,8 +1202,8 @@ impl Default for EventContentStageExcelT {
       StageEnterEchelonCount: 0,
       StarConditionTacticRankSCount: 0,
       StarConditionTurnCount: 0,
-      enterScenarioGroupId: None,
-      clearScenarioGroupId: None,
+      EnterScenarioGroupId: None,
+      ClearScenarioGroupId: None,
       StrategyMap: None,
       StrategyMapBG: None,
       EventContentStageRewardId: 0,
@@ -1219,8 +1219,8 @@ impl Default for EventContentStageExcelT {
       BuffContentId: 0,
       FixedEchelonId: 0,
       ChallengeDisplay: false,
-      starGoal: None,
-      starGoalAmount: None,
+      StarGoal: None,
+      StarGoalAmount: None,
       IsDefeatBattle: false,
       StageHint: 0,
       EchelonExtensionType: EchelonExtensionType::Base,
@@ -1257,10 +1257,10 @@ impl EventContentStageExcelT {
     let StageEnterEchelonCount = self.StageEnterEchelonCount;
     let StarConditionTacticRankSCount = self.StarConditionTacticRankSCount;
     let StarConditionTurnCount = self.StarConditionTurnCount;
-    let enterScenarioGroupId = self.enterScenarioGroupId.as_ref().map(|x|{
+    let EnterScenarioGroupId = self.EnterScenarioGroupId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let clearScenarioGroupId = self.clearScenarioGroupId.as_ref().map(|x|{
+    let ClearScenarioGroupId = self.ClearScenarioGroupId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let StrategyMap = self.StrategyMap.as_ref().map(|x|{
@@ -1284,10 +1284,10 @@ impl EventContentStageExcelT {
     let BuffContentId = self.BuffContentId;
     let FixedEchelonId = self.FixedEchelonId;
     let ChallengeDisplay = self.ChallengeDisplay;
-    let starGoal = self.starGoal.as_ref().map(|x|{
+    let StarGoal = self.StarGoal.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let starGoalAmount = self.starGoalAmount.as_ref().map(|x|{
+    let StarGoalAmount = self.StarGoalAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let IsDefeatBattle = self.IsDefeatBattle;
@@ -1315,8 +1315,8 @@ impl EventContentStageExcelT {
       StageEnterEchelonCount,
       StarConditionTacticRankSCount,
       StarConditionTurnCount,
-      enterScenarioGroupId,
-      clearScenarioGroupId,
+      EnterScenarioGroupId,
+      ClearScenarioGroupId,
       StrategyMap,
       StrategyMapBG,
       EventContentStageRewardId,
@@ -1332,8 +1332,8 @@ impl EventContentStageExcelT {
       BuffContentId,
       FixedEchelonId,
       ChallengeDisplay,
-      starGoal,
-      starGoalAmount,
+      StarGoal,
+      StarGoalAmount,
       IsDefeatBattle,
       StageHint,
       EchelonExtensionType,

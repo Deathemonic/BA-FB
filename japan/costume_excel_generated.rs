@@ -95,8 +95,8 @@ impl<'a> CostumeExcel<'a> {
       if let Some(x) = args.InformationPacel {
         builder.add_InformationPacel(x);
       }
-      if let Some(x) = args.textureSkillCard {
-        builder.add_textureSkillCard(x);
+      if let Some(x) = args.TextureSkillCard {
+        builder.add_TextureSkillCard(x);
       }
       if let Some(x) = args.TextureBoss {
         builder.add_TextureBoss(x);
@@ -131,8 +131,8 @@ impl<'a> CostumeExcel<'a> {
       let x = args.EntityMaterialType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_EntityMaterialType(x);
-      if let Some(x) = args.spineResourceNameDioramaForFormConversion {
-        builder.add_spineResourceNameDioramaForFormConversion(x);
+      if let Some(x) = args.SpineResourceNameDioramaForFormConversion {
+        builder.add_SpineResourceNameDioramaForFormConversion(x);
       }
       if let Some(x) = args.SpineResourceNameDiorama {
         builder.add_SpineResourceNameDiorama(x);
@@ -201,7 +201,7 @@ impl<'a> CostumeExcel<'a> {
     let SpineResourceNameDiorama = self.SpineResourceNameDiorama().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let spineResourceNameDioramaForFormConversion = self.spineResourceNameDioramaForFormConversion().map(|x| {
+    let SpineResourceNameDioramaForFormConversion = self.SpineResourceNameDioramaForFormConversion().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
       let EntityMaterialType = if table_encryption_service::use_encryption() {
@@ -240,7 +240,7 @@ impl<'a> CostumeExcel<'a> {
     let TextureBoss = self.TextureBoss().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let textureSkillCard = self.textureSkillCard().map(|x| {
+    let TextureSkillCard = self.TextureSkillCard().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     let InformationPacel = self.InformationPacel().map(|x| {
@@ -269,7 +269,7 @@ impl<'a> CostumeExcel<'a> {
       CharacterSkillListGroupId,
       SpineResourceName,
       SpineResourceNameDiorama,
-      spineResourceNameDioramaForFormConversion,
+      SpineResourceNameDioramaForFormConversion,
       EntityMaterialType,
       ModelPrefabName,
       AnimatorName,
@@ -282,7 +282,7 @@ impl<'a> CostumeExcel<'a> {
       CombatStyleTexturePath,
       UseObjectHPBAR,
       TextureBoss,
-      textureSkillCard,
+      TextureSkillCard,
       InformationPacel,
       AnimationSSR,
       EnterStrategyAnimationName,
@@ -384,7 +384,7 @@ impl<'a> CostumeExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CostumeExcel::VT_SPINERESOURCENAMEDIORAMA, None)}
   }
   #[inline]
-  pub fn spineResourceNameDioramaForFormConversion(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn SpineResourceNameDioramaForFormConversion(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -475,7 +475,7 @@ impl<'a> CostumeExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CostumeExcel::VT_TEXTUREBOSS, None)}
   }
   #[inline]
-  pub fn textureSkillCard(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn TextureSkillCard(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -545,7 +545,7 @@ impl flatbuffers::Verifiable for CostumeExcel<'_> {
      .visit_field::<i64>("CharacterSkillListGroupId", Self::VT_CHARACTERSKILLLISTGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SpineResourceName", Self::VT_SPINERESOURCENAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SpineResourceNameDiorama", Self::VT_SPINERESOURCENAMEDIORAMA, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("spineResourceNameDioramaForFormConversion", Self::VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("SpineResourceNameDioramaForFormConversion", Self::VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION, false)?
      .visit_field::<EntityMaterialType>("EntityMaterialType", Self::VT_ENTITYMATERIALTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ModelPrefabName", Self::VT_MODELPREFABNAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("AnimatorName", Self::VT_ANIMATORNAME, false)?
@@ -558,7 +558,7 @@ impl flatbuffers::Verifiable for CostumeExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("CombatStyleTexturePath", Self::VT_COMBATSTYLETEXTUREPATH, false)?
      .visit_field::<bool>("UseObjectHPBAR", Self::VT_USEOBJECTHPBAR, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("TextureBoss", Self::VT_TEXTUREBOSS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("textureSkillCard", Self::VT_TEXTURESKILLCARD, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("TextureSkillCard", Self::VT_TEXTURESKILLCARD, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("InformationPacel", Self::VT_INFORMATIONPACEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("AnimationSSR", Self::VT_ANIMATIONSSR, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EnterStrategyAnimationName", Self::VT_ENTERSTRATEGYANIMATIONNAME, false)?
@@ -583,7 +583,7 @@ pub struct CostumeExcelArgs<'a> {
     pub CharacterSkillListGroupId: i64,
     pub SpineResourceName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SpineResourceNameDiorama: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub spineResourceNameDioramaForFormConversion: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub SpineResourceNameDioramaForFormConversion: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub EntityMaterialType: EntityMaterialType,
     pub ModelPrefabName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub AnimatorName: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -596,7 +596,7 @@ pub struct CostumeExcelArgs<'a> {
     pub CombatStyleTexturePath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub UseObjectHPBAR: bool,
     pub TextureBoss: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub textureSkillCard: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub TextureSkillCard: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub InformationPacel: Option<flatbuffers::WIPOffset<&'a str>>,
     pub AnimationSSR: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EnterStrategyAnimationName: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -621,7 +621,7 @@ impl<'a> Default for CostumeExcelArgs<'a> {
       CharacterSkillListGroupId: 0,
       SpineResourceName: None,
       SpineResourceNameDiorama: None,
-      spineResourceNameDioramaForFormConversion: None,
+      SpineResourceNameDioramaForFormConversion: None,
       EntityMaterialType: EntityMaterialType::Wood,
       ModelPrefabName: None,
       AnimatorName: None,
@@ -634,7 +634,7 @@ impl<'a> Default for CostumeExcelArgs<'a> {
       CombatStyleTexturePath: None,
       UseObjectHPBAR: false,
       TextureBoss: None,
-      textureSkillCard: None,
+      TextureSkillCard: None,
       InformationPacel: None,
       AnimationSSR: None,
       EnterStrategyAnimationName: None,
@@ -688,10 +688,10 @@ impl Serialize for CostumeExcel<'_> {
       } else {
         s.skip_field("SpineResourceNameDiorama")?;
       }
-      if let Some(f) = self.spineResourceNameDioramaForFormConversion() {
-        s.serialize_field("spineResourceNameDioramaForFormConversion", &f)?;
+      if let Some(f) = self.SpineResourceNameDioramaForFormConversion() {
+        s.serialize_field("SpineResourceNameDioramaForFormConversion", &f)?;
       } else {
-        s.skip_field("spineResourceNameDioramaForFormConversion")?;
+        s.skip_field("SpineResourceNameDioramaForFormConversion")?;
       }
       s.serialize_field("EntityMaterialType", &self.EntityMaterialType())?;
       if let Some(f) = self.ModelPrefabName() {
@@ -745,10 +745,10 @@ impl Serialize for CostumeExcel<'_> {
       } else {
         s.skip_field("TextureBoss")?;
       }
-      if let Some(f) = self.textureSkillCard() {
-        s.serialize_field("textureSkillCard", &f)?;
+      if let Some(f) = self.TextureSkillCard() {
+        s.serialize_field("TextureSkillCard", &f)?;
       } else {
-        s.skip_field("textureSkillCard")?;
+        s.skip_field("TextureSkillCard")?;
       }
       if let Some(f) = self.InformationPacel() {
         s.serialize_field("InformationPacel", &f)?;
@@ -830,8 +830,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CostumeExcelBuilder<'a, 'b, A> 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_SPINERESOURCENAMEDIORAMA, SpineResourceNameDiorama);
   }
   #[inline]
-  pub fn add_spineResourceNameDioramaForFormConversion(&mut self, spineResourceNameDioramaForFormConversion: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION, spineResourceNameDioramaForFormConversion);
+  pub fn add_SpineResourceNameDioramaForFormConversion(&mut self, SpineResourceNameDioramaForFormConversion: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_SPINERESOURCENAMEDIORAMAFORFORMCONVERSION, SpineResourceNameDioramaForFormConversion);
   }
   #[inline]
   pub fn add_EntityMaterialType(&mut self, EntityMaterialType: EntityMaterialType) {
@@ -882,8 +882,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CostumeExcelBuilder<'a, 'b, A> 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_TEXTUREBOSS, TextureBoss);
   }
   #[inline]
-  pub fn add_textureSkillCard(&mut self, textureSkillCard: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_TEXTURESKILLCARD, textureSkillCard);
+  pub fn add_TextureSkillCard(&mut self, TextureSkillCard: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CostumeExcel::VT_TEXTURESKILLCARD, TextureSkillCard);
   }
   #[inline]
   pub fn add_InformationPacel(&mut self, InformationPacel: flatbuffers::WIPOffset<&'b  str>) {
@@ -940,7 +940,7 @@ impl core::fmt::Debug for CostumeExcel<'_> {
       ds.field("CharacterSkillListGroupId", &self.CharacterSkillListGroupId());
       ds.field("SpineResourceName", &self.SpineResourceName());
       ds.field("SpineResourceNameDiorama", &self.SpineResourceNameDiorama());
-      ds.field("spineResourceNameDioramaForFormConversion", &self.spineResourceNameDioramaForFormConversion());
+      ds.field("SpineResourceNameDioramaForFormConversion", &self.SpineResourceNameDioramaForFormConversion());
       ds.field("EntityMaterialType", &self.EntityMaterialType());
       ds.field("ModelPrefabName", &self.ModelPrefabName());
       ds.field("AnimatorName", &self.AnimatorName());
@@ -953,7 +953,7 @@ impl core::fmt::Debug for CostumeExcel<'_> {
       ds.field("CombatStyleTexturePath", &self.CombatStyleTexturePath());
       ds.field("UseObjectHPBAR", &self.UseObjectHPBAR());
       ds.field("TextureBoss", &self.TextureBoss());
-      ds.field("textureSkillCard", &self.textureSkillCard());
+      ds.field("TextureSkillCard", &self.TextureSkillCard());
       ds.field("InformationPacel", &self.InformationPacel());
       ds.field("AnimationSSR", &self.AnimationSSR());
       ds.field("EnterStrategyAnimationName", &self.EnterStrategyAnimationName());
@@ -979,7 +979,7 @@ pub struct CostumeExcelT {
   pub CharacterSkillListGroupId: i64,
   pub SpineResourceName: Option<String>,
   pub SpineResourceNameDiorama: Option<String>,
-  pub spineResourceNameDioramaForFormConversion: Option<Vec<String>>,
+  pub SpineResourceNameDioramaForFormConversion: Option<Vec<String>>,
   pub EntityMaterialType: EntityMaterialType,
   pub ModelPrefabName: Option<String>,
   pub AnimatorName: Option<String>,
@@ -992,7 +992,7 @@ pub struct CostumeExcelT {
   pub CombatStyleTexturePath: Option<String>,
   pub UseObjectHPBAR: bool,
   pub TextureBoss: Option<String>,
-  pub textureSkillCard: Option<Vec<String>>,
+  pub TextureSkillCard: Option<Vec<String>>,
   pub InformationPacel: Option<String>,
   pub AnimationSSR: Option<String>,
   pub EnterStrategyAnimationName: Option<String>,
@@ -1016,7 +1016,7 @@ impl Default for CostumeExcelT {
       CharacterSkillListGroupId: 0,
       SpineResourceName: None,
       SpineResourceNameDiorama: None,
-      spineResourceNameDioramaForFormConversion: None,
+      SpineResourceNameDioramaForFormConversion: None,
       EntityMaterialType: EntityMaterialType::Wood,
       ModelPrefabName: None,
       AnimatorName: None,
@@ -1029,7 +1029,7 @@ impl Default for CostumeExcelT {
       CombatStyleTexturePath: None,
       UseObjectHPBAR: false,
       TextureBoss: None,
-      textureSkillCard: None,
+      TextureSkillCard: None,
       InformationPacel: None,
       AnimationSSR: None,
       EnterStrategyAnimationName: None,
@@ -1069,7 +1069,7 @@ impl CostumeExcelT {
     let SpineResourceNameDiorama = self.SpineResourceNameDiorama.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let spineResourceNameDioramaForFormConversion = self.spineResourceNameDioramaForFormConversion.as_ref().map(|x|{
+    let SpineResourceNameDioramaForFormConversion = self.SpineResourceNameDioramaForFormConversion.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let EntityMaterialType = self.EntityMaterialType;
@@ -1104,7 +1104,7 @@ impl CostumeExcelT {
     let TextureBoss = self.TextureBoss.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let textureSkillCard = self.textureSkillCard.as_ref().map(|x|{
+    let TextureSkillCard = self.TextureSkillCard.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     let InformationPacel = self.InformationPacel.as_ref().map(|x|{
@@ -1133,7 +1133,7 @@ impl CostumeExcelT {
       CharacterSkillListGroupId,
       SpineResourceName,
       SpineResourceNameDiorama,
-      spineResourceNameDioramaForFormConversion,
+      SpineResourceNameDioramaForFormConversion,
       EntityMaterialType,
       ModelPrefabName,
       AnimatorName,
@@ -1146,7 +1146,7 @@ impl CostumeExcelT {
       CombatStyleTexturePath,
       UseObjectHPBAR,
       TextureBoss,
-      textureSkillCard,
+      TextureSkillCard,
       InformationPacel,
       AnimationSSR,
       EnterStrategyAnimationName,

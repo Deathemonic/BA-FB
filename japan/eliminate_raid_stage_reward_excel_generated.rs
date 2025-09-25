@@ -34,8 +34,7 @@ impl<'a> EliminateRaidStageRewardExcel<'a> {
   pub const VT_CLEARSTAGEREWARDPROB: flatbuffers::VOffsetT = 8;
   pub const VT_CLEARSTAGEREWARDPARCELTYPE: flatbuffers::VOffsetT = 10;
   pub const VT_CLEARSTAGEREWARDPARCELUNIQUEID: flatbuffers::VOffsetT = 12;
-  pub const VT_CLEARSTAGEREWARDPARCELUNIQUENAME: flatbuffers::VOffsetT = 14;
-  pub const VT_CLEARSTAGEREWARDAMOUNT: flatbuffers::VOffsetT = 16;
+  pub const VT_CLEARSTAGEREWARDAMOUNT: flatbuffers::VOffsetT = 14;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -44,7 +43,7 @@ impl<'a> EliminateRaidStageRewardExcel<'a> {
   #[allow(unused_mut)]
   pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr, A: flatbuffers::Allocator + 'bldr>(
     _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr, A>,
-    args: &'args EliminateRaidStageRewardExcelArgs<'args>
+    args: &'args EliminateRaidStageRewardExcelArgs
   ) -> flatbuffers::WIPOffset<EliminateRaidStageRewardExcel<'bldr>> {
     let mut builder = EliminateRaidStageRewardExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"EliminateRaidStageReward");
@@ -60,9 +59,6 @@ impl<'a> EliminateRaidStageRewardExcel<'a> {
       let x = args.GroupId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_GroupId(x);
-      if let Some(x) = args.ClearStageRewardParcelUniqueName {
-        builder.add_ClearStageRewardParcelUniqueName(x);
-      }
       let x = args.ClearStageRewardParcelType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ClearStageRewardParcelType(x);
@@ -81,9 +77,6 @@ impl<'a> EliminateRaidStageRewardExcel<'a> {
         self.ClearStageRewardParcelType()
       };
       let ClearStageRewardParcelUniqueID = self.ClearStageRewardParcelUniqueID();
-    let ClearStageRewardParcelUniqueName = self.ClearStageRewardParcelUniqueName().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
       let ClearStageRewardAmount = self.ClearStageRewardAmount();
     EliminateRaidStageRewardExcelT {
       GroupId,
@@ -91,7 +84,6 @@ impl<'a> EliminateRaidStageRewardExcel<'a> {
       ClearStageRewardProb,
       ClearStageRewardParcelType,
       ClearStageRewardParcelUniqueID,
-      ClearStageRewardParcelUniqueName,
       ClearStageRewardAmount,
     }
   }
@@ -132,13 +124,6 @@ impl<'a> EliminateRaidStageRewardExcel<'a> {
     unsafe { self._tab.get::<i64>(EliminateRaidStageRewardExcel::VT_CLEARSTAGEREWARDPARCELUNIQUEID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn ClearStageRewardParcelUniqueName(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EliminateRaidStageRewardExcel::VT_CLEARSTAGEREWARDPARCELUNIQUENAME, None)}
-  }
-  #[inline]
   pub fn ClearStageRewardAmount(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
@@ -159,22 +144,20 @@ impl flatbuffers::Verifiable for EliminateRaidStageRewardExcel<'_> {
      .visit_field::<i64>("ClearStageRewardProb", Self::VT_CLEARSTAGEREWARDPROB, false)?
      .visit_field::<ParcelType>("ClearStageRewardParcelType", Self::VT_CLEARSTAGEREWARDPARCELTYPE, false)?
      .visit_field::<i64>("ClearStageRewardParcelUniqueID", Self::VT_CLEARSTAGEREWARDPARCELUNIQUEID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ClearStageRewardParcelUniqueName", Self::VT_CLEARSTAGEREWARDPARCELUNIQUENAME, false)?
      .visit_field::<i64>("ClearStageRewardAmount", Self::VT_CLEARSTAGEREWARDAMOUNT, false)?
      .finish();
     Ok(())
   }
 }
-pub struct EliminateRaidStageRewardExcelArgs<'a> {
+pub struct EliminateRaidStageRewardExcelArgs {
     pub GroupId: i64,
     pub IsClearStageRewardHideInfo: bool,
     pub ClearStageRewardProb: i64,
     pub ClearStageRewardParcelType: ParcelType,
     pub ClearStageRewardParcelUniqueID: i64,
-    pub ClearStageRewardParcelUniqueName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ClearStageRewardAmount: i64,
 }
-impl<'a> Default for EliminateRaidStageRewardExcelArgs<'a> {
+impl<'a> Default for EliminateRaidStageRewardExcelArgs {
   #[inline]
   fn default() -> Self {
     EliminateRaidStageRewardExcelArgs {
@@ -183,7 +166,6 @@ impl<'a> Default for EliminateRaidStageRewardExcelArgs<'a> {
       ClearStageRewardProb: 0,
       ClearStageRewardParcelType: ParcelType::None,
       ClearStageRewardParcelUniqueID: 0,
-      ClearStageRewardParcelUniqueName: None,
       ClearStageRewardAmount: 0,
     }
   }
@@ -194,17 +176,12 @@ impl Serialize for EliminateRaidStageRewardExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EliminateRaidStageRewardExcel", 7)?;
+    let mut s = serializer.serialize_struct("EliminateRaidStageRewardExcel", 6)?;
       s.serialize_field("GroupId", &self.GroupId())?;
       s.serialize_field("IsClearStageRewardHideInfo", &self.IsClearStageRewardHideInfo())?;
       s.serialize_field("ClearStageRewardProb", &self.ClearStageRewardProb())?;
       s.serialize_field("ClearStageRewardParcelType", &self.ClearStageRewardParcelType())?;
       s.serialize_field("ClearStageRewardParcelUniqueID", &self.ClearStageRewardParcelUniqueID())?;
-      if let Some(f) = self.ClearStageRewardParcelUniqueName() {
-        s.serialize_field("ClearStageRewardParcelUniqueName", &f)?;
-      } else {
-        s.skip_field("ClearStageRewardParcelUniqueName")?;
-      }
       s.serialize_field("ClearStageRewardAmount", &self.ClearStageRewardAmount())?;
     s.end()
   }
@@ -236,10 +213,6 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EliminateRaidStageRewardExcelBu
     self.fbb_.push_slot::<i64>(EliminateRaidStageRewardExcel::VT_CLEARSTAGEREWARDPARCELUNIQUEID, ClearStageRewardParcelUniqueID, 0);
   }
   #[inline]
-  pub fn add_ClearStageRewardParcelUniqueName(&mut self, ClearStageRewardParcelUniqueName: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EliminateRaidStageRewardExcel::VT_CLEARSTAGEREWARDPARCELUNIQUENAME, ClearStageRewardParcelUniqueName);
-  }
-  #[inline]
   pub fn add_ClearStageRewardAmount(&mut self, ClearStageRewardAmount: i64) {
     self.fbb_.push_slot::<i64>(EliminateRaidStageRewardExcel::VT_CLEARSTAGEREWARDAMOUNT, ClearStageRewardAmount, 0);
   }
@@ -266,7 +239,6 @@ impl core::fmt::Debug for EliminateRaidStageRewardExcel<'_> {
       ds.field("ClearStageRewardProb", &self.ClearStageRewardProb());
       ds.field("ClearStageRewardParcelType", &self.ClearStageRewardParcelType());
       ds.field("ClearStageRewardParcelUniqueID", &self.ClearStageRewardParcelUniqueID());
-      ds.field("ClearStageRewardParcelUniqueName", &self.ClearStageRewardParcelUniqueName());
       ds.field("ClearStageRewardAmount", &self.ClearStageRewardAmount());
       ds.finish()
   }
@@ -279,7 +251,6 @@ pub struct EliminateRaidStageRewardExcelT {
   pub ClearStageRewardProb: i64,
   pub ClearStageRewardParcelType: ParcelType,
   pub ClearStageRewardParcelUniqueID: i64,
-  pub ClearStageRewardParcelUniqueName: Option<String>,
   pub ClearStageRewardAmount: i64,
 }
 impl Default for EliminateRaidStageRewardExcelT {
@@ -290,7 +261,6 @@ impl Default for EliminateRaidStageRewardExcelT {
       ClearStageRewardProb: 0,
       ClearStageRewardParcelType: ParcelType::None,
       ClearStageRewardParcelUniqueID: 0,
-      ClearStageRewardParcelUniqueName: None,
       ClearStageRewardAmount: 0,
     }
   }
@@ -305,9 +275,6 @@ impl EliminateRaidStageRewardExcelT {
     let ClearStageRewardProb = self.ClearStageRewardProb;
     let ClearStageRewardParcelType = self.ClearStageRewardParcelType;
     let ClearStageRewardParcelUniqueID = self.ClearStageRewardParcelUniqueID;
-    let ClearStageRewardParcelUniqueName = self.ClearStageRewardParcelUniqueName.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
     let ClearStageRewardAmount = self.ClearStageRewardAmount;
     EliminateRaidStageRewardExcel::create(_fbb, &EliminateRaidStageRewardExcelArgs{
       GroupId,
@@ -315,7 +282,6 @@ impl EliminateRaidStageRewardExcelT {
       ClearStageRewardProb,
       ClearStageRewardParcelType,
       ClearStageRewardParcelUniqueID,
-      ClearStageRewardParcelUniqueName,
       ClearStageRewardAmount,
     })
   }

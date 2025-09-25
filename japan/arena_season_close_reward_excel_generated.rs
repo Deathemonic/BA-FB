@@ -34,8 +34,7 @@ impl<'a> ArenaSeasonCloseRewardExcel<'a> {
   pub const VT_RANKEND: flatbuffers::VOffsetT = 8;
   pub const VT_REWARDPARCELTYPE: flatbuffers::VOffsetT = 10;
   pub const VT_REWARDPARCELUNIQUEID: flatbuffers::VOffsetT = 12;
-  pub const VT_REWARDPARCELUNIQUENAME: flatbuffers::VOffsetT = 14;
-  pub const VT_REWARDPARCELAMOUNT: flatbuffers::VOffsetT = 16;
+  pub const VT_REWARDPARCELAMOUNT: flatbuffers::VOffsetT = 14;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -60,9 +59,6 @@ impl<'a> ArenaSeasonCloseRewardExcel<'a> {
       if let Some(x) = args.RewardParcelAmount {
         builder.add_RewardParcelAmount(x);
       }
-      if let Some(x) = args.RewardParcelUniqueName {
-        builder.add_RewardParcelUniqueName(x);
-      }
       if let Some(x) = args.RewardParcelUniqueId {
         builder.add_RewardParcelUniqueId(x);
       }
@@ -83,9 +79,6 @@ impl<'a> ArenaSeasonCloseRewardExcel<'a> {
     let RewardParcelUniqueId = self.RewardParcelUniqueId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let RewardParcelUniqueName = self.RewardParcelUniqueName().map(|x| {
-      x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
-    });
     let RewardParcelAmount = self.RewardParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
@@ -95,7 +88,6 @@ impl<'a> ArenaSeasonCloseRewardExcel<'a> {
       RankEnd,
       RewardParcelType,
       RewardParcelUniqueId,
-      RewardParcelUniqueName,
       RewardParcelAmount,
     }
   }
@@ -136,13 +128,6 @@ impl<'a> ArenaSeasonCloseRewardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ArenaSeasonCloseRewardExcel::VT_REWARDPARCELUNIQUEID, None)}
   }
   #[inline]
-  pub fn RewardParcelUniqueName(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(ArenaSeasonCloseRewardExcel::VT_REWARDPARCELUNIQUENAME, None)}
-  }
-  #[inline]
   pub fn RewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
@@ -163,7 +148,6 @@ impl flatbuffers::Verifiable for ArenaSeasonCloseRewardExcel<'_> {
      .visit_field::<i64>("RankEnd", Self::VT_RANKEND, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelUniqueId", Self::VT_REWARDPARCELUNIQUEID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("RewardParcelUniqueName", Self::VT_REWARDPARCELUNIQUENAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
     Ok(())
@@ -175,7 +159,6 @@ pub struct ArenaSeasonCloseRewardExcelArgs<'a> {
     pub RankEnd: i64,
     pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub RewardParcelUniqueId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub RewardParcelUniqueName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for ArenaSeasonCloseRewardExcelArgs<'a> {
@@ -187,7 +170,6 @@ impl<'a> Default for ArenaSeasonCloseRewardExcelArgs<'a> {
       RankEnd: 0,
       RewardParcelType: None,
       RewardParcelUniqueId: None,
-      RewardParcelUniqueName: None,
       RewardParcelAmount: None,
     }
   }
@@ -198,7 +180,7 @@ impl Serialize for ArenaSeasonCloseRewardExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ArenaSeasonCloseRewardExcel", 7)?;
+    let mut s = serializer.serialize_struct("ArenaSeasonCloseRewardExcel", 6)?;
       s.serialize_field("SeasonId", &self.SeasonId())?;
       s.serialize_field("RankStart", &self.RankStart())?;
       s.serialize_field("RankEnd", &self.RankEnd())?;
@@ -211,11 +193,6 @@ impl Serialize for ArenaSeasonCloseRewardExcel<'_> {
         s.serialize_field("RewardParcelUniqueId", &f)?;
       } else {
         s.skip_field("RewardParcelUniqueId")?;
-      }
-      if let Some(f) = self.RewardParcelUniqueName() {
-        s.serialize_field("RewardParcelUniqueName", &f)?;
-      } else {
-        s.skip_field("RewardParcelUniqueName")?;
       }
       if let Some(f) = self.RewardParcelAmount() {
         s.serialize_field("RewardParcelAmount", &f)?;
@@ -252,10 +229,6 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ArenaSeasonCloseRewardExcelBuil
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaSeasonCloseRewardExcel::VT_REWARDPARCELUNIQUEID, RewardParcelUniqueId);
   }
   #[inline]
-  pub fn add_RewardParcelUniqueName(&mut self, RewardParcelUniqueName: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaSeasonCloseRewardExcel::VT_REWARDPARCELUNIQUENAME, RewardParcelUniqueName);
-  }
-  #[inline]
   pub fn add_RewardParcelAmount(&mut self, RewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ArenaSeasonCloseRewardExcel::VT_REWARDPARCELAMOUNT, RewardParcelAmount);
   }
@@ -282,7 +255,6 @@ impl core::fmt::Debug for ArenaSeasonCloseRewardExcel<'_> {
       ds.field("RankEnd", &self.RankEnd());
       ds.field("RewardParcelType", &self.RewardParcelType());
       ds.field("RewardParcelUniqueId", &self.RewardParcelUniqueId());
-      ds.field("RewardParcelUniqueName", &self.RewardParcelUniqueName());
       ds.field("RewardParcelAmount", &self.RewardParcelAmount());
       ds.finish()
   }
@@ -295,7 +267,6 @@ pub struct ArenaSeasonCloseRewardExcelT {
   pub RankEnd: i64,
   pub RewardParcelType: Option<Vec<ParcelType>>,
   pub RewardParcelUniqueId: Option<Vec<i64>>,
-  pub RewardParcelUniqueName: Option<Vec<String>>,
   pub RewardParcelAmount: Option<Vec<i64>>,
 }
 impl Default for ArenaSeasonCloseRewardExcelT {
@@ -306,7 +277,6 @@ impl Default for ArenaSeasonCloseRewardExcelT {
       RankEnd: 0,
       RewardParcelType: None,
       RewardParcelUniqueId: None,
-      RewardParcelUniqueName: None,
       RewardParcelAmount: None,
     }
   }
@@ -325,9 +295,6 @@ impl ArenaSeasonCloseRewardExcelT {
     let RewardParcelUniqueId = self.RewardParcelUniqueId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let RewardParcelUniqueName = self.RewardParcelUniqueName.as_ref().map(|x|{
-      let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
-    });
     let RewardParcelAmount = self.RewardParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
@@ -337,7 +304,6 @@ impl ArenaSeasonCloseRewardExcelT {
       RankEnd,
       RewardParcelType,
       RewardParcelUniqueId,
-      RewardParcelUniqueName,
       RewardParcelAmount,
     })
   }

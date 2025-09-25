@@ -64,11 +64,11 @@ impl<'a> EchelonConstraintExcel<'a> {
       let x = args.WeaponType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_WeaponType(x);
-      if let Some(x) = args.personalityId {
-        builder.add_personalityId(x);
+      if let Some(x) = args.PersonalityId {
+        builder.add_PersonalityId(x);
       }
-      if let Some(x) = args.characterId {
-        builder.add_characterId(x);
+      if let Some(x) = args.CharacterId {
+        builder.add_CharacterId(x);
       }
       builder.add_IsWhiteList(args.IsWhiteList);
     builder.finish()
@@ -78,10 +78,10 @@ impl<'a> EchelonConstraintExcel<'a> {
     let key = table_encryption_service::create_key(b"EchelonConstraint");
       let GroupId = self.GroupId();
       let IsWhiteList = self.IsWhiteList();
-    let characterId = self.characterId().map(|x| {
+    let CharacterId = self.CharacterId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let personalityId = self.personalityId().map(|x| {
+    let PersonalityId = self.PersonalityId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let WeaponType = if table_encryption_service::use_encryption() {
@@ -107,8 +107,8 @@ impl<'a> EchelonConstraintExcel<'a> {
     EchelonConstraintExcelT {
       GroupId,
       IsWhiteList,
-      characterId,
-      personalityId,
+      CharacterId,
+      PersonalityId,
       WeaponType,
       School,
       Club,
@@ -131,14 +131,14 @@ impl<'a> EchelonConstraintExcel<'a> {
     unsafe { self._tab.get::<bool>(EchelonConstraintExcel::VT_ISWHITELIST, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn characterId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn CharacterId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EchelonConstraintExcel::VT_CHARACTERID, None)}
   }
   #[inline]
-  pub fn personalityId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn PersonalityId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -183,8 +183,8 @@ impl flatbuffers::Verifiable for EchelonConstraintExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("GroupId", Self::VT_GROUPID, false)?
      .visit_field::<bool>("IsWhiteList", Self::VT_ISWHITELIST, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("characterId", Self::VT_CHARACTERID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("personalityId", Self::VT_PERSONALITYID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("CharacterId", Self::VT_CHARACTERID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("PersonalityId", Self::VT_PERSONALITYID, false)?
      .visit_field::<WeaponType>("WeaponType", Self::VT_WEAPONTYPE, false)?
      .visit_field::<School>("School", Self::VT_SCHOOL, false)?
      .visit_field::<Club>("Club", Self::VT_CLUB, false)?
@@ -196,8 +196,8 @@ impl flatbuffers::Verifiable for EchelonConstraintExcel<'_> {
 pub struct EchelonConstraintExcelArgs<'a> {
     pub GroupId: i64,
     pub IsWhiteList: bool,
-    pub characterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub personalityId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub CharacterId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub PersonalityId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub WeaponType: WeaponType,
     pub School: School,
     pub Club: Club,
@@ -209,8 +209,8 @@ impl<'a> Default for EchelonConstraintExcelArgs<'a> {
     EchelonConstraintExcelArgs {
       GroupId: 0,
       IsWhiteList: false,
-      characterId: None,
-      personalityId: None,
+      CharacterId: None,
+      PersonalityId: None,
       WeaponType: WeaponType::None,
       School: School::None,
       Club: Club::None,
@@ -227,15 +227,15 @@ impl Serialize for EchelonConstraintExcel<'_> {
     let mut s = serializer.serialize_struct("EchelonConstraintExcel", 8)?;
       s.serialize_field("GroupId", &self.GroupId())?;
       s.serialize_field("IsWhiteList", &self.IsWhiteList())?;
-      if let Some(f) = self.characterId() {
-        s.serialize_field("characterId", &f)?;
+      if let Some(f) = self.CharacterId() {
+        s.serialize_field("CharacterId", &f)?;
       } else {
-        s.skip_field("characterId")?;
+        s.skip_field("CharacterId")?;
       }
-      if let Some(f) = self.personalityId() {
-        s.serialize_field("personalityId", &f)?;
+      if let Some(f) = self.PersonalityId() {
+        s.serialize_field("PersonalityId", &f)?;
       } else {
-        s.skip_field("personalityId")?;
+        s.skip_field("PersonalityId")?;
       }
       s.serialize_field("WeaponType", &self.WeaponType())?;
       s.serialize_field("School", &self.School())?;
@@ -259,12 +259,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EchelonConstraintExcelBuilder<'
     self.fbb_.push_slot::<bool>(EchelonConstraintExcel::VT_ISWHITELIST, IsWhiteList, false);
   }
   #[inline]
-  pub fn add_characterId(&mut self, characterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EchelonConstraintExcel::VT_CHARACTERID, characterId);
+  pub fn add_CharacterId(&mut self, CharacterId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EchelonConstraintExcel::VT_CHARACTERID, CharacterId);
   }
   #[inline]
-  pub fn add_personalityId(&mut self, personalityId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EchelonConstraintExcel::VT_PERSONALITYID, personalityId);
+  pub fn add_PersonalityId(&mut self, PersonalityId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EchelonConstraintExcel::VT_PERSONALITYID, PersonalityId);
   }
   #[inline]
   pub fn add_WeaponType(&mut self, WeaponType: WeaponType) {
@@ -302,8 +302,8 @@ impl core::fmt::Debug for EchelonConstraintExcel<'_> {
     let mut ds = f.debug_struct("EchelonConstraintExcel");
       ds.field("GroupId", &self.GroupId());
       ds.field("IsWhiteList", &self.IsWhiteList());
-      ds.field("characterId", &self.characterId());
-      ds.field("personalityId", &self.personalityId());
+      ds.field("CharacterId", &self.CharacterId());
+      ds.field("PersonalityId", &self.PersonalityId());
       ds.field("WeaponType", &self.WeaponType());
       ds.field("School", &self.School());
       ds.field("Club", &self.Club());
@@ -316,8 +316,8 @@ impl core::fmt::Debug for EchelonConstraintExcel<'_> {
 pub struct EchelonConstraintExcelT {
   pub GroupId: i64,
   pub IsWhiteList: bool,
-  pub characterId: Option<Vec<i64>>,
-  pub personalityId: Option<Vec<i64>>,
+  pub CharacterId: Option<Vec<i64>>,
+  pub PersonalityId: Option<Vec<i64>>,
   pub WeaponType: WeaponType,
   pub School: School,
   pub Club: Club,
@@ -328,8 +328,8 @@ impl Default for EchelonConstraintExcelT {
     Self {
       GroupId: 0,
       IsWhiteList: false,
-      characterId: None,
-      personalityId: None,
+      CharacterId: None,
+      PersonalityId: None,
       WeaponType: WeaponType::None,
       School: School::None,
       Club: Club::None,
@@ -344,10 +344,10 @@ impl EchelonConstraintExcelT {
   ) -> flatbuffers::WIPOffset<EchelonConstraintExcel<'b>> {
     let GroupId = self.GroupId;
     let IsWhiteList = self.IsWhiteList;
-    let characterId = self.characterId.as_ref().map(|x|{
+    let CharacterId = self.CharacterId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let personalityId = self.personalityId.as_ref().map(|x|{
+    let PersonalityId = self.PersonalityId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let WeaponType = self.WeaponType;
@@ -357,8 +357,8 @@ impl EchelonConstraintExcelT {
     EchelonConstraintExcel::create(_fbb, &EchelonConstraintExcelArgs{
       GroupId,
       IsWhiteList,
-      characterId,
-      personalityId,
+      CharacterId,
+      PersonalityId,
       WeaponType,
       School,
       Club,

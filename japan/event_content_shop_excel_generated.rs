@@ -82,8 +82,8 @@ impl<'a> EventContentShopExcel<'a> {
       if let Some(x) = args.SalePeriodFrom {
         builder.add_SalePeriodFrom(x);
       }
-      if let Some(x) = args.goodsId {
-        builder.add_goodsId(x);
+      if let Some(x) = args.GoodsId {
+        builder.add_GoodsId(x);
       }
       let x = args.CategoryType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -107,7 +107,7 @@ impl<'a> EventContentShopExcel<'a> {
         self.CategoryType()
       };
       let IsLegacy = self.IsLegacy();
-    let goodsId = self.goodsId().map(|x| {
+    let GoodsId = self.GoodsId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let DisplayOrder = self.DisplayOrder();
@@ -134,7 +134,7 @@ impl<'a> EventContentShopExcel<'a> {
       LocalizeEtcId,
       CategoryType,
       IsLegacy,
-      goodsId,
+      GoodsId,
       DisplayOrder,
       SalePeriodFrom,
       SalePeriodTo,
@@ -182,7 +182,7 @@ impl<'a> EventContentShopExcel<'a> {
     unsafe { self._tab.get::<bool>(EventContentShopExcel::VT_ISLEGACY, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn goodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn GoodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -258,7 +258,7 @@ impl flatbuffers::Verifiable for EventContentShopExcel<'_> {
      .visit_field::<u32>("LocalizeEtcId", Self::VT_LOCALIZEETCID, false)?
      .visit_field::<ShopCategoryType>("CategoryType", Self::VT_CATEGORYTYPE, false)?
      .visit_field::<bool>("IsLegacy", Self::VT_ISLEGACY, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("goodsId", Self::VT_GOODSID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("GoodsId", Self::VT_GOODSID, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodFrom", Self::VT_SALEPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodTo", Self::VT_SALEPERIODTO, false)?
@@ -277,7 +277,7 @@ pub struct EventContentShopExcelArgs<'a> {
     pub LocalizeEtcId: u32,
     pub CategoryType: ShopCategoryType,
     pub IsLegacy: bool,
-    pub goodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub GoodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub DisplayOrder: i64,
     pub SalePeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SalePeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -296,7 +296,7 @@ impl<'a> Default for EventContentShopExcelArgs<'a> {
       LocalizeEtcId: 0,
       CategoryType: ShopCategoryType::General,
       IsLegacy: false,
-      goodsId: None,
+      GoodsId: None,
       DisplayOrder: 0,
       SalePeriodFrom: None,
       SalePeriodTo: None,
@@ -320,10 +320,10 @@ impl Serialize for EventContentShopExcel<'_> {
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
       s.serialize_field("CategoryType", &self.CategoryType())?;
       s.serialize_field("IsLegacy", &self.IsLegacy())?;
-      if let Some(f) = self.goodsId() {
-        s.serialize_field("goodsId", &f)?;
+      if let Some(f) = self.GoodsId() {
+        s.serialize_field("GoodsId", &f)?;
       } else {
-        s.skip_field("goodsId")?;
+        s.skip_field("GoodsId")?;
       }
       s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
       if let Some(f) = self.SalePeriodFrom() {
@@ -375,8 +375,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentShopExcelBuilder<'a
     self.fbb_.push_slot::<bool>(EventContentShopExcel::VT_ISLEGACY, IsLegacy, false);
   }
   #[inline]
-  pub fn add_goodsId(&mut self, goodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopExcel::VT_GOODSID, goodsId);
+  pub fn add_GoodsId(&mut self, GoodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopExcel::VT_GOODSID, GoodsId);
   }
   #[inline]
   pub fn add_DisplayOrder(&mut self, DisplayOrder: i64) {
@@ -433,7 +433,7 @@ impl core::fmt::Debug for EventContentShopExcel<'_> {
       ds.field("LocalizeEtcId", &self.LocalizeEtcId());
       ds.field("CategoryType", &self.CategoryType());
       ds.field("IsLegacy", &self.IsLegacy());
-      ds.field("goodsId", &self.goodsId());
+      ds.field("GoodsId", &self.GoodsId());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.field("SalePeriodFrom", &self.SalePeriodFrom());
       ds.field("SalePeriodTo", &self.SalePeriodTo());
@@ -453,7 +453,7 @@ pub struct EventContentShopExcelT {
   pub LocalizeEtcId: u32,
   pub CategoryType: ShopCategoryType,
   pub IsLegacy: bool,
-  pub goodsId: Option<Vec<i64>>,
+  pub GoodsId: Option<Vec<i64>>,
   pub DisplayOrder: i64,
   pub SalePeriodFrom: Option<String>,
   pub SalePeriodTo: Option<String>,
@@ -471,7 +471,7 @@ impl Default for EventContentShopExcelT {
       LocalizeEtcId: 0,
       CategoryType: ShopCategoryType::General,
       IsLegacy: false,
-      goodsId: None,
+      GoodsId: None,
       DisplayOrder: 0,
       SalePeriodFrom: None,
       SalePeriodTo: None,
@@ -493,7 +493,7 @@ impl EventContentShopExcelT {
     let LocalizeEtcId = self.LocalizeEtcId;
     let CategoryType = self.CategoryType;
     let IsLegacy = self.IsLegacy;
-    let goodsId = self.goodsId.as_ref().map(|x|{
+    let GoodsId = self.GoodsId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let DisplayOrder = self.DisplayOrder;
@@ -516,7 +516,7 @@ impl EventContentShopExcelT {
       LocalizeEtcId,
       CategoryType,
       IsLegacy,
-      goodsId,
+      GoodsId,
       DisplayOrder,
       SalePeriodFrom,
       SalePeriodTo,

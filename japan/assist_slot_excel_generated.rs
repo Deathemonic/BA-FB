@@ -13,22 +13,22 @@ extern crate serde;
 use self::serde::ser::{Serialize, Serializer, SerializeStruct};
 use self::flatbuffers::{EndianScalar, Follow};
 use super::*;
-pub enum ClanAssistSlotExcelOffset {}
+pub enum AssistSlotExcelOffset {}
 #[derive(Copy, Clone, PartialEq)]
 
-pub struct ClanAssistSlotExcel<'a> {
+pub struct AssistSlotExcel<'a> {
   pub _tab: flatbuffers::Table<'a>,
 }
 
-impl<'a> flatbuffers::Follow<'a> for ClanAssistSlotExcel<'a> {
-  type Inner = ClanAssistSlotExcel<'a>;
+impl<'a> flatbuffers::Follow<'a> for AssistSlotExcel<'a> {
+  type Inner = AssistSlotExcel<'a>;
   #[inline]
   unsafe fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
     Self { _tab: flatbuffers::Table::new(buf, loc) }
   }
 }
 
-impl<'a> ClanAssistSlotExcel<'a> {
+impl<'a> AssistSlotExcel<'a> {
   pub const VT_SLOTID: flatbuffers::VOffsetT = 4;
   pub const VT_ECHELONTYPE: flatbuffers::VOffsetT = 6;
   pub const VT_SLOTNUMBER: flatbuffers::VOffsetT = 8;
@@ -40,15 +40,15 @@ impl<'a> ClanAssistSlotExcel<'a> {
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
-    ClanAssistSlotExcel { _tab: table }
+    AssistSlotExcel { _tab: table }
   }
   #[allow(unused_mut)]
   pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr, A: flatbuffers::Allocator + 'bldr>(
     _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr, A>,
-    args: &'args ClanAssistSlotExcelArgs
-  ) -> flatbuffers::WIPOffset<ClanAssistSlotExcel<'bldr>> {
-    let mut builder = ClanAssistSlotExcelBuilder::new(_fbb);
-    let key = table_encryption_service::create_key(b"ClanAssistSlot");
+    args: &'args AssistSlotExcelArgs
+  ) -> flatbuffers::WIPOffset<AssistSlotExcel<'bldr>> {
+    let mut builder = AssistSlotExcelBuilder::new(_fbb);
+    let key = table_encryption_service::create_key(b"AssistSlot");
       let x = args.AssistRentalFeeAmountStranger;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_AssistRentalFeeAmountStranger(x);
@@ -76,8 +76,8 @@ impl<'a> ClanAssistSlotExcel<'a> {
     builder.finish()
   }
 
-  pub fn unpack(&self) -> ClanAssistSlotExcelT {
-    let key = table_encryption_service::create_key(b"ClanAssistSlot");
+  pub fn unpack(&self) -> AssistSlotExcelT {
+    let key = table_encryption_service::create_key(b"AssistSlot");
       let SlotId = self.SlotId();
       let EchelonType = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_enum(self.EchelonType(), &key)
@@ -90,7 +90,7 @@ impl<'a> ClanAssistSlotExcel<'a> {
       let AssistRentRewardDailyMaxCount = self.AssistRentRewardDailyMaxCount();
       let AssistRentalFeeAmount = self.AssistRentalFeeAmount();
       let AssistRentalFeeAmountStranger = self.AssistRentalFeeAmountStranger();
-    ClanAssistSlotExcelT {
+    AssistSlotExcelT {
       SlotId,
       EchelonType,
       SlotNumber,
@@ -107,60 +107,60 @@ impl<'a> ClanAssistSlotExcel<'a> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ClanAssistSlotExcel::VT_SLOTID, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(AssistSlotExcel::VT_SLOTID, Some(0)).unwrap()}
   }
   #[inline]
   pub fn EchelonType(&self) -> EchelonType {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<EchelonType>(ClanAssistSlotExcel::VT_ECHELONTYPE, Some(EchelonType::None)).unwrap()}
+    unsafe { self._tab.get::<EchelonType>(AssistSlotExcel::VT_ECHELONTYPE, Some(EchelonType::None)).unwrap()}
   }
   #[inline]
   pub fn SlotNumber(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ClanAssistSlotExcel::VT_SLOTNUMBER, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(AssistSlotExcel::VT_SLOTNUMBER, Some(0)).unwrap()}
   }
   #[inline]
   pub fn AssistTermRewardPeriodFromSec(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ClanAssistSlotExcel::VT_ASSISTTERMREWARDPERIODFROMSEC, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(AssistSlotExcel::VT_ASSISTTERMREWARDPERIODFROMSEC, Some(0)).unwrap()}
   }
   #[inline]
   pub fn AssistRewardLimit(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ClanAssistSlotExcel::VT_ASSISTREWARDLIMIT, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(AssistSlotExcel::VT_ASSISTREWARDLIMIT, Some(0)).unwrap()}
   }
   #[inline]
   pub fn AssistRentRewardDailyMaxCount(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ClanAssistSlotExcel::VT_ASSISTRENTREWARDDAILYMAXCOUNT, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(AssistSlotExcel::VT_ASSISTRENTREWARDDAILYMAXCOUNT, Some(0)).unwrap()}
   }
   #[inline]
   pub fn AssistRentalFeeAmount(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ClanAssistSlotExcel::VT_ASSISTRENTALFEEAMOUNT, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(AssistSlotExcel::VT_ASSISTRENTALFEEAMOUNT, Some(0)).unwrap()}
   }
   #[inline]
   pub fn AssistRentalFeeAmountStranger(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ClanAssistSlotExcel::VT_ASSISTRENTALFEEAMOUNTSTRANGER, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(AssistSlotExcel::VT_ASSISTRENTALFEEAMOUNTSTRANGER, Some(0)).unwrap()}
   }
 }
 
-impl flatbuffers::Verifiable for ClanAssistSlotExcel<'_> {
+impl flatbuffers::Verifiable for AssistSlotExcel<'_> {
   #[inline]
   fn run_verifier(
     v: &mut flatbuffers::Verifier, pos: usize
@@ -179,7 +179,7 @@ impl flatbuffers::Verifiable for ClanAssistSlotExcel<'_> {
     Ok(())
   }
 }
-pub struct ClanAssistSlotExcelArgs {
+pub struct AssistSlotExcelArgs {
     pub SlotId: i64,
     pub EchelonType: EchelonType,
     pub SlotNumber: i64,
@@ -189,10 +189,10 @@ pub struct ClanAssistSlotExcelArgs {
     pub AssistRentalFeeAmount: i64,
     pub AssistRentalFeeAmountStranger: i64,
 }
-impl<'a> Default for ClanAssistSlotExcelArgs {
+impl<'a> Default for AssistSlotExcelArgs {
   #[inline]
   fn default() -> Self {
-    ClanAssistSlotExcelArgs {
+    AssistSlotExcelArgs {
       SlotId: 0,
       EchelonType: EchelonType::None,
       SlotNumber: 0,
@@ -205,12 +205,12 @@ impl<'a> Default for ClanAssistSlotExcelArgs {
   }
 }
 
-impl Serialize for ClanAssistSlotExcel<'_> {
+impl Serialize for AssistSlotExcel<'_> {
   fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ClanAssistSlotExcel", 8)?;
+    let mut s = serializer.serialize_struct("AssistSlotExcel", 8)?;
       s.serialize_field("SlotId", &self.SlotId())?;
       s.serialize_field("EchelonType", &self.EchelonType())?;
       s.serialize_field("SlotNumber", &self.SlotNumber())?;
@@ -223,61 +223,61 @@ impl Serialize for ClanAssistSlotExcel<'_> {
   }
 }
 
-pub struct ClanAssistSlotExcelBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
+pub struct AssistSlotExcelBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
   fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a, A>,
   start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
 }
-impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ClanAssistSlotExcelBuilder<'a, 'b, A> {
+impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AssistSlotExcelBuilder<'a, 'b, A> {
   #[inline]
   pub fn add_SlotId(&mut self, SlotId: i64) {
-    self.fbb_.push_slot::<i64>(ClanAssistSlotExcel::VT_SLOTID, SlotId, 0);
+    self.fbb_.push_slot::<i64>(AssistSlotExcel::VT_SLOTID, SlotId, 0);
   }
   #[inline]
   pub fn add_EchelonType(&mut self, EchelonType: EchelonType) {
-    self.fbb_.push_slot::<EchelonType>(ClanAssistSlotExcel::VT_ECHELONTYPE, EchelonType, EchelonType::None);
+    self.fbb_.push_slot::<EchelonType>(AssistSlotExcel::VT_ECHELONTYPE, EchelonType, EchelonType::None);
   }
   #[inline]
   pub fn add_SlotNumber(&mut self, SlotNumber: i64) {
-    self.fbb_.push_slot::<i64>(ClanAssistSlotExcel::VT_SLOTNUMBER, SlotNumber, 0);
+    self.fbb_.push_slot::<i64>(AssistSlotExcel::VT_SLOTNUMBER, SlotNumber, 0);
   }
   #[inline]
   pub fn add_AssistTermRewardPeriodFromSec(&mut self, AssistTermRewardPeriodFromSec: i64) {
-    self.fbb_.push_slot::<i64>(ClanAssistSlotExcel::VT_ASSISTTERMREWARDPERIODFROMSEC, AssistTermRewardPeriodFromSec, 0);
+    self.fbb_.push_slot::<i64>(AssistSlotExcel::VT_ASSISTTERMREWARDPERIODFROMSEC, AssistTermRewardPeriodFromSec, 0);
   }
   #[inline]
   pub fn add_AssistRewardLimit(&mut self, AssistRewardLimit: i64) {
-    self.fbb_.push_slot::<i64>(ClanAssistSlotExcel::VT_ASSISTREWARDLIMIT, AssistRewardLimit, 0);
+    self.fbb_.push_slot::<i64>(AssistSlotExcel::VT_ASSISTREWARDLIMIT, AssistRewardLimit, 0);
   }
   #[inline]
   pub fn add_AssistRentRewardDailyMaxCount(&mut self, AssistRentRewardDailyMaxCount: i64) {
-    self.fbb_.push_slot::<i64>(ClanAssistSlotExcel::VT_ASSISTRENTREWARDDAILYMAXCOUNT, AssistRentRewardDailyMaxCount, 0);
+    self.fbb_.push_slot::<i64>(AssistSlotExcel::VT_ASSISTRENTREWARDDAILYMAXCOUNT, AssistRentRewardDailyMaxCount, 0);
   }
   #[inline]
   pub fn add_AssistRentalFeeAmount(&mut self, AssistRentalFeeAmount: i64) {
-    self.fbb_.push_slot::<i64>(ClanAssistSlotExcel::VT_ASSISTRENTALFEEAMOUNT, AssistRentalFeeAmount, 0);
+    self.fbb_.push_slot::<i64>(AssistSlotExcel::VT_ASSISTRENTALFEEAMOUNT, AssistRentalFeeAmount, 0);
   }
   #[inline]
   pub fn add_AssistRentalFeeAmountStranger(&mut self, AssistRentalFeeAmountStranger: i64) {
-    self.fbb_.push_slot::<i64>(ClanAssistSlotExcel::VT_ASSISTRENTALFEEAMOUNTSTRANGER, AssistRentalFeeAmountStranger, 0);
+    self.fbb_.push_slot::<i64>(AssistSlotExcel::VT_ASSISTRENTALFEEAMOUNTSTRANGER, AssistRentalFeeAmountStranger, 0);
   }
   #[inline]
-  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ClanAssistSlotExcelBuilder<'a, 'b, A> {
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> AssistSlotExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
-    ClanAssistSlotExcelBuilder {
+    AssistSlotExcelBuilder {
       fbb_: _fbb,
       start_: start,
     }
   }
   #[inline]
-  pub fn finish(self) -> flatbuffers::WIPOffset<ClanAssistSlotExcel<'a>> {
+  pub fn finish(self) -> flatbuffers::WIPOffset<AssistSlotExcel<'a>> {
     let o = self.fbb_.end_table(self.start_);
     flatbuffers::WIPOffset::new(o.value())
   }
 }
 
-impl core::fmt::Debug for ClanAssistSlotExcel<'_> {
+impl core::fmt::Debug for AssistSlotExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-    let mut ds = f.debug_struct("ClanAssistSlotExcel");
+    let mut ds = f.debug_struct("AssistSlotExcel");
       ds.field("SlotId", &self.SlotId());
       ds.field("EchelonType", &self.EchelonType());
       ds.field("SlotNumber", &self.SlotNumber());
@@ -291,7 +291,7 @@ impl core::fmt::Debug for ClanAssistSlotExcel<'_> {
 }
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
-pub struct ClanAssistSlotExcelT {
+pub struct AssistSlotExcelT {
   pub SlotId: i64,
   pub EchelonType: EchelonType,
   pub SlotNumber: i64,
@@ -301,7 +301,7 @@ pub struct ClanAssistSlotExcelT {
   pub AssistRentalFeeAmount: i64,
   pub AssistRentalFeeAmountStranger: i64,
 }
-impl Default for ClanAssistSlotExcelT {
+impl Default for AssistSlotExcelT {
   fn default() -> Self {
     Self {
       SlotId: 0,
@@ -315,11 +315,11 @@ impl Default for ClanAssistSlotExcelT {
     }
   }
 }
-impl ClanAssistSlotExcelT {
+impl AssistSlotExcelT {
   pub fn pack<'b, A: flatbuffers::Allocator + 'b>(
     &self,
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
-  ) -> flatbuffers::WIPOffset<ClanAssistSlotExcel<'b>> {
+  ) -> flatbuffers::WIPOffset<AssistSlotExcel<'b>> {
     let SlotId = self.SlotId;
     let EchelonType = self.EchelonType;
     let SlotNumber = self.SlotNumber;
@@ -328,7 +328,7 @@ impl ClanAssistSlotExcelT {
     let AssistRentRewardDailyMaxCount = self.AssistRentRewardDailyMaxCount;
     let AssistRentalFeeAmount = self.AssistRentalFeeAmount;
     let AssistRentalFeeAmountStranger = self.AssistRentalFeeAmountStranger;
-    ClanAssistSlotExcel::create(_fbb, &ClanAssistSlotExcelArgs{
+    AssistSlotExcel::create(_fbb, &AssistSlotExcelArgs{
       SlotId,
       EchelonType,
       SlotNumber,

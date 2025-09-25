@@ -44,12 +44,12 @@ pub const ENUM_VALUES_SHOP_FILTER_TYPE: [ShopFilterType; 38] = [
   ShopFilterType::Arius,
   ShopFilterType::Shanhaijing,
   ShopFilterType::Valkyrie,
-  ShopFilterType::SRT,
+  ShopFilterType::WildHunt,
   ShopFilterType::Event,
   ShopFilterType::ChaserTotalTicket,
   ShopFilterType::SchoolTotalTicket,
+  ShopFilterType::SRT,
   ShopFilterType::Highlander,
-  ShopFilterType::WildHunt,
   ShopFilterType::ShopFilterDUMMY_3,
   ShopFilterType::ShopFilterDUMMY_4,
   ShopFilterType::ShopFilterDUMMY_5,
@@ -89,12 +89,12 @@ impl ShopFilterType {
   pub const Arius: Self = Self(21);
   pub const Shanhaijing: Self = Self(22);
   pub const Valkyrie: Self = Self(23);
-  pub const SRT: Self = Self(24);
+  pub const WildHunt: Self = Self(24);
   pub const Event: Self = Self(25);
   pub const ChaserTotalTicket: Self = Self(26);
   pub const SchoolTotalTicket: Self = Self(27);
-  pub const Highlander: Self = Self(28);
-  pub const WildHunt: Self = Self(29);
+  pub const SRT: Self = Self(28);
+  pub const Highlander: Self = Self(29);
   pub const ShopFilterDUMMY_3: Self = Self(30);
   pub const ShopFilterDUMMY_4: Self = Self(31);
   pub const ShopFilterDUMMY_5: Self = Self(32);
@@ -131,12 +131,12 @@ impl ShopFilterType {
     Self::Arius,
     Self::Shanhaijing,
     Self::Valkyrie,
-    Self::SRT,
+    Self::WildHunt,
     Self::Event,
     Self::ChaserTotalTicket,
     Self::SchoolTotalTicket,
+    Self::SRT,
     Self::Highlander,
-    Self::WildHunt,
     Self::ShopFilterDUMMY_3,
     Self::ShopFilterDUMMY_4,
     Self::ShopFilterDUMMY_5,
@@ -173,12 +173,12 @@ impl ShopFilterType {
       Self::Arius => Some("Arius"),
       Self::Shanhaijing => Some("Shanhaijing"),
       Self::Valkyrie => Some("Valkyrie"),
-      Self::SRT => Some("SRT"),
+      Self::WildHunt => Some("WildHunt"),
       Self::Event => Some("Event"),
       Self::ChaserTotalTicket => Some("ChaserTotalTicket"),
       Self::SchoolTotalTicket => Some("SchoolTotalTicket"),
+      Self::SRT => Some("SRT"),
       Self::Highlander => Some("Highlander"),
-      Self::WildHunt => Some("WildHunt"),
       Self::ShopFilterDUMMY_3 => Some("ShopFilterDUMMY_3"),
       Self::ShopFilterDUMMY_4 => Some("ShopFilterDUMMY_4"),
       Self::ShopFilterDUMMY_5 => Some("ShopFilterDUMMY_5"),

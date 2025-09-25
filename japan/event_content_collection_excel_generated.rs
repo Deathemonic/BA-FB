@@ -90,8 +90,8 @@ impl<'a> EventContentCollectionExcel<'a> {
       let x = args.MultipleConditionCheckType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_MultipleConditionCheckType(x);
-      if let Some(x) = args.unlockConditionParameter {
-        builder.add_unlockConditionParameter(x);
+      if let Some(x) = args.UnlockConditionParameter {
+        builder.add_UnlockConditionParameter(x);
       }
       let x = args.UnlockConditionType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -112,7 +112,7 @@ impl<'a> EventContentCollectionExcel<'a> {
       } else {
         self.UnlockConditionType()
       };
-    let unlockConditionParameter = self.unlockConditionParameter().map(|x| {
+    let UnlockConditionParameter = self.UnlockConditionParameter().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let MultipleConditionCheckType = if table_encryption_service::use_encryption() {
@@ -145,7 +145,7 @@ impl<'a> EventContentCollectionExcel<'a> {
       EventContentId,
       GroupId,
       UnlockConditionType,
-      unlockConditionParameter,
+      UnlockConditionParameter,
       MultipleConditionCheckType,
       UnlockConditionCount,
       IsObject,
@@ -189,7 +189,7 @@ impl<'a> EventContentCollectionExcel<'a> {
     unsafe { self._tab.get::<CollectionUnlockType>(EventContentCollectionExcel::VT_UNLOCKCONDITIONTYPE, Some(CollectionUnlockType::None)).unwrap()}
   }
   #[inline]
-  pub fn unlockConditionParameter(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn UnlockConditionParameter(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -285,7 +285,7 @@ impl flatbuffers::Verifiable for EventContentCollectionExcel<'_> {
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
      .visit_field::<i64>("GroupId", Self::VT_GROUPID, false)?
      .visit_field::<CollectionUnlockType>("UnlockConditionType", Self::VT_UNLOCKCONDITIONTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("unlockConditionParameter", Self::VT_UNLOCKCONDITIONPARAMETER, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("UnlockConditionParameter", Self::VT_UNLOCKCONDITIONPARAMETER, false)?
      .visit_field::<MultipleConditionCheckType>("MultipleConditionCheckType", Self::VT_MULTIPLECONDITIONCHECKTYPE, false)?
      .visit_field::<i64>("UnlockConditionCount", Self::VT_UNLOCKCONDITIONCOUNT, false)?
      .visit_field::<bool>("IsObject", Self::VT_ISOBJECT, false)?
@@ -306,7 +306,7 @@ pub struct EventContentCollectionExcelArgs<'a> {
     pub EventContentId: i64,
     pub GroupId: i64,
     pub UnlockConditionType: CollectionUnlockType,
-    pub unlockConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub UnlockConditionParameter: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub MultipleConditionCheckType: MultipleConditionCheckType,
     pub UnlockConditionCount: i64,
     pub IsObject: bool,
@@ -327,7 +327,7 @@ impl<'a> Default for EventContentCollectionExcelArgs<'a> {
       EventContentId: 0,
       GroupId: 0,
       UnlockConditionType: CollectionUnlockType::None,
-      unlockConditionParameter: None,
+      UnlockConditionParameter: None,
       MultipleConditionCheckType: MultipleConditionCheckType::And,
       UnlockConditionCount: 0,
       IsObject: false,
@@ -353,10 +353,10 @@ impl Serialize for EventContentCollectionExcel<'_> {
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("GroupId", &self.GroupId())?;
       s.serialize_field("UnlockConditionType", &self.UnlockConditionType())?;
-      if let Some(f) = self.unlockConditionParameter() {
-        s.serialize_field("unlockConditionParameter", &f)?;
+      if let Some(f) = self.UnlockConditionParameter() {
+        s.serialize_field("UnlockConditionParameter", &f)?;
       } else {
-        s.skip_field("unlockConditionParameter")?;
+        s.skip_field("UnlockConditionParameter")?;
       }
       s.serialize_field("MultipleConditionCheckType", &self.MultipleConditionCheckType())?;
       s.serialize_field("UnlockConditionCount", &self.UnlockConditionCount())?;
@@ -415,8 +415,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentCollectionExcelBuil
     self.fbb_.push_slot::<CollectionUnlockType>(EventContentCollectionExcel::VT_UNLOCKCONDITIONTYPE, UnlockConditionType, CollectionUnlockType::None);
   }
   #[inline]
-  pub fn add_unlockConditionParameter(&mut self, unlockConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCollectionExcel::VT_UNLOCKCONDITIONPARAMETER, unlockConditionParameter);
+  pub fn add_UnlockConditionParameter(&mut self, UnlockConditionParameter: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCollectionExcel::VT_UNLOCKCONDITIONPARAMETER, UnlockConditionParameter);
   }
   #[inline]
   pub fn add_MultipleConditionCheckType(&mut self, MultipleConditionCheckType: MultipleConditionCheckType) {
@@ -484,7 +484,7 @@ impl core::fmt::Debug for EventContentCollectionExcel<'_> {
       ds.field("EventContentId", &self.EventContentId());
       ds.field("GroupId", &self.GroupId());
       ds.field("UnlockConditionType", &self.UnlockConditionType());
-      ds.field("unlockConditionParameter", &self.unlockConditionParameter());
+      ds.field("UnlockConditionParameter", &self.UnlockConditionParameter());
       ds.field("MultipleConditionCheckType", &self.MultipleConditionCheckType());
       ds.field("UnlockConditionCount", &self.UnlockConditionCount());
       ds.field("IsObject", &self.IsObject());
@@ -506,7 +506,7 @@ pub struct EventContentCollectionExcelT {
   pub EventContentId: i64,
   pub GroupId: i64,
   pub UnlockConditionType: CollectionUnlockType,
-  pub unlockConditionParameter: Option<Vec<i64>>,
+  pub UnlockConditionParameter: Option<Vec<i64>>,
   pub MultipleConditionCheckType: MultipleConditionCheckType,
   pub UnlockConditionCount: i64,
   pub IsObject: bool,
@@ -526,7 +526,7 @@ impl Default for EventContentCollectionExcelT {
       EventContentId: 0,
       GroupId: 0,
       UnlockConditionType: CollectionUnlockType::None,
-      unlockConditionParameter: None,
+      UnlockConditionParameter: None,
       MultipleConditionCheckType: MultipleConditionCheckType::And,
       UnlockConditionCount: 0,
       IsObject: false,
@@ -550,7 +550,7 @@ impl EventContentCollectionExcelT {
     let EventContentId = self.EventContentId;
     let GroupId = self.GroupId;
     let UnlockConditionType = self.UnlockConditionType;
-    let unlockConditionParameter = self.unlockConditionParameter.as_ref().map(|x|{
+    let UnlockConditionParameter = self.UnlockConditionParameter.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let MultipleConditionCheckType = self.MultipleConditionCheckType;
@@ -579,7 +579,7 @@ impl EventContentCollectionExcelT {
       EventContentId,
       GroupId,
       UnlockConditionType,
-      unlockConditionParameter,
+      UnlockConditionParameter,
       MultipleConditionCheckType,
       UnlockConditionCount,
       IsObject,
