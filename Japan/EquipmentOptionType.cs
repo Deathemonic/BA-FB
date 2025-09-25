@@ -97,6 +97,7 @@ public enum EquipmentOptionType : int
   RegenCost_Base = 87,
   RegenCost_Coefficient = 88,
   MaxCostIncrease_Base = 89,
+  HealRate_Base = 90,
 };
 
 

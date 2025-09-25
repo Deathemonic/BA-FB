@@ -10,15 +10,15 @@ using global::System.Collections.Generic;
 using global::Kuroko.Crypto;
 using global::Google.FlatBuffers;
 
-public struct ClanAssistSlotExcel : IFlatbufferObject
+public struct AssistSlotExcel : IFlatbufferObject
 {
   private Table __p;
   public ByteBuffer ByteBuffer { get { return __p.bb; } }
   public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_25_2_10(); }
-  public static ClanAssistSlotExcel GetRootAsClanAssistSlotExcel(ByteBuffer _bb) { return GetRootAsClanAssistSlotExcel(_bb, new ClanAssistSlotExcel()); }
-  public static ClanAssistSlotExcel GetRootAsClanAssistSlotExcel(ByteBuffer _bb, ClanAssistSlotExcel obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public static AssistSlotExcel GetRootAsAssistSlotExcel(ByteBuffer _bb) { return GetRootAsAssistSlotExcel(_bb, new AssistSlotExcel()); }
+  public static AssistSlotExcel GetRootAsAssistSlotExcel(ByteBuffer _bb, AssistSlotExcel obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
-  public ClanAssistSlotExcel __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+  public AssistSlotExcel __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
   public long SlotId { get { int o = __p.__offset(4); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
   public Japan.EchelonType EchelonType { get { int o = __p.__offset(6); return o != 0 ? (Japan.EchelonType)__p.bb.GetInt(o + __p.bb_pos) : Japan.EchelonType.None; } }
@@ -29,7 +29,7 @@ public struct ClanAssistSlotExcel : IFlatbufferObject
   public long AssistRentalFeeAmount { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
   public long AssistRentalFeeAmountStranger { get { int o = __p.__offset(18); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
 
-  public static Offset<Japan.ClanAssistSlotExcel> CreateClanAssistSlotExcel(FlatBufferBuilder builder,
+  public static Offset<Japan.AssistSlotExcel> CreateAssistSlotExcel(FlatBufferBuilder builder,
       long SlotId = 0,
       Japan.EchelonType EchelonType = Japan.EchelonType.None,
       long SlotNumber = 0,
@@ -39,18 +39,18 @@ public struct ClanAssistSlotExcel : IFlatbufferObject
       long AssistRentalFeeAmount = 0,
       long AssistRentalFeeAmountStranger = 0) {
     builder.StartTable(8);
-    ClanAssistSlotExcel.AddAssistRentalFeeAmountStranger(builder, AssistRentalFeeAmountStranger);
-    ClanAssistSlotExcel.AddAssistRentalFeeAmount(builder, AssistRentalFeeAmount);
-    ClanAssistSlotExcel.AddAssistRentRewardDailyMaxCount(builder, AssistRentRewardDailyMaxCount);
-    ClanAssistSlotExcel.AddAssistRewardLimit(builder, AssistRewardLimit);
-    ClanAssistSlotExcel.AddAssistTermRewardPeriodFromSec(builder, AssistTermRewardPeriodFromSec);
-    ClanAssistSlotExcel.AddSlotNumber(builder, SlotNumber);
-    ClanAssistSlotExcel.AddSlotId(builder, SlotId);
-    ClanAssistSlotExcel.AddEchelonType(builder, EchelonType);
-    return ClanAssistSlotExcel.EndClanAssistSlotExcel(builder);
+    AssistSlotExcel.AddAssistRentalFeeAmountStranger(builder, AssistRentalFeeAmountStranger);
+    AssistSlotExcel.AddAssistRentalFeeAmount(builder, AssistRentalFeeAmount);
+    AssistSlotExcel.AddAssistRentRewardDailyMaxCount(builder, AssistRentRewardDailyMaxCount);
+    AssistSlotExcel.AddAssistRewardLimit(builder, AssistRewardLimit);
+    AssistSlotExcel.AddAssistTermRewardPeriodFromSec(builder, AssistTermRewardPeriodFromSec);
+    AssistSlotExcel.AddSlotNumber(builder, SlotNumber);
+    AssistSlotExcel.AddSlotId(builder, SlotId);
+    AssistSlotExcel.AddEchelonType(builder, EchelonType);
+    return AssistSlotExcel.EndAssistSlotExcel(builder);
   }
 
-  public static void StartClanAssistSlotExcel(FlatBufferBuilder builder) { builder.StartTable(8); }
+  public static void StartAssistSlotExcel(FlatBufferBuilder builder) { builder.StartTable(8); }
   public static void AddSlotId(FlatBufferBuilder builder, long slotId) { builder.AddLong(0, slotId, 0); }
   public static void AddEchelonType(FlatBufferBuilder builder, Japan.EchelonType echelonType) { builder.AddInt(1, (int)echelonType, 0); }
   public static void AddSlotNumber(FlatBufferBuilder builder, long slotNumber) { builder.AddLong(2, slotNumber, 0); }
@@ -59,17 +59,17 @@ public struct ClanAssistSlotExcel : IFlatbufferObject
   public static void AddAssistRentRewardDailyMaxCount(FlatBufferBuilder builder, long assistRentRewardDailyMaxCount) { builder.AddLong(5, assistRentRewardDailyMaxCount, 0); }
   public static void AddAssistRentalFeeAmount(FlatBufferBuilder builder, long assistRentalFeeAmount) { builder.AddLong(6, assistRentalFeeAmount, 0); }
   public static void AddAssistRentalFeeAmountStranger(FlatBufferBuilder builder, long assistRentalFeeAmountStranger) { builder.AddLong(7, assistRentalFeeAmountStranger, 0); }
-  public static Offset<Japan.ClanAssistSlotExcel> EndClanAssistSlotExcel(FlatBufferBuilder builder) {
+  public static Offset<Japan.AssistSlotExcel> EndAssistSlotExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
-    return new Offset<Japan.ClanAssistSlotExcel>(o);
+    return new Offset<Japan.AssistSlotExcel>(o);
   }
-  public ClanAssistSlotExcelT UnPack() {
-    var _o = new ClanAssistSlotExcelT();
+  public AssistSlotExcelT UnPack() {
+    var _o = new AssistSlotExcelT();
     this.UnPackTo(_o);
     return _o;
   }
-  public void UnPackTo(ClanAssistSlotExcelT _o) {
-		byte[] key = TableEncryptionService.CreateKey("ClanAssistSlot");
+  public void UnPackTo(AssistSlotExcelT _o) {
+		byte[] key = TableEncryptionService.CreateKey("AssistSlot");
     _o.SlotId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SlotId, key) : this.SlotId;
     _o.EchelonType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.EchelonType, key) : this.EchelonType;
     _o.SlotNumber = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.SlotNumber, key) : this.SlotNumber;
@@ -79,9 +79,9 @@ public struct ClanAssistSlotExcel : IFlatbufferObject
     _o.AssistRentalFeeAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.AssistRentalFeeAmount, key) : this.AssistRentalFeeAmount;
     _o.AssistRentalFeeAmountStranger = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.AssistRentalFeeAmountStranger, key) : this.AssistRentalFeeAmountStranger;
   }
-  public static Offset<Japan.ClanAssistSlotExcel> Pack(FlatBufferBuilder builder, ClanAssistSlotExcelT _o) {
-    if (_o == null) return default(Offset<Japan.ClanAssistSlotExcel>);
-		byte[] key = TableEncryptionService.CreateKey("ClanAssistSlot");
+  public static Offset<Japan.AssistSlotExcel> Pack(FlatBufferBuilder builder, AssistSlotExcelT _o) {
+    if (_o == null) return default(Offset<Japan.AssistSlotExcel>);
+		byte[] key = TableEncryptionService.CreateKey("AssistSlot");
 		var _SlotId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SlotId, key) : _o.SlotId;
 		var _EchelonType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchelonType, key) : _o.EchelonType;
 		var _SlotNumber = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SlotNumber, key) : _o.SlotNumber;
@@ -90,7 +90,7 @@ public struct ClanAssistSlotExcel : IFlatbufferObject
 		var _AssistRentRewardDailyMaxCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AssistRentRewardDailyMaxCount, key) : _o.AssistRentRewardDailyMaxCount;
 		var _AssistRentalFeeAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AssistRentalFeeAmount, key) : _o.AssistRentalFeeAmount;
 		var _AssistRentalFeeAmountStranger = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AssistRentalFeeAmountStranger, key) : _o.AssistRentalFeeAmountStranger;
-    return CreateClanAssistSlotExcel(
+    return CreateAssistSlotExcel(
       builder,
       TableEncryptionService.UseEncryption ? _SlotId : _o.SlotId,
       TableEncryptionService.UseEncryption ? _EchelonType : _o.EchelonType,
@@ -103,7 +103,7 @@ public struct ClanAssistSlotExcel : IFlatbufferObject
   }
 }
 
-public class ClanAssistSlotExcelT
+public class AssistSlotExcelT
 {
   public long SlotId { get; set; }
   public Japan.EchelonType EchelonType { get; set; }
@@ -114,7 +114,7 @@ public class ClanAssistSlotExcelT
   public long AssistRentalFeeAmount { get; set; }
   public long AssistRentalFeeAmountStranger { get; set; }
 
-  public ClanAssistSlotExcelT() {
+  public AssistSlotExcelT() {
     this.SlotId = 0;
     this.EchelonType = Japan.EchelonType.None;
     this.SlotNumber = 0;
@@ -127,7 +127,7 @@ public class ClanAssistSlotExcelT
 }
 
 
-static public class ClanAssistSlotExcelVerify
+static public class AssistSlotExcelVerify
 {
   static public bool Verify(Google.FlatBuffers.Verifier verifier, uint tablePos)
   {

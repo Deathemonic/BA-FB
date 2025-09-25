@@ -41,7 +41,7 @@ public struct EventContentMeetupExcel : IFlatbufferObject
       long CharacterId = 0,
       long ConditionScenarioGroupId = 0,
       Japan.MeetupConditionType ConditionType = Japan.MeetupConditionType.None,
-      VectorOffset conditionParameterOffset = default(VectorOffset),
+      VectorOffset ConditionParameterOffset = default(VectorOffset),
       Japan.MeetupConditionPrintType ConditionPrintType = Japan.MeetupConditionPrintType.None) {
     builder.StartTable(7);
     EventContentMeetupExcel.AddConditionScenarioGroupId(builder, ConditionScenarioGroupId);
@@ -49,7 +49,7 @@ public struct EventContentMeetupExcel : IFlatbufferObject
     EventContentMeetupExcel.AddEventContentId(builder, EventContentId);
     EventContentMeetupExcel.AddId(builder, Id);
     EventContentMeetupExcel.AddConditionPrintType(builder, ConditionPrintType);
-    EventContentMeetupExcel.AddConditionParameter(builder, conditionParameterOffset);
+    EventContentMeetupExcel.AddConditionParameter(builder, ConditionParameterOffset);
     EventContentMeetupExcel.AddConditionType(builder, ConditionType);
     return EventContentMeetupExcel.EndEventContentMeetupExcel(builder);
   }
@@ -95,10 +95,10 @@ public struct EventContentMeetupExcel : IFlatbufferObject
 		var _CharacterId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CharacterId, key) : _o.CharacterId;
 		var _ConditionScenarioGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConditionScenarioGroupId, key) : _o.ConditionScenarioGroupId;
 		var _ConditionType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConditionType, key) : _o.ConditionType;
-    var _conditionParameter = default(VectorOffset);
+    var _ConditionParameter = default(VectorOffset);
     if (_o.ConditionParameter != null) {
-      var __conditionParameter = _o.ConditionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _conditionParameter = CreateConditionParameterVector(builder, __conditionParameter);
+      var __ConditionParameter = _o.ConditionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConditionParameter = CreateConditionParameterVector(builder, __ConditionParameter);
     }
 		var _ConditionPrintType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConditionPrintType, key) : _o.ConditionPrintType;
     return CreateEventContentMeetupExcel(
@@ -108,7 +108,7 @@ public struct EventContentMeetupExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _CharacterId : _o.CharacterId,
       TableEncryptionService.UseEncryption ? _ConditionScenarioGroupId : _o.ConditionScenarioGroupId,
       TableEncryptionService.UseEncryption ? _ConditionType : _o.ConditionType,
-      _conditionParameter,
+      _ConditionParameter,
       TableEncryptionService.UseEncryption ? _ConditionPrintType : _o.ConditionPrintType);
   }
 }

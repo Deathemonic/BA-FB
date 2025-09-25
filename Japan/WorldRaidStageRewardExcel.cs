@@ -25,14 +25,7 @@ public struct WorldRaidStageRewardExcel : IFlatbufferObject
   public long ClearStageRewardProb { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
   public Japan.ParcelType ClearStageRewardParcelType { get { int o = __p.__offset(10); return o != 0 ? (Japan.ParcelType)__p.bb.GetInt(o + __p.bb_pos) : Japan.ParcelType.None; } }
   public long ClearStageRewardParcelUniqueID { get { int o = __p.__offset(12); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
-  public string ClearStageRewardParcelUniqueName { get { int o = __p.__offset(14); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
-#if ENABLE_SPAN_T
-  public Span<byte> GetClearStageRewardParcelUniqueNameBytes() { return __p.__vector_as_span<byte>(14, 1); }
-#else
-  public ArraySegment<byte>? GetClearStageRewardParcelUniqueNameBytes() { return __p.__vector_as_arraysegment(14); }
-#endif
-  public byte[] GetClearStageRewardParcelUniqueNameArray() { return __p.__vector_as_array<byte>(14); }
-  public long ClearStageRewardAmount { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
+  public long ClearStageRewardAmount { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetLong(o + __p.bb_pos) : (long)0; } }
 
   public static Offset<Japan.WorldRaidStageRewardExcel> CreateWorldRaidStageRewardExcel(FlatBufferBuilder builder,
       long GroupId = 0,
@@ -40,27 +33,24 @@ public struct WorldRaidStageRewardExcel : IFlatbufferObject
       long ClearStageRewardProb = 0,
       Japan.ParcelType ClearStageRewardParcelType = Japan.ParcelType.None,
       long ClearStageRewardParcelUniqueID = 0,
-      StringOffset ClearStageRewardParcelUniqueNameOffset = default(StringOffset),
       long ClearStageRewardAmount = 0) {
-    builder.StartTable(7);
+    builder.StartTable(6);
     WorldRaidStageRewardExcel.AddClearStageRewardAmount(builder, ClearStageRewardAmount);
     WorldRaidStageRewardExcel.AddClearStageRewardParcelUniqueID(builder, ClearStageRewardParcelUniqueID);
     WorldRaidStageRewardExcel.AddClearStageRewardProb(builder, ClearStageRewardProb);
     WorldRaidStageRewardExcel.AddGroupId(builder, GroupId);
-    WorldRaidStageRewardExcel.AddClearStageRewardParcelUniqueName(builder, ClearStageRewardParcelUniqueNameOffset);
     WorldRaidStageRewardExcel.AddClearStageRewardParcelType(builder, ClearStageRewardParcelType);
     WorldRaidStageRewardExcel.AddIsClearStageRewardHideInfo(builder, IsClearStageRewardHideInfo);
     return WorldRaidStageRewardExcel.EndWorldRaidStageRewardExcel(builder);
   }
 
-  public static void StartWorldRaidStageRewardExcel(FlatBufferBuilder builder) { builder.StartTable(7); }
+  public static void StartWorldRaidStageRewardExcel(FlatBufferBuilder builder) { builder.StartTable(6); }
   public static void AddGroupId(FlatBufferBuilder builder, long groupId) { builder.AddLong(0, groupId, 0); }
   public static void AddIsClearStageRewardHideInfo(FlatBufferBuilder builder, bool isClearStageRewardHideInfo) { builder.AddBool(1, isClearStageRewardHideInfo, false); }
   public static void AddClearStageRewardProb(FlatBufferBuilder builder, long clearStageRewardProb) { builder.AddLong(2, clearStageRewardProb, 0); }
   public static void AddClearStageRewardParcelType(FlatBufferBuilder builder, Japan.ParcelType clearStageRewardParcelType) { builder.AddInt(3, (int)clearStageRewardParcelType, 0); }
   public static void AddClearStageRewardParcelUniqueID(FlatBufferBuilder builder, long clearStageRewardParcelUniqueID) { builder.AddLong(4, clearStageRewardParcelUniqueID, 0); }
-  public static void AddClearStageRewardParcelUniqueName(FlatBufferBuilder builder, StringOffset clearStageRewardParcelUniqueNameOffset) { builder.AddOffset(5, clearStageRewardParcelUniqueNameOffset.Value, 0); }
-  public static void AddClearStageRewardAmount(FlatBufferBuilder builder, long clearStageRewardAmount) { builder.AddLong(6, clearStageRewardAmount, 0); }
+  public static void AddClearStageRewardAmount(FlatBufferBuilder builder, long clearStageRewardAmount) { builder.AddLong(5, clearStageRewardAmount, 0); }
   public static Offset<Japan.WorldRaidStageRewardExcel> EndWorldRaidStageRewardExcel(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<Japan.WorldRaidStageRewardExcel>(o);
@@ -77,7 +67,6 @@ public struct WorldRaidStageRewardExcel : IFlatbufferObject
     _o.ClearStageRewardProb = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ClearStageRewardProb, key) : this.ClearStageRewardProb;
     _o.ClearStageRewardParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ClearStageRewardParcelType, key) : this.ClearStageRewardParcelType;
     _o.ClearStageRewardParcelUniqueID = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ClearStageRewardParcelUniqueID, key) : this.ClearStageRewardParcelUniqueID;
-    _o.ClearStageRewardParcelUniqueName = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ClearStageRewardParcelUniqueName, key) : this.ClearStageRewardParcelUniqueName;
     _o.ClearStageRewardAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(this.ClearStageRewardAmount, key) : this.ClearStageRewardAmount;
   }
   public static Offset<Japan.WorldRaidStageRewardExcel> Pack(FlatBufferBuilder builder, WorldRaidStageRewardExcelT _o) {
@@ -88,7 +77,6 @@ public struct WorldRaidStageRewardExcel : IFlatbufferObject
 		var _ClearStageRewardProb = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ClearStageRewardProb, key) : _o.ClearStageRewardProb;
 		var _ClearStageRewardParcelType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ClearStageRewardParcelType, key) : _o.ClearStageRewardParcelType;
 		var _ClearStageRewardParcelUniqueID = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ClearStageRewardParcelUniqueID, key) : _o.ClearStageRewardParcelUniqueID;
-    var _ClearStageRewardParcelUniqueName = _o.ClearStageRewardParcelUniqueName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ClearStageRewardParcelUniqueName, key) : _o.ClearStageRewardParcelUniqueName));
 		var _ClearStageRewardAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ClearStageRewardAmount, key) : _o.ClearStageRewardAmount;
     return CreateWorldRaidStageRewardExcel(
       builder,
@@ -97,7 +85,6 @@ public struct WorldRaidStageRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ClearStageRewardProb : _o.ClearStageRewardProb,
       TableEncryptionService.UseEncryption ? _ClearStageRewardParcelType : _o.ClearStageRewardParcelType,
       TableEncryptionService.UseEncryption ? _ClearStageRewardParcelUniqueID : _o.ClearStageRewardParcelUniqueID,
-      _ClearStageRewardParcelUniqueName,
       TableEncryptionService.UseEncryption ? _ClearStageRewardAmount : _o.ClearStageRewardAmount);
   }
 }
@@ -109,7 +96,6 @@ public class WorldRaidStageRewardExcelT
   public long ClearStageRewardProb { get; set; }
   public Japan.ParcelType ClearStageRewardParcelType { get; set; }
   public long ClearStageRewardParcelUniqueID { get; set; }
-  public string ClearStageRewardParcelUniqueName { get; set; }
   public long ClearStageRewardAmount { get; set; }
 
   public WorldRaidStageRewardExcelT() {
@@ -118,7 +104,6 @@ public class WorldRaidStageRewardExcelT
     this.ClearStageRewardProb = 0;
     this.ClearStageRewardParcelType = Japan.ParcelType.None;
     this.ClearStageRewardParcelUniqueID = 0;
-    this.ClearStageRewardParcelUniqueName = null;
     this.ClearStageRewardAmount = 0;
   }
 }
@@ -134,8 +119,7 @@ static public class WorldRaidStageRewardExcelVerify
       && verifier.VerifyField(tablePos, 8 /*ClearStageRewardProb*/, 8 /*long*/, 8, false)
       && verifier.VerifyField(tablePos, 10 /*ClearStageRewardParcelType*/, 4 /*Japan.ParcelType*/, 4, false)
       && verifier.VerifyField(tablePos, 12 /*ClearStageRewardParcelUniqueID*/, 8 /*long*/, 8, false)
-      && verifier.VerifyString(tablePos, 14 /*ClearStageRewardParcelUniqueName*/, false)
-      && verifier.VerifyField(tablePos, 16 /*ClearStageRewardAmount*/, 8 /*long*/, 8, false)
+      && verifier.VerifyField(tablePos, 14 /*ClearStageRewardAmount*/, 8 /*long*/, 8, false)
       && verifier.VerifyTableEnd(tablePos);
   }
 }

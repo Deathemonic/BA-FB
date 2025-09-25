@@ -52,16 +52,16 @@ public struct EventContentStageTotalRewardExcel : IFlatbufferObject
       long Id = 0,
       long EventContentId = 0,
       long RequiredEventItemAmount = 0,
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelIdOffset = default(VectorOffset),
-      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardParcelIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(6);
     EventContentStageTotalRewardExcel.AddRequiredEventItemAmount(builder, RequiredEventItemAmount);
     EventContentStageTotalRewardExcel.AddEventContentId(builder, EventContentId);
     EventContentStageTotalRewardExcel.AddId(builder, Id);
-    EventContentStageTotalRewardExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
-    EventContentStageTotalRewardExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
-    EventContentStageTotalRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    EventContentStageTotalRewardExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
+    EventContentStageTotalRewardExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
+    EventContentStageTotalRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     return EventContentStageTotalRewardExcel.EndEventContentStageTotalRewardExcel(builder);
   }
 
@@ -114,29 +114,29 @@ public struct EventContentStageTotalRewardExcel : IFlatbufferObject
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
 		var _EventContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentId, key) : _o.EventContentId;
 		var _RequiredEventItemAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RequiredEventItemAmount, key) : _o.RequiredEventItemAmount;
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelId = default(VectorOffset);
+    var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
-      var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
+      var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
-    var _rewardParcelAmount = default(VectorOffset);
+    var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
+      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
     }
     return CreateEventContentStageTotalRewardExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       TableEncryptionService.UseEncryption ? _EventContentId : _o.EventContentId,
       TableEncryptionService.UseEncryption ? _RequiredEventItemAmount : _o.RequiredEventItemAmount,
-      _rewardParcelType,
-      _rewardParcelId,
-      _rewardParcelAmount);
+      _RewardParcelType,
+      _RewardParcelId,
+      _RewardParcelAmount);
   }
 }
 

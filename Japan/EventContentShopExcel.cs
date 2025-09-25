@@ -66,7 +66,7 @@ public struct EventContentShopExcel : IFlatbufferObject
       uint LocalizeEtcId = 0,
       Japan.ShopCategoryType CategoryType = Japan.ShopCategoryType.General,
       bool IsLegacy = false,
-      VectorOffset goodsIdOffset = default(VectorOffset),
+      VectorOffset GoodsIdOffset = default(VectorOffset),
       long DisplayOrder = 0,
       StringOffset SalePeriodFromOffset = default(StringOffset),
       StringOffset SalePeriodToOffset = default(StringOffset),
@@ -85,7 +85,7 @@ public struct EventContentShopExcel : IFlatbufferObject
     EventContentShopExcel.AddPurchaseCountResetType(builder, PurchaseCountResetType);
     EventContentShopExcel.AddSalePeriodTo(builder, SalePeriodToOffset);
     EventContentShopExcel.AddSalePeriodFrom(builder, SalePeriodFromOffset);
-    EventContentShopExcel.AddGoodsId(builder, goodsIdOffset);
+    EventContentShopExcel.AddGoodsId(builder, GoodsIdOffset);
     EventContentShopExcel.AddCategoryType(builder, CategoryType);
     EventContentShopExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
     EventContentShopExcel.AddRestrictBuyWhenInventoryFull(builder, RestrictBuyWhenInventoryFull);
@@ -148,10 +148,10 @@ public struct EventContentShopExcel : IFlatbufferObject
 		var _LocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeEtcId, key) : _o.LocalizeEtcId;
 		var _CategoryType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CategoryType, key) : _o.CategoryType;
 		var _IsLegacy = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsLegacy, key) : _o.IsLegacy;
-    var _goodsId = default(VectorOffset);
+    var _GoodsId = default(VectorOffset);
     if (_o.GoodsId != null) {
-      var __goodsId = _o.GoodsId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _goodsId = CreateGoodsIdVector(builder, __goodsId);
+      var __GoodsId = _o.GoodsId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _GoodsId = CreateGoodsIdVector(builder, __GoodsId);
     }
 		var _DisplayOrder = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayOrder, key) : _o.DisplayOrder;
     var _SalePeriodFrom = _o.SalePeriodFrom == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SalePeriodFrom, key) : _o.SalePeriodFrom));
@@ -168,7 +168,7 @@ public struct EventContentShopExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _LocalizeEtcId : _o.LocalizeEtcId,
       TableEncryptionService.UseEncryption ? _CategoryType : _o.CategoryType,
       TableEncryptionService.UseEncryption ? _IsLegacy : _o.IsLegacy,
-      _goodsId,
+      _GoodsId,
       TableEncryptionService.UseEncryption ? _DisplayOrder : _o.DisplayOrder,
       _SalePeriodFrom,
       _SalePeriodTo,

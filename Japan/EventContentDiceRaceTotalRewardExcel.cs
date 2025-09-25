@@ -54,15 +54,15 @@ public struct EventContentDiceRaceTotalRewardExcel : IFlatbufferObject
       long RewardID = 0,
       int RequiredLapFinishCount = 0,
       int DisplayLapFinishCount = 0,
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelIdOffset = default(VectorOffset),
-      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardParcelIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(7);
     EventContentDiceRaceTotalRewardExcel.AddRewardID(builder, RewardID);
     EventContentDiceRaceTotalRewardExcel.AddEventContentId(builder, EventContentId);
-    EventContentDiceRaceTotalRewardExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
-    EventContentDiceRaceTotalRewardExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
-    EventContentDiceRaceTotalRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    EventContentDiceRaceTotalRewardExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
+    EventContentDiceRaceTotalRewardExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
+    EventContentDiceRaceTotalRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     EventContentDiceRaceTotalRewardExcel.AddDisplayLapFinishCount(builder, DisplayLapFinishCount);
     EventContentDiceRaceTotalRewardExcel.AddRequiredLapFinishCount(builder, RequiredLapFinishCount);
     return EventContentDiceRaceTotalRewardExcel.EndEventContentDiceRaceTotalRewardExcel(builder);
@@ -120,20 +120,20 @@ public struct EventContentDiceRaceTotalRewardExcel : IFlatbufferObject
 		var _RewardID = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RewardID, key) : _o.RewardID;
 		var _RequiredLapFinishCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RequiredLapFinishCount, key) : _o.RequiredLapFinishCount;
 		var _DisplayLapFinishCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayLapFinishCount, key) : _o.DisplayLapFinishCount;
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelId = default(VectorOffset);
+    var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
-      var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
+      var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
-    var _rewardParcelAmount = default(VectorOffset);
+    var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
+      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
     }
     return CreateEventContentDiceRaceTotalRewardExcel(
       builder,
@@ -141,9 +141,9 @@ public struct EventContentDiceRaceTotalRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _RewardID : _o.RewardID,
       TableEncryptionService.UseEncryption ? _RequiredLapFinishCount : _o.RequiredLapFinishCount,
       TableEncryptionService.UseEncryption ? _DisplayLapFinishCount : _o.DisplayLapFinishCount,
-      _rewardParcelType,
-      _rewardParcelId,
-      _rewardParcelAmount);
+      _RewardParcelType,
+      _RewardParcelId,
+      _RewardParcelAmount);
   }
 }
 

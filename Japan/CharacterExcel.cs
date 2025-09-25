@@ -169,7 +169,7 @@ public struct CharacterExcel : IFlatbufferObject
       StringOffset ScenarioCharacterOffset = default(StringOffset),
       uint SpawnTemplateId = 0,
       int FavorLevelupType = 0,
-      VectorOffset equipmentSlotOffset = default(VectorOffset),
+      VectorOffset EquipmentSlotOffset = default(VectorOffset),
       uint WeaponLocalizeId = 0,
       bool DisplayEnemyInfo = false,
       long bodyRadius = 0,
@@ -190,7 +190,7 @@ public struct CharacterExcel : IFlatbufferObject
       bool IgnoreObstacle = false,
       bool IsAirUnit = false,
       long AirUnitHeight = 0,
-      VectorOffset tagsOffset = default(VectorOffset),
+      VectorOffset TagsOffset = default(VectorOffset),
       long SecretStoneItemId = 0,
       int SecretStoneItemAmount = 0,
       long CharacterPieceItemId = 0,
@@ -211,7 +211,7 @@ public struct CharacterExcel : IFlatbufferObject
     CharacterExcel.AddId(builder, Id);
     CharacterExcel.AddCharacterPieceItemAmount(builder, CharacterPieceItemAmount);
     CharacterExcel.AddSecretStoneItemAmount(builder, SecretStoneItemAmount);
-    CharacterExcel.AddTags(builder, tagsOffset);
+    CharacterExcel.AddTags(builder, TagsOffset);
     CharacterExcel.AddAppearFrame(builder, AppearFrame);
     CharacterExcel.AddJumpMotionFrame(builder, JumpMotionFrame);
     CharacterExcel.AddMoveEndFrame(builder, MoveEndFrame);
@@ -221,7 +221,7 @@ public struct CharacterExcel : IFlatbufferObject
     CharacterExcel.AddHighlightFloaterHeight(builder, HighlightFloaterHeight);
     CharacterExcel.AddHpBarHeight(builder, HpBarHeight);
     CharacterExcel.AddWeaponLocalizeId(builder, WeaponLocalizeId);
-    CharacterExcel.AddEquipmentSlot(builder, equipmentSlotOffset);
+    CharacterExcel.AddEquipmentSlot(builder, EquipmentSlotOffset);
     CharacterExcel.AddFavorLevelupType(builder, FavorLevelupType);
     CharacterExcel.AddSpawnTemplateId(builder, SpawnTemplateId);
     CharacterExcel.AddScenarioCharacter(builder, ScenarioCharacterOffset);
@@ -461,10 +461,10 @@ public struct CharacterExcel : IFlatbufferObject
     var _ScenarioCharacter = _o.ScenarioCharacter == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ScenarioCharacter, key) : _o.ScenarioCharacter));
 		var _SpawnTemplateId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SpawnTemplateId, key) : _o.SpawnTemplateId;
 		var _FavorLevelupType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.FavorLevelupType, key) : _o.FavorLevelupType;
-    var _equipmentSlot = default(VectorOffset);
+    var _EquipmentSlot = default(VectorOffset);
     if (_o.EquipmentSlot != null) {
-      var __equipmentSlot = _o.EquipmentSlot.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _equipmentSlot = CreateEquipmentSlotVector(builder, __equipmentSlot);
+      var __EquipmentSlot = _o.EquipmentSlot.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _EquipmentSlot = CreateEquipmentSlotVector(builder, __EquipmentSlot);
     }
 		var _WeaponLocalizeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.WeaponLocalizeId, key) : _o.WeaponLocalizeId;
 		var _DisplayEnemyInfo = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayEnemyInfo, key) : _o.DisplayEnemyInfo;
@@ -486,10 +486,10 @@ public struct CharacterExcel : IFlatbufferObject
 		var _IgnoreObstacle = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IgnoreObstacle, key) : _o.IgnoreObstacle;
 		var _IsAirUnit = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsAirUnit, key) : _o.IsAirUnit;
 		var _AirUnitHeight = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AirUnitHeight, key) : _o.AirUnitHeight;
-    var _tags = default(VectorOffset);
+    var _Tags = default(VectorOffset);
     if (_o.Tags != null) {
-      var __tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _tags = CreateTagsVector(builder, __tags);
+      var __Tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _Tags = CreateTagsVector(builder, __Tags);
     }
 		var _SecretStoneItemId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SecretStoneItemId, key) : _o.SecretStoneItemId;
 		var _SecretStoneItemAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SecretStoneItemAmount, key) : _o.SecretStoneItemAmount;
@@ -536,7 +536,7 @@ public struct CharacterExcel : IFlatbufferObject
       _ScenarioCharacter,
       TableEncryptionService.UseEncryption ? _SpawnTemplateId : _o.SpawnTemplateId,
       TableEncryptionService.UseEncryption ? _FavorLevelupType : _o.FavorLevelupType,
-      _equipmentSlot,
+      _EquipmentSlot,
       TableEncryptionService.UseEncryption ? _WeaponLocalizeId : _o.WeaponLocalizeId,
       TableEncryptionService.UseEncryption ? _DisplayEnemyInfo : _o.DisplayEnemyInfo,
       TableEncryptionService.UseEncryption ? _bodyRadius : _o.BodyRadius,
@@ -557,7 +557,7 @@ public struct CharacterExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IgnoreObstacle : _o.IgnoreObstacle,
       TableEncryptionService.UseEncryption ? _IsAirUnit : _o.IsAirUnit,
       TableEncryptionService.UseEncryption ? _AirUnitHeight : _o.AirUnitHeight,
-      _tags,
+      _Tags,
       TableEncryptionService.UseEncryption ? _SecretStoneItemId : _o.SecretStoneItemId,
       TableEncryptionService.UseEncryption ? _SecretStoneItemAmount : _o.SecretStoneItemAmount,
       TableEncryptionService.UseEncryption ? _CharacterPieceItemId : _o.CharacterPieceItemId,

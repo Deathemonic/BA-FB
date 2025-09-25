@@ -123,7 +123,7 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
       long OrderInGroup = 0,
       long Id = 0,
       StringOffset ProgressTextureOffset = default(StringOffset),
-      VectorOffset voiceIdOffset = default(VectorOffset),
+      VectorOffset VoiceIdOffset = default(VectorOffset),
       uint LocalizeEtcId = 0,
       long LocationRank = 0,
       long FavorExp = 0,
@@ -131,14 +131,14 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
       long SecretStoneProb = 0,
       long ExtraFavorExp = 0,
       long ExtraFavorExpProb = 0,
-      VectorOffset extraRewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset extraRewardParcelIdOffset = default(VectorOffset),
-      VectorOffset extraRewardAmountOffset = default(VectorOffset),
-      VectorOffset extraRewardProbOffset = default(VectorOffset),
-      VectorOffset isExtraRewardDisplayedOffset = default(VectorOffset),
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelIdOffset = default(VectorOffset),
-      VectorOffset rewardAmountOffset = default(VectorOffset)) {
+      VectorOffset ExtraRewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset ExtraRewardParcelIdOffset = default(VectorOffset),
+      VectorOffset ExtraRewardAmountOffset = default(VectorOffset),
+      VectorOffset ExtraRewardProbOffset = default(VectorOffset),
+      VectorOffset IsExtraRewardDisplayedOffset = default(VectorOffset),
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardParcelIdOffset = default(VectorOffset),
+      VectorOffset RewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(21);
     EventContentLocationRewardExcel.AddExtraFavorExpProb(builder, ExtraFavorExpProb);
     EventContentLocationRewardExcel.AddExtraFavorExp(builder, ExtraFavorExp);
@@ -149,16 +149,16 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
     EventContentLocationRewardExcel.AddId(builder, Id);
     EventContentLocationRewardExcel.AddOrderInGroup(builder, OrderInGroup);
     EventContentLocationRewardExcel.AddScheduleGroupId(builder, ScheduleGroupId);
-    EventContentLocationRewardExcel.AddRewardAmount(builder, rewardAmountOffset);
-    EventContentLocationRewardExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
-    EventContentLocationRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
-    EventContentLocationRewardExcel.AddIsExtraRewardDisplayed(builder, isExtraRewardDisplayedOffset);
-    EventContentLocationRewardExcel.AddExtraRewardProb(builder, extraRewardProbOffset);
-    EventContentLocationRewardExcel.AddExtraRewardAmount(builder, extraRewardAmountOffset);
-    EventContentLocationRewardExcel.AddExtraRewardParcelId(builder, extraRewardParcelIdOffset);
-    EventContentLocationRewardExcel.AddExtraRewardParcelType(builder, extraRewardParcelTypeOffset);
+    EventContentLocationRewardExcel.AddRewardAmount(builder, RewardAmountOffset);
+    EventContentLocationRewardExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
+    EventContentLocationRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
+    EventContentLocationRewardExcel.AddIsExtraRewardDisplayed(builder, IsExtraRewardDisplayedOffset);
+    EventContentLocationRewardExcel.AddExtraRewardProb(builder, ExtraRewardProbOffset);
+    EventContentLocationRewardExcel.AddExtraRewardAmount(builder, ExtraRewardAmountOffset);
+    EventContentLocationRewardExcel.AddExtraRewardParcelId(builder, ExtraRewardParcelIdOffset);
+    EventContentLocationRewardExcel.AddExtraRewardParcelType(builder, ExtraRewardParcelTypeOffset);
     EventContentLocationRewardExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
-    EventContentLocationRewardExcel.AddVoiceId(builder, voiceIdOffset);
+    EventContentLocationRewardExcel.AddVoiceId(builder, VoiceIdOffset);
     EventContentLocationRewardExcel.AddProgressTexture(builder, ProgressTextureOffset);
     EventContentLocationRewardExcel.AddLocation(builder, LocationOffset);
     return EventContentLocationRewardExcel.EndEventContentLocationRewardExcel(builder);
@@ -281,10 +281,10 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
 		var _OrderInGroup = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.OrderInGroup, key) : _o.OrderInGroup;
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
     var _ProgressTexture = _o.ProgressTexture == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ProgressTexture, key) : _o.ProgressTexture));
-    var _voiceId = default(VectorOffset);
+    var _VoiceId = default(VectorOffset);
     if (_o.VoiceId != null) {
-      var __voiceId = _o.VoiceId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _voiceId = CreateVoiceIdVector(builder, __voiceId);
+      var __VoiceId = _o.VoiceId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _VoiceId = CreateVoiceIdVector(builder, __VoiceId);
     }
 		var _LocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeEtcId, key) : _o.LocalizeEtcId;
 		var _LocationRank = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocationRank, key) : _o.LocationRank;
@@ -293,45 +293,45 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
 		var _SecretStoneProb = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SecretStoneProb, key) : _o.SecretStoneProb;
 		var _ExtraFavorExp = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ExtraFavorExp, key) : _o.ExtraFavorExp;
 		var _ExtraFavorExpProb = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ExtraFavorExpProb, key) : _o.ExtraFavorExpProb;
-    var _extraRewardParcelType = default(VectorOffset);
+    var _ExtraRewardParcelType = default(VectorOffset);
     if (_o.ExtraRewardParcelType != null) {
-      var __extraRewardParcelType = _o.ExtraRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _extraRewardParcelType = CreateExtraRewardParcelTypeVector(builder, __extraRewardParcelType);
+      var __ExtraRewardParcelType = _o.ExtraRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ExtraRewardParcelType = CreateExtraRewardParcelTypeVector(builder, __ExtraRewardParcelType);
     }
-    var _extraRewardParcelId = default(VectorOffset);
+    var _ExtraRewardParcelId = default(VectorOffset);
     if (_o.ExtraRewardParcelId != null) {
-      var __extraRewardParcelId = _o.ExtraRewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _extraRewardParcelId = CreateExtraRewardParcelIdVector(builder, __extraRewardParcelId);
+      var __ExtraRewardParcelId = _o.ExtraRewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ExtraRewardParcelId = CreateExtraRewardParcelIdVector(builder, __ExtraRewardParcelId);
     }
-    var _extraRewardAmount = default(VectorOffset);
+    var _ExtraRewardAmount = default(VectorOffset);
     if (_o.ExtraRewardAmount != null) {
-      var __extraRewardAmount = _o.ExtraRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _extraRewardAmount = CreateExtraRewardAmountVector(builder, __extraRewardAmount);
+      var __ExtraRewardAmount = _o.ExtraRewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ExtraRewardAmount = CreateExtraRewardAmountVector(builder, __ExtraRewardAmount);
     }
-    var _extraRewardProb = default(VectorOffset);
+    var _ExtraRewardProb = default(VectorOffset);
     if (_o.ExtraRewardProb != null) {
-      var __extraRewardProb = _o.ExtraRewardProb.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _extraRewardProb = CreateExtraRewardProbVector(builder, __extraRewardProb);
+      var __ExtraRewardProb = _o.ExtraRewardProb.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ExtraRewardProb = CreateExtraRewardProbVector(builder, __ExtraRewardProb);
     }
-    var _isExtraRewardDisplayed = default(VectorOffset);
+    var _IsExtraRewardDisplayed = default(VectorOffset);
     if (_o.IsExtraRewardDisplayed != null) {
-      var __isExtraRewardDisplayed = _o.IsExtraRewardDisplayed.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _isExtraRewardDisplayed = CreateIsExtraRewardDisplayedVector(builder, __isExtraRewardDisplayed);
+      var __IsExtraRewardDisplayed = _o.IsExtraRewardDisplayed.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _IsExtraRewardDisplayed = CreateIsExtraRewardDisplayedVector(builder, __IsExtraRewardDisplayed);
     }
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelId = default(VectorOffset);
+    var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
-      var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
+      var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
-    var _rewardAmount = default(VectorOffset);
+    var _RewardAmount = default(VectorOffset);
     if (_o.RewardAmount != null) {
-      var __rewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardAmount = CreateRewardAmountVector(builder, __rewardAmount);
+      var __RewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardAmount = CreateRewardAmountVector(builder, __RewardAmount);
     }
     return CreateEventContentLocationRewardExcel(
       builder,
@@ -340,7 +340,7 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _OrderInGroup : _o.OrderInGroup,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
       _ProgressTexture,
-      _voiceId,
+      _VoiceId,
       TableEncryptionService.UseEncryption ? _LocalizeEtcId : _o.LocalizeEtcId,
       TableEncryptionService.UseEncryption ? _LocationRank : _o.LocationRank,
       TableEncryptionService.UseEncryption ? _FavorExp : _o.FavorExp,
@@ -348,14 +348,14 @@ public struct EventContentLocationRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _SecretStoneProb : _o.SecretStoneProb,
       TableEncryptionService.UseEncryption ? _ExtraFavorExp : _o.ExtraFavorExp,
       TableEncryptionService.UseEncryption ? _ExtraFavorExpProb : _o.ExtraFavorExpProb,
-      _extraRewardParcelType,
-      _extraRewardParcelId,
-      _extraRewardAmount,
-      _extraRewardProb,
-      _isExtraRewardDisplayed,
-      _rewardParcelType,
-      _rewardParcelId,
-      _rewardAmount);
+      _ExtraRewardParcelType,
+      _ExtraRewardParcelId,
+      _ExtraRewardAmount,
+      _ExtraRewardProb,
+      _IsExtraRewardDisplayed,
+      _RewardParcelType,
+      _RewardParcelId,
+      _RewardAmount);
   }
 }
 

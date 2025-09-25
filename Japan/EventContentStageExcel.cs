@@ -144,8 +144,8 @@ public struct EventContentStageExcel : IFlatbufferObject
       int StageEnterEchelonCount = 0,
       long StarConditionTacticRankSCount = 0,
       long StarConditionTurnCount = 0,
-      VectorOffset enterScenarioGroupIdOffset = default(VectorOffset),
-      VectorOffset clearScenarioGroupIdOffset = default(VectorOffset),
+      VectorOffset EnterScenarioGroupIdOffset = default(VectorOffset),
+      VectorOffset ClearScenarioGroupIdOffset = default(VectorOffset),
       StringOffset StrategyMapOffset = default(StringOffset),
       StringOffset StrategyMapBGOffset = default(StringOffset),
       long EventContentStageRewardId = 0,
@@ -161,8 +161,8 @@ public struct EventContentStageExcel : IFlatbufferObject
       long BuffContentId = 0,
       long FixedEchelonId = 0,
       bool ChallengeDisplay = false,
-      VectorOffset starGoalOffset = default(VectorOffset),
-      VectorOffset starGoalAmountOffset = default(VectorOffset),
+      VectorOffset StarGoalOffset = default(VectorOffset),
+      VectorOffset StarGoalAmountOffset = default(VectorOffset),
       bool IsDefeatBattle = false,
       uint StageHint = 0,
       Japan.EchelonExtensionType EchelonExtensionType = Japan.EchelonExtensionType.Base) {
@@ -187,8 +187,8 @@ public struct EventContentStageExcel : IFlatbufferObject
     EventContentStageExcel.AddId(builder, Id);
     EventContentStageExcel.AddEchelonExtensionType(builder, EchelonExtensionType);
     EventContentStageExcel.AddStageHint(builder, StageHint);
-    EventContentStageExcel.AddStarGoalAmount(builder, starGoalAmountOffset);
-    EventContentStageExcel.AddStarGoal(builder, starGoalOffset);
+    EventContentStageExcel.AddStarGoalAmount(builder, StarGoalAmountOffset);
+    EventContentStageExcel.AddStarGoal(builder, StarGoalOffset);
     EventContentStageExcel.AddContentType(builder, ContentType);
     EventContentStageExcel.AddStrategyEnvironment(builder, StrategyEnvironment);
     EventContentStageExcel.AddBgmId(builder, BgmIdOffset);
@@ -197,8 +197,8 @@ public struct EventContentStageExcel : IFlatbufferObject
     EventContentStageExcel.AddMaxTurn(builder, MaxTurn);
     EventContentStageExcel.AddStrategyMapBG(builder, StrategyMapBGOffset);
     EventContentStageExcel.AddStrategyMap(builder, StrategyMapOffset);
-    EventContentStageExcel.AddClearScenarioGroupId(builder, clearScenarioGroupIdOffset);
-    EventContentStageExcel.AddEnterScenarioGroupId(builder, enterScenarioGroupIdOffset);
+    EventContentStageExcel.AddClearScenarioGroupId(builder, ClearScenarioGroupIdOffset);
+    EventContentStageExcel.AddEnterScenarioGroupId(builder, EnterScenarioGroupIdOffset);
     EventContentStageExcel.AddStageEnterEchelonCount(builder, StageEnterEchelonCount);
     EventContentStageExcel.AddStageEnterCostAmount(builder, StageEnterCostAmount);
     EventContentStageExcel.AddStageEnterCostType(builder, StageEnterCostType);
@@ -360,15 +360,15 @@ public struct EventContentStageExcel : IFlatbufferObject
 		var _StageEnterEchelonCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StageEnterEchelonCount, key) : _o.StageEnterEchelonCount;
 		var _StarConditionTacticRankSCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StarConditionTacticRankSCount, key) : _o.StarConditionTacticRankSCount;
 		var _StarConditionTurnCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StarConditionTurnCount, key) : _o.StarConditionTurnCount;
-    var _enterScenarioGroupId = default(VectorOffset);
+    var _EnterScenarioGroupId = default(VectorOffset);
     if (_o.EnterScenarioGroupId != null) {
-      var __enterScenarioGroupId = _o.EnterScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _enterScenarioGroupId = CreateEnterScenarioGroupIdVector(builder, __enterScenarioGroupId);
+      var __EnterScenarioGroupId = _o.EnterScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _EnterScenarioGroupId = CreateEnterScenarioGroupIdVector(builder, __EnterScenarioGroupId);
     }
-    var _clearScenarioGroupId = default(VectorOffset);
+    var _ClearScenarioGroupId = default(VectorOffset);
     if (_o.ClearScenarioGroupId != null) {
-      var __clearScenarioGroupId = _o.ClearScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _clearScenarioGroupId = CreateClearScenarioGroupIdVector(builder, __clearScenarioGroupId);
+      var __ClearScenarioGroupId = _o.ClearScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ClearScenarioGroupId = CreateClearScenarioGroupIdVector(builder, __ClearScenarioGroupId);
     }
     var _StrategyMap = _o.StrategyMap == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.StrategyMap, key) : _o.StrategyMap));
     var _StrategyMapBG = _o.StrategyMapBG == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.StrategyMapBG, key) : _o.StrategyMapBG));
@@ -385,15 +385,15 @@ public struct EventContentStageExcel : IFlatbufferObject
 		var _BuffContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.BuffContentId, key) : _o.BuffContentId;
 		var _FixedEchelonId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.FixedEchelonId, key) : _o.FixedEchelonId;
 		var _ChallengeDisplay = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ChallengeDisplay, key) : _o.ChallengeDisplay;
-    var _starGoal = default(VectorOffset);
+    var _StarGoal = default(VectorOffset);
     if (_o.StarGoal != null) {
-      var __starGoal = _o.StarGoal.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _starGoal = CreateStarGoalVector(builder, __starGoal);
+      var __StarGoal = _o.StarGoal.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StarGoal = CreateStarGoalVector(builder, __StarGoal);
     }
-    var _starGoalAmount = default(VectorOffset);
+    var _StarGoalAmount = default(VectorOffset);
     if (_o.StarGoalAmount != null) {
-      var __starGoalAmount = _o.StarGoalAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _starGoalAmount = CreateStarGoalAmountVector(builder, __starGoalAmount);
+      var __StarGoalAmount = _o.StarGoalAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _StarGoalAmount = CreateStarGoalAmountVector(builder, __StarGoalAmount);
     }
 		var _IsDefeatBattle = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsDefeatBattle, key) : _o.IsDefeatBattle;
 		var _StageHint = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.StageHint, key) : _o.StageHint;
@@ -421,8 +421,8 @@ public struct EventContentStageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _StageEnterEchelonCount : _o.StageEnterEchelonCount,
       TableEncryptionService.UseEncryption ? _StarConditionTacticRankSCount : _o.StarConditionTacticRankSCount,
       TableEncryptionService.UseEncryption ? _StarConditionTurnCount : _o.StarConditionTurnCount,
-      _enterScenarioGroupId,
-      _clearScenarioGroupId,
+      _EnterScenarioGroupId,
+      _ClearScenarioGroupId,
       _StrategyMap,
       _StrategyMapBG,
       TableEncryptionService.UseEncryption ? _EventContentStageRewardId : _o.EventContentStageRewardId,
@@ -438,8 +438,8 @@ public struct EventContentStageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _BuffContentId : _o.BuffContentId,
       TableEncryptionService.UseEncryption ? _FixedEchelonId : _o.FixedEchelonId,
       TableEncryptionService.UseEncryption ? _ChallengeDisplay : _o.ChallengeDisplay,
-      _starGoal,
-      _starGoalAmount,
+      _StarGoal,
+      _StarGoalAmount,
       TableEncryptionService.UseEncryption ? _IsDefeatBattle : _o.IsDefeatBattle,
       TableEncryptionService.UseEncryption ? _StageHint : _o.StageHint,
       TableEncryptionService.UseEncryption ? _EchelonExtensionType : _o.EchelonExtensionType);

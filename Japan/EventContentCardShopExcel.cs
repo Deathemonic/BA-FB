@@ -64,16 +64,16 @@ public struct EventContentCardShopExcel : IFlatbufferObject
       int RefreshGroup = 0,
       int Prob = 0,
       int ProbWeight1 = 0,
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelIdOffset = default(VectorOffset),
-      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardParcelIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(12);
     EventContentCardShopExcel.AddCostGoodsId(builder, CostGoodsId);
     EventContentCardShopExcel.AddId(builder, Id);
     EventContentCardShopExcel.AddEventContentId(builder, EventContentId);
-    EventContentCardShopExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
-    EventContentCardShopExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
-    EventContentCardShopExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    EventContentCardShopExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
+    EventContentCardShopExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
+    EventContentCardShopExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     EventContentCardShopExcel.AddProbWeight1(builder, ProbWeight1);
     EventContentCardShopExcel.AddProb(builder, Prob);
     EventContentCardShopExcel.AddRefreshGroup(builder, RefreshGroup);
@@ -150,20 +150,20 @@ public struct EventContentCardShopExcel : IFlatbufferObject
 		var _RefreshGroup = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RefreshGroup, key) : _o.RefreshGroup;
 		var _Prob = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Prob, key) : _o.Prob;
 		var _ProbWeight1 = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ProbWeight1, key) : _o.ProbWeight1;
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelId = default(VectorOffset);
+    var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
-      var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
+      var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
-    var _rewardParcelAmount = default(VectorOffset);
+    var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
+      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
     }
     return CreateEventContentCardShopExcel(
       builder,
@@ -176,9 +176,9 @@ public struct EventContentCardShopExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _RefreshGroup : _o.RefreshGroup,
       TableEncryptionService.UseEncryption ? _Prob : _o.Prob,
       TableEncryptionService.UseEncryption ? _ProbWeight1 : _o.ProbWeight1,
-      _rewardParcelType,
-      _rewardParcelId,
-      _rewardParcelAmount);
+      _RewardParcelType,
+      _RewardParcelId,
+      _RewardParcelAmount);
   }
 }
 

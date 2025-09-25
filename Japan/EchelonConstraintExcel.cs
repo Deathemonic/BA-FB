@@ -46,8 +46,8 @@ public struct EchelonConstraintExcel : IFlatbufferObject
   public static Offset<Japan.EchelonConstraintExcel> CreateEchelonConstraintExcel(FlatBufferBuilder builder,
       long GroupId = 0,
       bool IsWhiteList = false,
-      VectorOffset characterIdOffset = default(VectorOffset),
-      VectorOffset personalityIdOffset = default(VectorOffset),
+      VectorOffset CharacterIdOffset = default(VectorOffset),
+      VectorOffset PersonalityIdOffset = default(VectorOffset),
       Japan.WeaponType WeaponType = Japan.WeaponType.None,
       Japan.School School = Japan.School.None,
       Japan.Club Club = Japan.Club.None,
@@ -58,8 +58,8 @@ public struct EchelonConstraintExcel : IFlatbufferObject
     EchelonConstraintExcel.AddClub(builder, Club);
     EchelonConstraintExcel.AddSchool(builder, School);
     EchelonConstraintExcel.AddWeaponType(builder, WeaponType);
-    EchelonConstraintExcel.AddPersonalityId(builder, personalityIdOffset);
-    EchelonConstraintExcel.AddCharacterId(builder, characterIdOffset);
+    EchelonConstraintExcel.AddPersonalityId(builder, PersonalityIdOffset);
+    EchelonConstraintExcel.AddCharacterId(builder, CharacterIdOffset);
     EchelonConstraintExcel.AddIsWhiteList(builder, IsWhiteList);
     return EchelonConstraintExcel.EndEchelonConstraintExcel(builder);
   }
@@ -110,15 +110,15 @@ public struct EchelonConstraintExcel : IFlatbufferObject
 		byte[] key = TableEncryptionService.CreateKey("EchelonConstraint");
 		var _GroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroupId, key) : _o.GroupId;
 		var _IsWhiteList = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsWhiteList, key) : _o.IsWhiteList;
-    var _characterId = default(VectorOffset);
+    var _CharacterId = default(VectorOffset);
     if (_o.CharacterId != null) {
-      var __characterId = _o.CharacterId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _characterId = CreateCharacterIdVector(builder, __characterId);
+      var __CharacterId = _o.CharacterId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _CharacterId = CreateCharacterIdVector(builder, __CharacterId);
     }
-    var _personalityId = default(VectorOffset);
+    var _PersonalityId = default(VectorOffset);
     if (_o.PersonalityId != null) {
-      var __personalityId = _o.PersonalityId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _personalityId = CreatePersonalityIdVector(builder, __personalityId);
+      var __PersonalityId = _o.PersonalityId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _PersonalityId = CreatePersonalityIdVector(builder, __PersonalityId);
     }
 		var _WeaponType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.WeaponType, key) : _o.WeaponType;
 		var _School = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.School, key) : _o.School;
@@ -128,8 +128,8 @@ public struct EchelonConstraintExcel : IFlatbufferObject
       builder,
       TableEncryptionService.UseEncryption ? _GroupId : _o.GroupId,
       TableEncryptionService.UseEncryption ? _IsWhiteList : _o.IsWhiteList,
-      _characterId,
-      _personalityId,
+      _CharacterId,
+      _PersonalityId,
       TableEncryptionService.UseEncryption ? _WeaponType : _o.WeaponType,
       TableEncryptionService.UseEncryption ? _School : _o.School,
       TableEncryptionService.UseEncryption ? _Club : _o.Club,

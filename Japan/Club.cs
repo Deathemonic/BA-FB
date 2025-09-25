@@ -61,6 +61,7 @@ public enum Club : int
   FreightLogisticsDepartment = 51,
   OccultClub = 52,
   PrefectBrigade = 53,
+  FreeTradeCartel = 54,
 };
 
 

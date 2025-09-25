@@ -40,12 +40,12 @@ public struct CharacterStatsDetailExcel : IFlatbufferObject
 
   public static Offset<Japan.CharacterStatsDetailExcel> CreateCharacterStatsDetailExcel(FlatBufferBuilder builder,
       long Id = 0,
-      VectorOffset detailShowStatsOffset = default(VectorOffset),
-      VectorOffset isStatsPercentOffset = default(VectorOffset)) {
+      VectorOffset DetailShowStatsOffset = default(VectorOffset),
+      VectorOffset IsStatsPercentOffset = default(VectorOffset)) {
     builder.StartTable(3);
     CharacterStatsDetailExcel.AddId(builder, Id);
-    CharacterStatsDetailExcel.AddIsStatsPercent(builder, isStatsPercentOffset);
-    CharacterStatsDetailExcel.AddDetailShowStats(builder, detailShowStatsOffset);
+    CharacterStatsDetailExcel.AddIsStatsPercent(builder, IsStatsPercentOffset);
+    CharacterStatsDetailExcel.AddDetailShowStats(builder, DetailShowStatsOffset);
     return CharacterStatsDetailExcel.EndCharacterStatsDetailExcel(builder);
   }
 
@@ -84,21 +84,21 @@ public struct CharacterStatsDetailExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Japan.CharacterStatsDetailExcel>);
 		byte[] key = TableEncryptionService.CreateKey("CharacterStatsDetail");
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
-    var _detailShowStats = default(VectorOffset);
+    var _DetailShowStats = default(VectorOffset);
     if (_o.DetailShowStats != null) {
-      var __detailShowStats = _o.DetailShowStats.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _detailShowStats = CreateDetailShowStatsVector(builder, __detailShowStats);
+      var __DetailShowStats = _o.DetailShowStats.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _DetailShowStats = CreateDetailShowStatsVector(builder, __DetailShowStats);
     }
-    var _isStatsPercent = default(VectorOffset);
+    var _IsStatsPercent = default(VectorOffset);
     if (_o.IsStatsPercent != null) {
-      var __isStatsPercent = _o.IsStatsPercent.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _isStatsPercent = CreateIsStatsPercentVector(builder, __isStatsPercent);
+      var __IsStatsPercent = _o.IsStatsPercent.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _IsStatsPercent = CreateIsStatsPercentVector(builder, __IsStatsPercent);
     }
     return CreateCharacterStatsDetailExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
-      _detailShowStats,
-      _isStatsPercent);
+      _DetailShowStats,
+      _IsStatsPercent);
   }
 }
 

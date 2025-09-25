@@ -83,7 +83,7 @@ public struct EventContentScenarioExcel : IFlatbufferObject
       bool IsRecollection = false,
       bool IsMeetup = false,
       bool IsOmnibus = false,
-      VectorOffset scenarioGroupIdOffset = default(VectorOffset),
+      VectorOffset ScenarioGroupIdOffset = default(VectorOffset),
       Japan.EventContentScenarioConditionType ScenarioConditionType = Japan.EventContentScenarioConditionType.None,
       long ConditionAmount = 0,
       long ConditionEventContentId = 0,
@@ -91,9 +91,9 @@ public struct EventContentScenarioExcel : IFlatbufferObject
       uint RecollectionSummaryLocalizeScenarioId = 0,
       StringOffset RecollectionResourceOffset = default(StringOffset),
       bool IsRecollectionHorizon = false,
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardIdOffset = default(VectorOffset),
-      VectorOffset rewardAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardIdOffset = default(VectorOffset),
+      VectorOffset RewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(19);
     EventContentScenarioExcel.AddClearedScenarioGroupId(builder, ClearedScenarioGroupId);
     EventContentScenarioExcel.AddConditionEventContentId(builder, ConditionEventContentId);
@@ -102,13 +102,13 @@ public struct EventContentScenarioExcel : IFlatbufferObject
     EventContentScenarioExcel.AddOrder(builder, Order);
     EventContentScenarioExcel.AddEventContentId(builder, EventContentId);
     EventContentScenarioExcel.AddId(builder, Id);
-    EventContentScenarioExcel.AddRewardAmount(builder, rewardAmountOffset);
-    EventContentScenarioExcel.AddRewardId(builder, rewardIdOffset);
-    EventContentScenarioExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    EventContentScenarioExcel.AddRewardAmount(builder, RewardAmountOffset);
+    EventContentScenarioExcel.AddRewardId(builder, RewardIdOffset);
+    EventContentScenarioExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     EventContentScenarioExcel.AddRecollectionResource(builder, RecollectionResourceOffset);
     EventContentScenarioExcel.AddRecollectionSummaryLocalizeScenarioId(builder, RecollectionSummaryLocalizeScenarioId);
     EventContentScenarioExcel.AddScenarioConditionType(builder, ScenarioConditionType);
-    EventContentScenarioExcel.AddScenarioGroupId(builder, scenarioGroupIdOffset);
+    EventContentScenarioExcel.AddScenarioGroupId(builder, ScenarioGroupIdOffset);
     EventContentScenarioExcel.AddReplayDisplayGroup(builder, ReplayDisplayGroup);
     EventContentScenarioExcel.AddIsRecollectionHorizon(builder, IsRecollectionHorizon);
     EventContentScenarioExcel.AddIsOmnibus(builder, IsOmnibus);
@@ -203,10 +203,10 @@ public struct EventContentScenarioExcel : IFlatbufferObject
 		var _IsRecollection = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsRecollection, key) : _o.IsRecollection;
 		var _IsMeetup = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsMeetup, key) : _o.IsMeetup;
 		var _IsOmnibus = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsOmnibus, key) : _o.IsOmnibus;
-    var _scenarioGroupId = default(VectorOffset);
+    var _ScenarioGroupId = default(VectorOffset);
     if (_o.ScenarioGroupId != null) {
-      var __scenarioGroupId = _o.ScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _scenarioGroupId = CreateScenarioGroupIdVector(builder, __scenarioGroupId);
+      var __ScenarioGroupId = _o.ScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ScenarioGroupId = CreateScenarioGroupIdVector(builder, __ScenarioGroupId);
     }
 		var _ScenarioConditionType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ScenarioConditionType, key) : _o.ScenarioConditionType;
 		var _ConditionAmount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.ConditionAmount, key) : _o.ConditionAmount;
@@ -215,20 +215,20 @@ public struct EventContentScenarioExcel : IFlatbufferObject
 		var _RecollectionSummaryLocalizeScenarioId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RecollectionSummaryLocalizeScenarioId, key) : _o.RecollectionSummaryLocalizeScenarioId;
     var _RecollectionResource = _o.RecollectionResource == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.RecollectionResource, key) : _o.RecollectionResource));
 		var _IsRecollectionHorizon = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsRecollectionHorizon, key) : _o.IsRecollectionHorizon;
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardId = default(VectorOffset);
+    var _RewardId = default(VectorOffset);
     if (_o.RewardId != null) {
-      var __rewardId = _o.RewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardId = CreateRewardIdVector(builder, __rewardId);
+      var __RewardId = _o.RewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardId = CreateRewardIdVector(builder, __RewardId);
     }
-    var _rewardAmount = default(VectorOffset);
+    var _RewardAmount = default(VectorOffset);
     if (_o.RewardAmount != null) {
-      var __rewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardAmount = CreateRewardAmountVector(builder, __rewardAmount);
+      var __RewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardAmount = CreateRewardAmountVector(builder, __RewardAmount);
     }
     return CreateEventContentScenarioExcel(
       builder,
@@ -240,7 +240,7 @@ public struct EventContentScenarioExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IsRecollection : _o.IsRecollection,
       TableEncryptionService.UseEncryption ? _IsMeetup : _o.IsMeetup,
       TableEncryptionService.UseEncryption ? _IsOmnibus : _o.IsOmnibus,
-      _scenarioGroupId,
+      _ScenarioGroupId,
       TableEncryptionService.UseEncryption ? _ScenarioConditionType : _o.ScenarioConditionType,
       TableEncryptionService.UseEncryption ? _ConditionAmount : _o.ConditionAmount,
       TableEncryptionService.UseEncryption ? _ConditionEventContentId : _o.ConditionEventContentId,
@@ -248,9 +248,9 @@ public struct EventContentScenarioExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _RecollectionSummaryLocalizeScenarioId : _o.RecollectionSummaryLocalizeScenarioId,
       _RecollectionResource,
       TableEncryptionService.UseEncryption ? _IsRecollectionHorizon : _o.IsRecollectionHorizon,
-      _rewardParcelType,
-      _rewardId,
-      _rewardAmount);
+      _RewardParcelType,
+      _RewardId,
+      _RewardAmount);
   }
 }
 

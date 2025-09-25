@@ -79,7 +79,7 @@ public struct EventContentCollectionExcel : IFlatbufferObject
       long EventContentId = 0,
       long GroupId = 0,
       Japan.CollectionUnlockType UnlockConditionType = Japan.CollectionUnlockType.None,
-      VectorOffset unlockConditionParameterOffset = default(VectorOffset),
+      VectorOffset UnlockConditionParameterOffset = default(VectorOffset),
       Japan.MultipleConditionCheckType MultipleConditionCheckType = Japan.MultipleConditionCheckType.And,
       long UnlockConditionCount = 0,
       bool IsObject = false,
@@ -103,7 +103,7 @@ public struct EventContentCollectionExcel : IFlatbufferObject
     EventContentCollectionExcel.AddThumbResource(builder, ThumbResourceOffset);
     EventContentCollectionExcel.AddEmblemResource(builder, EmblemResourceOffset);
     EventContentCollectionExcel.AddMultipleConditionCheckType(builder, MultipleConditionCheckType);
-    EventContentCollectionExcel.AddUnlockConditionParameter(builder, unlockConditionParameterOffset);
+    EventContentCollectionExcel.AddUnlockConditionParameter(builder, UnlockConditionParameterOffset);
     EventContentCollectionExcel.AddUnlockConditionType(builder, UnlockConditionType);
     EventContentCollectionExcel.AddIsHorizon(builder, IsHorizon);
     EventContentCollectionExcel.AddIsObjectOnFullResource(builder, IsObjectOnFullResource);
@@ -169,10 +169,10 @@ public struct EventContentCollectionExcel : IFlatbufferObject
 		var _EventContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentId, key) : _o.EventContentId;
 		var _GroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.GroupId, key) : _o.GroupId;
 		var _UnlockConditionType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UnlockConditionType, key) : _o.UnlockConditionType;
-    var _unlockConditionParameter = default(VectorOffset);
+    var _UnlockConditionParameter = default(VectorOffset);
     if (_o.UnlockConditionParameter != null) {
-      var __unlockConditionParameter = _o.UnlockConditionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _unlockConditionParameter = CreateUnlockConditionParameterVector(builder, __unlockConditionParameter);
+      var __UnlockConditionParameter = _o.UnlockConditionParameter.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _UnlockConditionParameter = CreateUnlockConditionParameterVector(builder, __UnlockConditionParameter);
     }
 		var _MultipleConditionCheckType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MultipleConditionCheckType, key) : _o.MultipleConditionCheckType;
 		var _UnlockConditionCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UnlockConditionCount, key) : _o.UnlockConditionCount;
@@ -191,7 +191,7 @@ public struct EventContentCollectionExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _EventContentId : _o.EventContentId,
       TableEncryptionService.UseEncryption ? _GroupId : _o.GroupId,
       TableEncryptionService.UseEncryption ? _UnlockConditionType : _o.UnlockConditionType,
-      _unlockConditionParameter,
+      _UnlockConditionParameter,
       TableEncryptionService.UseEncryption ? _MultipleConditionCheckType : _o.MultipleConditionCheckType,
       TableEncryptionService.UseEncryption ? _UnlockConditionCount : _o.UnlockConditionCount,
       TableEncryptionService.UseEncryption ? _IsObject : _o.IsObject,

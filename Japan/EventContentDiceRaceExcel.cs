@@ -42,13 +42,13 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
       int SkipableLap = 0,
       StringOffset DiceRacePawnPrefabOffset = default(StringOffset),
       bool IsUsingFixedDice = false,
-      VectorOffset fixedDiceIconOffset = default(VectorOffset),
-      VectorOffset diceRaceEventTypeOffset = default(VectorOffset)) {
+      VectorOffset FixedDiceIconOffset = default(VectorOffset),
+      VectorOffset DiceRaceEventTypeOffset = default(VectorOffset)) {
     builder.StartTable(7);
     EventContentDiceRaceExcel.AddDiceCostGoodsId(builder, DiceCostGoodsId);
     EventContentDiceRaceExcel.AddEventContentId(builder, EventContentId);
-    EventContentDiceRaceExcel.AddDiceRaceEventType(builder, diceRaceEventTypeOffset);
-    EventContentDiceRaceExcel.AddFixedDiceIcon(builder, fixedDiceIconOffset);
+    EventContentDiceRaceExcel.AddDiceRaceEventType(builder, DiceRaceEventTypeOffset);
+    EventContentDiceRaceExcel.AddFixedDiceIcon(builder, FixedDiceIconOffset);
     EventContentDiceRaceExcel.AddDiceRacePawnPrefab(builder, DiceRacePawnPrefabOffset);
     EventContentDiceRaceExcel.AddSkipableLap(builder, SkipableLap);
     EventContentDiceRaceExcel.AddIsUsingFixedDice(builder, IsUsingFixedDice);
@@ -102,17 +102,17 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
 		var _SkipableLap = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SkipableLap, key) : _o.SkipableLap;
     var _DiceRacePawnPrefab = _o.DiceRacePawnPrefab == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DiceRacePawnPrefab, key) : _o.DiceRacePawnPrefab));
 		var _IsUsingFixedDice = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsUsingFixedDice, key) : _o.IsUsingFixedDice;
-    var _fixedDiceIcon = default(VectorOffset);
+    var _FixedDiceIcon = default(VectorOffset);
     if (_o.FixedDiceIcon != null) {
-      var __fixedDiceIcon = new StringOffset[_o.FixedDiceIcon.Count];
-      for (var _j = 0; _j < __fixedDiceIcon.Length; ++_j) { __fixedDiceIcon[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FixedDiceIcon[_j], key) : _o.FixedDiceIcon[_j])); }
-      _fixedDiceIcon = CreateFixedDiceIconVector(builder, __fixedDiceIcon);
+      var __FixedDiceIcon = new StringOffset[_o.FixedDiceIcon.Count];
+      for (var _j = 0; _j < __FixedDiceIcon.Length; ++_j) { __FixedDiceIcon[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FixedDiceIcon[_j], key) : _o.FixedDiceIcon[_j])); }
+      _FixedDiceIcon = CreateFixedDiceIconVector(builder, __FixedDiceIcon);
     }
-    var _diceRaceEventType = default(VectorOffset);
+    var _DiceRaceEventType = default(VectorOffset);
     if (_o.DiceRaceEventType != null) {
-      var __diceRaceEventType = new StringOffset[_o.DiceRaceEventType.Count];
-      for (var _j = 0; _j < __diceRaceEventType.Length; ++_j) { __diceRaceEventType[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DiceRaceEventType[_j], key) : _o.DiceRaceEventType[_j])); }
-      _diceRaceEventType = CreateDiceRaceEventTypeVector(builder, __diceRaceEventType);
+      var __DiceRaceEventType = new StringOffset[_o.DiceRaceEventType.Count];
+      for (var _j = 0; _j < __DiceRaceEventType.Length; ++_j) { __DiceRaceEventType[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DiceRaceEventType[_j], key) : _o.DiceRaceEventType[_j])); }
+      _DiceRaceEventType = CreateDiceRaceEventTypeVector(builder, __DiceRaceEventType);
     }
     return CreateEventContentDiceRaceExcel(
       builder,
@@ -121,8 +121,8 @@ public struct EventContentDiceRaceExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _SkipableLap : _o.SkipableLap,
       _DiceRacePawnPrefab,
       TableEncryptionService.UseEncryption ? _IsUsingFixedDice : _o.IsUsingFixedDice,
-      _fixedDiceIcon,
-      _diceRaceEventType);
+      _FixedDiceIcon,
+      _DiceRaceEventType);
   }
 }
 

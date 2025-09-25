@@ -42,13 +42,13 @@ public struct EventContentCharacterBonusExcel : IFlatbufferObject
   public static Offset<Japan.EventContentCharacterBonusExcel> CreateEventContentCharacterBonusExcel(FlatBufferBuilder builder,
       long EventContentId = 0,
       long CharacterId = 0,
-      VectorOffset eventContentItemTypeOffset = default(VectorOffset),
-      VectorOffset bonusPercentageOffset = default(VectorOffset)) {
+      VectorOffset EventContentItemTypeOffset = default(VectorOffset),
+      VectorOffset BonusPercentageOffset = default(VectorOffset)) {
     builder.StartTable(4);
     EventContentCharacterBonusExcel.AddCharacterId(builder, CharacterId);
     EventContentCharacterBonusExcel.AddEventContentId(builder, EventContentId);
-    EventContentCharacterBonusExcel.AddBonusPercentage(builder, bonusPercentageOffset);
-    EventContentCharacterBonusExcel.AddEventContentItemType(builder, eventContentItemTypeOffset);
+    EventContentCharacterBonusExcel.AddBonusPercentage(builder, BonusPercentageOffset);
+    EventContentCharacterBonusExcel.AddEventContentItemType(builder, EventContentItemTypeOffset);
     return EventContentCharacterBonusExcel.EndEventContentCharacterBonusExcel(builder);
   }
 
@@ -90,22 +90,22 @@ public struct EventContentCharacterBonusExcel : IFlatbufferObject
 		byte[] key = TableEncryptionService.CreateKey("EventContentCharacterBonus");
 		var _EventContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentId, key) : _o.EventContentId;
 		var _CharacterId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CharacterId, key) : _o.CharacterId;
-    var _eventContentItemType = default(VectorOffset);
+    var _EventContentItemType = default(VectorOffset);
     if (_o.EventContentItemType != null) {
-      var __eventContentItemType = _o.EventContentItemType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _eventContentItemType = CreateEventContentItemTypeVector(builder, __eventContentItemType);
+      var __EventContentItemType = _o.EventContentItemType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _EventContentItemType = CreateEventContentItemTypeVector(builder, __EventContentItemType);
     }
-    var _bonusPercentage = default(VectorOffset);
+    var _BonusPercentage = default(VectorOffset);
     if (_o.BonusPercentage != null) {
-      var __bonusPercentage = _o.BonusPercentage.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _bonusPercentage = CreateBonusPercentageVector(builder, __bonusPercentage);
+      var __BonusPercentage = _o.BonusPercentage.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _BonusPercentage = CreateBonusPercentageVector(builder, __BonusPercentage);
     }
     return CreateEventContentCharacterBonusExcel(
       builder,
       TableEncryptionService.UseEncryption ? _EventContentId : _o.EventContentId,
       TableEncryptionService.UseEncryption ? _CharacterId : _o.CharacterId,
-      _eventContentItemType,
-      _bonusPercentage);
+      _EventContentItemType,
+      _BonusPercentage);
   }
 }
 

@@ -184,7 +184,7 @@ public struct CostumeExcel : IFlatbufferObject
       long CharacterSkillListGroupId = 0,
       StringOffset SpineResourceNameOffset = default(StringOffset),
       StringOffset SpineResourceNameDioramaOffset = default(StringOffset),
-      VectorOffset spineResourceNameDioramaForFormConversionOffset = default(VectorOffset),
+      VectorOffset SpineResourceNameDioramaForFormConversionOffset = default(VectorOffset),
       Japan.EntityMaterialType EntityMaterialType = Japan.EntityMaterialType.Wood,
       StringOffset ModelPrefabNameOffset = default(StringOffset),
       StringOffset AnimatorNameOffset = default(StringOffset),
@@ -197,7 +197,7 @@ public struct CostumeExcel : IFlatbufferObject
       StringOffset CombatStyleTexturePathOffset = default(StringOffset),
       bool UseObjectHPBAR = false,
       StringOffset TextureBossOffset = default(StringOffset),
-      VectorOffset textureSkillCardOffset = default(VectorOffset),
+      VectorOffset TextureSkillCardOffset = default(VectorOffset),
       StringOffset InformationPacelOffset = default(StringOffset),
       StringOffset AnimationSSROffset = default(StringOffset),
       StringOffset EnterStrategyAnimationNameOffset = default(StringOffset),
@@ -212,7 +212,7 @@ public struct CostumeExcel : IFlatbufferObject
     CostumeExcel.AddEnterStrategyAnimationName(builder, EnterStrategyAnimationNameOffset);
     CostumeExcel.AddAnimationSSR(builder, AnimationSSROffset);
     CostumeExcel.AddInformationPacel(builder, InformationPacelOffset);
-    CostumeExcel.AddTextureSkillCard(builder, textureSkillCardOffset);
+    CostumeExcel.AddTextureSkillCard(builder, TextureSkillCardOffset);
     CostumeExcel.AddTextureBoss(builder, TextureBossOffset);
     CostumeExcel.AddCombatStyleTexturePath(builder, CombatStyleTexturePathOffset);
     CostumeExcel.AddCollectionBGTexturePath(builder, CollectionBGTexturePathOffset);
@@ -224,7 +224,7 @@ public struct CostumeExcel : IFlatbufferObject
     CostumeExcel.AddAnimatorName(builder, AnimatorNameOffset);
     CostumeExcel.AddModelPrefabName(builder, ModelPrefabNameOffset);
     CostumeExcel.AddEntityMaterialType(builder, EntityMaterialType);
-    CostumeExcel.AddSpineResourceNameDioramaForFormConversion(builder, spineResourceNameDioramaForFormConversionOffset);
+    CostumeExcel.AddSpineResourceNameDioramaForFormConversion(builder, SpineResourceNameDioramaForFormConversionOffset);
     CostumeExcel.AddSpineResourceNameDiorama(builder, SpineResourceNameDioramaOffset);
     CostumeExcel.AddSpineResourceName(builder, SpineResourceNameOffset);
     CostumeExcel.AddRarity(builder, Rarity);
@@ -348,11 +348,11 @@ public struct CostumeExcel : IFlatbufferObject
 		var _CharacterSkillListGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CharacterSkillListGroupId, key) : _o.CharacterSkillListGroupId;
     var _SpineResourceName = _o.SpineResourceName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SpineResourceName, key) : _o.SpineResourceName));
     var _SpineResourceNameDiorama = _o.SpineResourceNameDiorama == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SpineResourceNameDiorama, key) : _o.SpineResourceNameDiorama));
-    var _spineResourceNameDioramaForFormConversion = default(VectorOffset);
+    var _SpineResourceNameDioramaForFormConversion = default(VectorOffset);
     if (_o.SpineResourceNameDioramaForFormConversion != null) {
-      var __spineResourceNameDioramaForFormConversion = new StringOffset[_o.SpineResourceNameDioramaForFormConversion.Count];
-      for (var _j = 0; _j < __spineResourceNameDioramaForFormConversion.Length; ++_j) { __spineResourceNameDioramaForFormConversion[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SpineResourceNameDioramaForFormConversion[_j], key) : _o.SpineResourceNameDioramaForFormConversion[_j])); }
-      _spineResourceNameDioramaForFormConversion = CreateSpineResourceNameDioramaForFormConversionVector(builder, __spineResourceNameDioramaForFormConversion);
+      var __SpineResourceNameDioramaForFormConversion = new StringOffset[_o.SpineResourceNameDioramaForFormConversion.Count];
+      for (var _j = 0; _j < __SpineResourceNameDioramaForFormConversion.Length; ++_j) { __SpineResourceNameDioramaForFormConversion[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SpineResourceNameDioramaForFormConversion[_j], key) : _o.SpineResourceNameDioramaForFormConversion[_j])); }
+      _SpineResourceNameDioramaForFormConversion = CreateSpineResourceNameDioramaForFormConversionVector(builder, __SpineResourceNameDioramaForFormConversion);
     }
 		var _EntityMaterialType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EntityMaterialType, key) : _o.EntityMaterialType;
     var _ModelPrefabName = _o.ModelPrefabName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ModelPrefabName, key) : _o.ModelPrefabName));
@@ -366,11 +366,11 @@ public struct CostumeExcel : IFlatbufferObject
     var _CombatStyleTexturePath = _o.CombatStyleTexturePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CombatStyleTexturePath, key) : _o.CombatStyleTexturePath));
 		var _UseObjectHPBAR = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UseObjectHPBAR, key) : _o.UseObjectHPBAR;
     var _TextureBoss = _o.TextureBoss == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.TextureBoss, key) : _o.TextureBoss));
-    var _textureSkillCard = default(VectorOffset);
+    var _TextureSkillCard = default(VectorOffset);
     if (_o.TextureSkillCard != null) {
-      var __textureSkillCard = new StringOffset[_o.TextureSkillCard.Count];
-      for (var _j = 0; _j < __textureSkillCard.Length; ++_j) { __textureSkillCard[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.TextureSkillCard[_j], key) : _o.TextureSkillCard[_j])); }
-      _textureSkillCard = CreateTextureSkillCardVector(builder, __textureSkillCard);
+      var __TextureSkillCard = new StringOffset[_o.TextureSkillCard.Count];
+      for (var _j = 0; _j < __TextureSkillCard.Length; ++_j) { __TextureSkillCard[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.TextureSkillCard[_j], key) : _o.TextureSkillCard[_j])); }
+      _TextureSkillCard = CreateTextureSkillCardVector(builder, __TextureSkillCard);
     }
     var _InformationPacel = _o.InformationPacel == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.InformationPacel, key) : _o.InformationPacel));
     var _AnimationSSR = _o.AnimationSSR == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.AnimationSSR, key) : _o.AnimationSSR));
@@ -393,7 +393,7 @@ public struct CostumeExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _CharacterSkillListGroupId : _o.CharacterSkillListGroupId,
       _SpineResourceName,
       _SpineResourceNameDiorama,
-      _spineResourceNameDioramaForFormConversion,
+      _SpineResourceNameDioramaForFormConversion,
       TableEncryptionService.UseEncryption ? _EntityMaterialType : _o.EntityMaterialType,
       _ModelPrefabName,
       _AnimatorName,
@@ -406,7 +406,7 @@ public struct CostumeExcel : IFlatbufferObject
       _CombatStyleTexturePath,
       TableEncryptionService.UseEncryption ? _UseObjectHPBAR : _o.UseObjectHPBAR,
       _TextureBoss,
-      _textureSkillCard,
+      _TextureSkillCard,
       _InformationPacel,
       _AnimationSSR,
       _EnterStrategyAnimationName,

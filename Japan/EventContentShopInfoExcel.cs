@@ -77,13 +77,13 @@ public struct EventContentShopInfoExcel : IFlatbufferObject
       long EventContentId = 0,
       Japan.ShopCategoryType CategoryType = Japan.ShopCategoryType.General,
       uint LocalizeCode = 0,
-      VectorOffset costParcelTypeOffset = default(VectorOffset),
-      VectorOffset costParcelIdOffset = default(VectorOffset),
+      VectorOffset CostParcelTypeOffset = default(VectorOffset),
+      VectorOffset CostParcelIdOffset = default(VectorOffset),
       bool IsRefresh = false,
       bool IsSoldOutDimmed = false,
       long AutoRefreshCoolTime = 0,
       long RefreshAbleCount = 0,
-      VectorOffset goodsIdOffset = default(VectorOffset),
+      VectorOffset GoodsIdOffset = default(VectorOffset),
       StringOffset OpenPeriodFromOffset = default(StringOffset),
       StringOffset OpenPeriodToOffset = default(StringOffset),
       StringOffset ShopProductUpdateDateOffset = default(StringOffset)) {
@@ -94,9 +94,9 @@ public struct EventContentShopInfoExcel : IFlatbufferObject
     EventContentShopInfoExcel.AddShopProductUpdateDate(builder, ShopProductUpdateDateOffset);
     EventContentShopInfoExcel.AddOpenPeriodTo(builder, OpenPeriodToOffset);
     EventContentShopInfoExcel.AddOpenPeriodFrom(builder, OpenPeriodFromOffset);
-    EventContentShopInfoExcel.AddGoodsId(builder, goodsIdOffset);
-    EventContentShopInfoExcel.AddCostParcelId(builder, costParcelIdOffset);
-    EventContentShopInfoExcel.AddCostParcelType(builder, costParcelTypeOffset);
+    EventContentShopInfoExcel.AddGoodsId(builder, GoodsIdOffset);
+    EventContentShopInfoExcel.AddCostParcelId(builder, CostParcelIdOffset);
+    EventContentShopInfoExcel.AddCostParcelType(builder, CostParcelTypeOffset);
     EventContentShopInfoExcel.AddLocalizeCode(builder, LocalizeCode);
     EventContentShopInfoExcel.AddCategoryType(builder, CategoryType);
     EventContentShopInfoExcel.AddIsSoldOutDimmed(builder, IsSoldOutDimmed);
@@ -167,24 +167,24 @@ public struct EventContentShopInfoExcel : IFlatbufferObject
 		var _EventContentId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentId, key) : _o.EventContentId;
 		var _CategoryType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CategoryType, key) : _o.CategoryType;
 		var _LocalizeCode = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeCode, key) : _o.LocalizeCode;
-    var _costParcelType = default(VectorOffset);
+    var _CostParcelType = default(VectorOffset);
     if (_o.CostParcelType != null) {
-      var __costParcelType = _o.CostParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _costParcelType = CreateCostParcelTypeVector(builder, __costParcelType);
+      var __CostParcelType = _o.CostParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _CostParcelType = CreateCostParcelTypeVector(builder, __CostParcelType);
     }
-    var _costParcelId = default(VectorOffset);
+    var _CostParcelId = default(VectorOffset);
     if (_o.CostParcelId != null) {
-      var __costParcelId = _o.CostParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _costParcelId = CreateCostParcelIdVector(builder, __costParcelId);
+      var __CostParcelId = _o.CostParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _CostParcelId = CreateCostParcelIdVector(builder, __CostParcelId);
     }
 		var _IsRefresh = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsRefresh, key) : _o.IsRefresh;
 		var _IsSoldOutDimmed = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsSoldOutDimmed, key) : _o.IsSoldOutDimmed;
 		var _AutoRefreshCoolTime = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AutoRefreshCoolTime, key) : _o.AutoRefreshCoolTime;
 		var _RefreshAbleCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RefreshAbleCount, key) : _o.RefreshAbleCount;
-    var _goodsId = default(VectorOffset);
+    var _GoodsId = default(VectorOffset);
     if (_o.GoodsId != null) {
-      var __goodsId = _o.GoodsId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _goodsId = CreateGoodsIdVector(builder, __goodsId);
+      var __GoodsId = _o.GoodsId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _GoodsId = CreateGoodsIdVector(builder, __GoodsId);
     }
     var _OpenPeriodFrom = _o.OpenPeriodFrom == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.OpenPeriodFrom, key) : _o.OpenPeriodFrom));
     var _OpenPeriodTo = _o.OpenPeriodTo == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.OpenPeriodTo, key) : _o.OpenPeriodTo));
@@ -194,13 +194,13 @@ public struct EventContentShopInfoExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _EventContentId : _o.EventContentId,
       TableEncryptionService.UseEncryption ? _CategoryType : _o.CategoryType,
       TableEncryptionService.UseEncryption ? _LocalizeCode : _o.LocalizeCode,
-      _costParcelType,
-      _costParcelId,
+      _CostParcelType,
+      _CostParcelId,
       TableEncryptionService.UseEncryption ? _IsRefresh : _o.IsRefresh,
       TableEncryptionService.UseEncryption ? _IsSoldOutDimmed : _o.IsSoldOutDimmed,
       TableEncryptionService.UseEncryption ? _AutoRefreshCoolTime : _o.AutoRefreshCoolTime,
       TableEncryptionService.UseEncryption ? _RefreshAbleCount : _o.RefreshAbleCount,
-      _goodsId,
+      _GoodsId,
       _OpenPeriodFrom,
       _OpenPeriodTo,
       _ShopProductUpdateDate);

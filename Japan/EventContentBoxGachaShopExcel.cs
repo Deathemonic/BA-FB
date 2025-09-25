@@ -43,7 +43,7 @@ public struct EventContentBoxGachaShopExcel : IFlatbufferObject
       long Round = 0,
       bool IsLegacy = false,
       bool IsPrize = false,
-      VectorOffset goodsIdOffset = default(VectorOffset),
+      VectorOffset GoodsIdOffset = default(VectorOffset),
       long DisplayOrder = 0) {
     builder.StartTable(8);
     EventContentBoxGachaShopExcel.AddDisplayOrder(builder, DisplayOrder);
@@ -51,7 +51,7 @@ public struct EventContentBoxGachaShopExcel : IFlatbufferObject
     EventContentBoxGachaShopExcel.AddGroupElementAmount(builder, GroupElementAmount);
     EventContentBoxGachaShopExcel.AddGroupId(builder, GroupId);
     EventContentBoxGachaShopExcel.AddEventContentId(builder, EventContentId);
-    EventContentBoxGachaShopExcel.AddGoodsId(builder, goodsIdOffset);
+    EventContentBoxGachaShopExcel.AddGoodsId(builder, GoodsIdOffset);
     EventContentBoxGachaShopExcel.AddIsPrize(builder, IsPrize);
     EventContentBoxGachaShopExcel.AddIsLegacy(builder, IsLegacy);
     return EventContentBoxGachaShopExcel.EndEventContentBoxGachaShopExcel(builder);
@@ -101,10 +101,10 @@ public struct EventContentBoxGachaShopExcel : IFlatbufferObject
 		var _Round = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Round, key) : _o.Round;
 		var _IsLegacy = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsLegacy, key) : _o.IsLegacy;
 		var _IsPrize = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsPrize, key) : _o.IsPrize;
-    var _goodsId = default(VectorOffset);
+    var _GoodsId = default(VectorOffset);
     if (_o.GoodsId != null) {
-      var __goodsId = _o.GoodsId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _goodsId = CreateGoodsIdVector(builder, __goodsId);
+      var __GoodsId = _o.GoodsId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _GoodsId = CreateGoodsIdVector(builder, __GoodsId);
     }
 		var _DisplayOrder = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayOrder, key) : _o.DisplayOrder;
     return CreateEventContentBoxGachaShopExcel(
@@ -115,7 +115,7 @@ public struct EventContentBoxGachaShopExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _Round : _o.Round,
       TableEncryptionService.UseEncryption ? _IsLegacy : _o.IsLegacy,
       TableEncryptionService.UseEncryption ? _IsPrize : _o.IsPrize,
-      _goodsId,
+      _GoodsId,
       TableEncryptionService.UseEncryption ? _DisplayOrder : _o.DisplayOrder);
   }
 }

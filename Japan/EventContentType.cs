@@ -48,6 +48,7 @@ public enum EventContentType : int
   MiniShop = 38,
   MiniGameRoad = 39,
   MiniGameCCG = 40,
+  Concentration = 41,
 };
 
 
