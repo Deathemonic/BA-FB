@@ -1,5 +1,4 @@
-use anyhow::Result;
-use baad_core::errors::{ErrorContext, ErrorExt};
+use eyre::{eyre, Context, Result};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::Command;
@@ -24,7 +23,7 @@ pub struct FbsDumperOptions {
 impl FbsDumper {
     pub fn new(binary: PathBuf) -> Result<Self> {
         if !binary.exists() {
-            return None.error_context(&format!("Binary path: {}", binary.display()));
+            return Err(eyre!(format!("Binary path: {}", binary.display())));
         }
         Ok(Self { binary })
     }
@@ -51,7 +50,8 @@ impl FbsDumper {
         }
 
         if let Some(namespace_to_look_for) = &options.namespace_to_look_for {
-            cmd.arg("--namespace-to-look-for").arg(namespace_to_look_for);
+            cmd.arg("--namespace-to-look-for")
+                .arg(namespace_to_look_for);
         }
 
         if options.force {
@@ -66,15 +66,13 @@ impl FbsDumper {
             cmd.arg("--suppress-warnings");
         }
 
-        let status = cmd.status()
-            .handle_errors()
-            .error_context(&format!("Failed to execute FbsDumper at {}", self.binary.display()))?;
+        let status = cmd.status().wrap_err_with(|| {
+            format!("Failed to execute FbsDumper at {}", self.binary.display())
+        })?;
 
         if !status.success() {
-            return Err(anyhow::anyhow!(
-                "FbsDumper failed with exit code {:?}",
-                status.code()
-            )).error_context("FbsDumper execution failed");
+            return Err(eyre!("FbsDumper failed with exit code {:?}", status.code()))
+                .wrap_err_with(|| "FbsDumper execution failed");
         }
 
         Ok(())

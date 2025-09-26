@@ -1,13 +1,12 @@
 use crate::helpers::config::*;
 
-use anyhow::{anyhow, Result};
-use baad::utils::FileManager;
-use baad_core::{errors::ErrorContext, info, success};
+use baad::info;
+use baad::utils::file;
+use eyre::{eyre, Result};
 use reqwest::{Client, Url};
 use serde::Deserialize;
 use std::env::consts::{ARCH, OS};
 use std::path::Path;
-use std::rc::Rc;
 use trauma::download::Download;
 use trauma::downloader::{Downloader, DownloaderBuilder};
 
@@ -19,39 +18,34 @@ struct GitHubAsset {
 
 #[derive(Deserialize)]
 struct GitHubRelease {
-    assets: Vec<GitHubAsset>
+    assets: Vec<GitHubAsset>,
 }
 
 pub struct ToolsFetcher {
-    file_manager: Rc<FileManager>,
     downloader: Downloader,
     client: Client,
 }
 
 impl ToolsFetcher {
-    pub fn new(file_manager: Rc<FileManager>) -> Result<Self> {
+    pub fn new() -> Result<Self> {
         let downloader = DownloaderBuilder::new()
-            .directory(file_manager.get_data_dir().to_path_buf())
+            .directory(file::data_dir()?)
             .use_range_for_content_length(true)
             .single_file_progress(true)
             .overwrite(true)
             .build();
 
-        let client = reqwest::Client::builder()
+        let client = Client::builder()
             .user_agent("BA-FB/1.4 (Blue Archive - FlatBuffer)")
             .build()?;
 
-        Ok(Self {
-            file_manager,
-            downloader,
-            client,
-        })
+        Ok(Self { downloader, client })
     }
 
     async fn download(&self, url: &[Download]) -> Result<()> {
-        self.downloader.download(url).await;
+        self.downloader.download(url, None).await;
 
-        success!("Successfully downloaded.");
+        info!(success = true, "Successfully downloaded.");
         Ok(())
     }
 
@@ -63,7 +57,7 @@ impl ToolsFetcher {
             ("macos", "aarch64") => Ok(if mac_prefix { MAC_ARM64 } else { OSX_ARM64 }),
             ("linux", "x86_64") => Ok(LINUX_X64),
             ("linux", "aarch64") => Ok(LINUX_ARM64),
-            _ => None.error_context("Unsupported platform")?,
+            _ => Err(eyre!("Unsupported platform")),
         }
     }
 
@@ -71,7 +65,7 @@ impl ToolsFetcher {
         assets
             .iter()
             .find(|asset| asset.name.contains(suffix))
-            .ok_or_else(|| anyhow!("No asset found for platform: {}", suffix))
+            .ok_or_else(|| eyre!("No asset found for platform: {}", suffix))
     }
 
     async fn fetch_github(&self, repo: &str) -> Result<GitHubRelease> {
@@ -89,16 +83,15 @@ impl ToolsFetcher {
 
         info!("Downloading {} from {}...", tool_name, url);
 
-        let file_path = self
-            .file_manager
-            .get_data_path(&format!("{}/{}", TOOLS_DIR, filename))
+        let file_path = file::get_data_path(&format!("{}/{}", TOOLS_DIR, filename))?
             .to_string_lossy()
-            .to_string();
+            .into();
 
         if url.starts_with(HTTP_PREFIX) || url.starts_with(HTTPS_PREFIX) {
             let download = vec![Download {
                 url: Url::parse(url)?,
                 filename: file_path,
+                target_file: None,
                 hash: None,
             }];
             self.download(&download).await
@@ -106,10 +99,11 @@ impl ToolsFetcher {
             let release = self.fetch_github(url).await?;
             let platform = Self::get_platform(false)?;
             let asset = Self::find_asset(&release.assets, platform)?;
-            
+
             let download = vec![Download {
                 url: Url::parse(&asset.browser_download_url)?,
                 filename: file_path,
+                target_file: None,
                 hash: None,
             }];
             self.download(&download).await
@@ -117,7 +111,8 @@ impl ToolsFetcher {
     }
 
     pub async fn il2cpp_dumper(&self) -> Result<()> {
-        self.download_tool(IL2CPP_INSPECTOR_REPO, IL2CPP_INSPECTOR_FILE).await
+        self.download_tool(IL2CPP_INSPECTOR_REPO, IL2CPP_INSPECTOR_FILE)
+            .await
     }
 
     pub async fn fbs_dumper(&self) -> Result<()> {

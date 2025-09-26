@@ -17,6 +17,10 @@ pub struct Args {
     /// Force update
     #[arg(short, long)]
     pub update: bool,
+
+    /// Enable verbose output
+    #[arg(short, long)]
+    pub verbose: bool
 }
 
 #[derive(Subcommand)]

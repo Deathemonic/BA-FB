@@ -1,21 +1,18 @@
 use crate::helpers::config::*;
 
-use anyhow::Result;
-use baad::utils::FileManager;
-use baad_core::{info, success, warn};
+use eyre::Result;
+use baad::utils::file;
+use baad::{info, warn};
 use std::io::{Read, Seek};
 use std::path::{Path, PathBuf};
-use std::rc::Rc;
 use std::{fs, io};
 use zip::ZipArchive;
 
-pub struct ToolsExtractor {
-    file_manager: Rc<FileManager>,
-}
+pub struct ToolsExtractor { }
 
 impl ToolsExtractor {
-    pub fn new(file_manager: Rc<FileManager>) -> Result<Self> {
-        Ok(Self { file_manager })
+    pub fn new() -> Result<Self> {
+        Ok(Self { })
     }
 
     fn is_windows() -> bool {
@@ -57,7 +54,7 @@ impl ToolsExtractor {
             }
         }
 
-        success!("Successfully extracted.");
+        info!(success = true, "Successfully extracted.");
         Ok(())
     }
 
@@ -73,9 +70,7 @@ impl ToolsExtractor {
             .and_then(|stem| stem.to_str())
             .unwrap_or(zip_file);
 
-        let target_path = self
-            .file_manager
-            .get_data_path(&format!("{}/{}", TOOLS_DIR, path));
+        let target_path = file::get_data_path(&format!("{}/{}", TOOLS_DIR, path))?;
         let binary_name_with_ext = Self::get_binary_name(binary_name);
         let binary_path = target_path.join(&binary_name_with_ext);
 
@@ -86,9 +81,7 @@ impl ToolsExtractor {
 
         info!("Extracting {}...", tool_name);
 
-        let zip_path = self
-            .file_manager
-            .get_data_path(&format!("{}/{}", TOOLS_DIR, zip_file));
+        let zip_path = file::get_data_path(&format!("{}/{}", TOOLS_DIR, zip_file))?;
 
         fs::create_dir_all(&target_path)?;
         let file = fs::File::open(zip_path)?;

@@ -1,5 +1,4 @@
-use anyhow::Result;
-use baad_core::errors::{ErrorContext, ErrorExt};
+use eyre::{eyre, Context, Result};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::Command;
@@ -62,7 +61,10 @@ impl Default for Il2CppDumperOptions {
 impl Il2CppDumper {
     pub fn new(binary: PathBuf) -> Result<Self> {
         if !binary.exists() {
-            return None.error_context(&format!("IL2CPP dumper binary not found at: {}", binary.display()));
+            return Err(eyre!(format!(
+                "IL2CPP dumper binary not found at: {}",
+                binary.display()
+            )));
         }
         Ok(Self { binary })
     }
@@ -141,22 +143,27 @@ impl Il2CppDumper {
         }
 
         if let Some(unity_assemblies_path) = &options.unity_assemblies_path {
-            cmd.arg("--unity-assemblies-path").arg(unity_assemblies_path);
+            cmd.arg("--unity-assemblies-path")
+                .arg(unity_assemblies_path);
         }
 
         if options.extract_il2cpp_files {
             cmd.arg("--extract-il2-cpp-files");
         }
 
-        let status = cmd.status()
-            .handle_errors()
-            .error_context(&format!("Failed to execute IL2CPP dumper at {}", self.binary.display()))?;
+        let status = cmd.status().wrap_err_with(|| {
+            format!(
+                "Failed to execute IL2CPP dumper at {}",
+                self.binary.display()
+            )
+        })?;
 
         if !status.success() {
-            return Err(anyhow::anyhow!(
+            return Err(eyre!(
                 "IL2CPP dumper failed with exit code {:?}",
                 status.code()
-            )).error_context("IL2CPP dumper execution failed");
+            ))
+            .wrap_err_with(|| "IL2CPP dumper execution failed");
         }
 
         Ok(())

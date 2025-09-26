@@ -1,6 +1,5 @@
-use anyhow::Result;
-use baad_core::errors::{ErrorContext, ErrorExt};
 use clap::ValueEnum;
+use eyre::{eyre, Context, Result};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::Command;
@@ -134,16 +133,23 @@ pub struct FlatCOptions {
     pub grpc_python_typed_handlers: bool,
 }
 
-
 impl FlatC {
     pub fn new(binary: PathBuf) -> Result<Self> {
         if !binary.exists() {
-            return None.error_context(&format!("FlatC binary not found at: {}", binary.display()));
+            return Err(eyre!(format!(
+                "FlatC binary not found at: {}",
+                binary.display()
+            )));
         }
         Ok(Self { binary })
     }
 
-    pub fn compile(&self, options: FlatCOptions, files: Vec<PathBuf>, binary_files: Vec<PathBuf>) -> Result<()> {
+    pub fn compile(
+        &self,
+        options: FlatCOptions,
+        files: Vec<PathBuf>,
+        binary_files: Vec<PathBuf>,
+    ) -> Result<()> {
         let mut cmd = Command::new(&self.binary);
 
         for lang in &options.languages {
@@ -470,22 +476,25 @@ impl FlatC {
             }
         }
 
-        let status = cmd.status()
-            .handle_errors()
-            .error_context(&format!("Failed to execute FlatC at {}", self.binary.display()))?;
+        let status = cmd
+            .status()
+            .wrap_err_with(|| format!("Failed to execute FlatC at {}", self.binary.display()))?;
 
         if !status.success() {
-            return Err(anyhow::anyhow!(
-                "FlatC failed with exit code {:?}",
-                status.code()
-            )).error_context("FlatC execution failed");
+            return Err(eyre!("FlatC failed with exit code {:?}", status.code()))
+                .wrap_err_with(|| "FlatC execution failed");
         }
 
         Ok(())
     }
 
     #[allow(dead_code)]
-    pub fn compile_schema(&self, schema_files: Vec<PathBuf>, language: Language, output_path: PathBuf) -> Result<()> {
+    pub fn compile_schema(
+        &self,
+        schema_files: Vec<PathBuf>,
+        language: Language,
+        output_path: PathBuf,
+    ) -> Result<()> {
         let options = FlatCOptions {
             languages: vec![language],
             output_path: Some(output_path),
@@ -495,7 +504,12 @@ impl FlatC {
     }
 
     #[allow(dead_code)]
-    pub fn json_to_binary(&self, schema_file: PathBuf, json_file: PathBuf, output_path: Option<PathBuf>) -> Result<()> {
+    pub fn json_to_binary(
+        &self,
+        schema_file: PathBuf,
+        json_file: PathBuf,
+        output_path: Option<PathBuf>,
+    ) -> Result<()> {
         let options = FlatCOptions {
             binary: true,
             output_path,
@@ -505,7 +519,12 @@ impl FlatC {
     }
 
     #[allow(dead_code)]
-    pub fn binary_to_json(&self, schema_file: PathBuf, binary_file: PathBuf, output_path: Option<PathBuf>) -> Result<()> {
+    pub fn binary_to_json(
+        &self,
+        schema_file: PathBuf,
+        binary_file: PathBuf,
+        output_path: Option<PathBuf>,
+    ) -> Result<()> {
         let options = FlatCOptions {
             json: true,
             output_path,

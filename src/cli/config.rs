@@ -2,7 +2,7 @@ use crate::wrappers::flatc::FlatCOptions;
 use crate::wrappers::fbs_dumper::FbsDumperOptions;
 use crate::wrappers::il2cpp_dumper::Il2CppDumperOptions;
 
-use anyhow::{anyhow, Result};
+use eyre::{eyre, Result};
 use serde::{Deserialize, Serialize};
 use std::path::Path;
 
@@ -21,7 +21,7 @@ impl Config {
         let config_path = match custom_path {
             Some(path) => {
                 if !path.exists() {
-                    return Err(anyhow!("Config file not found: {}", path.display()));
+                    return Err(eyre!("Config file not found: {}", path.display()));
                 }
                 Some(path)
             }
@@ -44,13 +44,13 @@ impl Config {
         }
     }
 
-    pub fn merge_fbs_dumper_config(&self, options: &mut FbsDumperOptions) {
-        let default_options = FbsDumperOptions::default();
+    pub fn merge_fbs_dumper_config(&self, _options: &mut FbsDumperOptions) {
+        let _default_options = FbsDumperOptions::default();
         
         macro_rules! merge_field {
             ($field:ident) => {
-                if self.fbs_dumper.$field != default_options.$field {
-                    options.$field = self.fbs_dumper.$field.clone();
+                if self.fbs_dumper.$field != _default_options.$field {
+                    _options.$field = self.fbs_dumper.$field.clone();
                 }
             };
         }
@@ -66,13 +66,13 @@ impl Config {
         merge_field!(suppress_warnings);
     }
 
-    pub fn merge_flatc_config(&self, options: &mut FlatCOptions) {
-        let default_options = FlatCOptions::default();
+    pub fn merge_flatc_config(&self, _options: &mut FlatCOptions) {
+        let _default_options = FlatCOptions::default();
         
         macro_rules! merge_field {
             ($field:ident) => {
-                if self.flatc.$field != default_options.$field {
-                    options.$field = self.flatc.$field.clone();
+                if self.flatc.$field != _default_options.$field {
+                    _options.$field = self.flatc.$field.clone();
                 }
             };
         }
@@ -171,13 +171,13 @@ impl Config {
         merge_field!(grpc_python_typed_handlers);
     }
 
-    pub fn merge_il2cpp_dumper_config(&self, options: &mut Il2CppDumperOptions) {
-        let default_options = Il2CppDumperOptions::default();
+    pub fn merge_il2cpp_dumper_config(&self, _options: &mut Il2CppDumperOptions) {
+        let _default_options = Il2CppDumperOptions::default();
         
         macro_rules! merge_field {
             ($field:ident) => {
-                if self.il2cpp_dumper.$field != default_options.$field {
-                    options.$field = self.il2cpp_dumper.$field.clone();
+                if self.il2cpp_dumper.$field != _default_options.$field {
+                    _options.$field = self.il2cpp_dumper.$field.clone();
                 }
             };
         }
