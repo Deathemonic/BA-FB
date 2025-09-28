@@ -136,8 +136,8 @@ checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
 
 [[package]]
 name = "baad"
-version = "2.8.0"
-source = "git+https://github.com/Deathemonic/BA-AD#a67981a7e197cd8f293253afa9f5b271487dfb9b"
+version = "2.8.2"
+source = "git+https://github.com/Deathemonic/BA-AD#3493abc2d90a3420716b5fca16751af91d88f000"
 dependencies = [
  "baad-core",
  "bacy",
@@ -160,8 +160,8 @@ dependencies = [
 
 [[package]]
 name = "baad-core"
-version = "2.5.0"
-source = "git+https://github.com/RZinth/BA-AD-Core#6fe01fda0ebccc6d502c9c6432493234f3eee631"
+version = "2.5.1"
+source = "git+https://github.com/RZinth/BA-AD-Core#02bfeb9a7f7d4425f4493cbd89ac84c338e2d497"
 dependencies = [
  "anyhow",
  "chrono",
@@ -215,7 +215,7 @@ dependencies = [
 
 [[package]]
 name = "bafb"
-version = "1.6.1"
+version = "1.6.2"
 dependencies = [
  "baad",
  "clap",
