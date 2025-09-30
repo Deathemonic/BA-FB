@@ -54,12 +54,12 @@ public struct EventContentStageTotalRewardExcel : IFlatbufferObject
       long RequiredEventItemAmount = 0,
       VectorOffset rewardParcelTypeOffset = default(VectorOffset),
       VectorOffset RewardParcelIdOffset = default(VectorOffset),
-      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(6);
     EventContentStageTotalRewardExcel.AddRequiredEventItemAmount(builder, RequiredEventItemAmount);
     EventContentStageTotalRewardExcel.AddEventContentId(builder, EventContentId);
     EventContentStageTotalRewardExcel.AddId(builder, Id);
-    EventContentStageTotalRewardExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
+    EventContentStageTotalRewardExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
     EventContentStageTotalRewardExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
     EventContentStageTotalRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
     return EventContentStageTotalRewardExcel.EndEventContentStageTotalRewardExcel(builder);
@@ -124,10 +124,10 @@ public struct EventContentStageTotalRewardExcel : IFlatbufferObject
       var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
-    var _RewardParcelAmount = default(VectorOffset);
+    var _rewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
+      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
     }
     return CreateEventContentStageTotalRewardExcel(
       builder,
@@ -136,7 +136,7 @@ public struct EventContentStageTotalRewardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _RequiredEventItemAmount : _o.RequiredEventItemAmount,
       _rewardParcelType,
       _RewardParcelId,
-      _RewardParcelAmount);
+      _rewardParcelAmount);
   }
 }
 

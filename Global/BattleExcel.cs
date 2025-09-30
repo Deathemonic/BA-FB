@@ -70,7 +70,7 @@ public struct BattleExcel : IFlatbufferObject
   public Global.BattleDialogType Talk { get { int o = __p.__offset(70); return o != 0 ? (Global.BattleDialogType)__p.bb.GetInt(o + __p.bb_pos) : Global.BattleDialogType.Talk; } }
 
   public static Offset<Global.BattleExcel> CreateBattleExcel(FlatBufferBuilder builder,
-      VectorOffset NoneOffset = default(VectorOffset),
+      VectorOffset noneOffset = default(VectorOffset),
       Global.AttackType Single = Global.AttackType.Single,
       Global.ProjectileType Guided = Global.ProjectileType.Guided,
       Global.DamageFontColor Blue = Global.DamageFontColor.Blue,
@@ -138,7 +138,7 @@ public struct BattleExcel : IFlatbufferObject
     BattleExcel.AddBlue(builder, Blue);
     BattleExcel.AddGuided(builder, Guided);
     BattleExcel.AddSingle(builder, Single);
-    BattleExcel.AddNone(builder, NoneOffset);
+    BattleExcel.AddNone(builder, noneOffset);
     return BattleExcel.EndBattleExcel(builder);
   }
 
@@ -238,10 +238,10 @@ public struct BattleExcel : IFlatbufferObject
   public static Offset<Global.BattleExcel> Pack(FlatBufferBuilder builder, BattleExcelT _o) {
     if (_o == null) return default(Offset<Global.BattleExcel>);
 		byte[] key = TableEncryptionService.CreateKey("Battle");
-    var _None = default(VectorOffset);
+    var _none = default(VectorOffset);
     if (_o.None != null) {
-      var __None = _o.None.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _None = CreateNoneVector(builder, __None);
+      var __none = _o.None.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _none = CreateNoneVector(builder, __none);
     }
 		var _Single = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Single, key) : _o.Single;
 		var _Guided = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Guided, key) : _o.Guided;
@@ -282,7 +282,7 @@ public struct BattleExcel : IFlatbufferObject
 		var _Talk = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Talk, key) : _o.Talk;
     return CreateBattleExcel(
       builder,
-      _None,
+      _none,
       TableEncryptionService.UseEncryption ? _Single : _o.Single,
       TableEncryptionService.UseEncryption ? _Guided : _o.Guided,
       TableEncryptionService.UseEncryption ? _Blue : _o.Blue,

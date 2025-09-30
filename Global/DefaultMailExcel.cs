@@ -69,12 +69,12 @@ public struct DefaultMailExcel : IFlatbufferObject
       StringOffset MailSendPeriodFromOffset = default(StringOffset),
       StringOffset MailSendPeriodToOffset = default(StringOffset),
       VectorOffset RewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelIdOffset = default(VectorOffset),
       VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(8);
     DefaultMailExcel.AddId(builder, Id);
     DefaultMailExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
-    DefaultMailExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
+    DefaultMailExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
     DefaultMailExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     DefaultMailExcel.AddMailSendPeriodTo(builder, MailSendPeriodToOffset);
     DefaultMailExcel.AddMailSendPeriodFrom(builder, MailSendPeriodFromOffset);
@@ -143,10 +143,10 @@ public struct DefaultMailExcel : IFlatbufferObject
       var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelId = default(VectorOffset);
+    var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
-      var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
+      var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
     var _RewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
@@ -161,7 +161,7 @@ public struct DefaultMailExcel : IFlatbufferObject
       _MailSendPeriodFrom,
       _MailSendPeriodTo,
       _RewardParcelType,
-      _rewardParcelId,
+      _RewardParcelId,
       _RewardParcelAmount);
   }
 }

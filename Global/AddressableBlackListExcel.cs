@@ -28,12 +28,12 @@ public struct AddressableBlackListExcel : IFlatbufferObject
 
   public static Offset<Global.AddressableBlackListExcel> CreateAddressableBlackListExcel(FlatBufferBuilder builder,
       long Id = 0,
-      VectorOffset folderPathOffset = default(VectorOffset),
-      VectorOffset ResourcePathOffset = default(VectorOffset)) {
+      VectorOffset FolderPathOffset = default(VectorOffset),
+      VectorOffset resourcePathOffset = default(VectorOffset)) {
     builder.StartTable(3);
     AddressableBlackListExcel.AddId(builder, Id);
-    AddressableBlackListExcel.AddResourcePath(builder, ResourcePathOffset);
-    AddressableBlackListExcel.AddFolderPath(builder, folderPathOffset);
+    AddressableBlackListExcel.AddResourcePath(builder, resourcePathOffset);
+    AddressableBlackListExcel.AddFolderPath(builder, FolderPathOffset);
     return AddressableBlackListExcel.EndAddressableBlackListExcel(builder);
   }
 
@@ -72,23 +72,23 @@ public struct AddressableBlackListExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.AddressableBlackListExcel>);
 		byte[] key = TableEncryptionService.CreateKey("AddressableBlackList");
 		var _Id = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Id, key) : _o.Id;
-    var _folderPath = default(VectorOffset);
+    var _FolderPath = default(VectorOffset);
     if (_o.FolderPath != null) {
-      var __folderPath = new StringOffset[_o.FolderPath.Count];
-      for (var _j = 0; _j < __folderPath.Length; ++_j) { __folderPath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FolderPath[_j], key) : _o.FolderPath[_j])); }
-      _folderPath = CreateFolderPathVector(builder, __folderPath);
+      var __FolderPath = new StringOffset[_o.FolderPath.Count];
+      for (var _j = 0; _j < __FolderPath.Length; ++_j) { __FolderPath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.FolderPath[_j], key) : _o.FolderPath[_j])); }
+      _FolderPath = CreateFolderPathVector(builder, __FolderPath);
     }
-    var _ResourcePath = default(VectorOffset);
+    var _resourcePath = default(VectorOffset);
     if (_o.ResourcePath != null) {
-      var __ResourcePath = new StringOffset[_o.ResourcePath.Count];
-      for (var _j = 0; _j < __ResourcePath.Length; ++_j) { __ResourcePath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ResourcePath[_j], key) : _o.ResourcePath[_j])); }
-      _ResourcePath = CreateResourcePathVector(builder, __ResourcePath);
+      var __resourcePath = new StringOffset[_o.ResourcePath.Count];
+      for (var _j = 0; _j < __resourcePath.Length; ++_j) { __resourcePath[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ResourcePath[_j], key) : _o.ResourcePath[_j])); }
+      _resourcePath = CreateResourcePathVector(builder, __resourcePath);
     }
     return CreateAddressableBlackListExcel(
       builder,
       TableEncryptionService.UseEncryption ? _Id : _o.Id,
-      _folderPath,
-      _ResourcePath);
+      _FolderPath,
+      _resourcePath);
   }
 }
 

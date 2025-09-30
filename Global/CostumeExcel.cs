@@ -197,7 +197,7 @@ public struct CostumeExcel : IFlatbufferObject
       StringOffset CombatStyleTexturePathOffset = default(StringOffset),
       bool UseObjectHPBAR = false,
       StringOffset TextureBossOffset = default(StringOffset),
-      VectorOffset textureSkillCardOffset = default(VectorOffset),
+      VectorOffset TextureSkillCardOffset = default(VectorOffset),
       StringOffset InformationPacelOffset = default(StringOffset),
       StringOffset AnimationSSROffset = default(StringOffset),
       StringOffset EnterStrategyAnimationNameOffset = default(StringOffset),
@@ -212,7 +212,7 @@ public struct CostumeExcel : IFlatbufferObject
     CostumeExcel.AddEnterStrategyAnimationName(builder, EnterStrategyAnimationNameOffset);
     CostumeExcel.AddAnimationSSR(builder, AnimationSSROffset);
     CostumeExcel.AddInformationPacel(builder, InformationPacelOffset);
-    CostumeExcel.AddTextureSkillCard(builder, textureSkillCardOffset);
+    CostumeExcel.AddTextureSkillCard(builder, TextureSkillCardOffset);
     CostumeExcel.AddTextureBoss(builder, TextureBossOffset);
     CostumeExcel.AddCombatStyleTexturePath(builder, CombatStyleTexturePathOffset);
     CostumeExcel.AddCollectionBGTexturePath(builder, CollectionBGTexturePathOffset);
@@ -366,11 +366,11 @@ public struct CostumeExcel : IFlatbufferObject
     var _CombatStyleTexturePath = _o.CombatStyleTexturePath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CombatStyleTexturePath, key) : _o.CombatStyleTexturePath));
 		var _UseObjectHPBAR = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UseObjectHPBAR, key) : _o.UseObjectHPBAR;
     var _TextureBoss = _o.TextureBoss == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.TextureBoss, key) : _o.TextureBoss));
-    var _textureSkillCard = default(VectorOffset);
+    var _TextureSkillCard = default(VectorOffset);
     if (_o.TextureSkillCard != null) {
-      var __textureSkillCard = new StringOffset[_o.TextureSkillCard.Count];
-      for (var _j = 0; _j < __textureSkillCard.Length; ++_j) { __textureSkillCard[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.TextureSkillCard[_j], key) : _o.TextureSkillCard[_j])); }
-      _textureSkillCard = CreateTextureSkillCardVector(builder, __textureSkillCard);
+      var __TextureSkillCard = new StringOffset[_o.TextureSkillCard.Count];
+      for (var _j = 0; _j < __TextureSkillCard.Length; ++_j) { __TextureSkillCard[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.TextureSkillCard[_j], key) : _o.TextureSkillCard[_j])); }
+      _TextureSkillCard = CreateTextureSkillCardVector(builder, __TextureSkillCard);
     }
     var _InformationPacel = _o.InformationPacel == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.InformationPacel, key) : _o.InformationPacel));
     var _AnimationSSR = _o.AnimationSSR == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.AnimationSSR, key) : _o.AnimationSSR));
@@ -406,7 +406,7 @@ public struct CostumeExcel : IFlatbufferObject
       _CombatStyleTexturePath,
       TableEncryptionService.UseEncryption ? _UseObjectHPBAR : _o.UseObjectHPBAR,
       _TextureBoss,
-      _textureSkillCard,
+      _TextureSkillCard,
       _InformationPacel,
       _AnimationSSR,
       _EnterStrategyAnimationName,

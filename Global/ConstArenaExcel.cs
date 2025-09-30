@@ -142,7 +142,7 @@ public struct ConstArenaExcel : IFlatbufferObject
       VectorOffset characterSlotHideRankOffset = default(VectorOffset),
       long MapSlotHideRank = 0,
       VectorOffset RelativeOpponentRankStartOffset = default(VectorOffset),
-      VectorOffset relativeOpponentRankEndOffset = default(VectorOffset),
+      VectorOffset RelativeOpponentRankEndOffset = default(VectorOffset),
       VectorOffset ModifiedStatTypeOffset = default(VectorOffset),
       VectorOffset statMulFactorOffset = default(VectorOffset),
       VectorOffset statSumFactorOffset = default(VectorOffset),
@@ -189,7 +189,7 @@ public struct ConstArenaExcel : IFlatbufferObject
     ConstArenaExcel.AddStatSumFactor(builder, statSumFactorOffset);
     ConstArenaExcel.AddStatMulFactor(builder, statMulFactorOffset);
     ConstArenaExcel.AddModifiedStatType(builder, ModifiedStatTypeOffset);
-    ConstArenaExcel.AddRelativeOpponentRankEnd(builder, relativeOpponentRankEndOffset);
+    ConstArenaExcel.AddRelativeOpponentRankEnd(builder, RelativeOpponentRankEndOffset);
     ConstArenaExcel.AddRelativeOpponentRankStart(builder, RelativeOpponentRankStartOffset);
     ConstArenaExcel.AddCharacterSlotHideRank(builder, characterSlotHideRankOffset);
     ConstArenaExcel.AddOpenScenarioId(builder, OpenScenarioIdOffset);
@@ -344,10 +344,10 @@ public struct ConstArenaExcel : IFlatbufferObject
       var __RelativeOpponentRankStart = _o.RelativeOpponentRankStart.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RelativeOpponentRankStart = CreateRelativeOpponentRankStartVector(builder, __RelativeOpponentRankStart);
     }
-    var _relativeOpponentRankEnd = default(VectorOffset);
+    var _RelativeOpponentRankEnd = default(VectorOffset);
     if (_o.RelativeOpponentRankEnd != null) {
-      var __relativeOpponentRankEnd = _o.RelativeOpponentRankEnd.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _relativeOpponentRankEnd = CreateRelativeOpponentRankEndVector(builder, __relativeOpponentRankEnd);
+      var __RelativeOpponentRankEnd = _o.RelativeOpponentRankEnd.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RelativeOpponentRankEnd = CreateRelativeOpponentRankEndVector(builder, __RelativeOpponentRankEnd);
     }
     var _ModifiedStatType = default(VectorOffset);
     if (_o.ModifiedStatType != null) {
@@ -400,7 +400,7 @@ public struct ConstArenaExcel : IFlatbufferObject
       _characterSlotHideRank,
       TableEncryptionService.UseEncryption ? _MapSlotHideRank : _o.MapSlotHideRank,
       _RelativeOpponentRankStart,
-      _relativeOpponentRankEnd,
+      _RelativeOpponentRankEnd,
       _ModifiedStatType,
       _statMulFactor,
       _statSumFactor,

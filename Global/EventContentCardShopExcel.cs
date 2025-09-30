@@ -66,12 +66,12 @@ public struct EventContentCardShopExcel : IFlatbufferObject
       int ProbWeight1 = 0,
       VectorOffset rewardParcelTypeOffset = default(VectorOffset),
       VectorOffset rewardParcelIdOffset = default(VectorOffset),
-      VectorOffset RewardParcelAmountOffset = default(VectorOffset)) {
+      VectorOffset rewardParcelAmountOffset = default(VectorOffset)) {
     builder.StartTable(12);
     EventContentCardShopExcel.AddCostGoodsId(builder, CostGoodsId);
     EventContentCardShopExcel.AddId(builder, Id);
     EventContentCardShopExcel.AddEventContentId(builder, EventContentId);
-    EventContentCardShopExcel.AddRewardParcelAmount(builder, RewardParcelAmountOffset);
+    EventContentCardShopExcel.AddRewardParcelAmount(builder, rewardParcelAmountOffset);
     EventContentCardShopExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
     EventContentCardShopExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
     EventContentCardShopExcel.AddProbWeight1(builder, ProbWeight1);
@@ -160,10 +160,10 @@ public struct EventContentCardShopExcel : IFlatbufferObject
       var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
     }
-    var _RewardParcelAmount = default(VectorOffset);
+    var _rewardParcelAmount = default(VectorOffset);
     if (_o.RewardParcelAmount != null) {
-      var __RewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RewardParcelAmount = CreateRewardParcelAmountVector(builder, __RewardParcelAmount);
+      var __rewardParcelAmount = _o.RewardParcelAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _rewardParcelAmount = CreateRewardParcelAmountVector(builder, __rewardParcelAmount);
     }
     return CreateEventContentCardShopExcel(
       builder,
@@ -178,7 +178,7 @@ public struct EventContentCardShopExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _ProbWeight1 : _o.ProbWeight1,
       _rewardParcelType,
       _rewardParcelId,
-      _RewardParcelAmount);
+      _rewardParcelAmount);
   }
 }
 

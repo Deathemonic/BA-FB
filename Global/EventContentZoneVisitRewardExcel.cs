@@ -76,7 +76,7 @@ public struct EventContentZoneVisitRewardExcel : IFlatbufferObject
       StringOffset DevNameOffset = default(StringOffset),
       long CharacterId = 0,
       StringOffset CharacterDevNameOffset = default(StringOffset),
-      VectorOffset visitRewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset VisitRewardParcelTypeOffset = default(VectorOffset),
       VectorOffset visitRewardParcelIdOffset = default(VectorOffset),
       VectorOffset VisitRewardAmountOffset = default(VectorOffset),
       VectorOffset VisitRewardProbOffset = default(VectorOffset)) {
@@ -87,7 +87,7 @@ public struct EventContentZoneVisitRewardExcel : IFlatbufferObject
     EventContentZoneVisitRewardExcel.AddVisitRewardProb(builder, VisitRewardProbOffset);
     EventContentZoneVisitRewardExcel.AddVisitRewardAmount(builder, VisitRewardAmountOffset);
     EventContentZoneVisitRewardExcel.AddVisitRewardParcelId(builder, visitRewardParcelIdOffset);
-    EventContentZoneVisitRewardExcel.AddVisitRewardParcelType(builder, visitRewardParcelTypeOffset);
+    EventContentZoneVisitRewardExcel.AddVisitRewardParcelType(builder, VisitRewardParcelTypeOffset);
     EventContentZoneVisitRewardExcel.AddCharacterDevName(builder, CharacterDevNameOffset);
     EventContentZoneVisitRewardExcel.AddDevName(builder, DevNameOffset);
     return EventContentZoneVisitRewardExcel.EndEventContentZoneVisitRewardExcel(builder);
@@ -156,10 +156,10 @@ public struct EventContentZoneVisitRewardExcel : IFlatbufferObject
     var _DevName = _o.DevName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.DevName, key) : _o.DevName));
 		var _CharacterId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CharacterId, key) : _o.CharacterId;
     var _CharacterDevName = _o.CharacterDevName == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.CharacterDevName, key) : _o.CharacterDevName));
-    var _visitRewardParcelType = default(VectorOffset);
+    var _VisitRewardParcelType = default(VectorOffset);
     if (_o.VisitRewardParcelType != null) {
-      var __visitRewardParcelType = _o.VisitRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _visitRewardParcelType = CreateVisitRewardParcelTypeVector(builder, __visitRewardParcelType);
+      var __VisitRewardParcelType = _o.VisitRewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _VisitRewardParcelType = CreateVisitRewardParcelTypeVector(builder, __VisitRewardParcelType);
     }
     var _visitRewardParcelId = default(VectorOffset);
     if (_o.VisitRewardParcelId != null) {
@@ -183,7 +183,7 @@ public struct EventContentZoneVisitRewardExcel : IFlatbufferObject
       _DevName,
       TableEncryptionService.UseEncryption ? _CharacterId : _o.CharacterId,
       _CharacterDevName,
-      _visitRewardParcelType,
+      _VisitRewardParcelType,
       _visitRewardParcelId,
       _VisitRewardAmount,
       _VisitRewardProb);

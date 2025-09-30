@@ -46,7 +46,7 @@ public struct ScenarioExcel : IFlatbufferObject
 
   public static Offset<Global.ScenarioExcel> CreateScenarioExcel(FlatBufferBuilder builder,
       VectorOffset NoneOffset = default(VectorOffset),
-      VectorOffset idleOffset = default(VectorOffset),
+      VectorOffset IdleOffset = default(VectorOffset),
       Global.DialogCategory Cafe = Global.DialogCategory.Cafe,
       Global.DialogType Talk = Global.DialogType.Talk,
       Global.StoryCondition Open = Global.StoryCondition.Open,
@@ -62,7 +62,7 @@ public struct ScenarioExcel : IFlatbufferObject
     ScenarioExcel.AddOpen(builder, Open);
     ScenarioExcel.AddTalk(builder, Talk);
     ScenarioExcel.AddCafe(builder, Cafe);
-    ScenarioExcel.AddIdle(builder, idleOffset);
+    ScenarioExcel.AddIdle(builder, IdleOffset);
     ScenarioExcel.AddNone(builder, NoneOffset);
     return ScenarioExcel.EndScenarioExcel(builder);
   }
@@ -118,10 +118,10 @@ public struct ScenarioExcel : IFlatbufferObject
       var __None = _o.None.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _None = CreateNoneVector(builder, __None);
     }
-    var _idle = default(VectorOffset);
+    var _Idle = default(VectorOffset);
     if (_o.Idle != null) {
-      var __idle = _o.Idle.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _idle = CreateIdleVector(builder, __idle);
+      var __Idle = _o.Idle.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _Idle = CreateIdleVector(builder, __Idle);
     }
 		var _Cafe = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Cafe, key) : _o.Cafe;
 		var _Talk = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.Talk, key) : _o.Talk;
@@ -133,7 +133,7 @@ public struct ScenarioExcel : IFlatbufferObject
     return CreateScenarioExcel(
       builder,
       _None,
-      _idle,
+      _Idle,
       TableEncryptionService.UseEncryption ? _Cafe : _o.Cafe,
       TableEncryptionService.UseEncryption ? _Talk : _o.Talk,
       TableEncryptionService.UseEncryption ? _Open : _o.Open,

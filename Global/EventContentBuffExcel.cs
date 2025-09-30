@@ -60,7 +60,7 @@ public struct EventContentBuffExcel : IFlatbufferObject
       bool IsBuff = false,
       Global.Tag CharacterTag = Global.Tag.A,
       Global.EventContentBuffFindRule EnumType = Global.EventContentBuffFindRule.None,
-      VectorOffset enumTypeValueOffset = default(VectorOffset),
+      VectorOffset EnumTypeValueOffset = default(VectorOffset),
       StringOffset SkillGroupIdOffset = default(StringOffset),
       StringOffset IconPathOffset = default(StringOffset),
       StringOffset SpriteNameOffset = default(StringOffset),
@@ -71,7 +71,7 @@ public struct EventContentBuffExcel : IFlatbufferObject
     EventContentBuffExcel.AddSpriteName(builder, SpriteNameOffset);
     EventContentBuffExcel.AddIconPath(builder, IconPathOffset);
     EventContentBuffExcel.AddSkillGroupId(builder, SkillGroupIdOffset);
-    EventContentBuffExcel.AddEnumTypeValue(builder, enumTypeValueOffset);
+    EventContentBuffExcel.AddEnumTypeValue(builder, EnumTypeValueOffset);
     EventContentBuffExcel.AddEnumType(builder, EnumType);
     EventContentBuffExcel.AddCharacterTag(builder, CharacterTag);
     EventContentBuffExcel.AddIsBuff(builder, IsBuff);
@@ -122,11 +122,11 @@ public struct EventContentBuffExcel : IFlatbufferObject
 		var _IsBuff = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsBuff, key) : _o.IsBuff;
 		var _CharacterTag = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CharacterTag, key) : _o.CharacterTag;
 		var _EnumType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EnumType, key) : _o.EnumType;
-    var _enumTypeValue = default(VectorOffset);
+    var _EnumTypeValue = default(VectorOffset);
     if (_o.EnumTypeValue != null) {
-      var __enumTypeValue = new StringOffset[_o.EnumTypeValue.Count];
-      for (var _j = 0; _j < __enumTypeValue.Length; ++_j) { __enumTypeValue[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EnumTypeValue[_j], key) : _o.EnumTypeValue[_j])); }
-      _enumTypeValue = CreateEnumTypeValueVector(builder, __enumTypeValue);
+      var __EnumTypeValue = new StringOffset[_o.EnumTypeValue.Count];
+      for (var _j = 0; _j < __EnumTypeValue.Length; ++_j) { __EnumTypeValue[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.EnumTypeValue[_j], key) : _o.EnumTypeValue[_j])); }
+      _EnumTypeValue = CreateEnumTypeValueVector(builder, __EnumTypeValue);
     }
     var _SkillGroupId = _o.SkillGroupId == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SkillGroupId, key) : _o.SkillGroupId));
     var _IconPath = _o.IconPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.IconPath, key) : _o.IconPath));
@@ -138,7 +138,7 @@ public struct EventContentBuffExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IsBuff : _o.IsBuff,
       TableEncryptionService.UseEncryption ? _CharacterTag : _o.CharacterTag,
       TableEncryptionService.UseEncryption ? _EnumType : _o.EnumType,
-      _enumTypeValue,
+      _EnumTypeValue,
       _SkillGroupId,
       _IconPath,
       _SpriteName,

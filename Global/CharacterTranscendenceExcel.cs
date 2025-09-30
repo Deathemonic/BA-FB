@@ -78,12 +78,12 @@ public struct CharacterTranscendenceExcel : IFlatbufferObject
 
   public static Offset<Global.CharacterTranscendenceExcel> CreateCharacterTranscendenceExcel(FlatBufferBuilder builder,
       long CharacterId = 0,
-      VectorOffset maxFavorLevelOffset = default(VectorOffset),
-      VectorOffset StatBonusRateAttackOffset = default(VectorOffset),
+      VectorOffset MaxFavorLevelOffset = default(VectorOffset),
+      VectorOffset statBonusRateAttackOffset = default(VectorOffset),
       VectorOffset StatBonusRateHPOffset = default(VectorOffset),
       VectorOffset StatBonusRateHealOffset = default(VectorOffset),
       VectorOffset recipeIdOffset = default(VectorOffset),
-      VectorOffset skillSlotAOffset = default(VectorOffset),
+      VectorOffset SkillSlotAOffset = default(VectorOffset),
       VectorOffset SkillSlotBOffset = default(VectorOffset),
       VectorOffset skillSlotCOffset = default(VectorOffset),
       VectorOffset maxlevelStarOffset = default(VectorOffset)) {
@@ -92,12 +92,12 @@ public struct CharacterTranscendenceExcel : IFlatbufferObject
     CharacterTranscendenceExcel.AddMaxlevelStar(builder, maxlevelStarOffset);
     CharacterTranscendenceExcel.AddSkillSlotC(builder, skillSlotCOffset);
     CharacterTranscendenceExcel.AddSkillSlotB(builder, SkillSlotBOffset);
-    CharacterTranscendenceExcel.AddSkillSlotA(builder, skillSlotAOffset);
+    CharacterTranscendenceExcel.AddSkillSlotA(builder, SkillSlotAOffset);
     CharacterTranscendenceExcel.AddRecipeId(builder, recipeIdOffset);
     CharacterTranscendenceExcel.AddStatBonusRateHeal(builder, StatBonusRateHealOffset);
     CharacterTranscendenceExcel.AddStatBonusRateHP(builder, StatBonusRateHPOffset);
-    CharacterTranscendenceExcel.AddStatBonusRateAttack(builder, StatBonusRateAttackOffset);
-    CharacterTranscendenceExcel.AddMaxFavorLevel(builder, maxFavorLevelOffset);
+    CharacterTranscendenceExcel.AddStatBonusRateAttack(builder, statBonusRateAttackOffset);
+    CharacterTranscendenceExcel.AddMaxFavorLevel(builder, MaxFavorLevelOffset);
     return CharacterTranscendenceExcel.EndCharacterTranscendenceExcel(builder);
   }
 
@@ -192,15 +192,15 @@ public struct CharacterTranscendenceExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.CharacterTranscendenceExcel>);
 		byte[] key = TableEncryptionService.CreateKey("CharacterTranscendence");
 		var _CharacterId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.CharacterId, key) : _o.CharacterId;
-    var _maxFavorLevel = default(VectorOffset);
+    var _MaxFavorLevel = default(VectorOffset);
     if (_o.MaxFavorLevel != null) {
-      var __maxFavorLevel = _o.MaxFavorLevel.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _maxFavorLevel = CreateMaxFavorLevelVector(builder, __maxFavorLevel);
+      var __MaxFavorLevel = _o.MaxFavorLevel.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _MaxFavorLevel = CreateMaxFavorLevelVector(builder, __MaxFavorLevel);
     }
-    var _StatBonusRateAttack = default(VectorOffset);
+    var _statBonusRateAttack = default(VectorOffset);
     if (_o.StatBonusRateAttack != null) {
-      var __StatBonusRateAttack = _o.StatBonusRateAttack.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _StatBonusRateAttack = CreateStatBonusRateAttackVector(builder, __StatBonusRateAttack);
+      var __statBonusRateAttack = _o.StatBonusRateAttack.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _statBonusRateAttack = CreateStatBonusRateAttackVector(builder, __statBonusRateAttack);
     }
     var _StatBonusRateHP = default(VectorOffset);
     if (_o.StatBonusRateHP != null) {
@@ -217,11 +217,11 @@ public struct CharacterTranscendenceExcel : IFlatbufferObject
       var __recipeId = _o.RecipeId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _recipeId = CreateRecipeIdVector(builder, __recipeId);
     }
-    var _skillSlotA = default(VectorOffset);
+    var _SkillSlotA = default(VectorOffset);
     if (_o.SkillSlotA != null) {
-      var __skillSlotA = new StringOffset[_o.SkillSlotA.Count];
-      for (var _j = 0; _j < __skillSlotA.Length; ++_j) { __skillSlotA[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SkillSlotA[_j], key) : _o.SkillSlotA[_j])); }
-      _skillSlotA = CreateSkillSlotAVector(builder, __skillSlotA);
+      var __SkillSlotA = new StringOffset[_o.SkillSlotA.Count];
+      for (var _j = 0; _j < __SkillSlotA.Length; ++_j) { __SkillSlotA[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.SkillSlotA[_j], key) : _o.SkillSlotA[_j])); }
+      _SkillSlotA = CreateSkillSlotAVector(builder, __SkillSlotA);
     }
     var _SkillSlotB = default(VectorOffset);
     if (_o.SkillSlotB != null) {
@@ -243,12 +243,12 @@ public struct CharacterTranscendenceExcel : IFlatbufferObject
     return CreateCharacterTranscendenceExcel(
       builder,
       TableEncryptionService.UseEncryption ? _CharacterId : _o.CharacterId,
-      _maxFavorLevel,
-      _StatBonusRateAttack,
+      _MaxFavorLevel,
+      _statBonusRateAttack,
       _StatBonusRateHP,
       _StatBonusRateHeal,
       _recipeId,
-      _skillSlotA,
+      _SkillSlotA,
       _SkillSlotB,
       _skillSlotC,
       _maxlevelStar);

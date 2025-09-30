@@ -60,12 +60,12 @@ public struct EventContentCardExcel : IFlatbufferObject
       uint LocalizeEtcId = 0,
       StringOffset IconPathOffset = default(StringOffset),
       StringOffset BackIconPathOffset = default(StringOffset),
-      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
       VectorOffset RewardParcelIdOffset = default(VectorOffset)) {
     builder.StartTable(7);
     EventContentCardExcel.AddEventContentId(builder, EventContentId);
     EventContentCardExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
-    EventContentCardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
+    EventContentCardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
     EventContentCardExcel.AddBackIconPath(builder, BackIconPathOffset);
     EventContentCardExcel.AddIconPath(builder, IconPathOffset);
     EventContentCardExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
@@ -120,10 +120,10 @@ public struct EventContentCardExcel : IFlatbufferObject
 		var _LocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeEtcId, key) : _o.LocalizeEtcId;
     var _IconPath = _o.IconPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.IconPath, key) : _o.IconPath));
     var _BackIconPath = _o.BackIconPath == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.BackIconPath, key) : _o.BackIconPath));
-    var _RewardParcelType = default(VectorOffset);
+    var _rewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
+      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
     }
     var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
@@ -137,7 +137,7 @@ public struct EventContentCardExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _LocalizeEtcId : _o.LocalizeEtcId,
       _IconPath,
       _BackIconPath,
-      _RewardParcelType,
+      _rewardParcelType,
       _RewardParcelId);
   }
 }

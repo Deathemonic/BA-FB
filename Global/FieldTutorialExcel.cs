@@ -48,14 +48,14 @@ public struct FieldTutorialExcel : IFlatbufferObject
 
   public static Offset<Global.FieldTutorialExcel> CreateFieldTutorialExcel(FlatBufferBuilder builder,
       long SeasonId = 0,
-      VectorOffset TutorialTypeOffset = default(VectorOffset),
-      VectorOffset conditionTypeOffset = default(VectorOffset),
+      VectorOffset tutorialTypeOffset = default(VectorOffset),
+      VectorOffset ConditionTypeOffset = default(VectorOffset),
       VectorOffset conditionIdOffset = default(VectorOffset)) {
     builder.StartTable(4);
     FieldTutorialExcel.AddSeasonId(builder, SeasonId);
     FieldTutorialExcel.AddConditionId(builder, conditionIdOffset);
-    FieldTutorialExcel.AddConditionType(builder, conditionTypeOffset);
-    FieldTutorialExcel.AddTutorialType(builder, TutorialTypeOffset);
+    FieldTutorialExcel.AddConditionType(builder, ConditionTypeOffset);
+    FieldTutorialExcel.AddTutorialType(builder, tutorialTypeOffset);
     return FieldTutorialExcel.EndFieldTutorialExcel(builder);
   }
 
@@ -102,15 +102,15 @@ public struct FieldTutorialExcel : IFlatbufferObject
     if (_o == null) return default(Offset<Global.FieldTutorialExcel>);
 		byte[] key = TableEncryptionService.CreateKey("FieldTutorial");
 		var _SeasonId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SeasonId, key) : _o.SeasonId;
-    var _TutorialType = default(VectorOffset);
+    var _tutorialType = default(VectorOffset);
     if (_o.TutorialType != null) {
-      var __TutorialType = _o.TutorialType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _TutorialType = CreateTutorialTypeVector(builder, __TutorialType);
+      var __tutorialType = _o.TutorialType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _tutorialType = CreateTutorialTypeVector(builder, __tutorialType);
     }
-    var _conditionType = default(VectorOffset);
+    var _ConditionType = default(VectorOffset);
     if (_o.ConditionType != null) {
-      var __conditionType = _o.ConditionType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _conditionType = CreateConditionTypeVector(builder, __conditionType);
+      var __ConditionType = _o.ConditionType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _ConditionType = CreateConditionTypeVector(builder, __ConditionType);
     }
     var _conditionId = default(VectorOffset);
     if (_o.ConditionId != null) {
@@ -120,8 +120,8 @@ public struct FieldTutorialExcel : IFlatbufferObject
     return CreateFieldTutorialExcel(
       builder,
       TableEncryptionService.UseEncryption ? _SeasonId : _o.SeasonId,
-      _TutorialType,
-      _conditionType,
+      _tutorialType,
+      _ConditionType,
       _conditionId);
   }
 }

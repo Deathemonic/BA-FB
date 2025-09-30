@@ -83,7 +83,7 @@ public struct EventContentShopInfoExcel : IFlatbufferObject
       bool IsSoldOutDimmed = false,
       long AutoRefreshCoolTime = 0,
       long RefreshAbleCount = 0,
-      VectorOffset GoodsIdOffset = default(VectorOffset),
+      VectorOffset goodsIdOffset = default(VectorOffset),
       StringOffset OpenPeriodFromOffset = default(StringOffset),
       StringOffset OpenPeriodToOffset = default(StringOffset),
       StringOffset ShopProductUpdateDateOffset = default(StringOffset)) {
@@ -94,7 +94,7 @@ public struct EventContentShopInfoExcel : IFlatbufferObject
     EventContentShopInfoExcel.AddShopProductUpdateDate(builder, ShopProductUpdateDateOffset);
     EventContentShopInfoExcel.AddOpenPeriodTo(builder, OpenPeriodToOffset);
     EventContentShopInfoExcel.AddOpenPeriodFrom(builder, OpenPeriodFromOffset);
-    EventContentShopInfoExcel.AddGoodsId(builder, GoodsIdOffset);
+    EventContentShopInfoExcel.AddGoodsId(builder, goodsIdOffset);
     EventContentShopInfoExcel.AddCostParcelId(builder, costParcelIdOffset);
     EventContentShopInfoExcel.AddCostParcelType(builder, costParcelTypeOffset);
     EventContentShopInfoExcel.AddLocalizeCode(builder, LocalizeCode);
@@ -181,10 +181,10 @@ public struct EventContentShopInfoExcel : IFlatbufferObject
 		var _IsSoldOutDimmed = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsSoldOutDimmed, key) : _o.IsSoldOutDimmed;
 		var _AutoRefreshCoolTime = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.AutoRefreshCoolTime, key) : _o.AutoRefreshCoolTime;
 		var _RefreshAbleCount = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RefreshAbleCount, key) : _o.RefreshAbleCount;
-    var _GoodsId = default(VectorOffset);
+    var _goodsId = default(VectorOffset);
     if (_o.GoodsId != null) {
-      var __GoodsId = _o.GoodsId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _GoodsId = CreateGoodsIdVector(builder, __GoodsId);
+      var __goodsId = _o.GoodsId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _goodsId = CreateGoodsIdVector(builder, __goodsId);
     }
     var _OpenPeriodFrom = _o.OpenPeriodFrom == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.OpenPeriodFrom, key) : _o.OpenPeriodFrom));
     var _OpenPeriodTo = _o.OpenPeriodTo == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.OpenPeriodTo, key) : _o.OpenPeriodTo));
@@ -200,7 +200,7 @@ public struct EventContentShopInfoExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IsSoldOutDimmed : _o.IsSoldOutDimmed,
       TableEncryptionService.UseEncryption ? _AutoRefreshCoolTime : _o.AutoRefreshCoolTime,
       TableEncryptionService.UseEncryption ? _RefreshAbleCount : _o.RefreshAbleCount,
-      _GoodsId,
+      _goodsId,
       _OpenPeriodFrom,
       _OpenPeriodTo,
       _ShopProductUpdateDate);

@@ -81,14 +81,14 @@ public struct CumulativeTimeRewardExcel : IFlatbufferObject
       StringOffset StartDateOffset = default(StringOffset),
       StringOffset EndDateOffset = default(StringOffset),
       VectorOffset TimeConditionOffset = default(VectorOffset),
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardIdOffset = default(VectorOffset),
-      VectorOffset RewardAmountOffset = default(VectorOffset)) {
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardIdOffset = default(VectorOffset),
+      VectorOffset rewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(8);
     CumulativeTimeRewardExcel.AddId(builder, Id);
-    CumulativeTimeRewardExcel.AddRewardAmount(builder, RewardAmountOffset);
-    CumulativeTimeRewardExcel.AddRewardId(builder, rewardIdOffset);
-    CumulativeTimeRewardExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    CumulativeTimeRewardExcel.AddRewardAmount(builder, rewardAmountOffset);
+    CumulativeTimeRewardExcel.AddRewardId(builder, RewardIdOffset);
+    CumulativeTimeRewardExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     CumulativeTimeRewardExcel.AddTimeCondition(builder, TimeConditionOffset);
     CumulativeTimeRewardExcel.AddEndDate(builder, EndDateOffset);
     CumulativeTimeRewardExcel.AddStartDate(builder, StartDateOffset);
@@ -161,20 +161,20 @@ public struct CumulativeTimeRewardExcel : IFlatbufferObject
       var __TimeCondition = _o.TimeCondition.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _TimeCondition = CreateTimeConditionVector(builder, __TimeCondition);
     }
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardId = default(VectorOffset);
+    var _RewardId = default(VectorOffset);
     if (_o.RewardId != null) {
-      var __rewardId = _o.RewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardId = CreateRewardIdVector(builder, __rewardId);
+      var __RewardId = _o.RewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardId = CreateRewardIdVector(builder, __RewardId);
     }
-    var _RewardAmount = default(VectorOffset);
+    var _rewardAmount = default(VectorOffset);
     if (_o.RewardAmount != null) {
-      var __RewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RewardAmount = CreateRewardAmountVector(builder, __RewardAmount);
+      var __rewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _rewardAmount = CreateRewardAmountVector(builder, __rewardAmount);
     }
     return CreateCumulativeTimeRewardExcel(
       builder,
@@ -183,9 +183,9 @@ public struct CumulativeTimeRewardExcel : IFlatbufferObject
       _StartDate,
       _EndDate,
       _TimeCondition,
-      _rewardParcelType,
-      _rewardId,
-      _RewardAmount);
+      _RewardParcelType,
+      _RewardId,
+      _rewardAmount);
   }
 }
 

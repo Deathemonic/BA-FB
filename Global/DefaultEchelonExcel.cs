@@ -43,14 +43,14 @@ public struct DefaultEchelonExcel : IFlatbufferObject
   public static Offset<Global.DefaultEchelonExcel> CreateDefaultEchelonExcel(FlatBufferBuilder builder,
       int EchlonId = 0,
       long LeaderId = 0,
-      VectorOffset MainIdOffset = default(VectorOffset),
-      VectorOffset supportIdOffset = default(VectorOffset),
+      VectorOffset mainIdOffset = default(VectorOffset),
+      VectorOffset SupportIdOffset = default(VectorOffset),
       long TssId = 0) {
     builder.StartTable(5);
     DefaultEchelonExcel.AddTssId(builder, TssId);
     DefaultEchelonExcel.AddLeaderId(builder, LeaderId);
-    DefaultEchelonExcel.AddSupportId(builder, supportIdOffset);
-    DefaultEchelonExcel.AddMainId(builder, MainIdOffset);
+    DefaultEchelonExcel.AddSupportId(builder, SupportIdOffset);
+    DefaultEchelonExcel.AddMainId(builder, mainIdOffset);
     DefaultEchelonExcel.AddEchlonId(builder, EchlonId);
     return DefaultEchelonExcel.EndDefaultEchelonExcel(builder);
   }
@@ -95,23 +95,23 @@ public struct DefaultEchelonExcel : IFlatbufferObject
 		byte[] key = TableEncryptionService.CreateKey("DefaultEchelon");
 		var _EchlonId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EchlonId, key) : _o.EchlonId;
 		var _LeaderId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LeaderId, key) : _o.LeaderId;
-    var _MainId = default(VectorOffset);
+    var _mainId = default(VectorOffset);
     if (_o.MainId != null) {
-      var __MainId = _o.MainId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _MainId = CreateMainIdVector(builder, __MainId);
+      var __mainId = _o.MainId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _mainId = CreateMainIdVector(builder, __mainId);
     }
-    var _supportId = default(VectorOffset);
+    var _SupportId = default(VectorOffset);
     if (_o.SupportId != null) {
-      var __supportId = _o.SupportId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _supportId = CreateSupportIdVector(builder, __supportId);
+      var __SupportId = _o.SupportId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _SupportId = CreateSupportIdVector(builder, __SupportId);
     }
 		var _TssId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.TssId, key) : _o.TssId;
     return CreateDefaultEchelonExcel(
       builder,
       TableEncryptionService.UseEncryption ? _EchlonId : _o.EchlonId,
       TableEncryptionService.UseEncryption ? _LeaderId : _o.LeaderId,
-      _MainId,
-      _supportId,
+      _mainId,
+      _SupportId,
       TableEncryptionService.UseEncryption ? _TssId : _o.TssId);
   }
 }

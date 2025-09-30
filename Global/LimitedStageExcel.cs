@@ -115,7 +115,7 @@ public struct LimitedStageExcel : IFlatbufferObject
       long StarConditionTacticRankSCount = 0,
       long StarConditionTurnCount = 0,
       VectorOffset EnterScenarioGroupIdOffset = default(VectorOffset),
-      VectorOffset ClearScenarioGroupIdOffset = default(VectorOffset),
+      VectorOffset clearScenarioGroupIdOffset = default(VectorOffset),
       StringOffset StrategyMapOffset = default(StringOffset),
       StringOffset StrategyMapBGOffset = default(StringOffset),
       long StageRewardId = 0,
@@ -152,7 +152,7 @@ public struct LimitedStageExcel : IFlatbufferObject
     LimitedStageExcel.AddMaxTurn(builder, MaxTurn);
     LimitedStageExcel.AddStrategyMapBG(builder, StrategyMapBGOffset);
     LimitedStageExcel.AddStrategyMap(builder, StrategyMapOffset);
-    LimitedStageExcel.AddClearScenarioGroupId(builder, ClearScenarioGroupIdOffset);
+    LimitedStageExcel.AddClearScenarioGroupId(builder, clearScenarioGroupIdOffset);
     LimitedStageExcel.AddEnterScenarioGroupId(builder, EnterScenarioGroupIdOffset);
     LimitedStageExcel.AddStageEnterEchelonCount(builder, StageEnterEchelonCount);
     LimitedStageExcel.AddStageEnterCostAmount(builder, StageEnterCostAmount);
@@ -279,10 +279,10 @@ public struct LimitedStageExcel : IFlatbufferObject
       var __EnterScenarioGroupId = _o.EnterScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _EnterScenarioGroupId = CreateEnterScenarioGroupIdVector(builder, __EnterScenarioGroupId);
     }
-    var _ClearScenarioGroupId = default(VectorOffset);
+    var _clearScenarioGroupId = default(VectorOffset);
     if (_o.ClearScenarioGroupId != null) {
-      var __ClearScenarioGroupId = _o.ClearScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _ClearScenarioGroupId = CreateClearScenarioGroupIdVector(builder, __ClearScenarioGroupId);
+      var __clearScenarioGroupId = _o.ClearScenarioGroupId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _clearScenarioGroupId = CreateClearScenarioGroupIdVector(builder, __clearScenarioGroupId);
     }
     var _StrategyMap = _o.StrategyMap == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.StrategyMap, key) : _o.StrategyMap));
     var _StrategyMapBG = _o.StrategyMapBG == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.StrategyMapBG, key) : _o.StrategyMapBG));
@@ -317,7 +317,7 @@ public struct LimitedStageExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _StarConditionTacticRankSCount : _o.StarConditionTacticRankSCount,
       TableEncryptionService.UseEncryption ? _StarConditionTurnCount : _o.StarConditionTurnCount,
       _EnterScenarioGroupId,
-      _ClearScenarioGroupId,
+      _clearScenarioGroupId,
       _StrategyMap,
       _StrategyMapBG,
       TableEncryptionService.UseEncryption ? _StageRewardId : _o.StageRewardId,

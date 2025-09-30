@@ -59,10 +59,10 @@ public struct EventContentZoneExcel : IFlatbufferObject
       long LocationRank = 0,
       long EventPointForLocationRank = 0,
       uint LocalizeEtcId = 0,
-      VectorOffset StudentVisitProbOffset = default(VectorOffset),
+      VectorOffset studentVisitProbOffset = default(VectorOffset),
       long RewardGroupId = 0,
       VectorOffset TagsOffset = default(VectorOffset),
-      VectorOffset whiteListTagsOffset = default(VectorOffset)) {
+      VectorOffset WhiteListTagsOffset = default(VectorOffset)) {
     builder.StartTable(10);
     EventContentZoneExcel.AddRewardGroupId(builder, RewardGroupId);
     EventContentZoneExcel.AddEventPointForLocationRank(builder, EventPointForLocationRank);
@@ -70,9 +70,9 @@ public struct EventContentZoneExcel : IFlatbufferObject
     EventContentZoneExcel.AddLocationId(builder, LocationId);
     EventContentZoneExcel.AddOriginalZoneId(builder, OriginalZoneId);
     EventContentZoneExcel.AddId(builder, Id);
-    EventContentZoneExcel.AddWhiteListTags(builder, whiteListTagsOffset);
+    EventContentZoneExcel.AddWhiteListTags(builder, WhiteListTagsOffset);
     EventContentZoneExcel.AddTags(builder, TagsOffset);
-    EventContentZoneExcel.AddStudentVisitProb(builder, StudentVisitProbOffset);
+    EventContentZoneExcel.AddStudentVisitProb(builder, studentVisitProbOffset);
     EventContentZoneExcel.AddLocalizeEtcId(builder, LocalizeEtcId);
     return EventContentZoneExcel.EndEventContentZoneExcel(builder);
   }
@@ -137,10 +137,10 @@ public struct EventContentZoneExcel : IFlatbufferObject
 		var _LocationRank = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocationRank, key) : _o.LocationRank;
 		var _EventPointForLocationRank = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventPointForLocationRank, key) : _o.EventPointForLocationRank;
 		var _LocalizeEtcId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.LocalizeEtcId, key) : _o.LocalizeEtcId;
-    var _StudentVisitProb = default(VectorOffset);
+    var _studentVisitProb = default(VectorOffset);
     if (_o.StudentVisitProb != null) {
-      var __StudentVisitProb = _o.StudentVisitProb.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _StudentVisitProb = CreateStudentVisitProbVector(builder, __StudentVisitProb);
+      var __studentVisitProb = _o.StudentVisitProb.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _studentVisitProb = CreateStudentVisitProbVector(builder, __studentVisitProb);
     }
 		var _RewardGroupId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.RewardGroupId, key) : _o.RewardGroupId;
     var _Tags = default(VectorOffset);
@@ -148,10 +148,10 @@ public struct EventContentZoneExcel : IFlatbufferObject
       var __Tags = _o.Tags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _Tags = CreateTagsVector(builder, __Tags);
     }
-    var _whiteListTags = default(VectorOffset);
+    var _WhiteListTags = default(VectorOffset);
     if (_o.WhiteListTags != null) {
-      var __whiteListTags = _o.WhiteListTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _whiteListTags = CreateWhiteListTagsVector(builder, __whiteListTags);
+      var __WhiteListTags = _o.WhiteListTags.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _WhiteListTags = CreateWhiteListTagsVector(builder, __WhiteListTags);
     }
     return CreateEventContentZoneExcel(
       builder,
@@ -161,10 +161,10 @@ public struct EventContentZoneExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _LocationRank : _o.LocationRank,
       TableEncryptionService.UseEncryption ? _EventPointForLocationRank : _o.EventPointForLocationRank,
       TableEncryptionService.UseEncryption ? _LocalizeEtcId : _o.LocalizeEtcId,
-      _StudentVisitProb,
+      _studentVisitProb,
       TableEncryptionService.UseEncryption ? _RewardGroupId : _o.RewardGroupId,
       _Tags,
-      _whiteListTags);
+      _WhiteListTags);
   }
 }
 

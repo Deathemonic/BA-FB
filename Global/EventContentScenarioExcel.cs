@@ -93,7 +93,7 @@ public struct EventContentScenarioExcel : IFlatbufferObject
       bool IsRecollectionHorizon = false,
       VectorOffset rewardParcelTypeOffset = default(VectorOffset),
       VectorOffset RewardIdOffset = default(VectorOffset),
-      VectorOffset RewardAmountOffset = default(VectorOffset)) {
+      VectorOffset rewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(19);
     EventContentScenarioExcel.AddClearedScenarioGroupId(builder, ClearedScenarioGroupId);
     EventContentScenarioExcel.AddConditionEventContentId(builder, ConditionEventContentId);
@@ -102,7 +102,7 @@ public struct EventContentScenarioExcel : IFlatbufferObject
     EventContentScenarioExcel.AddOrder(builder, Order);
     EventContentScenarioExcel.AddEventContentId(builder, EventContentId);
     EventContentScenarioExcel.AddId(builder, Id);
-    EventContentScenarioExcel.AddRewardAmount(builder, RewardAmountOffset);
+    EventContentScenarioExcel.AddRewardAmount(builder, rewardAmountOffset);
     EventContentScenarioExcel.AddRewardId(builder, RewardIdOffset);
     EventContentScenarioExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
     EventContentScenarioExcel.AddRecollectionResource(builder, RecollectionResourceOffset);
@@ -225,10 +225,10 @@ public struct EventContentScenarioExcel : IFlatbufferObject
       var __RewardId = _o.RewardId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
       _RewardId = CreateRewardIdVector(builder, __RewardId);
     }
-    var _RewardAmount = default(VectorOffset);
+    var _rewardAmount = default(VectorOffset);
     if (_o.RewardAmount != null) {
-      var __RewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _RewardAmount = CreateRewardAmountVector(builder, __RewardAmount);
+      var __rewardAmount = _o.RewardAmount.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _rewardAmount = CreateRewardAmountVector(builder, __rewardAmount);
     }
     return CreateEventContentScenarioExcel(
       builder,
@@ -250,7 +250,7 @@ public struct EventContentScenarioExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IsRecollectionHorizon : _o.IsRecollectionHorizon,
       _rewardParcelType,
       _RewardId,
-      _RewardAmount);
+      _rewardAmount);
   }
 }
 

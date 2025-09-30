@@ -169,7 +169,7 @@ public struct CharacterExcel : IFlatbufferObject
       StringOffset ScenarioCharacterOffset = default(StringOffset),
       uint SpawnTemplateId = 0,
       int FavorLevelupType = 0,
-      VectorOffset equipmentSlotOffset = default(VectorOffset),
+      VectorOffset EquipmentSlotOffset = default(VectorOffset),
       uint WeaponLocalizeId = 0,
       bool DisplayEnemyInfo = false,
       long bodyRadius = 0,
@@ -221,7 +221,7 @@ public struct CharacterExcel : IFlatbufferObject
     CharacterExcel.AddHighlightFloaterHeight(builder, HighlightFloaterHeight);
     CharacterExcel.AddHpBarHeight(builder, HpBarHeight);
     CharacterExcel.AddWeaponLocalizeId(builder, WeaponLocalizeId);
-    CharacterExcel.AddEquipmentSlot(builder, equipmentSlotOffset);
+    CharacterExcel.AddEquipmentSlot(builder, EquipmentSlotOffset);
     CharacterExcel.AddFavorLevelupType(builder, FavorLevelupType);
     CharacterExcel.AddSpawnTemplateId(builder, SpawnTemplateId);
     CharacterExcel.AddScenarioCharacter(builder, ScenarioCharacterOffset);
@@ -461,10 +461,10 @@ public struct CharacterExcel : IFlatbufferObject
     var _ScenarioCharacter = _o.ScenarioCharacter == null ? default(StringOffset) : builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ScenarioCharacter, key) : _o.ScenarioCharacter));
 		var _SpawnTemplateId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SpawnTemplateId, key) : _o.SpawnTemplateId;
 		var _FavorLevelupType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.FavorLevelupType, key) : _o.FavorLevelupType;
-    var _equipmentSlot = default(VectorOffset);
+    var _EquipmentSlot = default(VectorOffset);
     if (_o.EquipmentSlot != null) {
-      var __equipmentSlot = _o.EquipmentSlot.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _equipmentSlot = CreateEquipmentSlotVector(builder, __equipmentSlot);
+      var __EquipmentSlot = _o.EquipmentSlot.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _EquipmentSlot = CreateEquipmentSlotVector(builder, __EquipmentSlot);
     }
 		var _WeaponLocalizeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.WeaponLocalizeId, key) : _o.WeaponLocalizeId;
 		var _DisplayEnemyInfo = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.DisplayEnemyInfo, key) : _o.DisplayEnemyInfo;
@@ -536,7 +536,7 @@ public struct CharacterExcel : IFlatbufferObject
       _ScenarioCharacter,
       TableEncryptionService.UseEncryption ? _SpawnTemplateId : _o.SpawnTemplateId,
       TableEncryptionService.UseEncryption ? _FavorLevelupType : _o.FavorLevelupType,
-      _equipmentSlot,
+      _EquipmentSlot,
       TableEncryptionService.UseEncryption ? _WeaponLocalizeId : _o.WeaponLocalizeId,
       TableEncryptionService.UseEncryption ? _DisplayEnemyInfo : _o.DisplayEnemyInfo,
       TableEncryptionService.UseEncryption ? _bodyRadius : _o.BodyRadius,

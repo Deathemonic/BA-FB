@@ -54,15 +54,15 @@ public struct EventContentDiceRaceNodeExcel : IFlatbufferObject
       long NodeId = 0,
       Global.EventContentDiceRaceNodeType EventContentDiceRaceNodeType = Global.EventContentDiceRaceNodeType.StartNode,
       int MoveForwardTypeArg = 0,
-      VectorOffset rewardParcelTypeOffset = default(VectorOffset),
-      VectorOffset rewardParcelIdOffset = default(VectorOffset),
+      VectorOffset RewardParcelTypeOffset = default(VectorOffset),
+      VectorOffset RewardParcelIdOffset = default(VectorOffset),
       VectorOffset RewardAmountOffset = default(VectorOffset)) {
     builder.StartTable(7);
     EventContentDiceRaceNodeExcel.AddNodeId(builder, NodeId);
     EventContentDiceRaceNodeExcel.AddEventContentId(builder, EventContentId);
     EventContentDiceRaceNodeExcel.AddRewardAmount(builder, RewardAmountOffset);
-    EventContentDiceRaceNodeExcel.AddRewardParcelId(builder, rewardParcelIdOffset);
-    EventContentDiceRaceNodeExcel.AddRewardParcelType(builder, rewardParcelTypeOffset);
+    EventContentDiceRaceNodeExcel.AddRewardParcelId(builder, RewardParcelIdOffset);
+    EventContentDiceRaceNodeExcel.AddRewardParcelType(builder, RewardParcelTypeOffset);
     EventContentDiceRaceNodeExcel.AddMoveForwardTypeArg(builder, MoveForwardTypeArg);
     EventContentDiceRaceNodeExcel.AddEventContentDiceRaceNodeType(builder, EventContentDiceRaceNodeType);
     return EventContentDiceRaceNodeExcel.EndEventContentDiceRaceNodeExcel(builder);
@@ -120,15 +120,15 @@ public struct EventContentDiceRaceNodeExcel : IFlatbufferObject
 		var _NodeId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.NodeId, key) : _o.NodeId;
 		var _EventContentDiceRaceNodeType = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.EventContentDiceRaceNodeType, key) : _o.EventContentDiceRaceNodeType;
 		var _MoveForwardTypeArg = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.MoveForwardTypeArg, key) : _o.MoveForwardTypeArg;
-    var _rewardParcelType = default(VectorOffset);
+    var _RewardParcelType = default(VectorOffset);
     if (_o.RewardParcelType != null) {
-      var __rewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelType = CreateRewardParcelTypeVector(builder, __rewardParcelType);
+      var __RewardParcelType = _o.RewardParcelType.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelType = CreateRewardParcelTypeVector(builder, __RewardParcelType);
     }
-    var _rewardParcelId = default(VectorOffset);
+    var _RewardParcelId = default(VectorOffset);
     if (_o.RewardParcelId != null) {
-      var __rewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _rewardParcelId = CreateRewardParcelIdVector(builder, __rewardParcelId);
+      var __RewardParcelId = _o.RewardParcelId.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _RewardParcelId = CreateRewardParcelIdVector(builder, __RewardParcelId);
     }
     var _RewardAmount = default(VectorOffset);
     if (_o.RewardAmount != null) {
@@ -141,8 +141,8 @@ public struct EventContentDiceRaceNodeExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _NodeId : _o.NodeId,
       TableEncryptionService.UseEncryption ? _EventContentDiceRaceNodeType : _o.EventContentDiceRaceNodeType,
       TableEncryptionService.UseEncryption ? _MoveForwardTypeArg : _o.MoveForwardTypeArg,
-      _rewardParcelType,
-      _rewardParcelId,
+      _RewardParcelType,
+      _RewardParcelId,
       _RewardAmount);
   }
 }

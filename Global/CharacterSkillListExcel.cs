@@ -73,33 +73,33 @@ public struct CharacterSkillListExcel : IFlatbufferObject
       bool IsMoveLeftRight = false,
       bool UseRandomExSkillTimeline = false,
       long TSAInteractionId = 0,
-      VectorOffset NormalSkillGroupIdOffset = default(VectorOffset),
-      VectorOffset normalSkillTimeLineIndexOffset = default(VectorOffset),
+      VectorOffset normalSkillGroupIdOffset = default(VectorOffset),
+      VectorOffset NormalSkillTimeLineIndexOffset = default(VectorOffset),
       int SelectExSkillActionSkillSlot = 0,
       VectorOffset exSkillGroupIdOffset = default(VectorOffset),
       VectorOffset ExSkillCutInTimeLineIndexOffset = default(VectorOffset),
       VectorOffset exSkillLevelTimeLineIndexOffset = default(VectorOffset),
       VectorOffset publicSkillGroupIdOffset = default(VectorOffset),
-      VectorOffset PublicSkillTimeLineIndexOffset = default(VectorOffset),
-      VectorOffset passiveSkillGroupIdOffset = default(VectorOffset),
-      VectorOffset leaderSkillGroupIdOffset = default(VectorOffset),
+      VectorOffset publicSkillTimeLineIndexOffset = default(VectorOffset),
+      VectorOffset PassiveSkillGroupIdOffset = default(VectorOffset),
+      VectorOffset LeaderSkillGroupIdOffset = default(VectorOffset),
       VectorOffset extraPassiveSkillGroupIdOffset = default(VectorOffset),
-      VectorOffset HiddenPassiveSkillGroupIdOffset = default(VectorOffset)) {
+      VectorOffset hiddenPassiveSkillGroupIdOffset = default(VectorOffset)) {
     builder.StartTable(20);
     CharacterSkillListExcel.AddTSAInteractionId(builder, TSAInteractionId);
     CharacterSkillListExcel.AddCharacterSkillListGroupId(builder, CharacterSkillListGroupId);
-    CharacterSkillListExcel.AddHiddenPassiveSkillGroupId(builder, HiddenPassiveSkillGroupIdOffset);
+    CharacterSkillListExcel.AddHiddenPassiveSkillGroupId(builder, hiddenPassiveSkillGroupIdOffset);
     CharacterSkillListExcel.AddExtraPassiveSkillGroupId(builder, extraPassiveSkillGroupIdOffset);
-    CharacterSkillListExcel.AddLeaderSkillGroupId(builder, leaderSkillGroupIdOffset);
-    CharacterSkillListExcel.AddPassiveSkillGroupId(builder, passiveSkillGroupIdOffset);
-    CharacterSkillListExcel.AddPublicSkillTimeLineIndex(builder, PublicSkillTimeLineIndexOffset);
+    CharacterSkillListExcel.AddLeaderSkillGroupId(builder, LeaderSkillGroupIdOffset);
+    CharacterSkillListExcel.AddPassiveSkillGroupId(builder, PassiveSkillGroupIdOffset);
+    CharacterSkillListExcel.AddPublicSkillTimeLineIndex(builder, publicSkillTimeLineIndexOffset);
     CharacterSkillListExcel.AddPublicSkillGroupId(builder, publicSkillGroupIdOffset);
     CharacterSkillListExcel.AddExSkillLevelTimeLineIndex(builder, exSkillLevelTimeLineIndexOffset);
     CharacterSkillListExcel.AddExSkillCutInTimeLineIndex(builder, ExSkillCutInTimeLineIndexOffset);
     CharacterSkillListExcel.AddExSkillGroupId(builder, exSkillGroupIdOffset);
     CharacterSkillListExcel.AddSelectExSkillActionSkillSlot(builder, SelectExSkillActionSkillSlot);
-    CharacterSkillListExcel.AddNormalSkillTimeLineIndex(builder, normalSkillTimeLineIndexOffset);
-    CharacterSkillListExcel.AddNormalSkillGroupId(builder, NormalSkillGroupIdOffset);
+    CharacterSkillListExcel.AddNormalSkillTimeLineIndex(builder, NormalSkillTimeLineIndexOffset);
+    CharacterSkillListExcel.AddNormalSkillGroupId(builder, normalSkillGroupIdOffset);
     CharacterSkillListExcel.AddFormIndex(builder, FormIndex);
     CharacterSkillListExcel.AddMinimumTierCharacterGear(builder, MinimumTierCharacterGear);
     CharacterSkillListExcel.AddMinimumGradeCharacterWeapon(builder, MinimumGradeCharacterWeapon);
@@ -239,16 +239,16 @@ public struct CharacterSkillListExcel : IFlatbufferObject
 		var _IsMoveLeftRight = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.IsMoveLeftRight, key) : _o.IsMoveLeftRight;
 		var _UseRandomExSkillTimeline = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.UseRandomExSkillTimeline, key) : _o.UseRandomExSkillTimeline;
 		var _TSAInteractionId = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.TSAInteractionId, key) : _o.TSAInteractionId;
-    var _NormalSkillGroupId = default(VectorOffset);
+    var _normalSkillGroupId = default(VectorOffset);
     if (_o.NormalSkillGroupId != null) {
-      var __NormalSkillGroupId = new StringOffset[_o.NormalSkillGroupId.Count];
-      for (var _j = 0; _j < __NormalSkillGroupId.Length; ++_j) { __NormalSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.NormalSkillGroupId[_j], key) : _o.NormalSkillGroupId[_j])); }
-      _NormalSkillGroupId = CreateNormalSkillGroupIdVector(builder, __NormalSkillGroupId);
+      var __normalSkillGroupId = new StringOffset[_o.NormalSkillGroupId.Count];
+      for (var _j = 0; _j < __normalSkillGroupId.Length; ++_j) { __normalSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.NormalSkillGroupId[_j], key) : _o.NormalSkillGroupId[_j])); }
+      _normalSkillGroupId = CreateNormalSkillGroupIdVector(builder, __normalSkillGroupId);
     }
-    var _normalSkillTimeLineIndex = default(VectorOffset);
+    var _NormalSkillTimeLineIndex = default(VectorOffset);
     if (_o.NormalSkillTimeLineIndex != null) {
-      var __normalSkillTimeLineIndex = _o.NormalSkillTimeLineIndex.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _normalSkillTimeLineIndex = CreateNormalSkillTimeLineIndexVector(builder, __normalSkillTimeLineIndex);
+      var __NormalSkillTimeLineIndex = _o.NormalSkillTimeLineIndex.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _NormalSkillTimeLineIndex = CreateNormalSkillTimeLineIndexVector(builder, __NormalSkillTimeLineIndex);
     }
 		var _SelectExSkillActionSkillSlot = TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(_o.SelectExSkillActionSkillSlot, key) : _o.SelectExSkillActionSkillSlot;
     var _exSkillGroupId = default(VectorOffset);
@@ -275,22 +275,22 @@ public struct CharacterSkillListExcel : IFlatbufferObject
       for (var _j = 0; _j < __publicSkillGroupId.Length; ++_j) { __publicSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PublicSkillGroupId[_j], key) : _o.PublicSkillGroupId[_j])); }
       _publicSkillGroupId = CreatePublicSkillGroupIdVector(builder, __publicSkillGroupId);
     }
-    var _PublicSkillTimeLineIndex = default(VectorOffset);
+    var _publicSkillTimeLineIndex = default(VectorOffset);
     if (_o.PublicSkillTimeLineIndex != null) {
-      var __PublicSkillTimeLineIndex = _o.PublicSkillTimeLineIndex.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
-      _PublicSkillTimeLineIndex = CreatePublicSkillTimeLineIndexVector(builder, __PublicSkillTimeLineIndex);
+      var __publicSkillTimeLineIndex = _o.PublicSkillTimeLineIndex.Select(x => (TableEncryptionService.UseEncryption ? TableEncryptionService.Convert(x, key) : x)).ToArray();
+      _publicSkillTimeLineIndex = CreatePublicSkillTimeLineIndexVector(builder, __publicSkillTimeLineIndex);
     }
-    var _passiveSkillGroupId = default(VectorOffset);
+    var _PassiveSkillGroupId = default(VectorOffset);
     if (_o.PassiveSkillGroupId != null) {
-      var __passiveSkillGroupId = new StringOffset[_o.PassiveSkillGroupId.Count];
-      for (var _j = 0; _j < __passiveSkillGroupId.Length; ++_j) { __passiveSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PassiveSkillGroupId[_j], key) : _o.PassiveSkillGroupId[_j])); }
-      _passiveSkillGroupId = CreatePassiveSkillGroupIdVector(builder, __passiveSkillGroupId);
+      var __PassiveSkillGroupId = new StringOffset[_o.PassiveSkillGroupId.Count];
+      for (var _j = 0; _j < __PassiveSkillGroupId.Length; ++_j) { __PassiveSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.PassiveSkillGroupId[_j], key) : _o.PassiveSkillGroupId[_j])); }
+      _PassiveSkillGroupId = CreatePassiveSkillGroupIdVector(builder, __PassiveSkillGroupId);
     }
-    var _leaderSkillGroupId = default(VectorOffset);
+    var _LeaderSkillGroupId = default(VectorOffset);
     if (_o.LeaderSkillGroupId != null) {
-      var __leaderSkillGroupId = new StringOffset[_o.LeaderSkillGroupId.Count];
-      for (var _j = 0; _j < __leaderSkillGroupId.Length; ++_j) { __leaderSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.LeaderSkillGroupId[_j], key) : _o.LeaderSkillGroupId[_j])); }
-      _leaderSkillGroupId = CreateLeaderSkillGroupIdVector(builder, __leaderSkillGroupId);
+      var __LeaderSkillGroupId = new StringOffset[_o.LeaderSkillGroupId.Count];
+      for (var _j = 0; _j < __LeaderSkillGroupId.Length; ++_j) { __LeaderSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.LeaderSkillGroupId[_j], key) : _o.LeaderSkillGroupId[_j])); }
+      _LeaderSkillGroupId = CreateLeaderSkillGroupIdVector(builder, __LeaderSkillGroupId);
     }
     var _extraPassiveSkillGroupId = default(VectorOffset);
     if (_o.ExtraPassiveSkillGroupId != null) {
@@ -298,11 +298,11 @@ public struct CharacterSkillListExcel : IFlatbufferObject
       for (var _j = 0; _j < __extraPassiveSkillGroupId.Length; ++_j) { __extraPassiveSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.ExtraPassiveSkillGroupId[_j], key) : _o.ExtraPassiveSkillGroupId[_j])); }
       _extraPassiveSkillGroupId = CreateExtraPassiveSkillGroupIdVector(builder, __extraPassiveSkillGroupId);
     }
-    var _HiddenPassiveSkillGroupId = default(VectorOffset);
+    var _hiddenPassiveSkillGroupId = default(VectorOffset);
     if (_o.HiddenPassiveSkillGroupId != null) {
-      var __HiddenPassiveSkillGroupId = new StringOffset[_o.HiddenPassiveSkillGroupId.Count];
-      for (var _j = 0; _j < __HiddenPassiveSkillGroupId.Length; ++_j) { __HiddenPassiveSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.HiddenPassiveSkillGroupId[_j], key) : _o.HiddenPassiveSkillGroupId[_j])); }
-      _HiddenPassiveSkillGroupId = CreateHiddenPassiveSkillGroupIdVector(builder, __HiddenPassiveSkillGroupId);
+      var __hiddenPassiveSkillGroupId = new StringOffset[_o.HiddenPassiveSkillGroupId.Count];
+      for (var _j = 0; _j < __hiddenPassiveSkillGroupId.Length; ++_j) { __hiddenPassiveSkillGroupId[_j] = builder.CreateString((TableEncryptionService.UseEncryption ? TableEncryptionService.ConvertPack(_o.HiddenPassiveSkillGroupId[_j], key) : _o.HiddenPassiveSkillGroupId[_j])); }
+      _hiddenPassiveSkillGroupId = CreateHiddenPassiveSkillGroupIdVector(builder, __hiddenPassiveSkillGroupId);
     }
     return CreateCharacterSkillListExcel(
       builder,
@@ -314,18 +314,18 @@ public struct CharacterSkillListExcel : IFlatbufferObject
       TableEncryptionService.UseEncryption ? _IsMoveLeftRight : _o.IsMoveLeftRight,
       TableEncryptionService.UseEncryption ? _UseRandomExSkillTimeline : _o.UseRandomExSkillTimeline,
       TableEncryptionService.UseEncryption ? _TSAInteractionId : _o.TSAInteractionId,
-      _NormalSkillGroupId,
-      _normalSkillTimeLineIndex,
+      _normalSkillGroupId,
+      _NormalSkillTimeLineIndex,
       TableEncryptionService.UseEncryption ? _SelectExSkillActionSkillSlot : _o.SelectExSkillActionSkillSlot,
       _exSkillGroupId,
       _ExSkillCutInTimeLineIndex,
       _exSkillLevelTimeLineIndex,
       _publicSkillGroupId,
-      _PublicSkillTimeLineIndex,
-      _passiveSkillGroupId,
-      _leaderSkillGroupId,
+      _publicSkillTimeLineIndex,
+      _PassiveSkillGroupId,
+      _LeaderSkillGroupId,
       _extraPassiveSkillGroupId,
-      _HiddenPassiveSkillGroupId);
+      _hiddenPassiveSkillGroupId);
   }
 }
 
