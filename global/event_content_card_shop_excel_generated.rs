@@ -62,8 +62,8 @@ impl<'a> EventContentCardShopExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.RewardParcelAmount {
-        builder.add_RewardParcelAmount(x);
+      if let Some(x) = args.rewardParcelAmount {
+        builder.add_rewardParcelAmount(x);
       }
       if let Some(x) = args.rewardParcelId {
         builder.add_rewardParcelId(x);
@@ -111,7 +111,7 @@ impl<'a> EventContentCardShopExcel<'a> {
     let rewardParcelId = self.rewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let RewardParcelAmount = self.RewardParcelAmount().map(|x| {
+    let rewardParcelAmount = self.rewardParcelAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     EventContentCardShopExcelT {
@@ -126,7 +126,7 @@ impl<'a> EventContentCardShopExcel<'a> {
       ProbWeight1,
       rewardParcelType,
       rewardParcelId,
-      RewardParcelAmount,
+      rewardParcelAmount,
     }
   }
 
@@ -208,7 +208,7 @@ impl<'a> EventContentCardShopExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EventContentCardShopExcel::VT_REWARDPARCELID, None)}
   }
   #[inline]
-  pub fn RewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn rewardParcelAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -234,7 +234,7 @@ impl flatbuffers::Verifiable for EventContentCardShopExcel<'_> {
      .visit_field::<i32>("ProbWeight1", Self::VT_PROBWEIGHT1, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelId", Self::VT_REWARDPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -251,7 +251,7 @@ pub struct EventContentCardShopExcelArgs<'a> {
     pub ProbWeight1: i32,
     pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub rewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub rewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EventContentCardShopExcelArgs<'a> {
   #[inline]
@@ -268,7 +268,7 @@ impl<'a> Default for EventContentCardShopExcelArgs<'a> {
       ProbWeight1: 0,
       rewardParcelType: None,
       rewardParcelId: None,
-      RewardParcelAmount: None,
+      rewardParcelAmount: None,
     }
   }
 }
@@ -298,10 +298,10 @@ impl Serialize for EventContentCardShopExcel<'_> {
       } else {
         s.skip_field("rewardParcelId")?;
       }
-      if let Some(f) = self.RewardParcelAmount() {
-        s.serialize_field("RewardParcelAmount", &f)?;
+      if let Some(f) = self.rewardParcelAmount() {
+        s.serialize_field("rewardParcelAmount", &f)?;
       } else {
-        s.skip_field("RewardParcelAmount")?;
+        s.skip_field("rewardParcelAmount")?;
       }
     s.end()
   }
@@ -357,8 +357,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentCardShopExcelBuilde
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCardShopExcel::VT_REWARDPARCELID, rewardParcelId);
   }
   #[inline]
-  pub fn add_RewardParcelAmount(&mut self, RewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCardShopExcel::VT_REWARDPARCELAMOUNT, RewardParcelAmount);
+  pub fn add_rewardParcelAmount(&mut self, rewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCardShopExcel::VT_REWARDPARCELAMOUNT, rewardParcelAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentCardShopExcelBuilder<'a, 'b, A> {
@@ -389,7 +389,7 @@ impl core::fmt::Debug for EventContentCardShopExcel<'_> {
       ds.field("ProbWeight1", &self.ProbWeight1());
       ds.field("rewardParcelType", &self.rewardParcelType());
       ds.field("rewardParcelId", &self.rewardParcelId());
-      ds.field("RewardParcelAmount", &self.RewardParcelAmount());
+      ds.field("rewardParcelAmount", &self.rewardParcelAmount());
       ds.finish()
   }
 }
@@ -407,7 +407,7 @@ pub struct EventContentCardShopExcelT {
   pub ProbWeight1: i32,
   pub rewardParcelType: Option<Vec<ParcelType>>,
   pub rewardParcelId: Option<Vec<i64>>,
-  pub RewardParcelAmount: Option<Vec<i64>>,
+  pub rewardParcelAmount: Option<Vec<i64>>,
 }
 impl Default for EventContentCardShopExcelT {
   fn default() -> Self {
@@ -423,7 +423,7 @@ impl Default for EventContentCardShopExcelT {
       ProbWeight1: 0,
       rewardParcelType: None,
       rewardParcelId: None,
-      RewardParcelAmount: None,
+      rewardParcelAmount: None,
     }
   }
 }
@@ -447,7 +447,7 @@ impl EventContentCardShopExcelT {
     let rewardParcelId = self.rewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let RewardParcelAmount = self.RewardParcelAmount.as_ref().map(|x|{
+    let rewardParcelAmount = self.rewardParcelAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     EventContentCardShopExcel::create(_fbb, &EventContentCardShopExcelArgs{
@@ -462,7 +462,7 @@ impl EventContentCardShopExcelT {
       ProbWeight1,
       rewardParcelType,
       rewardParcelId,
-      RewardParcelAmount,
+      rewardParcelAmount,
     })
   }
 }

@@ -51,11 +51,11 @@ impl<'a> FieldTutorialExcel<'a> {
       if let Some(x) = args.conditionId {
         builder.add_conditionId(x);
       }
-      if let Some(x) = args.conditionType {
-        builder.add_conditionType(x);
+      if let Some(x) = args.ConditionType {
+        builder.add_ConditionType(x);
       }
-      if let Some(x) = args.TutorialType {
-        builder.add_TutorialType(x);
+      if let Some(x) = args.tutorialType {
+        builder.add_tutorialType(x);
       }
     builder.finish()
   }
@@ -63,10 +63,10 @@ impl<'a> FieldTutorialExcel<'a> {
   pub fn unpack(&self) -> FieldTutorialExcelT {
     let key = table_encryption_service::create_key(b"FieldTutorial");
       let SeasonId = self.SeasonId();
-    let TutorialType = self.TutorialType().map(|x| {
+    let tutorialType = self.tutorialType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let conditionType = self.conditionType().map(|x| {
+    let ConditionType = self.ConditionType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let conditionId = self.conditionId().map(|x| {
@@ -74,8 +74,8 @@ impl<'a> FieldTutorialExcel<'a> {
     });
     FieldTutorialExcelT {
       SeasonId,
-      TutorialType,
-      conditionType,
+      tutorialType,
+      ConditionType,
       conditionId,
     }
   }
@@ -88,14 +88,14 @@ impl<'a> FieldTutorialExcel<'a> {
     unsafe { self._tab.get::<i64>(FieldTutorialExcel::VT_SEASONID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn TutorialType(&self) -> Option<flatbuffers::Vector<'a, FieldTutorialType>> {
+  pub fn tutorialType(&self) -> Option<flatbuffers::Vector<'a, FieldTutorialType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, FieldTutorialType>>>(FieldTutorialExcel::VT_TUTORIALTYPE, None)}
   }
   #[inline]
-  pub fn conditionType(&self) -> Option<flatbuffers::Vector<'a, FieldConditionType>> {
+  pub fn ConditionType(&self) -> Option<flatbuffers::Vector<'a, FieldConditionType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -118,8 +118,8 @@ impl flatbuffers::Verifiable for FieldTutorialExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("SeasonId", Self::VT_SEASONID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldTutorialType>>>("TutorialType", Self::VT_TUTORIALTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldConditionType>>>("conditionType", Self::VT_CONDITIONTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldTutorialType>>>("tutorialType", Self::VT_TUTORIALTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, FieldConditionType>>>("ConditionType", Self::VT_CONDITIONTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("conditionId", Self::VT_CONDITIONID, false)?
      .finish();
     Ok(())
@@ -127,8 +127,8 @@ impl flatbuffers::Verifiable for FieldTutorialExcel<'_> {
 }
 pub struct FieldTutorialExcelArgs<'a> {
     pub SeasonId: i64,
-    pub TutorialType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldTutorialType>>>,
-    pub conditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldConditionType>>>,
+    pub tutorialType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldTutorialType>>>,
+    pub ConditionType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, FieldConditionType>>>,
     pub conditionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for FieldTutorialExcelArgs<'a> {
@@ -136,8 +136,8 @@ impl<'a> Default for FieldTutorialExcelArgs<'a> {
   fn default() -> Self {
     FieldTutorialExcelArgs {
       SeasonId: 0,
-      TutorialType: None,
-      conditionType: None,
+      tutorialType: None,
+      ConditionType: None,
       conditionId: None,
     }
   }
@@ -150,15 +150,15 @@ impl Serialize for FieldTutorialExcel<'_> {
   {
     let mut s = serializer.serialize_struct("FieldTutorialExcel", 4)?;
       s.serialize_field("SeasonId", &self.SeasonId())?;
-      if let Some(f) = self.TutorialType() {
-        s.serialize_field("TutorialType", &f)?;
+      if let Some(f) = self.tutorialType() {
+        s.serialize_field("tutorialType", &f)?;
       } else {
-        s.skip_field("TutorialType")?;
+        s.skip_field("tutorialType")?;
       }
-      if let Some(f) = self.conditionType() {
-        s.serialize_field("conditionType", &f)?;
+      if let Some(f) = self.ConditionType() {
+        s.serialize_field("ConditionType", &f)?;
       } else {
-        s.skip_field("conditionType")?;
+        s.skip_field("ConditionType")?;
       }
       if let Some(f) = self.conditionId() {
         s.serialize_field("conditionId", &f)?;
@@ -179,12 +179,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FieldTutorialExcelBuilder<'a, '
     self.fbb_.push_slot::<i64>(FieldTutorialExcel::VT_SEASONID, SeasonId, 0);
   }
   #[inline]
-  pub fn add_TutorialType(&mut self, TutorialType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , FieldTutorialType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_TUTORIALTYPE, TutorialType);
+  pub fn add_tutorialType(&mut self, tutorialType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , FieldTutorialType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_TUTORIALTYPE, tutorialType);
   }
   #[inline]
-  pub fn add_conditionType(&mut self, conditionType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , FieldConditionType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_CONDITIONTYPE, conditionType);
+  pub fn add_ConditionType(&mut self, ConditionType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , FieldConditionType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FieldTutorialExcel::VT_CONDITIONTYPE, ConditionType);
   }
   #[inline]
   pub fn add_conditionId(&mut self, conditionId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -209,8 +209,8 @@ impl core::fmt::Debug for FieldTutorialExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("FieldTutorialExcel");
       ds.field("SeasonId", &self.SeasonId());
-      ds.field("TutorialType", &self.TutorialType());
-      ds.field("conditionType", &self.conditionType());
+      ds.field("tutorialType", &self.tutorialType());
+      ds.field("ConditionType", &self.ConditionType());
       ds.field("conditionId", &self.conditionId());
       ds.finish()
   }
@@ -219,16 +219,16 @@ impl core::fmt::Debug for FieldTutorialExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct FieldTutorialExcelT {
   pub SeasonId: i64,
-  pub TutorialType: Option<Vec<FieldTutorialType>>,
-  pub conditionType: Option<Vec<FieldConditionType>>,
+  pub tutorialType: Option<Vec<FieldTutorialType>>,
+  pub ConditionType: Option<Vec<FieldConditionType>>,
   pub conditionId: Option<Vec<i64>>,
 }
 impl Default for FieldTutorialExcelT {
   fn default() -> Self {
     Self {
       SeasonId: 0,
-      TutorialType: None,
-      conditionType: None,
+      tutorialType: None,
+      ConditionType: None,
       conditionId: None,
     }
   }
@@ -239,10 +239,10 @@ impl FieldTutorialExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<FieldTutorialExcel<'b>> {
     let SeasonId = self.SeasonId;
-    let TutorialType = self.TutorialType.as_ref().map(|x|{
+    let tutorialType = self.tutorialType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let conditionType = self.conditionType.as_ref().map(|x|{
+    let ConditionType = self.ConditionType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let conditionId = self.conditionId.as_ref().map(|x|{
@@ -250,8 +250,8 @@ impl FieldTutorialExcelT {
     });
     FieldTutorialExcel::create(_fbb, &FieldTutorialExcelArgs{
       SeasonId,
-      TutorialType,
-      conditionType,
+      tutorialType,
+      ConditionType,
       conditionId,
     })
   }

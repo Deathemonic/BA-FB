@@ -155,8 +155,8 @@ impl<'a> ConstArenaExcel<'a> {
       if let Some(x) = args.ModifiedStatType {
         builder.add_ModifiedStatType(x);
       }
-      if let Some(x) = args.relativeOpponentRankEnd {
-        builder.add_relativeOpponentRankEnd(x);
+      if let Some(x) = args.RelativeOpponentRankEnd {
+        builder.add_RelativeOpponentRankEnd(x);
       }
       if let Some(x) = args.RelativeOpponentRankStart {
         builder.add_RelativeOpponentRankStart(x);
@@ -204,7 +204,7 @@ impl<'a> ConstArenaExcel<'a> {
     let RelativeOpponentRankStart = self.RelativeOpponentRankStart().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let relativeOpponentRankEnd = self.relativeOpponentRankEnd().map(|x| {
+    let RelativeOpponentRankEnd = self.RelativeOpponentRankEnd().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let ModifiedStatType = self.ModifiedStatType().map(|x| {
@@ -254,7 +254,7 @@ impl<'a> ConstArenaExcel<'a> {
       characterSlotHideRank,
       MapSlotHideRank,
       RelativeOpponentRankStart,
-      relativeOpponentRankEnd,
+      RelativeOpponentRankEnd,
       ModifiedStatType,
       statMulFactor,
       statSumFactor,
@@ -375,7 +375,7 @@ impl<'a> ConstArenaExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(ConstArenaExcel::VT_RELATIVEOPPONENTRANKSTART, None)}
   }
   #[inline]
-  pub fn relativeOpponentRankEnd(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RelativeOpponentRankEnd(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -530,7 +530,7 @@ impl flatbuffers::Verifiable for ConstArenaExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("characterSlotHideRank", Self::VT_CHARACTERSLOTHIDERANK, false)?
      .visit_field::<i64>("MapSlotHideRank", Self::VT_MAPSLOTHIDERANK, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RelativeOpponentRankStart", Self::VT_RELATIVEOPPONENTRANKSTART, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("relativeOpponentRankEnd", Self::VT_RELATIVEOPPONENTRANKEND, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RelativeOpponentRankEnd", Self::VT_RELATIVEOPPONENTRANKEND, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StatType>>>("ModifiedStatType", Self::VT_MODIFIEDSTATTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("statMulFactor", Self::VT_STATMULFACTOR, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("statSumFactor", Self::VT_STATSUMFACTOR, false)?
@@ -568,7 +568,7 @@ pub struct ConstArenaExcelArgs<'a> {
     pub characterSlotHideRank: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub MapSlotHideRank: i64,
     pub RelativeOpponentRankStart: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub relativeOpponentRankEnd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RelativeOpponentRankEnd: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ModifiedStatType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StatType>>>,
     pub statMulFactor: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub statSumFactor: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
@@ -606,7 +606,7 @@ impl<'a> Default for ConstArenaExcelArgs<'a> {
       characterSlotHideRank: None,
       MapSlotHideRank: 0,
       RelativeOpponentRankStart: None,
-      relativeOpponentRankEnd: None,
+      RelativeOpponentRankEnd: None,
       ModifiedStatType: None,
       statMulFactor: None,
       statSumFactor: None,
@@ -665,10 +665,10 @@ impl Serialize for ConstArenaExcel<'_> {
       } else {
         s.skip_field("RelativeOpponentRankStart")?;
       }
-      if let Some(f) = self.relativeOpponentRankEnd() {
-        s.serialize_field("relativeOpponentRankEnd", &f)?;
+      if let Some(f) = self.RelativeOpponentRankEnd() {
+        s.serialize_field("RelativeOpponentRankEnd", &f)?;
       } else {
-        s.skip_field("relativeOpponentRankEnd")?;
+        s.skip_field("RelativeOpponentRankEnd")?;
       }
       if let Some(f) = self.ModifiedStatType() {
         s.serialize_field("ModifiedStatType", &f)?;
@@ -782,8 +782,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConstArenaExcelBuilder<'a, 'b, 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_RELATIVEOPPONENTRANKSTART, RelativeOpponentRankStart);
   }
   #[inline]
-  pub fn add_relativeOpponentRankEnd(&mut self, relativeOpponentRankEnd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_RELATIVEOPPONENTRANKEND, relativeOpponentRankEnd);
+  pub fn add_RelativeOpponentRankEnd(&mut self, RelativeOpponentRankEnd: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ConstArenaExcel::VT_RELATIVEOPPONENTRANKEND, RelativeOpponentRankEnd);
   }
   #[inline]
   pub fn add_ModifiedStatType(&mut self, ModifiedStatType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , StatType>>) {
@@ -889,7 +889,7 @@ impl core::fmt::Debug for ConstArenaExcel<'_> {
       ds.field("characterSlotHideRank", &self.characterSlotHideRank());
       ds.field("MapSlotHideRank", &self.MapSlotHideRank());
       ds.field("RelativeOpponentRankStart", &self.RelativeOpponentRankStart());
-      ds.field("relativeOpponentRankEnd", &self.relativeOpponentRankEnd());
+      ds.field("RelativeOpponentRankEnd", &self.RelativeOpponentRankEnd());
       ds.field("ModifiedStatType", &self.ModifiedStatType());
       ds.field("statMulFactor", &self.statMulFactor());
       ds.field("statSumFactor", &self.statSumFactor());
@@ -928,7 +928,7 @@ pub struct ConstArenaExcelT {
   pub characterSlotHideRank: Option<Vec<i64>>,
   pub MapSlotHideRank: i64,
   pub RelativeOpponentRankStart: Option<Vec<i64>>,
-  pub relativeOpponentRankEnd: Option<Vec<i64>>,
+  pub RelativeOpponentRankEnd: Option<Vec<i64>>,
   pub ModifiedStatType: Option<Vec<StatType>>,
   pub statMulFactor: Option<Vec<i64>>,
   pub statSumFactor: Option<Vec<i64>>,
@@ -965,7 +965,7 @@ impl Default for ConstArenaExcelT {
       characterSlotHideRank: None,
       MapSlotHideRank: 0,
       RelativeOpponentRankStart: None,
-      relativeOpponentRankEnd: None,
+      RelativeOpponentRankEnd: None,
       ModifiedStatType: None,
       statMulFactor: None,
       statSumFactor: None,
@@ -1014,7 +1014,7 @@ impl ConstArenaExcelT {
     let RelativeOpponentRankStart = self.RelativeOpponentRankStart.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let relativeOpponentRankEnd = self.relativeOpponentRankEnd.as_ref().map(|x|{
+    let RelativeOpponentRankEnd = self.RelativeOpponentRankEnd.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ModifiedStatType = self.ModifiedStatType.as_ref().map(|x|{
@@ -1064,7 +1064,7 @@ impl ConstArenaExcelT {
       characterSlotHideRank,
       MapSlotHideRank,
       RelativeOpponentRankStart,
-      relativeOpponentRankEnd,
+      RelativeOpponentRankEnd,
       ModifiedStatType,
       statMulFactor,
       statSumFactor,

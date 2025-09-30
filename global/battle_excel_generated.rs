@@ -174,15 +174,15 @@ impl<'a> BattleExcel<'a> {
       let x = args.Single;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_Single(x);
-      if let Some(x) = args.None {
-        builder.add_None(x);
+      if let Some(x) = args.none {
+        builder.add_none(x);
       }
     builder.finish()
   }
 
   pub fn unpack(&self) -> BattleExcelT {
     let key = table_encryption_service::create_key(b"Battle");
-    let None = self.None().map(|x| {
+    let none = self.none().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let Single = if table_encryption_service::use_encryption() {
@@ -349,7 +349,7 @@ impl<'a> BattleExcel<'a> {
         self.Talk()
       };
     BattleExcelT {
-      None,
+      none,
       Single,
       Guided,
       Blue,
@@ -387,7 +387,7 @@ impl<'a> BattleExcel<'a> {
   }
 
   #[inline]
-  pub fn None(&self) -> Option<flatbuffers::Vector<'a, UnitType>> {
+  pub fn none(&self) -> Option<flatbuffers::Vector<'a, UnitType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -633,7 +633,7 @@ impl flatbuffers::Verifiable for BattleExcel<'_> {
   ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, UnitType>>>("None", Self::VT_NONE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, UnitType>>>("none", Self::VT_NONE, false)?
      .visit_field::<AttackType>("Single", Self::VT_SINGLE, false)?
      .visit_field::<ProjectileType>("Guided", Self::VT_GUIDED, false)?
      .visit_field::<DamageFontColor>("Blue", Self::VT_BLUE, false)?
@@ -672,7 +672,7 @@ impl flatbuffers::Verifiable for BattleExcel<'_> {
   }
 }
 pub struct BattleExcelArgs<'a> {
-    pub None: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, UnitType>>>,
+    pub none: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, UnitType>>>,
     pub Single: AttackType,
     pub Guided: ProjectileType,
     pub Blue: DamageFontColor,
@@ -711,7 +711,7 @@ impl<'a> Default for BattleExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     BattleExcelArgs {
-      None: None,
+      none: None,
       Single: AttackType::Single,
       Guided: ProjectileType::Guided,
       Blue: DamageFontColor::Blue,
@@ -755,10 +755,10 @@ impl Serialize for BattleExcel<'_> {
     S: Serializer,
   {
     let mut s = serializer.serialize_struct("BattleExcel", 34)?;
-      if let Some(f) = self.None() {
-        s.serialize_field("None", &f)?;
+      if let Some(f) = self.none() {
+        s.serialize_field("none", &f)?;
       } else {
-        s.skip_field("None")?;
+        s.skip_field("none")?;
       }
       s.serialize_field("Single", &self.Single())?;
       s.serialize_field("Guided", &self.Guided())?;
@@ -807,8 +807,8 @@ pub struct BattleExcelBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
 }
 impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> BattleExcelBuilder<'a, 'b, A> {
   #[inline]
-  pub fn add_None(&mut self, None: flatbuffers::WIPOffset<flatbuffers::Vector<'b , UnitType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(BattleExcel::VT_NONE, None);
+  pub fn add_none(&mut self, none: flatbuffers::WIPOffset<flatbuffers::Vector<'b , UnitType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(BattleExcel::VT_NONE, none);
   }
   #[inline]
   pub fn add_Single(&mut self, Single: AttackType) {
@@ -960,7 +960,7 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> BattleExcelBuilder<'a, 'b, A> {
 impl core::fmt::Debug for BattleExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("BattleExcel");
-      ds.field("None", &self.None());
+      ds.field("none", &self.none());
       ds.field("Single", &self.Single());
       ds.field("Guided", &self.Guided());
       ds.field("Blue", &self.Blue());
@@ -1000,7 +1000,7 @@ impl core::fmt::Debug for BattleExcel<'_> {
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
 pub struct BattleExcelT {
-  pub None: Option<Vec<UnitType>>,
+  pub none: Option<Vec<UnitType>>,
   pub Single: AttackType,
   pub Guided: ProjectileType,
   pub Blue: DamageFontColor,
@@ -1038,7 +1038,7 @@ pub struct BattleExcelT {
 impl Default for BattleExcelT {
   fn default() -> Self {
     Self {
-      None: None,
+      none: None,
       Single: AttackType::Single,
       Guided: ProjectileType::Guided,
       Blue: DamageFontColor::Blue,
@@ -1080,7 +1080,7 @@ impl BattleExcelT {
     &self,
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<BattleExcel<'b>> {
-    let None = self.None.as_ref().map(|x|{
+    let none = self.none.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let Single = self.Single;
@@ -1119,7 +1119,7 @@ impl BattleExcelT {
     let SpecialTransStat = self.SpecialTransStat;
     let Talk = self.Talk;
     BattleExcel::create(_fbb, &BattleExcelArgs{
-      None,
+      none,
       Single,
       Guided,
       Blue,

@@ -52,11 +52,11 @@ impl<'a> DefaultEchelonExcel<'a> {
       let x = args.LeaderId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_LeaderId(x);
-      if let Some(x) = args.supportId {
-        builder.add_supportId(x);
+      if let Some(x) = args.SupportId {
+        builder.add_SupportId(x);
       }
-      if let Some(x) = args.MainId {
-        builder.add_MainId(x);
+      if let Some(x) = args.mainId {
+        builder.add_mainId(x);
       }
       let x = args.EchlonId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -68,18 +68,18 @@ impl<'a> DefaultEchelonExcel<'a> {
     let key = table_encryption_service::create_key(b"DefaultEchelon");
       let EchlonId = self.EchlonId();
       let LeaderId = self.LeaderId();
-    let MainId = self.MainId().map(|x| {
+    let mainId = self.mainId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let supportId = self.supportId().map(|x| {
+    let SupportId = self.SupportId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let TssId = self.TssId();
     DefaultEchelonExcelT {
       EchlonId,
       LeaderId,
-      MainId,
-      supportId,
+      mainId,
+      SupportId,
       TssId,
     }
   }
@@ -99,14 +99,14 @@ impl<'a> DefaultEchelonExcel<'a> {
     unsafe { self._tab.get::<i64>(DefaultEchelonExcel::VT_LEADERID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn MainId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn mainId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(DefaultEchelonExcel::VT_MAINID, None)}
   }
   #[inline]
-  pub fn supportId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn SupportId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -130,8 +130,8 @@ impl flatbuffers::Verifiable for DefaultEchelonExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i32>("EchlonId", Self::VT_ECHLONID, false)?
      .visit_field::<i64>("LeaderId", Self::VT_LEADERID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("MainId", Self::VT_MAINID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("supportId", Self::VT_SUPPORTID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("mainId", Self::VT_MAINID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("SupportId", Self::VT_SUPPORTID, false)?
      .visit_field::<i64>("TssId", Self::VT_TSSID, false)?
      .finish();
     Ok(())
@@ -140,8 +140,8 @@ impl flatbuffers::Verifiable for DefaultEchelonExcel<'_> {
 pub struct DefaultEchelonExcelArgs<'a> {
     pub EchlonId: i32,
     pub LeaderId: i64,
-    pub MainId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub supportId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub mainId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub SupportId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub TssId: i64,
 }
 impl<'a> Default for DefaultEchelonExcelArgs<'a> {
@@ -150,8 +150,8 @@ impl<'a> Default for DefaultEchelonExcelArgs<'a> {
     DefaultEchelonExcelArgs {
       EchlonId: 0,
       LeaderId: 0,
-      MainId: None,
-      supportId: None,
+      mainId: None,
+      SupportId: None,
       TssId: 0,
     }
   }
@@ -165,15 +165,15 @@ impl Serialize for DefaultEchelonExcel<'_> {
     let mut s = serializer.serialize_struct("DefaultEchelonExcel", 5)?;
       s.serialize_field("EchlonId", &self.EchlonId())?;
       s.serialize_field("LeaderId", &self.LeaderId())?;
-      if let Some(f) = self.MainId() {
-        s.serialize_field("MainId", &f)?;
+      if let Some(f) = self.mainId() {
+        s.serialize_field("mainId", &f)?;
       } else {
-        s.skip_field("MainId")?;
+        s.skip_field("mainId")?;
       }
-      if let Some(f) = self.supportId() {
-        s.serialize_field("supportId", &f)?;
+      if let Some(f) = self.SupportId() {
+        s.serialize_field("SupportId", &f)?;
       } else {
-        s.skip_field("supportId")?;
+        s.skip_field("SupportId")?;
       }
       s.serialize_field("TssId", &self.TssId())?;
     s.end()
@@ -194,12 +194,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> DefaultEchelonExcelBuilder<'a, 
     self.fbb_.push_slot::<i64>(DefaultEchelonExcel::VT_LEADERID, LeaderId, 0);
   }
   #[inline]
-  pub fn add_MainId(&mut self, MainId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(DefaultEchelonExcel::VT_MAINID, MainId);
+  pub fn add_mainId(&mut self, mainId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(DefaultEchelonExcel::VT_MAINID, mainId);
   }
   #[inline]
-  pub fn add_supportId(&mut self, supportId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(DefaultEchelonExcel::VT_SUPPORTID, supportId);
+  pub fn add_SupportId(&mut self, SupportId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(DefaultEchelonExcel::VT_SUPPORTID, SupportId);
   }
   #[inline]
   pub fn add_TssId(&mut self, TssId: i64) {
@@ -225,8 +225,8 @@ impl core::fmt::Debug for DefaultEchelonExcel<'_> {
     let mut ds = f.debug_struct("DefaultEchelonExcel");
       ds.field("EchlonId", &self.EchlonId());
       ds.field("LeaderId", &self.LeaderId());
-      ds.field("MainId", &self.MainId());
-      ds.field("supportId", &self.supportId());
+      ds.field("mainId", &self.mainId());
+      ds.field("SupportId", &self.SupportId());
       ds.field("TssId", &self.TssId());
       ds.finish()
   }
@@ -236,8 +236,8 @@ impl core::fmt::Debug for DefaultEchelonExcel<'_> {
 pub struct DefaultEchelonExcelT {
   pub EchlonId: i32,
   pub LeaderId: i64,
-  pub MainId: Option<Vec<i64>>,
-  pub supportId: Option<Vec<i64>>,
+  pub mainId: Option<Vec<i64>>,
+  pub SupportId: Option<Vec<i64>>,
   pub TssId: i64,
 }
 impl Default for DefaultEchelonExcelT {
@@ -245,8 +245,8 @@ impl Default for DefaultEchelonExcelT {
     Self {
       EchlonId: 0,
       LeaderId: 0,
-      MainId: None,
-      supportId: None,
+      mainId: None,
+      SupportId: None,
       TssId: 0,
     }
   }
@@ -258,18 +258,18 @@ impl DefaultEchelonExcelT {
   ) -> flatbuffers::WIPOffset<DefaultEchelonExcel<'b>> {
     let EchlonId = self.EchlonId;
     let LeaderId = self.LeaderId;
-    let MainId = self.MainId.as_ref().map(|x|{
+    let mainId = self.mainId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let supportId = self.supportId.as_ref().map(|x|{
+    let SupportId = self.SupportId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let TssId = self.TssId;
     DefaultEchelonExcel::create(_fbb, &DefaultEchelonExcelArgs{
       EchlonId,
       LeaderId,
-      MainId,
-      supportId,
+      mainId,
+      SupportId,
       TssId,
     })
   }

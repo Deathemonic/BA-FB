@@ -55,8 +55,8 @@ impl<'a> DefaultMailExcel<'a> {
       if let Some(x) = args.RewardParcelAmount {
         builder.add_RewardParcelAmount(x);
       }
-      if let Some(x) = args.rewardParcelId {
-        builder.add_rewardParcelId(x);
+      if let Some(x) = args.RewardParcelId {
+        builder.add_RewardParcelId(x);
       }
       if let Some(x) = args.RewardParcelType {
         builder.add_RewardParcelType(x);
@@ -94,7 +94,7 @@ impl<'a> DefaultMailExcel<'a> {
     let RewardParcelType = self.RewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let rewardParcelId = self.rewardParcelId().map(|x| {
+    let RewardParcelId = self.RewardParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let RewardParcelAmount = self.RewardParcelAmount().map(|x| {
@@ -107,7 +107,7 @@ impl<'a> DefaultMailExcel<'a> {
       MailSendPeriodFrom,
       MailSendPeriodTo,
       RewardParcelType,
-      rewardParcelId,
+      RewardParcelId,
       RewardParcelAmount,
     }
   }
@@ -155,7 +155,7 @@ impl<'a> DefaultMailExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(DefaultMailExcel::VT_REWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn rewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -183,7 +183,7 @@ impl flatbuffers::Verifiable for DefaultMailExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MailSendPeriodFrom", Self::VT_MAILSENDPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("MailSendPeriodTo", Self::VT_MAILSENDPERIODTO, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardParcelId", Self::VT_REWARDPARCELID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelAmount", Self::VT_REWARDPARCELAMOUNT, false)?
      .finish();
     Ok(())
@@ -196,7 +196,7 @@ pub struct DefaultMailExcelArgs<'a> {
     pub MailSendPeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub MailSendPeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
     pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub rewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardParcelAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for DefaultMailExcelArgs<'a> {
@@ -209,7 +209,7 @@ impl<'a> Default for DefaultMailExcelArgs<'a> {
       MailSendPeriodFrom: None,
       MailSendPeriodTo: None,
       RewardParcelType: None,
-      rewardParcelId: None,
+      RewardParcelId: None,
       RewardParcelAmount: None,
     }
   }
@@ -239,10 +239,10 @@ impl Serialize for DefaultMailExcel<'_> {
       } else {
         s.skip_field("RewardParcelType")?;
       }
-      if let Some(f) = self.rewardParcelId() {
-        s.serialize_field("rewardParcelId", &f)?;
+      if let Some(f) = self.RewardParcelId() {
+        s.serialize_field("RewardParcelId", &f)?;
       } else {
-        s.skip_field("rewardParcelId")?;
+        s.skip_field("RewardParcelId")?;
       }
       if let Some(f) = self.RewardParcelAmount() {
         s.serialize_field("RewardParcelAmount", &f)?;
@@ -283,8 +283,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> DefaultMailExcelBuilder<'a, 'b,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(DefaultMailExcel::VT_REWARDPARCELTYPE, RewardParcelType);
   }
   #[inline]
-  pub fn add_rewardParcelId(&mut self, rewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(DefaultMailExcel::VT_REWARDPARCELID, rewardParcelId);
+  pub fn add_RewardParcelId(&mut self, RewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(DefaultMailExcel::VT_REWARDPARCELID, RewardParcelId);
   }
   #[inline]
   pub fn add_RewardParcelAmount(&mut self, RewardParcelAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -314,7 +314,7 @@ impl core::fmt::Debug for DefaultMailExcel<'_> {
       ds.field("MailSendPeriodFrom", &self.MailSendPeriodFrom());
       ds.field("MailSendPeriodTo", &self.MailSendPeriodTo());
       ds.field("RewardParcelType", &self.RewardParcelType());
-      ds.field("rewardParcelId", &self.rewardParcelId());
+      ds.field("RewardParcelId", &self.RewardParcelId());
       ds.field("RewardParcelAmount", &self.RewardParcelAmount());
       ds.finish()
   }
@@ -328,7 +328,7 @@ pub struct DefaultMailExcelT {
   pub MailSendPeriodFrom: Option<String>,
   pub MailSendPeriodTo: Option<String>,
   pub RewardParcelType: Option<Vec<ParcelType>>,
-  pub rewardParcelId: Option<Vec<i64>>,
+  pub RewardParcelId: Option<Vec<i64>>,
   pub RewardParcelAmount: Option<Vec<i64>>,
 }
 impl Default for DefaultMailExcelT {
@@ -340,7 +340,7 @@ impl Default for DefaultMailExcelT {
       MailSendPeriodFrom: None,
       MailSendPeriodTo: None,
       RewardParcelType: None,
-      rewardParcelId: None,
+      RewardParcelId: None,
       RewardParcelAmount: None,
     }
   }
@@ -362,7 +362,7 @@ impl DefaultMailExcelT {
     let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardParcelId = self.rewardParcelId.as_ref().map(|x|{
+    let RewardParcelId = self.RewardParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardParcelAmount = self.RewardParcelAmount.as_ref().map(|x|{
@@ -375,7 +375,7 @@ impl DefaultMailExcelT {
       MailSendPeriodFrom,
       MailSendPeriodTo,
       RewardParcelType,
-      rewardParcelId,
+      RewardParcelId,
       RewardParcelAmount,
     })
   }

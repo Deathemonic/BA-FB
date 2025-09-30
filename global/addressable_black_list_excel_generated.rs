@@ -47,11 +47,11 @@ impl<'a> AddressableBlackListExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.ResourcePath {
-        builder.add_ResourcePath(x);
+      if let Some(x) = args.resourcePath {
+        builder.add_resourcePath(x);
       }
-      if let Some(x) = args.folderPath {
-        builder.add_folderPath(x);
+      if let Some(x) = args.FolderPath {
+        builder.add_FolderPath(x);
       }
     builder.finish()
   }
@@ -59,16 +59,16 @@ impl<'a> AddressableBlackListExcel<'a> {
   pub fn unpack(&self) -> AddressableBlackListExcelT {
     let key = table_encryption_service::create_key(b"AddressableBlackList");
       let Id = self.Id();
-    let folderPath = self.folderPath().map(|x| {
+    let FolderPath = self.FolderPath().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let ResourcePath = self.ResourcePath().map(|x| {
+    let resourcePath = self.resourcePath().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     AddressableBlackListExcelT {
       Id,
-      folderPath,
-      ResourcePath,
+      FolderPath,
+      resourcePath,
     }
   }
 
@@ -80,14 +80,14 @@ impl<'a> AddressableBlackListExcel<'a> {
     unsafe { self._tab.get::<i64>(AddressableBlackListExcel::VT_ID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn folderPath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn FolderPath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(AddressableBlackListExcel::VT_FOLDERPATH, None)}
   }
   #[inline]
-  pub fn ResourcePath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn resourcePath(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -103,24 +103,24 @@ impl flatbuffers::Verifiable for AddressableBlackListExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("folderPath", Self::VT_FOLDERPATH, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ResourcePath", Self::VT_RESOURCEPATH, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("FolderPath", Self::VT_FOLDERPATH, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("resourcePath", Self::VT_RESOURCEPATH, false)?
      .finish();
     Ok(())
   }
 }
 pub struct AddressableBlackListExcelArgs<'a> {
     pub Id: i64,
-    pub folderPath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub ResourcePath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub FolderPath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub resourcePath: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
 }
 impl<'a> Default for AddressableBlackListExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     AddressableBlackListExcelArgs {
       Id: 0,
-      folderPath: None,
-      ResourcePath: None,
+      FolderPath: None,
+      resourcePath: None,
     }
   }
 }
@@ -132,15 +132,15 @@ impl Serialize for AddressableBlackListExcel<'_> {
   {
     let mut s = serializer.serialize_struct("AddressableBlackListExcel", 3)?;
       s.serialize_field("Id", &self.Id())?;
-      if let Some(f) = self.folderPath() {
-        s.serialize_field("folderPath", &f)?;
+      if let Some(f) = self.FolderPath() {
+        s.serialize_field("FolderPath", &f)?;
       } else {
-        s.skip_field("folderPath")?;
+        s.skip_field("FolderPath")?;
       }
-      if let Some(f) = self.ResourcePath() {
-        s.serialize_field("ResourcePath", &f)?;
+      if let Some(f) = self.resourcePath() {
+        s.serialize_field("resourcePath", &f)?;
       } else {
-        s.skip_field("ResourcePath")?;
+        s.skip_field("resourcePath")?;
       }
     s.end()
   }
@@ -156,12 +156,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AddressableBlackListExcelBuilde
     self.fbb_.push_slot::<i64>(AddressableBlackListExcel::VT_ID, Id, 0);
   }
   #[inline]
-  pub fn add_folderPath(&mut self, folderPath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AddressableBlackListExcel::VT_FOLDERPATH, folderPath);
+  pub fn add_FolderPath(&mut self, FolderPath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AddressableBlackListExcel::VT_FOLDERPATH, FolderPath);
   }
   #[inline]
-  pub fn add_ResourcePath(&mut self, ResourcePath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AddressableBlackListExcel::VT_RESOURCEPATH, ResourcePath);
+  pub fn add_resourcePath(&mut self, resourcePath: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AddressableBlackListExcel::VT_RESOURCEPATH, resourcePath);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> AddressableBlackListExcelBuilder<'a, 'b, A> {
@@ -182,8 +182,8 @@ impl core::fmt::Debug for AddressableBlackListExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("AddressableBlackListExcel");
       ds.field("Id", &self.Id());
-      ds.field("folderPath", &self.folderPath());
-      ds.field("ResourcePath", &self.ResourcePath());
+      ds.field("FolderPath", &self.FolderPath());
+      ds.field("resourcePath", &self.resourcePath());
       ds.finish()
   }
 }
@@ -191,15 +191,15 @@ impl core::fmt::Debug for AddressableBlackListExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct AddressableBlackListExcelT {
   pub Id: i64,
-  pub folderPath: Option<Vec<String>>,
-  pub ResourcePath: Option<Vec<String>>,
+  pub FolderPath: Option<Vec<String>>,
+  pub resourcePath: Option<Vec<String>>,
 }
 impl Default for AddressableBlackListExcelT {
   fn default() -> Self {
     Self {
       Id: 0,
-      folderPath: None,
-      ResourcePath: None,
+      FolderPath: None,
+      resourcePath: None,
     }
   }
 }
@@ -209,16 +209,16 @@ impl AddressableBlackListExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<AddressableBlackListExcel<'b>> {
     let Id = self.Id;
-    let folderPath = self.folderPath.as_ref().map(|x|{
+    let FolderPath = self.FolderPath.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let ResourcePath = self.ResourcePath.as_ref().map(|x|{
+    let resourcePath = self.resourcePath.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     AddressableBlackListExcel::create(_fbb, &AddressableBlackListExcelArgs{
       Id,
-      folderPath,
-      ResourcePath,
+      FolderPath,
+      resourcePath,
     })
   }
 }

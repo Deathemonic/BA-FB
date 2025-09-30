@@ -47,11 +47,11 @@ impl<'a> CharacterStatsDetailExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.IsStatsPercent {
-        builder.add_IsStatsPercent(x);
+      if let Some(x) = args.isStatsPercent {
+        builder.add_isStatsPercent(x);
       }
-      if let Some(x) = args.detailShowStats {
-        builder.add_detailShowStats(x);
+      if let Some(x) = args.DetailShowStats {
+        builder.add_DetailShowStats(x);
       }
     builder.finish()
   }
@@ -59,16 +59,16 @@ impl<'a> CharacterStatsDetailExcel<'a> {
   pub fn unpack(&self) -> CharacterStatsDetailExcelT {
     let key = table_encryption_service::create_key(b"CharacterStatsDetail");
       let Id = self.Id();
-    let detailShowStats = self.detailShowStats().map(|x| {
+    let DetailShowStats = self.DetailShowStats().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let IsStatsPercent = self.IsStatsPercent().map(|x| {
+    let isStatsPercent = self.isStatsPercent().map(|x| {
       x.into_iter().collect()
     });
     CharacterStatsDetailExcelT {
       Id,
-      detailShowStats,
-      IsStatsPercent,
+      DetailShowStats,
+      isStatsPercent,
     }
   }
 
@@ -80,14 +80,14 @@ impl<'a> CharacterStatsDetailExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterStatsDetailExcel::VT_ID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn detailShowStats(&self) -> Option<flatbuffers::Vector<'a, StatType>> {
+  pub fn DetailShowStats(&self) -> Option<flatbuffers::Vector<'a, StatType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, StatType>>>(CharacterStatsDetailExcel::VT_DETAILSHOWSTATS, None)}
   }
   #[inline]
-  pub fn IsStatsPercent(&self) -> Option<flatbuffers::Vector<'a, bool>> {
+  pub fn isStatsPercent(&self) -> Option<flatbuffers::Vector<'a, bool>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -103,24 +103,24 @@ impl flatbuffers::Verifiable for CharacterStatsDetailExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StatType>>>("detailShowStats", Self::VT_DETAILSHOWSTATS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("IsStatsPercent", Self::VT_ISSTATSPERCENT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, StatType>>>("DetailShowStats", Self::VT_DETAILSHOWSTATS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, bool>>>("isStatsPercent", Self::VT_ISSTATSPERCENT, false)?
      .finish();
     Ok(())
   }
 }
 pub struct CharacterStatsDetailExcelArgs<'a> {
     pub Id: i64,
-    pub detailShowStats: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StatType>>>,
-    pub IsStatsPercent: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
+    pub DetailShowStats: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, StatType>>>,
+    pub isStatsPercent: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, bool>>>,
 }
 impl<'a> Default for CharacterStatsDetailExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     CharacterStatsDetailExcelArgs {
       Id: 0,
-      detailShowStats: None,
-      IsStatsPercent: None,
+      DetailShowStats: None,
+      isStatsPercent: None,
     }
   }
 }
@@ -132,15 +132,15 @@ impl Serialize for CharacterStatsDetailExcel<'_> {
   {
     let mut s = serializer.serialize_struct("CharacterStatsDetailExcel", 3)?;
       s.serialize_field("Id", &self.Id())?;
-      if let Some(f) = self.detailShowStats() {
-        s.serialize_field("detailShowStats", &f)?;
+      if let Some(f) = self.DetailShowStats() {
+        s.serialize_field("DetailShowStats", &f)?;
       } else {
-        s.skip_field("detailShowStats")?;
+        s.skip_field("DetailShowStats")?;
       }
-      if let Some(f) = self.IsStatsPercent() {
-        s.serialize_field("IsStatsPercent", &f)?;
+      if let Some(f) = self.isStatsPercent() {
+        s.serialize_field("isStatsPercent", &f)?;
       } else {
-        s.skip_field("IsStatsPercent")?;
+        s.skip_field("isStatsPercent")?;
       }
     s.end()
   }
@@ -156,12 +156,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterStatsDetailExcelBuilde
     self.fbb_.push_slot::<i64>(CharacterStatsDetailExcel::VT_ID, Id, 0);
   }
   #[inline]
-  pub fn add_detailShowStats(&mut self, detailShowStats: flatbuffers::WIPOffset<flatbuffers::Vector<'b , StatType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterStatsDetailExcel::VT_DETAILSHOWSTATS, detailShowStats);
+  pub fn add_DetailShowStats(&mut self, DetailShowStats: flatbuffers::WIPOffset<flatbuffers::Vector<'b , StatType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterStatsDetailExcel::VT_DETAILSHOWSTATS, DetailShowStats);
   }
   #[inline]
-  pub fn add_IsStatsPercent(&mut self, IsStatsPercent: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterStatsDetailExcel::VT_ISSTATSPERCENT, IsStatsPercent);
+  pub fn add_isStatsPercent(&mut self, isStatsPercent: flatbuffers::WIPOffset<flatbuffers::Vector<'b , bool>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterStatsDetailExcel::VT_ISSTATSPERCENT, isStatsPercent);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> CharacterStatsDetailExcelBuilder<'a, 'b, A> {
@@ -182,8 +182,8 @@ impl core::fmt::Debug for CharacterStatsDetailExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("CharacterStatsDetailExcel");
       ds.field("Id", &self.Id());
-      ds.field("detailShowStats", &self.detailShowStats());
-      ds.field("IsStatsPercent", &self.IsStatsPercent());
+      ds.field("DetailShowStats", &self.DetailShowStats());
+      ds.field("isStatsPercent", &self.isStatsPercent());
       ds.finish()
   }
 }
@@ -191,15 +191,15 @@ impl core::fmt::Debug for CharacterStatsDetailExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct CharacterStatsDetailExcelT {
   pub Id: i64,
-  pub detailShowStats: Option<Vec<StatType>>,
-  pub IsStatsPercent: Option<Vec<bool>>,
+  pub DetailShowStats: Option<Vec<StatType>>,
+  pub isStatsPercent: Option<Vec<bool>>,
 }
 impl Default for CharacterStatsDetailExcelT {
   fn default() -> Self {
     Self {
       Id: 0,
-      detailShowStats: None,
-      IsStatsPercent: None,
+      DetailShowStats: None,
+      isStatsPercent: None,
     }
   }
 }
@@ -209,16 +209,16 @@ impl CharacterStatsDetailExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<CharacterStatsDetailExcel<'b>> {
     let Id = self.Id;
-    let detailShowStats = self.detailShowStats.as_ref().map(|x|{
+    let DetailShowStats = self.DetailShowStats.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let IsStatsPercent = self.IsStatsPercent.as_ref().map(|x|{
+    let isStatsPercent = self.isStatsPercent.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     CharacterStatsDetailExcel::create(_fbb, &CharacterStatsDetailExcelArgs{
       Id,
-      detailShowStats,
-      IsStatsPercent,
+      DetailShowStats,
+      isStatsPercent,
     })
   }
 }

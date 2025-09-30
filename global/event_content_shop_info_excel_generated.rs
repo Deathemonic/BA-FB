@@ -72,8 +72,8 @@ impl<'a> EventContentShopInfoExcel<'a> {
       if let Some(x) = args.OpenPeriodFrom {
         builder.add_OpenPeriodFrom(x);
       }
-      if let Some(x) = args.GoodsId {
-        builder.add_GoodsId(x);
+      if let Some(x) = args.goodsId {
+        builder.add_goodsId(x);
       }
       if let Some(x) = args.costParcelId {
         builder.add_costParcelId(x);
@@ -111,7 +111,7 @@ impl<'a> EventContentShopInfoExcel<'a> {
       let IsSoldOutDimmed = self.IsSoldOutDimmed();
       let AutoRefreshCoolTime = self.AutoRefreshCoolTime();
       let RefreshAbleCount = self.RefreshAbleCount();
-    let GoodsId = self.GoodsId().map(|x| {
+    let goodsId = self.goodsId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let OpenPeriodFrom = self.OpenPeriodFrom().map(|x| {
@@ -133,7 +133,7 @@ impl<'a> EventContentShopInfoExcel<'a> {
       IsSoldOutDimmed,
       AutoRefreshCoolTime,
       RefreshAbleCount,
-      GoodsId,
+      goodsId,
       OpenPeriodFrom,
       OpenPeriodTo,
       ShopProductUpdateDate,
@@ -204,7 +204,7 @@ impl<'a> EventContentShopInfoExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentShopInfoExcel::VT_REFRESHABLECOUNT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn GoodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn goodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -249,7 +249,7 @@ impl flatbuffers::Verifiable for EventContentShopInfoExcel<'_> {
      .visit_field::<bool>("IsSoldOutDimmed", Self::VT_ISSOLDOUTDIMMED, false)?
      .visit_field::<i64>("AutoRefreshCoolTime", Self::VT_AUTOREFRESHCOOLTIME, false)?
      .visit_field::<i64>("RefreshAbleCount", Self::VT_REFRESHABLECOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("GoodsId", Self::VT_GOODSID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("goodsId", Self::VT_GOODSID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("OpenPeriodFrom", Self::VT_OPENPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("OpenPeriodTo", Self::VT_OPENPERIODTO, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ShopProductUpdateDate", Self::VT_SHOPPRODUCTUPDATEDATE, false)?
@@ -267,7 +267,7 @@ pub struct EventContentShopInfoExcelArgs<'a> {
     pub IsSoldOutDimmed: bool,
     pub AutoRefreshCoolTime: i64,
     pub RefreshAbleCount: i64,
-    pub GoodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub goodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub OpenPeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub OpenPeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ShopProductUpdateDate: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -285,7 +285,7 @@ impl<'a> Default for EventContentShopInfoExcelArgs<'a> {
       IsSoldOutDimmed: false,
       AutoRefreshCoolTime: 0,
       RefreshAbleCount: 0,
-      GoodsId: None,
+      goodsId: None,
       OpenPeriodFrom: None,
       OpenPeriodTo: None,
       ShopProductUpdateDate: None,
@@ -316,10 +316,10 @@ impl Serialize for EventContentShopInfoExcel<'_> {
       s.serialize_field("IsSoldOutDimmed", &self.IsSoldOutDimmed())?;
       s.serialize_field("AutoRefreshCoolTime", &self.AutoRefreshCoolTime())?;
       s.serialize_field("RefreshAbleCount", &self.RefreshAbleCount())?;
-      if let Some(f) = self.GoodsId() {
-        s.serialize_field("GoodsId", &f)?;
+      if let Some(f) = self.goodsId() {
+        s.serialize_field("goodsId", &f)?;
       } else {
-        s.skip_field("GoodsId")?;
+        s.skip_field("goodsId")?;
       }
       if let Some(f) = self.OpenPeriodFrom() {
         s.serialize_field("OpenPeriodFrom", &f)?;
@@ -382,8 +382,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentShopInfoExcelBuilde
     self.fbb_.push_slot::<i64>(EventContentShopInfoExcel::VT_REFRESHABLECOUNT, RefreshAbleCount, 0);
   }
   #[inline]
-  pub fn add_GoodsId(&mut self, GoodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopInfoExcel::VT_GOODSID, GoodsId);
+  pub fn add_goodsId(&mut self, goodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopInfoExcel::VT_GOODSID, goodsId);
   }
   #[inline]
   pub fn add_OpenPeriodFrom(&mut self, OpenPeriodFrom: flatbuffers::WIPOffset<&'b  str>) {
@@ -424,7 +424,7 @@ impl core::fmt::Debug for EventContentShopInfoExcel<'_> {
       ds.field("IsSoldOutDimmed", &self.IsSoldOutDimmed());
       ds.field("AutoRefreshCoolTime", &self.AutoRefreshCoolTime());
       ds.field("RefreshAbleCount", &self.RefreshAbleCount());
-      ds.field("GoodsId", &self.GoodsId());
+      ds.field("goodsId", &self.goodsId());
       ds.field("OpenPeriodFrom", &self.OpenPeriodFrom());
       ds.field("OpenPeriodTo", &self.OpenPeriodTo());
       ds.field("ShopProductUpdateDate", &self.ShopProductUpdateDate());
@@ -443,7 +443,7 @@ pub struct EventContentShopInfoExcelT {
   pub IsSoldOutDimmed: bool,
   pub AutoRefreshCoolTime: i64,
   pub RefreshAbleCount: i64,
-  pub GoodsId: Option<Vec<i64>>,
+  pub goodsId: Option<Vec<i64>>,
   pub OpenPeriodFrom: Option<String>,
   pub OpenPeriodTo: Option<String>,
   pub ShopProductUpdateDate: Option<String>,
@@ -460,7 +460,7 @@ impl Default for EventContentShopInfoExcelT {
       IsSoldOutDimmed: false,
       AutoRefreshCoolTime: 0,
       RefreshAbleCount: 0,
-      GoodsId: None,
+      goodsId: None,
       OpenPeriodFrom: None,
       OpenPeriodTo: None,
       ShopProductUpdateDate: None,
@@ -485,7 +485,7 @@ impl EventContentShopInfoExcelT {
     let IsSoldOutDimmed = self.IsSoldOutDimmed;
     let AutoRefreshCoolTime = self.AutoRefreshCoolTime;
     let RefreshAbleCount = self.RefreshAbleCount;
-    let GoodsId = self.GoodsId.as_ref().map(|x|{
+    let goodsId = self.goodsId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let OpenPeriodFrom = self.OpenPeriodFrom.as_ref().map(|x|{
@@ -507,7 +507,7 @@ impl EventContentShopInfoExcelT {
       IsSoldOutDimmed,
       AutoRefreshCoolTime,
       RefreshAbleCount,
-      GoodsId,
+      goodsId,
       OpenPeriodFrom,
       OpenPeriodTo,
       ShopProductUpdateDate,

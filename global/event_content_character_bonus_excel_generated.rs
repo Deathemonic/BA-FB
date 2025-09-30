@@ -51,11 +51,11 @@ impl<'a> EventContentCharacterBonusExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.BonusPercentage {
-        builder.add_BonusPercentage(x);
+      if let Some(x) = args.bonusPercentage {
+        builder.add_bonusPercentage(x);
       }
-      if let Some(x) = args.EventContentItemType {
-        builder.add_EventContentItemType(x);
+      if let Some(x) = args.eventContentItemType {
+        builder.add_eventContentItemType(x);
       }
     builder.finish()
   }
@@ -64,17 +64,17 @@ impl<'a> EventContentCharacterBonusExcel<'a> {
     let key = table_encryption_service::create_key(b"EventContentCharacterBonus");
       let EventContentId = self.EventContentId();
       let CharacterId = self.CharacterId();
-    let EventContentItemType = self.EventContentItemType().map(|x| {
+    let eventContentItemType = self.eventContentItemType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let BonusPercentage = self.BonusPercentage().map(|x| {
+    let bonusPercentage = self.bonusPercentage().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     EventContentCharacterBonusExcelT {
       EventContentId,
       CharacterId,
-      EventContentItemType,
-      BonusPercentage,
+      eventContentItemType,
+      bonusPercentage,
     }
   }
 
@@ -93,14 +93,14 @@ impl<'a> EventContentCharacterBonusExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentCharacterBonusExcel::VT_CHARACTERID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn EventContentItemType(&self) -> Option<flatbuffers::Vector<'a, EventContentItemType>> {
+  pub fn eventContentItemType(&self) -> Option<flatbuffers::Vector<'a, EventContentItemType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, EventContentItemType>>>(EventContentCharacterBonusExcel::VT_EVENTCONTENTITEMTYPE, None)}
   }
   #[inline]
-  pub fn BonusPercentage(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn bonusPercentage(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -117,8 +117,8 @@ impl flatbuffers::Verifiable for EventContentCharacterBonusExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
      .visit_field::<i64>("CharacterId", Self::VT_CHARACTERID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EventContentItemType>>>("EventContentItemType", Self::VT_EVENTCONTENTITEMTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("BonusPercentage", Self::VT_BONUSPERCENTAGE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EventContentItemType>>>("eventContentItemType", Self::VT_EVENTCONTENTITEMTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("bonusPercentage", Self::VT_BONUSPERCENTAGE, false)?
      .finish();
     Ok(())
   }
@@ -126,8 +126,8 @@ impl flatbuffers::Verifiable for EventContentCharacterBonusExcel<'_> {
 pub struct EventContentCharacterBonusExcelArgs<'a> {
     pub EventContentId: i64,
     pub CharacterId: i64,
-    pub EventContentItemType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EventContentItemType>>>,
-    pub BonusPercentage: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub eventContentItemType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EventContentItemType>>>,
+    pub bonusPercentage: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EventContentCharacterBonusExcelArgs<'a> {
   #[inline]
@@ -135,8 +135,8 @@ impl<'a> Default for EventContentCharacterBonusExcelArgs<'a> {
     EventContentCharacterBonusExcelArgs {
       EventContentId: 0,
       CharacterId: 0,
-      EventContentItemType: None,
-      BonusPercentage: None,
+      eventContentItemType: None,
+      bonusPercentage: None,
     }
   }
 }
@@ -149,15 +149,15 @@ impl Serialize for EventContentCharacterBonusExcel<'_> {
     let mut s = serializer.serialize_struct("EventContentCharacterBonusExcel", 4)?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("CharacterId", &self.CharacterId())?;
-      if let Some(f) = self.EventContentItemType() {
-        s.serialize_field("EventContentItemType", &f)?;
+      if let Some(f) = self.eventContentItemType() {
+        s.serialize_field("eventContentItemType", &f)?;
       } else {
-        s.skip_field("EventContentItemType")?;
+        s.skip_field("eventContentItemType")?;
       }
-      if let Some(f) = self.BonusPercentage() {
-        s.serialize_field("BonusPercentage", &f)?;
+      if let Some(f) = self.bonusPercentage() {
+        s.serialize_field("bonusPercentage", &f)?;
       } else {
-        s.skip_field("BonusPercentage")?;
+        s.skip_field("bonusPercentage")?;
       }
     s.end()
   }
@@ -177,12 +177,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentCharacterBonusExcel
     self.fbb_.push_slot::<i64>(EventContentCharacterBonusExcel::VT_CHARACTERID, CharacterId, 0);
   }
   #[inline]
-  pub fn add_EventContentItemType(&mut self, EventContentItemType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , EventContentItemType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCharacterBonusExcel::VT_EVENTCONTENTITEMTYPE, EventContentItemType);
+  pub fn add_eventContentItemType(&mut self, eventContentItemType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , EventContentItemType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCharacterBonusExcel::VT_EVENTCONTENTITEMTYPE, eventContentItemType);
   }
   #[inline]
-  pub fn add_BonusPercentage(&mut self, BonusPercentage: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCharacterBonusExcel::VT_BONUSPERCENTAGE, BonusPercentage);
+  pub fn add_bonusPercentage(&mut self, bonusPercentage: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCharacterBonusExcel::VT_BONUSPERCENTAGE, bonusPercentage);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentCharacterBonusExcelBuilder<'a, 'b, A> {
@@ -204,8 +204,8 @@ impl core::fmt::Debug for EventContentCharacterBonusExcel<'_> {
     let mut ds = f.debug_struct("EventContentCharacterBonusExcel");
       ds.field("EventContentId", &self.EventContentId());
       ds.field("CharacterId", &self.CharacterId());
-      ds.field("EventContentItemType", &self.EventContentItemType());
-      ds.field("BonusPercentage", &self.BonusPercentage());
+      ds.field("eventContentItemType", &self.eventContentItemType());
+      ds.field("bonusPercentage", &self.bonusPercentage());
       ds.finish()
   }
 }
@@ -214,16 +214,16 @@ impl core::fmt::Debug for EventContentCharacterBonusExcel<'_> {
 pub struct EventContentCharacterBonusExcelT {
   pub EventContentId: i64,
   pub CharacterId: i64,
-  pub EventContentItemType: Option<Vec<EventContentItemType>>,
-  pub BonusPercentage: Option<Vec<i64>>,
+  pub eventContentItemType: Option<Vec<EventContentItemType>>,
+  pub bonusPercentage: Option<Vec<i64>>,
 }
 impl Default for EventContentCharacterBonusExcelT {
   fn default() -> Self {
     Self {
       EventContentId: 0,
       CharacterId: 0,
-      EventContentItemType: None,
-      BonusPercentage: None,
+      eventContentItemType: None,
+      bonusPercentage: None,
     }
   }
 }
@@ -234,17 +234,17 @@ impl EventContentCharacterBonusExcelT {
   ) -> flatbuffers::WIPOffset<EventContentCharacterBonusExcel<'b>> {
     let EventContentId = self.EventContentId;
     let CharacterId = self.CharacterId;
-    let EventContentItemType = self.EventContentItemType.as_ref().map(|x|{
+    let eventContentItemType = self.eventContentItemType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let BonusPercentage = self.BonusPercentage.as_ref().map(|x|{
+    let bonusPercentage = self.bonusPercentage.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     EventContentCharacterBonusExcel::create(_fbb, &EventContentCharacterBonusExcelArgs{
       EventContentId,
       CharacterId,
-      EventContentItemType,
-      BonusPercentage,
+      eventContentItemType,
+      bonusPercentage,
     })
   }
 }

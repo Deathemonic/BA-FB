@@ -54,8 +54,8 @@ impl<'a> EventContentCardExcel<'a> {
       if let Some(x) = args.RewardParcelId {
         builder.add_RewardParcelId(x);
       }
-      if let Some(x) = args.RewardParcelType {
-        builder.add_RewardParcelType(x);
+      if let Some(x) = args.rewardParcelType {
+        builder.add_rewardParcelType(x);
       }
       if let Some(x) = args.BackIconPath {
         builder.add_BackIconPath(x);
@@ -83,7 +83,7 @@ impl<'a> EventContentCardExcel<'a> {
     let BackIconPath = self.BackIconPath().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let RewardParcelType = self.RewardParcelType().map(|x| {
+    let rewardParcelType = self.rewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     let RewardParcelId = self.RewardParcelId().map(|x| {
@@ -95,7 +95,7 @@ impl<'a> EventContentCardExcel<'a> {
       LocalizeEtcId,
       IconPath,
       BackIconPath,
-      RewardParcelType,
+      rewardParcelType,
       RewardParcelId,
     }
   }
@@ -136,7 +136,7 @@ impl<'a> EventContentCardExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentCardExcel::VT_BACKICONPATH, None)}
   }
   #[inline]
-  pub fn RewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn rewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -163,7 +163,7 @@ impl flatbuffers::Verifiable for EventContentCardExcel<'_> {
      .visit_field::<u32>("LocalizeEtcId", Self::VT_LOCALIZEETCID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("IconPath", Self::VT_ICONPATH, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BackIconPath", Self::VT_BACKICONPATH, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
      .finish();
     Ok(())
@@ -175,7 +175,7 @@ pub struct EventContentCardExcelArgs<'a> {
     pub LocalizeEtcId: u32,
     pub IconPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub BackIconPath: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
     pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for EventContentCardExcelArgs<'a> {
@@ -187,7 +187,7 @@ impl<'a> Default for EventContentCardExcelArgs<'a> {
       LocalizeEtcId: 0,
       IconPath: None,
       BackIconPath: None,
-      RewardParcelType: None,
+      rewardParcelType: None,
       RewardParcelId: None,
     }
   }
@@ -212,10 +212,10 @@ impl Serialize for EventContentCardExcel<'_> {
       } else {
         s.skip_field("BackIconPath")?;
       }
-      if let Some(f) = self.RewardParcelType() {
-        s.serialize_field("RewardParcelType", &f)?;
+      if let Some(f) = self.rewardParcelType() {
+        s.serialize_field("rewardParcelType", &f)?;
       } else {
-        s.skip_field("RewardParcelType")?;
+        s.skip_field("rewardParcelType")?;
       }
       if let Some(f) = self.RewardParcelId() {
         s.serialize_field("RewardParcelId", &f)?;
@@ -252,8 +252,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentCardExcelBuilder<'a
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCardExcel::VT_BACKICONPATH, BackIconPath);
   }
   #[inline]
-  pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCardExcel::VT_REWARDPARCELTYPE, RewardParcelType);
+  pub fn add_rewardParcelType(&mut self, rewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentCardExcel::VT_REWARDPARCELTYPE, rewardParcelType);
   }
   #[inline]
   pub fn add_RewardParcelId(&mut self, RewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
@@ -282,7 +282,7 @@ impl core::fmt::Debug for EventContentCardExcel<'_> {
       ds.field("LocalizeEtcId", &self.LocalizeEtcId());
       ds.field("IconPath", &self.IconPath());
       ds.field("BackIconPath", &self.BackIconPath());
-      ds.field("RewardParcelType", &self.RewardParcelType());
+      ds.field("rewardParcelType", &self.rewardParcelType());
       ds.field("RewardParcelId", &self.RewardParcelId());
       ds.finish()
   }
@@ -295,7 +295,7 @@ pub struct EventContentCardExcelT {
   pub LocalizeEtcId: u32,
   pub IconPath: Option<String>,
   pub BackIconPath: Option<String>,
-  pub RewardParcelType: Option<Vec<ParcelType>>,
+  pub rewardParcelType: Option<Vec<ParcelType>>,
   pub RewardParcelId: Option<Vec<i64>>,
 }
 impl Default for EventContentCardExcelT {
@@ -306,7 +306,7 @@ impl Default for EventContentCardExcelT {
       LocalizeEtcId: 0,
       IconPath: None,
       BackIconPath: None,
-      RewardParcelType: None,
+      rewardParcelType: None,
       RewardParcelId: None,
     }
   }
@@ -325,7 +325,7 @@ impl EventContentCardExcelT {
     let BackIconPath = self.BackIconPath.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
+    let rewardParcelType = self.rewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardParcelId = self.RewardParcelId.as_ref().map(|x|{
@@ -337,7 +337,7 @@ impl EventContentCardExcelT {
       LocalizeEtcId,
       IconPath,
       BackIconPath,
-      RewardParcelType,
+      rewardParcelType,
       RewardParcelId,
     })
   }
