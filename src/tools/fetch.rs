@@ -29,7 +29,7 @@ pub struct ToolsFetcher {
 impl ToolsFetcher {
     pub fn new() -> Result<Self> {
         let downloader = DownloaderBuilder::new()
-            .directory(file::data_dir()?)
+            .directory(file::data_dir()?.into())
             .use_range_for_content_length(true)
             .single_file_progress(true)
             .overwrite(true)
