@@ -104,22 +104,22 @@ impl ToolsFetcher {
         }
     }
 
-    pub async fn il2cpp_dumper(&self) -> Result<()> {
+    pub async fn il2cpp_dumper(&self, repo: &str) -> Result<()> {
         self.download_tool(
-            IL2CPP_INSPECTOR_REPO,
+            repo,
             IL2CPP_INSPECTOR_FILE,
             Self::get_platform,
         )
         .await
     }
 
-    pub async fn fbs_dumper(&self) -> Result<()> {
-        self.download_tool(FBS_DUMPER_REPO, FBS_DUMPER_FILE, Self::get_platform)
+    pub async fn fbs_dumper(&self, repo: &str) -> Result<()> {
+        self.download_tool(repo, FBS_DUMPER_FILE, Self::get_platform)
             .await
     }
 
-    pub async fn flatc(&self) -> Result<()> {
-        self.download_tool(FLATC_REPO, FLATC_FILE, || match (OS, ARCH) {
+    pub async fn flatc(&self, repo: &str) -> Result<()> {
+        self.download_tool(repo, FLATC_FILE, || match (OS, ARCH) {
             ("windows", _) => Ok("Windows.flatc.binary.zip"),
             ("macos", "aarch64") => Ok("Mac.flatc.binary.zip"),
             ("macos", "x86_64") => Ok("MacIntel.flatc.binary.zip"),

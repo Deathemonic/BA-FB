@@ -9,6 +9,7 @@ pub struct Il2CppDumper {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Il2CppDumperOptions {
+    pub url: Option<String>,
     pub il2cpp: PathBuf,
     pub metadata: Option<PathBuf>,
     pub output: Option<PathBuf>,
@@ -34,6 +35,7 @@ pub struct Il2CppDumperOptions {
 impl Default for Il2CppDumperOptions {
     fn default() -> Self {
         Self {
+            url: None,
             il2cpp: PathBuf::new(),
             metadata: None,
             output: None,

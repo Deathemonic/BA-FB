@@ -1,5 +1,6 @@
 use crate::cli::args::{Args, Commands, DumpTarget};
 use crate::cli::config::Config;
+use crate::helpers::config::*;
 use crate::tools::extract::ToolsExtractor;
 use crate::tools::fetch::ToolsFetcher;
 use crate::wrappers::fbs_dumper::{FbsDumper, FbsDumperOptions};
@@ -61,9 +62,27 @@ impl CommandHandler {
         apk_fetcher.download_apk(true).await?;
 
         let tool_fetcher = ToolsFetcher::new()?;
-        tool_fetcher.il2cpp_dumper().await?;
-        tool_fetcher.fbs_dumper().await?;
-        tool_fetcher.flatc().await?;
+        tool_fetcher
+            .il2cpp_dumper(
+                self.config
+                    .il2cpp_dumper
+                    .url
+                    .as_deref()
+                    .unwrap_or(IL2CPP_INSPECTOR_REPO),
+            )
+            .await?;
+        tool_fetcher
+            .fbs_dumper(
+                self.config
+                    .fbs_dumper
+                    .url
+                    .as_deref()
+                    .unwrap_or(FBS_DUMPER_REPO),
+            )
+            .await?;
+        tool_fetcher
+            .flatc(self.config.flatc.url.as_deref().unwrap_or(FLATC_REPO))
+            .await?;
 
         let tool_extractor = ToolsExtractor::new()?;
         tool_extractor.il2cpp_dumper(true)?;
@@ -97,7 +116,9 @@ impl CommandHandler {
 
         let il2cpp_zip_path = file::get_data_path("tools/Flatc.zip")?;
         if !il2cpp_zip_path.exists() {
-            tool_fetcher.flatc().await?;
+            tool_fetcher
+                .flatc(self.config.flatc.url.as_deref().unwrap_or(FLATC_REPO))
+                .await?;
         }
 
         Ok(())
@@ -126,12 +147,28 @@ impl CommandHandler {
 
         let il2cpp_zip_path = file::get_data_path("tools/Il2CppInspectorRedux.zip")?;
         if !il2cpp_zip_path.exists() {
-            tool_fetcher.il2cpp_dumper().await?;
+            tool_fetcher
+                .il2cpp_dumper(
+                    self.config
+                        .il2cpp_dumper
+                        .url
+                        .as_deref()
+                        .unwrap_or(IL2CPP_INSPECTOR_REPO),
+                )
+                .await?;
         }
 
         let fbs_zip_path = file::get_data_path("tools/FbsDumperV2.zip")?;
         if !fbs_zip_path.exists() {
-            tool_fetcher.fbs_dumper().await?;
+            tool_fetcher
+                .fbs_dumper(
+                    self.config
+                        .fbs_dumper
+                        .url
+                        .as_deref()
+                        .unwrap_or(FBS_DUMPER_REPO),
+                )
+                .await?;
         }
 
         Ok(())
