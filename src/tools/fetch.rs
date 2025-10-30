@@ -2,7 +2,7 @@ use crate::helpers::config::*;
 
 use baad::info;
 use baad::utils::file;
-use eyre::{Result, eyre};
+use eyre::{eyre, Result};
 use reqwest::{Client, Url};
 use serde::Deserialize;
 use std::env::consts::{ARCH, OS};
@@ -92,23 +92,8 @@ impl ToolsFetcher {
         self.download(&download).await
     }
 
-    pub async fn il2cpp_dumper(&self) -> Result<()> {
-        self.download_tool(IL2CPP_INSPECTOR_REPO, IL2CPP_INSPECTOR_FILE, || {
-            match (OS, ARCH) {
-                ("windows", "x86_64") => Ok(WIN_X64),
-                ("windows", "aarch64") => Ok(WIN_ARM64),
-                ("macos", "x86_64") => Ok(OSX_X64),
-                ("macos", "aarch64") => Ok(OSX_ARM64),
-                ("linux", "x86_64") => Ok(LINUX_X64),
-                ("linux", "aarch64") => Ok(LINUX_ARM64),
-                _ => Err(eyre!("Unsupported platform")),
-            }
-        })
-        .await
-    }
-
-    pub async fn fbs_dumper(&self) -> Result<()> {
-        self.download_tool(FBS_DUMPER_REPO, FBS_DUMPER_FILE, || match (OS, ARCH) {
+    fn get_platform() -> Result<&'static str> {
+        match (OS, ARCH) {
             ("windows", "x86_64") => Ok(WIN_X64),
             ("windows", "aarch64") => Ok(WIN_ARM64),
             ("macos", "x86_64") => Ok(OSX_X64),
@@ -116,8 +101,21 @@ impl ToolsFetcher {
             ("linux", "x86_64") => Ok(LINUX_X64),
             ("linux", "aarch64") => Ok(LINUX_ARM64),
             _ => Err(eyre!("Unsupported platform")),
-        })
+        }
+    }
+
+    pub async fn il2cpp_dumper(&self) -> Result<()> {
+        self.download_tool(
+            IL2CPP_INSPECTOR_REPO,
+            IL2CPP_INSPECTOR_FILE,
+            Self::get_platform,
+        )
         .await
+    }
+
+    pub async fn fbs_dumper(&self) -> Result<()> {
+        self.download_tool(FBS_DUMPER_REPO, FBS_DUMPER_FILE, Self::get_platform)
+            .await
     }
 
     pub async fn flatc(&self) -> Result<()> {

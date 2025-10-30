@@ -1,4 +1,4 @@
-# BAFB Configuration File
+# BA-FB Configuration File
 
 [fbs_dumper]
 force_snake_case = true
