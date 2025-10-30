@@ -2,7 +2,7 @@ use crate::helpers::config::*;
 
 use baad::info;
 use baad::utils::file;
-use eyre::{eyre, Result};
+use eyre::{Result, eyre};
 use reqwest::{Client, Url};
 use serde::Deserialize;
 use std::env::consts::{ARCH, OS};
@@ -34,38 +34,16 @@ impl ToolsFetcher {
             .single_file_progress(true)
             .overwrite(true)
             .build();
-
         let client = Client::builder()
-            .user_agent("BA-FB/1.4 (Blue Archive - FlatBuffer)")
+            .user_agent("BA-FB/1.7 (Blue Archive - FlatBuffer)")
             .build()?;
-
         Ok(Self { downloader, client })
     }
 
     async fn download(&self, url: &[Download]) -> Result<()> {
         self.downloader.download(url, None).await;
-
         info!(success = true, "Successfully downloaded.");
         Ok(())
-    }
-
-    fn get_platform(mac_prefix: bool) -> Result<&'static str> {
-        match (OS, ARCH) {
-            ("windows", "x86_64") => Ok(WIN_X64),
-            ("windows", "aarch64") => Ok(WIN_ARM64),
-            ("macos", "x86_64") => Ok(if mac_prefix { MAC_X64 } else { OSX_X64 }),
-            ("macos", "aarch64") => Ok(if mac_prefix { MAC_ARM64 } else { OSX_ARM64 }),
-            ("linux", "x86_64") => Ok(LINUX_X64),
-            ("linux", "aarch64") => Ok(LINUX_ARM64),
-            _ => Err(eyre!("Unsupported platform")),
-        }
-    }
-
-    fn find_asset<'a>(assets: &'a [GitHubAsset], suffix: &str) -> Result<&'a GitHubAsset> {
-        assets
-            .iter()
-            .find(|asset| asset.name.contains(suffix))
-            .ok_or_else(|| eyre!("No asset found for platform: {}", suffix))
     }
 
     async fn fetch_github(&self, repo: &str) -> Result<GitHubRelease> {
@@ -75,55 +53,81 @@ impl ToolsFetcher {
         Ok(release)
     }
 
-    async fn download_tool(&self, url: &str, filename: &str) -> Result<()> {
+    async fn download_tool<F>(&self, repo: &str, filename: &str, get_asset_name: F) -> Result<()>
+    where
+        F: FnOnce() -> Result<&'static str>,
+    {
         let tool_name = Path::new(filename)
             .file_stem()
             .and_then(|stem| stem.to_str())
             .unwrap_or(filename);
 
-        info!("Downloading {} from {}...", tool_name, url);
-
         let file_path = file::get_data_path(&format!("{}/{}", TOOLS_DIR, filename))?
             .to_string_lossy()
             .into();
 
-        if url.starts_with(HTTP_PREFIX) || url.starts_with(HTTPS_PREFIX) {
-            let download = vec![Download {
-                url: Url::parse(url)?,
-                filename: file_path,
-                target_file: None,
-                hash: None,
-            }];
-            self.download(&download).await
+        let download_url = if repo.starts_with(HTTP_PREFIX) || repo.starts_with(HTTPS_PREFIX) {
+            info!(tool_name, "Downloading");
+            repo.to_string()
         } else {
-            let release = self.fetch_github(url).await?;
-            let platform = Self::get_platform(false)?;
-            let asset = Self::find_asset(&release.assets, platform)?;
+            info!(tool_name, "Downloading");
+            let asset_name = get_asset_name()?;
+            let release = self.fetch_github(repo).await?;
 
-            let download = vec![Download {
-                url: Url::parse(&asset.browser_download_url)?,
-                filename: file_path,
-                target_file: None,
-                hash: None,
-            }];
-            self.download(&download).await
-        }
+            release
+                .assets
+                .into_iter()
+                .find(|a| a.name.contains(asset_name))
+                .map(|a| a.browser_download_url)
+                .ok_or_else(|| eyre!("No asset found"))?
+        };
+
+        let download = vec![Download {
+            url: Url::parse(&download_url)?,
+            filename: file_path,
+            target_file: None,
+            hash: None,
+        }];
+
+        self.download(&download).await
     }
 
     pub async fn il2cpp_dumper(&self) -> Result<()> {
-        self.download_tool(IL2CPP_INSPECTOR_REPO, IL2CPP_INSPECTOR_FILE)
-            .await
+        self.download_tool(IL2CPP_INSPECTOR_REPO, IL2CPP_INSPECTOR_FILE, || {
+            match (OS, ARCH) {
+                ("windows", "x86_64") => Ok(WIN_X64),
+                ("windows", "aarch64") => Ok(WIN_ARM64),
+                ("macos", "x86_64") => Ok(OSX_X64),
+                ("macos", "aarch64") => Ok(OSX_ARM64),
+                ("linux", "x86_64") => Ok(LINUX_X64),
+                ("linux", "aarch64") => Ok(LINUX_ARM64),
+                _ => Err(eyre!("Unsupported platform")),
+            }
+        })
+        .await
     }
 
     pub async fn fbs_dumper(&self) -> Result<()> {
-        self.download_tool(FBS_DUMPER_REPO, FBS_DUMPER_FILE).await
+        self.download_tool(FBS_DUMPER_REPO, FBS_DUMPER_FILE, || match (OS, ARCH) {
+            ("windows", "x86_64") => Ok(WIN_X64),
+            ("windows", "aarch64") => Ok(WIN_ARM64),
+            ("macos", "x86_64") => Ok(OSX_X64),
+            ("macos", "aarch64") => Ok(OSX_ARM64),
+            ("linux", "x86_64") => Ok(LINUX_X64),
+            ("linux", "aarch64") => Ok(LINUX_ARM64),
+            _ => Err(eyre!("Unsupported platform")),
+        })
+        .await
     }
 
     pub async fn flatc(&self) -> Result<()> {
-        let platform = Self::get_platform(true)?;
-        let tool = format!("flatc-{}.zip", platform);
-        let url = format!("{}/{}", FLATC_BASE_URL, tool);
-
-        self.download_tool(&url, FLATC_FILE).await
+        self.download_tool(FLATC_REPO, FLATC_FILE, || match (OS, ARCH) {
+            ("windows", _) => Ok("Windows.flatc.binary.zip"),
+            ("macos", "aarch64") => Ok("Mac.flatc.binary.zip"),
+            ("macos", "x86_64") => Ok("MacIntel.flatc.binary.zip"),
+            ("linux", _) => Ok("Linux.flatc.binary.g++-13.zip"),
+            _ => Err(eyre!("Unsupported platform")),
+        })
+        .await
     }
 }
