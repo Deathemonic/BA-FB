@@ -11,7 +11,7 @@ on:
 
 jobs:
   dump-data:
-    runs-on: macos-15
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout data branch
@@ -22,11 +22,11 @@ jobs:
 
       - name: Download latest release
         run: |
-          curl -L -o bafb-macos-aarch64.zip "https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-macos-aarch64.zip"
+          curl -L -o bafb-linux-x86_64.zip "https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-linux-x86_64.zip"
 
       - name: Extract executable
         run: |
-          unzip bafb-macos-aarch64.zip
+          unzip bafb-linux-x86_64.zip
 
       - name: Configure Git
         run: |
@@ -93,7 +93,7 @@ jobs:
 
       - name: Clean up executable and zip file
         run: |
-          rm -f bafb bafb-macos-aarch64.zip
+          rm -f bafb bafb-linux-x86_64.zip
 
       - name: Check for large files and update LFS tracking
         run: |
