@@ -201,7 +201,7 @@ dependencies = [
 
 [[package]]
 name = "bafb"
-version = "1.7.2"
+version = "1.7.3"
 dependencies = [
  "baad",
  "clap",

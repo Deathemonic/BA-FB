@@ -346,7 +346,7 @@ impl CommandHandler {
 }
 
 pub async fn run(args: Args) -> Result<()> {
-    if args.command.is_none() && !args.clean {
+    if args.command.is_none() && !args.update && !args.clean {
         Args::command().print_help()?;
         std::process::exit(0);
     }
