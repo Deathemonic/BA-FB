@@ -13,14 +13,18 @@ jobs:
     runs-on: macos-15
     
     steps:
-      - name: Checkout repository
+      - name: Checkout branch
         uses: actions/checkout@v4
         with:
+          ref: flatdata
           fetch-depth: 0
+        continue-on-error: true
       
-      - name: Switch to flatdata branch
+      - name: Create branch if needed
         run: |
-          git checkout -B flatdata
+          if ! git rev-parse --verify flatdata >/dev/null 2>&1; then
+            git checkout -b flatdata
+          fi
       
       - name: Download latest release
         run: |
