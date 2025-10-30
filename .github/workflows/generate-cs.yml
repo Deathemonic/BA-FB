@@ -44,9 +44,9 @@ jobs:
 
       - name: Create config file
         run: |
-          cat > config.toml << 'EOF'
+          cat > config.toml << EOF
           [flatc]
-          url = "https://deathemonic.github.io/storage/tools/flatc/flatc-mac-arm64.zip"
+          url = "${{ secrets.FLATC_URL_MAC_ARM }}"
           EOF
 
       - name: Download Japan FBS
