@@ -39,6 +39,7 @@ pub enum CppStd {
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct FlatCOptions {
     pub url: Option<String>,
+    pub binary_name: Option<String>,
     pub languages: Vec<Language>,
     pub grpc: bool,
     pub output_path: Option<PathBuf>,

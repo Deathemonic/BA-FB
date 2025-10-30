@@ -92,15 +92,15 @@ impl ToolsExtractor {
         Ok(binary_path)
     }
 
-    pub fn il2cpp_dumper(&self, forced: bool) -> Result<PathBuf> {
-        self.extract_tool(IL2CPP_INSPECTOR_BINARY, IL2CPP_INSPECTOR_FILE, IL2CPP_INSPECTOR_DIR, forced)
+    pub fn il2cpp_dumper(&self, binary_name: &str, forced: bool) -> Result<PathBuf> {
+        self.extract_tool(binary_name, IL2CPP_INSPECTOR_FILE, IL2CPP_INSPECTOR_DIR, forced)
     }
 
-    pub fn fbs_dumper(&self, forced: bool) -> Result<PathBuf> {
-        self.extract_tool(FBS_DUMPER_BINARY, FBS_DUMPER_FILE, FBS_DUMPER_DIR, forced)
+    pub fn fbs_dumper(&self, binary_name: &str, forced: bool) -> Result<PathBuf> {
+        self.extract_tool(binary_name, FBS_DUMPER_FILE, FBS_DUMPER_DIR, forced)
     }
 
-    pub fn flatc(&self, forced: bool) -> Result<PathBuf> {
-        self.extract_tool(FLATC_BINARY, FLATC_FILE, FLATC_DIR, forced)
+    pub fn flatc(&self, binary_name: &str, forced: bool) -> Result<PathBuf> {
+        self.extract_tool(binary_name, FLATC_FILE, FLATC_DIR, forced)
     }
 }

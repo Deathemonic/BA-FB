@@ -10,6 +10,7 @@ pub struct FbsDumper {
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct FbsDumperOptions {
     pub url: Option<String>,
+    pub binary_name: Option<String>,
     pub dummy_dll: PathBuf,
     pub game_assembly: Option<PathBuf>,
     pub output_file: Option<PathBuf>,

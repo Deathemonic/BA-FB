@@ -65,6 +65,7 @@ impl Config {
         merge_field!(verbose);
         merge_field!(suppress_warnings);
         merge_field!(url);
+        merge_field!(binary_name);
     }
 
     pub fn merge_flatc_config(&self, _options: &mut FlatCOptions) {
@@ -171,6 +172,7 @@ impl Config {
         merge_field!(grpc_use_system_headers);
         merge_field!(grpc_python_typed_handlers);
         merge_field!(url);
+        merge_field!(binary_name);
     }
 
     pub fn merge_il2cpp_dumper_config(&self, _options: &mut Il2CppDumperOptions) {
@@ -205,5 +207,6 @@ impl Config {
         merge_field!(unity_assemblies_path);
         merge_field!(extract_il2cpp_files);
         merge_field!(url);
+        merge_field!(binary_name);
     }
 }

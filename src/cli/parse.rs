@@ -85,9 +85,18 @@ impl CommandHandler {
             .await?;
 
         let tool_extractor = ToolsExtractor::new()?;
-        tool_extractor.il2cpp_dumper(true)?;
-        tool_extractor.fbs_dumper(true)?;
-        tool_extractor.flatc(true)?;
+        tool_extractor.il2cpp_dumper(
+            self.config.il2cpp_dumper.binary_name.as_deref().unwrap_or(IL2CPP_INSPECTOR_BINARY),
+            true
+        )?;
+        tool_extractor.fbs_dumper(
+            self.config.fbs_dumper.binary_name.as_deref().unwrap_or(FBS_DUMPER_BINARY),
+            true
+        )?;
+        tool_extractor.flatc(
+            self.config.flatc.binary_name.as_deref().unwrap_or(FLATC_BINARY),
+            true
+        )?;
 
         Ok(())
     }
@@ -127,7 +136,10 @@ impl CommandHandler {
     fn prepare_generate_tools(&self) -> Result<FlatC> {
         let tool_extractor = ToolsExtractor::new()?;
 
-        let flatc_bin = tool_extractor.flatc(false)?;
+        let flatc_bin = tool_extractor.flatc(
+            self.config.flatc.binary_name.as_deref().unwrap_or(FLATC_BINARY),
+            false
+        )?;
         let flatc = FlatC::new(flatc_bin)?;
 
         Ok(flatc)
@@ -177,8 +189,14 @@ impl CommandHandler {
     fn prepare_dumper_tools(&self) -> Result<(Il2CppDumper, FbsDumper)> {
         let tool_extractor = ToolsExtractor::new()?;
 
-        let il2cppdumper_bin = tool_extractor.il2cpp_dumper(false)?;
-        let fbsdumper_bin = tool_extractor.fbs_dumper(false)?;
+        let il2cppdumper_bin = tool_extractor.il2cpp_dumper(
+            self.config.il2cpp_dumper.binary_name.as_deref().unwrap_or(IL2CPP_INSPECTOR_BINARY),
+            false
+        )?;
+        let fbsdumper_bin = tool_extractor.fbs_dumper(
+            self.config.fbs_dumper.binary_name.as_deref().unwrap_or(FBS_DUMPER_BINARY),
+            false
+        )?;
 
         let il2cpp_dumper = Il2CppDumper::new(il2cppdumper_bin)?;
         let fbs_dumper = FbsDumper::new(fbsdumper_bin)?;
