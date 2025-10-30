@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 jobs:
   generate:
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     
     steps:
       - name: Checkout flatdata branch
@@ -20,15 +20,23 @@ jobs:
           fetch-depth: 0
       - name: Download latest release
         run: |
-          wget https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-linux-x86_64.zip
+          curl -L -o bafb-macos-aarch64.zip https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-macos-aarch64.zip
       - name: Extract executable
         run: |
-          unzip bafb-linux-x86_64.zip
+          unzip bafb-macos-aarch64.zip
           chmod +x bafb
       - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+      
+      - name: Create config file
+        run: |
+          cat > config.toml << 'EOF'
+          [flatc]
+          url = "https://deathemonic.github.io/storage/tools/flatc/flatc-mac-arm64.zip"
+          EOF
+      
       - name: Clean previous data
         run: |
           find . -name ".git" -prune -o -name "bafb" -prune -o -name "*.zip" -prune -o -type f -exec rm {} +
@@ -83,7 +91,7 @@ jobs:
 
       - name: Clean up executable and zip file
         run: |
-          rm -f bafb bafb-linux-x86_64.zip japan.fbs global.fbs
+          rm -f bafb bafb-macos-aarch64.zip japan.fbs global.fbs
 
       - name: Commit and push changes
         run: |
