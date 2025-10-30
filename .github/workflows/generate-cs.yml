@@ -14,11 +14,14 @@ jobs:
     runs-on: macos-15
     
     steps:
-      - name: Checkout flatdata-cs branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: flatdata-cs
           fetch-depth: 0
+
+      - name: Switch to flatdata-cs branch
+        run: |
+          git checkout -B flatdata-cs
 
       - name: Download latest release
         run: |
@@ -56,11 +59,11 @@ jobs:
 
       - name: Generate Japan Flatbuffers
         run: |
-          ./bafb generate --fbs japan.fbs --language c-sharp --output ./
+          ./bafb generate --fbs japan.fbs --language c-sharp --output ./ --config config.toml
 
       - name: Generate Global Flatbuffers
         run: |
-          ./bafb generate --fbs global.fbs --language c-sharp --output ./
+          ./bafb generate --fbs global.fbs --language c-sharp --output ./ --config config.toml
 
       - name: Clean up executable and zip file
         run: |

@@ -13,11 +13,15 @@ jobs:
     runs-on: macos-15
     
     steps:
-      - name: Checkout flatdata branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: flatdata
           fetch-depth: 0
+      
+      - name: Switch to flatdata branch
+        run: |
+          git checkout -B flatdata
+      
       - name: Download latest release
         run: |
           curl -L -o bafb-macos-aarch64.zip https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-macos-aarch64.zip
@@ -50,10 +54,10 @@ jobs:
 
       - name: Generate Japan Flatbuffers
         run: |
-          ./bafb generate --fbs japan.fbs --language rust --output ./japan_temp
+          ./bafb generate --fbs japan.fbs --language rust --output ./japan_temp --config config.toml
       - name: Generate Global Flatbuffers
         run: |
-          ./bafb generate --fbs global.fbs --language rust --output ./global_temp
+          ./bafb generate --fbs global.fbs --language rust --output ./global_temp --config config.toml
 
       - name: Combine and organize files
         run: |
