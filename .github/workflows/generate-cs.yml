@@ -37,17 +37,17 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
+      - name: Clean previous data
+        run: |
+          find . -name ".git" -prune -o -name "bafb" -prune -o -name "*.zip" -prune -o -type f -exec rm {} +
+          find . -name ".git" -prune -o -name "bafb" -prune -o -type d -empty -delete 2>/dev/null || true
+
       - name: Create config file
         run: |
           cat > config.toml << 'EOF'
           [flatc]
           url = "https://deathemonic.github.io/storage/tools/flatc/flatc-mac-arm64.zip"
           EOF
-
-      - name: Clean previous data
-        run: |
-          find . -name ".git" -prune -o -name "bafb" -prune -o -name "*.zip" -prune -o -type f -exec rm {} +
-          find . -name ".git" -prune -o -name "bafb" -prune -o -type d -empty -delete 2>/dev/null || true
 
       - name: Download Japan FBS
         run: |
@@ -59,15 +59,15 @@ jobs:
 
       - name: Generate Japan Flatbuffers
         run: |
-          ./bafb generate --fbs japan.fbs --language c-sharp --output ./ --config config.toml
+          ./bafb generate --fbs japan.fbs --language c-sharp --output ./
 
       - name: Generate Global Flatbuffers
         run: |
-          ./bafb generate --fbs global.fbs --language c-sharp --output ./ --config config.toml
+          ./bafb generate --fbs global.fbs --language c-sharp --output ./
 
       - name: Clean up executable and zip file
         run: |
-          rm -f bafb bafb-macos-aarch64.zip japan.fbs global.fbs
+          rm -f bafb bafb-macos-aarch64.zip japan.fbs global.fbs config.toml
 
       - name: Commit and push changes
         run: |
