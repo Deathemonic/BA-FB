@@ -26,7 +26,7 @@ impl Config {
                 Some(path)
             }
             None => {
-                let default_path = Path::new("bafb.toml");
+                let default_path = Path::new("config.toml");
                 if default_path.exists() {
                     Some(default_path)
                 } else {

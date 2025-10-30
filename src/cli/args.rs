@@ -10,7 +10,7 @@ pub struct Args {
     #[command(subcommand)]
     pub command: Option<Commands>,
 
-    /// Configuration file path (defaults to ./bafb.toml)
+    /// Configuration file path (defaults to ./config.toml)
     #[arg(long, global = true)]
     pub config: Option<PathBuf>,
 

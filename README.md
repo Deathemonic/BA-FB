@@ -41,7 +41,7 @@ bafb --update
 | `dump`         |       | Dump Blue Archive flatbuffers                             |
 | `generate`     |       | Generate code from flatbuffer schema                      |
 | `help`         |       | Print this message or the help of the given subcommand(s) |
-| `--config`     |       | Path to configuration file (defaults to `./bafb.toml`)    |
+| `--config`     |       | Path to configuration file (defaults to `./config.toml`)  |
 | `--update`     | `-u`  | Force update all tools and APK files                      |
 | `--help`       | `-h`  | Print help                                                |
 | `--version`    | `-V`  | Print version                                             |
