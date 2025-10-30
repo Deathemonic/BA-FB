@@ -18,6 +18,10 @@ pub struct Args {
     #[arg(short, long)]
     pub update: bool,
 
+    /// Clean tools directory
+    #[arg(short, long)]
+    pub clean: bool,
+
     /// Enable verbose output
     #[arg(short, long)]
     pub verbose: bool

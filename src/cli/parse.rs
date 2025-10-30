@@ -11,6 +11,7 @@ use baad::apk::{ApkExtractor, ApkFetcher};
 use baad::helpers::{ServerConfig, ServerRegion};
 use baad::info;
 use baad::utils::file;
+use clap::CommandFactory;
 use eyre::Result;
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
@@ -27,6 +28,15 @@ impl CommandHandler {
     }
 
     pub async fn handle(&self) -> Result<()> {
+        if self.args.clean {
+            info!("Cleaning data...");
+
+            let tools_dir = file::get_data_path("tools")?;
+            file::clear_all(&tools_dir).await?;
+
+            info!(success = true, "Data cleared");
+        }
+
         match &self.args.command {
             Some(Commands::Dump { target }) => self.handle_dump(target).await,
             Some(Commands::Generate {
@@ -86,16 +96,28 @@ impl CommandHandler {
 
         let tool_extractor = ToolsExtractor::new()?;
         tool_extractor.il2cpp_dumper(
-            self.config.il2cpp_dumper.binary_name.as_deref().unwrap_or(IL2CPP_INSPECTOR_BINARY),
-            true
+            self.config
+                .il2cpp_dumper
+                .binary_name
+                .as_deref()
+                .unwrap_or(IL2CPP_INSPECTOR_BINARY),
+            true,
         )?;
         tool_extractor.fbs_dumper(
-            self.config.fbs_dumper.binary_name.as_deref().unwrap_or(FBS_DUMPER_BINARY),
-            true
+            self.config
+                .fbs_dumper
+                .binary_name
+                .as_deref()
+                .unwrap_or(FBS_DUMPER_BINARY),
+            true,
         )?;
         tool_extractor.flatc(
-            self.config.flatc.binary_name.as_deref().unwrap_or(FLATC_BINARY),
-            true
+            self.config
+                .flatc
+                .binary_name
+                .as_deref()
+                .unwrap_or(FLATC_BINARY),
+            true,
         )?;
 
         Ok(())
@@ -137,8 +159,12 @@ impl CommandHandler {
         let tool_extractor = ToolsExtractor::new()?;
 
         let flatc_bin = tool_extractor.flatc(
-            self.config.flatc.binary_name.as_deref().unwrap_or(FLATC_BINARY),
-            false
+            self.config
+                .flatc
+                .binary_name
+                .as_deref()
+                .unwrap_or(FLATC_BINARY),
+            false,
         )?;
         let flatc = FlatC::new(flatc_bin)?;
 
@@ -190,12 +216,20 @@ impl CommandHandler {
         let tool_extractor = ToolsExtractor::new()?;
 
         let il2cppdumper_bin = tool_extractor.il2cpp_dumper(
-            self.config.il2cpp_dumper.binary_name.as_deref().unwrap_or(IL2CPP_INSPECTOR_BINARY),
-            false
+            self.config
+                .il2cpp_dumper
+                .binary_name
+                .as_deref()
+                .unwrap_or(IL2CPP_INSPECTOR_BINARY),
+            false,
         )?;
         let fbsdumper_bin = tool_extractor.fbs_dumper(
-            self.config.fbs_dumper.binary_name.as_deref().unwrap_or(FBS_DUMPER_BINARY),
-            false
+            self.config
+                .fbs_dumper
+                .binary_name
+                .as_deref()
+                .unwrap_or(FBS_DUMPER_BINARY),
+            false,
         )?;
 
         let il2cpp_dumper = Il2CppDumper::new(il2cppdumper_bin)?;
@@ -312,6 +346,11 @@ impl CommandHandler {
 }
 
 pub async fn run(args: Args) -> Result<()> {
+    if args.command.is_none() && !args.clean {
+        Args::command().print_help()?;
+        std::process::exit(0);
+    }
+
     let handler = CommandHandler::new(args)?;
     handler.handle().await
 }
