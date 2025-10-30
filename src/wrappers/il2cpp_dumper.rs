@@ -8,6 +8,7 @@ pub struct Il2CppDumper {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Il2CppDumperOptions {
     pub url: Option<String>,
     pub binary_name: Option<String>,

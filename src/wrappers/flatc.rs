@@ -37,6 +37,7 @@ pub enum CppStd {
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
+#[serde(default)]
 pub struct FlatCOptions {
     pub url: Option<String>,
     pub binary_name: Option<String>,

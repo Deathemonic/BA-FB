@@ -8,6 +8,7 @@ pub struct FbsDumper {
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
+#[serde(default)]
 pub struct FbsDumperOptions {
     pub url: Option<String>,
     pub binary_name: Option<String>,
