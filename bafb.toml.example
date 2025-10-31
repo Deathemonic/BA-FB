@@ -5,6 +5,8 @@ force_snake_case = true
 namespace_to_look_for = "BlueArchive"
 
 [flatc]
+url = "https://cdn.example.com/flatc.zip"
+binary_name = "flatc_win.exe"
 no_warnings = true
 scoped_enums = true
 gen_object_api = true
