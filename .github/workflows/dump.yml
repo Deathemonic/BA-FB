@@ -1,5 +1,4 @@
 name: Dump Data
-
 on:
   schedule:
     - cron: '0 3 * * 2,4'
@@ -21,6 +20,7 @@ jobs:
       - name: Checkout data branch
         uses: actions/checkout@v4
         with:
+          ref: data
           fetch-depth: 0
           lfs: true
       
@@ -37,10 +37,6 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
       
-      - name: Switch to data branch
-        run: |
-          git checkout -B data
-      
       - name: Setup Git LFS
         run: |
           git lfs install
@@ -56,6 +52,7 @@ jobs:
           git lfs track "*.db"
           git lfs track "*.txt"
           
+          # Find large files and track them with LFS
           find . -type f -size +50M \
             ! -path "./.git/*" \
             ! -name "bafb" \
@@ -74,19 +71,6 @@ jobs:
         run: |
           REGION_DIR=$(echo "${{ matrix.region }}" | sed 's/./\U&/')
           rm -rf "$REGION_DIR" || true
-          
-          # Only clean files if this is the first job
-          if [ "${{ matrix.region }}" == "japan" ]; then
-            find . -type f \
-              ! -path "./.git/*" \
-              ! -name "bafb" \
-              ! -name "*.zip" \
-              ! -name ".gitattributes" \
-              -delete || true
-            find . -type d -empty \
-              ! -path "./.git/*" \
-              -delete || true
-          fi
       
       - name: Run ${{ matrix.region }} dump
         timeout-minutes: 10
@@ -117,7 +101,10 @@ jobs:
       
       - name: Add and commit changes with LFS
         run: |
-          git add .
+          REGION_DIR=$(echo "${{ matrix.region }}" | sed 's/./\U&/')
+          git add "$REGION_DIR"
+          git add .gitattributes
+          
           if git diff --staged --quiet; then
             echo "No changes to commit"
             exit 0
@@ -125,8 +112,56 @@ jobs:
           
           timestamp=$(date '+%Y-%m-%d %H:%M:%S')
           git commit -m "Update ${{ matrix.region }} data dump - $timestamp"
-          
-          git pull --rebase origin data || true
+      
+      - name: Push to temporary branch
+        run: |
+          BRANCH_NAME="data-${{ matrix.region }}-${{ github.run_id }}"
+          git push origin HEAD:"$BRANCH_NAME" --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  merge-dumps:
+    needs: dump-data
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          fetch-depth: 0
+          lfs: true
+      
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      
+      - name: Setup Git LFS
+        run: |
+          git lfs install
+      
+      - name: Merge Japan dump
+        run: |
+          BRANCH_NAME="data-japan-${{ github.run_id }}"
+          git fetch origin "$BRANCH_NAME"
+          git merge "origin/$BRANCH_NAME" --no-edit -X theirs || true
+      
+      - name: Merge Global dump
+        run: |
+          BRANCH_NAME="data-global-${{ github.run_id }}"
+          git fetch origin "$BRANCH_NAME"
+          git merge "origin/$BRANCH_NAME" --no-edit -X theirs || true
+      
+      - name: Push merged changes
+        run: |
           git push origin data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Cleanup temporary branches
+        if: always()
+        run: |
+          git push origin --delete "data-japan-${{ github.run_id }}" || true
+          git push origin --delete "data-global-${{ github.run_id }}" || true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
