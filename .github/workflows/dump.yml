@@ -12,31 +12,35 @@ on:
 jobs:
   dump-data:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        region: [japan, global]
+      fail-fast: false
+    
     steps:
       - name: Checkout data branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
-
+      
       - name: Download latest release
         run: |
           curl -L -o bafb-linux-x86_64.zip "https://github.com/Deathemonic/BA-FB/releases/latest/download/bafb-linux-x86_64.zip"
-
+      
       - name: Extract executable
         run: |
           unzip bafb-linux-x86_64.zip
-
+      
       - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-
+      
       - name: Switch to data branch
         run: |
           git checkout -B data
-
+      
       - name: Setup Git LFS
         run: |
           git lfs install
@@ -52,7 +56,6 @@ jobs:
           git lfs track "*.db"
           git lfs track "*.txt"
           
-          # Find large files and track them with LFS
           find . -type f -size +50M \
             ! -path "./.git/*" \
             ! -name "bafb" \
@@ -66,38 +69,40 @@ jobs:
           if ! git diff --staged --quiet .gitattributes; then
             git commit -m "Add Git LFS tracking for large files"
           fi
-
-      - name: Clean previous data
+      
+      - name: Clean previous data for ${{ matrix.region }}
         run: |
-          rm -rf Japan Global || true
-          find . -type f \
-            ! -path "./.git/*" \
-            ! -name "bafb" \
-            ! -name "*.zip" \
-            ! -name ".gitattributes" \
-            -delete || true
-          find . -type d -empty \
-            ! -path "./.git/*" \
-            -delete || true
-
-      - name: Run Japan dump
+          REGION_DIR=$(echo "${{ matrix.region }}" | sed 's/./\U&/')
+          rm -rf "$REGION_DIR" || true
+          
+          # Only clean files if this is the first job
+          if [ "${{ matrix.region }}" == "japan" ]; then
+            find . -type f \
+              ! -path "./.git/*" \
+              ! -name "bafb" \
+              ! -name "*.zip" \
+              ! -name ".gitattributes" \
+              -delete || true
+            find . -type d -empty \
+              ! -path "./.git/*" \
+              -delete || true
+          fi
+      
+      - name: Run ${{ matrix.region }} dump
         timeout-minutes: 10
         run: |
           chmod +x ./bafb
-          ./bafb dump japan --output ./Japan
-
-      - name: Run Global dump
-        timeout-minutes: 10
-        run: |
-          ./bafb dump global --output ./Global
-
+          REGION_DIR=$(echo "${{ matrix.region }}" | sed 's/./\U&/')
+          ./bafb dump ${{ matrix.region }} --output "./$REGION_DIR"
+      
       - name: Clean up executable and zip file
         run: |
           rm -f bafb bafb-linux-x86_64.zip
-
+      
       - name: Check for large files and update LFS tracking
         run: |
-          large_files=$(find Japan Global -type f -size +50M 2>/dev/null || true)
+          REGION_DIR=$(echo "${{ matrix.region }}" | sed 's/./\U&/')
+          large_files=$(find "$REGION_DIR" -type f -size +50M 2>/dev/null || true)
           
           if [ -n "$large_files" ]; then
             echo "$large_files" | while read -r file; do
@@ -109,7 +114,7 @@ jobs:
               git commit -m "Update LFS tracking for new large files"
             fi
           fi
-
+      
       - name: Add and commit changes with LFS
         run: |
           git add .
@@ -119,7 +124,9 @@ jobs:
           fi
           
           timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-          git commit -m "Update data dumps - $timestamp"
-          git push origin data --force
+          git commit -m "Update ${{ matrix.region }} data dump - $timestamp"
+          
+          git pull --rebase origin data || true
+          git push origin data
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
