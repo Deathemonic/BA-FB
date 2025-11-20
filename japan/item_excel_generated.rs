@@ -61,6 +61,8 @@ impl<'a> ItemExcel<'a> {
   pub const VT_EXPIRATIONNOTIFYDATEIN: flatbuffers::VOffsetT = 62;
   pub const VT_SHORTCUTTYPEID: flatbuffers::VOffsetT = 64;
   pub const VT_GACHATICKET: flatbuffers::VOffsetT = 66;
+  pub const VT_ALERTPOPUPID: flatbuffers::VOffsetT = 68;
+  pub const VT_SHIFTINGCRAFTRECIPE: flatbuffers::VOffsetT = 70;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -73,6 +75,12 @@ impl<'a> ItemExcel<'a> {
   ) -> flatbuffers::WIPOffset<ItemExcel<'bldr>> {
     let mut builder = ItemExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"Item");
+      let x = args.ShiftingCraftRecipe;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ShiftingCraftRecipe(x);
+      let x = args.AlertPopupId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_AlertPopupId(x);
       let x = args.ShortcutTypeId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ShortcutTypeId(x);
@@ -240,6 +248,8 @@ impl<'a> ItemExcel<'a> {
       } else {
         self.GachaTicket()
       };
+      let AlertPopupId = self.AlertPopupId();
+      let ShiftingCraftRecipe = self.ShiftingCraftRecipe();
     ItemExcelT {
       Id,
       GroupId,
@@ -273,6 +283,8 @@ impl<'a> ItemExcel<'a> {
       ExpirationNotifyDateIn,
       ShortcutTypeId,
       GachaTicket,
+      AlertPopupId,
+      ShiftingCraftRecipe,
     }
   }
 
@@ -500,6 +512,20 @@ impl<'a> ItemExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<GachaTicketType>(ItemExcel::VT_GACHATICKET, Some(GachaTicketType::None)).unwrap()}
   }
+  #[inline]
+  pub fn AlertPopupId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ItemExcel::VT_ALERTPOPUPID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn ShiftingCraftRecipe(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ItemExcel::VT_SHIFTINGCRAFTRECIPE, Some(0)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for ItemExcel<'_> {
@@ -541,6 +567,8 @@ impl flatbuffers::Verifiable for ItemExcel<'_> {
      .visit_field::<i32>("ExpirationNotifyDateIn", Self::VT_EXPIRATIONNOTIFYDATEIN, false)?
      .visit_field::<i64>("ShortcutTypeId", Self::VT_SHORTCUTTYPEID, false)?
      .visit_field::<GachaTicketType>("GachaTicket", Self::VT_GACHATICKET, false)?
+     .visit_field::<i64>("AlertPopupId", Self::VT_ALERTPOPUPID, false)?
+     .visit_field::<i64>("ShiftingCraftRecipe", Self::VT_SHIFTINGCRAFTRECIPE, false)?
      .finish();
     Ok(())
   }
@@ -578,6 +606,8 @@ pub struct ItemExcelArgs<'a> {
     pub ExpirationNotifyDateIn: i32,
     pub ShortcutTypeId: i64,
     pub GachaTicket: GachaTicketType,
+    pub AlertPopupId: i64,
+    pub ShiftingCraftRecipe: i64,
 }
 impl<'a> Default for ItemExcelArgs<'a> {
   #[inline]
@@ -615,6 +645,8 @@ impl<'a> Default for ItemExcelArgs<'a> {
       ExpirationNotifyDateIn: 0,
       ShortcutTypeId: 0,
       GachaTicket: GachaTicketType::None,
+      AlertPopupId: 0,
+      ShiftingCraftRecipe: 0,
     }
   }
 }
@@ -624,7 +656,7 @@ impl Serialize for ItemExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ItemExcel", 32)?;
+    let mut s = serializer.serialize_struct("ItemExcel", 34)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("GroupId", &self.GroupId())?;
       s.serialize_field("Rarity", &self.Rarity())?;
@@ -677,6 +709,8 @@ impl Serialize for ItemExcel<'_> {
       s.serialize_field("ExpirationNotifyDateIn", &self.ExpirationNotifyDateIn())?;
       s.serialize_field("ShortcutTypeId", &self.ShortcutTypeId())?;
       s.serialize_field("GachaTicket", &self.GachaTicket())?;
+      s.serialize_field("AlertPopupId", &self.AlertPopupId())?;
+      s.serialize_field("ShiftingCraftRecipe", &self.ShiftingCraftRecipe())?;
     s.end()
   }
 }
@@ -815,6 +849,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ItemExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<GachaTicketType>(ItemExcel::VT_GACHATICKET, GachaTicket, GachaTicketType::None);
   }
   #[inline]
+  pub fn add_AlertPopupId(&mut self, AlertPopupId: i64) {
+    self.fbb_.push_slot::<i64>(ItemExcel::VT_ALERTPOPUPID, AlertPopupId, 0);
+  }
+  #[inline]
+  pub fn add_ShiftingCraftRecipe(&mut self, ShiftingCraftRecipe: i64) {
+    self.fbb_.push_slot::<i64>(ItemExcel::VT_SHIFTINGCRAFTRECIPE, ShiftingCraftRecipe, 0);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ItemExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     ItemExcelBuilder {
@@ -864,6 +906,8 @@ impl core::fmt::Debug for ItemExcel<'_> {
       ds.field("ExpirationNotifyDateIn", &self.ExpirationNotifyDateIn());
       ds.field("ShortcutTypeId", &self.ShortcutTypeId());
       ds.field("GachaTicket", &self.GachaTicket());
+      ds.field("AlertPopupId", &self.AlertPopupId());
+      ds.field("ShiftingCraftRecipe", &self.ShiftingCraftRecipe());
       ds.finish()
   }
 }
@@ -902,6 +946,8 @@ pub struct ItemExcelT {
   pub ExpirationNotifyDateIn: i32,
   pub ShortcutTypeId: i64,
   pub GachaTicket: GachaTicketType,
+  pub AlertPopupId: i64,
+  pub ShiftingCraftRecipe: i64,
 }
 impl Default for ItemExcelT {
   fn default() -> Self {
@@ -938,6 +984,8 @@ impl Default for ItemExcelT {
       ExpirationNotifyDateIn: 0,
       ShortcutTypeId: 0,
       GachaTicket: GachaTicketType::None,
+      AlertPopupId: 0,
+      ShiftingCraftRecipe: 0,
     }
   }
 }
@@ -988,6 +1036,8 @@ impl ItemExcelT {
     let ExpirationNotifyDateIn = self.ExpirationNotifyDateIn;
     let ShortcutTypeId = self.ShortcutTypeId;
     let GachaTicket = self.GachaTicket;
+    let AlertPopupId = self.AlertPopupId;
+    let ShiftingCraftRecipe = self.ShiftingCraftRecipe;
     ItemExcel::create(_fbb, &ItemExcelArgs{
       Id,
       GroupId,
@@ -1021,6 +1071,8 @@ impl ItemExcelT {
       ExpirationNotifyDateIn,
       ShortcutTypeId,
       GachaTicket,
+      AlertPopupId,
+      ShiftingCraftRecipe,
     })
   }
 }

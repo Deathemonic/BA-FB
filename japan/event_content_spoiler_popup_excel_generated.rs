@@ -32,7 +32,7 @@ impl<'a> EventContentSpoilerPopupExcel<'a> {
   pub const VT_EVENTCONTENTID: flatbuffers::VOffsetT = 4;
   pub const VT_SPOILERPOPUPTITLE: flatbuffers::VOffsetT = 6;
   pub const VT_SPOILERPOPUPDESCRIPTION: flatbuffers::VOffsetT = 8;
-  pub const VT_ISWARNINGPOPUP: flatbuffers::VOffsetT = 10;
+  pub const VT_POPUPTYPE: flatbuffers::VOffsetT = 10;
   pub const VT_CONDITIONSCENARIOMODEID: flatbuffers::VOffsetT = 12;
 
   #[inline]
@@ -42,7 +42,7 @@ impl<'a> EventContentSpoilerPopupExcel<'a> {
   #[allow(unused_mut)]
   pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr, A: flatbuffers::Allocator + 'bldr>(
     _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr, A>,
-    args: &'args EventContentSpoilerPopupExcelArgs<'args>
+    args: &'args EventContentSpoilerPopupExcelArgs
   ) -> flatbuffers::WIPOffset<EventContentSpoilerPopupExcel<'bldr>> {
     let mut builder = EventContentSpoilerPopupExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"EventContentSpoilerPopup");
@@ -52,32 +52,34 @@ impl<'a> EventContentSpoilerPopupExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.SpoilerPopupDescription {
-        builder.add_SpoilerPopupDescription(x);
-      }
-      if let Some(x) = args.SpoilerPopupTitle {
-        builder.add_SpoilerPopupTitle(x);
-      }
-      builder.add_IsWarningPopUp(args.IsWarningPopUp);
+      let x = args.PopupType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_PopupType(x);
+      let x = args.SpoilerPopupDescription;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
+      builder.add_SpoilerPopupDescription(x);
+      let x = args.SpoilerPopupTitle;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
+      builder.add_SpoilerPopupTitle(x);
     builder.finish()
   }
 
   pub fn unpack(&self) -> EventContentSpoilerPopupExcelT {
     let key = table_encryption_service::create_key(b"EventContentSpoilerPopup");
       let EventContentId = self.EventContentId();
-    let SpoilerPopupTitle = self.SpoilerPopupTitle().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let SpoilerPopupDescription = self.SpoilerPopupDescription().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-      let IsWarningPopUp = self.IsWarningPopUp();
+      let SpoilerPopupTitle = self.SpoilerPopupTitle();
+      let SpoilerPopupDescription = self.SpoilerPopupDescription();
+      let PopupType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.PopupType(), &key)
+      } else {
+        self.PopupType()
+      };
       let ConditionScenarioModeId = self.ConditionScenarioModeId();
     EventContentSpoilerPopupExcelT {
       EventContentId,
       SpoilerPopupTitle,
       SpoilerPopupDescription,
-      IsWarningPopUp,
+      PopupType,
       ConditionScenarioModeId,
     }
   }
@@ -90,25 +92,25 @@ impl<'a> EventContentSpoilerPopupExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentSpoilerPopupExcel::VT_EVENTCONTENTID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn SpoilerPopupTitle(&self) -> Option<&'a str> {
+  pub fn SpoilerPopupTitle(&self) -> u32 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentSpoilerPopupExcel::VT_SPOILERPOPUPTITLE, None)}
+    unsafe { self._tab.get::<u32>(EventContentSpoilerPopupExcel::VT_SPOILERPOPUPTITLE, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn SpoilerPopupDescription(&self) -> Option<&'a str> {
+  pub fn SpoilerPopupDescription(&self) -> u32 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentSpoilerPopupExcel::VT_SPOILERPOPUPDESCRIPTION, None)}
+    unsafe { self._tab.get::<u32>(EventContentSpoilerPopupExcel::VT_SPOILERPOPUPDESCRIPTION, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn IsWarningPopUp(&self) -> bool {
+  pub fn PopupType(&self) -> SpoilerPopupType {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<bool>(EventContentSpoilerPopupExcel::VT_ISWARNINGPOPUP, Some(false)).unwrap()}
+    unsafe { self._tab.get::<SpoilerPopupType>(EventContentSpoilerPopupExcel::VT_POPUPTYPE, Some(SpoilerPopupType::None)).unwrap()}
   }
   #[inline]
   pub fn ConditionScenarioModeId(&self) -> i64 {
@@ -127,29 +129,29 @@ impl flatbuffers::Verifiable for EventContentSpoilerPopupExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SpoilerPopupTitle", Self::VT_SPOILERPOPUPTITLE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SpoilerPopupDescription", Self::VT_SPOILERPOPUPDESCRIPTION, false)?
-     .visit_field::<bool>("IsWarningPopUp", Self::VT_ISWARNINGPOPUP, false)?
+     .visit_field::<u32>("SpoilerPopupTitle", Self::VT_SPOILERPOPUPTITLE, false)?
+     .visit_field::<u32>("SpoilerPopupDescription", Self::VT_SPOILERPOPUPDESCRIPTION, false)?
+     .visit_field::<SpoilerPopupType>("PopupType", Self::VT_POPUPTYPE, false)?
      .visit_field::<i64>("ConditionScenarioModeId", Self::VT_CONDITIONSCENARIOMODEID, false)?
      .finish();
     Ok(())
   }
 }
-pub struct EventContentSpoilerPopupExcelArgs<'a> {
+pub struct EventContentSpoilerPopupExcelArgs {
     pub EventContentId: i64,
-    pub SpoilerPopupTitle: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub SpoilerPopupDescription: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub IsWarningPopUp: bool,
+    pub SpoilerPopupTitle: u32,
+    pub SpoilerPopupDescription: u32,
+    pub PopupType: SpoilerPopupType,
     pub ConditionScenarioModeId: i64,
 }
-impl<'a> Default for EventContentSpoilerPopupExcelArgs<'a> {
+impl<'a> Default for EventContentSpoilerPopupExcelArgs {
   #[inline]
   fn default() -> Self {
     EventContentSpoilerPopupExcelArgs {
       EventContentId: 0,
-      SpoilerPopupTitle: None,
-      SpoilerPopupDescription: None,
-      IsWarningPopUp: false,
+      SpoilerPopupTitle: 0,
+      SpoilerPopupDescription: 0,
+      PopupType: SpoilerPopupType::None,
       ConditionScenarioModeId: 0,
     }
   }
@@ -162,17 +164,9 @@ impl Serialize for EventContentSpoilerPopupExcel<'_> {
   {
     let mut s = serializer.serialize_struct("EventContentSpoilerPopupExcel", 5)?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
-      if let Some(f) = self.SpoilerPopupTitle() {
-        s.serialize_field("SpoilerPopupTitle", &f)?;
-      } else {
-        s.skip_field("SpoilerPopupTitle")?;
-      }
-      if let Some(f) = self.SpoilerPopupDescription() {
-        s.serialize_field("SpoilerPopupDescription", &f)?;
-      } else {
-        s.skip_field("SpoilerPopupDescription")?;
-      }
-      s.serialize_field("IsWarningPopUp", &self.IsWarningPopUp())?;
+      s.serialize_field("SpoilerPopupTitle", &self.SpoilerPopupTitle())?;
+      s.serialize_field("SpoilerPopupDescription", &self.SpoilerPopupDescription())?;
+      s.serialize_field("PopupType", &self.PopupType())?;
       s.serialize_field("ConditionScenarioModeId", &self.ConditionScenarioModeId())?;
     s.end()
   }
@@ -188,16 +182,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentSpoilerPopupExcelBu
     self.fbb_.push_slot::<i64>(EventContentSpoilerPopupExcel::VT_EVENTCONTENTID, EventContentId, 0);
   }
   #[inline]
-  pub fn add_SpoilerPopupTitle(&mut self, SpoilerPopupTitle: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSpoilerPopupExcel::VT_SPOILERPOPUPTITLE, SpoilerPopupTitle);
+  pub fn add_SpoilerPopupTitle(&mut self, SpoilerPopupTitle: u32) {
+    self.fbb_.push_slot::<u32>(EventContentSpoilerPopupExcel::VT_SPOILERPOPUPTITLE, SpoilerPopupTitle, 0);
   }
   #[inline]
-  pub fn add_SpoilerPopupDescription(&mut self, SpoilerPopupDescription: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSpoilerPopupExcel::VT_SPOILERPOPUPDESCRIPTION, SpoilerPopupDescription);
+  pub fn add_SpoilerPopupDescription(&mut self, SpoilerPopupDescription: u32) {
+    self.fbb_.push_slot::<u32>(EventContentSpoilerPopupExcel::VT_SPOILERPOPUPDESCRIPTION, SpoilerPopupDescription, 0);
   }
   #[inline]
-  pub fn add_IsWarningPopUp(&mut self, IsWarningPopUp: bool) {
-    self.fbb_.push_slot::<bool>(EventContentSpoilerPopupExcel::VT_ISWARNINGPOPUP, IsWarningPopUp, false);
+  pub fn add_PopupType(&mut self, PopupType: SpoilerPopupType) {
+    self.fbb_.push_slot::<SpoilerPopupType>(EventContentSpoilerPopupExcel::VT_POPUPTYPE, PopupType, SpoilerPopupType::None);
   }
   #[inline]
   pub fn add_ConditionScenarioModeId(&mut self, ConditionScenarioModeId: i64) {
@@ -224,7 +218,7 @@ impl core::fmt::Debug for EventContentSpoilerPopupExcel<'_> {
       ds.field("EventContentId", &self.EventContentId());
       ds.field("SpoilerPopupTitle", &self.SpoilerPopupTitle());
       ds.field("SpoilerPopupDescription", &self.SpoilerPopupDescription());
-      ds.field("IsWarningPopUp", &self.IsWarningPopUp());
+      ds.field("PopupType", &self.PopupType());
       ds.field("ConditionScenarioModeId", &self.ConditionScenarioModeId());
       ds.finish()
   }
@@ -233,18 +227,18 @@ impl core::fmt::Debug for EventContentSpoilerPopupExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct EventContentSpoilerPopupExcelT {
   pub EventContentId: i64,
-  pub SpoilerPopupTitle: Option<String>,
-  pub SpoilerPopupDescription: Option<String>,
-  pub IsWarningPopUp: bool,
+  pub SpoilerPopupTitle: u32,
+  pub SpoilerPopupDescription: u32,
+  pub PopupType: SpoilerPopupType,
   pub ConditionScenarioModeId: i64,
 }
 impl Default for EventContentSpoilerPopupExcelT {
   fn default() -> Self {
     Self {
       EventContentId: 0,
-      SpoilerPopupTitle: None,
-      SpoilerPopupDescription: None,
-      IsWarningPopUp: false,
+      SpoilerPopupTitle: 0,
+      SpoilerPopupDescription: 0,
+      PopupType: SpoilerPopupType::None,
       ConditionScenarioModeId: 0,
     }
   }
@@ -255,19 +249,15 @@ impl EventContentSpoilerPopupExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<EventContentSpoilerPopupExcel<'b>> {
     let EventContentId = self.EventContentId;
-    let SpoilerPopupTitle = self.SpoilerPopupTitle.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let SpoilerPopupDescription = self.SpoilerPopupDescription.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let IsWarningPopUp = self.IsWarningPopUp;
+    let SpoilerPopupTitle = self.SpoilerPopupTitle;
+    let SpoilerPopupDescription = self.SpoilerPopupDescription;
+    let PopupType = self.PopupType;
     let ConditionScenarioModeId = self.ConditionScenarioModeId;
     EventContentSpoilerPopupExcel::create(_fbb, &EventContentSpoilerPopupExcelArgs{
       EventContentId,
       SpoilerPopupTitle,
       SpoilerPopupDescription,
-      IsWarningPopUp,
+      PopupType,
       ConditionScenarioModeId,
     })
   }

@@ -32,13 +32,12 @@ impl<'a> EventContentConcentrationRewardExcel<'a> {
   pub const VT_EVENTCONTENTID: flatbuffers::VOffsetT = 4;
   pub const VT_UNIQUEID: flatbuffers::VOffsetT = 6;
   pub const VT_CONCENTRATIONREWARDTYPE: flatbuffers::VOffsetT = 8;
-  pub const VT_LOCALIZEPREFABID: flatbuffers::VOffsetT = 10;
-  pub const VT_RARITY: flatbuffers::VOffsetT = 12;
-  pub const VT_ROUND: flatbuffers::VOffsetT = 14;
-  pub const VT_ISLOOP: flatbuffers::VOffsetT = 16;
-  pub const VT_REWARDPARCELTYPE: flatbuffers::VOffsetT = 18;
-  pub const VT_REWARDPARCELID: flatbuffers::VOffsetT = 20;
-  pub const VT_REWARDPARCELAMOUNT: flatbuffers::VOffsetT = 22;
+  pub const VT_RARITY: flatbuffers::VOffsetT = 10;
+  pub const VT_ROUND: flatbuffers::VOffsetT = 12;
+  pub const VT_ISLOOP: flatbuffers::VOffsetT = 14;
+  pub const VT_REWARDPARCELTYPE: flatbuffers::VOffsetT = 16;
+  pub const VT_REWARDPARCELID: flatbuffers::VOffsetT = 18;
+  pub const VT_REWARDPARCELAMOUNT: flatbuffers::VOffsetT = 20;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -72,9 +71,6 @@ impl<'a> EventContentConcentrationRewardExcel<'a> {
       let x = args.Rarity;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_Rarity(x);
-      if let Some(x) = args.LocalizePrefabId {
-        builder.add_LocalizePrefabId(x);
-      }
       let x = args.ConcentrationRewardType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ConcentrationRewardType(x);
@@ -91,9 +87,6 @@ impl<'a> EventContentConcentrationRewardExcel<'a> {
       } else {
         self.ConcentrationRewardType()
       };
-    let LocalizePrefabId = self.LocalizePrefabId().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
       let Rarity = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_enum(self.Rarity(), &key)
       } else {
@@ -114,7 +107,6 @@ impl<'a> EventContentConcentrationRewardExcel<'a> {
       EventContentId,
       UniqueId,
       ConcentrationRewardType,
-      LocalizePrefabId,
       Rarity,
       Round,
       IsLoop,
@@ -144,13 +136,6 @@ impl<'a> EventContentConcentrationRewardExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<ConcentrationRewardType>(EventContentConcentrationRewardExcel::VT_CONCENTRATIONREWARDTYPE, Some(ConcentrationRewardType::None)).unwrap()}
-  }
-  #[inline]
-  pub fn LocalizePrefabId(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentConcentrationRewardExcel::VT_LOCALIZEPREFABID, None)}
   }
   #[inline]
   pub fn Rarity(&self) -> Rarity {
@@ -206,7 +191,6 @@ impl flatbuffers::Verifiable for EventContentConcentrationRewardExcel<'_> {
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
      .visit_field::<i64>("UniqueId", Self::VT_UNIQUEID, false)?
      .visit_field::<ConcentrationRewardType>("ConcentrationRewardType", Self::VT_CONCENTRATIONREWARDTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("LocalizePrefabId", Self::VT_LOCALIZEPREFABID, false)?
      .visit_field::<Rarity>("Rarity", Self::VT_RARITY, false)?
      .visit_field::<i32>("Round", Self::VT_ROUND, false)?
      .visit_field::<bool>("IsLoop", Self::VT_ISLOOP, false)?
@@ -221,7 +205,6 @@ pub struct EventContentConcentrationRewardExcelArgs<'a> {
     pub EventContentId: i64,
     pub UniqueId: i64,
     pub ConcentrationRewardType: ConcentrationRewardType,
-    pub LocalizePrefabId: Option<flatbuffers::WIPOffset<&'a str>>,
     pub Rarity: Rarity,
     pub Round: i32,
     pub IsLoop: bool,
@@ -236,7 +219,6 @@ impl<'a> Default for EventContentConcentrationRewardExcelArgs<'a> {
       EventContentId: 0,
       UniqueId: 0,
       ConcentrationRewardType: ConcentrationRewardType::None,
-      LocalizePrefabId: None,
       Rarity: Rarity::N,
       Round: 0,
       IsLoop: false,
@@ -252,15 +234,10 @@ impl Serialize for EventContentConcentrationRewardExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EventContentConcentrationRewardExcel", 10)?;
+    let mut s = serializer.serialize_struct("EventContentConcentrationRewardExcel", 9)?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("UniqueId", &self.UniqueId())?;
       s.serialize_field("ConcentrationRewardType", &self.ConcentrationRewardType())?;
-      if let Some(f) = self.LocalizePrefabId() {
-        s.serialize_field("LocalizePrefabId", &f)?;
-      } else {
-        s.skip_field("LocalizePrefabId")?;
-      }
       s.serialize_field("Rarity", &self.Rarity())?;
       s.serialize_field("Round", &self.Round())?;
       s.serialize_field("IsLoop", &self.IsLoop())?;
@@ -299,10 +276,6 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentConcentrationReward
   #[inline]
   pub fn add_ConcentrationRewardType(&mut self, ConcentrationRewardType: ConcentrationRewardType) {
     self.fbb_.push_slot::<ConcentrationRewardType>(EventContentConcentrationRewardExcel::VT_CONCENTRATIONREWARDTYPE, ConcentrationRewardType, ConcentrationRewardType::None);
-  }
-  #[inline]
-  pub fn add_LocalizePrefabId(&mut self, LocalizePrefabId: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentConcentrationRewardExcel::VT_LOCALIZEPREFABID, LocalizePrefabId);
   }
   #[inline]
   pub fn add_Rarity(&mut self, Rarity: Rarity) {
@@ -349,7 +322,6 @@ impl core::fmt::Debug for EventContentConcentrationRewardExcel<'_> {
       ds.field("EventContentId", &self.EventContentId());
       ds.field("UniqueId", &self.UniqueId());
       ds.field("ConcentrationRewardType", &self.ConcentrationRewardType());
-      ds.field("LocalizePrefabId", &self.LocalizePrefabId());
       ds.field("Rarity", &self.Rarity());
       ds.field("Round", &self.Round());
       ds.field("IsLoop", &self.IsLoop());
@@ -365,7 +337,6 @@ pub struct EventContentConcentrationRewardExcelT {
   pub EventContentId: i64,
   pub UniqueId: i64,
   pub ConcentrationRewardType: ConcentrationRewardType,
-  pub LocalizePrefabId: Option<String>,
   pub Rarity: Rarity,
   pub Round: i32,
   pub IsLoop: bool,
@@ -379,7 +350,6 @@ impl Default for EventContentConcentrationRewardExcelT {
       EventContentId: 0,
       UniqueId: 0,
       ConcentrationRewardType: ConcentrationRewardType::None,
-      LocalizePrefabId: None,
       Rarity: Rarity::N,
       Round: 0,
       IsLoop: false,
@@ -397,9 +367,6 @@ impl EventContentConcentrationRewardExcelT {
     let EventContentId = self.EventContentId;
     let UniqueId = self.UniqueId;
     let ConcentrationRewardType = self.ConcentrationRewardType;
-    let LocalizePrefabId = self.LocalizePrefabId.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
     let Rarity = self.Rarity;
     let Round = self.Round;
     let IsLoop = self.IsLoop;
@@ -416,7 +383,6 @@ impl EventContentConcentrationRewardExcelT {
       EventContentId,
       UniqueId,
       ConcentrationRewardType,
-      LocalizePrefabId,
       Rarity,
       Round,
       IsLoop,

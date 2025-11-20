@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_MISSION_COMPLETE_CONDITION_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_MISSION_COMPLETE_CONDITION_TYPE: i32 = 183;
+pub const ENUM_MAX_MISSION_COMPLETE_CONDITION_TYPE: i32 = 185;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteConditionType; 184] = [
+pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteConditionType; 186] = [
   MissionCompleteConditionType::None,
   MissionCompleteConditionType::Reset_DailyLogin,
   MissionCompleteConditionType::Reset_DailyLoginCount,
@@ -204,6 +204,8 @@ pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteCondition
   MissionCompleteConditionType::Reset_CCGActivatePerkCount,
   MissionCompleteConditionType::Reset_ClearMultiFloorRaid,
   MissionCompleteConditionType::Reset_DayCompleteMission,
+  MissionCompleteConditionType::Reset_ConcentrationCardMatchCount,
+  MissionCompleteConditionType::Reset_ConcentrationClearCount,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -395,9 +397,11 @@ impl MissionCompleteConditionType {
   pub const Reset_CCGActivatePerkCount: Self = Self(181);
   pub const Reset_ClearMultiFloorRaid: Self = Self(182);
   pub const Reset_DayCompleteMission: Self = Self(183);
+  pub const Reset_ConcentrationCardMatchCount: Self = Self(184);
+  pub const Reset_ConcentrationClearCount: Self = Self(185);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 183;
+  pub const ENUM_MAX: i32 = 185;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Reset_DailyLogin,
@@ -583,6 +587,8 @@ impl MissionCompleteConditionType {
     Self::Reset_CCGActivatePerkCount,
     Self::Reset_ClearMultiFloorRaid,
     Self::Reset_DayCompleteMission,
+    Self::Reset_ConcentrationCardMatchCount,
+    Self::Reset_ConcentrationClearCount,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -771,6 +777,8 @@ impl MissionCompleteConditionType {
       Self::Reset_CCGActivatePerkCount => Some("Reset_CCGActivatePerkCount"),
       Self::Reset_ClearMultiFloorRaid => Some("Reset_ClearMultiFloorRaid"),
       Self::Reset_DayCompleteMission => Some("Reset_DayCompleteMission"),
+      Self::Reset_ConcentrationCardMatchCount => Some("Reset_ConcentrationCardMatchCount"),
+      Self::Reset_ConcentrationClearCount => Some("Reset_ConcentrationClearCount"),
       _ => None,
     }
   }

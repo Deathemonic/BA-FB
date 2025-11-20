@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_EVENT_CONTENT_ITEM_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_EVENT_CONTENT_ITEM_TYPE: i32 = 7;
+pub const ENUM_MAX_EVENT_CONTENT_ITEM_TYPE: i32 = 8;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_EVENT_CONTENT_ITEM_TYPE: [EventContentItemType; 8] = [
+pub const ENUM_VALUES_EVENT_CONTENT_ITEM_TYPE: [EventContentItemType; 9] = [
   EventContentItemType::EventPoint,
   EventContentItemType::EventToken1,
   EventContentItemType::EventToken2,
@@ -28,6 +28,7 @@ pub const ENUM_VALUES_EVENT_CONTENT_ITEM_TYPE: [EventContentItemType; 8] = [
   EventContentItemType::EventToken5,
   EventContentItemType::EventMeetUpTicket,
   EventContentItemType::EventEtcItem,
+  EventContentItemType::Concentration,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -43,9 +44,10 @@ impl EventContentItemType {
   pub const EventToken5: Self = Self(5);
   pub const EventMeetUpTicket: Self = Self(6);
   pub const EventEtcItem: Self = Self(7);
+  pub const Concentration: Self = Self(8);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 7;
+  pub const ENUM_MAX: i32 = 8;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::EventPoint,
     Self::EventToken1,
@@ -55,6 +57,7 @@ impl EventContentItemType {
     Self::EventToken5,
     Self::EventMeetUpTicket,
     Self::EventEtcItem,
+    Self::Concentration,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -67,6 +70,7 @@ impl EventContentItemType {
       Self::EventToken5 => Some("EventToken5"),
       Self::EventMeetUpTicket => Some("EventMeetUpTicket"),
       Self::EventEtcItem => Some("EventEtcItem"),
+      Self::Concentration => Some("Concentration"),
       _ => None,
     }
   }

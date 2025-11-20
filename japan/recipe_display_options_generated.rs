@@ -14,44 +14,44 @@ use self::serde::ser::{Serialize, Serializer, SerializeStruct};
 use self::flatbuffers::{EndianScalar, Follow};
 use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MIN_CONCENTRATION_REWARD_TYPE: i32 = 0;
+pub const ENUM_MIN_RECIPE_DISPLAY_OPTIONS: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_CONCENTRATION_REWARD_TYPE: i32 = 2;
+pub const ENUM_MAX_RECIPE_DISPLAY_OPTIONS: i32 = 2;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_CONCENTRATION_REWARD_TYPE: [ConcentrationRewardType; 3] = [
-  ConcentrationRewardType::None,
-  ConcentrationRewardType::PairMatch,
-  ConcentrationRewardType::RoundRenewal,
+pub const ENUM_VALUES_RECIPE_DISPLAY_OPTIONS: [RecipeDisplayOptions; 3] = [
+  RecipeDisplayOptions::None,
+  RecipeDisplayOptions::Always,
+  RecipeDisplayOptions::HideNoMaterials,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]
-pub struct ConcentrationRewardType(pub i32);
+pub struct RecipeDisplayOptions(pub i32);
 #[allow(non_upper_case_globals)]
-impl ConcentrationRewardType {
+impl RecipeDisplayOptions {
   pub const None: Self = Self(0);
-  pub const PairMatch: Self = Self(1);
-  pub const RoundRenewal: Self = Self(2);
+  pub const Always: Self = Self(1);
+  pub const HideNoMaterials: Self = Self(2);
 
   pub const ENUM_MIN: i32 = 0;
   pub const ENUM_MAX: i32 = 2;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
-    Self::PairMatch,
-    Self::RoundRenewal,
+    Self::Always,
+    Self::HideNoMaterials,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
     match self {
       Self::None => Some("None"),
-      Self::PairMatch => Some("PairMatch"),
-      Self::RoundRenewal => Some("RoundRenewal"),
+      Self::Always => Some("Always"),
+      Self::HideNoMaterials => Some("HideNoMaterials"),
       _ => None,
     }
   }
 }
-impl core::fmt::Debug for ConcentrationRewardType {
+impl core::fmt::Debug for RecipeDisplayOptions {
   fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
     if let Some(name) = self.variant_name() {
       f.write_str(name)
@@ -60,16 +60,16 @@ impl core::fmt::Debug for ConcentrationRewardType {
     }
   }
 }
-impl Serialize for ConcentrationRewardType {
+impl Serialize for RecipeDisplayOptions {
   fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
   where
     S: Serializer,
   {
-    serializer.serialize_unit_variant("ConcentrationRewardType", self.0 as u32, self.variant_name().unwrap())
+    serializer.serialize_unit_variant("RecipeDisplayOptions", self.0 as u32, self.variant_name().unwrap())
   }
 }
 
-impl<'a> flatbuffers::Follow<'a> for ConcentrationRewardType {
+impl<'a> flatbuffers::Follow<'a> for RecipeDisplayOptions {
   type Inner = Self;
   #[inline]
   unsafe fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
@@ -78,15 +78,15 @@ impl<'a> flatbuffers::Follow<'a> for ConcentrationRewardType {
   }
 }
 
-impl flatbuffers::Push for ConcentrationRewardType {
-    type Output = ConcentrationRewardType;
+impl flatbuffers::Push for RecipeDisplayOptions {
+    type Output = RecipeDisplayOptions;
     #[inline]
     unsafe fn push(&self, dst: &mut [u8], _written_len: usize) {
         flatbuffers::emplace_scalar::<i32>(dst, self.0);
     }
 }
 
-impl flatbuffers::EndianScalar for ConcentrationRewardType {
+impl flatbuffers::EndianScalar for RecipeDisplayOptions {
   type Scalar = i32;
   #[inline]
   fn to_little_endian(self) -> i32 {
@@ -100,7 +100,7 @@ impl flatbuffers::EndianScalar for ConcentrationRewardType {
   }
 }
 
-impl<'a> flatbuffers::Verifiable for ConcentrationRewardType {
+impl<'a> flatbuffers::Verifiable for RecipeDisplayOptions {
   #[inline]
   fn run_verifier(
     v: &mut flatbuffers::Verifier, pos: usize
@@ -110,4 +110,4 @@ impl<'a> flatbuffers::Verifiable for ConcentrationRewardType {
   }
 }
 
-impl flatbuffers::SimpleToVerifyInSlice for ConcentrationRewardType {}
+impl flatbuffers::SimpleToVerifyInSlice for RecipeDisplayOptions {}

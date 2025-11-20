@@ -38,8 +38,12 @@ impl<'a> ShiftingCraftRecipeExcel<'a> {
   pub const VT_REQUIREITEMID: flatbuffers::VOffsetT = 16;
   pub const VT_REQUIREITEMAMOUNT: flatbuffers::VOffsetT = 18;
   pub const VT_REQUIREGOLD: flatbuffers::VOffsetT = 20;
-  pub const VT_INGREDIENTTAG: flatbuffers::VOffsetT = 22;
-  pub const VT_INGREDIENTEXP: flatbuffers::VOffsetT = 24;
+  pub const VT_ADDITIONALCOSTPARCELTYPE: flatbuffers::VOffsetT = 22;
+  pub const VT_ADDITIONALCOSTPARCELID: flatbuffers::VOffsetT = 24;
+  pub const VT_ADDITIONALCOSTPARCELAMOUNT: flatbuffers::VOffsetT = 26;
+  pub const VT_INGREDIENTTAG: flatbuffers::VOffsetT = 28;
+  pub const VT_INGREDIENTEXP: flatbuffers::VOffsetT = 30;
+  pub const VT_RECIPEDISPLAYOPTIONS: flatbuffers::VOffsetT = 32;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -55,6 +59,12 @@ impl<'a> ShiftingCraftRecipeExcel<'a> {
       let x = args.IngredientExp;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_IngredientExp(x);
+      let x = args.AdditionalCostParcelAmount;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_AdditionalCostParcelAmount(x);
+      let x = args.AdditionalCostParcelId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_AdditionalCostParcelId(x);
       let x = args.RequireGold;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_RequireGold(x);
@@ -76,9 +86,15 @@ impl<'a> ShiftingCraftRecipeExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
+      let x = args.RecipeDisplayOptions;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_RecipeDisplayOptions(x);
       if let Some(x) = args.IngredientTag {
         builder.add_IngredientTag(x);
       }
+      let x = args.AdditionalCostParcelType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_AdditionalCostParcelType(x);
       let x = args.ResultParcel;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ResultParcel(x);
@@ -103,10 +119,22 @@ impl<'a> ShiftingCraftRecipeExcel<'a> {
       let RequireItemId = self.RequireItemId();
       let RequireItemAmount = self.RequireItemAmount();
       let RequireGold = self.RequireGold();
+      let AdditionalCostParcelType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.AdditionalCostParcelType(), &key)
+      } else {
+        self.AdditionalCostParcelType()
+      };
+      let AdditionalCostParcelId = self.AdditionalCostParcelId();
+      let AdditionalCostParcelAmount = self.AdditionalCostParcelAmount();
     let IngredientTag = self.IngredientTag().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let IngredientExp = self.IngredientExp();
+      let RecipeDisplayOptions = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.RecipeDisplayOptions(), &key)
+      } else {
+        self.RecipeDisplayOptions()
+      };
     ShiftingCraftRecipeExcelT {
       Id,
       DisplayOrder,
@@ -117,8 +145,12 @@ impl<'a> ShiftingCraftRecipeExcel<'a> {
       RequireItemId,
       RequireItemAmount,
       RequireGold,
+      AdditionalCostParcelType,
+      AdditionalCostParcelId,
+      AdditionalCostParcelAmount,
       IngredientTag,
       IngredientExp,
+      RecipeDisplayOptions,
     }
   }
 
@@ -186,6 +218,27 @@ impl<'a> ShiftingCraftRecipeExcel<'a> {
     unsafe { self._tab.get::<i64>(ShiftingCraftRecipeExcel::VT_REQUIREGOLD, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn AdditionalCostParcelType(&self) -> ParcelType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ParcelType>(ShiftingCraftRecipeExcel::VT_ADDITIONALCOSTPARCELTYPE, Some(ParcelType::None)).unwrap()}
+  }
+  #[inline]
+  pub fn AdditionalCostParcelId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ShiftingCraftRecipeExcel::VT_ADDITIONALCOSTPARCELID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn AdditionalCostParcelAmount(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ShiftingCraftRecipeExcel::VT_ADDITIONALCOSTPARCELAMOUNT, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn IngredientTag(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
@@ -198,6 +251,13 @@ impl<'a> ShiftingCraftRecipeExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(ShiftingCraftRecipeExcel::VT_INGREDIENTEXP, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn RecipeDisplayOptions(&self) -> RecipeDisplayOptions {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<RecipeDisplayOptions>(ShiftingCraftRecipeExcel::VT_RECIPEDISPLAYOPTIONS, Some(RecipeDisplayOptions::None)).unwrap()}
   }
 }
 
@@ -217,8 +277,12 @@ impl flatbuffers::Verifiable for ShiftingCraftRecipeExcel<'_> {
      .visit_field::<i64>("RequireItemId", Self::VT_REQUIREITEMID, false)?
      .visit_field::<i64>("RequireItemAmount", Self::VT_REQUIREITEMAMOUNT, false)?
      .visit_field::<i64>("RequireGold", Self::VT_REQUIREGOLD, false)?
+     .visit_field::<ParcelType>("AdditionalCostParcelType", Self::VT_ADDITIONALCOSTPARCELTYPE, false)?
+     .visit_field::<i64>("AdditionalCostParcelId", Self::VT_ADDITIONALCOSTPARCELID, false)?
+     .visit_field::<i64>("AdditionalCostParcelAmount", Self::VT_ADDITIONALCOSTPARCELAMOUNT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("IngredientTag", Self::VT_INGREDIENTTAG, false)?
      .visit_field::<i64>("IngredientExp", Self::VT_INGREDIENTEXP, false)?
+     .visit_field::<RecipeDisplayOptions>("RecipeDisplayOptions", Self::VT_RECIPEDISPLAYOPTIONS, false)?
      .finish();
     Ok(())
   }
@@ -233,8 +297,12 @@ pub struct ShiftingCraftRecipeExcelArgs<'a> {
     pub RequireItemId: i64,
     pub RequireItemAmount: i64,
     pub RequireGold: i64,
+    pub AdditionalCostParcelType: ParcelType,
+    pub AdditionalCostParcelId: i64,
+    pub AdditionalCostParcelAmount: i64,
     pub IngredientTag: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub IngredientExp: i64,
+    pub RecipeDisplayOptions: RecipeDisplayOptions,
 }
 impl<'a> Default for ShiftingCraftRecipeExcelArgs<'a> {
   #[inline]
@@ -249,8 +317,12 @@ impl<'a> Default for ShiftingCraftRecipeExcelArgs<'a> {
       RequireItemId: 0,
       RequireItemAmount: 0,
       RequireGold: 0,
+      AdditionalCostParcelType: ParcelType::None,
+      AdditionalCostParcelId: 0,
+      AdditionalCostParcelAmount: 0,
       IngredientTag: None,
       IngredientExp: 0,
+      RecipeDisplayOptions: RecipeDisplayOptions::None,
     }
   }
 }
@@ -260,7 +332,7 @@ impl Serialize for ShiftingCraftRecipeExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShiftingCraftRecipeExcel", 11)?;
+    let mut s = serializer.serialize_struct("ShiftingCraftRecipeExcel", 15)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
       s.serialize_field("NotificationId", &self.NotificationId())?;
@@ -270,12 +342,16 @@ impl Serialize for ShiftingCraftRecipeExcel<'_> {
       s.serialize_field("RequireItemId", &self.RequireItemId())?;
       s.serialize_field("RequireItemAmount", &self.RequireItemAmount())?;
       s.serialize_field("RequireGold", &self.RequireGold())?;
+      s.serialize_field("AdditionalCostParcelType", &self.AdditionalCostParcelType())?;
+      s.serialize_field("AdditionalCostParcelId", &self.AdditionalCostParcelId())?;
+      s.serialize_field("AdditionalCostParcelAmount", &self.AdditionalCostParcelAmount())?;
       if let Some(f) = self.IngredientTag() {
         s.serialize_field("IngredientTag", &f)?;
       } else {
         s.skip_field("IngredientTag")?;
       }
       s.serialize_field("IngredientExp", &self.IngredientExp())?;
+      s.serialize_field("RecipeDisplayOptions", &self.RecipeDisplayOptions())?;
     s.end()
   }
 }
@@ -322,12 +398,28 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShiftingCraftRecipeExcelBuilder
     self.fbb_.push_slot::<i64>(ShiftingCraftRecipeExcel::VT_REQUIREGOLD, RequireGold, 0);
   }
   #[inline]
+  pub fn add_AdditionalCostParcelType(&mut self, AdditionalCostParcelType: ParcelType) {
+    self.fbb_.push_slot::<ParcelType>(ShiftingCraftRecipeExcel::VT_ADDITIONALCOSTPARCELTYPE, AdditionalCostParcelType, ParcelType::None);
+  }
+  #[inline]
+  pub fn add_AdditionalCostParcelId(&mut self, AdditionalCostParcelId: i64) {
+    self.fbb_.push_slot::<i64>(ShiftingCraftRecipeExcel::VT_ADDITIONALCOSTPARCELID, AdditionalCostParcelId, 0);
+  }
+  #[inline]
+  pub fn add_AdditionalCostParcelAmount(&mut self, AdditionalCostParcelAmount: i64) {
+    self.fbb_.push_slot::<i64>(ShiftingCraftRecipeExcel::VT_ADDITIONALCOSTPARCELAMOUNT, AdditionalCostParcelAmount, 0);
+  }
+  #[inline]
   pub fn add_IngredientTag(&mut self, IngredientTag: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShiftingCraftRecipeExcel::VT_INGREDIENTTAG, IngredientTag);
   }
   #[inline]
   pub fn add_IngredientExp(&mut self, IngredientExp: i64) {
     self.fbb_.push_slot::<i64>(ShiftingCraftRecipeExcel::VT_INGREDIENTEXP, IngredientExp, 0);
+  }
+  #[inline]
+  pub fn add_RecipeDisplayOptions(&mut self, RecipeDisplayOptions: RecipeDisplayOptions) {
+    self.fbb_.push_slot::<RecipeDisplayOptions>(ShiftingCraftRecipeExcel::VT_RECIPEDISPLAYOPTIONS, RecipeDisplayOptions, RecipeDisplayOptions::None);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ShiftingCraftRecipeExcelBuilder<'a, 'b, A> {
@@ -356,8 +448,12 @@ impl core::fmt::Debug for ShiftingCraftRecipeExcel<'_> {
       ds.field("RequireItemId", &self.RequireItemId());
       ds.field("RequireItemAmount", &self.RequireItemAmount());
       ds.field("RequireGold", &self.RequireGold());
+      ds.field("AdditionalCostParcelType", &self.AdditionalCostParcelType());
+      ds.field("AdditionalCostParcelId", &self.AdditionalCostParcelId());
+      ds.field("AdditionalCostParcelAmount", &self.AdditionalCostParcelAmount());
       ds.field("IngredientTag", &self.IngredientTag());
       ds.field("IngredientExp", &self.IngredientExp());
+      ds.field("RecipeDisplayOptions", &self.RecipeDisplayOptions());
       ds.finish()
   }
 }
@@ -373,8 +469,12 @@ pub struct ShiftingCraftRecipeExcelT {
   pub RequireItemId: i64,
   pub RequireItemAmount: i64,
   pub RequireGold: i64,
+  pub AdditionalCostParcelType: ParcelType,
+  pub AdditionalCostParcelId: i64,
+  pub AdditionalCostParcelAmount: i64,
   pub IngredientTag: Option<Vec<Tag>>,
   pub IngredientExp: i64,
+  pub RecipeDisplayOptions: RecipeDisplayOptions,
 }
 impl Default for ShiftingCraftRecipeExcelT {
   fn default() -> Self {
@@ -388,8 +488,12 @@ impl Default for ShiftingCraftRecipeExcelT {
       RequireItemId: 0,
       RequireItemAmount: 0,
       RequireGold: 0,
+      AdditionalCostParcelType: ParcelType::None,
+      AdditionalCostParcelId: 0,
+      AdditionalCostParcelAmount: 0,
       IngredientTag: None,
       IngredientExp: 0,
+      RecipeDisplayOptions: RecipeDisplayOptions::None,
     }
   }
 }
@@ -407,10 +511,14 @@ impl ShiftingCraftRecipeExcelT {
     let RequireItemId = self.RequireItemId;
     let RequireItemAmount = self.RequireItemAmount;
     let RequireGold = self.RequireGold;
+    let AdditionalCostParcelType = self.AdditionalCostParcelType;
+    let AdditionalCostParcelId = self.AdditionalCostParcelId;
+    let AdditionalCostParcelAmount = self.AdditionalCostParcelAmount;
     let IngredientTag = self.IngredientTag.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let IngredientExp = self.IngredientExp;
+    let RecipeDisplayOptions = self.RecipeDisplayOptions;
     ShiftingCraftRecipeExcel::create(_fbb, &ShiftingCraftRecipeExcelArgs{
       Id,
       DisplayOrder,
@@ -421,8 +529,12 @@ impl ShiftingCraftRecipeExcelT {
       RequireItemId,
       RequireItemAmount,
       RequireGold,
+      AdditionalCostParcelType,
+      AdditionalCostParcelId,
+      AdditionalCostParcelAmount,
       IngredientTag,
       IngredientExp,
+      RecipeDisplayOptions,
     })
   }
 }

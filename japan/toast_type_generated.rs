@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_TOAST_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_TOAST_TYPE: i32 = 6;
+pub const ENUM_MAX_TOAST_TYPE: i32 = 7;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_TOAST_TYPE: [ToastType; 7] = [
+pub const ENUM_VALUES_TOAST_TYPE: [ToastType; 8] = [
   ToastType::None,
   ToastType::Tactic_Left,
   ToastType::Tactic_Right,
@@ -27,6 +27,7 @@ pub const ENUM_VALUES_TOAST_TYPE: [ToastType; 7] = [
   ToastType::Social_Mission,
   ToastType::Social_Right,
   ToastType::Notice_Center,
+  ToastType::PC_LeftCenter,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -41,9 +42,10 @@ impl ToastType {
   pub const Social_Mission: Self = Self(4);
   pub const Social_Right: Self = Self(5);
   pub const Notice_Center: Self = Self(6);
+  pub const PC_LeftCenter: Self = Self(7);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 6;
+  pub const ENUM_MAX: i32 = 7;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Tactic_Left,
@@ -52,6 +54,7 @@ impl ToastType {
     Self::Social_Mission,
     Self::Social_Right,
     Self::Notice_Center,
+    Self::PC_LeftCenter,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -63,6 +66,7 @@ impl ToastType {
       Self::Social_Mission => Some("Social_Mission"),
       Self::Social_Right => Some("Social_Right"),
       Self::Notice_Center => Some("Notice_Center"),
+      Self::PC_LeftCenter => Some("PC_LeftCenter"),
       _ => None,
     }
   }

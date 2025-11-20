@@ -150,6 +150,8 @@ pub mod japan {
   pub use self::academy_message_conditions_generated::*;
   mod academy_message_types_generated;
   pub use self::academy_message_types_generated::*;
+  mod spoiler_popup_type_generated;
+  pub use self::spoiler_popup_type_generated::*;
   mod arena_reward_type_generated;
   pub use self::arena_reward_type_generated::*;
   mod echelon_type_generated;
@@ -414,6 +416,8 @@ pub mod japan {
   pub use self::scenario_mode_sub_types_generated::*;
   mod service_action_type_generated;
   pub use self::service_action_type_generated::*;
+  mod recipe_display_options_generated;
+  pub use self::recipe_display_options_generated::*;
   mod purchase_source_type_generated;
   pub use self::purchase_source_type_generated::*;
   mod product_category_generated;
@@ -526,6 +530,10 @@ pub mod japan {
   pub use self::const_field_excel_table_generated::*;
   mod const_field_excel_generated;
   pub use self::const_field_excel_generated::*;
+  mod const_key_mapping_excel_table_generated;
+  pub use self::const_key_mapping_excel_table_generated::*;
+  mod const_key_mapping_excel_generated;
+  pub use self::const_key_mapping_excel_generated::*;
   mod const_minigame_ccgexcel_table_generated;
   pub use self::const_minigame_ccgexcel_table_generated::*;
   mod const_minigame_ccgexcel_generated;
@@ -798,6 +806,8 @@ pub mod japan {
   pub use self::account_level_excel_generated::*;
   mod account_level_reward_excel_generated;
   pub use self::account_level_reward_excel_generated::*;
+  mod alert_popup_excel_generated;
+  pub use self::alert_popup_excel_generated::*;
   mod arena_level_section_excel_generated;
   pub use self::arena_level_section_excel_generated::*;
   mod arena_map_excel_generated;
@@ -1170,6 +1180,10 @@ pub mod japan {
   pub use self::information_strategy_object_excel_generated::*;
   mod item_excel_generated;
   pub use self::item_excel_generated::*;
+  mod key_mapping_excel_generated;
+  pub use self::key_mapping_excel_generated::*;
+  mod key_mapping_popup_excel_generated;
+  pub use self::key_mapping_popup_excel_generated::*;
   mod level_exp_master_coin_excel_generated;
   pub use self::level_exp_master_coin_excel_generated::*;
   mod loading_image_excel_generated;
@@ -1398,6 +1412,8 @@ pub mod japan {
   pub use self::scenario_mode_excel_generated::*;
   mod scenario_mode_reward_excel_generated;
   pub use self::scenario_mode_reward_excel_generated::*;
+  mod scenario_mode_spoiler_popup_excel_generated;
+  pub use self::scenario_mode_spoiler_popup_excel_generated::*;
   mod scenario_resource_info_excel_generated;
   pub use self::scenario_resource_info_excel_generated::*;
   mod scenario_script_excel_generated;

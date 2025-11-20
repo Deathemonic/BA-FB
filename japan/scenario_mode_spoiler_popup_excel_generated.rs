@@ -13,42 +13,50 @@ extern crate serde;
 use self::serde::ser::{Serialize, Serializer, SerializeStruct};
 use self::flatbuffers::{EndianScalar, Follow};
 use super::*;
-pub enum ContentSpoilerPopupExcelOffset {}
+pub enum ScenarioModeSpoilerPopupExcelOffset {}
 #[derive(Copy, Clone, PartialEq)]
 
-pub struct ContentSpoilerPopupExcel<'a> {
+pub struct ScenarioModeSpoilerPopupExcel<'a> {
   pub _tab: flatbuffers::Table<'a>,
 }
 
-impl<'a> flatbuffers::Follow<'a> for ContentSpoilerPopupExcel<'a> {
-  type Inner = ContentSpoilerPopupExcel<'a>;
+impl<'a> flatbuffers::Follow<'a> for ScenarioModeSpoilerPopupExcel<'a> {
+  type Inner = ScenarioModeSpoilerPopupExcel<'a>;
   #[inline]
   unsafe fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
     Self { _tab: flatbuffers::Table::new(buf, loc) }
   }
 }
 
-impl<'a> ContentSpoilerPopupExcel<'a> {
-  pub const VT_CONTENTTYPE: flatbuffers::VOffsetT = 4;
-  pub const VT_SPOILERPOPUPTITLE: flatbuffers::VOffsetT = 6;
-  pub const VT_SPOILERPOPUPDESCRIPTION: flatbuffers::VOffsetT = 8;
-  pub const VT_POPUPTYPE: flatbuffers::VOffsetT = 10;
-  pub const VT_CONDITIONSCENARIOMODEID: flatbuffers::VOffsetT = 12;
+impl<'a> ScenarioModeSpoilerPopupExcel<'a> {
+  pub const VT_MODETYPE: flatbuffers::VOffsetT = 4;
+  pub const VT_VOLUMEID: flatbuffers::VOffsetT = 6;
+  pub const VT_CHAPTERID: flatbuffers::VOffsetT = 8;
+  pub const VT_SPOILERPOPUPTITLE: flatbuffers::VOffsetT = 10;
+  pub const VT_SPOILERPOPUPDESCRIPTION: flatbuffers::VOffsetT = 12;
+  pub const VT_POPUPTYPE: flatbuffers::VOffsetT = 14;
+  pub const VT_CONDITIONSCENARIOMODEID: flatbuffers::VOffsetT = 16;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
-    ContentSpoilerPopupExcel { _tab: table }
+    ScenarioModeSpoilerPopupExcel { _tab: table }
   }
   #[allow(unused_mut)]
   pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr, A: flatbuffers::Allocator + 'bldr>(
     _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr, A>,
-    args: &'args ContentSpoilerPopupExcelArgs
-  ) -> flatbuffers::WIPOffset<ContentSpoilerPopupExcel<'bldr>> {
-    let mut builder = ContentSpoilerPopupExcelBuilder::new(_fbb);
-    let key = table_encryption_service::create_key(b"ContentSpoilerPopup");
+    args: &'args ScenarioModeSpoilerPopupExcelArgs
+  ) -> flatbuffers::WIPOffset<ScenarioModeSpoilerPopupExcel<'bldr>> {
+    let mut builder = ScenarioModeSpoilerPopupExcelBuilder::new(_fbb);
+    let key = table_encryption_service::create_key(b"ScenarioModeSpoilerPopup");
       let x = args.ConditionScenarioModeId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ConditionScenarioModeId(x);
+      let x = args.ChapterId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ChapterId(x);
+      let x = args.VolumeId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_VolumeId(x);
       let x = args.PopupType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_PopupType(x);
@@ -58,19 +66,21 @@ impl<'a> ContentSpoilerPopupExcel<'a> {
       let x = args.SpoilerPopupTitle;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_SpoilerPopupTitle(x);
-      let x = args.ContentType;
+      let x = args.ModeType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
-      builder.add_ContentType(x);
+      builder.add_ModeType(x);
     builder.finish()
   }
 
-  pub fn unpack(&self) -> ContentSpoilerPopupExcelT {
-    let key = table_encryption_service::create_key(b"ContentSpoilerPopup");
-      let ContentType = if table_encryption_service::use_encryption() {
-        table_encryption_service::convert_enum(self.ContentType(), &key)
+  pub fn unpack(&self) -> ScenarioModeSpoilerPopupExcelT {
+    let key = table_encryption_service::create_key(b"ScenarioModeSpoilerPopup");
+      let ModeType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.ModeType(), &key)
       } else {
-        self.ContentType()
+        self.ModeType()
       };
+      let VolumeId = self.VolumeId();
+      let ChapterId = self.ChapterId();
       let SpoilerPopupTitle = self.SpoilerPopupTitle();
       let SpoilerPopupDescription = self.SpoilerPopupDescription();
       let PopupType = if table_encryption_service::use_encryption() {
@@ -79,8 +89,10 @@ impl<'a> ContentSpoilerPopupExcel<'a> {
         self.PopupType()
       };
       let ConditionScenarioModeId = self.ConditionScenarioModeId();
-    ContentSpoilerPopupExcelT {
-      ContentType,
+    ScenarioModeSpoilerPopupExcelT {
+      ModeType,
+      VolumeId,
+      ChapterId,
       SpoilerPopupTitle,
       SpoilerPopupDescription,
       PopupType,
@@ -89,50 +101,66 @@ impl<'a> ContentSpoilerPopupExcel<'a> {
   }
 
   #[inline]
-  pub fn ContentType(&self) -> ContentType {
+  pub fn ModeType(&self) -> ScenarioModeTypes {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<ContentType>(ContentSpoilerPopupExcel::VT_CONTENTTYPE, Some(ContentType::None)).unwrap()}
+    unsafe { self._tab.get::<ScenarioModeTypes>(ScenarioModeSpoilerPopupExcel::VT_MODETYPE, Some(ScenarioModeTypes::None)).unwrap()}
+  }
+  #[inline]
+  pub fn VolumeId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ScenarioModeSpoilerPopupExcel::VT_VOLUMEID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn ChapterId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ScenarioModeSpoilerPopupExcel::VT_CHAPTERID, Some(0)).unwrap()}
   }
   #[inline]
   pub fn SpoilerPopupTitle(&self) -> u32 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<u32>(ContentSpoilerPopupExcel::VT_SPOILERPOPUPTITLE, Some(0)).unwrap()}
+    unsafe { self._tab.get::<u32>(ScenarioModeSpoilerPopupExcel::VT_SPOILERPOPUPTITLE, Some(0)).unwrap()}
   }
   #[inline]
   pub fn SpoilerPopupDescription(&self) -> u32 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<u32>(ContentSpoilerPopupExcel::VT_SPOILERPOPUPDESCRIPTION, Some(0)).unwrap()}
+    unsafe { self._tab.get::<u32>(ScenarioModeSpoilerPopupExcel::VT_SPOILERPOPUPDESCRIPTION, Some(0)).unwrap()}
   }
   #[inline]
   pub fn PopupType(&self) -> SpoilerPopupType {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<SpoilerPopupType>(ContentSpoilerPopupExcel::VT_POPUPTYPE, Some(SpoilerPopupType::None)).unwrap()}
+    unsafe { self._tab.get::<SpoilerPopupType>(ScenarioModeSpoilerPopupExcel::VT_POPUPTYPE, Some(SpoilerPopupType::None)).unwrap()}
   }
   #[inline]
   pub fn ConditionScenarioModeId(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ContentSpoilerPopupExcel::VT_CONDITIONSCENARIOMODEID, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(ScenarioModeSpoilerPopupExcel::VT_CONDITIONSCENARIOMODEID, Some(0)).unwrap()}
   }
 }
 
-impl flatbuffers::Verifiable for ContentSpoilerPopupExcel<'_> {
+impl flatbuffers::Verifiable for ScenarioModeSpoilerPopupExcel<'_> {
   #[inline]
   fn run_verifier(
     v: &mut flatbuffers::Verifier, pos: usize
   ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
-     .visit_field::<ContentType>("ContentType", Self::VT_CONTENTTYPE, false)?
+     .visit_field::<ScenarioModeTypes>("ModeType", Self::VT_MODETYPE, false)?
+     .visit_field::<i64>("VolumeId", Self::VT_VOLUMEID, false)?
+     .visit_field::<i64>("ChapterId", Self::VT_CHAPTERID, false)?
      .visit_field::<u32>("SpoilerPopupTitle", Self::VT_SPOILERPOPUPTITLE, false)?
      .visit_field::<u32>("SpoilerPopupDescription", Self::VT_SPOILERPOPUPDESCRIPTION, false)?
      .visit_field::<SpoilerPopupType>("PopupType", Self::VT_POPUPTYPE, false)?
@@ -141,18 +169,22 @@ impl flatbuffers::Verifiable for ContentSpoilerPopupExcel<'_> {
     Ok(())
   }
 }
-pub struct ContentSpoilerPopupExcelArgs {
-    pub ContentType: ContentType,
+pub struct ScenarioModeSpoilerPopupExcelArgs {
+    pub ModeType: ScenarioModeTypes,
+    pub VolumeId: i64,
+    pub ChapterId: i64,
     pub SpoilerPopupTitle: u32,
     pub SpoilerPopupDescription: u32,
     pub PopupType: SpoilerPopupType,
     pub ConditionScenarioModeId: i64,
 }
-impl<'a> Default for ContentSpoilerPopupExcelArgs {
+impl<'a> Default for ScenarioModeSpoilerPopupExcelArgs {
   #[inline]
   fn default() -> Self {
-    ContentSpoilerPopupExcelArgs {
-      ContentType: ContentType::None,
+    ScenarioModeSpoilerPopupExcelArgs {
+      ModeType: ScenarioModeTypes::None,
+      VolumeId: 0,
+      ChapterId: 0,
       SpoilerPopupTitle: 0,
       SpoilerPopupDescription: 0,
       PopupType: SpoilerPopupType::None,
@@ -161,13 +193,15 @@ impl<'a> Default for ContentSpoilerPopupExcelArgs {
   }
 }
 
-impl Serialize for ContentSpoilerPopupExcel<'_> {
+impl Serialize for ScenarioModeSpoilerPopupExcel<'_> {
   fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ContentSpoilerPopupExcel", 5)?;
-      s.serialize_field("ContentType", &self.ContentType())?;
+    let mut s = serializer.serialize_struct("ScenarioModeSpoilerPopupExcel", 7)?;
+      s.serialize_field("ModeType", &self.ModeType())?;
+      s.serialize_field("VolumeId", &self.VolumeId())?;
+      s.serialize_field("ChapterId", &self.ChapterId())?;
       s.serialize_field("SpoilerPopupTitle", &self.SpoilerPopupTitle())?;
       s.serialize_field("SpoilerPopupDescription", &self.SpoilerPopupDescription())?;
       s.serialize_field("PopupType", &self.PopupType())?;
@@ -176,50 +210,60 @@ impl Serialize for ContentSpoilerPopupExcel<'_> {
   }
 }
 
-pub struct ContentSpoilerPopupExcelBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
+pub struct ScenarioModeSpoilerPopupExcelBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
   fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a, A>,
   start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
 }
-impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ContentSpoilerPopupExcelBuilder<'a, 'b, A> {
+impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ScenarioModeSpoilerPopupExcelBuilder<'a, 'b, A> {
   #[inline]
-  pub fn add_ContentType(&mut self, ContentType: ContentType) {
-    self.fbb_.push_slot::<ContentType>(ContentSpoilerPopupExcel::VT_CONTENTTYPE, ContentType, ContentType::None);
+  pub fn add_ModeType(&mut self, ModeType: ScenarioModeTypes) {
+    self.fbb_.push_slot::<ScenarioModeTypes>(ScenarioModeSpoilerPopupExcel::VT_MODETYPE, ModeType, ScenarioModeTypes::None);
+  }
+  #[inline]
+  pub fn add_VolumeId(&mut self, VolumeId: i64) {
+    self.fbb_.push_slot::<i64>(ScenarioModeSpoilerPopupExcel::VT_VOLUMEID, VolumeId, 0);
+  }
+  #[inline]
+  pub fn add_ChapterId(&mut self, ChapterId: i64) {
+    self.fbb_.push_slot::<i64>(ScenarioModeSpoilerPopupExcel::VT_CHAPTERID, ChapterId, 0);
   }
   #[inline]
   pub fn add_SpoilerPopupTitle(&mut self, SpoilerPopupTitle: u32) {
-    self.fbb_.push_slot::<u32>(ContentSpoilerPopupExcel::VT_SPOILERPOPUPTITLE, SpoilerPopupTitle, 0);
+    self.fbb_.push_slot::<u32>(ScenarioModeSpoilerPopupExcel::VT_SPOILERPOPUPTITLE, SpoilerPopupTitle, 0);
   }
   #[inline]
   pub fn add_SpoilerPopupDescription(&mut self, SpoilerPopupDescription: u32) {
-    self.fbb_.push_slot::<u32>(ContentSpoilerPopupExcel::VT_SPOILERPOPUPDESCRIPTION, SpoilerPopupDescription, 0);
+    self.fbb_.push_slot::<u32>(ScenarioModeSpoilerPopupExcel::VT_SPOILERPOPUPDESCRIPTION, SpoilerPopupDescription, 0);
   }
   #[inline]
   pub fn add_PopupType(&mut self, PopupType: SpoilerPopupType) {
-    self.fbb_.push_slot::<SpoilerPopupType>(ContentSpoilerPopupExcel::VT_POPUPTYPE, PopupType, SpoilerPopupType::None);
+    self.fbb_.push_slot::<SpoilerPopupType>(ScenarioModeSpoilerPopupExcel::VT_POPUPTYPE, PopupType, SpoilerPopupType::None);
   }
   #[inline]
   pub fn add_ConditionScenarioModeId(&mut self, ConditionScenarioModeId: i64) {
-    self.fbb_.push_slot::<i64>(ContentSpoilerPopupExcel::VT_CONDITIONSCENARIOMODEID, ConditionScenarioModeId, 0);
+    self.fbb_.push_slot::<i64>(ScenarioModeSpoilerPopupExcel::VT_CONDITIONSCENARIOMODEID, ConditionScenarioModeId, 0);
   }
   #[inline]
-  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ContentSpoilerPopupExcelBuilder<'a, 'b, A> {
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ScenarioModeSpoilerPopupExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
-    ContentSpoilerPopupExcelBuilder {
+    ScenarioModeSpoilerPopupExcelBuilder {
       fbb_: _fbb,
       start_: start,
     }
   }
   #[inline]
-  pub fn finish(self) -> flatbuffers::WIPOffset<ContentSpoilerPopupExcel<'a>> {
+  pub fn finish(self) -> flatbuffers::WIPOffset<ScenarioModeSpoilerPopupExcel<'a>> {
     let o = self.fbb_.end_table(self.start_);
     flatbuffers::WIPOffset::new(o.value())
   }
 }
 
-impl core::fmt::Debug for ContentSpoilerPopupExcel<'_> {
+impl core::fmt::Debug for ScenarioModeSpoilerPopupExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-    let mut ds = f.debug_struct("ContentSpoilerPopupExcel");
-      ds.field("ContentType", &self.ContentType());
+    let mut ds = f.debug_struct("ScenarioModeSpoilerPopupExcel");
+      ds.field("ModeType", &self.ModeType());
+      ds.field("VolumeId", &self.VolumeId());
+      ds.field("ChapterId", &self.ChapterId());
       ds.field("SpoilerPopupTitle", &self.SpoilerPopupTitle());
       ds.field("SpoilerPopupDescription", &self.SpoilerPopupDescription());
       ds.field("PopupType", &self.PopupType());
@@ -229,17 +273,21 @@ impl core::fmt::Debug for ContentSpoilerPopupExcel<'_> {
 }
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
-pub struct ContentSpoilerPopupExcelT {
-  pub ContentType: ContentType,
+pub struct ScenarioModeSpoilerPopupExcelT {
+  pub ModeType: ScenarioModeTypes,
+  pub VolumeId: i64,
+  pub ChapterId: i64,
   pub SpoilerPopupTitle: u32,
   pub SpoilerPopupDescription: u32,
   pub PopupType: SpoilerPopupType,
   pub ConditionScenarioModeId: i64,
 }
-impl Default for ContentSpoilerPopupExcelT {
+impl Default for ScenarioModeSpoilerPopupExcelT {
   fn default() -> Self {
     Self {
-      ContentType: ContentType::None,
+      ModeType: ScenarioModeTypes::None,
+      VolumeId: 0,
+      ChapterId: 0,
       SpoilerPopupTitle: 0,
       SpoilerPopupDescription: 0,
       PopupType: SpoilerPopupType::None,
@@ -247,18 +295,22 @@ impl Default for ContentSpoilerPopupExcelT {
     }
   }
 }
-impl ContentSpoilerPopupExcelT {
+impl ScenarioModeSpoilerPopupExcelT {
   pub fn pack<'b, A: flatbuffers::Allocator + 'b>(
     &self,
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
-  ) -> flatbuffers::WIPOffset<ContentSpoilerPopupExcel<'b>> {
-    let ContentType = self.ContentType;
+  ) -> flatbuffers::WIPOffset<ScenarioModeSpoilerPopupExcel<'b>> {
+    let ModeType = self.ModeType;
+    let VolumeId = self.VolumeId;
+    let ChapterId = self.ChapterId;
     let SpoilerPopupTitle = self.SpoilerPopupTitle;
     let SpoilerPopupDescription = self.SpoilerPopupDescription;
     let PopupType = self.PopupType;
     let ConditionScenarioModeId = self.ConditionScenarioModeId;
-    ContentSpoilerPopupExcel::create(_fbb, &ContentSpoilerPopupExcelArgs{
-      ContentType,
+    ScenarioModeSpoilerPopupExcel::create(_fbb, &ScenarioModeSpoilerPopupExcelArgs{
+      ModeType,
+      VolumeId,
+      ChapterId,
       SpoilerPopupTitle,
       SpoilerPopupDescription,
       PopupType,
