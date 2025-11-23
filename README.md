@@ -120,7 +120,9 @@ BA-FB relies on this tools in order for it to work.
 - [ArkanDash/BA-Source-Dump](https://github.com/ArkanDash/BA-Source-Dump)
 - [Hiro420/FbsDumper](https://github.com/Hiro420/FbsDumper)
 
-### Copyright
-Blue Archive is a registered trademark of NAT GAMES Co., Ltd., NEXON Korea Corp., and Yostar, Inc.
-This project is not affiliated with, endorsed by, or connected to NAT GAMES Co., Ltd., NEXON Korea Corp., NEXON GAMES Co., Ltd., IODivision, Yostar, Inc., or any of their subsidiaries or affiliates.
-All game assets, content, and materials are copyrighted by their respective owners and are used for informational and educational purposes only.
+---
+
+<sub>**Copyright** - Blue Archive is a registered trademark of NAT GAMES Co., Ltd., NEXON Korea Corp., and Yostar, Inc.
+This project is not affiliated with, endorsed by, or connected to NAT GAMES Co., Ltd., NEXON Korea Corp., NEXON GAMES
+Co., Ltd., IODivision, Yostar, Inc., or any of their subsidiaries or affiliates. All game assets, content, and materials
+are copyrighted by their respective owners and are used for informational and educational purposes only.</sub>
