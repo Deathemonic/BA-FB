@@ -40,11 +40,6 @@ jobs:
           chmod +x bafb
       
       - name: Configure Git
-        uses: gitleaks/gitleaks-action@v2
-        with:
-          config-path: config.toml
-      
-      - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
