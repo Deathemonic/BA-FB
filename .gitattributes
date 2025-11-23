@@ -10,3 +10,4 @@
 *.txt filter=lfs diff=lfs merge=lfs -text
 Japan/metadata.json filter=lfs diff=lfs merge=lfs -text
 Global/metadata.json filter=lfs diff=lfs merge=lfs -text
+*.so filter=lfs diff=lfs merge=lfs -text
