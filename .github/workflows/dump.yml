@@ -46,13 +46,13 @@ jobs:
           git lfs track "*.cpp"
           git lfs track "*.c"
           git lfs track "*.hpp"
+          git lfs track "*.so"
           git lfs track "*.zip"
           git lfs track "*.bin"
           git lfs track "*.dat"
           git lfs track "*.db"
           git lfs track "*.txt"
           
-          # Find large files and track them with LFS
           find . -type f -size +50M \
             ! -path "./.git/*" \
             ! -name "bafb" \
@@ -78,6 +78,17 @@ jobs:
           chmod +x ./bafb
           REGION_DIR=$(echo "${{ matrix.region }}" | sed 's/./\U&/')
           ./bafb dump ${{ matrix.region }} --output "./$REGION_DIR"
+      
+      - name: Copy il2cpp files for ${{ matrix.region }}
+        run: |
+          REGION_DIR=$(echo "${{ matrix.region }}" | sed 's/./\U&/')
+          mkdir -p "$REGION_DIR/il2cpp"
+          if [ -f "$HOME/.local/share/baad/il2cpp/${{ matrix.region }}/libil2cpp.so" ]; then
+            cp "$HOME/.local/share/baad/il2cpp/${{ matrix.region }}/libil2cpp.so" "$REGION_DIR/il2cpp/libil2cpp.so"
+          fi
+          if [ -f "$HOME/.local/share/baad/il2cpp/${{ matrix.region }}/global-metadata.dat" ]; then
+            cp "$HOME/.local/share/baad/il2cpp/${{ matrix.region }}/global-metadata.dat" "$REGION_DIR/il2cpp/global-metadata.dat"
+          fi
       
       - name: Clean up executable and zip file
         run: |
