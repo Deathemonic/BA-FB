@@ -12,3 +12,4 @@ Japan/metadata.json filter=lfs diff=lfs merge=lfs -text
 Global/metadata.json filter=lfs diff=lfs merge=lfs -text
 *.so filter=lfs diff=lfs merge=lfs -text
 Global/il2cpp/libil2cpp.so filter=lfs diff=lfs merge=lfs -text
+Japan/il2cpp/libil2cpp.so filter=lfs diff=lfs merge=lfs -text
