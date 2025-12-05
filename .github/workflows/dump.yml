@@ -22,7 +22,7 @@ jobs:
         with:
           ref: data
           fetch-depth: 0
-          lfs: true
+          lfs: false
       
       - name: Download latest release
         run: |
@@ -40,7 +40,8 @@ jobs:
       - name: Setup Git LFS
         run: |
           git lfs install
-          
+
+          git lfs track "*.dll"
           git lfs track "*.json"
           git lfs track "*.h"
           git lfs track "*.cpp"
@@ -140,7 +141,7 @@ jobs:
         with:
           ref: data
           fetch-depth: 0
-          lfs: true
+          lfs: false
       
       - name: Configure Git
         run: |
