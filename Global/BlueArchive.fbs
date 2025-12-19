@@ -5492,7 +5492,9 @@ enum StoreType : int {
 	MicrosoftStore = 4,
 	GalaxyStore = 5,
 	STEAM = 6,
-	FreeProduct = 7
+	FreeProduct = 7,
+	Twitch = 8,
+	Chzzk = 9
 }
 
 enum PurchasePeriodType : int {
@@ -6199,10 +6201,10 @@ table CharacterSkillListExcel {
 }
 
 table CharacterStatExcelTable {
-	DataList: [O09e5e4f912402c81e7c5cfba5bfe3a48a49bd438bcd057a3aafcc868b68db826]; // index 0x0
+	DataList: [O7f25c53ce20d0f67080ef6ee1e869f3132a31066adc703789125ea1a79184937]; // index 0x0
 }
 
-table O09e5e4f912402c81e7c5cfba5bfe3a48a49bd438bcd057a3aafcc868b68db826 {
+table O7f25c53ce20d0f67080ef6ee1e869f3132a31066adc703789125ea1a79184937 {
 	// No Create method
 }
 
