@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_STORE_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_STORE_TYPE: i32 = 7;
+pub const ENUM_MAX_STORE_TYPE: i32 = 9;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_STORE_TYPE: [StoreType; 8] = [
+pub const ENUM_VALUES_STORE_TYPE: [StoreType; 10] = [
   StoreType::None,
   StoreType::GooglePlay,
   StoreType::AppStore,
@@ -28,6 +28,8 @@ pub const ENUM_VALUES_STORE_TYPE: [StoreType; 8] = [
   StoreType::GalaxyStore,
   StoreType::STEAM,
   StoreType::FreeProduct,
+  StoreType::Twitch,
+  StoreType::Chzzk,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -43,9 +45,11 @@ impl StoreType {
   pub const GalaxyStore: Self = Self(5);
   pub const STEAM: Self = Self(6);
   pub const FreeProduct: Self = Self(7);
+  pub const Twitch: Self = Self(8);
+  pub const Chzzk: Self = Self(9);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 7;
+  pub const ENUM_MAX: i32 = 9;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::GooglePlay,
@@ -55,6 +59,8 @@ impl StoreType {
     Self::GalaxyStore,
     Self::STEAM,
     Self::FreeProduct,
+    Self::Twitch,
+    Self::Chzzk,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -67,6 +73,8 @@ impl StoreType {
       Self::GalaxyStore => Some("GalaxyStore"),
       Self::STEAM => Some("STEAM"),
       Self::FreeProduct => Some("FreeProduct"),
+      Self::Twitch => Some("Twitch"),
+      Self::Chzzk => Some("Chzzk"),
       _ => None,
     }
   }
