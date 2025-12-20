@@ -2054,8 +2054,8 @@ pub mod global {
   pub use self::character_skill_list_excel_generated::*;
   mod character_stat_excel_table_generated;
   pub use self::character_stat_excel_table_generated::*;
-  mod o09e_5e_4f_912402c_81e_7c_5cfba_5bfe_3a_48a_49bd_438bcd_057a_3aafcc_868b_68db_826_generated;
-  pub use self::o09e_5e_4f_912402c_81e_7c_5cfba_5bfe_3a_48a_49bd_438bcd_057a_3aafcc_868b_68db_826_generated::*;
+  mod o7f_25c_53ce_20d_0f_67080ef_6ee_1e_869f_3132a_31066adc_703789125ea_1a_79184937_generated;
+  pub use self::o7f_25c_53ce_20d_0f_67080ef_6ee_1e_869f_3132a_31066adc_703789125ea_1a_79184937_generated::*;
   mod character_stat_limit_excel_table_generated;
   pub use self::character_stat_limit_excel_table_generated::*;
   mod character_stat_limit_excel_generated;
