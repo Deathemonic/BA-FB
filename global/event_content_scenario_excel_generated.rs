@@ -31,23 +31,24 @@ impl<'a> flatbuffers::Follow<'a> for EventContentScenarioExcel<'a> {
 impl<'a> EventContentScenarioExcel<'a> {
   pub const VT_ID: flatbuffers::VOffsetT = 4;
   pub const VT_EVENTCONTENTID: flatbuffers::VOffsetT = 6;
-  pub const VT_REPLAYDISPLAYGROUP: flatbuffers::VOffsetT = 8;
-  pub const VT_ORDER: flatbuffers::VOffsetT = 10;
-  pub const VT_RECOLLECTIONNUMBER: flatbuffers::VOffsetT = 12;
-  pub const VT_ISRECOLLECTION: flatbuffers::VOffsetT = 14;
-  pub const VT_ISMEETUP: flatbuffers::VOffsetT = 16;
-  pub const VT_ISOMNIBUS: flatbuffers::VOffsetT = 18;
-  pub const VT_SCENARIOGROUPID: flatbuffers::VOffsetT = 20;
-  pub const VT_SCENARIOCONDITIONTYPE: flatbuffers::VOffsetT = 22;
-  pub const VT_CONDITIONAMOUNT: flatbuffers::VOffsetT = 24;
-  pub const VT_CONDITIONEVENTCONTENTID: flatbuffers::VOffsetT = 26;
-  pub const VT_CLEAREDSCENARIOGROUPID: flatbuffers::VOffsetT = 28;
-  pub const VT_RECOLLECTIONSUMMARYLOCALIZESCENARIOID: flatbuffers::VOffsetT = 30;
-  pub const VT_RECOLLECTIONRESOURCE: flatbuffers::VOffsetT = 32;
-  pub const VT_ISRECOLLECTIONHORIZON: flatbuffers::VOffsetT = 34;
-  pub const VT_REWARDPARCELTYPE: flatbuffers::VOffsetT = 36;
-  pub const VT_REWARDID: flatbuffers::VOffsetT = 38;
-  pub const VT_REWARDAMOUNT: flatbuffers::VOffsetT = 40;
+  pub const VT_RETURNSCENARIOPLAY: flatbuffers::VOffsetT = 8;
+  pub const VT_REPLAYDISPLAYGROUP: flatbuffers::VOffsetT = 10;
+  pub const VT_ORDER: flatbuffers::VOffsetT = 12;
+  pub const VT_RECOLLECTIONNUMBER: flatbuffers::VOffsetT = 14;
+  pub const VT_ISRECOLLECTION: flatbuffers::VOffsetT = 16;
+  pub const VT_ISMEETUP: flatbuffers::VOffsetT = 18;
+  pub const VT_ISOMNIBUS: flatbuffers::VOffsetT = 20;
+  pub const VT_SCENARIOGROUPID: flatbuffers::VOffsetT = 22;
+  pub const VT_SCENARIOCONDITIONTYPE: flatbuffers::VOffsetT = 24;
+  pub const VT_CONDITIONAMOUNT: flatbuffers::VOffsetT = 26;
+  pub const VT_CONDITIONEVENTCONTENTID: flatbuffers::VOffsetT = 28;
+  pub const VT_CLEAREDSCENARIOGROUPID: flatbuffers::VOffsetT = 30;
+  pub const VT_RECOLLECTIONSUMMARYLOCALIZESCENARIOID: flatbuffers::VOffsetT = 32;
+  pub const VT_RECOLLECTIONRESOURCE: flatbuffers::VOffsetT = 34;
+  pub const VT_ISRECOLLECTIONHORIZON: flatbuffers::VOffsetT = 36;
+  pub const VT_REWARDPARCELTYPE: flatbuffers::VOffsetT = 38;
+  pub const VT_REWARDID: flatbuffers::VOffsetT = 40;
+  pub const VT_REWARDAMOUNT: flatbuffers::VOffsetT = 42;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -81,14 +82,14 @@ impl<'a> EventContentScenarioExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.rewardAmount {
-        builder.add_rewardAmount(x);
+      if let Some(x) = args.RewardAmount {
+        builder.add_RewardAmount(x);
       }
-      if let Some(x) = args.rewardId {
-        builder.add_rewardId(x);
+      if let Some(x) = args.RewardId {
+        builder.add_RewardId(x);
       }
-      if let Some(x) = args.rewardParcelType {
-        builder.add_rewardParcelType(x);
+      if let Some(x) = args.RewardParcelType {
+        builder.add_RewardParcelType(x);
       }
       if let Some(x) = args.RecollectionResource {
         builder.add_RecollectionResource(x);
@@ -99,8 +100,8 @@ impl<'a> EventContentScenarioExcel<'a> {
       let x = args.ScenarioConditionType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ScenarioConditionType(x);
-      if let Some(x) = args.scenarioGroupId {
-        builder.add_scenarioGroupId(x);
+      if let Some(x) = args.ScenarioGroupId {
+        builder.add_ScenarioGroupId(x);
       }
       let x = args.ReplayDisplayGroup;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -109,6 +110,7 @@ impl<'a> EventContentScenarioExcel<'a> {
       builder.add_IsOmnibus(args.IsOmnibus);
       builder.add_IsMeetup(args.IsMeetup);
       builder.add_IsRecollection(args.IsRecollection);
+      builder.add_ReturnScenarioPlay(args.ReturnScenarioPlay);
     builder.finish()
   }
 
@@ -116,13 +118,14 @@ impl<'a> EventContentScenarioExcel<'a> {
     let key = table_encryption_service::create_key(b"EventContentScenario");
       let Id = self.Id();
       let EventContentId = self.EventContentId();
+      let ReturnScenarioPlay = self.ReturnScenarioPlay();
       let ReplayDisplayGroup = self.ReplayDisplayGroup();
       let Order = self.Order();
       let RecollectionNumber = self.RecollectionNumber();
       let IsRecollection = self.IsRecollection();
       let IsMeetup = self.IsMeetup();
       let IsOmnibus = self.IsOmnibus();
-    let scenarioGroupId = self.scenarioGroupId().map(|x| {
+    let ScenarioGroupId = self.ScenarioGroupId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let ScenarioConditionType = if table_encryption_service::use_encryption() {
@@ -138,25 +141,26 @@ impl<'a> EventContentScenarioExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let IsRecollectionHorizon = self.IsRecollectionHorizon();
-    let rewardParcelType = self.rewardParcelType().map(|x| {
+    let RewardParcelType = self.RewardParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let rewardId = self.rewardId().map(|x| {
+    let RewardId = self.RewardId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let rewardAmount = self.rewardAmount().map(|x| {
+    let RewardAmount = self.RewardAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     EventContentScenarioExcelT {
       Id,
       EventContentId,
+      ReturnScenarioPlay,
       ReplayDisplayGroup,
       Order,
       RecollectionNumber,
       IsRecollection,
       IsMeetup,
       IsOmnibus,
-      scenarioGroupId,
+      ScenarioGroupId,
       ScenarioConditionType,
       ConditionAmount,
       ConditionEventContentId,
@@ -164,9 +168,9 @@ impl<'a> EventContentScenarioExcel<'a> {
       RecollectionSummaryLocalizeScenarioId,
       RecollectionResource,
       IsRecollectionHorizon,
-      rewardParcelType,
-      rewardId,
-      rewardAmount,
+      RewardParcelType,
+      RewardId,
+      RewardAmount,
     }
   }
 
@@ -183,6 +187,13 @@ impl<'a> EventContentScenarioExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(EventContentScenarioExcel::VT_EVENTCONTENTID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn ReturnScenarioPlay(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(EventContentScenarioExcel::VT_RETURNSCENARIOPLAY, Some(false)).unwrap()}
   }
   #[inline]
   pub fn ReplayDisplayGroup(&self) -> i32 {
@@ -227,7 +238,7 @@ impl<'a> EventContentScenarioExcel<'a> {
     unsafe { self._tab.get::<bool>(EventContentScenarioExcel::VT_ISOMNIBUS, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn scenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn ScenarioGroupId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -283,21 +294,21 @@ impl<'a> EventContentScenarioExcel<'a> {
     unsafe { self._tab.get::<bool>(EventContentScenarioExcel::VT_ISRECOLLECTIONHORIZON, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn rewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn RewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(EventContentScenarioExcel::VT_REWARDPARCELTYPE, None)}
   }
   #[inline]
-  pub fn rewardId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RewardId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EventContentScenarioExcel::VT_REWARDID, None)}
   }
   #[inline]
-  pub fn rewardAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn RewardAmount(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -314,13 +325,14 @@ impl flatbuffers::Verifiable for EventContentScenarioExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
+     .visit_field::<bool>("ReturnScenarioPlay", Self::VT_RETURNSCENARIOPLAY, false)?
      .visit_field::<i32>("ReplayDisplayGroup", Self::VT_REPLAYDISPLAYGROUP, false)?
      .visit_field::<i64>("Order", Self::VT_ORDER, false)?
      .visit_field::<i64>("RecollectionNumber", Self::VT_RECOLLECTIONNUMBER, false)?
      .visit_field::<bool>("IsRecollection", Self::VT_ISRECOLLECTION, false)?
      .visit_field::<bool>("IsMeetup", Self::VT_ISMEETUP, false)?
      .visit_field::<bool>("IsOmnibus", Self::VT_ISOMNIBUS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("scenarioGroupId", Self::VT_SCENARIOGROUPID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ScenarioGroupId", Self::VT_SCENARIOGROUPID, false)?
      .visit_field::<EventContentScenarioConditionType>("ScenarioConditionType", Self::VT_SCENARIOCONDITIONTYPE, false)?
      .visit_field::<i64>("ConditionAmount", Self::VT_CONDITIONAMOUNT, false)?
      .visit_field::<i64>("ConditionEventContentId", Self::VT_CONDITIONEVENTCONTENTID, false)?
@@ -328,9 +340,9 @@ impl flatbuffers::Verifiable for EventContentScenarioExcel<'_> {
      .visit_field::<u32>("RecollectionSummaryLocalizeScenarioId", Self::VT_RECOLLECTIONSUMMARYLOCALIZESCENARIOID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("RecollectionResource", Self::VT_RECOLLECTIONRESOURCE, false)?
      .visit_field::<bool>("IsRecollectionHorizon", Self::VT_ISRECOLLECTIONHORIZON, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("rewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("rewardId", Self::VT_REWARDID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("rewardAmount", Self::VT_REWARDAMOUNT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardId", Self::VT_REWARDID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("RewardAmount", Self::VT_REWARDAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -338,13 +350,14 @@ impl flatbuffers::Verifiable for EventContentScenarioExcel<'_> {
 pub struct EventContentScenarioExcelArgs<'a> {
     pub Id: i64,
     pub EventContentId: i64,
+    pub ReturnScenarioPlay: bool,
     pub ReplayDisplayGroup: i32,
     pub Order: i64,
     pub RecollectionNumber: i64,
     pub IsRecollection: bool,
     pub IsMeetup: bool,
     pub IsOmnibus: bool,
-    pub scenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub ScenarioGroupId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub ScenarioConditionType: EventContentScenarioConditionType,
     pub ConditionAmount: i64,
     pub ConditionEventContentId: i64,
@@ -352,9 +365,9 @@ pub struct EventContentScenarioExcelArgs<'a> {
     pub RecollectionSummaryLocalizeScenarioId: u32,
     pub RecollectionResource: Option<flatbuffers::WIPOffset<&'a str>>,
     pub IsRecollectionHorizon: bool,
-    pub rewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub rewardId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub rewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub RewardId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for EventContentScenarioExcelArgs<'a> {
   #[inline]
@@ -362,13 +375,14 @@ impl<'a> Default for EventContentScenarioExcelArgs<'a> {
     EventContentScenarioExcelArgs {
       Id: 0,
       EventContentId: 0,
+      ReturnScenarioPlay: false,
       ReplayDisplayGroup: 0,
       Order: 0,
       RecollectionNumber: 0,
       IsRecollection: false,
       IsMeetup: false,
       IsOmnibus: false,
-      scenarioGroupId: None,
+      ScenarioGroupId: None,
       ScenarioConditionType: EventContentScenarioConditionType::None,
       ConditionAmount: 0,
       ConditionEventContentId: 0,
@@ -376,9 +390,9 @@ impl<'a> Default for EventContentScenarioExcelArgs<'a> {
       RecollectionSummaryLocalizeScenarioId: 0,
       RecollectionResource: None,
       IsRecollectionHorizon: false,
-      rewardParcelType: None,
-      rewardId: None,
-      rewardAmount: None,
+      RewardParcelType: None,
+      RewardId: None,
+      RewardAmount: None,
     }
   }
 }
@@ -388,19 +402,20 @@ impl Serialize for EventContentScenarioExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EventContentScenarioExcel", 19)?;
+    let mut s = serializer.serialize_struct("EventContentScenarioExcel", 20)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
+      s.serialize_field("ReturnScenarioPlay", &self.ReturnScenarioPlay())?;
       s.serialize_field("ReplayDisplayGroup", &self.ReplayDisplayGroup())?;
       s.serialize_field("Order", &self.Order())?;
       s.serialize_field("RecollectionNumber", &self.RecollectionNumber())?;
       s.serialize_field("IsRecollection", &self.IsRecollection())?;
       s.serialize_field("IsMeetup", &self.IsMeetup())?;
       s.serialize_field("IsOmnibus", &self.IsOmnibus())?;
-      if let Some(f) = self.scenarioGroupId() {
-        s.serialize_field("scenarioGroupId", &f)?;
+      if let Some(f) = self.ScenarioGroupId() {
+        s.serialize_field("ScenarioGroupId", &f)?;
       } else {
-        s.skip_field("scenarioGroupId")?;
+        s.skip_field("ScenarioGroupId")?;
       }
       s.serialize_field("ScenarioConditionType", &self.ScenarioConditionType())?;
       s.serialize_field("ConditionAmount", &self.ConditionAmount())?;
@@ -413,20 +428,20 @@ impl Serialize for EventContentScenarioExcel<'_> {
         s.skip_field("RecollectionResource")?;
       }
       s.serialize_field("IsRecollectionHorizon", &self.IsRecollectionHorizon())?;
-      if let Some(f) = self.rewardParcelType() {
-        s.serialize_field("rewardParcelType", &f)?;
+      if let Some(f) = self.RewardParcelType() {
+        s.serialize_field("RewardParcelType", &f)?;
       } else {
-        s.skip_field("rewardParcelType")?;
+        s.skip_field("RewardParcelType")?;
       }
-      if let Some(f) = self.rewardId() {
-        s.serialize_field("rewardId", &f)?;
+      if let Some(f) = self.RewardId() {
+        s.serialize_field("RewardId", &f)?;
       } else {
-        s.skip_field("rewardId")?;
+        s.skip_field("RewardId")?;
       }
-      if let Some(f) = self.rewardAmount() {
-        s.serialize_field("rewardAmount", &f)?;
+      if let Some(f) = self.RewardAmount() {
+        s.serialize_field("RewardAmount", &f)?;
       } else {
-        s.skip_field("rewardAmount")?;
+        s.skip_field("RewardAmount")?;
       }
     s.end()
   }
@@ -444,6 +459,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentScenarioExcelBuilde
   #[inline]
   pub fn add_EventContentId(&mut self, EventContentId: i64) {
     self.fbb_.push_slot::<i64>(EventContentScenarioExcel::VT_EVENTCONTENTID, EventContentId, 0);
+  }
+  #[inline]
+  pub fn add_ReturnScenarioPlay(&mut self, ReturnScenarioPlay: bool) {
+    self.fbb_.push_slot::<bool>(EventContentScenarioExcel::VT_RETURNSCENARIOPLAY, ReturnScenarioPlay, false);
   }
   #[inline]
   pub fn add_ReplayDisplayGroup(&mut self, ReplayDisplayGroup: i32) {
@@ -470,8 +489,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentScenarioExcelBuilde
     self.fbb_.push_slot::<bool>(EventContentScenarioExcel::VT_ISOMNIBUS, IsOmnibus, false);
   }
   #[inline]
-  pub fn add_scenarioGroupId(&mut self, scenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentScenarioExcel::VT_SCENARIOGROUPID, scenarioGroupId);
+  pub fn add_ScenarioGroupId(&mut self, ScenarioGroupId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentScenarioExcel::VT_SCENARIOGROUPID, ScenarioGroupId);
   }
   #[inline]
   pub fn add_ScenarioConditionType(&mut self, ScenarioConditionType: EventContentScenarioConditionType) {
@@ -502,16 +521,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentScenarioExcelBuilde
     self.fbb_.push_slot::<bool>(EventContentScenarioExcel::VT_ISRECOLLECTIONHORIZON, IsRecollectionHorizon, false);
   }
   #[inline]
-  pub fn add_rewardParcelType(&mut self, rewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentScenarioExcel::VT_REWARDPARCELTYPE, rewardParcelType);
+  pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentScenarioExcel::VT_REWARDPARCELTYPE, RewardParcelType);
   }
   #[inline]
-  pub fn add_rewardId(&mut self, rewardId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentScenarioExcel::VT_REWARDID, rewardId);
+  pub fn add_RewardId(&mut self, RewardId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentScenarioExcel::VT_REWARDID, RewardId);
   }
   #[inline]
-  pub fn add_rewardAmount(&mut self, rewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentScenarioExcel::VT_REWARDAMOUNT, rewardAmount);
+  pub fn add_RewardAmount(&mut self, RewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentScenarioExcel::VT_REWARDAMOUNT, RewardAmount);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentScenarioExcelBuilder<'a, 'b, A> {
@@ -533,13 +552,14 @@ impl core::fmt::Debug for EventContentScenarioExcel<'_> {
     let mut ds = f.debug_struct("EventContentScenarioExcel");
       ds.field("Id", &self.Id());
       ds.field("EventContentId", &self.EventContentId());
+      ds.field("ReturnScenarioPlay", &self.ReturnScenarioPlay());
       ds.field("ReplayDisplayGroup", &self.ReplayDisplayGroup());
       ds.field("Order", &self.Order());
       ds.field("RecollectionNumber", &self.RecollectionNumber());
       ds.field("IsRecollection", &self.IsRecollection());
       ds.field("IsMeetup", &self.IsMeetup());
       ds.field("IsOmnibus", &self.IsOmnibus());
-      ds.field("scenarioGroupId", &self.scenarioGroupId());
+      ds.field("ScenarioGroupId", &self.ScenarioGroupId());
       ds.field("ScenarioConditionType", &self.ScenarioConditionType());
       ds.field("ConditionAmount", &self.ConditionAmount());
       ds.field("ConditionEventContentId", &self.ConditionEventContentId());
@@ -547,9 +567,9 @@ impl core::fmt::Debug for EventContentScenarioExcel<'_> {
       ds.field("RecollectionSummaryLocalizeScenarioId", &self.RecollectionSummaryLocalizeScenarioId());
       ds.field("RecollectionResource", &self.RecollectionResource());
       ds.field("IsRecollectionHorizon", &self.IsRecollectionHorizon());
-      ds.field("rewardParcelType", &self.rewardParcelType());
-      ds.field("rewardId", &self.rewardId());
-      ds.field("rewardAmount", &self.rewardAmount());
+      ds.field("RewardParcelType", &self.RewardParcelType());
+      ds.field("RewardId", &self.RewardId());
+      ds.field("RewardAmount", &self.RewardAmount());
       ds.finish()
   }
 }
@@ -558,13 +578,14 @@ impl core::fmt::Debug for EventContentScenarioExcel<'_> {
 pub struct EventContentScenarioExcelT {
   pub Id: i64,
   pub EventContentId: i64,
+  pub ReturnScenarioPlay: bool,
   pub ReplayDisplayGroup: i32,
   pub Order: i64,
   pub RecollectionNumber: i64,
   pub IsRecollection: bool,
   pub IsMeetup: bool,
   pub IsOmnibus: bool,
-  pub scenarioGroupId: Option<Vec<i64>>,
+  pub ScenarioGroupId: Option<Vec<i64>>,
   pub ScenarioConditionType: EventContentScenarioConditionType,
   pub ConditionAmount: i64,
   pub ConditionEventContentId: i64,
@@ -572,22 +593,23 @@ pub struct EventContentScenarioExcelT {
   pub RecollectionSummaryLocalizeScenarioId: u32,
   pub RecollectionResource: Option<String>,
   pub IsRecollectionHorizon: bool,
-  pub rewardParcelType: Option<Vec<ParcelType>>,
-  pub rewardId: Option<Vec<i64>>,
-  pub rewardAmount: Option<Vec<i32>>,
+  pub RewardParcelType: Option<Vec<ParcelType>>,
+  pub RewardId: Option<Vec<i64>>,
+  pub RewardAmount: Option<Vec<i32>>,
 }
 impl Default for EventContentScenarioExcelT {
   fn default() -> Self {
     Self {
       Id: 0,
       EventContentId: 0,
+      ReturnScenarioPlay: false,
       ReplayDisplayGroup: 0,
       Order: 0,
       RecollectionNumber: 0,
       IsRecollection: false,
       IsMeetup: false,
       IsOmnibus: false,
-      scenarioGroupId: None,
+      ScenarioGroupId: None,
       ScenarioConditionType: EventContentScenarioConditionType::None,
       ConditionAmount: 0,
       ConditionEventContentId: 0,
@@ -595,9 +617,9 @@ impl Default for EventContentScenarioExcelT {
       RecollectionSummaryLocalizeScenarioId: 0,
       RecollectionResource: None,
       IsRecollectionHorizon: false,
-      rewardParcelType: None,
-      rewardId: None,
-      rewardAmount: None,
+      RewardParcelType: None,
+      RewardId: None,
+      RewardAmount: None,
     }
   }
 }
@@ -608,13 +630,14 @@ impl EventContentScenarioExcelT {
   ) -> flatbuffers::WIPOffset<EventContentScenarioExcel<'b>> {
     let Id = self.Id;
     let EventContentId = self.EventContentId;
+    let ReturnScenarioPlay = self.ReturnScenarioPlay;
     let ReplayDisplayGroup = self.ReplayDisplayGroup;
     let Order = self.Order;
     let RecollectionNumber = self.RecollectionNumber;
     let IsRecollection = self.IsRecollection;
     let IsMeetup = self.IsMeetup;
     let IsOmnibus = self.IsOmnibus;
-    let scenarioGroupId = self.scenarioGroupId.as_ref().map(|x|{
+    let ScenarioGroupId = self.ScenarioGroupId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let ScenarioConditionType = self.ScenarioConditionType;
@@ -626,25 +649,26 @@ impl EventContentScenarioExcelT {
       _fbb.create_string(x)
     });
     let IsRecollectionHorizon = self.IsRecollectionHorizon;
-    let rewardParcelType = self.rewardParcelType.as_ref().map(|x|{
+    let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardId = self.rewardId.as_ref().map(|x|{
+    let RewardId = self.RewardId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let rewardAmount = self.rewardAmount.as_ref().map(|x|{
+    let RewardAmount = self.RewardAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     EventContentScenarioExcel::create(_fbb, &EventContentScenarioExcelArgs{
       Id,
       EventContentId,
+      ReturnScenarioPlay,
       ReplayDisplayGroup,
       Order,
       RecollectionNumber,
       IsRecollection,
       IsMeetup,
       IsOmnibus,
-      scenarioGroupId,
+      ScenarioGroupId,
       ScenarioConditionType,
       ConditionAmount,
       ConditionEventContentId,
@@ -652,9 +676,9 @@ impl EventContentScenarioExcelT {
       RecollectionSummaryLocalizeScenarioId,
       RecollectionResource,
       IsRecollectionHorizon,
-      rewardParcelType,
-      rewardId,
-      rewardAmount,
+      RewardParcelType,
+      RewardId,
+      RewardAmount,
     })
   }
 }

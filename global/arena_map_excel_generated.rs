@@ -29,15 +29,16 @@ impl<'a> flatbuffers::Follow<'a> for ArenaMapExcel<'a> {
 }
 
 impl<'a> ArenaMapExcel<'a> {
-  pub const VT_UNIQUEID: flatbuffers::VOffsetT = 4;
-  pub const VT_TERRAINTYPE: flatbuffers::VOffsetT = 6;
-  pub const VT_TERRAINTYPELOCALIZEKEY: flatbuffers::VOffsetT = 8;
-  pub const VT_IMAGEPATH: flatbuffers::VOffsetT = 10;
-  pub const VT_GROUNDGROUPID: flatbuffers::VOffsetT = 12;
-  pub const VT_GROUNDGROUPNAMELOCALIZEKEY: flatbuffers::VOffsetT = 14;
-  pub const VT_STARTRANK: flatbuffers::VOffsetT = 16;
-  pub const VT_ENDRANK: flatbuffers::VOffsetT = 18;
-  pub const VT_GROUNDID: flatbuffers::VOffsetT = 20;
+  pub const VT_ARENASEASONID: flatbuffers::VOffsetT = 4;
+  pub const VT_UNIQUEID: flatbuffers::VOffsetT = 6;
+  pub const VT_TERRAINTYPE: flatbuffers::VOffsetT = 8;
+  pub const VT_TERRAINTYPELOCALIZEKEY: flatbuffers::VOffsetT = 10;
+  pub const VT_IMAGEPATH: flatbuffers::VOffsetT = 12;
+  pub const VT_GROUNDGROUPID: flatbuffers::VOffsetT = 14;
+  pub const VT_GROUNDGROUPNAMELOCALIZEKEY: flatbuffers::VOffsetT = 16;
+  pub const VT_STARTRANK: flatbuffers::VOffsetT = 18;
+  pub const VT_ENDRANK: flatbuffers::VOffsetT = 20;
+  pub const VT_GROUNDID: flatbuffers::VOffsetT = 22;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -68,6 +69,9 @@ impl<'a> ArenaMapExcel<'a> {
       let x = args.UniqueId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_UniqueId(x);
+      let x = args.ArenaSeasonId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ArenaSeasonId(x);
       if let Some(x) = args.GroundGroupNameLocalizeKey {
         builder.add_GroundGroupNameLocalizeKey(x);
       }
@@ -82,6 +86,7 @@ impl<'a> ArenaMapExcel<'a> {
 
   pub fn unpack(&self) -> ArenaMapExcelT {
     let key = table_encryption_service::create_key(b"ArenaMap");
+      let ArenaSeasonId = self.ArenaSeasonId();
       let UniqueId = self.UniqueId();
       let TerrainType = self.TerrainType();
     let TerrainTypeLocalizeKey = self.TerrainTypeLocalizeKey().map(|x| {
@@ -98,6 +103,7 @@ impl<'a> ArenaMapExcel<'a> {
       let EndRank = self.EndRank();
       let GroundId = self.GroundId();
     ArenaMapExcelT {
+      ArenaSeasonId,
       UniqueId,
       TerrainType,
       TerrainTypeLocalizeKey,
@@ -110,6 +116,13 @@ impl<'a> ArenaMapExcel<'a> {
     }
   }
 
+  #[inline]
+  pub fn ArenaSeasonId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ArenaMapExcel::VT_ARENASEASONID, Some(0)).unwrap()}
+  }
   #[inline]
   pub fn UniqueId(&self) -> i64 {
     // Safety:
@@ -182,6 +195,7 @@ impl flatbuffers::Verifiable for ArenaMapExcel<'_> {
   ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
+     .visit_field::<i64>("ArenaSeasonId", Self::VT_ARENASEASONID, false)?
      .visit_field::<i64>("UniqueId", Self::VT_UNIQUEID, false)?
      .visit_field::<i64>("TerrainType", Self::VT_TERRAINTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("TerrainTypeLocalizeKey", Self::VT_TERRAINTYPELOCALIZEKEY, false)?
@@ -196,6 +210,7 @@ impl flatbuffers::Verifiable for ArenaMapExcel<'_> {
   }
 }
 pub struct ArenaMapExcelArgs<'a> {
+    pub ArenaSeasonId: i64,
     pub UniqueId: i64,
     pub TerrainType: i64,
     pub TerrainTypeLocalizeKey: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -210,6 +225,7 @@ impl<'a> Default for ArenaMapExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     ArenaMapExcelArgs {
+      ArenaSeasonId: 0,
       UniqueId: 0,
       TerrainType: 0,
       TerrainTypeLocalizeKey: None,
@@ -228,7 +244,8 @@ impl Serialize for ArenaMapExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ArenaMapExcel", 9)?;
+    let mut s = serializer.serialize_struct("ArenaMapExcel", 10)?;
+      s.serialize_field("ArenaSeasonId", &self.ArenaSeasonId())?;
       s.serialize_field("UniqueId", &self.UniqueId())?;
       s.serialize_field("TerrainType", &self.TerrainType())?;
       if let Some(f) = self.TerrainTypeLocalizeKey() {
@@ -259,6 +276,10 @@ pub struct ArenaMapExcelBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
   start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
 }
 impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ArenaMapExcelBuilder<'a, 'b, A> {
+  #[inline]
+  pub fn add_ArenaSeasonId(&mut self, ArenaSeasonId: i64) {
+    self.fbb_.push_slot::<i64>(ArenaMapExcel::VT_ARENASEASONID, ArenaSeasonId, 0);
+  }
   #[inline]
   pub fn add_UniqueId(&mut self, UniqueId: i64) {
     self.fbb_.push_slot::<i64>(ArenaMapExcel::VT_UNIQUEID, UniqueId, 0);
@@ -313,6 +334,7 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ArenaMapExcelBuilder<'a, 'b, A>
 impl core::fmt::Debug for ArenaMapExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("ArenaMapExcel");
+      ds.field("ArenaSeasonId", &self.ArenaSeasonId());
       ds.field("UniqueId", &self.UniqueId());
       ds.field("TerrainType", &self.TerrainType());
       ds.field("TerrainTypeLocalizeKey", &self.TerrainTypeLocalizeKey());
@@ -328,6 +350,7 @@ impl core::fmt::Debug for ArenaMapExcel<'_> {
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
 pub struct ArenaMapExcelT {
+  pub ArenaSeasonId: i64,
   pub UniqueId: i64,
   pub TerrainType: i64,
   pub TerrainTypeLocalizeKey: Option<String>,
@@ -341,6 +364,7 @@ pub struct ArenaMapExcelT {
 impl Default for ArenaMapExcelT {
   fn default() -> Self {
     Self {
+      ArenaSeasonId: 0,
       UniqueId: 0,
       TerrainType: 0,
       TerrainTypeLocalizeKey: None,
@@ -358,6 +382,7 @@ impl ArenaMapExcelT {
     &self,
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<ArenaMapExcel<'b>> {
+    let ArenaSeasonId = self.ArenaSeasonId;
     let UniqueId = self.UniqueId;
     let TerrainType = self.TerrainType;
     let TerrainTypeLocalizeKey = self.TerrainTypeLocalizeKey.as_ref().map(|x|{
@@ -374,6 +399,7 @@ impl ArenaMapExcelT {
     let EndRank = self.EndRank;
     let GroundId = self.GroundId;
     ArenaMapExcel::create(_fbb, &ArenaMapExcelArgs{
+      ArenaSeasonId,
       UniqueId,
       TerrainType,
       TerrainTypeLocalizeKey,

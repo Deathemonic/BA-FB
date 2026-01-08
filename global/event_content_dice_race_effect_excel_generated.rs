@@ -49,8 +49,8 @@ impl<'a> EventContentDiceRaceEffectExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.voiceId {
-        builder.add_voiceId(x);
+      if let Some(x) = args.VoiceId {
+        builder.add_VoiceId(x);
       }
       if let Some(x) = args.AniClip {
         builder.add_AniClip(x);
@@ -74,7 +74,7 @@ impl<'a> EventContentDiceRaceEffectExcel<'a> {
     let AniClip = self.AniClip().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let voiceId = self.voiceId().map(|x| {
+    let VoiceId = self.VoiceId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(*val, &key) } else { *val }).collect()
     });
     EventContentDiceRaceEffectExcelT {
@@ -82,7 +82,7 @@ impl<'a> EventContentDiceRaceEffectExcel<'a> {
       EventContentDiceRaceResultType,
       isDiceResult,
       AniClip,
-      voiceId,
+      VoiceId,
     }
   }
 
@@ -115,7 +115,7 @@ impl<'a> EventContentDiceRaceEffectExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentDiceRaceEffectExcel::VT_ANICLIP, None)}
   }
   #[inline]
-  pub fn voiceId(&self) -> Option<flatbuffers::Vector<'a, u32>> {
+  pub fn VoiceId(&self) -> Option<flatbuffers::Vector<'a, u32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -134,7 +134,7 @@ impl flatbuffers::Verifiable for EventContentDiceRaceEffectExcel<'_> {
      .visit_field::<EventContentDiceRaceResultType>("EventContentDiceRaceResultType", Self::VT_EVENTCONTENTDICERACERESULTTYPE, false)?
      .visit_field::<bool>("isDiceResult", Self::VT_ISDICERESULT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("AniClip", Self::VT_ANICLIP, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, u32>>>("voiceId", Self::VT_VOICEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, u32>>>("VoiceId", Self::VT_VOICEID, false)?
      .finish();
     Ok(())
   }
@@ -144,7 +144,7 @@ pub struct EventContentDiceRaceEffectExcelArgs<'a> {
     pub EventContentDiceRaceResultType: EventContentDiceRaceResultType,
     pub isDiceResult: bool,
     pub AniClip: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub voiceId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, u32>>>,
+    pub VoiceId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, u32>>>,
 }
 impl<'a> Default for EventContentDiceRaceEffectExcelArgs<'a> {
   #[inline]
@@ -154,7 +154,7 @@ impl<'a> Default for EventContentDiceRaceEffectExcelArgs<'a> {
       EventContentDiceRaceResultType: EventContentDiceRaceResultType::DiceResult1,
       isDiceResult: false,
       AniClip: None,
-      voiceId: None,
+      VoiceId: None,
     }
   }
 }
@@ -173,10 +173,10 @@ impl Serialize for EventContentDiceRaceEffectExcel<'_> {
       } else {
         s.skip_field("AniClip")?;
       }
-      if let Some(f) = self.voiceId() {
-        s.serialize_field("voiceId", &f)?;
+      if let Some(f) = self.VoiceId() {
+        s.serialize_field("VoiceId", &f)?;
       } else {
-        s.skip_field("voiceId")?;
+        s.skip_field("VoiceId")?;
       }
     s.end()
   }
@@ -204,8 +204,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentDiceRaceEffectExcel
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceEffectExcel::VT_ANICLIP, AniClip);
   }
   #[inline]
-  pub fn add_voiceId(&mut self, voiceId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , u32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceEffectExcel::VT_VOICEID, voiceId);
+  pub fn add_VoiceId(&mut self, VoiceId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , u32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceEffectExcel::VT_VOICEID, VoiceId);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentDiceRaceEffectExcelBuilder<'a, 'b, A> {
@@ -229,7 +229,7 @@ impl core::fmt::Debug for EventContentDiceRaceEffectExcel<'_> {
       ds.field("EventContentDiceRaceResultType", &self.EventContentDiceRaceResultType());
       ds.field("isDiceResult", &self.isDiceResult());
       ds.field("AniClip", &self.AniClip());
-      ds.field("voiceId", &self.voiceId());
+      ds.field("VoiceId", &self.VoiceId());
       ds.finish()
   }
 }
@@ -240,7 +240,7 @@ pub struct EventContentDiceRaceEffectExcelT {
   pub EventContentDiceRaceResultType: EventContentDiceRaceResultType,
   pub isDiceResult: bool,
   pub AniClip: Option<String>,
-  pub voiceId: Option<Vec<u32>>,
+  pub VoiceId: Option<Vec<u32>>,
 }
 impl Default for EventContentDiceRaceEffectExcelT {
   fn default() -> Self {
@@ -249,7 +249,7 @@ impl Default for EventContentDiceRaceEffectExcelT {
       EventContentDiceRaceResultType: EventContentDiceRaceResultType::DiceResult1,
       isDiceResult: false,
       AniClip: None,
-      voiceId: None,
+      VoiceId: None,
     }
   }
 }
@@ -264,7 +264,7 @@ impl EventContentDiceRaceEffectExcelT {
     let AniClip = self.AniClip.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let voiceId = self.voiceId.as_ref().map(|x|{
+    let VoiceId = self.VoiceId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     EventContentDiceRaceEffectExcel::create(_fbb, &EventContentDiceRaceEffectExcelArgs{
@@ -272,7 +272,7 @@ impl EventContentDiceRaceEffectExcelT {
       EventContentDiceRaceResultType,
       isDiceResult,
       AniClip,
-      voiceId,
+      VoiceId,
     })
   }
 }

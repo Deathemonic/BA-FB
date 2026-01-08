@@ -72,14 +72,14 @@ impl<'a> EventContentShopInfoExcel<'a> {
       if let Some(x) = args.OpenPeriodFrom {
         builder.add_OpenPeriodFrom(x);
       }
-      if let Some(x) = args.goodsId {
-        builder.add_goodsId(x);
+      if let Some(x) = args.GoodsId {
+        builder.add_GoodsId(x);
       }
-      if let Some(x) = args.costParcelId {
-        builder.add_costParcelId(x);
+      if let Some(x) = args.CostParcelId {
+        builder.add_CostParcelId(x);
       }
-      if let Some(x) = args.costParcelType {
-        builder.add_costParcelType(x);
+      if let Some(x) = args.CostParcelType {
+        builder.add_CostParcelType(x);
       }
       let x = args.LocalizeCode;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
@@ -101,17 +101,17 @@ impl<'a> EventContentShopInfoExcel<'a> {
         self.CategoryType()
       };
       let LocalizeCode = self.LocalizeCode();
-    let costParcelType = self.costParcelType().map(|x| {
+    let CostParcelType = self.CostParcelType().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let costParcelId = self.costParcelId().map(|x| {
+    let CostParcelId = self.CostParcelId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let IsRefresh = self.IsRefresh();
       let IsSoldOutDimmed = self.IsSoldOutDimmed();
       let AutoRefreshCoolTime = self.AutoRefreshCoolTime();
       let RefreshAbleCount = self.RefreshAbleCount();
-    let goodsId = self.goodsId().map(|x| {
+    let GoodsId = self.GoodsId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     let OpenPeriodFrom = self.OpenPeriodFrom().map(|x| {
@@ -127,13 +127,13 @@ impl<'a> EventContentShopInfoExcel<'a> {
       EventContentId,
       CategoryType,
       LocalizeCode,
-      costParcelType,
-      costParcelId,
+      CostParcelType,
+      CostParcelId,
       IsRefresh,
       IsSoldOutDimmed,
       AutoRefreshCoolTime,
       RefreshAbleCount,
-      goodsId,
+      GoodsId,
       OpenPeriodFrom,
       OpenPeriodTo,
       ShopProductUpdateDate,
@@ -162,14 +162,14 @@ impl<'a> EventContentShopInfoExcel<'a> {
     unsafe { self._tab.get::<u32>(EventContentShopInfoExcel::VT_LOCALIZECODE, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn costParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
+  pub fn CostParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(EventContentShopInfoExcel::VT_COSTPARCELTYPE, None)}
   }
   #[inline]
-  pub fn costParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn CostParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -204,7 +204,7 @@ impl<'a> EventContentShopInfoExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentShopInfoExcel::VT_REFRESHABLECOUNT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn goodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn GoodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -243,13 +243,13 @@ impl flatbuffers::Verifiable for EventContentShopInfoExcel<'_> {
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
      .visit_field::<ShopCategoryType>("CategoryType", Self::VT_CATEGORYTYPE, false)?
      .visit_field::<u32>("LocalizeCode", Self::VT_LOCALIZECODE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("costParcelType", Self::VT_COSTPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("costParcelId", Self::VT_COSTPARCELID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("CostParcelType", Self::VT_COSTPARCELTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("CostParcelId", Self::VT_COSTPARCELID, false)?
      .visit_field::<bool>("IsRefresh", Self::VT_ISREFRESH, false)?
      .visit_field::<bool>("IsSoldOutDimmed", Self::VT_ISSOLDOUTDIMMED, false)?
      .visit_field::<i64>("AutoRefreshCoolTime", Self::VT_AUTOREFRESHCOOLTIME, false)?
      .visit_field::<i64>("RefreshAbleCount", Self::VT_REFRESHABLECOUNT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("goodsId", Self::VT_GOODSID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("GoodsId", Self::VT_GOODSID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("OpenPeriodFrom", Self::VT_OPENPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("OpenPeriodTo", Self::VT_OPENPERIODTO, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ShopProductUpdateDate", Self::VT_SHOPPRODUCTUPDATEDATE, false)?
@@ -261,13 +261,13 @@ pub struct EventContentShopInfoExcelArgs<'a> {
     pub EventContentId: i64,
     pub CategoryType: ShopCategoryType,
     pub LocalizeCode: u32,
-    pub costParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub costParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub CostParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
+    pub CostParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub IsRefresh: bool,
     pub IsSoldOutDimmed: bool,
     pub AutoRefreshCoolTime: i64,
     pub RefreshAbleCount: i64,
-    pub goodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub GoodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub OpenPeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub OpenPeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ShopProductUpdateDate: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -279,13 +279,13 @@ impl<'a> Default for EventContentShopInfoExcelArgs<'a> {
       EventContentId: 0,
       CategoryType: ShopCategoryType::General,
       LocalizeCode: 0,
-      costParcelType: None,
-      costParcelId: None,
+      CostParcelType: None,
+      CostParcelId: None,
       IsRefresh: false,
       IsSoldOutDimmed: false,
       AutoRefreshCoolTime: 0,
       RefreshAbleCount: 0,
-      goodsId: None,
+      GoodsId: None,
       OpenPeriodFrom: None,
       OpenPeriodTo: None,
       ShopProductUpdateDate: None,
@@ -302,24 +302,24 @@ impl Serialize for EventContentShopInfoExcel<'_> {
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("CategoryType", &self.CategoryType())?;
       s.serialize_field("LocalizeCode", &self.LocalizeCode())?;
-      if let Some(f) = self.costParcelType() {
-        s.serialize_field("costParcelType", &f)?;
+      if let Some(f) = self.CostParcelType() {
+        s.serialize_field("CostParcelType", &f)?;
       } else {
-        s.skip_field("costParcelType")?;
+        s.skip_field("CostParcelType")?;
       }
-      if let Some(f) = self.costParcelId() {
-        s.serialize_field("costParcelId", &f)?;
+      if let Some(f) = self.CostParcelId() {
+        s.serialize_field("CostParcelId", &f)?;
       } else {
-        s.skip_field("costParcelId")?;
+        s.skip_field("CostParcelId")?;
       }
       s.serialize_field("IsRefresh", &self.IsRefresh())?;
       s.serialize_field("IsSoldOutDimmed", &self.IsSoldOutDimmed())?;
       s.serialize_field("AutoRefreshCoolTime", &self.AutoRefreshCoolTime())?;
       s.serialize_field("RefreshAbleCount", &self.RefreshAbleCount())?;
-      if let Some(f) = self.goodsId() {
-        s.serialize_field("goodsId", &f)?;
+      if let Some(f) = self.GoodsId() {
+        s.serialize_field("GoodsId", &f)?;
       } else {
-        s.skip_field("goodsId")?;
+        s.skip_field("GoodsId")?;
       }
       if let Some(f) = self.OpenPeriodFrom() {
         s.serialize_field("OpenPeriodFrom", &f)?;
@@ -358,12 +358,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentShopInfoExcelBuilde
     self.fbb_.push_slot::<u32>(EventContentShopInfoExcel::VT_LOCALIZECODE, LocalizeCode, 0);
   }
   #[inline]
-  pub fn add_costParcelType(&mut self, costParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopInfoExcel::VT_COSTPARCELTYPE, costParcelType);
+  pub fn add_CostParcelType(&mut self, CostParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopInfoExcel::VT_COSTPARCELTYPE, CostParcelType);
   }
   #[inline]
-  pub fn add_costParcelId(&mut self, costParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopInfoExcel::VT_COSTPARCELID, costParcelId);
+  pub fn add_CostParcelId(&mut self, CostParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopInfoExcel::VT_COSTPARCELID, CostParcelId);
   }
   #[inline]
   pub fn add_IsRefresh(&mut self, IsRefresh: bool) {
@@ -382,8 +382,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentShopInfoExcelBuilde
     self.fbb_.push_slot::<i64>(EventContentShopInfoExcel::VT_REFRESHABLECOUNT, RefreshAbleCount, 0);
   }
   #[inline]
-  pub fn add_goodsId(&mut self, goodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopInfoExcel::VT_GOODSID, goodsId);
+  pub fn add_GoodsId(&mut self, GoodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopInfoExcel::VT_GOODSID, GoodsId);
   }
   #[inline]
   pub fn add_OpenPeriodFrom(&mut self, OpenPeriodFrom: flatbuffers::WIPOffset<&'b  str>) {
@@ -418,13 +418,13 @@ impl core::fmt::Debug for EventContentShopInfoExcel<'_> {
       ds.field("EventContentId", &self.EventContentId());
       ds.field("CategoryType", &self.CategoryType());
       ds.field("LocalizeCode", &self.LocalizeCode());
-      ds.field("costParcelType", &self.costParcelType());
-      ds.field("costParcelId", &self.costParcelId());
+      ds.field("CostParcelType", &self.CostParcelType());
+      ds.field("CostParcelId", &self.CostParcelId());
       ds.field("IsRefresh", &self.IsRefresh());
       ds.field("IsSoldOutDimmed", &self.IsSoldOutDimmed());
       ds.field("AutoRefreshCoolTime", &self.AutoRefreshCoolTime());
       ds.field("RefreshAbleCount", &self.RefreshAbleCount());
-      ds.field("goodsId", &self.goodsId());
+      ds.field("GoodsId", &self.GoodsId());
       ds.field("OpenPeriodFrom", &self.OpenPeriodFrom());
       ds.field("OpenPeriodTo", &self.OpenPeriodTo());
       ds.field("ShopProductUpdateDate", &self.ShopProductUpdateDate());
@@ -437,13 +437,13 @@ pub struct EventContentShopInfoExcelT {
   pub EventContentId: i64,
   pub CategoryType: ShopCategoryType,
   pub LocalizeCode: u32,
-  pub costParcelType: Option<Vec<ParcelType>>,
-  pub costParcelId: Option<Vec<i64>>,
+  pub CostParcelType: Option<Vec<ParcelType>>,
+  pub CostParcelId: Option<Vec<i64>>,
   pub IsRefresh: bool,
   pub IsSoldOutDimmed: bool,
   pub AutoRefreshCoolTime: i64,
   pub RefreshAbleCount: i64,
-  pub goodsId: Option<Vec<i64>>,
+  pub GoodsId: Option<Vec<i64>>,
   pub OpenPeriodFrom: Option<String>,
   pub OpenPeriodTo: Option<String>,
   pub ShopProductUpdateDate: Option<String>,
@@ -454,13 +454,13 @@ impl Default for EventContentShopInfoExcelT {
       EventContentId: 0,
       CategoryType: ShopCategoryType::General,
       LocalizeCode: 0,
-      costParcelType: None,
-      costParcelId: None,
+      CostParcelType: None,
+      CostParcelId: None,
       IsRefresh: false,
       IsSoldOutDimmed: false,
       AutoRefreshCoolTime: 0,
       RefreshAbleCount: 0,
-      goodsId: None,
+      GoodsId: None,
       OpenPeriodFrom: None,
       OpenPeriodTo: None,
       ShopProductUpdateDate: None,
@@ -475,17 +475,17 @@ impl EventContentShopInfoExcelT {
     let EventContentId = self.EventContentId;
     let CategoryType = self.CategoryType;
     let LocalizeCode = self.LocalizeCode;
-    let costParcelType = self.costParcelType.as_ref().map(|x|{
+    let CostParcelType = self.CostParcelType.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let costParcelId = self.costParcelId.as_ref().map(|x|{
+    let CostParcelId = self.CostParcelId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let IsRefresh = self.IsRefresh;
     let IsSoldOutDimmed = self.IsSoldOutDimmed;
     let AutoRefreshCoolTime = self.AutoRefreshCoolTime;
     let RefreshAbleCount = self.RefreshAbleCount;
-    let goodsId = self.goodsId.as_ref().map(|x|{
+    let GoodsId = self.GoodsId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let OpenPeriodFrom = self.OpenPeriodFrom.as_ref().map(|x|{
@@ -501,13 +501,13 @@ impl EventContentShopInfoExcelT {
       EventContentId,
       CategoryType,
       LocalizeCode,
-      costParcelType,
-      costParcelId,
+      CostParcelType,
+      CostParcelId,
       IsRefresh,
       IsSoldOutDimmed,
       AutoRefreshCoolTime,
       RefreshAbleCount,
-      goodsId,
+      GoodsId,
       OpenPeriodFrom,
       OpenPeriodTo,
       ShopProductUpdateDate,

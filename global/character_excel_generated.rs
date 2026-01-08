@@ -148,8 +148,8 @@ impl<'a> CharacterExcel<'a> {
       let x = args.SecretStoneItemAmount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_SecretStoneItemAmount(x);
-      if let Some(x) = args.tags {
-        builder.add_tags(x);
+      if let Some(x) = args.Tags {
+        builder.add_Tags(x);
       }
       let x = args.AppearFrame;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -178,8 +178,8 @@ impl<'a> CharacterExcel<'a> {
       let x = args.WeaponLocalizeId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_WeaponLocalizeId(x);
-      if let Some(x) = args.equipmentSlot {
-        builder.add_equipmentSlot(x);
+      if let Some(x) = args.EquipmentSlot {
+        builder.add_EquipmentSlot(x);
       }
       let x = args.FavorLevelupType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
@@ -376,7 +376,7 @@ impl<'a> CharacterExcel<'a> {
     });
       let SpawnTemplateId = self.SpawnTemplateId();
       let FavorLevelupType = self.FavorLevelupType();
-    let equipmentSlot = self.equipmentSlot().map(|x| {
+    let EquipmentSlot = self.EquipmentSlot().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let WeaponLocalizeId = self.WeaponLocalizeId();
@@ -415,7 +415,7 @@ impl<'a> CharacterExcel<'a> {
       let IgnoreObstacle = self.IgnoreObstacle();
       let IsAirUnit = self.IsAirUnit();
       let AirUnitHeight = self.AirUnitHeight();
-    let tags = self.tags().map(|x| {
+    let Tags = self.Tags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let SecretStoneItemId = self.SecretStoneItemId();
@@ -462,7 +462,7 @@ impl<'a> CharacterExcel<'a> {
       ScenarioCharacter,
       SpawnTemplateId,
       FavorLevelupType,
-      equipmentSlot,
+      EquipmentSlot,
       WeaponLocalizeId,
       DisplayEnemyInfo,
       bodyRadius,
@@ -483,7 +483,7 @@ impl<'a> CharacterExcel<'a> {
       IgnoreObstacle,
       IsAirUnit,
       AirUnitHeight,
-      tags,
+      Tags,
       SecretStoneItemId,
       SecretStoneItemAmount,
       CharacterPieceItemId,
@@ -759,7 +759,7 @@ impl<'a> CharacterExcel<'a> {
     unsafe { self._tab.get::<i32>(CharacterExcel::VT_FAVORLEVELUPTYPE, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn equipmentSlot(&self) -> Option<flatbuffers::Vector<'a, EquipmentCategory>> {
+  pub fn EquipmentSlot(&self) -> Option<flatbuffers::Vector<'a, EquipmentCategory>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -906,7 +906,7 @@ impl<'a> CharacterExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterExcel::VT_AIRUNITHEIGHT, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn Tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -994,7 +994,7 @@ impl flatbuffers::Verifiable for CharacterExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ScenarioCharacter", Self::VT_SCENARIOCHARACTER, false)?
      .visit_field::<u32>("SpawnTemplateId", Self::VT_SPAWNTEMPLATEID, false)?
      .visit_field::<i32>("FavorLevelupType", Self::VT_FAVORLEVELUPTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EquipmentCategory>>>("equipmentSlot", Self::VT_EQUIPMENTSLOT, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EquipmentCategory>>>("EquipmentSlot", Self::VT_EQUIPMENTSLOT, false)?
      .visit_field::<u32>("WeaponLocalizeId", Self::VT_WEAPONLOCALIZEID, false)?
      .visit_field::<bool>("DisplayEnemyInfo", Self::VT_DISPLAYENEMYINFO, false)?
      .visit_field::<i64>("bodyRadius", Self::VT_BODYRADIUS, false)?
@@ -1015,7 +1015,7 @@ impl flatbuffers::Verifiable for CharacterExcel<'_> {
      .visit_field::<bool>("IgnoreObstacle", Self::VT_IGNOREOBSTACLE, false)?
      .visit_field::<bool>("IsAirUnit", Self::VT_ISAIRUNIT, false)?
      .visit_field::<i64>("AirUnitHeight", Self::VT_AIRUNITHEIGHT, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("tags", Self::VT_TAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("Tags", Self::VT_TAGS, false)?
      .visit_field::<i64>("SecretStoneItemId", Self::VT_SECRETSTONEITEMID, false)?
      .visit_field::<i32>("SecretStoneItemAmount", Self::VT_SECRETSTONEITEMAMOUNT, false)?
      .visit_field::<i64>("CharacterPieceItemId", Self::VT_CHARACTERPIECEITEMID, false)?
@@ -1064,7 +1064,7 @@ pub struct CharacterExcelArgs<'a> {
     pub ScenarioCharacter: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SpawnTemplateId: u32,
     pub FavorLevelupType: i32,
-    pub equipmentSlot: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EquipmentCategory>>>,
+    pub EquipmentSlot: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EquipmentCategory>>>,
     pub WeaponLocalizeId: u32,
     pub DisplayEnemyInfo: bool,
     pub bodyRadius: i64,
@@ -1085,7 +1085,7 @@ pub struct CharacterExcelArgs<'a> {
     pub IgnoreObstacle: bool,
     pub IsAirUnit: bool,
     pub AirUnitHeight: i64,
-    pub tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub Tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
     pub SecretStoneItemId: i64,
     pub SecretStoneItemAmount: i32,
     pub CharacterPieceItemId: i64,
@@ -1134,7 +1134,7 @@ impl<'a> Default for CharacterExcelArgs<'a> {
       ScenarioCharacter: None,
       SpawnTemplateId: 0,
       FavorLevelupType: 0,
-      equipmentSlot: None,
+      EquipmentSlot: None,
       WeaponLocalizeId: 0,
       DisplayEnemyInfo: false,
       bodyRadius: 0,
@@ -1155,7 +1155,7 @@ impl<'a> Default for CharacterExcelArgs<'a> {
       IgnoreObstacle: false,
       IsAirUnit: false,
       AirUnitHeight: 0,
-      tags: None,
+      Tags: None,
       SecretStoneItemId: 0,
       SecretStoneItemAmount: 0,
       CharacterPieceItemId: 0,
@@ -1229,10 +1229,10 @@ impl Serialize for CharacterExcel<'_> {
       }
       s.serialize_field("SpawnTemplateId", &self.SpawnTemplateId())?;
       s.serialize_field("FavorLevelupType", &self.FavorLevelupType())?;
-      if let Some(f) = self.equipmentSlot() {
-        s.serialize_field("equipmentSlot", &f)?;
+      if let Some(f) = self.EquipmentSlot() {
+        s.serialize_field("EquipmentSlot", &f)?;
       } else {
-        s.skip_field("equipmentSlot")?;
+        s.skip_field("EquipmentSlot")?;
       }
       s.serialize_field("WeaponLocalizeId", &self.WeaponLocalizeId())?;
       s.serialize_field("DisplayEnemyInfo", &self.DisplayEnemyInfo())?;
@@ -1254,10 +1254,10 @@ impl Serialize for CharacterExcel<'_> {
       s.serialize_field("IgnoreObstacle", &self.IgnoreObstacle())?;
       s.serialize_field("IsAirUnit", &self.IsAirUnit())?;
       s.serialize_field("AirUnitHeight", &self.AirUnitHeight())?;
-      if let Some(f) = self.tags() {
-        s.serialize_field("tags", &f)?;
+      if let Some(f) = self.Tags() {
+        s.serialize_field("Tags", &f)?;
       } else {
-        s.skip_field("tags")?;
+        s.skip_field("Tags")?;
       }
       s.serialize_field("SecretStoneItemId", &self.SecretStoneItemId())?;
       s.serialize_field("SecretStoneItemAmount", &self.SecretStoneItemAmount())?;
@@ -1426,8 +1426,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterExcelBuilder<'a, 'b, A
     self.fbb_.push_slot::<i32>(CharacterExcel::VT_FAVORLEVELUPTYPE, FavorLevelupType, 0);
   }
   #[inline]
-  pub fn add_equipmentSlot(&mut self, equipmentSlot: flatbuffers::WIPOffset<flatbuffers::Vector<'b , EquipmentCategory>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterExcel::VT_EQUIPMENTSLOT, equipmentSlot);
+  pub fn add_EquipmentSlot(&mut self, EquipmentSlot: flatbuffers::WIPOffset<flatbuffers::Vector<'b , EquipmentCategory>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterExcel::VT_EQUIPMENTSLOT, EquipmentSlot);
   }
   #[inline]
   pub fn add_WeaponLocalizeId(&mut self, WeaponLocalizeId: u32) {
@@ -1510,8 +1510,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterExcelBuilder<'a, 'b, A
     self.fbb_.push_slot::<i64>(CharacterExcel::VT_AIRUNITHEIGHT, AirUnitHeight, 0);
   }
   #[inline]
-  pub fn add_tags(&mut self, tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterExcel::VT_TAGS, tags);
+  pub fn add_Tags(&mut self, Tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterExcel::VT_TAGS, Tags);
   }
   #[inline]
   pub fn add_SecretStoneItemId(&mut self, SecretStoneItemId: i64) {
@@ -1589,7 +1589,7 @@ impl core::fmt::Debug for CharacterExcel<'_> {
       ds.field("ScenarioCharacter", &self.ScenarioCharacter());
       ds.field("SpawnTemplateId", &self.SpawnTemplateId());
       ds.field("FavorLevelupType", &self.FavorLevelupType());
-      ds.field("equipmentSlot", &self.equipmentSlot());
+      ds.field("EquipmentSlot", &self.EquipmentSlot());
       ds.field("WeaponLocalizeId", &self.WeaponLocalizeId());
       ds.field("DisplayEnemyInfo", &self.DisplayEnemyInfo());
       ds.field("bodyRadius", &self.bodyRadius());
@@ -1610,7 +1610,7 @@ impl core::fmt::Debug for CharacterExcel<'_> {
       ds.field("IgnoreObstacle", &self.IgnoreObstacle());
       ds.field("IsAirUnit", &self.IsAirUnit());
       ds.field("AirUnitHeight", &self.AirUnitHeight());
-      ds.field("tags", &self.tags());
+      ds.field("Tags", &self.Tags());
       ds.field("SecretStoneItemId", &self.SecretStoneItemId());
       ds.field("SecretStoneItemAmount", &self.SecretStoneItemAmount());
       ds.field("CharacterPieceItemId", &self.CharacterPieceItemId());
@@ -1660,7 +1660,7 @@ pub struct CharacterExcelT {
   pub ScenarioCharacter: Option<String>,
   pub SpawnTemplateId: u32,
   pub FavorLevelupType: i32,
-  pub equipmentSlot: Option<Vec<EquipmentCategory>>,
+  pub EquipmentSlot: Option<Vec<EquipmentCategory>>,
   pub WeaponLocalizeId: u32,
   pub DisplayEnemyInfo: bool,
   pub bodyRadius: i64,
@@ -1681,7 +1681,7 @@ pub struct CharacterExcelT {
   pub IgnoreObstacle: bool,
   pub IsAirUnit: bool,
   pub AirUnitHeight: i64,
-  pub tags: Option<Vec<Tag>>,
+  pub Tags: Option<Vec<Tag>>,
   pub SecretStoneItemId: i64,
   pub SecretStoneItemAmount: i32,
   pub CharacterPieceItemId: i64,
@@ -1729,7 +1729,7 @@ impl Default for CharacterExcelT {
       ScenarioCharacter: None,
       SpawnTemplateId: 0,
       FavorLevelupType: 0,
-      equipmentSlot: None,
+      EquipmentSlot: None,
       WeaponLocalizeId: 0,
       DisplayEnemyInfo: false,
       bodyRadius: 0,
@@ -1750,7 +1750,7 @@ impl Default for CharacterExcelT {
       IgnoreObstacle: false,
       IsAirUnit: false,
       AirUnitHeight: 0,
-      tags: None,
+      Tags: None,
       SecretStoneItemId: 0,
       SecretStoneItemAmount: 0,
       CharacterPieceItemId: 0,
@@ -1812,7 +1812,7 @@ impl CharacterExcelT {
     });
     let SpawnTemplateId = self.SpawnTemplateId;
     let FavorLevelupType = self.FavorLevelupType;
-    let equipmentSlot = self.equipmentSlot.as_ref().map(|x|{
+    let EquipmentSlot = self.EquipmentSlot.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let WeaponLocalizeId = self.WeaponLocalizeId;
@@ -1835,7 +1835,7 @@ impl CharacterExcelT {
     let IgnoreObstacle = self.IgnoreObstacle;
     let IsAirUnit = self.IsAirUnit;
     let AirUnitHeight = self.AirUnitHeight;
-    let tags = self.tags.as_ref().map(|x|{
+    let Tags = self.Tags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let SecretStoneItemId = self.SecretStoneItemId;
@@ -1882,7 +1882,7 @@ impl CharacterExcelT {
       ScenarioCharacter,
       SpawnTemplateId,
       FavorLevelupType,
-      equipmentSlot,
+      EquipmentSlot,
       WeaponLocalizeId,
       DisplayEnemyInfo,
       bodyRadius,
@@ -1903,7 +1903,7 @@ impl CharacterExcelT {
       IgnoreObstacle,
       IsAirUnit,
       AirUnitHeight,
-      tags,
+      Tags,
       SecretStoneItemId,
       SecretStoneItemAmount,
       CharacterPieceItemId,

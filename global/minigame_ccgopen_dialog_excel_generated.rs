@@ -34,7 +34,8 @@ impl<'a> MinigameCCGOpenDialogExcel<'a> {
   pub const VT_CONDITIONCARD: flatbuffers::VOffsetT = 8;
   pub const VT_DIALOG: flatbuffers::VOffsetT = 10;
   pub const VT_DURATION: flatbuffers::VOffsetT = 12;
-  pub const VT_VOICE: flatbuffers::VOffsetT = 14;
+  pub const VT_DURATIONKR: flatbuffers::VOffsetT = 14;
+  pub const VT_VOICE: flatbuffers::VOffsetT = 16;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -47,6 +48,9 @@ impl<'a> MinigameCCGOpenDialogExcel<'a> {
   ) -> flatbuffers::WIPOffset<MinigameCCGOpenDialogExcel<'bldr>> {
     let mut builder = MinigameCCGOpenDialogExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"MinigameCCGOpenDialog");
+      let x = args.DurationKr;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_DurationKr(x);
       let x = args.Duration;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Duration(x);
@@ -75,6 +79,7 @@ impl<'a> MinigameCCGOpenDialogExcel<'a> {
       let ConditionCard = self.ConditionCard();
       let Dialog = self.Dialog();
       let Duration = self.Duration();
+      let DurationKr = self.DurationKr();
       let Voice = self.Voice();
     MinigameCCGOpenDialogExcelT {
       DialogId,
@@ -82,6 +87,7 @@ impl<'a> MinigameCCGOpenDialogExcel<'a> {
       ConditionCard,
       Dialog,
       Duration,
+      DurationKr,
       Voice,
     }
   }
@@ -122,6 +128,13 @@ impl<'a> MinigameCCGOpenDialogExcel<'a> {
     unsafe { self._tab.get::<i64>(MinigameCCGOpenDialogExcel::VT_DURATION, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn DurationKr(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(MinigameCCGOpenDialogExcel::VT_DURATIONKR, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn Voice(&self) -> u32 {
     // Safety:
     // Created from valid Table for this object
@@ -142,6 +155,7 @@ impl flatbuffers::Verifiable for MinigameCCGOpenDialogExcel<'_> {
      .visit_field::<i64>("ConditionCard", Self::VT_CONDITIONCARD, false)?
      .visit_field::<u32>("Dialog", Self::VT_DIALOG, false)?
      .visit_field::<i64>("Duration", Self::VT_DURATION, false)?
+     .visit_field::<i64>("DurationKr", Self::VT_DURATIONKR, false)?
      .visit_field::<u32>("Voice", Self::VT_VOICE, false)?
      .finish();
     Ok(())
@@ -153,6 +167,7 @@ pub struct MinigameCCGOpenDialogExcelArgs {
     pub ConditionCard: i64,
     pub Dialog: u32,
     pub Duration: i64,
+    pub DurationKr: i64,
     pub Voice: u32,
 }
 impl<'a> Default for MinigameCCGOpenDialogExcelArgs {
@@ -164,6 +179,7 @@ impl<'a> Default for MinigameCCGOpenDialogExcelArgs {
       ConditionCard: 0,
       Dialog: 0,
       Duration: 0,
+      DurationKr: 0,
       Voice: 0,
     }
   }
@@ -174,12 +190,13 @@ impl Serialize for MinigameCCGOpenDialogExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("MinigameCCGOpenDialogExcel", 6)?;
+    let mut s = serializer.serialize_struct("MinigameCCGOpenDialogExcel", 7)?;
       s.serialize_field("DialogId", &self.DialogId())?;
       s.serialize_field("PlayOrder", &self.PlayOrder())?;
       s.serialize_field("ConditionCard", &self.ConditionCard())?;
       s.serialize_field("Dialog", &self.Dialog())?;
       s.serialize_field("Duration", &self.Duration())?;
+      s.serialize_field("DurationKr", &self.DurationKr())?;
       s.serialize_field("Voice", &self.Voice())?;
     s.end()
   }
@@ -211,6 +228,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MinigameCCGOpenDialogExcelBuild
     self.fbb_.push_slot::<i64>(MinigameCCGOpenDialogExcel::VT_DURATION, Duration, 0);
   }
   #[inline]
+  pub fn add_DurationKr(&mut self, DurationKr: i64) {
+    self.fbb_.push_slot::<i64>(MinigameCCGOpenDialogExcel::VT_DURATIONKR, DurationKr, 0);
+  }
+  #[inline]
   pub fn add_Voice(&mut self, Voice: u32) {
     self.fbb_.push_slot::<u32>(MinigameCCGOpenDialogExcel::VT_VOICE, Voice, 0);
   }
@@ -237,6 +258,7 @@ impl core::fmt::Debug for MinigameCCGOpenDialogExcel<'_> {
       ds.field("ConditionCard", &self.ConditionCard());
       ds.field("Dialog", &self.Dialog());
       ds.field("Duration", &self.Duration());
+      ds.field("DurationKr", &self.DurationKr());
       ds.field("Voice", &self.Voice());
       ds.finish()
   }
@@ -249,6 +271,7 @@ pub struct MinigameCCGOpenDialogExcelT {
   pub ConditionCard: i64,
   pub Dialog: u32,
   pub Duration: i64,
+  pub DurationKr: i64,
   pub Voice: u32,
 }
 impl Default for MinigameCCGOpenDialogExcelT {
@@ -259,6 +282,7 @@ impl Default for MinigameCCGOpenDialogExcelT {
       ConditionCard: 0,
       Dialog: 0,
       Duration: 0,
+      DurationKr: 0,
       Voice: 0,
     }
   }
@@ -273,6 +297,7 @@ impl MinigameCCGOpenDialogExcelT {
     let ConditionCard = self.ConditionCard;
     let Dialog = self.Dialog;
     let Duration = self.Duration;
+    let DurationKr = self.DurationKr;
     let Voice = self.Voice;
     MinigameCCGOpenDialogExcel::create(_fbb, &MinigameCCGOpenDialogExcelArgs{
       DialogId,
@@ -280,6 +305,7 @@ impl MinigameCCGOpenDialogExcelT {
       ConditionCard,
       Dialog,
       Duration,
+      DurationKr,
       Voice,
     })
   }

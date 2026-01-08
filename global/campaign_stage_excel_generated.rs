@@ -61,9 +61,10 @@ impl<'a> CampaignStageExcel<'a> {
   pub const VT_FIRSTCLEARREPORTEVENTNAME: flatbuffers::VOffsetT = 62;
   pub const VT_FIRSTCLEARFUNNELMESSAGE: flatbuffers::VOffsetT = 64;
   pub const VT_FIRSTCLEAREVENTMESSAGE: flatbuffers::VOffsetT = 66;
-  pub const VT_TACTICREWARDEXP: flatbuffers::VOffsetT = 68;
-  pub const VT_FIXEDECHELONID: flatbuffers::VOffsetT = 70;
-  pub const VT_ECHELONEXTENSIONTYPE: flatbuffers::VOffsetT = 72;
+  pub const VT_FIRSTSTARTFUNNELMESSAGE: flatbuffers::VOffsetT = 68;
+  pub const VT_TACTICREWARDEXP: flatbuffers::VOffsetT = 70;
+  pub const VT_FIXEDECHELONID: flatbuffers::VOffsetT = 72;
+  pub const VT_ECHELONEXTENSIONTYPE: flatbuffers::VOffsetT = 74;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -112,6 +113,9 @@ impl<'a> CampaignStageExcel<'a> {
       let x = args.EchelonExtensionType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_EchelonExtensionType(x);
+      if let Some(x) = args.FirstStartFunnelMessage {
+        builder.add_FirstStartFunnelMessage(x);
+      }
       if let Some(x) = args.FirstClearEventMessage {
         builder.add_FirstClearEventMessage(x);
       }
@@ -256,6 +260,9 @@ impl<'a> CampaignStageExcel<'a> {
     let FirstClearEventMessage = self.FirstClearEventMessage().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+    let FirstStartFunnelMessage = self.FirstStartFunnelMessage().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
       let TacticRewardExp = self.TacticRewardExp();
       let FixedEchelonId = self.FixedEchelonId();
       let EchelonExtensionType = if table_encryption_service::use_encryption() {
@@ -296,6 +303,7 @@ impl<'a> CampaignStageExcel<'a> {
       FirstClearReportEventName,
       FirstClearFunnelMessage,
       FirstClearEventMessage,
+      FirstStartFunnelMessage,
       TacticRewardExp,
       FixedEchelonId,
       EchelonExtensionType,
@@ -527,6 +535,13 @@ impl<'a> CampaignStageExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CampaignStageExcel::VT_FIRSTCLEAREVENTMESSAGE, None)}
   }
   #[inline]
+  pub fn FirstStartFunnelMessage(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CampaignStageExcel::VT_FIRSTSTARTFUNNELMESSAGE, None)}
+  }
+  #[inline]
   pub fn TacticRewardExp(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
@@ -588,6 +603,7 @@ impl flatbuffers::Verifiable for CampaignStageExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FirstClearReportEventName", Self::VT_FIRSTCLEARREPORTEVENTNAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FirstClearFunnelMessage", Self::VT_FIRSTCLEARFUNNELMESSAGE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FirstClearEventMessage", Self::VT_FIRSTCLEAREVENTMESSAGE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FirstStartFunnelMessage", Self::VT_FIRSTSTARTFUNNELMESSAGE, false)?
      .visit_field::<i64>("TacticRewardExp", Self::VT_TACTICREWARDEXP, false)?
      .visit_field::<i64>("FixedEchelonId", Self::VT_FIXEDECHELONID, false)?
      .visit_field::<EchelonExtensionType>("EchelonExtensionType", Self::VT_ECHELONEXTENSIONTYPE, false)?
@@ -628,6 +644,7 @@ pub struct CampaignStageExcelArgs<'a> {
     pub FirstClearReportEventName: Option<flatbuffers::WIPOffset<&'a str>>,
     pub FirstClearFunnelMessage: Option<flatbuffers::WIPOffset<&'a str>>,
     pub FirstClearEventMessage: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub FirstStartFunnelMessage: Option<flatbuffers::WIPOffset<&'a str>>,
     pub TacticRewardExp: i64,
     pub FixedEchelonId: i64,
     pub EchelonExtensionType: EchelonExtensionType,
@@ -668,6 +685,7 @@ impl<'a> Default for CampaignStageExcelArgs<'a> {
       FirstClearReportEventName: None,
       FirstClearFunnelMessage: None,
       FirstClearEventMessage: None,
+      FirstStartFunnelMessage: None,
       TacticRewardExp: 0,
       FixedEchelonId: 0,
       EchelonExtensionType: EchelonExtensionType::Base,
@@ -680,7 +698,7 @@ impl Serialize for CampaignStageExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("CampaignStageExcel", 35)?;
+    let mut s = serializer.serialize_struct("CampaignStageExcel", 36)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("Deprecated", &self.Deprecated())?;
       if let Some(f) = self.Name() {
@@ -760,6 +778,11 @@ impl Serialize for CampaignStageExcel<'_> {
         s.serialize_field("FirstClearEventMessage", &f)?;
       } else {
         s.skip_field("FirstClearEventMessage")?;
+      }
+      if let Some(f) = self.FirstStartFunnelMessage() {
+        s.serialize_field("FirstStartFunnelMessage", &f)?;
+      } else {
+        s.skip_field("FirstStartFunnelMessage")?;
       }
       s.serialize_field("TacticRewardExp", &self.TacticRewardExp())?;
       s.serialize_field("FixedEchelonId", &self.FixedEchelonId())?;
@@ -902,6 +925,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CampaignStageExcelBuilder<'a, '
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignStageExcel::VT_FIRSTCLEAREVENTMESSAGE, FirstClearEventMessage);
   }
   #[inline]
+  pub fn add_FirstStartFunnelMessage(&mut self, FirstStartFunnelMessage: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CampaignStageExcel::VT_FIRSTSTARTFUNNELMESSAGE, FirstStartFunnelMessage);
+  }
+  #[inline]
   pub fn add_TacticRewardExp(&mut self, TacticRewardExp: i64) {
     self.fbb_.push_slot::<i64>(CampaignStageExcel::VT_TACTICREWARDEXP, TacticRewardExp, 0);
   }
@@ -963,6 +990,7 @@ impl core::fmt::Debug for CampaignStageExcel<'_> {
       ds.field("FirstClearReportEventName", &self.FirstClearReportEventName());
       ds.field("FirstClearFunnelMessage", &self.FirstClearFunnelMessage());
       ds.field("FirstClearEventMessage", &self.FirstClearEventMessage());
+      ds.field("FirstStartFunnelMessage", &self.FirstStartFunnelMessage());
       ds.field("TacticRewardExp", &self.TacticRewardExp());
       ds.field("FixedEchelonId", &self.FixedEchelonId());
       ds.field("EchelonExtensionType", &self.EchelonExtensionType());
@@ -1004,6 +1032,7 @@ pub struct CampaignStageExcelT {
   pub FirstClearReportEventName: Option<String>,
   pub FirstClearFunnelMessage: Option<String>,
   pub FirstClearEventMessage: Option<String>,
+  pub FirstStartFunnelMessage: Option<String>,
   pub TacticRewardExp: i64,
   pub FixedEchelonId: i64,
   pub EchelonExtensionType: EchelonExtensionType,
@@ -1043,6 +1072,7 @@ impl Default for CampaignStageExcelT {
       FirstClearReportEventName: None,
       FirstClearFunnelMessage: None,
       FirstClearEventMessage: None,
+      FirstStartFunnelMessage: None,
       TacticRewardExp: 0,
       FixedEchelonId: 0,
       EchelonExtensionType: EchelonExtensionType::Base,
@@ -1110,6 +1140,9 @@ impl CampaignStageExcelT {
     let FirstClearEventMessage = self.FirstClearEventMessage.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let FirstStartFunnelMessage = self.FirstStartFunnelMessage.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     let TacticRewardExp = self.TacticRewardExp;
     let FixedEchelonId = self.FixedEchelonId;
     let EchelonExtensionType = self.EchelonExtensionType;
@@ -1146,6 +1179,7 @@ impl CampaignStageExcelT {
       FirstClearReportEventName,
       FirstClearFunnelMessage,
       FirstClearEventMessage,
+      FirstStartFunnelMessage,
       TacticRewardExp,
       FixedEchelonId,
       EchelonExtensionType,

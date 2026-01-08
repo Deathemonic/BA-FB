@@ -69,14 +69,14 @@ impl<'a> EventContentZoneExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.whiteListTags {
-        builder.add_whiteListTags(x);
+      if let Some(x) = args.WhiteListTags {
+        builder.add_WhiteListTags(x);
       }
-      if let Some(x) = args.tags {
-        builder.add_tags(x);
+      if let Some(x) = args.Tags {
+        builder.add_Tags(x);
       }
-      if let Some(x) = args.studentVisitProb {
-        builder.add_studentVisitProb(x);
+      if let Some(x) = args.StudentVisitProb {
+        builder.add_StudentVisitProb(x);
       }
       let x = args.LocalizeEtcId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
@@ -92,14 +92,14 @@ impl<'a> EventContentZoneExcel<'a> {
       let LocationRank = self.LocationRank();
       let EventPointForLocationRank = self.EventPointForLocationRank();
       let LocalizeEtcId = self.LocalizeEtcId();
-    let studentVisitProb = self.studentVisitProb().map(|x| {
+    let StudentVisitProb = self.StudentVisitProb().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let RewardGroupId = self.RewardGroupId();
-    let tags = self.tags().map(|x| {
+    let Tags = self.Tags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
-    let whiteListTags = self.whiteListTags().map(|x| {
+    let WhiteListTags = self.WhiteListTags().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
     EventContentZoneExcelT {
@@ -109,10 +109,10 @@ impl<'a> EventContentZoneExcel<'a> {
       LocationRank,
       EventPointForLocationRank,
       LocalizeEtcId,
-      studentVisitProb,
+      StudentVisitProb,
       RewardGroupId,
-      tags,
-      whiteListTags,
+      Tags,
+      WhiteListTags,
     }
   }
 
@@ -159,7 +159,7 @@ impl<'a> EventContentZoneExcel<'a> {
     unsafe { self._tab.get::<u32>(EventContentZoneExcel::VT_LOCALIZEETCID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn studentVisitProb(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn StudentVisitProb(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -173,14 +173,14 @@ impl<'a> EventContentZoneExcel<'a> {
     unsafe { self._tab.get::<i64>(EventContentZoneExcel::VT_REWARDGROUPID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn Tags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, Tag>>>(EventContentZoneExcel::VT_TAGS, None)}
   }
   #[inline]
-  pub fn whiteListTags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
+  pub fn WhiteListTags(&self) -> Option<flatbuffers::Vector<'a, Tag>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -201,10 +201,10 @@ impl flatbuffers::Verifiable for EventContentZoneExcel<'_> {
      .visit_field::<i64>("LocationRank", Self::VT_LOCATIONRANK, false)?
      .visit_field::<i64>("EventPointForLocationRank", Self::VT_EVENTPOINTFORLOCATIONRANK, false)?
      .visit_field::<u32>("LocalizeEtcId", Self::VT_LOCALIZEETCID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("studentVisitProb", Self::VT_STUDENTVISITPROB, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StudentVisitProb", Self::VT_STUDENTVISITPROB, false)?
      .visit_field::<i64>("RewardGroupId", Self::VT_REWARDGROUPID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("tags", Self::VT_TAGS, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("whiteListTags", Self::VT_WHITELISTTAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("Tags", Self::VT_TAGS, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, Tag>>>("WhiteListTags", Self::VT_WHITELISTTAGS, false)?
      .finish();
     Ok(())
   }
@@ -216,10 +216,10 @@ pub struct EventContentZoneExcelArgs<'a> {
     pub LocationRank: i64,
     pub EventPointForLocationRank: i64,
     pub LocalizeEtcId: u32,
-    pub studentVisitProb: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub StudentVisitProb: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub RewardGroupId: i64,
-    pub tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
-    pub whiteListTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub Tags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
+    pub WhiteListTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, Tag>>>,
 }
 impl<'a> Default for EventContentZoneExcelArgs<'a> {
   #[inline]
@@ -231,10 +231,10 @@ impl<'a> Default for EventContentZoneExcelArgs<'a> {
       LocationRank: 0,
       EventPointForLocationRank: 0,
       LocalizeEtcId: 0,
-      studentVisitProb: None,
+      StudentVisitProb: None,
       RewardGroupId: 0,
-      tags: None,
-      whiteListTags: None,
+      Tags: None,
+      WhiteListTags: None,
     }
   }
 }
@@ -251,21 +251,21 @@ impl Serialize for EventContentZoneExcel<'_> {
       s.serialize_field("LocationRank", &self.LocationRank())?;
       s.serialize_field("EventPointForLocationRank", &self.EventPointForLocationRank())?;
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
-      if let Some(f) = self.studentVisitProb() {
-        s.serialize_field("studentVisitProb", &f)?;
+      if let Some(f) = self.StudentVisitProb() {
+        s.serialize_field("StudentVisitProb", &f)?;
       } else {
-        s.skip_field("studentVisitProb")?;
+        s.skip_field("StudentVisitProb")?;
       }
       s.serialize_field("RewardGroupId", &self.RewardGroupId())?;
-      if let Some(f) = self.tags() {
-        s.serialize_field("tags", &f)?;
+      if let Some(f) = self.Tags() {
+        s.serialize_field("Tags", &f)?;
       } else {
-        s.skip_field("tags")?;
+        s.skip_field("Tags")?;
       }
-      if let Some(f) = self.whiteListTags() {
-        s.serialize_field("whiteListTags", &f)?;
+      if let Some(f) = self.WhiteListTags() {
+        s.serialize_field("WhiteListTags", &f)?;
       } else {
-        s.skip_field("whiteListTags")?;
+        s.skip_field("WhiteListTags")?;
       }
     s.end()
   }
@@ -301,20 +301,20 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentZoneExcelBuilder<'a
     self.fbb_.push_slot::<u32>(EventContentZoneExcel::VT_LOCALIZEETCID, LocalizeEtcId, 0);
   }
   #[inline]
-  pub fn add_studentVisitProb(&mut self, studentVisitProb: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneExcel::VT_STUDENTVISITPROB, studentVisitProb);
+  pub fn add_StudentVisitProb(&mut self, StudentVisitProb: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneExcel::VT_STUDENTVISITPROB, StudentVisitProb);
   }
   #[inline]
   pub fn add_RewardGroupId(&mut self, RewardGroupId: i64) {
     self.fbb_.push_slot::<i64>(EventContentZoneExcel::VT_REWARDGROUPID, RewardGroupId, 0);
   }
   #[inline]
-  pub fn add_tags(&mut self, tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneExcel::VT_TAGS, tags);
+  pub fn add_Tags(&mut self, Tags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneExcel::VT_TAGS, Tags);
   }
   #[inline]
-  pub fn add_whiteListTags(&mut self, whiteListTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneExcel::VT_WHITELISTTAGS, whiteListTags);
+  pub fn add_WhiteListTags(&mut self, WhiteListTags: flatbuffers::WIPOffset<flatbuffers::Vector<'b , Tag>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentZoneExcel::VT_WHITELISTTAGS, WhiteListTags);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentZoneExcelBuilder<'a, 'b, A> {
@@ -340,10 +340,10 @@ impl core::fmt::Debug for EventContentZoneExcel<'_> {
       ds.field("LocationRank", &self.LocationRank());
       ds.field("EventPointForLocationRank", &self.EventPointForLocationRank());
       ds.field("LocalizeEtcId", &self.LocalizeEtcId());
-      ds.field("studentVisitProb", &self.studentVisitProb());
+      ds.field("StudentVisitProb", &self.StudentVisitProb());
       ds.field("RewardGroupId", &self.RewardGroupId());
-      ds.field("tags", &self.tags());
-      ds.field("whiteListTags", &self.whiteListTags());
+      ds.field("Tags", &self.Tags());
+      ds.field("WhiteListTags", &self.WhiteListTags());
       ds.finish()
   }
 }
@@ -356,10 +356,10 @@ pub struct EventContentZoneExcelT {
   pub LocationRank: i64,
   pub EventPointForLocationRank: i64,
   pub LocalizeEtcId: u32,
-  pub studentVisitProb: Option<Vec<i64>>,
+  pub StudentVisitProb: Option<Vec<i64>>,
   pub RewardGroupId: i64,
-  pub tags: Option<Vec<Tag>>,
-  pub whiteListTags: Option<Vec<Tag>>,
+  pub Tags: Option<Vec<Tag>>,
+  pub WhiteListTags: Option<Vec<Tag>>,
 }
 impl Default for EventContentZoneExcelT {
   fn default() -> Self {
@@ -370,10 +370,10 @@ impl Default for EventContentZoneExcelT {
       LocationRank: 0,
       EventPointForLocationRank: 0,
       LocalizeEtcId: 0,
-      studentVisitProb: None,
+      StudentVisitProb: None,
       RewardGroupId: 0,
-      tags: None,
-      whiteListTags: None,
+      Tags: None,
+      WhiteListTags: None,
     }
   }
 }
@@ -388,14 +388,14 @@ impl EventContentZoneExcelT {
     let LocationRank = self.LocationRank;
     let EventPointForLocationRank = self.EventPointForLocationRank;
     let LocalizeEtcId = self.LocalizeEtcId;
-    let studentVisitProb = self.studentVisitProb.as_ref().map(|x|{
+    let StudentVisitProb = self.StudentVisitProb.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let RewardGroupId = self.RewardGroupId;
-    let tags = self.tags.as_ref().map(|x|{
+    let Tags = self.Tags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let whiteListTags = self.whiteListTags.as_ref().map(|x|{
+    let WhiteListTags = self.WhiteListTags.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     EventContentZoneExcel::create(_fbb, &EventContentZoneExcelArgs{
@@ -405,10 +405,10 @@ impl EventContentZoneExcelT {
       LocationRank,
       EventPointForLocationRank,
       LocalizeEtcId,
-      studentVisitProb,
+      StudentVisitProb,
       RewardGroupId,
-      tags,
-      whiteListTags,
+      Tags,
+      WhiteListTags,
     })
   }
 }

@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_CLUB: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_CLUB: i32 = 51;
+pub const ENUM_MAX_CLUB: i32 = 55;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_CLUB: [Club; 52] = [
+pub const ENUM_VALUES_CLUB: [Club; 56] = [
   Club::None,
   Club::Engineer,
   Club::CleanNClearing,
@@ -72,6 +72,10 @@ pub const ENUM_VALUES_CLUB: [Club; 52] = [
   Club::AbydosStudentCouncil,
   Club::CentralControlCenter,
   Club::FreightLogisticsDepartment,
+  Club::OccultClub,
+  Club::PrefectBrigade,
+  Club::FreeTradeCartel,
+  Club::NicomediasTroop,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -131,9 +135,13 @@ impl Club {
   pub const AbydosStudentCouncil: Self = Self(49);
   pub const CentralControlCenter: Self = Self(50);
   pub const FreightLogisticsDepartment: Self = Self(51);
+  pub const OccultClub: Self = Self(52);
+  pub const PrefectBrigade: Self = Self(53);
+  pub const FreeTradeCartel: Self = Self(54);
+  pub const NicomediasTroop: Self = Self(55);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 51;
+  pub const ENUM_MAX: i32 = 55;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Engineer,
@@ -187,6 +195,10 @@ impl Club {
     Self::AbydosStudentCouncil,
     Self::CentralControlCenter,
     Self::FreightLogisticsDepartment,
+    Self::OccultClub,
+    Self::PrefectBrigade,
+    Self::FreeTradeCartel,
+    Self::NicomediasTroop,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -243,6 +255,10 @@ impl Club {
       Self::AbydosStudentCouncil => Some("AbydosStudentCouncil"),
       Self::CentralControlCenter => Some("CentralControlCenter"),
       Self::FreightLogisticsDepartment => Some("FreightLogisticsDepartment"),
+      Self::OccultClub => Some("OccultClub"),
+      Self::PrefectBrigade => Some("PrefectBrigade"),
+      Self::FreeTradeCartel => Some("FreeTradeCartel"),
+      Self::NicomediasTroop => Some("NicomediasTroop"),
       _ => None,
     }
   }

@@ -31,12 +31,14 @@ impl<'a> flatbuffers::Follow<'a> for WebEventSeasonExcel<'a> {
 impl<'a> WebEventSeasonExcel<'a> {
   pub const VT_ID: flatbuffers::VOffsetT = 4;
   pub const VT_ENABLED: flatbuffers::VOffsetT = 6;
-  pub const VT_STARTDATE: flatbuffers::VOffsetT = 8;
-  pub const VT_ENDDATE: flatbuffers::VOffsetT = 10;
-  pub const VT_LOBBYBANNERIMAGE: flatbuffers::VOffsetT = 12;
-  pub const VT_POPUPTITLELOCALIZEKEY: flatbuffers::VOffsetT = 14;
-  pub const VT_STAGEEVENTURL: flatbuffers::VOffsetT = 16;
-  pub const VT_LIVEEVENTURL: flatbuffers::VOffsetT = 18;
+  pub const VT_ISFULL: flatbuffers::VOffsetT = 8;
+  pub const VT_USEEXTERNALBROWSER: flatbuffers::VOffsetT = 10;
+  pub const VT_STARTDATE: flatbuffers::VOffsetT = 12;
+  pub const VT_ENDDATE: flatbuffers::VOffsetT = 14;
+  pub const VT_LOBBYBANNERIMAGE: flatbuffers::VOffsetT = 16;
+  pub const VT_POPUPTITLELOCALIZEKEY: flatbuffers::VOffsetT = 18;
+  pub const VT_STAGEEVENTURL: flatbuffers::VOffsetT = 20;
+  pub const VT_LIVEEVENTURL: flatbuffers::VOffsetT = 22;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -70,6 +72,8 @@ impl<'a> WebEventSeasonExcel<'a> {
       if let Some(x) = args.StartDate {
         builder.add_StartDate(x);
       }
+      builder.add_UseExternalBrowser(args.UseExternalBrowser);
+      builder.add_IsFull(args.IsFull);
       builder.add_Enabled(args.Enabled);
     builder.finish()
   }
@@ -78,6 +82,8 @@ impl<'a> WebEventSeasonExcel<'a> {
     let key = table_encryption_service::create_key(b"WebEventSeason");
       let Id = self.Id();
       let Enabled = self.Enabled();
+      let IsFull = self.IsFull();
+      let UseExternalBrowser = self.UseExternalBrowser();
     let StartDate = self.StartDate().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -99,6 +105,8 @@ impl<'a> WebEventSeasonExcel<'a> {
     WebEventSeasonExcelT {
       Id,
       Enabled,
+      IsFull,
+      UseExternalBrowser,
       StartDate,
       EndDate,
       LobbyBannerImage,
@@ -121,6 +129,20 @@ impl<'a> WebEventSeasonExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<bool>(WebEventSeasonExcel::VT_ENABLED, Some(false)).unwrap()}
+  }
+  #[inline]
+  pub fn IsFull(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(WebEventSeasonExcel::VT_ISFULL, Some(false)).unwrap()}
+  }
+  #[inline]
+  pub fn UseExternalBrowser(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(WebEventSeasonExcel::VT_USEEXTERNALBROWSER, Some(false)).unwrap()}
   }
   #[inline]
   pub fn StartDate(&self) -> Option<&'a str> {
@@ -175,6 +197,8 @@ impl flatbuffers::Verifiable for WebEventSeasonExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<bool>("Enabled", Self::VT_ENABLED, false)?
+     .visit_field::<bool>("IsFull", Self::VT_ISFULL, false)?
+     .visit_field::<bool>("UseExternalBrowser", Self::VT_USEEXTERNALBROWSER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("StartDate", Self::VT_STARTDATE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EndDate", Self::VT_ENDDATE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("LobbyBannerImage", Self::VT_LOBBYBANNERIMAGE, false)?
@@ -188,6 +212,8 @@ impl flatbuffers::Verifiable for WebEventSeasonExcel<'_> {
 pub struct WebEventSeasonExcelArgs<'a> {
     pub Id: i64,
     pub Enabled: bool,
+    pub IsFull: bool,
+    pub UseExternalBrowser: bool,
     pub StartDate: Option<flatbuffers::WIPOffset<&'a str>>,
     pub EndDate: Option<flatbuffers::WIPOffset<&'a str>>,
     pub LobbyBannerImage: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -201,6 +227,8 @@ impl<'a> Default for WebEventSeasonExcelArgs<'a> {
     WebEventSeasonExcelArgs {
       Id: 0,
       Enabled: false,
+      IsFull: false,
+      UseExternalBrowser: false,
       StartDate: None,
       EndDate: None,
       LobbyBannerImage: None,
@@ -216,9 +244,11 @@ impl Serialize for WebEventSeasonExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("WebEventSeasonExcel", 8)?;
+    let mut s = serializer.serialize_struct("WebEventSeasonExcel", 10)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("Enabled", &self.Enabled())?;
+      s.serialize_field("IsFull", &self.IsFull())?;
+      s.serialize_field("UseExternalBrowser", &self.UseExternalBrowser())?;
       if let Some(f) = self.StartDate() {
         s.serialize_field("StartDate", &f)?;
       } else {
@@ -267,6 +297,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> WebEventSeasonExcelBuilder<'a, 
     self.fbb_.push_slot::<bool>(WebEventSeasonExcel::VT_ENABLED, Enabled, false);
   }
   #[inline]
+  pub fn add_IsFull(&mut self, IsFull: bool) {
+    self.fbb_.push_slot::<bool>(WebEventSeasonExcel::VT_ISFULL, IsFull, false);
+  }
+  #[inline]
+  pub fn add_UseExternalBrowser(&mut self, UseExternalBrowser: bool) {
+    self.fbb_.push_slot::<bool>(WebEventSeasonExcel::VT_USEEXTERNALBROWSER, UseExternalBrowser, false);
+  }
+  #[inline]
   pub fn add_StartDate(&mut self, StartDate: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(WebEventSeasonExcel::VT_STARTDATE, StartDate);
   }
@@ -310,6 +348,8 @@ impl core::fmt::Debug for WebEventSeasonExcel<'_> {
     let mut ds = f.debug_struct("WebEventSeasonExcel");
       ds.field("Id", &self.Id());
       ds.field("Enabled", &self.Enabled());
+      ds.field("IsFull", &self.IsFull());
+      ds.field("UseExternalBrowser", &self.UseExternalBrowser());
       ds.field("StartDate", &self.StartDate());
       ds.field("EndDate", &self.EndDate());
       ds.field("LobbyBannerImage", &self.LobbyBannerImage());
@@ -324,6 +364,8 @@ impl core::fmt::Debug for WebEventSeasonExcel<'_> {
 pub struct WebEventSeasonExcelT {
   pub Id: i64,
   pub Enabled: bool,
+  pub IsFull: bool,
+  pub UseExternalBrowser: bool,
   pub StartDate: Option<String>,
   pub EndDate: Option<String>,
   pub LobbyBannerImage: Option<String>,
@@ -336,6 +378,8 @@ impl Default for WebEventSeasonExcelT {
     Self {
       Id: 0,
       Enabled: false,
+      IsFull: false,
+      UseExternalBrowser: false,
       StartDate: None,
       EndDate: None,
       LobbyBannerImage: None,
@@ -352,6 +396,8 @@ impl WebEventSeasonExcelT {
   ) -> flatbuffers::WIPOffset<WebEventSeasonExcel<'b>> {
     let Id = self.Id;
     let Enabled = self.Enabled;
+    let IsFull = self.IsFull;
+    let UseExternalBrowser = self.UseExternalBrowser;
     let StartDate = self.StartDate.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -373,6 +419,8 @@ impl WebEventSeasonExcelT {
     WebEventSeasonExcel::create(_fbb, &WebEventSeasonExcelArgs{
       Id,
       Enabled,
+      IsFull,
+      UseExternalBrowser,
       StartDate,
       EndDate,
       LobbyBannerImage,

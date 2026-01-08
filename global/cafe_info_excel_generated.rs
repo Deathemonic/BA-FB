@@ -33,6 +33,11 @@ impl<'a> CafeInfoExcel<'a> {
   pub const VT_ISDEFAULT: flatbuffers::VOffsetT = 6;
   pub const VT_OPENCONDITIONCAFEID: flatbuffers::VOffsetT = 8;
   pub const VT_OPENCONDITIONCAFEINVITE: flatbuffers::VOffsetT = 10;
+  pub const VT_SUMMONPARCELTYPE: flatbuffers::VOffsetT = 12;
+  pub const VT_SUMMONPARCELID: flatbuffers::VOffsetT = 14;
+  pub const VT_SUMMONPARCELAMOUNT: flatbuffers::VOffsetT = 16;
+  pub const VT_CATEGORYTYPE: flatbuffers::VOffsetT = 18;
+  pub const VT_SUMMONTICKETICONPATH: flatbuffers::VOffsetT = 20;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -41,13 +46,28 @@ impl<'a> CafeInfoExcel<'a> {
   #[allow(unused_mut)]
   pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr, A: flatbuffers::Allocator + 'bldr>(
     _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr, A>,
-    args: &'args CafeInfoExcelArgs
+    args: &'args CafeInfoExcelArgs<'args>
   ) -> flatbuffers::WIPOffset<CafeInfoExcel<'bldr>> {
     let mut builder = CafeInfoExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"CafeInfo");
+      let x = args.SummonParcelAmount;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_SummonParcelAmount(x);
+      let x = args.SummonParcelId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_SummonParcelId(x);
       let x = args.CafeId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_CafeId(x);
+      if let Some(x) = args.SummonTicketIconPath {
+        builder.add_SummonTicketIconPath(x);
+      }
+      let x = args.CategoryType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_CategoryType(x);
+      let x = args.SummonParcelType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_SummonParcelType(x);
       let x = args.OpenConditionCafeInvite;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_OpenConditionCafeInvite(x);
@@ -72,11 +92,31 @@ impl<'a> CafeInfoExcel<'a> {
       } else {
         self.OpenConditionCafeInvite()
       };
+      let SummonParcelType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.SummonParcelType(), &key)
+      } else {
+        self.SummonParcelType()
+      };
+      let SummonParcelId = self.SummonParcelId();
+      let SummonParcelAmount = self.SummonParcelAmount();
+      let CategoryType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.CategoryType(), &key)
+      } else {
+        self.CategoryType()
+      };
+    let SummonTicketIconPath = self.SummonTicketIconPath().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
     CafeInfoExcelT {
       CafeId,
       IsDefault,
       OpenConditionCafeId,
       OpenConditionCafeInvite,
+      SummonParcelType,
+      SummonParcelId,
+      SummonParcelAmount,
+      CategoryType,
+      SummonTicketIconPath,
     }
   }
 
@@ -108,6 +148,41 @@ impl<'a> CafeInfoExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<OpenConditionContent>(CafeInfoExcel::VT_OPENCONDITIONCAFEINVITE, Some(OpenConditionContent::Shop)).unwrap()}
   }
+  #[inline]
+  pub fn SummonParcelType(&self) -> ParcelType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ParcelType>(CafeInfoExcel::VT_SUMMONPARCELTYPE, Some(ParcelType::None)).unwrap()}
+  }
+  #[inline]
+  pub fn SummonParcelId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(CafeInfoExcel::VT_SUMMONPARCELID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn SummonParcelAmount(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(CafeInfoExcel::VT_SUMMONPARCELAMOUNT, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn CategoryType(&self) -> ShopCategoryType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ShopCategoryType>(CafeInfoExcel::VT_CATEGORYTYPE, Some(ShopCategoryType::General)).unwrap()}
+  }
+  #[inline]
+  pub fn SummonTicketIconPath(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CafeInfoExcel::VT_SUMMONTICKETICONPATH, None)}
+  }
 }
 
 impl flatbuffers::Verifiable for CafeInfoExcel<'_> {
@@ -121,17 +196,27 @@ impl flatbuffers::Verifiable for CafeInfoExcel<'_> {
      .visit_field::<bool>("IsDefault", Self::VT_ISDEFAULT, false)?
      .visit_field::<OpenConditionContent>("OpenConditionCafeId", Self::VT_OPENCONDITIONCAFEID, false)?
      .visit_field::<OpenConditionContent>("OpenConditionCafeInvite", Self::VT_OPENCONDITIONCAFEINVITE, false)?
+     .visit_field::<ParcelType>("SummonParcelType", Self::VT_SUMMONPARCELTYPE, false)?
+     .visit_field::<i64>("SummonParcelId", Self::VT_SUMMONPARCELID, false)?
+     .visit_field::<i64>("SummonParcelAmount", Self::VT_SUMMONPARCELAMOUNT, false)?
+     .visit_field::<ShopCategoryType>("CategoryType", Self::VT_CATEGORYTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SummonTicketIconPath", Self::VT_SUMMONTICKETICONPATH, false)?
      .finish();
     Ok(())
   }
 }
-pub struct CafeInfoExcelArgs {
+pub struct CafeInfoExcelArgs<'a> {
     pub CafeId: i64,
     pub IsDefault: bool,
     pub OpenConditionCafeId: OpenConditionContent,
     pub OpenConditionCafeInvite: OpenConditionContent,
+    pub SummonParcelType: ParcelType,
+    pub SummonParcelId: i64,
+    pub SummonParcelAmount: i64,
+    pub CategoryType: ShopCategoryType,
+    pub SummonTicketIconPath: Option<flatbuffers::WIPOffset<&'a str>>,
 }
-impl<'a> Default for CafeInfoExcelArgs {
+impl<'a> Default for CafeInfoExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     CafeInfoExcelArgs {
@@ -139,6 +224,11 @@ impl<'a> Default for CafeInfoExcelArgs {
       IsDefault: false,
       OpenConditionCafeId: OpenConditionContent::Shop,
       OpenConditionCafeInvite: OpenConditionContent::Shop,
+      SummonParcelType: ParcelType::None,
+      SummonParcelId: 0,
+      SummonParcelAmount: 0,
+      CategoryType: ShopCategoryType::General,
+      SummonTicketIconPath: None,
     }
   }
 }
@@ -148,11 +238,20 @@ impl Serialize for CafeInfoExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("CafeInfoExcel", 4)?;
+    let mut s = serializer.serialize_struct("CafeInfoExcel", 9)?;
       s.serialize_field("CafeId", &self.CafeId())?;
       s.serialize_field("IsDefault", &self.IsDefault())?;
       s.serialize_field("OpenConditionCafeId", &self.OpenConditionCafeId())?;
       s.serialize_field("OpenConditionCafeInvite", &self.OpenConditionCafeInvite())?;
+      s.serialize_field("SummonParcelType", &self.SummonParcelType())?;
+      s.serialize_field("SummonParcelId", &self.SummonParcelId())?;
+      s.serialize_field("SummonParcelAmount", &self.SummonParcelAmount())?;
+      s.serialize_field("CategoryType", &self.CategoryType())?;
+      if let Some(f) = self.SummonTicketIconPath() {
+        s.serialize_field("SummonTicketIconPath", &f)?;
+      } else {
+        s.skip_field("SummonTicketIconPath")?;
+      }
     s.end()
   }
 }
@@ -179,6 +278,26 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CafeInfoExcelBuilder<'a, 'b, A>
     self.fbb_.push_slot::<OpenConditionContent>(CafeInfoExcel::VT_OPENCONDITIONCAFEINVITE, OpenConditionCafeInvite, OpenConditionContent::Shop);
   }
   #[inline]
+  pub fn add_SummonParcelType(&mut self, SummonParcelType: ParcelType) {
+    self.fbb_.push_slot::<ParcelType>(CafeInfoExcel::VT_SUMMONPARCELTYPE, SummonParcelType, ParcelType::None);
+  }
+  #[inline]
+  pub fn add_SummonParcelId(&mut self, SummonParcelId: i64) {
+    self.fbb_.push_slot::<i64>(CafeInfoExcel::VT_SUMMONPARCELID, SummonParcelId, 0);
+  }
+  #[inline]
+  pub fn add_SummonParcelAmount(&mut self, SummonParcelAmount: i64) {
+    self.fbb_.push_slot::<i64>(CafeInfoExcel::VT_SUMMONPARCELAMOUNT, SummonParcelAmount, 0);
+  }
+  #[inline]
+  pub fn add_CategoryType(&mut self, CategoryType: ShopCategoryType) {
+    self.fbb_.push_slot::<ShopCategoryType>(CafeInfoExcel::VT_CATEGORYTYPE, CategoryType, ShopCategoryType::General);
+  }
+  #[inline]
+  pub fn add_SummonTicketIconPath(&mut self, SummonTicketIconPath: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CafeInfoExcel::VT_SUMMONTICKETICONPATH, SummonTicketIconPath);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> CafeInfoExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     CafeInfoExcelBuilder {
@@ -200,6 +319,11 @@ impl core::fmt::Debug for CafeInfoExcel<'_> {
       ds.field("IsDefault", &self.IsDefault());
       ds.field("OpenConditionCafeId", &self.OpenConditionCafeId());
       ds.field("OpenConditionCafeInvite", &self.OpenConditionCafeInvite());
+      ds.field("SummonParcelType", &self.SummonParcelType());
+      ds.field("SummonParcelId", &self.SummonParcelId());
+      ds.field("SummonParcelAmount", &self.SummonParcelAmount());
+      ds.field("CategoryType", &self.CategoryType());
+      ds.field("SummonTicketIconPath", &self.SummonTicketIconPath());
       ds.finish()
   }
 }
@@ -210,6 +334,11 @@ pub struct CafeInfoExcelT {
   pub IsDefault: bool,
   pub OpenConditionCafeId: OpenConditionContent,
   pub OpenConditionCafeInvite: OpenConditionContent,
+  pub SummonParcelType: ParcelType,
+  pub SummonParcelId: i64,
+  pub SummonParcelAmount: i64,
+  pub CategoryType: ShopCategoryType,
+  pub SummonTicketIconPath: Option<String>,
 }
 impl Default for CafeInfoExcelT {
   fn default() -> Self {
@@ -218,6 +347,11 @@ impl Default for CafeInfoExcelT {
       IsDefault: false,
       OpenConditionCafeId: OpenConditionContent::Shop,
       OpenConditionCafeInvite: OpenConditionContent::Shop,
+      SummonParcelType: ParcelType::None,
+      SummonParcelId: 0,
+      SummonParcelAmount: 0,
+      CategoryType: ShopCategoryType::General,
+      SummonTicketIconPath: None,
     }
   }
 }
@@ -230,11 +364,23 @@ impl CafeInfoExcelT {
     let IsDefault = self.IsDefault;
     let OpenConditionCafeId = self.OpenConditionCafeId;
     let OpenConditionCafeInvite = self.OpenConditionCafeInvite;
+    let SummonParcelType = self.SummonParcelType;
+    let SummonParcelId = self.SummonParcelId;
+    let SummonParcelAmount = self.SummonParcelAmount;
+    let CategoryType = self.CategoryType;
+    let SummonTicketIconPath = self.SummonTicketIconPath.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     CafeInfoExcel::create(_fbb, &CafeInfoExcelArgs{
       CafeId,
       IsDefault,
       OpenConditionCafeId,
       OpenConditionCafeInvite,
+      SummonParcelType,
+      SummonParcelId,
+      SummonParcelAmount,
+      CategoryType,
+      SummonTicketIconPath,
     })
   }
 }

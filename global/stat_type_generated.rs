@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_STAT_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_STAT_TYPE: i32 = 83;
+pub const ENUM_MAX_STAT_TYPE: i32 = 85;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_STAT_TYPE: [StatType; 84] = [
+pub const ENUM_VALUES_STAT_TYPE: [StatType; 86] = [
   StatType::None,
   StatType::MaxHP,
   StatType::AttackPower,
@@ -89,6 +89,8 @@ pub const ENUM_VALUES_STAT_TYPE: [StatType; 84] = [
   StatType::ExDamagedRatioDecrease,
   StatType::EnhanceExDamageRate,
   StatType::ReduceExDamagedRate,
+  StatType::EnhanceBasicsDamageRate,
+  StatType::ReduceBasicsDamagedRate,
   StatType::HealRate,
   StatType::HealLightArmorRate,
   StatType::HealHeavyArmorRate,
@@ -180,24 +182,26 @@ impl StatType {
   pub const ExDamagedRatioDecrease: Self = Self(66);
   pub const EnhanceExDamageRate: Self = Self(67);
   pub const ReduceExDamagedRate: Self = Self(68);
-  pub const HealRate: Self = Self(69);
-  pub const HealLightArmorRate: Self = Self(70);
-  pub const HealHeavyArmorRate: Self = Self(71);
-  pub const HealUnarmedRate: Self = Self(72);
-  pub const HealElasticArmorRate: Self = Self(73);
-  pub const HealNormalArmorRate: Self = Self(74);
-  pub const HealedExplosionRate: Self = Self(75);
-  pub const HealedPierceRate: Self = Self(76);
-  pub const HealedMysticRate: Self = Self(77);
-  pub const HealedSonicRate: Self = Self(78);
-  pub const HealedNormalRate: Self = Self(79);
-  pub const GrowthScore: Self = Self(80);
-  pub const CharacterBulletTypeEnhanceRate: Self = Self(81);
-  pub const MaxCostIncrease: Self = Self(82);
-  pub const Max: Self = Self(83);
+  pub const EnhanceBasicsDamageRate: Self = Self(69);
+  pub const ReduceBasicsDamagedRate: Self = Self(70);
+  pub const HealRate: Self = Self(71);
+  pub const HealLightArmorRate: Self = Self(72);
+  pub const HealHeavyArmorRate: Self = Self(73);
+  pub const HealUnarmedRate: Self = Self(74);
+  pub const HealElasticArmorRate: Self = Self(75);
+  pub const HealNormalArmorRate: Self = Self(76);
+  pub const HealedExplosionRate: Self = Self(77);
+  pub const HealedPierceRate: Self = Self(78);
+  pub const HealedMysticRate: Self = Self(79);
+  pub const HealedSonicRate: Self = Self(80);
+  pub const HealedNormalRate: Self = Self(81);
+  pub const GrowthScore: Self = Self(82);
+  pub const CharacterBulletTypeEnhanceRate: Self = Self(83);
+  pub const MaxCostIncrease: Self = Self(84);
+  pub const Max: Self = Self(85);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 83;
+  pub const ENUM_MAX: i32 = 85;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::MaxHP,
@@ -268,6 +272,8 @@ impl StatType {
     Self::ExDamagedRatioDecrease,
     Self::EnhanceExDamageRate,
     Self::ReduceExDamagedRate,
+    Self::EnhanceBasicsDamageRate,
+    Self::ReduceBasicsDamagedRate,
     Self::HealRate,
     Self::HealLightArmorRate,
     Self::HealHeavyArmorRate,
@@ -356,6 +362,8 @@ impl StatType {
       Self::ExDamagedRatioDecrease => Some("ExDamagedRatioDecrease"),
       Self::EnhanceExDamageRate => Some("EnhanceExDamageRate"),
       Self::ReduceExDamagedRate => Some("ReduceExDamagedRate"),
+      Self::EnhanceBasicsDamageRate => Some("EnhanceBasicsDamageRate"),
+      Self::ReduceBasicsDamagedRate => Some("ReduceBasicsDamagedRate"),
       Self::HealRate => Some("HealRate"),
       Self::HealLightArmorRate => Some("HealLightArmorRate"),
       Self::HealHeavyArmorRate => Some("HealHeavyArmorRate"),

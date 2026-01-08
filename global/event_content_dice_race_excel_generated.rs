@@ -34,7 +34,8 @@ impl<'a> EventContentDiceRaceExcel<'a> {
   pub const VT_SKIPABLELAP: flatbuffers::VOffsetT = 8;
   pub const VT_DICERACEPAWNPREFAB: flatbuffers::VOffsetT = 10;
   pub const VT_ISUSINGFIXEDDICE: flatbuffers::VOffsetT = 12;
-  pub const VT_DICERACEEVENTTYPE: flatbuffers::VOffsetT = 14;
+  pub const VT_FIXEDDICEICON: flatbuffers::VOffsetT = 14;
+  pub const VT_DICERACEEVENTTYPE: flatbuffers::VOffsetT = 16;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -53,8 +54,11 @@ impl<'a> EventContentDiceRaceExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.diceRaceEventType {
-        builder.add_diceRaceEventType(x);
+      if let Some(x) = args.DiceRaceEventType {
+        builder.add_DiceRaceEventType(x);
+      }
+      if let Some(x) = args.FixedDiceIcon {
+        builder.add_FixedDiceIcon(x);
       }
       if let Some(x) = args.DiceRacePawnPrefab {
         builder.add_DiceRacePawnPrefab(x);
@@ -75,7 +79,10 @@ impl<'a> EventContentDiceRaceExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let IsUsingFixedDice = self.IsUsingFixedDice();
-    let diceRaceEventType = self.diceRaceEventType().map(|x| {
+    let FixedDiceIcon = self.FixedDiceIcon().map(|x| {
+      x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
+    });
+    let DiceRaceEventType = self.DiceRaceEventType().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     EventContentDiceRaceExcelT {
@@ -84,7 +91,8 @@ impl<'a> EventContentDiceRaceExcel<'a> {
       SkipableLap,
       DiceRacePawnPrefab,
       IsUsingFixedDice,
-      diceRaceEventType,
+      FixedDiceIcon,
+      DiceRaceEventType,
     }
   }
 
@@ -124,7 +132,14 @@ impl<'a> EventContentDiceRaceExcel<'a> {
     unsafe { self._tab.get::<bool>(EventContentDiceRaceExcel::VT_ISUSINGFIXEDDICE, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn diceRaceEventType(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn FixedDiceIcon(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(EventContentDiceRaceExcel::VT_FIXEDDICEICON, None)}
+  }
+  #[inline]
+  pub fn DiceRaceEventType(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -144,7 +159,8 @@ impl flatbuffers::Verifiable for EventContentDiceRaceExcel<'_> {
      .visit_field::<i32>("SkipableLap", Self::VT_SKIPABLELAP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("DiceRacePawnPrefab", Self::VT_DICERACEPAWNPREFAB, false)?
      .visit_field::<bool>("IsUsingFixedDice", Self::VT_ISUSINGFIXEDDICE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("diceRaceEventType", Self::VT_DICERACEEVENTTYPE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("FixedDiceIcon", Self::VT_FIXEDDICEICON, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("DiceRaceEventType", Self::VT_DICERACEEVENTTYPE, false)?
      .finish();
     Ok(())
   }
@@ -155,7 +171,8 @@ pub struct EventContentDiceRaceExcelArgs<'a> {
     pub SkipableLap: i32,
     pub DiceRacePawnPrefab: Option<flatbuffers::WIPOffset<&'a str>>,
     pub IsUsingFixedDice: bool,
-    pub diceRaceEventType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub FixedDiceIcon: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub DiceRaceEventType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
 }
 impl<'a> Default for EventContentDiceRaceExcelArgs<'a> {
   #[inline]
@@ -166,7 +183,8 @@ impl<'a> Default for EventContentDiceRaceExcelArgs<'a> {
       SkipableLap: 0,
       DiceRacePawnPrefab: None,
       IsUsingFixedDice: false,
-      diceRaceEventType: None,
+      FixedDiceIcon: None,
+      DiceRaceEventType: None,
     }
   }
 }
@@ -176,7 +194,7 @@ impl Serialize for EventContentDiceRaceExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EventContentDiceRaceExcel", 6)?;
+    let mut s = serializer.serialize_struct("EventContentDiceRaceExcel", 7)?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("DiceCostGoodsId", &self.DiceCostGoodsId())?;
       s.serialize_field("SkipableLap", &self.SkipableLap())?;
@@ -186,10 +204,15 @@ impl Serialize for EventContentDiceRaceExcel<'_> {
         s.skip_field("DiceRacePawnPrefab")?;
       }
       s.serialize_field("IsUsingFixedDice", &self.IsUsingFixedDice())?;
-      if let Some(f) = self.diceRaceEventType() {
-        s.serialize_field("diceRaceEventType", &f)?;
+      if let Some(f) = self.FixedDiceIcon() {
+        s.serialize_field("FixedDiceIcon", &f)?;
       } else {
-        s.skip_field("diceRaceEventType")?;
+        s.skip_field("FixedDiceIcon")?;
+      }
+      if let Some(f) = self.DiceRaceEventType() {
+        s.serialize_field("DiceRaceEventType", &f)?;
+      } else {
+        s.skip_field("DiceRaceEventType")?;
       }
     s.end()
   }
@@ -221,8 +244,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentDiceRaceExcelBuilde
     self.fbb_.push_slot::<bool>(EventContentDiceRaceExcel::VT_ISUSINGFIXEDDICE, IsUsingFixedDice, false);
   }
   #[inline]
-  pub fn add_diceRaceEventType(&mut self, diceRaceEventType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceExcel::VT_DICERACEEVENTTYPE, diceRaceEventType);
+  pub fn add_FixedDiceIcon(&mut self, FixedDiceIcon: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceExcel::VT_FIXEDDICEICON, FixedDiceIcon);
+  }
+  #[inline]
+  pub fn add_DiceRaceEventType(&mut self, DiceRaceEventType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentDiceRaceExcel::VT_DICERACEEVENTTYPE, DiceRaceEventType);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentDiceRaceExcelBuilder<'a, 'b, A> {
@@ -247,7 +274,8 @@ impl core::fmt::Debug for EventContentDiceRaceExcel<'_> {
       ds.field("SkipableLap", &self.SkipableLap());
       ds.field("DiceRacePawnPrefab", &self.DiceRacePawnPrefab());
       ds.field("IsUsingFixedDice", &self.IsUsingFixedDice());
-      ds.field("diceRaceEventType", &self.diceRaceEventType());
+      ds.field("FixedDiceIcon", &self.FixedDiceIcon());
+      ds.field("DiceRaceEventType", &self.DiceRaceEventType());
       ds.finish()
   }
 }
@@ -259,7 +287,8 @@ pub struct EventContentDiceRaceExcelT {
   pub SkipableLap: i32,
   pub DiceRacePawnPrefab: Option<String>,
   pub IsUsingFixedDice: bool,
-  pub diceRaceEventType: Option<Vec<String>>,
+  pub FixedDiceIcon: Option<Vec<String>>,
+  pub DiceRaceEventType: Option<Vec<String>>,
 }
 impl Default for EventContentDiceRaceExcelT {
   fn default() -> Self {
@@ -269,7 +298,8 @@ impl Default for EventContentDiceRaceExcelT {
       SkipableLap: 0,
       DiceRacePawnPrefab: None,
       IsUsingFixedDice: false,
-      diceRaceEventType: None,
+      FixedDiceIcon: None,
+      DiceRaceEventType: None,
     }
   }
 }
@@ -285,7 +315,10 @@ impl EventContentDiceRaceExcelT {
       _fbb.create_string(x)
     });
     let IsUsingFixedDice = self.IsUsingFixedDice;
-    let diceRaceEventType = self.diceRaceEventType.as_ref().map(|x|{
+    let FixedDiceIcon = self.FixedDiceIcon.as_ref().map(|x|{
+      let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
+    });
+    let DiceRaceEventType = self.DiceRaceEventType.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     EventContentDiceRaceExcel::create(_fbb, &EventContentDiceRaceExcelArgs{
@@ -294,7 +327,8 @@ impl EventContentDiceRaceExcelT {
       SkipableLap,
       DiceRacePawnPrefab,
       IsUsingFixedDice,
-      diceRaceEventType,
+      FixedDiceIcon,
+      DiceRaceEventType,
     })
   }
 }

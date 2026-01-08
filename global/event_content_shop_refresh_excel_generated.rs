@@ -39,6 +39,7 @@ impl<'a> EventContentShopRefreshExcel<'a> {
   pub const VT_REFRESHGROUP: flatbuffers::VOffsetT = 18;
   pub const VT_PROB: flatbuffers::VOffsetT = 20;
   pub const VT_BUYREPORTEVENTNAME: flatbuffers::VOffsetT = 22;
+  pub const VT_PRODUCTUPDATETIME: flatbuffers::VOffsetT = 24;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -63,6 +64,9 @@ impl<'a> EventContentShopRefreshExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
+      if let Some(x) = args.ProductUpdateTime {
+        builder.add_ProductUpdateTime(x);
+      }
       if let Some(x) = args.BuyReportEventName {
         builder.add_BuyReportEventName(x);
       }
@@ -100,6 +104,9 @@ impl<'a> EventContentShopRefreshExcel<'a> {
     let BuyReportEventName = self.BuyReportEventName().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+    let ProductUpdateTime = self.ProductUpdateTime().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
     EventContentShopRefreshExcelT {
       EventContentId,
       Id,
@@ -111,6 +118,7 @@ impl<'a> EventContentShopRefreshExcel<'a> {
       RefreshGroup,
       Prob,
       BuyReportEventName,
+      ProductUpdateTime,
     }
   }
 
@@ -184,6 +192,13 @@ impl<'a> EventContentShopRefreshExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentShopRefreshExcel::VT_BUYREPORTEVENTNAME, None)}
   }
+  #[inline]
+  pub fn ProductUpdateTime(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentShopRefreshExcel::VT_PRODUCTUPDATETIME, None)}
+  }
 }
 
 impl flatbuffers::Verifiable for EventContentShopRefreshExcel<'_> {
@@ -203,6 +218,7 @@ impl flatbuffers::Verifiable for EventContentShopRefreshExcel<'_> {
      .visit_field::<i32>("RefreshGroup", Self::VT_REFRESHGROUP, false)?
      .visit_field::<i32>("Prob", Self::VT_PROB, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BuyReportEventName", Self::VT_BUYREPORTEVENTNAME, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ProductUpdateTime", Self::VT_PRODUCTUPDATETIME, false)?
      .finish();
     Ok(())
   }
@@ -218,6 +234,7 @@ pub struct EventContentShopRefreshExcelArgs<'a> {
     pub RefreshGroup: i32,
     pub Prob: i32,
     pub BuyReportEventName: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub ProductUpdateTime: Option<flatbuffers::WIPOffset<&'a str>>,
 }
 impl<'a> Default for EventContentShopRefreshExcelArgs<'a> {
   #[inline]
@@ -233,6 +250,7 @@ impl<'a> Default for EventContentShopRefreshExcelArgs<'a> {
       RefreshGroup: 0,
       Prob: 0,
       BuyReportEventName: None,
+      ProductUpdateTime: None,
     }
   }
 }
@@ -242,7 +260,7 @@ impl Serialize for EventContentShopRefreshExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EventContentShopRefreshExcel", 10)?;
+    let mut s = serializer.serialize_struct("EventContentShopRefreshExcel", 11)?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
@@ -256,6 +274,11 @@ impl Serialize for EventContentShopRefreshExcel<'_> {
         s.serialize_field("BuyReportEventName", &f)?;
       } else {
         s.skip_field("BuyReportEventName")?;
+      }
+      if let Some(f) = self.ProductUpdateTime() {
+        s.serialize_field("ProductUpdateTime", &f)?;
+      } else {
+        s.skip_field("ProductUpdateTime")?;
       }
     s.end()
   }
@@ -307,6 +330,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentShopRefreshExcelBui
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopRefreshExcel::VT_BUYREPORTEVENTNAME, BuyReportEventName);
   }
   #[inline]
+  pub fn add_ProductUpdateTime(&mut self, ProductUpdateTime: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentShopRefreshExcel::VT_PRODUCTUPDATETIME, ProductUpdateTime);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentShopRefreshExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     EventContentShopRefreshExcelBuilder {
@@ -334,6 +361,7 @@ impl core::fmt::Debug for EventContentShopRefreshExcel<'_> {
       ds.field("RefreshGroup", &self.RefreshGroup());
       ds.field("Prob", &self.Prob());
       ds.field("BuyReportEventName", &self.BuyReportEventName());
+      ds.field("ProductUpdateTime", &self.ProductUpdateTime());
       ds.finish()
   }
 }
@@ -350,6 +378,7 @@ pub struct EventContentShopRefreshExcelT {
   pub RefreshGroup: i32,
   pub Prob: i32,
   pub BuyReportEventName: Option<String>,
+  pub ProductUpdateTime: Option<String>,
 }
 impl Default for EventContentShopRefreshExcelT {
   fn default() -> Self {
@@ -364,6 +393,7 @@ impl Default for EventContentShopRefreshExcelT {
       RefreshGroup: 0,
       Prob: 0,
       BuyReportEventName: None,
+      ProductUpdateTime: None,
     }
   }
 }
@@ -384,6 +414,9 @@ impl EventContentShopRefreshExcelT {
     let BuyReportEventName = self.BuyReportEventName.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let ProductUpdateTime = self.ProductUpdateTime.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     EventContentShopRefreshExcel::create(_fbb, &EventContentShopRefreshExcelArgs{
       EventContentId,
       Id,
@@ -395,6 +428,7 @@ impl EventContentShopRefreshExcelT {
       RefreshGroup,
       Prob,
       BuyReportEventName,
+      ProductUpdateTime,
     })
   }
 }

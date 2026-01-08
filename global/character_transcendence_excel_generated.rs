@@ -54,32 +54,32 @@ impl<'a> CharacterTranscendenceExcel<'a> {
       let x = args.CharacterId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_CharacterId(x);
-      if let Some(x) = args.maxlevelStar {
-        builder.add_maxlevelStar(x);
+      if let Some(x) = args.MaxlevelStar {
+        builder.add_MaxlevelStar(x);
       }
-      if let Some(x) = args.skillSlotC {
-        builder.add_skillSlotC(x);
+      if let Some(x) = args.SkillSlotC {
+        builder.add_SkillSlotC(x);
       }
-      if let Some(x) = args.skillSlotB {
-        builder.add_skillSlotB(x);
+      if let Some(x) = args.SkillSlotB {
+        builder.add_SkillSlotB(x);
       }
-      if let Some(x) = args.skillSlotA {
-        builder.add_skillSlotA(x);
+      if let Some(x) = args.SkillSlotA {
+        builder.add_SkillSlotA(x);
       }
-      if let Some(x) = args.recipeId {
-        builder.add_recipeId(x);
+      if let Some(x) = args.RecipeId {
+        builder.add_RecipeId(x);
       }
-      if let Some(x) = args.statBonusRateHeal {
-        builder.add_statBonusRateHeal(x);
+      if let Some(x) = args.StatBonusRateHeal {
+        builder.add_StatBonusRateHeal(x);
       }
-      if let Some(x) = args.statBonusRateHP {
-        builder.add_statBonusRateHP(x);
+      if let Some(x) = args.StatBonusRateHP {
+        builder.add_StatBonusRateHP(x);
       }
-      if let Some(x) = args.statBonusRateAttack {
-        builder.add_statBonusRateAttack(x);
+      if let Some(x) = args.StatBonusRateAttack {
+        builder.add_StatBonusRateAttack(x);
       }
-      if let Some(x) = args.maxFavorLevel {
-        builder.add_maxFavorLevel(x);
+      if let Some(x) = args.MaxFavorLevel {
+        builder.add_MaxFavorLevel(x);
       }
     builder.finish()
   }
@@ -87,44 +87,44 @@ impl<'a> CharacterTranscendenceExcel<'a> {
   pub fn unpack(&self) -> CharacterTranscendenceExcelT {
     let key = table_encryption_service::create_key(b"CharacterTranscendence");
       let CharacterId = self.CharacterId();
-    let maxFavorLevel = self.maxFavorLevel().map(|x| {
+    let MaxFavorLevel = self.MaxFavorLevel().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
-    let statBonusRateAttack = self.statBonusRateAttack().map(|x| {
+    let StatBonusRateAttack = self.StatBonusRateAttack().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let statBonusRateHP = self.statBonusRateHP().map(|x| {
+    let StatBonusRateHP = self.StatBonusRateHP().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let statBonusRateHeal = self.statBonusRateHeal().map(|x| {
+    let StatBonusRateHeal = self.StatBonusRateHeal().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let recipeId = self.recipeId().map(|x| {
+    let RecipeId = self.RecipeId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let skillSlotA = self.skillSlotA().map(|x| {
+    let SkillSlotA = self.SkillSlotA().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let skillSlotB = self.skillSlotB().map(|x| {
+    let SkillSlotB = self.SkillSlotB().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let skillSlotC = self.skillSlotC().map(|x| {
+    let SkillSlotC = self.SkillSlotC().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let maxlevelStar = self.maxlevelStar().map(|x| {
+    let MaxlevelStar = self.MaxlevelStar().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_int(*val, &key) } else { *val }).collect()
     });
     CharacterTranscendenceExcelT {
       CharacterId,
-      maxFavorLevel,
-      statBonusRateAttack,
-      statBonusRateHP,
-      statBonusRateHeal,
-      recipeId,
-      skillSlotA,
-      skillSlotB,
-      skillSlotC,
-      maxlevelStar,
+      MaxFavorLevel,
+      StatBonusRateAttack,
+      StatBonusRateHP,
+      StatBonusRateHeal,
+      RecipeId,
+      SkillSlotA,
+      SkillSlotB,
+      SkillSlotC,
+      MaxlevelStar,
     }
   }
 
@@ -136,63 +136,63 @@ impl<'a> CharacterTranscendenceExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterTranscendenceExcel::VT_CHARACTERID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn maxFavorLevel(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn MaxFavorLevel(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i32>>>(CharacterTranscendenceExcel::VT_MAXFAVORLEVEL, None)}
   }
   #[inline]
-  pub fn statBonusRateAttack(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn StatBonusRateAttack(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CharacterTranscendenceExcel::VT_STATBONUSRATEATTACK, None)}
   }
   #[inline]
-  pub fn statBonusRateHP(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn StatBonusRateHP(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CharacterTranscendenceExcel::VT_STATBONUSRATEHP, None)}
   }
   #[inline]
-  pub fn statBonusRateHeal(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn StatBonusRateHeal(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CharacterTranscendenceExcel::VT_STATBONUSRATEHEAL, None)}
   }
   #[inline]
-  pub fn recipeId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn RecipeId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CharacterTranscendenceExcel::VT_RECIPEID, None)}
   }
   #[inline]
-  pub fn skillSlotA(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn SkillSlotA(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(CharacterTranscendenceExcel::VT_SKILLSLOTA, None)}
   }
   #[inline]
-  pub fn skillSlotB(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn SkillSlotB(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(CharacterTranscendenceExcel::VT_SKILLSLOTB, None)}
   }
   #[inline]
-  pub fn skillSlotC(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
+  pub fn SkillSlotC(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(CharacterTranscendenceExcel::VT_SKILLSLOTC, None)}
   }
   #[inline]
-  pub fn maxlevelStar(&self) -> Option<flatbuffers::Vector<'a, i32>> {
+  pub fn MaxlevelStar(&self) -> Option<flatbuffers::Vector<'a, i32>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -208,45 +208,45 @@ impl flatbuffers::Verifiable for CharacterTranscendenceExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("CharacterId", Self::VT_CHARACTERID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("maxFavorLevel", Self::VT_MAXFAVORLEVEL, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("statBonusRateAttack", Self::VT_STATBONUSRATEATTACK, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("statBonusRateHP", Self::VT_STATBONUSRATEHP, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("statBonusRateHeal", Self::VT_STATBONUSRATEHEAL, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("recipeId", Self::VT_RECIPEID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("skillSlotA", Self::VT_SKILLSLOTA, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("skillSlotB", Self::VT_SKILLSLOTB, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("skillSlotC", Self::VT_SKILLSLOTC, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("maxlevelStar", Self::VT_MAXLEVELSTAR, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("MaxFavorLevel", Self::VT_MAXFAVORLEVEL, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StatBonusRateAttack", Self::VT_STATBONUSRATEATTACK, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StatBonusRateHP", Self::VT_STATBONUSRATEHP, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StatBonusRateHeal", Self::VT_STATBONUSRATEHEAL, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RecipeId", Self::VT_RECIPEID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("SkillSlotA", Self::VT_SKILLSLOTA, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("SkillSlotB", Self::VT_SKILLSLOTB, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("SkillSlotC", Self::VT_SKILLSLOTC, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("MaxlevelStar", Self::VT_MAXLEVELSTAR, false)?
      .finish();
     Ok(())
   }
 }
 pub struct CharacterTranscendenceExcelArgs<'a> {
     pub CharacterId: i64,
-    pub maxFavorLevel: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
-    pub statBonusRateAttack: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub statBonusRateHP: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub statBonusRateHeal: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub recipeId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub skillSlotA: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub skillSlotB: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub skillSlotC: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
-    pub maxlevelStar: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub MaxFavorLevel: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
+    pub StatBonusRateAttack: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub StatBonusRateHP: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub StatBonusRateHeal: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub RecipeId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub SkillSlotA: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub SkillSlotB: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub SkillSlotC: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub MaxlevelStar: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
 }
 impl<'a> Default for CharacterTranscendenceExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     CharacterTranscendenceExcelArgs {
       CharacterId: 0,
-      maxFavorLevel: None,
-      statBonusRateAttack: None,
-      statBonusRateHP: None,
-      statBonusRateHeal: None,
-      recipeId: None,
-      skillSlotA: None,
-      skillSlotB: None,
-      skillSlotC: None,
-      maxlevelStar: None,
+      MaxFavorLevel: None,
+      StatBonusRateAttack: None,
+      StatBonusRateHP: None,
+      StatBonusRateHeal: None,
+      RecipeId: None,
+      SkillSlotA: None,
+      SkillSlotB: None,
+      SkillSlotC: None,
+      MaxlevelStar: None,
     }
   }
 }
@@ -258,50 +258,50 @@ impl Serialize for CharacterTranscendenceExcel<'_> {
   {
     let mut s = serializer.serialize_struct("CharacterTranscendenceExcel", 10)?;
       s.serialize_field("CharacterId", &self.CharacterId())?;
-      if let Some(f) = self.maxFavorLevel() {
-        s.serialize_field("maxFavorLevel", &f)?;
+      if let Some(f) = self.MaxFavorLevel() {
+        s.serialize_field("MaxFavorLevel", &f)?;
       } else {
-        s.skip_field("maxFavorLevel")?;
+        s.skip_field("MaxFavorLevel")?;
       }
-      if let Some(f) = self.statBonusRateAttack() {
-        s.serialize_field("statBonusRateAttack", &f)?;
+      if let Some(f) = self.StatBonusRateAttack() {
+        s.serialize_field("StatBonusRateAttack", &f)?;
       } else {
-        s.skip_field("statBonusRateAttack")?;
+        s.skip_field("StatBonusRateAttack")?;
       }
-      if let Some(f) = self.statBonusRateHP() {
-        s.serialize_field("statBonusRateHP", &f)?;
+      if let Some(f) = self.StatBonusRateHP() {
+        s.serialize_field("StatBonusRateHP", &f)?;
       } else {
-        s.skip_field("statBonusRateHP")?;
+        s.skip_field("StatBonusRateHP")?;
       }
-      if let Some(f) = self.statBonusRateHeal() {
-        s.serialize_field("statBonusRateHeal", &f)?;
+      if let Some(f) = self.StatBonusRateHeal() {
+        s.serialize_field("StatBonusRateHeal", &f)?;
       } else {
-        s.skip_field("statBonusRateHeal")?;
+        s.skip_field("StatBonusRateHeal")?;
       }
-      if let Some(f) = self.recipeId() {
-        s.serialize_field("recipeId", &f)?;
+      if let Some(f) = self.RecipeId() {
+        s.serialize_field("RecipeId", &f)?;
       } else {
-        s.skip_field("recipeId")?;
+        s.skip_field("RecipeId")?;
       }
-      if let Some(f) = self.skillSlotA() {
-        s.serialize_field("skillSlotA", &f)?;
+      if let Some(f) = self.SkillSlotA() {
+        s.serialize_field("SkillSlotA", &f)?;
       } else {
-        s.skip_field("skillSlotA")?;
+        s.skip_field("SkillSlotA")?;
       }
-      if let Some(f) = self.skillSlotB() {
-        s.serialize_field("skillSlotB", &f)?;
+      if let Some(f) = self.SkillSlotB() {
+        s.serialize_field("SkillSlotB", &f)?;
       } else {
-        s.skip_field("skillSlotB")?;
+        s.skip_field("SkillSlotB")?;
       }
-      if let Some(f) = self.skillSlotC() {
-        s.serialize_field("skillSlotC", &f)?;
+      if let Some(f) = self.SkillSlotC() {
+        s.serialize_field("SkillSlotC", &f)?;
       } else {
-        s.skip_field("skillSlotC")?;
+        s.skip_field("SkillSlotC")?;
       }
-      if let Some(f) = self.maxlevelStar() {
-        s.serialize_field("maxlevelStar", &f)?;
+      if let Some(f) = self.MaxlevelStar() {
+        s.serialize_field("MaxlevelStar", &f)?;
       } else {
-        s.skip_field("maxlevelStar")?;
+        s.skip_field("MaxlevelStar")?;
       }
     s.end()
   }
@@ -317,40 +317,40 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterTranscendenceExcelBuil
     self.fbb_.push_slot::<i64>(CharacterTranscendenceExcel::VT_CHARACTERID, CharacterId, 0);
   }
   #[inline]
-  pub fn add_maxFavorLevel(&mut self, maxFavorLevel: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_MAXFAVORLEVEL, maxFavorLevel);
+  pub fn add_MaxFavorLevel(&mut self, MaxFavorLevel: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_MAXFAVORLEVEL, MaxFavorLevel);
   }
   #[inline]
-  pub fn add_statBonusRateAttack(&mut self, statBonusRateAttack: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_STATBONUSRATEATTACK, statBonusRateAttack);
+  pub fn add_StatBonusRateAttack(&mut self, StatBonusRateAttack: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_STATBONUSRATEATTACK, StatBonusRateAttack);
   }
   #[inline]
-  pub fn add_statBonusRateHP(&mut self, statBonusRateHP: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_STATBONUSRATEHP, statBonusRateHP);
+  pub fn add_StatBonusRateHP(&mut self, StatBonusRateHP: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_STATBONUSRATEHP, StatBonusRateHP);
   }
   #[inline]
-  pub fn add_statBonusRateHeal(&mut self, statBonusRateHeal: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_STATBONUSRATEHEAL, statBonusRateHeal);
+  pub fn add_StatBonusRateHeal(&mut self, StatBonusRateHeal: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_STATBONUSRATEHEAL, StatBonusRateHeal);
   }
   #[inline]
-  pub fn add_recipeId(&mut self, recipeId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_RECIPEID, recipeId);
+  pub fn add_RecipeId(&mut self, RecipeId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_RECIPEID, RecipeId);
   }
   #[inline]
-  pub fn add_skillSlotA(&mut self, skillSlotA: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_SKILLSLOTA, skillSlotA);
+  pub fn add_SkillSlotA(&mut self, SkillSlotA: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_SKILLSLOTA, SkillSlotA);
   }
   #[inline]
-  pub fn add_skillSlotB(&mut self, skillSlotB: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_SKILLSLOTB, skillSlotB);
+  pub fn add_SkillSlotB(&mut self, SkillSlotB: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_SKILLSLOTB, SkillSlotB);
   }
   #[inline]
-  pub fn add_skillSlotC(&mut self, skillSlotC: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_SKILLSLOTC, skillSlotC);
+  pub fn add_SkillSlotC(&mut self, SkillSlotC: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_SKILLSLOTC, SkillSlotC);
   }
   #[inline]
-  pub fn add_maxlevelStar(&mut self, maxlevelStar: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_MAXLEVELSTAR, maxlevelStar);
+  pub fn add_MaxlevelStar(&mut self, MaxlevelStar: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i32>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterTranscendenceExcel::VT_MAXLEVELSTAR, MaxlevelStar);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> CharacterTranscendenceExcelBuilder<'a, 'b, A> {
@@ -371,15 +371,15 @@ impl core::fmt::Debug for CharacterTranscendenceExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("CharacterTranscendenceExcel");
       ds.field("CharacterId", &self.CharacterId());
-      ds.field("maxFavorLevel", &self.maxFavorLevel());
-      ds.field("statBonusRateAttack", &self.statBonusRateAttack());
-      ds.field("statBonusRateHP", &self.statBonusRateHP());
-      ds.field("statBonusRateHeal", &self.statBonusRateHeal());
-      ds.field("recipeId", &self.recipeId());
-      ds.field("skillSlotA", &self.skillSlotA());
-      ds.field("skillSlotB", &self.skillSlotB());
-      ds.field("skillSlotC", &self.skillSlotC());
-      ds.field("maxlevelStar", &self.maxlevelStar());
+      ds.field("MaxFavorLevel", &self.MaxFavorLevel());
+      ds.field("StatBonusRateAttack", &self.StatBonusRateAttack());
+      ds.field("StatBonusRateHP", &self.StatBonusRateHP());
+      ds.field("StatBonusRateHeal", &self.StatBonusRateHeal());
+      ds.field("RecipeId", &self.RecipeId());
+      ds.field("SkillSlotA", &self.SkillSlotA());
+      ds.field("SkillSlotB", &self.SkillSlotB());
+      ds.field("SkillSlotC", &self.SkillSlotC());
+      ds.field("MaxlevelStar", &self.MaxlevelStar());
       ds.finish()
   }
 }
@@ -387,29 +387,29 @@ impl core::fmt::Debug for CharacterTranscendenceExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct CharacterTranscendenceExcelT {
   pub CharacterId: i64,
-  pub maxFavorLevel: Option<Vec<i32>>,
-  pub statBonusRateAttack: Option<Vec<i64>>,
-  pub statBonusRateHP: Option<Vec<i64>>,
-  pub statBonusRateHeal: Option<Vec<i64>>,
-  pub recipeId: Option<Vec<i64>>,
-  pub skillSlotA: Option<Vec<String>>,
-  pub skillSlotB: Option<Vec<String>>,
-  pub skillSlotC: Option<Vec<String>>,
-  pub maxlevelStar: Option<Vec<i32>>,
+  pub MaxFavorLevel: Option<Vec<i32>>,
+  pub StatBonusRateAttack: Option<Vec<i64>>,
+  pub StatBonusRateHP: Option<Vec<i64>>,
+  pub StatBonusRateHeal: Option<Vec<i64>>,
+  pub RecipeId: Option<Vec<i64>>,
+  pub SkillSlotA: Option<Vec<String>>,
+  pub SkillSlotB: Option<Vec<String>>,
+  pub SkillSlotC: Option<Vec<String>>,
+  pub MaxlevelStar: Option<Vec<i32>>,
 }
 impl Default for CharacterTranscendenceExcelT {
   fn default() -> Self {
     Self {
       CharacterId: 0,
-      maxFavorLevel: None,
-      statBonusRateAttack: None,
-      statBonusRateHP: None,
-      statBonusRateHeal: None,
-      recipeId: None,
-      skillSlotA: None,
-      skillSlotB: None,
-      skillSlotC: None,
-      maxlevelStar: None,
+      MaxFavorLevel: None,
+      StatBonusRateAttack: None,
+      StatBonusRateHP: None,
+      StatBonusRateHeal: None,
+      RecipeId: None,
+      SkillSlotA: None,
+      SkillSlotB: None,
+      SkillSlotC: None,
+      MaxlevelStar: None,
     }
   }
 }
@@ -419,44 +419,44 @@ impl CharacterTranscendenceExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<CharacterTranscendenceExcel<'b>> {
     let CharacterId = self.CharacterId;
-    let maxFavorLevel = self.maxFavorLevel.as_ref().map(|x|{
+    let MaxFavorLevel = self.MaxFavorLevel.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let statBonusRateAttack = self.statBonusRateAttack.as_ref().map(|x|{
+    let StatBonusRateAttack = self.StatBonusRateAttack.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let statBonusRateHP = self.statBonusRateHP.as_ref().map(|x|{
+    let StatBonusRateHP = self.StatBonusRateHP.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let statBonusRateHeal = self.statBonusRateHeal.as_ref().map(|x|{
+    let StatBonusRateHeal = self.StatBonusRateHeal.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let recipeId = self.recipeId.as_ref().map(|x|{
+    let RecipeId = self.RecipeId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let skillSlotA = self.skillSlotA.as_ref().map(|x|{
+    let SkillSlotA = self.SkillSlotA.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let skillSlotB = self.skillSlotB.as_ref().map(|x|{
+    let SkillSlotB = self.SkillSlotB.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let skillSlotC = self.skillSlotC.as_ref().map(|x|{
+    let SkillSlotC = self.SkillSlotC.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let maxlevelStar = self.maxlevelStar.as_ref().map(|x|{
+    let MaxlevelStar = self.MaxlevelStar.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     CharacterTranscendenceExcel::create(_fbb, &CharacterTranscendenceExcelArgs{
       CharacterId,
-      maxFavorLevel,
-      statBonusRateAttack,
-      statBonusRateHP,
-      statBonusRateHeal,
-      recipeId,
-      skillSlotA,
-      skillSlotB,
-      skillSlotC,
-      maxlevelStar,
+      MaxFavorLevel,
+      StatBonusRateAttack,
+      StatBonusRateHP,
+      StatBonusRateHeal,
+      RecipeId,
+      SkillSlotA,
+      SkillSlotB,
+      SkillSlotC,
+      MaxlevelStar,
     })
   }
 }
