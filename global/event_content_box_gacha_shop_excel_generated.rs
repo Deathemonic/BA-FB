@@ -64,8 +64,8 @@ impl<'a> EventContentBoxGachaShopExcel<'a> {
       let x = args.EventContentId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EventContentId(x);
-      if let Some(x) = args.goodsId {
-        builder.add_goodsId(x);
+      if let Some(x) = args.GoodsId {
+        builder.add_GoodsId(x);
       }
       builder.add_IsPrize(args.IsPrize);
       builder.add_IsLegacy(args.IsLegacy);
@@ -80,7 +80,7 @@ impl<'a> EventContentBoxGachaShopExcel<'a> {
       let Round = self.Round();
       let IsLegacy = self.IsLegacy();
       let IsPrize = self.IsPrize();
-    let goodsId = self.goodsId().map(|x| {
+    let GoodsId = self.GoodsId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
       let DisplayOrder = self.DisplayOrder();
@@ -91,7 +91,7 @@ impl<'a> EventContentBoxGachaShopExcel<'a> {
       Round,
       IsLegacy,
       IsPrize,
-      goodsId,
+      GoodsId,
       DisplayOrder,
     }
   }
@@ -139,7 +139,7 @@ impl<'a> EventContentBoxGachaShopExcel<'a> {
     unsafe { self._tab.get::<bool>(EventContentBoxGachaShopExcel::VT_ISPRIZE, Some(false)).unwrap()}
   }
   #[inline]
-  pub fn goodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn GoodsId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -167,7 +167,7 @@ impl flatbuffers::Verifiable for EventContentBoxGachaShopExcel<'_> {
      .visit_field::<i64>("Round", Self::VT_ROUND, false)?
      .visit_field::<bool>("IsLegacy", Self::VT_ISLEGACY, false)?
      .visit_field::<bool>("IsPrize", Self::VT_ISPRIZE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("goodsId", Self::VT_GOODSID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("GoodsId", Self::VT_GOODSID, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .finish();
     Ok(())
@@ -180,7 +180,7 @@ pub struct EventContentBoxGachaShopExcelArgs<'a> {
     pub Round: i64,
     pub IsLegacy: bool,
     pub IsPrize: bool,
-    pub goodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub GoodsId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
     pub DisplayOrder: i64,
 }
 impl<'a> Default for EventContentBoxGachaShopExcelArgs<'a> {
@@ -193,7 +193,7 @@ impl<'a> Default for EventContentBoxGachaShopExcelArgs<'a> {
       Round: 0,
       IsLegacy: false,
       IsPrize: false,
-      goodsId: None,
+      GoodsId: None,
       DisplayOrder: 0,
     }
   }
@@ -211,10 +211,10 @@ impl Serialize for EventContentBoxGachaShopExcel<'_> {
       s.serialize_field("Round", &self.Round())?;
       s.serialize_field("IsLegacy", &self.IsLegacy())?;
       s.serialize_field("IsPrize", &self.IsPrize())?;
-      if let Some(f) = self.goodsId() {
-        s.serialize_field("goodsId", &f)?;
+      if let Some(f) = self.GoodsId() {
+        s.serialize_field("GoodsId", &f)?;
       } else {
-        s.skip_field("goodsId")?;
+        s.skip_field("GoodsId")?;
       }
       s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
     s.end()
@@ -251,8 +251,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentBoxGachaShopExcelBu
     self.fbb_.push_slot::<bool>(EventContentBoxGachaShopExcel::VT_ISPRIZE, IsPrize, false);
   }
   #[inline]
-  pub fn add_goodsId(&mut self, goodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentBoxGachaShopExcel::VT_GOODSID, goodsId);
+  pub fn add_GoodsId(&mut self, GoodsId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentBoxGachaShopExcel::VT_GOODSID, GoodsId);
   }
   #[inline]
   pub fn add_DisplayOrder(&mut self, DisplayOrder: i64) {
@@ -282,7 +282,7 @@ impl core::fmt::Debug for EventContentBoxGachaShopExcel<'_> {
       ds.field("Round", &self.Round());
       ds.field("IsLegacy", &self.IsLegacy());
       ds.field("IsPrize", &self.IsPrize());
-      ds.field("goodsId", &self.goodsId());
+      ds.field("GoodsId", &self.GoodsId());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.finish()
   }
@@ -296,7 +296,7 @@ pub struct EventContentBoxGachaShopExcelT {
   pub Round: i64,
   pub IsLegacy: bool,
   pub IsPrize: bool,
-  pub goodsId: Option<Vec<i64>>,
+  pub GoodsId: Option<Vec<i64>>,
   pub DisplayOrder: i64,
 }
 impl Default for EventContentBoxGachaShopExcelT {
@@ -308,7 +308,7 @@ impl Default for EventContentBoxGachaShopExcelT {
       Round: 0,
       IsLegacy: false,
       IsPrize: false,
-      goodsId: None,
+      GoodsId: None,
       DisplayOrder: 0,
     }
   }
@@ -324,7 +324,7 @@ impl EventContentBoxGachaShopExcelT {
     let Round = self.Round;
     let IsLegacy = self.IsLegacy;
     let IsPrize = self.IsPrize;
-    let goodsId = self.goodsId.as_ref().map(|x|{
+    let GoodsId = self.GoodsId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     let DisplayOrder = self.DisplayOrder;
@@ -335,7 +335,7 @@ impl EventContentBoxGachaShopExcelT {
       Round,
       IsLegacy,
       IsPrize,
-      goodsId,
+      GoodsId,
       DisplayOrder,
     })
   }

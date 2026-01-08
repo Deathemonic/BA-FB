@@ -41,6 +41,7 @@ impl<'a> OperatorExcel<'a> {
   pub const VT_TEXTLOCALIZEKEY: flatbuffers::VOffsetT = 22;
   pub const VT_VOICEID: flatbuffers::VOffsetT = 24;
   pub const VT_OPERATORWAITQUEUE: flatbuffers::VOffsetT = 26;
+  pub const VT_CHARACTERVOICEOVERRIDEPRIORITY: flatbuffers::VOffsetT = 28;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -56,6 +57,9 @@ impl<'a> OperatorExcel<'a> {
       let x = args.UniqueId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_UniqueId(x);
+      let x = args.CharacterVoiceOverridePriority;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_CharacterVoiceOverridePriority(x);
       if let Some(x) = args.VoiceId {
         builder.add_VoiceId(x);
       }
@@ -116,6 +120,11 @@ impl<'a> OperatorExcel<'a> {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(*val, &key) } else { *val }).collect()
     });
       let OperatorWaitQueue = self.OperatorWaitQueue();
+      let CharacterVoiceOverridePriority = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.CharacterVoiceOverridePriority(), &key)
+      } else {
+        self.CharacterVoiceOverridePriority()
+      };
     OperatorExcelT {
       UniqueId,
       GroupId,
@@ -129,6 +138,7 @@ impl<'a> OperatorExcel<'a> {
       TextLocalizeKey,
       VoiceId,
       OperatorWaitQueue,
+      CharacterVoiceOverridePriority,
     }
   }
 
@@ -216,6 +226,13 @@ impl<'a> OperatorExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<bool>(OperatorExcel::VT_OPERATORWAITQUEUE, Some(false)).unwrap()}
   }
+  #[inline]
+  pub fn CharacterVoiceOverridePriority(&self) -> CharacterVoiceOverridePriority {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<CharacterVoiceOverridePriority>(OperatorExcel::VT_CHARACTERVOICEOVERRIDEPRIORITY, Some(CharacterVoiceOverridePriority::None)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for OperatorExcel<'_> {
@@ -237,6 +254,7 @@ impl flatbuffers::Verifiable for OperatorExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("TextLocalizeKey", Self::VT_TEXTLOCALIZEKEY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, u32>>>("VoiceId", Self::VT_VOICEID, false)?
      .visit_field::<bool>("OperatorWaitQueue", Self::VT_OPERATORWAITQUEUE, false)?
+     .visit_field::<CharacterVoiceOverridePriority>("CharacterVoiceOverridePriority", Self::VT_CHARACTERVOICEOVERRIDEPRIORITY, false)?
      .finish();
     Ok(())
   }
@@ -254,6 +272,7 @@ pub struct OperatorExcelArgs<'a> {
     pub TextLocalizeKey: Option<flatbuffers::WIPOffset<&'a str>>,
     pub VoiceId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, u32>>>,
     pub OperatorWaitQueue: bool,
+    pub CharacterVoiceOverridePriority: CharacterVoiceOverridePriority,
 }
 impl<'a> Default for OperatorExcelArgs<'a> {
   #[inline]
@@ -271,6 +290,7 @@ impl<'a> Default for OperatorExcelArgs<'a> {
       TextLocalizeKey: None,
       VoiceId: None,
       OperatorWaitQueue: false,
+      CharacterVoiceOverridePriority: CharacterVoiceOverridePriority::None,
     }
   }
 }
@@ -280,7 +300,7 @@ impl Serialize for OperatorExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("OperatorExcel", 12)?;
+    let mut s = serializer.serialize_struct("OperatorExcel", 13)?;
       s.serialize_field("UniqueId", &self.UniqueId())?;
       if let Some(f) = self.GroupId() {
         s.serialize_field("GroupId", &f)?;
@@ -309,6 +329,7 @@ impl Serialize for OperatorExcel<'_> {
         s.skip_field("VoiceId")?;
       }
       s.serialize_field("OperatorWaitQueue", &self.OperatorWaitQueue())?;
+      s.serialize_field("CharacterVoiceOverridePriority", &self.CharacterVoiceOverridePriority())?;
     s.end()
   }
 }
@@ -367,6 +388,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> OperatorExcelBuilder<'a, 'b, A>
     self.fbb_.push_slot::<bool>(OperatorExcel::VT_OPERATORWAITQUEUE, OperatorWaitQueue, false);
   }
   #[inline]
+  pub fn add_CharacterVoiceOverridePriority(&mut self, CharacterVoiceOverridePriority: CharacterVoiceOverridePriority) {
+    self.fbb_.push_slot::<CharacterVoiceOverridePriority>(OperatorExcel::VT_CHARACTERVOICEOVERRIDEPRIORITY, CharacterVoiceOverridePriority, CharacterVoiceOverridePriority::None);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> OperatorExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     OperatorExcelBuilder {
@@ -396,6 +421,7 @@ impl core::fmt::Debug for OperatorExcel<'_> {
       ds.field("TextLocalizeKey", &self.TextLocalizeKey());
       ds.field("VoiceId", &self.VoiceId());
       ds.field("OperatorWaitQueue", &self.OperatorWaitQueue());
+      ds.field("CharacterVoiceOverridePriority", &self.CharacterVoiceOverridePriority());
       ds.finish()
   }
 }
@@ -414,6 +440,7 @@ pub struct OperatorExcelT {
   pub TextLocalizeKey: Option<String>,
   pub VoiceId: Option<Vec<u32>>,
   pub OperatorWaitQueue: bool,
+  pub CharacterVoiceOverridePriority: CharacterVoiceOverridePriority,
 }
 impl Default for OperatorExcelT {
   fn default() -> Self {
@@ -430,6 +457,7 @@ impl Default for OperatorExcelT {
       TextLocalizeKey: None,
       VoiceId: None,
       OperatorWaitQueue: false,
+      CharacterVoiceOverridePriority: CharacterVoiceOverridePriority::None,
     }
   }
 }
@@ -458,6 +486,7 @@ impl OperatorExcelT {
       _fbb.create_vector(x)
     });
     let OperatorWaitQueue = self.OperatorWaitQueue;
+    let CharacterVoiceOverridePriority = self.CharacterVoiceOverridePriority;
     OperatorExcel::create(_fbb, &OperatorExcelArgs{
       UniqueId,
       GroupId,
@@ -471,6 +500,7 @@ impl OperatorExcelT {
       TextLocalizeKey,
       VoiceId,
       OperatorWaitQueue,
+      CharacterVoiceOverridePriority,
     })
   }
 }

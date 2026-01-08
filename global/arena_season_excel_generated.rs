@@ -34,6 +34,7 @@ impl<'a> ArenaSeasonExcel<'a> {
   pub const VT_SEASONENDDATE: flatbuffers::VOffsetT = 8;
   pub const VT_SEASONGROUPLIMIT: flatbuffers::VOffsetT = 10;
   pub const VT_PREVSEASONID: flatbuffers::VOffsetT = 12;
+  pub const VT_INFORMATIONGROUPID: flatbuffers::VOffsetT = 14;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -46,6 +47,9 @@ impl<'a> ArenaSeasonExcel<'a> {
   ) -> flatbuffers::WIPOffset<ArenaSeasonExcel<'bldr>> {
     let mut builder = ArenaSeasonExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"ArenaSeason");
+      let x = args.InformationGroupId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_InformationGroupId(x);
       let x = args.PrevSeasonId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_PrevSeasonId(x);
@@ -75,12 +79,14 @@ impl<'a> ArenaSeasonExcel<'a> {
     });
       let SeasonGroupLimit = self.SeasonGroupLimit();
       let PrevSeasonId = self.PrevSeasonId();
+      let InformationGroupId = self.InformationGroupId();
     ArenaSeasonExcelT {
       UniqueId,
       SeasonStartDate,
       SeasonEndDate,
       SeasonGroupLimit,
       PrevSeasonId,
+      InformationGroupId,
     }
   }
 
@@ -119,6 +125,13 @@ impl<'a> ArenaSeasonExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(ArenaSeasonExcel::VT_PREVSEASONID, Some(0)).unwrap()}
   }
+  #[inline]
+  pub fn InformationGroupId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ArenaSeasonExcel::VT_INFORMATIONGROUPID, Some(0)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for ArenaSeasonExcel<'_> {
@@ -133,6 +146,7 @@ impl flatbuffers::Verifiable for ArenaSeasonExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SeasonEndDate", Self::VT_SEASONENDDATE, false)?
      .visit_field::<i64>("SeasonGroupLimit", Self::VT_SEASONGROUPLIMIT, false)?
      .visit_field::<i64>("PrevSeasonId", Self::VT_PREVSEASONID, false)?
+     .visit_field::<i64>("InformationGroupId", Self::VT_INFORMATIONGROUPID, false)?
      .finish();
     Ok(())
   }
@@ -143,6 +157,7 @@ pub struct ArenaSeasonExcelArgs<'a> {
     pub SeasonEndDate: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SeasonGroupLimit: i64,
     pub PrevSeasonId: i64,
+    pub InformationGroupId: i64,
 }
 impl<'a> Default for ArenaSeasonExcelArgs<'a> {
   #[inline]
@@ -153,6 +168,7 @@ impl<'a> Default for ArenaSeasonExcelArgs<'a> {
       SeasonEndDate: None,
       SeasonGroupLimit: 0,
       PrevSeasonId: 0,
+      InformationGroupId: 0,
     }
   }
 }
@@ -162,7 +178,7 @@ impl Serialize for ArenaSeasonExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ArenaSeasonExcel", 5)?;
+    let mut s = serializer.serialize_struct("ArenaSeasonExcel", 6)?;
       s.serialize_field("UniqueId", &self.UniqueId())?;
       if let Some(f) = self.SeasonStartDate() {
         s.serialize_field("SeasonStartDate", &f)?;
@@ -176,6 +192,7 @@ impl Serialize for ArenaSeasonExcel<'_> {
       }
       s.serialize_field("SeasonGroupLimit", &self.SeasonGroupLimit())?;
       s.serialize_field("PrevSeasonId", &self.PrevSeasonId())?;
+      s.serialize_field("InformationGroupId", &self.InformationGroupId())?;
     s.end()
   }
 }
@@ -206,6 +223,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ArenaSeasonExcelBuilder<'a, 'b,
     self.fbb_.push_slot::<i64>(ArenaSeasonExcel::VT_PREVSEASONID, PrevSeasonId, 0);
   }
   #[inline]
+  pub fn add_InformationGroupId(&mut self, InformationGroupId: i64) {
+    self.fbb_.push_slot::<i64>(ArenaSeasonExcel::VT_INFORMATIONGROUPID, InformationGroupId, 0);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ArenaSeasonExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     ArenaSeasonExcelBuilder {
@@ -228,6 +249,7 @@ impl core::fmt::Debug for ArenaSeasonExcel<'_> {
       ds.field("SeasonEndDate", &self.SeasonEndDate());
       ds.field("SeasonGroupLimit", &self.SeasonGroupLimit());
       ds.field("PrevSeasonId", &self.PrevSeasonId());
+      ds.field("InformationGroupId", &self.InformationGroupId());
       ds.finish()
   }
 }
@@ -239,6 +261,7 @@ pub struct ArenaSeasonExcelT {
   pub SeasonEndDate: Option<String>,
   pub SeasonGroupLimit: i64,
   pub PrevSeasonId: i64,
+  pub InformationGroupId: i64,
 }
 impl Default for ArenaSeasonExcelT {
   fn default() -> Self {
@@ -248,6 +271,7 @@ impl Default for ArenaSeasonExcelT {
       SeasonEndDate: None,
       SeasonGroupLimit: 0,
       PrevSeasonId: 0,
+      InformationGroupId: 0,
     }
   }
 }
@@ -265,12 +289,14 @@ impl ArenaSeasonExcelT {
     });
     let SeasonGroupLimit = self.SeasonGroupLimit;
     let PrevSeasonId = self.PrevSeasonId;
+    let InformationGroupId = self.InformationGroupId;
     ArenaSeasonExcel::create(_fbb, &ArenaSeasonExcelArgs{
       UniqueId,
       SeasonStartDate,
       SeasonEndDate,
       SeasonGroupLimit,
       PrevSeasonId,
+      InformationGroupId,
     })
   }
 }

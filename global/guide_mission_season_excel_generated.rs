@@ -42,18 +42,19 @@ impl<'a> GuideMissionSeasonExcel<'a> {
   pub const VT_CLOSEBANNERAFTERCOMPLETION: flatbuffers::VOffsetT = 24;
   pub const VT_MAXIMUMLOGINCOUNT: flatbuffers::VOffsetT = 26;
   pub const VT_EXPIRYDATE: flatbuffers::VOffsetT = 28;
-  pub const VT_SPINECHARACTERID: flatbuffers::VOffsetT = 30;
-  pub const VT_REQUIREMENTPARCELIMAGE: flatbuffers::VOffsetT = 32;
-  pub const VT_REWARDIMAGE: flatbuffers::VOffsetT = 34;
-  pub const VT_LOBBYBANNERIMAGE: flatbuffers::VOffsetT = 36;
-  pub const VT_BACKGROUNDIMAGE: flatbuffers::VOffsetT = 38;
-  pub const VT_TITLEIMAGE: flatbuffers::VOffsetT = 40;
-  pub const VT_REQUIREMENTPARCELTYPE: flatbuffers::VOffsetT = 42;
-  pub const VT_REQUIREMENTPARCELID: flatbuffers::VOffsetT = 44;
-  pub const VT_REQUIREMENTPARCELAMOUNT: flatbuffers::VOffsetT = 46;
-  pub const VT_TABTYPE: flatbuffers::VOffsetT = 48;
-  pub const VT_ISPERMANENT: flatbuffers::VOffsetT = 50;
-  pub const VT_PRESEASONID: flatbuffers::VOffsetT = 52;
+  pub const VT_ICONORDER: flatbuffers::VOffsetT = 30;
+  pub const VT_SPINECHARACTERID: flatbuffers::VOffsetT = 32;
+  pub const VT_REQUIREMENTPARCELIMAGE: flatbuffers::VOffsetT = 34;
+  pub const VT_REWARDIMAGE: flatbuffers::VOffsetT = 36;
+  pub const VT_LOBBYBANNERIMAGE: flatbuffers::VOffsetT = 38;
+  pub const VT_BACKGROUNDIMAGE: flatbuffers::VOffsetT = 40;
+  pub const VT_TITLEIMAGE: flatbuffers::VOffsetT = 42;
+  pub const VT_REQUIREMENTPARCELTYPE: flatbuffers::VOffsetT = 44;
+  pub const VT_REQUIREMENTPARCELID: flatbuffers::VOffsetT = 46;
+  pub const VT_REQUIREMENTPARCELAMOUNT: flatbuffers::VOffsetT = 48;
+  pub const VT_TABTYPE: flatbuffers::VOffsetT = 50;
+  pub const VT_ISPERMANENT: flatbuffers::VOffsetT = 52;
+  pub const VT_PRESEASONID: flatbuffers::VOffsetT = 54;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -75,6 +76,9 @@ impl<'a> GuideMissionSeasonExcel<'a> {
       let x = args.SpineCharacterId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_SpineCharacterId(x);
+      let x = args.IconOrder;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_IconOrder(x);
       let x = args.ExpiryDate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ExpiryDate(x);
@@ -171,6 +175,7 @@ impl<'a> GuideMissionSeasonExcel<'a> {
       let CloseBannerAfterCompletion = self.CloseBannerAfterCompletion();
       let MaximumLoginCount = self.MaximumLoginCount();
       let ExpiryDate = self.ExpiryDate();
+      let IconOrder = self.IconOrder();
       let SpineCharacterId = self.SpineCharacterId();
     let RequirementParcelImage = self.RequirementParcelImage().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
@@ -215,6 +220,7 @@ impl<'a> GuideMissionSeasonExcel<'a> {
       CloseBannerAfterCompletion,
       MaximumLoginCount,
       ExpiryDate,
+      IconOrder,
       SpineCharacterId,
       RequirementParcelImage,
       RewardImage,
@@ -322,6 +328,13 @@ impl<'a> GuideMissionSeasonExcel<'a> {
     unsafe { self._tab.get::<i64>(GuideMissionSeasonExcel::VT_EXPIRYDATE, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn IconOrder(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(GuideMissionSeasonExcel::VT_ICONORDER, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn SpineCharacterId(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
@@ -427,6 +440,7 @@ impl flatbuffers::Verifiable for GuideMissionSeasonExcel<'_> {
      .visit_field::<bool>("CloseBannerAfterCompletion", Self::VT_CLOSEBANNERAFTERCOMPLETION, false)?
      .visit_field::<i64>("MaximumLoginCount", Self::VT_MAXIMUMLOGINCOUNT, false)?
      .visit_field::<i64>("ExpiryDate", Self::VT_EXPIRYDATE, false)?
+     .visit_field::<i64>("IconOrder", Self::VT_ICONORDER, false)?
      .visit_field::<i64>("SpineCharacterId", Self::VT_SPINECHARACTERID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("RequirementParcelImage", Self::VT_REQUIREMENTPARCELIMAGE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("RewardImage", Self::VT_REWARDIMAGE, false)?
@@ -457,6 +471,7 @@ pub struct GuideMissionSeasonExcelArgs<'a> {
     pub CloseBannerAfterCompletion: bool,
     pub MaximumLoginCount: i64,
     pub ExpiryDate: i64,
+    pub IconOrder: i64,
     pub SpineCharacterId: i64,
     pub RequirementParcelImage: Option<flatbuffers::WIPOffset<&'a str>>,
     pub RewardImage: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -487,6 +502,7 @@ impl<'a> Default for GuideMissionSeasonExcelArgs<'a> {
       CloseBannerAfterCompletion: false,
       MaximumLoginCount: 0,
       ExpiryDate: 0,
+      IconOrder: 0,
       SpineCharacterId: 0,
       RequirementParcelImage: None,
       RewardImage: None,
@@ -508,7 +524,7 @@ impl Serialize for GuideMissionSeasonExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("GuideMissionSeasonExcel", 25)?;
+    let mut s = serializer.serialize_struct("GuideMissionSeasonExcel", 26)?;
       s.serialize_field("Id", &self.Id())?;
       if let Some(f) = self.TitleLocalizeCode() {
         s.serialize_field("TitleLocalizeCode", &f)?;
@@ -550,6 +566,7 @@ impl Serialize for GuideMissionSeasonExcel<'_> {
       s.serialize_field("CloseBannerAfterCompletion", &self.CloseBannerAfterCompletion())?;
       s.serialize_field("MaximumLoginCount", &self.MaximumLoginCount())?;
       s.serialize_field("ExpiryDate", &self.ExpiryDate())?;
+      s.serialize_field("IconOrder", &self.IconOrder())?;
       s.serialize_field("SpineCharacterId", &self.SpineCharacterId())?;
       if let Some(f) = self.RequirementParcelImage() {
         s.serialize_field("RequirementParcelImage", &f)?;
@@ -644,6 +661,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GuideMissionSeasonExcelBuilder<
     self.fbb_.push_slot::<i64>(GuideMissionSeasonExcel::VT_EXPIRYDATE, ExpiryDate, 0);
   }
   #[inline]
+  pub fn add_IconOrder(&mut self, IconOrder: i64) {
+    self.fbb_.push_slot::<i64>(GuideMissionSeasonExcel::VT_ICONORDER, IconOrder, 0);
+  }
+  #[inline]
   pub fn add_SpineCharacterId(&mut self, SpineCharacterId: i64) {
     self.fbb_.push_slot::<i64>(GuideMissionSeasonExcel::VT_SPINECHARACTERID, SpineCharacterId, 0);
   }
@@ -722,6 +743,7 @@ impl core::fmt::Debug for GuideMissionSeasonExcel<'_> {
       ds.field("CloseBannerAfterCompletion", &self.CloseBannerAfterCompletion());
       ds.field("MaximumLoginCount", &self.MaximumLoginCount());
       ds.field("ExpiryDate", &self.ExpiryDate());
+      ds.field("IconOrder", &self.IconOrder());
       ds.field("SpineCharacterId", &self.SpineCharacterId());
       ds.field("RequirementParcelImage", &self.RequirementParcelImage());
       ds.field("RewardImage", &self.RewardImage());
@@ -753,6 +775,7 @@ pub struct GuideMissionSeasonExcelT {
   pub CloseBannerAfterCompletion: bool,
   pub MaximumLoginCount: i64,
   pub ExpiryDate: i64,
+  pub IconOrder: i64,
   pub SpineCharacterId: i64,
   pub RequirementParcelImage: Option<String>,
   pub RewardImage: Option<String>,
@@ -782,6 +805,7 @@ impl Default for GuideMissionSeasonExcelT {
       CloseBannerAfterCompletion: false,
       MaximumLoginCount: 0,
       ExpiryDate: 0,
+      IconOrder: 0,
       SpineCharacterId: 0,
       RequirementParcelImage: None,
       RewardImage: None,
@@ -829,6 +853,7 @@ impl GuideMissionSeasonExcelT {
     let CloseBannerAfterCompletion = self.CloseBannerAfterCompletion;
     let MaximumLoginCount = self.MaximumLoginCount;
     let ExpiryDate = self.ExpiryDate;
+    let IconOrder = self.IconOrder;
     let SpineCharacterId = self.SpineCharacterId;
     let RequirementParcelImage = self.RequirementParcelImage.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -865,6 +890,7 @@ impl GuideMissionSeasonExcelT {
       CloseBannerAfterCompletion,
       MaximumLoginCount,
       ExpiryDate,
+      IconOrder,
       SpineCharacterId,
       RequirementParcelImage,
       RewardImage,

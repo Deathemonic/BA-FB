@@ -39,17 +39,18 @@ impl<'a> GoodsExcel<'a> {
   pub const VT_CONSUMECONDITION: flatbuffers::VOffsetT = 18;
   pub const VT_CONSUMEGACHATICKETTYPE: flatbuffers::VOffsetT = 20;
   pub const VT_CONSUMEGACHATICKETTYPEAMOUNT: flatbuffers::VOffsetT = 22;
-  pub const VT_PRODUCTIDAOS: flatbuffers::VOffsetT = 24;
-  pub const VT_PRODUCTIDIOS: flatbuffers::VOffsetT = 26;
-  pub const VT_PRODUCTIDONE: flatbuffers::VOffsetT = 28;
-  pub const VT_PRODUCTIDSGS: flatbuffers::VOffsetT = 30;
-  pub const VT_PRODUCTIDSTEAM: flatbuffers::VOffsetT = 32;
-  pub const VT_CONSUMEEXTRASTEP: flatbuffers::VOffsetT = 34;
-  pub const VT_CONSUMEEXTRAAMOUNT: flatbuffers::VOffsetT = 36;
-  pub const VT_STATE: flatbuffers::VOffsetT = 38;
-  pub const VT_PARCELTYPE: flatbuffers::VOffsetT = 40;
-  pub const VT_PARCELID: flatbuffers::VOffsetT = 42;
-  pub const VT_PARCELAMOUNT: flatbuffers::VOffsetT = 44;
+  pub const VT_COMBINEDGACHACOSTID: flatbuffers::VOffsetT = 24;
+  pub const VT_PRODUCTIDAOS: flatbuffers::VOffsetT = 26;
+  pub const VT_PRODUCTIDIOS: flatbuffers::VOffsetT = 28;
+  pub const VT_PRODUCTIDONE: flatbuffers::VOffsetT = 30;
+  pub const VT_PRODUCTIDSGS: flatbuffers::VOffsetT = 32;
+  pub const VT_PRODUCTIDSTEAM: flatbuffers::VOffsetT = 34;
+  pub const VT_CONSUMEEXTRASTEP: flatbuffers::VOffsetT = 36;
+  pub const VT_CONSUMEEXTRAAMOUNT: flatbuffers::VOffsetT = 38;
+  pub const VT_STATE: flatbuffers::VOffsetT = 40;
+  pub const VT_PARCELTYPE: flatbuffers::VOffsetT = 42;
+  pub const VT_PARCELID: flatbuffers::VOffsetT = 44;
+  pub const VT_PARCELAMOUNT: flatbuffers::VOffsetT = 46;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -77,6 +78,9 @@ impl<'a> GoodsExcel<'a> {
       let x = args.ProductIdAOS;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ProductIdAOS(x);
+      let x = args.CombinedGachaCostId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_CombinedGachaCostId(x);
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
@@ -158,6 +162,7 @@ impl<'a> GoodsExcel<'a> {
     let ConsumeGachaTicketTypeAmount = self.ConsumeGachaTicketTypeAmount().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
+      let CombinedGachaCostId = self.CombinedGachaCostId();
       let ProductIdAOS = self.ProductIdAOS();
       let ProductIdiOS = self.ProductIdiOS();
       let ProductIdONE = self.ProductIdONE();
@@ -190,6 +195,7 @@ impl<'a> GoodsExcel<'a> {
       ConsumeCondition,
       ConsumeGachaTicketType,
       ConsumeGachaTicketTypeAmount,
+      CombinedGachaCostId,
       ProductIdAOS,
       ProductIdiOS,
       ProductIdONE,
@@ -273,6 +279,13 @@ impl<'a> GoodsExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(GoodsExcel::VT_CONSUMEGACHATICKETTYPEAMOUNT, None)}
+  }
+  #[inline]
+  pub fn CombinedGachaCostId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(GoodsExcel::VT_COMBINEDGACHACOSTID, Some(0)).unwrap()}
   }
   #[inline]
   pub fn ProductIdAOS(&self) -> i64 {
@@ -370,6 +383,7 @@ impl flatbuffers::Verifiable for GoodsExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ConsumeCondition>>>("ConsumeCondition", Self::VT_CONSUMECONDITION, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, GachaTicketType>>>("ConsumeGachaTicketType", Self::VT_CONSUMEGACHATICKETTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("ConsumeGachaTicketTypeAmount", Self::VT_CONSUMEGACHATICKETTYPEAMOUNT, false)?
+     .visit_field::<i64>("CombinedGachaCostId", Self::VT_COMBINEDGACHACOSTID, false)?
      .visit_field::<i64>("ProductIdAOS", Self::VT_PRODUCTIDAOS, false)?
      .visit_field::<i64>("ProductIdiOS", Self::VT_PRODUCTIDIOS, false)?
      .visit_field::<i64>("ProductIdONE", Self::VT_PRODUCTIDONE, false)?
@@ -396,6 +410,7 @@ pub struct GoodsExcelArgs<'a> {
     pub ConsumeCondition: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ConsumeCondition>>>,
     pub ConsumeGachaTicketType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, GachaTicketType>>>,
     pub ConsumeGachaTicketTypeAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub CombinedGachaCostId: i64,
     pub ProductIdAOS: i64,
     pub ProductIdiOS: i64,
     pub ProductIdONE: i64,
@@ -422,6 +437,7 @@ impl<'a> Default for GoodsExcelArgs<'a> {
       ConsumeCondition: None,
       ConsumeGachaTicketType: None,
       ConsumeGachaTicketTypeAmount: None,
+      CombinedGachaCostId: 0,
       ProductIdAOS: 0,
       ProductIdiOS: 0,
       ProductIdONE: 0,
@@ -442,7 +458,7 @@ impl Serialize for GoodsExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("GoodsExcel", 21)?;
+    let mut s = serializer.serialize_struct("GoodsExcel", 22)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("Type", &self.Type())?;
       s.serialize_field("Rarity", &self.Rarity())?;
@@ -481,6 +497,7 @@ impl Serialize for GoodsExcel<'_> {
       } else {
         s.skip_field("ConsumeGachaTicketTypeAmount")?;
       }
+      s.serialize_field("CombinedGachaCostId", &self.CombinedGachaCostId())?;
       s.serialize_field("ProductIdAOS", &self.ProductIdAOS())?;
       s.serialize_field("ProductIdiOS", &self.ProductIdiOS())?;
       s.serialize_field("ProductIdONE", &self.ProductIdONE())?;
@@ -562,6 +579,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GoodsExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GoodsExcel::VT_CONSUMEGACHATICKETTYPEAMOUNT, ConsumeGachaTicketTypeAmount);
   }
   #[inline]
+  pub fn add_CombinedGachaCostId(&mut self, CombinedGachaCostId: i64) {
+    self.fbb_.push_slot::<i64>(GoodsExcel::VT_COMBINEDGACHACOSTID, CombinedGachaCostId, 0);
+  }
+  #[inline]
   pub fn add_ProductIdAOS(&mut self, ProductIdAOS: i64) {
     self.fbb_.push_slot::<i64>(GoodsExcel::VT_PRODUCTIDAOS, ProductIdAOS, 0);
   }
@@ -633,6 +654,7 @@ impl core::fmt::Debug for GoodsExcel<'_> {
       ds.field("ConsumeCondition", &self.ConsumeCondition());
       ds.field("ConsumeGachaTicketType", &self.ConsumeGachaTicketType());
       ds.field("ConsumeGachaTicketTypeAmount", &self.ConsumeGachaTicketTypeAmount());
+      ds.field("CombinedGachaCostId", &self.CombinedGachaCostId());
       ds.field("ProductIdAOS", &self.ProductIdAOS());
       ds.field("ProductIdiOS", &self.ProductIdiOS());
       ds.field("ProductIdONE", &self.ProductIdONE());
@@ -660,6 +682,7 @@ pub struct GoodsExcelT {
   pub ConsumeCondition: Option<Vec<ConsumeCondition>>,
   pub ConsumeGachaTicketType: Option<Vec<GachaTicketType>>,
   pub ConsumeGachaTicketTypeAmount: Option<Vec<i64>>,
+  pub CombinedGachaCostId: i64,
   pub ProductIdAOS: i64,
   pub ProductIdiOS: i64,
   pub ProductIdONE: i64,
@@ -685,6 +708,7 @@ impl Default for GoodsExcelT {
       ConsumeCondition: None,
       ConsumeGachaTicketType: None,
       ConsumeGachaTicketTypeAmount: None,
+      CombinedGachaCostId: 0,
       ProductIdAOS: 0,
       ProductIdiOS: 0,
       ProductIdONE: 0,
@@ -728,6 +752,7 @@ impl GoodsExcelT {
     let ConsumeGachaTicketTypeAmount = self.ConsumeGachaTicketTypeAmount.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
+    let CombinedGachaCostId = self.CombinedGachaCostId;
     let ProductIdAOS = self.ProductIdAOS;
     let ProductIdiOS = self.ProductIdiOS;
     let ProductIdONE = self.ProductIdONE;
@@ -760,6 +785,7 @@ impl GoodsExcelT {
       ConsumeCondition,
       ConsumeGachaTicketType,
       ConsumeGachaTicketTypeAmount,
+      CombinedGachaCostId,
       ProductIdAOS,
       ProductIdiOS,
       ProductIdONE,

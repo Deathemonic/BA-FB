@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_FURNITURE_SUB_CATEGORY: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_FURNITURE_SUB_CATEGORY: i32 = 16;
+pub const ENUM_MAX_FURNITURE_SUB_CATEGORY: i32 = 17;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_FURNITURE_SUB_CATEGORY: [FurnitureSubCategory; 17] = [
+pub const ENUM_VALUES_FURNITURE_SUB_CATEGORY: [FurnitureSubCategory; 18] = [
   FurnitureSubCategory::Table,
   FurnitureSubCategory::Closet,
   FurnitureSubCategory::Chair,
@@ -28,6 +28,7 @@ pub const ENUM_VALUES_FURNITURE_SUB_CATEGORY: [FurnitureSubCategory; 17] = [
   FurnitureSubCategory::FurnitureEtc,
   FurnitureSubCategory::FurnitureSubCategory1,
   FurnitureSubCategory::HomeAppliance,
+  FurnitureSubCategory::Trophy,
   FurnitureSubCategory::WallDecoration,
   FurnitureSubCategory::FloorDecoration,
   FurnitureSubCategory::DecorationEtc,
@@ -52,18 +53,19 @@ impl FurnitureSubCategory {
   pub const FurnitureEtc: Self = Self(5);
   pub const FurnitureSubCategory1: Self = Self(6);
   pub const HomeAppliance: Self = Self(7);
-  pub const WallDecoration: Self = Self(8);
-  pub const FloorDecoration: Self = Self(9);
-  pub const DecorationEtc: Self = Self(10);
-  pub const DecorationSubCategory1: Self = Self(11);
-  pub const Floor: Self = Self(12);
-  pub const Background: Self = Self(13);
-  pub const Wallpaper: Self = Self(14);
-  pub const InteriorsSubCategory1: Self = Self(15);
-  pub const All: Self = Self(16);
+  pub const Trophy: Self = Self(8);
+  pub const WallDecoration: Self = Self(9);
+  pub const FloorDecoration: Self = Self(10);
+  pub const DecorationEtc: Self = Self(11);
+  pub const DecorationSubCategory1: Self = Self(12);
+  pub const Floor: Self = Self(13);
+  pub const Background: Self = Self(14);
+  pub const Wallpaper: Self = Self(15);
+  pub const InteriorsSubCategory1: Self = Self(16);
+  pub const All: Self = Self(17);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 16;
+  pub const ENUM_MAX: i32 = 17;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Table,
     Self::Closet,
@@ -73,6 +75,7 @@ impl FurnitureSubCategory {
     Self::FurnitureEtc,
     Self::FurnitureSubCategory1,
     Self::HomeAppliance,
+    Self::Trophy,
     Self::WallDecoration,
     Self::FloorDecoration,
     Self::DecorationEtc,
@@ -94,6 +97,7 @@ impl FurnitureSubCategory {
       Self::FurnitureEtc => Some("FurnitureEtc"),
       Self::FurnitureSubCategory1 => Some("FurnitureSubCategory1"),
       Self::HomeAppliance => Some("HomeAppliance"),
+      Self::Trophy => Some("Trophy"),
       Self::WallDecoration => Some("WallDecoration"),
       Self::FloorDecoration => Some("FloorDecoration"),
       Self::DecorationEtc => Some("DecorationEtc"),

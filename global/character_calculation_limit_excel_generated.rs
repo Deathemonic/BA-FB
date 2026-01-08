@@ -57,11 +57,11 @@ impl<'a> CharacterCalculationLimitExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
-      if let Some(x) = args.decreaseRate {
-        builder.add_decreaseRate(x);
+      if let Some(x) = args.DecreaseRate {
+        builder.add_DecreaseRate(x);
       }
-      if let Some(x) = args.limitStartValue {
-        builder.add_limitStartValue(x);
+      if let Some(x) = args.LimitStartValue {
+        builder.add_LimitStartValue(x);
       }
       let x = args.CalculationValue;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
@@ -87,10 +87,10 @@ impl<'a> CharacterCalculationLimitExcel<'a> {
       };
       let MinValue = self.MinValue();
       let MaxValue = self.MaxValue();
-    let limitStartValue = self.limitStartValue().map(|x| {
+    let LimitStartValue = self.LimitStartValue().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let decreaseRate = self.decreaseRate().map(|x| {
+    let DecreaseRate = self.DecreaseRate().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
     CharacterCalculationLimitExcelT {
@@ -99,8 +99,8 @@ impl<'a> CharacterCalculationLimitExcel<'a> {
       CalculationValue,
       MinValue,
       MaxValue,
-      limitStartValue,
-      decreaseRate,
+      LimitStartValue,
+      DecreaseRate,
     }
   }
 
@@ -140,14 +140,14 @@ impl<'a> CharacterCalculationLimitExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterCalculationLimitExcel::VT_MAXVALUE, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn limitStartValue(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn LimitStartValue(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(CharacterCalculationLimitExcel::VT_LIMITSTARTVALUE, None)}
   }
   #[inline]
-  pub fn decreaseRate(&self) -> Option<flatbuffers::Vector<'a, i64>> {
+  pub fn DecreaseRate(&self) -> Option<flatbuffers::Vector<'a, i64>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
@@ -167,8 +167,8 @@ impl flatbuffers::Verifiable for CharacterCalculationLimitExcel<'_> {
      .visit_field::<BattleCalculationStat>("CalculationValue", Self::VT_CALCULATIONVALUE, false)?
      .visit_field::<i64>("MinValue", Self::VT_MINVALUE, false)?
      .visit_field::<i64>("MaxValue", Self::VT_MAXVALUE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("limitStartValue", Self::VT_LIMITSTARTVALUE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("decreaseRate", Self::VT_DECREASERATE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("LimitStartValue", Self::VT_LIMITSTARTVALUE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("DecreaseRate", Self::VT_DECREASERATE, false)?
      .finish();
     Ok(())
   }
@@ -179,8 +179,8 @@ pub struct CharacterCalculationLimitExcelArgs<'a> {
     pub CalculationValue: BattleCalculationStat,
     pub MinValue: i64,
     pub MaxValue: i64,
-    pub limitStartValue: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub decreaseRate: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub LimitStartValue: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
+    pub DecreaseRate: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for CharacterCalculationLimitExcelArgs<'a> {
   #[inline]
@@ -191,8 +191,8 @@ impl<'a> Default for CharacterCalculationLimitExcelArgs<'a> {
       CalculationValue: BattleCalculationStat::FinalDamage,
       MinValue: 0,
       MaxValue: 0,
-      limitStartValue: None,
-      decreaseRate: None,
+      LimitStartValue: None,
+      DecreaseRate: None,
     }
   }
 }
@@ -208,15 +208,15 @@ impl Serialize for CharacterCalculationLimitExcel<'_> {
       s.serialize_field("CalculationValue", &self.CalculationValue())?;
       s.serialize_field("MinValue", &self.MinValue())?;
       s.serialize_field("MaxValue", &self.MaxValue())?;
-      if let Some(f) = self.limitStartValue() {
-        s.serialize_field("limitStartValue", &f)?;
+      if let Some(f) = self.LimitStartValue() {
+        s.serialize_field("LimitStartValue", &f)?;
       } else {
-        s.skip_field("limitStartValue")?;
+        s.skip_field("LimitStartValue")?;
       }
-      if let Some(f) = self.decreaseRate() {
-        s.serialize_field("decreaseRate", &f)?;
+      if let Some(f) = self.DecreaseRate() {
+        s.serialize_field("DecreaseRate", &f)?;
       } else {
-        s.skip_field("decreaseRate")?;
+        s.skip_field("DecreaseRate")?;
       }
     s.end()
   }
@@ -248,12 +248,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterCalculationLimitExcelB
     self.fbb_.push_slot::<i64>(CharacterCalculationLimitExcel::VT_MAXVALUE, MaxValue, 0);
   }
   #[inline]
-  pub fn add_limitStartValue(&mut self, limitStartValue: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterCalculationLimitExcel::VT_LIMITSTARTVALUE, limitStartValue);
+  pub fn add_LimitStartValue(&mut self, LimitStartValue: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterCalculationLimitExcel::VT_LIMITSTARTVALUE, LimitStartValue);
   }
   #[inline]
-  pub fn add_decreaseRate(&mut self, decreaseRate: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterCalculationLimitExcel::VT_DECREASERATE, decreaseRate);
+  pub fn add_DecreaseRate(&mut self, DecreaseRate: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterCalculationLimitExcel::VT_DECREASERATE, DecreaseRate);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> CharacterCalculationLimitExcelBuilder<'a, 'b, A> {
@@ -278,8 +278,8 @@ impl core::fmt::Debug for CharacterCalculationLimitExcel<'_> {
       ds.field("CalculationValue", &self.CalculationValue());
       ds.field("MinValue", &self.MinValue());
       ds.field("MaxValue", &self.MaxValue());
-      ds.field("limitStartValue", &self.limitStartValue());
-      ds.field("decreaseRate", &self.decreaseRate());
+      ds.field("LimitStartValue", &self.LimitStartValue());
+      ds.field("DecreaseRate", &self.DecreaseRate());
       ds.finish()
   }
 }
@@ -291,8 +291,8 @@ pub struct CharacterCalculationLimitExcelT {
   pub CalculationValue: BattleCalculationStat,
   pub MinValue: i64,
   pub MaxValue: i64,
-  pub limitStartValue: Option<Vec<i64>>,
-  pub decreaseRate: Option<Vec<i64>>,
+  pub LimitStartValue: Option<Vec<i64>>,
+  pub DecreaseRate: Option<Vec<i64>>,
 }
 impl Default for CharacterCalculationLimitExcelT {
   fn default() -> Self {
@@ -302,8 +302,8 @@ impl Default for CharacterCalculationLimitExcelT {
       CalculationValue: BattleCalculationStat::FinalDamage,
       MinValue: 0,
       MaxValue: 0,
-      limitStartValue: None,
-      decreaseRate: None,
+      LimitStartValue: None,
+      DecreaseRate: None,
     }
   }
 }
@@ -317,10 +317,10 @@ impl CharacterCalculationLimitExcelT {
     let CalculationValue = self.CalculationValue;
     let MinValue = self.MinValue;
     let MaxValue = self.MaxValue;
-    let limitStartValue = self.limitStartValue.as_ref().map(|x|{
+    let LimitStartValue = self.LimitStartValue.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let decreaseRate = self.decreaseRate.as_ref().map(|x|{
+    let DecreaseRate = self.DecreaseRate.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
     CharacterCalculationLimitExcel::create(_fbb, &CharacterCalculationLimitExcelArgs{
@@ -329,8 +329,8 @@ impl CharacterCalculationLimitExcelT {
       CalculationValue,
       MinValue,
       MaxValue,
-      limitStartValue,
-      decreaseRate,
+      LimitStartValue,
+      DecreaseRate,
     })
   }
 }
