@@ -1,7 +1,7 @@
 use bacy::table_encryption::table_encryption_service;
 #![allow(unused_imports, dead_code)]
 #![allow(non_camel_case_types, non_snake_case, non_upper_case_globals)]
-pub mod japan {
+pub mod global {
   use super::*;
   mod unit_type_generated;
   pub use self::unit_type_generated::*;
@@ -145,8 +145,6 @@ pub mod japan {
   pub use self::academy_message_conditions_generated::*;
   mod academy_message_types_generated;
   pub use self::academy_message_types_generated::*;
-  mod spoiler_popup_type_generated;
-  pub use self::spoiler_popup_type_generated::*;
   mod arena_reward_type_generated;
   pub use self::arena_reward_type_generated::*;
   mod echelon_type_generated;
@@ -411,8 +409,6 @@ pub mod japan {
   pub use self::scenario_mode_sub_types_generated::*;
   mod service_action_type_generated;
   pub use self::service_action_type_generated::*;
-  mod recipe_display_options_generated;
-  pub use self::recipe_display_options_generated::*;
   mod purchase_source_type_generated;
   pub use self::purchase_source_type_generated::*;
   mod product_category_generated;
@@ -455,6 +451,14 @@ pub mod japan {
   pub use self::world_raid_difficulty_generated::*;
   mod ground_vector_3_generated;
   pub use self::ground_vector_3_generated::*;
+  mod addressable_black_list_excel_table_generated;
+  pub use self::addressable_black_list_excel_table_generated::*;
+  mod addressable_black_list_excel_generated;
+  pub use self::addressable_black_list_excel_generated::*;
+  mod addressable_white_list_excel_table_generated;
+  pub use self::addressable_white_list_excel_table_generated::*;
+  mod addressable_white_list_excel_generated;
+  pub use self::addressable_white_list_excel_generated::*;
   mod animation_blend_table_generated;
   pub use self::animation_blend_table_generated::*;
   mod blend_data_generated;
@@ -481,14 +485,14 @@ pub mod japan {
   pub use self::buff_particle_excel_table_generated::*;
   mod buff_particle_excel_generated;
   pub use self::buff_particle_excel_generated::*;
-  mod character_dialog_emoji_excel_table_generated;
-  pub use self::character_dialog_emoji_excel_table_generated::*;
-  mod character_dialog_emoji_excel_generated;
-  pub use self::character_dialog_emoji_excel_generated::*;
   mod character_dialog_field_excel_table_generated;
   pub use self::character_dialog_field_excel_table_generated::*;
   mod character_dialog_field_excel_generated;
   pub use self::character_dialog_field_excel_generated::*;
+  mod cheat_code_list_excel_table_generated;
+  pub use self::cheat_code_list_excel_table_generated::*;
+  mod cheat_code_list_excel_generated;
+  pub use self::cheat_code_list_excel_generated::*;
   mod clear_deck_rule_excel_table_generated;
   pub use self::clear_deck_rule_excel_table_generated::*;
   mod clear_deck_rule_excel_generated;
@@ -557,6 +561,10 @@ pub mod japan {
   pub use self::coupon_stuff_excel_table_generated::*;
   mod coupon_stuff_excel_generated;
   pub use self::coupon_stuff_excel_generated::*;
+  mod cumulative_time_reward_excel_table_generated;
+  pub use self::cumulative_time_reward_excel_table_generated::*;
+  mod cumulative_time_reward_excel_generated;
+  pub use self::cumulative_time_reward_excel_generated::*;
   mod default_character_excel_table_generated;
   pub use self::default_character_excel_table_generated::*;
   mod default_character_excel_generated;
@@ -657,16 +665,24 @@ pub mod japan {
   pub use self::field_world_map_zone_excel_table_generated::*;
   mod field_world_map_zone_excel_generated;
   pub use self::field_world_map_zone_excel_generated::*;
-  mod gacha_select_pickup_group_excel_table_generated;
-  pub use self::gacha_select_pickup_group_excel_table_generated::*;
-  mod gacha_select_pickup_group_excel_generated;
-  pub use self::gacha_select_pickup_group_excel_generated::*;
   mod ground_grid_flat_generated;
   pub use self::ground_grid_flat_generated::*;
   mod ground_node_flat_generated;
   pub use self::ground_node_flat_generated::*;
   mod ground_node_layer_flat_generated;
   pub use self::ground_node_layer_flat_generated::*;
+  mod katakana_convert_excel_table_generated;
+  pub use self::katakana_convert_excel_table_generated::*;
+  mod katakana_convert_excel_generated;
+  pub use self::katakana_convert_excel_generated::*;
+  mod key_mapping_excel_table_generated;
+  pub use self::key_mapping_excel_table_generated::*;
+  mod key_mapping_excel_generated;
+  pub use self::key_mapping_excel_generated::*;
+  mod key_mapping_popup_excel_table_generated;
+  pub use self::key_mapping_popup_excel_table_generated::*;
+  mod key_mapping_popup_excel_generated;
+  pub use self::key_mapping_popup_excel_generated::*;
   mod knock_back_excel_table_generated;
   pub use self::knock_back_excel_table_generated::*;
   mod knock_back_excel_generated;
@@ -683,14 +699,6 @@ pub mod japan {
   pub use self::limited_stage_season_excel_table_generated::*;
   mod limited_stage_season_excel_generated;
   pub use self::limited_stage_season_excel_generated::*;
-  mod localize_ccgexcel_table_generated;
-  pub use self::localize_ccgexcel_table_generated::*;
-  mod localize_ccgexcel_generated;
-  pub use self::localize_ccgexcel_generated::*;
-  mod localize_field_excel_table_generated;
-  pub use self::localize_field_excel_table_generated::*;
-  mod localize_field_excel_generated;
-  pub use self::localize_field_excel_generated::*;
   mod minigame_card_excel_table_generated;
   pub use self::minigame_card_excel_table_generated::*;
   mod minigame_card_excel_generated;
@@ -739,10 +747,6 @@ pub mod japan {
   pub use self::scenario_replay_excel_table_generated::*;
   mod scenario_replay_excel_generated;
   pub use self::scenario_replay_excel_generated::*;
-  mod scenario_script_field_1_excel_table_generated;
-  pub use self::scenario_script_field_1_excel_table_generated::*;
-  mod scenario_script_field_1_excel_generated;
-  pub use self::scenario_script_field_1_excel_generated::*;
   mod special_lobby_illust_excel_table_generated;
   pub use self::special_lobby_illust_excel_table_generated::*;
   mod special_lobby_illust_excel_generated;
@@ -779,6 +783,10 @@ pub mod japan {
   pub use self::transcendence_recipe_excel_table_generated::*;
   mod transcendence_recipe_excel_generated;
   pub use self::transcendence_recipe_excel_generated::*;
+  mod voice_skill_use_excel_table_generated;
+  pub use self::voice_skill_use_excel_table_generated::*;
+  mod voice_skill_use_excel_generated;
+  pub use self::voice_skill_use_excel_generated::*;
   mod week_dungeon_find_gift_reward_excel_table_generated;
   pub use self::week_dungeon_find_gift_reward_excel_table_generated::*;
   mod week_dungeon_find_gift_reward_excel_generated;
@@ -801,8 +809,6 @@ pub mod japan {
   pub use self::account_level_excel_generated::*;
   mod account_level_reward_excel_generated;
   pub use self::account_level_reward_excel_generated::*;
-  mod alert_popup_excel_generated;
-  pub use self::alert_popup_excel_generated::*;
   mod arena_level_section_excel_generated;
   pub use self::arena_level_section_excel_generated::*;
   mod arena_map_excel_generated;
@@ -847,6 +853,8 @@ pub mod japan {
   pub use self::bgmraid_excel_generated::*;
   mod bgmuiexcel_generated;
   pub use self::bgmuiexcel_generated::*;
+  mod bgm_global_excel_generated;
+  pub use self::bgm_global_excel_generated::*;
   mod boss_external_btexcel_generated;
   pub use self::boss_external_btexcel_generated::*;
   mod bullet_armor_damage_factor_excel_generated;
@@ -883,6 +891,8 @@ pub mod japan {
   pub use self::character_combat_skin_excel_generated::*;
   mod character_dialog_battle_pass_excel_generated;
   pub use self::character_dialog_battle_pass_excel_generated::*;
+  mod character_dialog_emoji_excel_generated;
+  pub use self::character_dialog_emoji_excel_generated::*;
   mod character_dialog_event_excel_generated;
   pub use self::character_dialog_event_excel_generated::*;
   mod character_dialog_excel_generated;
@@ -931,8 +941,6 @@ pub mod japan {
   pub use self::character_weapon_exp_bonus_excel_generated::*;
   mod character_weapon_level_excel_generated;
   pub use self::character_weapon_level_excel_generated::*;
-  mod cheat_code_list_excel_generated;
-  pub use self::cheat_code_list_excel_generated::*;
   mod clan_chatting_emoji_excel_generated;
   pub use self::clan_chatting_emoji_excel_generated::*;
   mod clan_reward_excel_generated;
@@ -1151,6 +1159,8 @@ pub mod japan {
   pub use self::gacha_element_recursive_excel_generated::*;
   mod gacha_group_excel_generated;
   pub use self::gacha_group_excel_generated::*;
+  mod gacha_select_pickup_group_excel_generated;
+  pub use self::gacha_select_pickup_group_excel_generated::*;
   mod goods_excel_generated;
   pub use self::goods_excel_generated::*;
   mod ground_excel_generated;
@@ -1175,10 +1185,6 @@ pub mod japan {
   pub use self::information_strategy_object_excel_generated::*;
   mod item_excel_generated;
   pub use self::item_excel_generated::*;
-  mod key_mapping_excel_generated;
-  pub use self::key_mapping_excel_generated::*;
-  mod key_mapping_popup_excel_generated;
-  pub use self::key_mapping_popup_excel_generated::*;
   mod level_exp_master_coin_excel_generated;
   pub use self::level_exp_master_coin_excel_generated::*;
   mod loading_image_excel_generated;
@@ -1203,6 +1209,8 @@ pub mod japan {
   pub use self::logic_effect_common_visual_excel_generated::*;
   mod memory_lobby_excel_generated;
   pub use self::memory_lobby_excel_generated::*;
+  mod memory_lobby_global_excel_generated;
+  pub use self::memory_lobby_global_excel_generated::*;
   mod message_popup_excel_generated;
   pub use self::message_popup_excel_generated::*;
   mod mini_game_audio_animator_excel_generated;
@@ -1393,6 +1401,8 @@ pub mod japan {
   pub use self::scenario_bgeffect_excel_generated::*;
   mod scenario_bgname_excel_generated;
   pub use self::scenario_bgname_excel_generated::*;
+  mod scenario_bgname_global_excel_generated;
+  pub use self::scenario_bgname_global_excel_generated::*;
   mod scenario_character_emotion_excel_generated;
   pub use self::scenario_character_emotion_excel_generated::*;
   mod scenario_character_name_excel_generated;
@@ -1407,12 +1417,12 @@ pub mod japan {
   pub use self::scenario_mode_excel_generated::*;
   mod scenario_mode_reward_excel_generated;
   pub use self::scenario_mode_reward_excel_generated::*;
-  mod scenario_mode_spoiler_popup_excel_generated;
-  pub use self::scenario_mode_spoiler_popup_excel_generated::*;
   mod scenario_resource_info_excel_generated;
   pub use self::scenario_resource_info_excel_generated::*;
   mod scenario_script_excel_generated;
   pub use self::scenario_script_excel_generated::*;
+  mod scenario_script_funnel_excel_generated;
+  pub use self::scenario_script_funnel_excel_generated::*;
   mod scenario_transition_excel_generated;
   pub use self::scenario_transition_excel_generated::*;
   mod school_dungeon_reward_excel_generated;
@@ -1455,6 +1465,8 @@ pub mod japan {
   pub use self::sound_uiexcel_generated::*;
   mod spine_lipsync_excel_generated;
   pub use self::spine_lipsync_excel_generated::*;
+  mod stage_file_refresh_setting_excel_generated;
+  pub use self::stage_file_refresh_setting_excel_generated::*;
   mod stat_level_interpolation_excel_generated;
   pub use self::stat_level_interpolation_excel_generated::*;
   mod sticker_group_excel_generated;
@@ -1495,6 +1507,8 @@ pub mod japan {
   pub use self::under_cover_stage_excel_generated::*;
   mod video_excel_generated;
   pub use self::video_excel_generated::*;
+  mod video_global_excel_generated;
+  pub use self::video_global_excel_generated::*;
   mod voice_common_excel_generated;
   pub use self::voice_common_excel_generated::*;
   mod voice_excel_generated;
@@ -1507,6 +1521,8 @@ pub mod japan {
   pub use self::voice_spine_excel_generated::*;
   mod voice_timeline_excel_generated;
   pub use self::voice_timeline_excel_generated::*;
+  mod web_event_season_excel_generated;
+  pub use self::web_event_season_excel_generated::*;
   mod week_dungeon_excel_generated;
   pub use self::week_dungeon_excel_generated::*;
   mod week_dungeon_group_buff_excel_generated;
@@ -1527,4 +1543,4 @@ pub mod japan {
   pub use self::world_raid_stage_excel_generated::*;
   mod world_raid_stage_reward_excel_generated;
   pub use self::world_raid_stage_reward_excel_generated::*;
-} // japan
+} // global
