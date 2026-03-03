@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_EQUIPMENT_OPTION_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_EQUIPMENT_OPTION_TYPE: i32 = 90;
+pub const ENUM_MAX_EQUIPMENT_OPTION_TYPE: i32 = 94;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_EQUIPMENT_OPTION_TYPE: [EquipmentOptionType; 91] = [
+pub const ENUM_VALUES_EQUIPMENT_OPTION_TYPE: [EquipmentOptionType; 95] = [
   EquipmentOptionType::None,
   EquipmentOptionType::MaxHP_Base,
   EquipmentOptionType::MaxHP_Coefficient,
@@ -111,6 +111,10 @@ pub const ENUM_VALUES_EQUIPMENT_OPTION_TYPE: [EquipmentOptionType; 91] = [
   EquipmentOptionType::RegenCost_Coefficient,
   EquipmentOptionType::MaxCostIncrease_Base,
   EquipmentOptionType::HealRate_Base,
+  EquipmentOptionType::EnhanceChemicalRate_Base,
+  EquipmentOptionType::EnhanceChemicalRate_Coefficient,
+  EquipmentOptionType::EnhanceCompositeArmorRate_Base,
+  EquipmentOptionType::EnhanceCompositeArmorRate_Coefficient,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -209,9 +213,13 @@ impl EquipmentOptionType {
   pub const RegenCost_Coefficient: Self = Self(88);
   pub const MaxCostIncrease_Base: Self = Self(89);
   pub const HealRate_Base: Self = Self(90);
+  pub const EnhanceChemicalRate_Base: Self = Self(91);
+  pub const EnhanceChemicalRate_Coefficient: Self = Self(92);
+  pub const EnhanceCompositeArmorRate_Base: Self = Self(93);
+  pub const EnhanceCompositeArmorRate_Coefficient: Self = Self(94);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 90;
+  pub const ENUM_MAX: i32 = 94;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::MaxHP_Base,
@@ -304,6 +312,10 @@ impl EquipmentOptionType {
     Self::RegenCost_Coefficient,
     Self::MaxCostIncrease_Base,
     Self::HealRate_Base,
+    Self::EnhanceChemicalRate_Base,
+    Self::EnhanceChemicalRate_Coefficient,
+    Self::EnhanceCompositeArmorRate_Base,
+    Self::EnhanceCompositeArmorRate_Coefficient,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -399,6 +411,10 @@ impl EquipmentOptionType {
       Self::RegenCost_Coefficient => Some("RegenCost_Coefficient"),
       Self::MaxCostIncrease_Base => Some("MaxCostIncrease_Base"),
       Self::HealRate_Base => Some("HealRate_Base"),
+      Self::EnhanceChemicalRate_Base => Some("EnhanceChemicalRate_Base"),
+      Self::EnhanceChemicalRate_Coefficient => Some("EnhanceChemicalRate_Coefficient"),
+      Self::EnhanceCompositeArmorRate_Base => Some("EnhanceCompositeArmorRate_Base"),
+      Self::EnhanceCompositeArmorRate_Coefficient => Some("EnhanceCompositeArmorRate_Coefficient"),
       _ => None,
     }
   }

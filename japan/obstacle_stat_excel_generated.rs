@@ -41,10 +41,12 @@ impl<'a> ObstacleStatExcel<'a> {
   pub const VT_ENHANCEHEAVYARMORRATE: flatbuffers::VOffsetT = 22;
   pub const VT_ENHANCEUNARMEDRATE: flatbuffers::VOffsetT = 24;
   pub const VT_ENHANCEELASTICARMORRATE: flatbuffers::VOffsetT = 26;
-  pub const VT_ENHANCESTRUCTURERATE: flatbuffers::VOffsetT = 28;
-  pub const VT_ENHANCENORMALARMORRATE: flatbuffers::VOffsetT = 30;
-  pub const VT_REDUCEEXDAMAGEDRATE: flatbuffers::VOffsetT = 32;
-  pub const VT_REDUCEBASICSDAMAGEDRATE: flatbuffers::VOffsetT = 34;
+  pub const VT_ENHANCECOMPOSITEARMORRATE: flatbuffers::VOffsetT = 28;
+  pub const VT_ENHANCESTRUCTURERATE: flatbuffers::VOffsetT = 30;
+  pub const VT_ENHANCENORMALARMORRATE: flatbuffers::VOffsetT = 32;
+  pub const VT_REDUCEEXDAMAGEDRATE: flatbuffers::VOffsetT = 34;
+  pub const VT_REDUCEBASICSDAMAGEDRATE: flatbuffers::VOffsetT = 36;
+  pub const VT_REDUCEWEAKDAMAGEDRATE: flatbuffers::VOffsetT = 38;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -57,6 +59,9 @@ impl<'a> ObstacleStatExcel<'a> {
   ) -> flatbuffers::WIPOffset<ObstacleStatExcel<'bldr>> {
     let mut builder = ObstacleStatExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"ObstacleStat");
+      let x = args.ReduceWeakDamagedRate;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ReduceWeakDamagedRate(x);
       let x = args.ReduceBasicsDamagedRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ReduceBasicsDamagedRate(x);
@@ -69,6 +74,9 @@ impl<'a> ObstacleStatExcel<'a> {
       let x = args.EnhanceStructureRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EnhanceStructureRate(x);
+      let x = args.EnhanceCompositeArmorRate;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_EnhanceCompositeArmorRate(x);
       let x = args.EnhanceElasticArmorRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EnhanceElasticArmorRate(x);
@@ -128,10 +136,12 @@ impl<'a> ObstacleStatExcel<'a> {
       let EnhanceHeavyArmorRate = self.EnhanceHeavyArmorRate();
       let EnhanceUnarmedRate = self.EnhanceUnarmedRate();
       let EnhanceElasticArmorRate = self.EnhanceElasticArmorRate();
+      let EnhanceCompositeArmorRate = self.EnhanceCompositeArmorRate();
       let EnhanceStructureRate = self.EnhanceStructureRate();
       let EnhanceNormalArmorRate = self.EnhanceNormalArmorRate();
       let ReduceExDamagedRate = self.ReduceExDamagedRate();
       let ReduceBasicsDamagedRate = self.ReduceBasicsDamagedRate();
+      let ReduceWeakDamagedRate = self.ReduceWeakDamagedRate();
     ObstacleStatExcelT {
       StringID,
       Name,
@@ -145,10 +155,12 @@ impl<'a> ObstacleStatExcel<'a> {
       EnhanceHeavyArmorRate,
       EnhanceUnarmedRate,
       EnhanceElasticArmorRate,
+      EnhanceCompositeArmorRate,
       EnhanceStructureRate,
       EnhanceNormalArmorRate,
       ReduceExDamagedRate,
       ReduceBasicsDamagedRate,
+      ReduceWeakDamagedRate,
     }
   }
 
@@ -237,6 +249,13 @@ impl<'a> ObstacleStatExcel<'a> {
     unsafe { self._tab.get::<i64>(ObstacleStatExcel::VT_ENHANCEELASTICARMORRATE, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn EnhanceCompositeArmorRate(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ObstacleStatExcel::VT_ENHANCECOMPOSITEARMORRATE, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn EnhanceStructureRate(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
@@ -264,6 +283,13 @@ impl<'a> ObstacleStatExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(ObstacleStatExcel::VT_REDUCEBASICSDAMAGEDRATE, Some(0)).unwrap()}
   }
+  #[inline]
+  pub fn ReduceWeakDamagedRate(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ObstacleStatExcel::VT_REDUCEWEAKDAMAGEDRATE, Some(0)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for ObstacleStatExcel<'_> {
@@ -285,10 +311,12 @@ impl flatbuffers::Verifiable for ObstacleStatExcel<'_> {
      .visit_field::<i64>("EnhanceHeavyArmorRate", Self::VT_ENHANCEHEAVYARMORRATE, false)?
      .visit_field::<i64>("EnhanceUnarmedRate", Self::VT_ENHANCEUNARMEDRATE, false)?
      .visit_field::<i64>("EnhanceElasticArmorRate", Self::VT_ENHANCEELASTICARMORRATE, false)?
+     .visit_field::<i64>("EnhanceCompositeArmorRate", Self::VT_ENHANCECOMPOSITEARMORRATE, false)?
      .visit_field::<i64>("EnhanceStructureRate", Self::VT_ENHANCESTRUCTURERATE, false)?
      .visit_field::<i64>("EnhanceNormalArmorRate", Self::VT_ENHANCENORMALARMORRATE, false)?
      .visit_field::<i64>("ReduceExDamagedRate", Self::VT_REDUCEEXDAMAGEDRATE, false)?
      .visit_field::<i64>("ReduceBasicsDamagedRate", Self::VT_REDUCEBASICSDAMAGEDRATE, false)?
+     .visit_field::<i64>("ReduceWeakDamagedRate", Self::VT_REDUCEWEAKDAMAGEDRATE, false)?
      .finish();
     Ok(())
   }
@@ -306,10 +334,12 @@ pub struct ObstacleStatExcelArgs<'a> {
     pub EnhanceHeavyArmorRate: i64,
     pub EnhanceUnarmedRate: i64,
     pub EnhanceElasticArmorRate: i64,
+    pub EnhanceCompositeArmorRate: i64,
     pub EnhanceStructureRate: i64,
     pub EnhanceNormalArmorRate: i64,
     pub ReduceExDamagedRate: i64,
     pub ReduceBasicsDamagedRate: i64,
+    pub ReduceWeakDamagedRate: i64,
 }
 impl<'a> Default for ObstacleStatExcelArgs<'a> {
   #[inline]
@@ -327,10 +357,12 @@ impl<'a> Default for ObstacleStatExcelArgs<'a> {
       EnhanceHeavyArmorRate: 0,
       EnhanceUnarmedRate: 0,
       EnhanceElasticArmorRate: 0,
+      EnhanceCompositeArmorRate: 0,
       EnhanceStructureRate: 0,
       EnhanceNormalArmorRate: 0,
       ReduceExDamagedRate: 0,
       ReduceBasicsDamagedRate: 0,
+      ReduceWeakDamagedRate: 0,
     }
   }
 }
@@ -340,7 +372,7 @@ impl Serialize for ObstacleStatExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ObstacleStatExcel", 16)?;
+    let mut s = serializer.serialize_struct("ObstacleStatExcel", 18)?;
       s.serialize_field("StringID", &self.StringID())?;
       if let Some(f) = self.Name() {
         s.serialize_field("Name", &f)?;
@@ -357,10 +389,12 @@ impl Serialize for ObstacleStatExcel<'_> {
       s.serialize_field("EnhanceHeavyArmorRate", &self.EnhanceHeavyArmorRate())?;
       s.serialize_field("EnhanceUnarmedRate", &self.EnhanceUnarmedRate())?;
       s.serialize_field("EnhanceElasticArmorRate", &self.EnhanceElasticArmorRate())?;
+      s.serialize_field("EnhanceCompositeArmorRate", &self.EnhanceCompositeArmorRate())?;
       s.serialize_field("EnhanceStructureRate", &self.EnhanceStructureRate())?;
       s.serialize_field("EnhanceNormalArmorRate", &self.EnhanceNormalArmorRate())?;
       s.serialize_field("ReduceExDamagedRate", &self.ReduceExDamagedRate())?;
       s.serialize_field("ReduceBasicsDamagedRate", &self.ReduceBasicsDamagedRate())?;
+      s.serialize_field("ReduceWeakDamagedRate", &self.ReduceWeakDamagedRate())?;
     s.end()
   }
 }
@@ -419,6 +453,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ObstacleStatExcelBuilder<'a, 'b
     self.fbb_.push_slot::<i64>(ObstacleStatExcel::VT_ENHANCEELASTICARMORRATE, EnhanceElasticArmorRate, 0);
   }
   #[inline]
+  pub fn add_EnhanceCompositeArmorRate(&mut self, EnhanceCompositeArmorRate: i64) {
+    self.fbb_.push_slot::<i64>(ObstacleStatExcel::VT_ENHANCECOMPOSITEARMORRATE, EnhanceCompositeArmorRate, 0);
+  }
+  #[inline]
   pub fn add_EnhanceStructureRate(&mut self, EnhanceStructureRate: i64) {
     self.fbb_.push_slot::<i64>(ObstacleStatExcel::VT_ENHANCESTRUCTURERATE, EnhanceStructureRate, 0);
   }
@@ -433,6 +471,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ObstacleStatExcelBuilder<'a, 'b
   #[inline]
   pub fn add_ReduceBasicsDamagedRate(&mut self, ReduceBasicsDamagedRate: i64) {
     self.fbb_.push_slot::<i64>(ObstacleStatExcel::VT_REDUCEBASICSDAMAGEDRATE, ReduceBasicsDamagedRate, 0);
+  }
+  #[inline]
+  pub fn add_ReduceWeakDamagedRate(&mut self, ReduceWeakDamagedRate: i64) {
+    self.fbb_.push_slot::<i64>(ObstacleStatExcel::VT_REDUCEWEAKDAMAGEDRATE, ReduceWeakDamagedRate, 0);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ObstacleStatExcelBuilder<'a, 'b, A> {
@@ -464,10 +506,12 @@ impl core::fmt::Debug for ObstacleStatExcel<'_> {
       ds.field("EnhanceHeavyArmorRate", &self.EnhanceHeavyArmorRate());
       ds.field("EnhanceUnarmedRate", &self.EnhanceUnarmedRate());
       ds.field("EnhanceElasticArmorRate", &self.EnhanceElasticArmorRate());
+      ds.field("EnhanceCompositeArmorRate", &self.EnhanceCompositeArmorRate());
       ds.field("EnhanceStructureRate", &self.EnhanceStructureRate());
       ds.field("EnhanceNormalArmorRate", &self.EnhanceNormalArmorRate());
       ds.field("ReduceExDamagedRate", &self.ReduceExDamagedRate());
       ds.field("ReduceBasicsDamagedRate", &self.ReduceBasicsDamagedRate());
+      ds.field("ReduceWeakDamagedRate", &self.ReduceWeakDamagedRate());
       ds.finish()
   }
 }
@@ -486,10 +530,12 @@ pub struct ObstacleStatExcelT {
   pub EnhanceHeavyArmorRate: i64,
   pub EnhanceUnarmedRate: i64,
   pub EnhanceElasticArmorRate: i64,
+  pub EnhanceCompositeArmorRate: i64,
   pub EnhanceStructureRate: i64,
   pub EnhanceNormalArmorRate: i64,
   pub ReduceExDamagedRate: i64,
   pub ReduceBasicsDamagedRate: i64,
+  pub ReduceWeakDamagedRate: i64,
 }
 impl Default for ObstacleStatExcelT {
   fn default() -> Self {
@@ -506,10 +552,12 @@ impl Default for ObstacleStatExcelT {
       EnhanceHeavyArmorRate: 0,
       EnhanceUnarmedRate: 0,
       EnhanceElasticArmorRate: 0,
+      EnhanceCompositeArmorRate: 0,
       EnhanceStructureRate: 0,
       EnhanceNormalArmorRate: 0,
       ReduceExDamagedRate: 0,
       ReduceBasicsDamagedRate: 0,
+      ReduceWeakDamagedRate: 0,
     }
   }
 }
@@ -532,10 +580,12 @@ impl ObstacleStatExcelT {
     let EnhanceHeavyArmorRate = self.EnhanceHeavyArmorRate;
     let EnhanceUnarmedRate = self.EnhanceUnarmedRate;
     let EnhanceElasticArmorRate = self.EnhanceElasticArmorRate;
+    let EnhanceCompositeArmorRate = self.EnhanceCompositeArmorRate;
     let EnhanceStructureRate = self.EnhanceStructureRate;
     let EnhanceNormalArmorRate = self.EnhanceNormalArmorRate;
     let ReduceExDamagedRate = self.ReduceExDamagedRate;
     let ReduceBasicsDamagedRate = self.ReduceBasicsDamagedRate;
+    let ReduceWeakDamagedRate = self.ReduceWeakDamagedRate;
     ObstacleStatExcel::create(_fbb, &ObstacleStatExcelArgs{
       StringID,
       Name,
@@ -549,10 +599,12 @@ impl ObstacleStatExcelT {
       EnhanceHeavyArmorRate,
       EnhanceUnarmedRate,
       EnhanceElasticArmorRate,
+      EnhanceCompositeArmorRate,
       EnhanceStructureRate,
       EnhanceNormalArmorRate,
       ReduceExDamagedRate,
       ReduceBasicsDamagedRate,
+      ReduceWeakDamagedRate,
     })
   }
 }

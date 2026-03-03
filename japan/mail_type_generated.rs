@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_MAIL_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_MAIL_TYPE: i32 = 30;
+pub const ENUM_MAX_MAIL_TYPE: i32 = 35;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_MAIL_TYPE: [MailType; 31] = [
+pub const ENUM_VALUES_MAIL_TYPE: [MailType; 36] = [
   MailType::System,
   MailType::Attendance,
   MailType::Event,
@@ -51,6 +51,11 @@ pub const ENUM_VALUES_MAIL_TYPE: [MailType; 31] = [
   MailType::Temp_5,
   MailType::Temp_6,
   MailType::ProductGooglePointReward,
+  MailType::PaymentCenterProduct,
+  MailType::PaymentCenterMonthly,
+  MailType::PaymentCenterBattlePass,
+  MailType::PaymentCenterDailyRecord,
+  MailType::ExpiryProductDailyRecordItem,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -89,9 +94,14 @@ impl MailType {
   pub const Temp_5: Self = Self(28);
   pub const Temp_6: Self = Self(29);
   pub const ProductGooglePointReward: Self = Self(30);
+  pub const PaymentCenterProduct: Self = Self(31);
+  pub const PaymentCenterMonthly: Self = Self(32);
+  pub const PaymentCenterBattlePass: Self = Self(33);
+  pub const PaymentCenterDailyRecord: Self = Self(34);
+  pub const ExpiryProductDailyRecordItem: Self = Self(35);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 30;
+  pub const ENUM_MAX: i32 = 35;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::System,
     Self::Attendance,
@@ -124,6 +134,11 @@ impl MailType {
     Self::Temp_5,
     Self::Temp_6,
     Self::ProductGooglePointReward,
+    Self::PaymentCenterProduct,
+    Self::PaymentCenterMonthly,
+    Self::PaymentCenterBattlePass,
+    Self::PaymentCenterDailyRecord,
+    Self::ExpiryProductDailyRecordItem,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -159,6 +174,11 @@ impl MailType {
       Self::Temp_5 => Some("Temp_5"),
       Self::Temp_6 => Some("Temp_6"),
       Self::ProductGooglePointReward => Some("ProductGooglePointReward"),
+      Self::PaymentCenterProduct => Some("PaymentCenterProduct"),
+      Self::PaymentCenterMonthly => Some("PaymentCenterMonthly"),
+      Self::PaymentCenterBattlePass => Some("PaymentCenterBattlePass"),
+      Self::PaymentCenterDailyRecord => Some("PaymentCenterDailyRecord"),
+      Self::ExpiryProductDailyRecordItem => Some("ExpiryProductDailyRecordItem"),
       _ => None,
     }
   }

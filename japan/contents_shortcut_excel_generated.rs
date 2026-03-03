@@ -32,16 +32,17 @@ impl<'a> ContentsShortcutExcel<'a> {
   pub const VT_UNIQUEID: flatbuffers::VOffsetT = 4;
   pub const VT_CONTENTTYPE: flatbuffers::VOffsetT = 6;
   pub const VT_EVENTCONTENTID: flatbuffers::VOffsetT = 8;
-  pub const VT_SCENARIOMODEVOLUME: flatbuffers::VOffsetT = 10;
-  pub const VT_SCENARIOMODECHAPTER: flatbuffers::VOffsetT = 12;
-  pub const VT_SHORTCUTOPENTIME: flatbuffers::VOffsetT = 14;
-  pub const VT_SHORTCUTCLOSETIME: flatbuffers::VOffsetT = 16;
-  pub const VT_CONDITIONCONTENTID: flatbuffers::VOffsetT = 18;
-  pub const VT_CONQUESTMAPDIFFICULTY: flatbuffers::VOffsetT = 20;
-  pub const VT_CONQUESTSTEPINDEX: flatbuffers::VOffsetT = 22;
-  pub const VT_SHORTCUTCONTENTID: flatbuffers::VOffsetT = 24;
-  pub const VT_SHORTCUTUINAME: flatbuffers::VOffsetT = 26;
-  pub const VT_LOCALIZE: flatbuffers::VOffsetT = 28;
+  pub const VT_SCENARIOMODETYPE: flatbuffers::VOffsetT = 10;
+  pub const VT_SCENARIOMODEVOLUME: flatbuffers::VOffsetT = 12;
+  pub const VT_SCENARIOMODECHAPTER: flatbuffers::VOffsetT = 14;
+  pub const VT_SHORTCUTOPENTIME: flatbuffers::VOffsetT = 16;
+  pub const VT_SHORTCUTCLOSETIME: flatbuffers::VOffsetT = 18;
+  pub const VT_CONDITIONCONTENTID: flatbuffers::VOffsetT = 20;
+  pub const VT_CONQUESTMAPDIFFICULTY: flatbuffers::VOffsetT = 22;
+  pub const VT_CONQUESTSTEPINDEX: flatbuffers::VOffsetT = 24;
+  pub const VT_SHORTCUTCONTENTID: flatbuffers::VOffsetT = 26;
+  pub const VT_SHORTCUTUINAME: flatbuffers::VOffsetT = 28;
+  pub const VT_LOCALIZE: flatbuffers::VOffsetT = 30;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -90,6 +91,9 @@ impl<'a> ContentsShortcutExcel<'a> {
       if let Some(x) = args.ShortcutOpenTime {
         builder.add_ShortcutOpenTime(x);
       }
+      let x = args.ScenarioModeType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_ScenarioModeType(x);
       let x = args.ContentType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_ContentType(x);
@@ -105,6 +109,11 @@ impl<'a> ContentsShortcutExcel<'a> {
         self.ContentType()
       };
       let EventContentId = self.EventContentId();
+      let ScenarioModeType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.ScenarioModeType(), &key)
+      } else {
+        self.ScenarioModeType()
+      };
       let ScenarioModeVolume = self.ScenarioModeVolume();
       let ScenarioModeChapter = self.ScenarioModeChapter();
     let ShortcutOpenTime = self.ShortcutOpenTime().map(|x| {
@@ -131,6 +140,7 @@ impl<'a> ContentsShortcutExcel<'a> {
       UniqueId,
       ContentType,
       EventContentId,
+      ScenarioModeType,
       ScenarioModeVolume,
       ScenarioModeChapter,
       ShortcutOpenTime,
@@ -164,6 +174,13 @@ impl<'a> ContentsShortcutExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(ContentsShortcutExcel::VT_EVENTCONTENTID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn ScenarioModeType(&self) -> ScenarioModeTypes {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ScenarioModeTypes>(ContentsShortcutExcel::VT_SCENARIOMODETYPE, Some(ScenarioModeTypes::None)).unwrap()}
   }
   #[inline]
   pub fn ScenarioModeVolume(&self) -> i64 {
@@ -247,6 +264,7 @@ impl flatbuffers::Verifiable for ContentsShortcutExcel<'_> {
      .visit_field::<i64>("UniqueId", Self::VT_UNIQUEID, false)?
      .visit_field::<ContentType>("ContentType", Self::VT_CONTENTTYPE, false)?
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
+     .visit_field::<ScenarioModeTypes>("ScenarioModeType", Self::VT_SCENARIOMODETYPE, false)?
      .visit_field::<i64>("ScenarioModeVolume", Self::VT_SCENARIOMODEVOLUME, false)?
      .visit_field::<i64>("ScenarioModeChapter", Self::VT_SCENARIOMODECHAPTER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ShortcutOpenTime", Self::VT_SHORTCUTOPENTIME, false)?
@@ -265,6 +283,7 @@ pub struct ContentsShortcutExcelArgs<'a> {
     pub UniqueId: i64,
     pub ContentType: ContentType,
     pub EventContentId: i64,
+    pub ScenarioModeType: ScenarioModeTypes,
     pub ScenarioModeVolume: i64,
     pub ScenarioModeChapter: i64,
     pub ShortcutOpenTime: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -283,6 +302,7 @@ impl<'a> Default for ContentsShortcutExcelArgs<'a> {
       UniqueId: 0,
       ContentType: ContentType::None,
       EventContentId: 0,
+      ScenarioModeType: ScenarioModeTypes::None,
       ScenarioModeVolume: 0,
       ScenarioModeChapter: 0,
       ShortcutOpenTime: None,
@@ -302,10 +322,11 @@ impl Serialize for ContentsShortcutExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ContentsShortcutExcel", 13)?;
+    let mut s = serializer.serialize_struct("ContentsShortcutExcel", 14)?;
       s.serialize_field("UniqueId", &self.UniqueId())?;
       s.serialize_field("ContentType", &self.ContentType())?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
+      s.serialize_field("ScenarioModeType", &self.ScenarioModeType())?;
       s.serialize_field("ScenarioModeVolume", &self.ScenarioModeVolume())?;
       s.serialize_field("ScenarioModeChapter", &self.ScenarioModeChapter())?;
       if let Some(f) = self.ShortcutOpenTime() {
@@ -352,6 +373,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ContentsShortcutExcelBuilder<'a
   #[inline]
   pub fn add_EventContentId(&mut self, EventContentId: i64) {
     self.fbb_.push_slot::<i64>(ContentsShortcutExcel::VT_EVENTCONTENTID, EventContentId, 0);
+  }
+  #[inline]
+  pub fn add_ScenarioModeType(&mut self, ScenarioModeType: ScenarioModeTypes) {
+    self.fbb_.push_slot::<ScenarioModeTypes>(ContentsShortcutExcel::VT_SCENARIOMODETYPE, ScenarioModeType, ScenarioModeTypes::None);
   }
   #[inline]
   pub fn add_ScenarioModeVolume(&mut self, ScenarioModeVolume: i64) {
@@ -414,6 +439,7 @@ impl core::fmt::Debug for ContentsShortcutExcel<'_> {
       ds.field("UniqueId", &self.UniqueId());
       ds.field("ContentType", &self.ContentType());
       ds.field("EventContentId", &self.EventContentId());
+      ds.field("ScenarioModeType", &self.ScenarioModeType());
       ds.field("ScenarioModeVolume", &self.ScenarioModeVolume());
       ds.field("ScenarioModeChapter", &self.ScenarioModeChapter());
       ds.field("ShortcutOpenTime", &self.ShortcutOpenTime());
@@ -433,6 +459,7 @@ pub struct ContentsShortcutExcelT {
   pub UniqueId: i64,
   pub ContentType: ContentType,
   pub EventContentId: i64,
+  pub ScenarioModeType: ScenarioModeTypes,
   pub ScenarioModeVolume: i64,
   pub ScenarioModeChapter: i64,
   pub ShortcutOpenTime: Option<String>,
@@ -450,6 +477,7 @@ impl Default for ContentsShortcutExcelT {
       UniqueId: 0,
       ContentType: ContentType::None,
       EventContentId: 0,
+      ScenarioModeType: ScenarioModeTypes::None,
       ScenarioModeVolume: 0,
       ScenarioModeChapter: 0,
       ShortcutOpenTime: None,
@@ -471,6 +499,7 @@ impl ContentsShortcutExcelT {
     let UniqueId = self.UniqueId;
     let ContentType = self.ContentType;
     let EventContentId = self.EventContentId;
+    let ScenarioModeType = self.ScenarioModeType;
     let ScenarioModeVolume = self.ScenarioModeVolume;
     let ScenarioModeChapter = self.ScenarioModeChapter;
     let ShortcutOpenTime = self.ShortcutOpenTime.as_ref().map(|x|{
@@ -493,6 +522,7 @@ impl ContentsShortcutExcelT {
       UniqueId,
       ContentType,
       EventContentId,
+      ScenarioModeType,
       ScenarioModeVolume,
       ScenarioModeChapter,
       ShortcutOpenTime,

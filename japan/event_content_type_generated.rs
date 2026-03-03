@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_EVENT_CONTENT_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_EVENT_CONTENT_TYPE: i32 = 41;
+pub const ENUM_MAX_EVENT_CONTENT_TYPE: i32 = 43;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_EVENT_CONTENT_TYPE: [EventContentType; 42] = [
+pub const ENUM_VALUES_EVENT_CONTENT_TYPE: [EventContentType; 44] = [
   EventContentType::Stage,
   EventContentType::Gacha,
   EventContentType::Mission,
@@ -62,6 +62,8 @@ pub const ENUM_VALUES_EVENT_CONTENT_TYPE: [EventContentType; 42] = [
   EventContentType::MiniGameRoad,
   EventContentType::MiniGameCCG,
   EventContentType::Concentration,
+  EventContentType::InteractiveWorldRaid,
+  EventContentType::ClueSearch,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -111,9 +113,11 @@ impl EventContentType {
   pub const MiniGameRoad: Self = Self(39);
   pub const MiniGameCCG: Self = Self(40);
   pub const Concentration: Self = Self(41);
+  pub const InteractiveWorldRaid: Self = Self(42);
+  pub const ClueSearch: Self = Self(43);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 41;
+  pub const ENUM_MAX: i32 = 43;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Stage,
     Self::Gacha,
@@ -157,6 +161,8 @@ impl EventContentType {
     Self::MiniGameRoad,
     Self::MiniGameCCG,
     Self::Concentration,
+    Self::InteractiveWorldRaid,
+    Self::ClueSearch,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -203,6 +209,8 @@ impl EventContentType {
       Self::MiniGameRoad => Some("MiniGameRoad"),
       Self::MiniGameCCG => Some("MiniGameCCG"),
       Self::Concentration => Some("Concentration"),
+      Self::InteractiveWorldRaid => Some("InteractiveWorldRaid"),
+      Self::ClueSearch => Some("ClueSearch"),
       _ => None,
     }
   }

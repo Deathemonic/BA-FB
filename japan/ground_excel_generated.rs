@@ -83,10 +83,11 @@ impl<'a> GroundExcel<'a> {
   pub const VT_UIEMOJISCALE: flatbuffers::VOffsetT = 106;
   pub const VT_UISKILLMAINLOGSCALE: flatbuffers::VOffsetT = 108;
   pub const VT_EFFECTCOUNTLIMIT: flatbuffers::VOffsetT = 110;
-  pub const VT_ALLYPASSIVESKILLID: flatbuffers::VOffsetT = 112;
-  pub const VT_ALLYPASSIVESKILLLEVEL: flatbuffers::VOffsetT = 114;
-  pub const VT_ENEMYPASSIVESKILLID: flatbuffers::VOffsetT = 116;
-  pub const VT_ENEMYPASSIVESKILLLEVEL: flatbuffers::VOffsetT = 118;
+  pub const VT_CARRIERSKILLGROUPID: flatbuffers::VOffsetT = 112;
+  pub const VT_ALLYPASSIVESKILLID: flatbuffers::VOffsetT = 114;
+  pub const VT_ALLYPASSIVESKILLLEVEL: flatbuffers::VOffsetT = 116;
+  pub const VT_ENEMYPASSIVESKILLID: flatbuffers::VOffsetT = 118;
+  pub const VT_ENEMYPASSIVESKILLLEVEL: flatbuffers::VOffsetT = 120;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -99,6 +100,9 @@ impl<'a> GroundExcel<'a> {
   ) -> flatbuffers::WIPOffset<GroundExcel<'bldr>> {
     let mut builder = GroundExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"Ground");
+      let x = args.CarrierSkillGroupId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_CarrierSkillGroupId(x);
       let x = args.BGMId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_BGMId(x);
@@ -360,6 +364,7 @@ impl<'a> GroundExcel<'a> {
         self.UISkillMainLogScale()
       };
       let EffectCountLimit = self.EffectCountLimit();
+      let CarrierSkillGroupId = self.CarrierSkillGroupId();
     let AllyPassiveSkillId = self.AllyPassiveSkillId().map(|x| {
       x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
@@ -427,6 +432,7 @@ impl<'a> GroundExcel<'a> {
       UIEmojiScale,
       UISkillMainLogScale,
       EffectCountLimit,
+      CarrierSkillGroupId,
       AllyPassiveSkillId,
       AllyPassiveSkillLevel,
       EnemyPassiveSkillId,
@@ -813,6 +819,13 @@ impl<'a> GroundExcel<'a> {
     unsafe { self._tab.get::<i32>(GroundExcel::VT_EFFECTCOUNTLIMIT, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn CarrierSkillGroupId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(GroundExcel::VT_CARRIERSKILLGROUPID, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn AllyPassiveSkillId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
@@ -903,6 +916,7 @@ impl flatbuffers::Verifiable for GroundExcel<'_> {
      .visit_field::<f32>("UIEmojiScale", Self::VT_UIEMOJISCALE, false)?
      .visit_field::<f32>("UISkillMainLogScale", Self::VT_UISKILLMAINLOGSCALE, false)?
      .visit_field::<i32>("EffectCountLimit", Self::VT_EFFECTCOUNTLIMIT, false)?
+     .visit_field::<i64>("CarrierSkillGroupId", Self::VT_CARRIERSKILLGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("AllyPassiveSkillId", Self::VT_ALLYPASSIVESKILLID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i32>>>("AllyPassiveSkillLevel", Self::VT_ALLYPASSIVESKILLLEVEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("EnemyPassiveSkillId", Self::VT_ENEMYPASSIVESKILLID, false)?
@@ -966,6 +980,7 @@ pub struct GroundExcelArgs<'a> {
     pub UIEmojiScale: f32,
     pub UISkillMainLogScale: f32,
     pub EffectCountLimit: i32,
+    pub CarrierSkillGroupId: i64,
     pub AllyPassiveSkillId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub AllyPassiveSkillLevel: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i32>>>,
     pub EnemyPassiveSkillId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
@@ -1029,6 +1044,7 @@ impl<'a> Default for GroundExcelArgs<'a> {
       UIEmojiScale: 0.0,
       UISkillMainLogScale: 0.0,
       EffectCountLimit: 0,
+      CarrierSkillGroupId: 0,
       AllyPassiveSkillId: None,
       AllyPassiveSkillLevel: None,
       EnemyPassiveSkillId: None,
@@ -1042,7 +1058,7 @@ impl Serialize for GroundExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("GroundExcel", 58)?;
+    let mut s = serializer.serialize_struct("GroundExcel", 59)?;
       s.serialize_field("Id", &self.Id())?;
       if let Some(f) = self.StageFileName() {
         s.serialize_field("StageFileName", &f)?;
@@ -1113,6 +1129,7 @@ impl Serialize for GroundExcel<'_> {
       s.serialize_field("UIEmojiScale", &self.UIEmojiScale())?;
       s.serialize_field("UISkillMainLogScale", &self.UISkillMainLogScale())?;
       s.serialize_field("EffectCountLimit", &self.EffectCountLimit())?;
+      s.serialize_field("CarrierSkillGroupId", &self.CarrierSkillGroupId())?;
       if let Some(f) = self.AllyPassiveSkillId() {
         s.serialize_field("AllyPassiveSkillId", &f)?;
       } else {
@@ -1359,6 +1376,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GroundExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<i32>(GroundExcel::VT_EFFECTCOUNTLIMIT, EffectCountLimit, 0);
   }
   #[inline]
+  pub fn add_CarrierSkillGroupId(&mut self, CarrierSkillGroupId: i64) {
+    self.fbb_.push_slot::<i64>(GroundExcel::VT_CARRIERSKILLGROUPID, CarrierSkillGroupId, 0);
+  }
+  #[inline]
   pub fn add_AllyPassiveSkillId(&mut self, AllyPassiveSkillId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GroundExcel::VT_ALLYPASSIVESKILLID, AllyPassiveSkillId);
   }
@@ -1446,6 +1467,7 @@ impl core::fmt::Debug for GroundExcel<'_> {
       ds.field("UIEmojiScale", &self.UIEmojiScale());
       ds.field("UISkillMainLogScale", &self.UISkillMainLogScale());
       ds.field("EffectCountLimit", &self.EffectCountLimit());
+      ds.field("CarrierSkillGroupId", &self.CarrierSkillGroupId());
       ds.field("AllyPassiveSkillId", &self.AllyPassiveSkillId());
       ds.field("AllyPassiveSkillLevel", &self.AllyPassiveSkillLevel());
       ds.field("EnemyPassiveSkillId", &self.EnemyPassiveSkillId());
@@ -1510,6 +1532,7 @@ pub struct GroundExcelT {
   pub UIEmojiScale: f32,
   pub UISkillMainLogScale: f32,
   pub EffectCountLimit: i32,
+  pub CarrierSkillGroupId: i64,
   pub AllyPassiveSkillId: Option<Vec<String>>,
   pub AllyPassiveSkillLevel: Option<Vec<i32>>,
   pub EnemyPassiveSkillId: Option<Vec<String>>,
@@ -1572,6 +1595,7 @@ impl Default for GroundExcelT {
       UIEmojiScale: 0.0,
       UISkillMainLogScale: 0.0,
       EffectCountLimit: 0,
+      CarrierSkillGroupId: 0,
       AllyPassiveSkillId: None,
       AllyPassiveSkillLevel: None,
       EnemyPassiveSkillId: None,
@@ -1646,6 +1670,7 @@ impl GroundExcelT {
     let UIEmojiScale = self.UIEmojiScale;
     let UISkillMainLogScale = self.UISkillMainLogScale;
     let EffectCountLimit = self.EffectCountLimit;
+    let CarrierSkillGroupId = self.CarrierSkillGroupId;
     let AllyPassiveSkillId = self.AllyPassiveSkillId.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
@@ -1713,6 +1738,7 @@ impl GroundExcelT {
       UIEmojiScale,
       UISkillMainLogScale,
       EffectCountLimit,
+      CarrierSkillGroupId,
       AllyPassiveSkillId,
       AllyPassiveSkillLevel,
       EnemyPassiveSkillId,

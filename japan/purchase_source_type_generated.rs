@@ -16,16 +16,17 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_PURCHASE_SOURCE_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_PURCHASE_SOURCE_TYPE: i32 = 5;
+pub const ENUM_MAX_PURCHASE_SOURCE_TYPE: i32 = 6;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_PURCHASE_SOURCE_TYPE: [PurchaseSourceType; 6] = [
+pub const ENUM_VALUES_PURCHASE_SOURCE_TYPE: [PurchaseSourceType; 7] = [
   PurchaseSourceType::None,
   PurchaseSourceType::Product,
   PurchaseSourceType::ProductMonthly,
   PurchaseSourceType::ProductBattlePass,
   PurchaseSourceType::ProductSelect,
   PurchaseSourceType::ProductGooglePoint,
+  PurchaseSourceType::ProductDailyRecord,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -39,9 +40,10 @@ impl PurchaseSourceType {
   pub const ProductBattlePass: Self = Self(3);
   pub const ProductSelect: Self = Self(4);
   pub const ProductGooglePoint: Self = Self(5);
+  pub const ProductDailyRecord: Self = Self(6);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 5;
+  pub const ENUM_MAX: i32 = 6;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Product,
@@ -49,6 +51,7 @@ impl PurchaseSourceType {
     Self::ProductBattlePass,
     Self::ProductSelect,
     Self::ProductGooglePoint,
+    Self::ProductDailyRecord,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -59,6 +62,7 @@ impl PurchaseSourceType {
       Self::ProductBattlePass => Some("ProductBattlePass"),
       Self::ProductSelect => Some("ProductSelect"),
       Self::ProductGooglePoint => Some("ProductGooglePoint"),
+      Self::ProductDailyRecord => Some("ProductDailyRecord"),
       _ => None,
     }
   }

@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_EXTERNAL_BEHAVIOR: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_EXTERNAL_BEHAVIOR: i32 = 17;
+pub const ENUM_MAX_EXTERNAL_BEHAVIOR: i32 = 19;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_EXTERNAL_BEHAVIOR: [ExternalBehavior; 18] = [
+pub const ENUM_VALUES_EXTERNAL_BEHAVIOR: [ExternalBehavior; 20] = [
   ExternalBehavior::UseNextExSkill,
   ExternalBehavior::ChangePhase,
   ExternalBehavior::ChangeSection,
@@ -38,6 +38,8 @@ pub const ENUM_VALUES_EXTERNAL_BEHAVIOR: [ExternalBehavior; 18] = [
   ExternalBehavior::SelectTargetToUseSkillAlly,
   ExternalBehavior::ForceChangePhase,
   ExternalBehavior::ClearUseSkillEndGroupId,
+  ExternalBehavior::ChangePhaseKeepATG,
+  ExternalBehavior::ForceChangePhaseKeepATG,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -63,9 +65,11 @@ impl ExternalBehavior {
   pub const SelectTargetToUseSkillAlly: Self = Self(15);
   pub const ForceChangePhase: Self = Self(16);
   pub const ClearUseSkillEndGroupId: Self = Self(17);
+  pub const ChangePhaseKeepATG: Self = Self(18);
+  pub const ForceChangePhaseKeepATG: Self = Self(19);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 17;
+  pub const ENUM_MAX: i32 = 19;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::UseNextExSkill,
     Self::ChangePhase,
@@ -85,6 +89,8 @@ impl ExternalBehavior {
     Self::SelectTargetToUseSkillAlly,
     Self::ForceChangePhase,
     Self::ClearUseSkillEndGroupId,
+    Self::ChangePhaseKeepATG,
+    Self::ForceChangePhaseKeepATG,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -107,6 +113,8 @@ impl ExternalBehavior {
       Self::SelectTargetToUseSkillAlly => Some("SelectTargetToUseSkillAlly"),
       Self::ForceChangePhase => Some("ForceChangePhase"),
       Self::ClearUseSkillEndGroupId => Some("ClearUseSkillEndGroupId"),
+      Self::ChangePhaseKeepATG => Some("ChangePhaseKeepATG"),
+      Self::ForceChangePhaseKeepATG => Some("ForceChangePhaseKeepATG"),
       _ => None,
     }
   }

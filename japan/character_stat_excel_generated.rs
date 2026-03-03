@@ -58,58 +58,62 @@ impl<'a> CharacterStatExcel<'a> {
   pub const VT_ENHANCEPIERCERATE: flatbuffers::VOffsetT = 56;
   pub const VT_ENHANCEMYSTICRATE: flatbuffers::VOffsetT = 58;
   pub const VT_ENHANCESONICRATE: flatbuffers::VOffsetT = 60;
-  pub const VT_ENHANCESIEGERATE: flatbuffers::VOffsetT = 62;
-  pub const VT_ENHANCENORMALRATE: flatbuffers::VOffsetT = 64;
-  pub const VT_ENHANCELIGHTARMORRATE: flatbuffers::VOffsetT = 66;
-  pub const VT_ENHANCEHEAVYARMORRATE: flatbuffers::VOffsetT = 68;
-  pub const VT_ENHANCEUNARMEDRATE: flatbuffers::VOffsetT = 70;
-  pub const VT_ENHANCEELASTICARMORRATE: flatbuffers::VOffsetT = 72;
-  pub const VT_ENHANCESTRUCTURERATE: flatbuffers::VOffsetT = 74;
-  pub const VT_ENHANCENORMALARMORRATE: flatbuffers::VOffsetT = 76;
-  pub const VT_EXTENDBUFFDURATION: flatbuffers::VOffsetT = 78;
-  pub const VT_EXTENDDEBUFFDURATION: flatbuffers::VOffsetT = 80;
-  pub const VT_EXTENDCROWDCONTROLDURATION: flatbuffers::VOffsetT = 82;
-  pub const VT_AMMOCOUNT: flatbuffers::VOffsetT = 84;
-  pub const VT_AMMOCOST: flatbuffers::VOffsetT = 86;
-  pub const VT_IGNOREDELAYCOUNT: flatbuffers::VOffsetT = 88;
-  pub const VT_NORMALATTACKSPEED: flatbuffers::VOffsetT = 90;
-  pub const VT_RANGE: flatbuffers::VOffsetT = 92;
-  pub const VT_INITIALRANGERATE: flatbuffers::VOffsetT = 94;
-  pub const VT_MOVESPEED: flatbuffers::VOffsetT = 96;
-  pub const VT_SIGHTPOINT: flatbuffers::VOffsetT = 98;
-  pub const VT_ACTIVEGAUGE: flatbuffers::VOffsetT = 100;
-  pub const VT_GROGGYGAUGE: flatbuffers::VOffsetT = 102;
-  pub const VT_GROGGYTIME: flatbuffers::VOffsetT = 104;
-  pub const VT_STRATEGYMOBILITY: flatbuffers::VOffsetT = 106;
-  pub const VT_ACTIONCOUNT: flatbuffers::VOffsetT = 108;
-  pub const VT_STRATEGYSIGHTRANGE: flatbuffers::VOffsetT = 110;
-  pub const VT_DAMAGERATIO: flatbuffers::VOffsetT = 112;
-  pub const VT_DAMAGEDRATIO: flatbuffers::VOffsetT = 114;
-  pub const VT_DAMAGERATIO2INCREASE: flatbuffers::VOffsetT = 116;
-  pub const VT_DAMAGERATIO2DECREASE: flatbuffers::VOffsetT = 118;
-  pub const VT_DAMAGEDRATIO2INCREASE: flatbuffers::VOffsetT = 120;
-  pub const VT_DAMAGEDRATIO2DECREASE: flatbuffers::VOffsetT = 122;
-  pub const VT_EXDAMAGEDRATIOINCREASE: flatbuffers::VOffsetT = 124;
-  pub const VT_EXDAMAGEDRATIODECREASE: flatbuffers::VOffsetT = 126;
-  pub const VT_ENHANCEEXDAMAGERATE: flatbuffers::VOffsetT = 128;
-  pub const VT_REDUCEEXDAMAGEDRATE: flatbuffers::VOffsetT = 130;
-  pub const VT_ENHANCEBASICSDAMAGERATE: flatbuffers::VOffsetT = 132;
-  pub const VT_REDUCEBASICSDAMAGEDRATE: flatbuffers::VOffsetT = 134;
-  pub const VT_HEALRATE: flatbuffers::VOffsetT = 136;
-  pub const VT_HEALLIGHTARMORRATE: flatbuffers::VOffsetT = 138;
-  pub const VT_HEALHEAVYARMORRATE: flatbuffers::VOffsetT = 140;
-  pub const VT_HEALUNARMEDRATE: flatbuffers::VOffsetT = 142;
-  pub const VT_HEALELASTICARMORRATE: flatbuffers::VOffsetT = 144;
-  pub const VT_HEALNORMALARMORRATE: flatbuffers::VOffsetT = 146;
-  pub const VT_HEALEDEXPLOSIONRATE: flatbuffers::VOffsetT = 148;
-  pub const VT_HEALEDPIERCERATE: flatbuffers::VOffsetT = 150;
-  pub const VT_HEALEDMYSTICRATE: flatbuffers::VOffsetT = 152;
-  pub const VT_HEALEDSONICRATE: flatbuffers::VOffsetT = 154;
-  pub const VT_HEALEDNORMALRATE: flatbuffers::VOffsetT = 156;
-  pub const VT_STREETBATTLEADAPTATION: flatbuffers::VOffsetT = 158;
-  pub const VT_OUTDOORBATTLEADAPTATION: flatbuffers::VOffsetT = 160;
-  pub const VT_INDOORBATTLEADAPTATION: flatbuffers::VOffsetT = 162;
-  pub const VT_REGENCOST: flatbuffers::VOffsetT = 164;
+  pub const VT_ENHANCECHEMICALRATE: flatbuffers::VOffsetT = 62;
+  pub const VT_ENHANCESIEGERATE: flatbuffers::VOffsetT = 64;
+  pub const VT_ENHANCENORMALRATE: flatbuffers::VOffsetT = 66;
+  pub const VT_ENHANCELIGHTARMORRATE: flatbuffers::VOffsetT = 68;
+  pub const VT_ENHANCEHEAVYARMORRATE: flatbuffers::VOffsetT = 70;
+  pub const VT_ENHANCEUNARMEDRATE: flatbuffers::VOffsetT = 72;
+  pub const VT_ENHANCEELASTICARMORRATE: flatbuffers::VOffsetT = 74;
+  pub const VT_ENHANCECOMPOSITEARMORRATE: flatbuffers::VOffsetT = 76;
+  pub const VT_ENHANCESTRUCTURERATE: flatbuffers::VOffsetT = 78;
+  pub const VT_ENHANCENORMALARMORRATE: flatbuffers::VOffsetT = 80;
+  pub const VT_EXTENDBUFFDURATION: flatbuffers::VOffsetT = 82;
+  pub const VT_EXTENDDEBUFFDURATION: flatbuffers::VOffsetT = 84;
+  pub const VT_EXTENDCROWDCONTROLDURATION: flatbuffers::VOffsetT = 86;
+  pub const VT_AMMOCOUNT: flatbuffers::VOffsetT = 88;
+  pub const VT_AMMOCOST: flatbuffers::VOffsetT = 90;
+  pub const VT_IGNOREDELAYCOUNT: flatbuffers::VOffsetT = 92;
+  pub const VT_NORMALATTACKSPEED: flatbuffers::VOffsetT = 94;
+  pub const VT_RANGE: flatbuffers::VOffsetT = 96;
+  pub const VT_INITIALRANGERATE: flatbuffers::VOffsetT = 98;
+  pub const VT_MOVESPEED: flatbuffers::VOffsetT = 100;
+  pub const VT_SIGHTPOINT: flatbuffers::VOffsetT = 102;
+  pub const VT_ACTIVEGAUGE: flatbuffers::VOffsetT = 104;
+  pub const VT_GROGGYGAUGE: flatbuffers::VOffsetT = 106;
+  pub const VT_GROGGYTIME: flatbuffers::VOffsetT = 108;
+  pub const VT_STRATEGYMOBILITY: flatbuffers::VOffsetT = 110;
+  pub const VT_ACTIONCOUNT: flatbuffers::VOffsetT = 112;
+  pub const VT_STRATEGYSIGHTRANGE: flatbuffers::VOffsetT = 114;
+  pub const VT_DAMAGERATIO: flatbuffers::VOffsetT = 116;
+  pub const VT_DAMAGEDRATIO: flatbuffers::VOffsetT = 118;
+  pub const VT_DAMAGERATIO2INCREASE: flatbuffers::VOffsetT = 120;
+  pub const VT_DAMAGERATIO2DECREASE: flatbuffers::VOffsetT = 122;
+  pub const VT_DAMAGEDRATIO2INCREASE: flatbuffers::VOffsetT = 124;
+  pub const VT_DAMAGEDRATIO2DECREASE: flatbuffers::VOffsetT = 126;
+  pub const VT_EXDAMAGEDRATIOINCREASE: flatbuffers::VOffsetT = 128;
+  pub const VT_EXDAMAGEDRATIODECREASE: flatbuffers::VOffsetT = 130;
+  pub const VT_ENHANCEEXDAMAGERATE: flatbuffers::VOffsetT = 132;
+  pub const VT_REDUCEEXDAMAGEDRATE: flatbuffers::VOffsetT = 134;
+  pub const VT_ENHANCEBASICSDAMAGERATE: flatbuffers::VOffsetT = 136;
+  pub const VT_REDUCEBASICSDAMAGEDRATE: flatbuffers::VOffsetT = 138;
+  pub const VT_ENHANCEWEAKDAMAGERATE: flatbuffers::VOffsetT = 140;
+  pub const VT_REDUCEWEAKDAMAGEDRATE: flatbuffers::VOffsetT = 142;
+  pub const VT_HEALRATE: flatbuffers::VOffsetT = 144;
+  pub const VT_HEALLIGHTARMORRATE: flatbuffers::VOffsetT = 146;
+  pub const VT_HEALHEAVYARMORRATE: flatbuffers::VOffsetT = 148;
+  pub const VT_HEALUNARMEDRATE: flatbuffers::VOffsetT = 150;
+  pub const VT_HEALELASTICARMORRATE: flatbuffers::VOffsetT = 152;
+  pub const VT_HEALNORMALARMORRATE: flatbuffers::VOffsetT = 154;
+  pub const VT_HEALEDEXPLOSIONRATE: flatbuffers::VOffsetT = 156;
+  pub const VT_HEALEDPIERCERATE: flatbuffers::VOffsetT = 158;
+  pub const VT_HEALEDMYSTICRATE: flatbuffers::VOffsetT = 160;
+  pub const VT_HEALEDSONICRATE: flatbuffers::VOffsetT = 162;
+  pub const VT_HEALEDNORMALRATE: flatbuffers::VOffsetT = 164;
+  pub const VT_STREETBATTLEADAPTATION: flatbuffers::VOffsetT = 166;
+  pub const VT_OUTDOORBATTLEADAPTATION: flatbuffers::VOffsetT = 168;
+  pub const VT_INDOORBATTLEADAPTATION: flatbuffers::VOffsetT = 170;
+  pub const VT_REGENCOST: flatbuffers::VOffsetT = 172;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -158,6 +162,12 @@ impl<'a> CharacterStatExcel<'a> {
       let x = args.HealRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_HealRate(x);
+      let x = args.ReduceWeakDamagedRate;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ReduceWeakDamagedRate(x);
+      let x = args.EnhanceWeakDamageRate;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_EnhanceWeakDamageRate(x);
       let x = args.ReduceBasicsDamagedRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ReduceBasicsDamagedRate(x);
@@ -245,6 +255,9 @@ impl<'a> CharacterStatExcel<'a> {
       let x = args.EnhanceStructureRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EnhanceStructureRate(x);
+      let x = args.EnhanceCompositeArmorRate;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_EnhanceCompositeArmorRate(x);
       let x = args.EnhanceElasticArmorRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EnhanceElasticArmorRate(x);
@@ -263,6 +276,9 @@ impl<'a> CharacterStatExcel<'a> {
       let x = args.EnhanceSiegeRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EnhanceSiegeRate(x);
+      let x = args.EnhanceChemicalRate;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_EnhanceChemicalRate(x);
       let x = args.EnhanceSonicRate;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_EnhanceSonicRate(x);
@@ -399,12 +415,14 @@ impl<'a> CharacterStatExcel<'a> {
       let EnhancePierceRate = self.EnhancePierceRate();
       let EnhanceMysticRate = self.EnhanceMysticRate();
       let EnhanceSonicRate = self.EnhanceSonicRate();
+      let EnhanceChemicalRate = self.EnhanceChemicalRate();
       let EnhanceSiegeRate = self.EnhanceSiegeRate();
       let EnhanceNormalRate = self.EnhanceNormalRate();
       let EnhanceLightArmorRate = self.EnhanceLightArmorRate();
       let EnhanceHeavyArmorRate = self.EnhanceHeavyArmorRate();
       let EnhanceUnarmedRate = self.EnhanceUnarmedRate();
       let EnhanceElasticArmorRate = self.EnhanceElasticArmorRate();
+      let EnhanceCompositeArmorRate = self.EnhanceCompositeArmorRate();
       let EnhanceStructureRate = self.EnhanceStructureRate();
       let EnhanceNormalArmorRate = self.EnhanceNormalArmorRate();
       let ExtendBuffDuration = self.ExtendBuffDuration();
@@ -436,6 +454,8 @@ impl<'a> CharacterStatExcel<'a> {
       let ReduceExDamagedRate = self.ReduceExDamagedRate();
       let EnhanceBasicsDamageRate = self.EnhanceBasicsDamageRate();
       let ReduceBasicsDamagedRate = self.ReduceBasicsDamagedRate();
+      let EnhanceWeakDamageRate = self.EnhanceWeakDamageRate();
+      let ReduceWeakDamagedRate = self.ReduceWeakDamagedRate();
       let HealRate = self.HealRate();
       let HealLightArmorRate = self.HealLightArmorRate();
       let HealHeavyArmorRate = self.HealHeavyArmorRate();
@@ -493,12 +513,14 @@ impl<'a> CharacterStatExcel<'a> {
       EnhancePierceRate,
       EnhanceMysticRate,
       EnhanceSonicRate,
+      EnhanceChemicalRate,
       EnhanceSiegeRate,
       EnhanceNormalRate,
       EnhanceLightArmorRate,
       EnhanceHeavyArmorRate,
       EnhanceUnarmedRate,
       EnhanceElasticArmorRate,
+      EnhanceCompositeArmorRate,
       EnhanceStructureRate,
       EnhanceNormalArmorRate,
       ExtendBuffDuration,
@@ -530,6 +552,8 @@ impl<'a> CharacterStatExcel<'a> {
       ReduceExDamagedRate,
       EnhanceBasicsDamageRate,
       ReduceBasicsDamagedRate,
+      EnhanceWeakDamageRate,
+      ReduceWeakDamagedRate,
       HealRate,
       HealLightArmorRate,
       HealHeavyArmorRate,
@@ -752,6 +776,13 @@ impl<'a> CharacterStatExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterStatExcel::VT_ENHANCESONICRATE, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn EnhanceChemicalRate(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(CharacterStatExcel::VT_ENHANCECHEMICALRATE, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn EnhanceSiegeRate(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
@@ -792,6 +823,13 @@ impl<'a> CharacterStatExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(CharacterStatExcel::VT_ENHANCEELASTICARMORRATE, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn EnhanceCompositeArmorRate(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(CharacterStatExcel::VT_ENHANCECOMPOSITEARMORRATE, Some(0)).unwrap()}
   }
   #[inline]
   pub fn EnhanceStructureRate(&self) -> i64 {
@@ -1011,6 +1049,20 @@ impl<'a> CharacterStatExcel<'a> {
     unsafe { self._tab.get::<i64>(CharacterStatExcel::VT_REDUCEBASICSDAMAGEDRATE, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn EnhanceWeakDamageRate(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(CharacterStatExcel::VT_ENHANCEWEAKDAMAGERATE, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn ReduceWeakDamagedRate(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(CharacterStatExcel::VT_REDUCEWEAKDAMAGEDRATE, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn HealRate(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
@@ -1153,12 +1205,14 @@ impl flatbuffers::Verifiable for CharacterStatExcel<'_> {
      .visit_field::<i64>("EnhancePierceRate", Self::VT_ENHANCEPIERCERATE, false)?
      .visit_field::<i64>("EnhanceMysticRate", Self::VT_ENHANCEMYSTICRATE, false)?
      .visit_field::<i64>("EnhanceSonicRate", Self::VT_ENHANCESONICRATE, false)?
+     .visit_field::<i64>("EnhanceChemicalRate", Self::VT_ENHANCECHEMICALRATE, false)?
      .visit_field::<i64>("EnhanceSiegeRate", Self::VT_ENHANCESIEGERATE, false)?
      .visit_field::<i64>("EnhanceNormalRate", Self::VT_ENHANCENORMALRATE, false)?
      .visit_field::<i64>("EnhanceLightArmorRate", Self::VT_ENHANCELIGHTARMORRATE, false)?
      .visit_field::<i64>("EnhanceHeavyArmorRate", Self::VT_ENHANCEHEAVYARMORRATE, false)?
      .visit_field::<i64>("EnhanceUnarmedRate", Self::VT_ENHANCEUNARMEDRATE, false)?
      .visit_field::<i64>("EnhanceElasticArmorRate", Self::VT_ENHANCEELASTICARMORRATE, false)?
+     .visit_field::<i64>("EnhanceCompositeArmorRate", Self::VT_ENHANCECOMPOSITEARMORRATE, false)?
      .visit_field::<i64>("EnhanceStructureRate", Self::VT_ENHANCESTRUCTURERATE, false)?
      .visit_field::<i64>("EnhanceNormalArmorRate", Self::VT_ENHANCENORMALARMORRATE, false)?
      .visit_field::<i64>("ExtendBuffDuration", Self::VT_EXTENDBUFFDURATION, false)?
@@ -1190,6 +1244,8 @@ impl flatbuffers::Verifiable for CharacterStatExcel<'_> {
      .visit_field::<i64>("ReduceExDamagedRate", Self::VT_REDUCEEXDAMAGEDRATE, false)?
      .visit_field::<i64>("EnhanceBasicsDamageRate", Self::VT_ENHANCEBASICSDAMAGERATE, false)?
      .visit_field::<i64>("ReduceBasicsDamagedRate", Self::VT_REDUCEBASICSDAMAGEDRATE, false)?
+     .visit_field::<i64>("EnhanceWeakDamageRate", Self::VT_ENHANCEWEAKDAMAGERATE, false)?
+     .visit_field::<i64>("ReduceWeakDamagedRate", Self::VT_REDUCEWEAKDAMAGEDRATE, false)?
      .visit_field::<i64>("HealRate", Self::VT_HEALRATE, false)?
      .visit_field::<i64>("HealLightArmorRate", Self::VT_HEALLIGHTARMORRATE, false)?
      .visit_field::<i64>("HealHeavyArmorRate", Self::VT_HEALHEAVYARMORRATE, false)?
@@ -1239,12 +1295,14 @@ pub struct CharacterStatExcelArgs {
     pub EnhancePierceRate: i64,
     pub EnhanceMysticRate: i64,
     pub EnhanceSonicRate: i64,
+    pub EnhanceChemicalRate: i64,
     pub EnhanceSiegeRate: i64,
     pub EnhanceNormalRate: i64,
     pub EnhanceLightArmorRate: i64,
     pub EnhanceHeavyArmorRate: i64,
     pub EnhanceUnarmedRate: i64,
     pub EnhanceElasticArmorRate: i64,
+    pub EnhanceCompositeArmorRate: i64,
     pub EnhanceStructureRate: i64,
     pub EnhanceNormalArmorRate: i64,
     pub ExtendBuffDuration: i64,
@@ -1276,6 +1334,8 @@ pub struct CharacterStatExcelArgs {
     pub ReduceExDamagedRate: i64,
     pub EnhanceBasicsDamageRate: i64,
     pub ReduceBasicsDamagedRate: i64,
+    pub EnhanceWeakDamageRate: i64,
+    pub ReduceWeakDamagedRate: i64,
     pub HealRate: i64,
     pub HealLightArmorRate: i64,
     pub HealHeavyArmorRate: i64,
@@ -1325,12 +1385,14 @@ impl<'a> Default for CharacterStatExcelArgs {
       EnhancePierceRate: 0,
       EnhanceMysticRate: 0,
       EnhanceSonicRate: 0,
+      EnhanceChemicalRate: 0,
       EnhanceSiegeRate: 0,
       EnhanceNormalRate: 0,
       EnhanceLightArmorRate: 0,
       EnhanceHeavyArmorRate: 0,
       EnhanceUnarmedRate: 0,
       EnhanceElasticArmorRate: 0,
+      EnhanceCompositeArmorRate: 0,
       EnhanceStructureRate: 0,
       EnhanceNormalArmorRate: 0,
       ExtendBuffDuration: 0,
@@ -1362,6 +1424,8 @@ impl<'a> Default for CharacterStatExcelArgs {
       ReduceExDamagedRate: 0,
       EnhanceBasicsDamageRate: 0,
       ReduceBasicsDamagedRate: 0,
+      EnhanceWeakDamageRate: 0,
+      ReduceWeakDamagedRate: 0,
       HealRate: 0,
       HealLightArmorRate: 0,
       HealHeavyArmorRate: 0,
@@ -1386,7 +1450,7 @@ impl Serialize for CharacterStatExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("CharacterStatExcel", 81)?;
+    let mut s = serializer.serialize_struct("CharacterStatExcel", 85)?;
       s.serialize_field("CharacterId", &self.CharacterId())?;
       s.serialize_field("StabilityRate", &self.StabilityRate())?;
       s.serialize_field("StabilityPoint", &self.StabilityPoint())?;
@@ -1416,12 +1480,14 @@ impl Serialize for CharacterStatExcel<'_> {
       s.serialize_field("EnhancePierceRate", &self.EnhancePierceRate())?;
       s.serialize_field("EnhanceMysticRate", &self.EnhanceMysticRate())?;
       s.serialize_field("EnhanceSonicRate", &self.EnhanceSonicRate())?;
+      s.serialize_field("EnhanceChemicalRate", &self.EnhanceChemicalRate())?;
       s.serialize_field("EnhanceSiegeRate", &self.EnhanceSiegeRate())?;
       s.serialize_field("EnhanceNormalRate", &self.EnhanceNormalRate())?;
       s.serialize_field("EnhanceLightArmorRate", &self.EnhanceLightArmorRate())?;
       s.serialize_field("EnhanceHeavyArmorRate", &self.EnhanceHeavyArmorRate())?;
       s.serialize_field("EnhanceUnarmedRate", &self.EnhanceUnarmedRate())?;
       s.serialize_field("EnhanceElasticArmorRate", &self.EnhanceElasticArmorRate())?;
+      s.serialize_field("EnhanceCompositeArmorRate", &self.EnhanceCompositeArmorRate())?;
       s.serialize_field("EnhanceStructureRate", &self.EnhanceStructureRate())?;
       s.serialize_field("EnhanceNormalArmorRate", &self.EnhanceNormalArmorRate())?;
       s.serialize_field("ExtendBuffDuration", &self.ExtendBuffDuration())?;
@@ -1453,6 +1519,8 @@ impl Serialize for CharacterStatExcel<'_> {
       s.serialize_field("ReduceExDamagedRate", &self.ReduceExDamagedRate())?;
       s.serialize_field("EnhanceBasicsDamageRate", &self.EnhanceBasicsDamageRate())?;
       s.serialize_field("ReduceBasicsDamagedRate", &self.ReduceBasicsDamagedRate())?;
+      s.serialize_field("EnhanceWeakDamageRate", &self.EnhanceWeakDamageRate())?;
+      s.serialize_field("ReduceWeakDamagedRate", &self.ReduceWeakDamagedRate())?;
       s.serialize_field("HealRate", &self.HealRate())?;
       s.serialize_field("HealLightArmorRate", &self.HealLightArmorRate())?;
       s.serialize_field("HealHeavyArmorRate", &self.HealHeavyArmorRate())?;
@@ -1594,6 +1662,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterStatExcelBuilder<'a, '
     self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_ENHANCESONICRATE, EnhanceSonicRate, 0);
   }
   #[inline]
+  pub fn add_EnhanceChemicalRate(&mut self, EnhanceChemicalRate: i64) {
+    self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_ENHANCECHEMICALRATE, EnhanceChemicalRate, 0);
+  }
+  #[inline]
   pub fn add_EnhanceSiegeRate(&mut self, EnhanceSiegeRate: i64) {
     self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_ENHANCESIEGERATE, EnhanceSiegeRate, 0);
   }
@@ -1616,6 +1688,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterStatExcelBuilder<'a, '
   #[inline]
   pub fn add_EnhanceElasticArmorRate(&mut self, EnhanceElasticArmorRate: i64) {
     self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_ENHANCEELASTICARMORRATE, EnhanceElasticArmorRate, 0);
+  }
+  #[inline]
+  pub fn add_EnhanceCompositeArmorRate(&mut self, EnhanceCompositeArmorRate: i64) {
+    self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_ENHANCECOMPOSITEARMORRATE, EnhanceCompositeArmorRate, 0);
   }
   #[inline]
   pub fn add_EnhanceStructureRate(&mut self, EnhanceStructureRate: i64) {
@@ -1742,6 +1818,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterStatExcelBuilder<'a, '
     self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_REDUCEBASICSDAMAGEDRATE, ReduceBasicsDamagedRate, 0);
   }
   #[inline]
+  pub fn add_EnhanceWeakDamageRate(&mut self, EnhanceWeakDamageRate: i64) {
+    self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_ENHANCEWEAKDAMAGERATE, EnhanceWeakDamageRate, 0);
+  }
+  #[inline]
+  pub fn add_ReduceWeakDamagedRate(&mut self, ReduceWeakDamagedRate: i64) {
+    self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_REDUCEWEAKDAMAGEDRATE, ReduceWeakDamagedRate, 0);
+  }
+  #[inline]
   pub fn add_HealRate(&mut self, HealRate: i64) {
     self.fbb_.push_slot::<i64>(CharacterStatExcel::VT_HEALRATE, HealRate, 0);
   }
@@ -1848,12 +1932,14 @@ impl core::fmt::Debug for CharacterStatExcel<'_> {
       ds.field("EnhancePierceRate", &self.EnhancePierceRate());
       ds.field("EnhanceMysticRate", &self.EnhanceMysticRate());
       ds.field("EnhanceSonicRate", &self.EnhanceSonicRate());
+      ds.field("EnhanceChemicalRate", &self.EnhanceChemicalRate());
       ds.field("EnhanceSiegeRate", &self.EnhanceSiegeRate());
       ds.field("EnhanceNormalRate", &self.EnhanceNormalRate());
       ds.field("EnhanceLightArmorRate", &self.EnhanceLightArmorRate());
       ds.field("EnhanceHeavyArmorRate", &self.EnhanceHeavyArmorRate());
       ds.field("EnhanceUnarmedRate", &self.EnhanceUnarmedRate());
       ds.field("EnhanceElasticArmorRate", &self.EnhanceElasticArmorRate());
+      ds.field("EnhanceCompositeArmorRate", &self.EnhanceCompositeArmorRate());
       ds.field("EnhanceStructureRate", &self.EnhanceStructureRate());
       ds.field("EnhanceNormalArmorRate", &self.EnhanceNormalArmorRate());
       ds.field("ExtendBuffDuration", &self.ExtendBuffDuration());
@@ -1885,6 +1971,8 @@ impl core::fmt::Debug for CharacterStatExcel<'_> {
       ds.field("ReduceExDamagedRate", &self.ReduceExDamagedRate());
       ds.field("EnhanceBasicsDamageRate", &self.EnhanceBasicsDamageRate());
       ds.field("ReduceBasicsDamagedRate", &self.ReduceBasicsDamagedRate());
+      ds.field("EnhanceWeakDamageRate", &self.EnhanceWeakDamageRate());
+      ds.field("ReduceWeakDamagedRate", &self.ReduceWeakDamagedRate());
       ds.field("HealRate", &self.HealRate());
       ds.field("HealLightArmorRate", &self.HealLightArmorRate());
       ds.field("HealHeavyArmorRate", &self.HealHeavyArmorRate());
@@ -1935,12 +2023,14 @@ pub struct CharacterStatExcelT {
   pub EnhancePierceRate: i64,
   pub EnhanceMysticRate: i64,
   pub EnhanceSonicRate: i64,
+  pub EnhanceChemicalRate: i64,
   pub EnhanceSiegeRate: i64,
   pub EnhanceNormalRate: i64,
   pub EnhanceLightArmorRate: i64,
   pub EnhanceHeavyArmorRate: i64,
   pub EnhanceUnarmedRate: i64,
   pub EnhanceElasticArmorRate: i64,
+  pub EnhanceCompositeArmorRate: i64,
   pub EnhanceStructureRate: i64,
   pub EnhanceNormalArmorRate: i64,
   pub ExtendBuffDuration: i64,
@@ -1972,6 +2062,8 @@ pub struct CharacterStatExcelT {
   pub ReduceExDamagedRate: i64,
   pub EnhanceBasicsDamageRate: i64,
   pub ReduceBasicsDamagedRate: i64,
+  pub EnhanceWeakDamageRate: i64,
+  pub ReduceWeakDamagedRate: i64,
   pub HealRate: i64,
   pub HealLightArmorRate: i64,
   pub HealHeavyArmorRate: i64,
@@ -2020,12 +2112,14 @@ impl Default for CharacterStatExcelT {
       EnhancePierceRate: 0,
       EnhanceMysticRate: 0,
       EnhanceSonicRate: 0,
+      EnhanceChemicalRate: 0,
       EnhanceSiegeRate: 0,
       EnhanceNormalRate: 0,
       EnhanceLightArmorRate: 0,
       EnhanceHeavyArmorRate: 0,
       EnhanceUnarmedRate: 0,
       EnhanceElasticArmorRate: 0,
+      EnhanceCompositeArmorRate: 0,
       EnhanceStructureRate: 0,
       EnhanceNormalArmorRate: 0,
       ExtendBuffDuration: 0,
@@ -2057,6 +2151,8 @@ impl Default for CharacterStatExcelT {
       ReduceExDamagedRate: 0,
       EnhanceBasicsDamageRate: 0,
       ReduceBasicsDamagedRate: 0,
+      EnhanceWeakDamageRate: 0,
+      ReduceWeakDamagedRate: 0,
       HealRate: 0,
       HealLightArmorRate: 0,
       HealHeavyArmorRate: 0,
@@ -2109,12 +2205,14 @@ impl CharacterStatExcelT {
     let EnhancePierceRate = self.EnhancePierceRate;
     let EnhanceMysticRate = self.EnhanceMysticRate;
     let EnhanceSonicRate = self.EnhanceSonicRate;
+    let EnhanceChemicalRate = self.EnhanceChemicalRate;
     let EnhanceSiegeRate = self.EnhanceSiegeRate;
     let EnhanceNormalRate = self.EnhanceNormalRate;
     let EnhanceLightArmorRate = self.EnhanceLightArmorRate;
     let EnhanceHeavyArmorRate = self.EnhanceHeavyArmorRate;
     let EnhanceUnarmedRate = self.EnhanceUnarmedRate;
     let EnhanceElasticArmorRate = self.EnhanceElasticArmorRate;
+    let EnhanceCompositeArmorRate = self.EnhanceCompositeArmorRate;
     let EnhanceStructureRate = self.EnhanceStructureRate;
     let EnhanceNormalArmorRate = self.EnhanceNormalArmorRate;
     let ExtendBuffDuration = self.ExtendBuffDuration;
@@ -2146,6 +2244,8 @@ impl CharacterStatExcelT {
     let ReduceExDamagedRate = self.ReduceExDamagedRate;
     let EnhanceBasicsDamageRate = self.EnhanceBasicsDamageRate;
     let ReduceBasicsDamagedRate = self.ReduceBasicsDamagedRate;
+    let EnhanceWeakDamageRate = self.EnhanceWeakDamageRate;
+    let ReduceWeakDamagedRate = self.ReduceWeakDamagedRate;
     let HealRate = self.HealRate;
     let HealLightArmorRate = self.HealLightArmorRate;
     let HealHeavyArmorRate = self.HealHeavyArmorRate;
@@ -2191,12 +2291,14 @@ impl CharacterStatExcelT {
       EnhancePierceRate,
       EnhanceMysticRate,
       EnhanceSonicRate,
+      EnhanceChemicalRate,
       EnhanceSiegeRate,
       EnhanceNormalRate,
       EnhanceLightArmorRate,
       EnhanceHeavyArmorRate,
       EnhanceUnarmedRate,
       EnhanceElasticArmorRate,
+      EnhanceCompositeArmorRate,
       EnhanceStructureRate,
       EnhanceNormalArmorRate,
       ExtendBuffDuration,
@@ -2228,6 +2330,8 @@ impl CharacterStatExcelT {
       ReduceExDamagedRate,
       EnhanceBasicsDamageRate,
       ReduceBasicsDamagedRate,
+      EnhanceWeakDamageRate,
+      ReduceWeakDamagedRate,
       HealRate,
       HealLightArmorRate,
       HealHeavyArmorRate,

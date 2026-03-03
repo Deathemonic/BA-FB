@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_TUTORIAL_FAILURE_CONTENT_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_TUTORIAL_FAILURE_CONTENT_TYPE: i32 = 8;
+pub const ENUM_MAX_TUTORIAL_FAILURE_CONTENT_TYPE: i32 = 9;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_TUTORIAL_FAILURE_CONTENT_TYPE: [TutorialFailureContentType; 9] = [
+pub const ENUM_VALUES_TUTORIAL_FAILURE_CONTENT_TYPE: [TutorialFailureContentType; 10] = [
   TutorialFailureContentType::None,
   TutorialFailureContentType::Campaign,
   TutorialFailureContentType::WeekDungeon,
@@ -29,6 +29,7 @@ pub const ENUM_VALUES_TUTORIAL_FAILURE_CONTENT_TYPE: [TutorialFailureContentType
   TutorialFailureContentType::Conquest,
   TutorialFailureContentType::EliminateRaid,
   TutorialFailureContentType::MultiFloorRaid,
+  TutorialFailureContentType::InteractiveWorldRaid,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -45,9 +46,10 @@ impl TutorialFailureContentType {
   pub const Conquest: Self = Self(6);
   pub const EliminateRaid: Self = Self(7);
   pub const MultiFloorRaid: Self = Self(8);
+  pub const InteractiveWorldRaid: Self = Self(9);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 8;
+  pub const ENUM_MAX: i32 = 9;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Campaign,
@@ -58,6 +60,7 @@ impl TutorialFailureContentType {
     Self::Conquest,
     Self::EliminateRaid,
     Self::MultiFloorRaid,
+    Self::InteractiveWorldRaid,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -71,6 +74,7 @@ impl TutorialFailureContentType {
       Self::Conquest => Some("Conquest"),
       Self::EliminateRaid => Some("EliminateRaid"),
       Self::MultiFloorRaid => Some("MultiFloorRaid"),
+      Self::InteractiveWorldRaid => Some("InteractiveWorldRaid"),
       _ => None,
     }
   }

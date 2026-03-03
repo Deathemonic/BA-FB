@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_WEAPON_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_WEAPON_TYPE: i32 = 20;
+pub const ENUM_MAX_WEAPON_TYPE: i32 = 21;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_WEAPON_TYPE: [WeaponType; 21] = [
+pub const ENUM_VALUES_WEAPON_TYPE: [WeaponType; 22] = [
   WeaponType::None,
   WeaponType::SG,
   WeaponType::SMG,
@@ -41,6 +41,7 @@ pub const ENUM_VALUES_WEAPON_TYPE: [WeaponType; 21] = [
   WeaponType::Relic,
   WeaponType::FT,
   WeaponType::Akemi,
+  WeaponType::KetherCannon,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -69,9 +70,10 @@ impl WeaponType {
   pub const Relic: Self = Self(18);
   pub const FT: Self = Self(19);
   pub const Akemi: Self = Self(20);
+  pub const KetherCannon: Self = Self(21);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 20;
+  pub const ENUM_MAX: i32 = 21;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::SG,
@@ -94,6 +96,7 @@ impl WeaponType {
     Self::Relic,
     Self::FT,
     Self::Akemi,
+    Self::KetherCannon,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -119,6 +122,7 @@ impl WeaponType {
       Self::Relic => Some("Relic"),
       Self::FT => Some("FT"),
       Self::Akemi => Some("Akemi"),
+      Self::KetherCannon => Some("KetherCannon"),
       _ => None,
     }
   }

@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_ECHELON_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_ECHELON_TYPE: i32 = 25;
+pub const ENUM_MAX_ECHELON_TYPE: i32 = 26;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_ECHELON_TYPE: [EchelonType; 26] = [
+pub const ENUM_VALUES_ECHELON_TYPE: [EchelonType; 27] = [
   EchelonType::None,
   EchelonType::Adventure,
   EchelonType::Raid,
@@ -46,6 +46,7 @@ pub const ENUM_VALUES_ECHELON_TYPE: [EchelonType; 26] = [
   EchelonType::Field,
   EchelonType::MultiFloorRaid,
   EchelonType::MinigameDefense,
+  EchelonType::PermanentRaid,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -79,9 +80,10 @@ impl EchelonType {
   pub const Field: Self = Self(23);
   pub const MultiFloorRaid: Self = Self(24);
   pub const MinigameDefense: Self = Self(25);
+  pub const PermanentRaid: Self = Self(26);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 25;
+  pub const ENUM_MAX: i32 = 26;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Adventure,
@@ -109,6 +111,7 @@ impl EchelonType {
     Self::Field,
     Self::MultiFloorRaid,
     Self::MinigameDefense,
+    Self::PermanentRaid,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -139,6 +142,7 @@ impl EchelonType {
       Self::Field => Some("Field"),
       Self::MultiFloorRaid => Some("MultiFloorRaid"),
       Self::MinigameDefense => Some("MinigameDefense"),
+      Self::PermanentRaid => Some("PermanentRaid"),
       _ => None,
     }
   }

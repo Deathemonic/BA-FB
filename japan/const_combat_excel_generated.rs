@@ -116,6 +116,8 @@ impl<'a> ConstCombatExcel<'a> {
   pub const VT_EXCESSIVETOUCHCHECKCOUNT: flatbuffers::VOffsetT = 172;
   pub const VT_CAMPAIGNALERTPOPUPLEVELGAP: flatbuffers::VOffsetT = 174;
   pub const VT_MOVECORRECTIONSKIPRATIO: flatbuffers::VOffsetT = 176;
+  pub const VT_OBSTACLECOLLIDERHEIGHTJUMPABLE: flatbuffers::VOffsetT = 178;
+  pub const VT_OBSTACLECOLLIDERHEIGHTNOTJUMPABLE: flatbuffers::VOffsetT = 180;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -266,6 +268,12 @@ impl<'a> ConstCombatExcel<'a> {
       let x = args.MaxRaidTicketCount;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_MaxRaidTicketCount(x);
+      let x = args.ObstacleColliderHeightNotJumpable;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::encrypt_float(x, &key) } else { x };
+      builder.add_ObstacleColliderHeightNotJumpable(x);
+      let x = args.ObstacleColliderHeightJumpable;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::encrypt_float(x, &key) } else { x };
+      builder.add_ObstacleColliderHeightJumpable(x);
       let x = args.MoveCorrectionSkipRatio;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_MoveCorrectionSkipRatio(x);
@@ -515,6 +523,16 @@ impl<'a> ConstCombatExcel<'a> {
       let ExcessiveTouchCheckCount = self.ExcessiveTouchCheckCount();
       let CampaignAlertPopupLevelGap = self.CampaignAlertPopupLevelGap();
       let MoveCorrectionSkipRatio = self.MoveCorrectionSkipRatio();
+      let ObstacleColliderHeightJumpable = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_float(self.ObstacleColliderHeightJumpable(), &key)
+      } else {
+        self.ObstacleColliderHeightJumpable()
+      };
+      let ObstacleColliderHeightNotJumpable = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_float(self.ObstacleColliderHeightNotJumpable(), &key)
+      } else {
+        self.ObstacleColliderHeightNotJumpable()
+      };
     ConstCombatExcelT {
       SkillHandCount,
       DyingTime,
@@ -603,6 +621,8 @@ impl<'a> ConstCombatExcel<'a> {
       ExcessiveTouchCheckCount,
       CampaignAlertPopupLevelGap,
       MoveCorrectionSkipRatio,
+      ObstacleColliderHeightJumpable,
+      ObstacleColliderHeightNotJumpable,
     }
   }
 
@@ -1215,6 +1235,20 @@ impl<'a> ConstCombatExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i32>(ConstCombatExcel::VT_MOVECORRECTIONSKIPRATIO, Some(0)).unwrap()}
   }
+  #[inline]
+  pub fn ObstacleColliderHeightJumpable(&self) -> f32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<f32>(ConstCombatExcel::VT_OBSTACLECOLLIDERHEIGHTJUMPABLE, Some(0.0)).unwrap()}
+  }
+  #[inline]
+  pub fn ObstacleColliderHeightNotJumpable(&self) -> f32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<f32>(ConstCombatExcel::VT_OBSTACLECOLLIDERHEIGHTNOTJUMPABLE, Some(0.0)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for ConstCombatExcel<'_> {
@@ -1311,6 +1345,8 @@ impl flatbuffers::Verifiable for ConstCombatExcel<'_> {
      .visit_field::<i32>("ExcessiveTouchCheckCount", Self::VT_EXCESSIVETOUCHCHECKCOUNT, false)?
      .visit_field::<i32>("CampaignAlertPopupLevelGap", Self::VT_CAMPAIGNALERTPOPUPLEVELGAP, false)?
      .visit_field::<i32>("MoveCorrectionSkipRatio", Self::VT_MOVECORRECTIONSKIPRATIO, false)?
+     .visit_field::<f32>("ObstacleColliderHeightJumpable", Self::VT_OBSTACLECOLLIDERHEIGHTJUMPABLE, false)?
+     .visit_field::<f32>("ObstacleColliderHeightNotJumpable", Self::VT_OBSTACLECOLLIDERHEIGHTNOTJUMPABLE, false)?
      .finish();
     Ok(())
   }
@@ -1403,6 +1439,8 @@ pub struct ConstCombatExcelArgs<'a> {
     pub ExcessiveTouchCheckCount: i32,
     pub CampaignAlertPopupLevelGap: i32,
     pub MoveCorrectionSkipRatio: i32,
+    pub ObstacleColliderHeightJumpable: f32,
+    pub ObstacleColliderHeightNotJumpable: f32,
 }
 impl<'a> Default for ConstCombatExcelArgs<'a> {
   #[inline]
@@ -1495,6 +1533,8 @@ impl<'a> Default for ConstCombatExcelArgs<'a> {
       ExcessiveTouchCheckCount: 0,
       CampaignAlertPopupLevelGap: 0,
       MoveCorrectionSkipRatio: 0,
+      ObstacleColliderHeightJumpable: 0.0,
+      ObstacleColliderHeightNotJumpable: 0.0,
     }
   }
 }
@@ -1504,7 +1544,7 @@ impl Serialize for ConstCombatExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ConstCombatExcel", 87)?;
+    let mut s = serializer.serialize_struct("ConstCombatExcel", 89)?;
       s.serialize_field("SkillHandCount", &self.SkillHandCount())?;
       s.serialize_field("DyingTime", &self.DyingTime())?;
       s.serialize_field("BuffIconBlinkTime", &self.BuffIconBlinkTime())?;
@@ -1628,6 +1668,8 @@ impl Serialize for ConstCombatExcel<'_> {
       s.serialize_field("ExcessiveTouchCheckCount", &self.ExcessiveTouchCheckCount())?;
       s.serialize_field("CampaignAlertPopupLevelGap", &self.CampaignAlertPopupLevelGap())?;
       s.serialize_field("MoveCorrectionSkipRatio", &self.MoveCorrectionSkipRatio())?;
+      s.serialize_field("ObstacleColliderHeightJumpable", &self.ObstacleColliderHeightJumpable())?;
+      s.serialize_field("ObstacleColliderHeightNotJumpable", &self.ObstacleColliderHeightNotJumpable())?;
     s.end()
   }
 }
@@ -1986,6 +2028,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConstCombatExcelBuilder<'a, 'b,
     self.fbb_.push_slot::<i32>(ConstCombatExcel::VT_MOVECORRECTIONSKIPRATIO, MoveCorrectionSkipRatio, 0);
   }
   #[inline]
+  pub fn add_ObstacleColliderHeightJumpable(&mut self, ObstacleColliderHeightJumpable: f32) {
+    self.fbb_.push_slot::<f32>(ConstCombatExcel::VT_OBSTACLECOLLIDERHEIGHTJUMPABLE, ObstacleColliderHeightJumpable, 0.0);
+  }
+  #[inline]
+  pub fn add_ObstacleColliderHeightNotJumpable(&mut self, ObstacleColliderHeightNotJumpable: f32) {
+    self.fbb_.push_slot::<f32>(ConstCombatExcel::VT_OBSTACLECOLLIDERHEIGHTNOTJUMPABLE, ObstacleColliderHeightNotJumpable, 0.0);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> ConstCombatExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     ConstCombatExcelBuilder {
@@ -2090,6 +2140,8 @@ impl core::fmt::Debug for ConstCombatExcel<'_> {
       ds.field("ExcessiveTouchCheckCount", &self.ExcessiveTouchCheckCount());
       ds.field("CampaignAlertPopupLevelGap", &self.CampaignAlertPopupLevelGap());
       ds.field("MoveCorrectionSkipRatio", &self.MoveCorrectionSkipRatio());
+      ds.field("ObstacleColliderHeightJumpable", &self.ObstacleColliderHeightJumpable());
+      ds.field("ObstacleColliderHeightNotJumpable", &self.ObstacleColliderHeightNotJumpable());
       ds.finish()
   }
 }
@@ -2183,6 +2235,8 @@ pub struct ConstCombatExcelT {
   pub ExcessiveTouchCheckCount: i32,
   pub CampaignAlertPopupLevelGap: i32,
   pub MoveCorrectionSkipRatio: i32,
+  pub ObstacleColliderHeightJumpable: f32,
+  pub ObstacleColliderHeightNotJumpable: f32,
 }
 impl Default for ConstCombatExcelT {
   fn default() -> Self {
@@ -2274,6 +2328,8 @@ impl Default for ConstCombatExcelT {
       ExcessiveTouchCheckCount: 0,
       CampaignAlertPopupLevelGap: 0,
       MoveCorrectionSkipRatio: 0,
+      ObstacleColliderHeightJumpable: 0.0,
+      ObstacleColliderHeightNotJumpable: 0.0,
     }
   }
 }
@@ -2387,6 +2443,8 @@ impl ConstCombatExcelT {
     let ExcessiveTouchCheckCount = self.ExcessiveTouchCheckCount;
     let CampaignAlertPopupLevelGap = self.CampaignAlertPopupLevelGap;
     let MoveCorrectionSkipRatio = self.MoveCorrectionSkipRatio;
+    let ObstacleColliderHeightJumpable = self.ObstacleColliderHeightJumpable;
+    let ObstacleColliderHeightNotJumpable = self.ObstacleColliderHeightNotJumpable;
     ConstCombatExcel::create(_fbb, &ConstCombatExcelArgs{
       SkillHandCount,
       DyingTime,
@@ -2475,6 +2533,8 @@ impl ConstCombatExcelT {
       ExcessiveTouchCheckCount,
       CampaignAlertPopupLevelGap,
       MoveCorrectionSkipRatio,
+      ObstacleColliderHeightJumpable,
+      ObstacleColliderHeightNotJumpable,
     })
   }
 }

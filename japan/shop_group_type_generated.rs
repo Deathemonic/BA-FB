@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_SHOP_GROUP_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_SHOP_GROUP_TYPE: i32 = 9;
+pub const ENUM_MAX_SHOP_GROUP_TYPE: i32 = 10;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_SHOP_GROUP_TYPE: [ShopGroupType; 10] = [
+pub const ENUM_VALUES_SHOP_GROUP_TYPE: [ShopGroupType; 11] = [
   ShopGroupType::None,
   ShopGroupType::General,
   ShopGroupType::SecretStone,
@@ -30,6 +30,7 @@ pub const ENUM_VALUES_SHOP_GROUP_TYPE: [ShopGroupType; 10] = [
   ShopGroupType::TimeAttack,
   ShopGroupType::EliminateRaid,
   ShopGroupType::Gem,
+  ShopGroupType::Chaser,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -47,9 +48,10 @@ impl ShopGroupType {
   pub const TimeAttack: Self = Self(7);
   pub const EliminateRaid: Self = Self(8);
   pub const Gem: Self = Self(9);
+  pub const Chaser: Self = Self(10);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 9;
+  pub const ENUM_MAX: i32 = 10;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::General,
@@ -61,6 +63,7 @@ impl ShopGroupType {
     Self::TimeAttack,
     Self::EliminateRaid,
     Self::Gem,
+    Self::Chaser,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -75,6 +78,7 @@ impl ShopGroupType {
       Self::TimeAttack => Some("TimeAttack"),
       Self::EliminateRaid => Some("EliminateRaid"),
       Self::Gem => Some("Gem"),
+      Self::Chaser => Some("Chaser"),
       _ => None,
     }
   }

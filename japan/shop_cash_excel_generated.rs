@@ -32,20 +32,25 @@ impl<'a> ShopCashExcel<'a> {
   pub const VT_ID: flatbuffers::VOffsetT = 4;
   pub const VT_CASHPRODUCTID: flatbuffers::VOffsetT = 6;
   pub const VT_PACKAGETYPE: flatbuffers::VOffsetT = 8;
-  pub const VT_LOCALIZEETCID: flatbuffers::VOffsetT = 10;
-  pub const VT_ICONPATH: flatbuffers::VOffsetT = 12;
-  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 14;
-  pub const VT_RENEWALDISPLAYORDER: flatbuffers::VOffsetT = 16;
-  pub const VT_CATEGORYTYPE: flatbuffers::VOffsetT = 18;
-  pub const VT_DISPLAYTAG: flatbuffers::VOffsetT = 20;
-  pub const VT_SALEPERIODFROM: flatbuffers::VOffsetT = 22;
-  pub const VT_SALEPERIODTO: flatbuffers::VOffsetT = 24;
-  pub const VT_PERIODTAG: flatbuffers::VOffsetT = 26;
-  pub const VT_ACCOUNTLEVELLIMIT: flatbuffers::VOffsetT = 28;
-  pub const VT_ACCOUNTLEVELHIDE: flatbuffers::VOffsetT = 30;
-  pub const VT_CLEARMISSIONLIMIT: flatbuffers::VOffsetT = 32;
-  pub const VT_CLEARMISSIONHIDE: flatbuffers::VOffsetT = 34;
-  pub const VT_PURCHASEREPORTEVENTNAME: flatbuffers::VOffsetT = 36;
+  pub const VT_TARGETGROUP: flatbuffers::VOffsetT = 10;
+  pub const VT_LOCALIZEETCID: flatbuffers::VOffsetT = 12;
+  pub const VT_INMAILPURCHASELOCK: flatbuffers::VOffsetT = 14;
+  pub const VT_USEMAILPARCEL: flatbuffers::VOffsetT = 16;
+  pub const VT_ICONPATH: flatbuffers::VOffsetT = 18;
+  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 20;
+  pub const VT_RENEWALDISPLAYORDER: flatbuffers::VOffsetT = 22;
+  pub const VT_CATEGORYTYPE: flatbuffers::VOffsetT = 24;
+  pub const VT_DISPLAYTAG: flatbuffers::VOffsetT = 26;
+  pub const VT_PRODUCTSALETYPE: flatbuffers::VOffsetT = 28;
+  pub const VT_SALEPERIODFROM: flatbuffers::VOffsetT = 30;
+  pub const VT_SALEPERIODTO: flatbuffers::VOffsetT = 32;
+  pub const VT_PRODUCTSALEDAY: flatbuffers::VOffsetT = 34;
+  pub const VT_PERIODTAG: flatbuffers::VOffsetT = 36;
+  pub const VT_ACCOUNTLEVELLIMIT: flatbuffers::VOffsetT = 38;
+  pub const VT_ACCOUNTLEVELHIDE: flatbuffers::VOffsetT = 40;
+  pub const VT_CLEARMISSIONLIMIT: flatbuffers::VOffsetT = 42;
+  pub const VT_CLEARMISSIONHIDE: flatbuffers::VOffsetT = 44;
+  pub const VT_PURCHASEREPORTEVENTNAME: flatbuffers::VOffsetT = 46;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -64,6 +69,9 @@ impl<'a> ShopCashExcel<'a> {
       let x = args.AccountLevelLimit;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_AccountLevelLimit(x);
+      let x = args.ProductSaleDay;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ProductSaleDay(x);
       let x = args.RenewalDisplayOrder;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_RenewalDisplayOrder(x);
@@ -85,6 +93,9 @@ impl<'a> ShopCashExcel<'a> {
       if let Some(x) = args.SalePeriodFrom {
         builder.add_SalePeriodFrom(x);
       }
+      let x = args.ProductSaleType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_ProductSaleType(x);
       let x = args.DisplayTag;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_DisplayTag(x);
@@ -97,12 +108,17 @@ impl<'a> ShopCashExcel<'a> {
       let x = args.LocalizeEtcId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_uint(x, &key) } else { x };
       builder.add_LocalizeEtcId(x);
+      let x = args.TargetGroup;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_TargetGroup(x);
       let x = args.PackageType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_PackageType(x);
       builder.add_ClearMissionHide(args.ClearMissionHide);
       builder.add_AccountLevelHide(args.AccountLevelHide);
       builder.add_PeriodTag(args.PeriodTag);
+      builder.add_UseMailParcel(args.UseMailParcel);
+      builder.add_InMailPurchaseLock(args.InMailPurchaseLock);
     builder.finish()
   }
 
@@ -115,7 +131,14 @@ impl<'a> ShopCashExcel<'a> {
       } else {
         self.PackageType()
       };
+      let TargetGroup = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.TargetGroup(), &key)
+      } else {
+        self.TargetGroup()
+      };
       let LocalizeEtcId = self.LocalizeEtcId();
+      let InMailPurchaseLock = self.InMailPurchaseLock();
+      let UseMailParcel = self.UseMailParcel();
     let IconPath = self.IconPath().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -131,12 +154,18 @@ impl<'a> ShopCashExcel<'a> {
       } else {
         self.DisplayTag()
       };
+      let ProductSaleType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.ProductSaleType(), &key)
+      } else {
+        self.ProductSaleType()
+      };
     let SalePeriodFrom = self.SalePeriodFrom().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
     let SalePeriodTo = self.SalePeriodTo().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+      let ProductSaleDay = self.ProductSaleDay();
       let PeriodTag = self.PeriodTag();
       let AccountLevelLimit = self.AccountLevelLimit();
       let AccountLevelHide = self.AccountLevelHide();
@@ -149,14 +178,19 @@ impl<'a> ShopCashExcel<'a> {
       Id,
       CashProductId,
       PackageType,
+      TargetGroup,
       LocalizeEtcId,
+      InMailPurchaseLock,
+      UseMailParcel,
       IconPath,
       DisplayOrder,
       RenewalDisplayOrder,
       CategoryType,
       DisplayTag,
+      ProductSaleType,
       SalePeriodFrom,
       SalePeriodTo,
+      ProductSaleDay,
       PeriodTag,
       AccountLevelLimit,
       AccountLevelHide,
@@ -188,11 +222,32 @@ impl<'a> ShopCashExcel<'a> {
     unsafe { self._tab.get::<PurchaseSourceType>(ShopCashExcel::VT_PACKAGETYPE, Some(PurchaseSourceType::None)).unwrap()}
   }
   #[inline]
+  pub fn TargetGroup(&self) -> TargetGroup {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<TargetGroup>(ShopCashExcel::VT_TARGETGROUP, Some(TargetGroup::WaitingSignIn)).unwrap()}
+  }
+  #[inline]
   pub fn LocalizeEtcId(&self) -> u32 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<u32>(ShopCashExcel::VT_LOCALIZEETCID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn InMailPurchaseLock(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(ShopCashExcel::VT_INMAILPURCHASELOCK, Some(false)).unwrap()}
+  }
+  #[inline]
+  pub fn UseMailParcel(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(ShopCashExcel::VT_USEMAILPARCEL, Some(false)).unwrap()}
   }
   #[inline]
   pub fn IconPath(&self) -> Option<&'a str> {
@@ -230,6 +285,13 @@ impl<'a> ShopCashExcel<'a> {
     unsafe { self._tab.get::<ProductDisplayTag>(ShopCashExcel::VT_DISPLAYTAG, Some(ProductDisplayTag::None)).unwrap()}
   }
   #[inline]
+  pub fn ProductSaleType(&self) -> ProductSaleType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ProductSaleType>(ShopCashExcel::VT_PRODUCTSALETYPE, Some(ProductSaleType::Limited)).unwrap()}
+  }
+  #[inline]
   pub fn SalePeriodFrom(&self) -> Option<&'a str> {
     // Safety:
     // Created from valid Table for this object
@@ -242,6 +304,13 @@ impl<'a> ShopCashExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(ShopCashExcel::VT_SALEPERIODTO, None)}
+  }
+  #[inline]
+  pub fn ProductSaleDay(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(ShopCashExcel::VT_PRODUCTSALEDAY, Some(0)).unwrap()}
   }
   #[inline]
   pub fn PeriodTag(&self) -> bool {
@@ -297,14 +366,19 @@ impl flatbuffers::Verifiable for ShopCashExcel<'_> {
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<i64>("CashProductId", Self::VT_CASHPRODUCTID, false)?
      .visit_field::<PurchaseSourceType>("PackageType", Self::VT_PACKAGETYPE, false)?
+     .visit_field::<TargetGroup>("TargetGroup", Self::VT_TARGETGROUP, false)?
      .visit_field::<u32>("LocalizeEtcId", Self::VT_LOCALIZEETCID, false)?
+     .visit_field::<bool>("InMailPurchaseLock", Self::VT_INMAILPURCHASELOCK, false)?
+     .visit_field::<bool>("UseMailParcel", Self::VT_USEMAILPARCEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("IconPath", Self::VT_ICONPATH, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .visit_field::<i64>("RenewalDisplayOrder", Self::VT_RENEWALDISPLAYORDER, false)?
      .visit_field::<ProductCategory>("CategoryType", Self::VT_CATEGORYTYPE, false)?
      .visit_field::<ProductDisplayTag>("DisplayTag", Self::VT_DISPLAYTAG, false)?
+     .visit_field::<ProductSaleType>("ProductSaleType", Self::VT_PRODUCTSALETYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodFrom", Self::VT_SALEPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SalePeriodTo", Self::VT_SALEPERIODTO, false)?
+     .visit_field::<i64>("ProductSaleDay", Self::VT_PRODUCTSALEDAY, false)?
      .visit_field::<bool>("PeriodTag", Self::VT_PERIODTAG, false)?
      .visit_field::<i64>("AccountLevelLimit", Self::VT_ACCOUNTLEVELLIMIT, false)?
      .visit_field::<bool>("AccountLevelHide", Self::VT_ACCOUNTLEVELHIDE, false)?
@@ -319,14 +393,19 @@ pub struct ShopCashExcelArgs<'a> {
     pub Id: i64,
     pub CashProductId: i64,
     pub PackageType: PurchaseSourceType,
+    pub TargetGroup: TargetGroup,
     pub LocalizeEtcId: u32,
+    pub InMailPurchaseLock: bool,
+    pub UseMailParcel: bool,
     pub IconPath: Option<flatbuffers::WIPOffset<&'a str>>,
     pub DisplayOrder: i64,
     pub RenewalDisplayOrder: i64,
     pub CategoryType: ProductCategory,
     pub DisplayTag: ProductDisplayTag,
+    pub ProductSaleType: ProductSaleType,
     pub SalePeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SalePeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub ProductSaleDay: i64,
     pub PeriodTag: bool,
     pub AccountLevelLimit: i64,
     pub AccountLevelHide: bool,
@@ -341,14 +420,19 @@ impl<'a> Default for ShopCashExcelArgs<'a> {
       Id: 0,
       CashProductId: 0,
       PackageType: PurchaseSourceType::None,
+      TargetGroup: TargetGroup::WaitingSignIn,
       LocalizeEtcId: 0,
+      InMailPurchaseLock: false,
+      UseMailParcel: false,
       IconPath: None,
       DisplayOrder: 0,
       RenewalDisplayOrder: 0,
       CategoryType: ProductCategory::None,
       DisplayTag: ProductDisplayTag::None,
+      ProductSaleType: ProductSaleType::Limited,
       SalePeriodFrom: None,
       SalePeriodTo: None,
+      ProductSaleDay: 0,
       PeriodTag: false,
       AccountLevelLimit: 0,
       AccountLevelHide: false,
@@ -364,11 +448,14 @@ impl Serialize for ShopCashExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ShopCashExcel", 17)?;
+    let mut s = serializer.serialize_struct("ShopCashExcel", 22)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("CashProductId", &self.CashProductId())?;
       s.serialize_field("PackageType", &self.PackageType())?;
+      s.serialize_field("TargetGroup", &self.TargetGroup())?;
       s.serialize_field("LocalizeEtcId", &self.LocalizeEtcId())?;
+      s.serialize_field("InMailPurchaseLock", &self.InMailPurchaseLock())?;
+      s.serialize_field("UseMailParcel", &self.UseMailParcel())?;
       if let Some(f) = self.IconPath() {
         s.serialize_field("IconPath", &f)?;
       } else {
@@ -378,6 +465,7 @@ impl Serialize for ShopCashExcel<'_> {
       s.serialize_field("RenewalDisplayOrder", &self.RenewalDisplayOrder())?;
       s.serialize_field("CategoryType", &self.CategoryType())?;
       s.serialize_field("DisplayTag", &self.DisplayTag())?;
+      s.serialize_field("ProductSaleType", &self.ProductSaleType())?;
       if let Some(f) = self.SalePeriodFrom() {
         s.serialize_field("SalePeriodFrom", &f)?;
       } else {
@@ -388,6 +476,7 @@ impl Serialize for ShopCashExcel<'_> {
       } else {
         s.skip_field("SalePeriodTo")?;
       }
+      s.serialize_field("ProductSaleDay", &self.ProductSaleDay())?;
       s.serialize_field("PeriodTag", &self.PeriodTag())?;
       s.serialize_field("AccountLevelLimit", &self.AccountLevelLimit())?;
       s.serialize_field("AccountLevelHide", &self.AccountLevelHide())?;
@@ -420,8 +509,20 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopCashExcelBuilder<'a, 'b, A>
     self.fbb_.push_slot::<PurchaseSourceType>(ShopCashExcel::VT_PACKAGETYPE, PackageType, PurchaseSourceType::None);
   }
   #[inline]
+  pub fn add_TargetGroup(&mut self, TargetGroup: TargetGroup) {
+    self.fbb_.push_slot::<TargetGroup>(ShopCashExcel::VT_TARGETGROUP, TargetGroup, TargetGroup::WaitingSignIn);
+  }
+  #[inline]
   pub fn add_LocalizeEtcId(&mut self, LocalizeEtcId: u32) {
     self.fbb_.push_slot::<u32>(ShopCashExcel::VT_LOCALIZEETCID, LocalizeEtcId, 0);
+  }
+  #[inline]
+  pub fn add_InMailPurchaseLock(&mut self, InMailPurchaseLock: bool) {
+    self.fbb_.push_slot::<bool>(ShopCashExcel::VT_INMAILPURCHASELOCK, InMailPurchaseLock, false);
+  }
+  #[inline]
+  pub fn add_UseMailParcel(&mut self, UseMailParcel: bool) {
+    self.fbb_.push_slot::<bool>(ShopCashExcel::VT_USEMAILPARCEL, UseMailParcel, false);
   }
   #[inline]
   pub fn add_IconPath(&mut self, IconPath: flatbuffers::WIPOffset<&'b  str>) {
@@ -444,12 +545,20 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ShopCashExcelBuilder<'a, 'b, A>
     self.fbb_.push_slot::<ProductDisplayTag>(ShopCashExcel::VT_DISPLAYTAG, DisplayTag, ProductDisplayTag::None);
   }
   #[inline]
+  pub fn add_ProductSaleType(&mut self, ProductSaleType: ProductSaleType) {
+    self.fbb_.push_slot::<ProductSaleType>(ShopCashExcel::VT_PRODUCTSALETYPE, ProductSaleType, ProductSaleType::Limited);
+  }
+  #[inline]
   pub fn add_SalePeriodFrom(&mut self, SalePeriodFrom: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopCashExcel::VT_SALEPERIODFROM, SalePeriodFrom);
   }
   #[inline]
   pub fn add_SalePeriodTo(&mut self, SalePeriodTo: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(ShopCashExcel::VT_SALEPERIODTO, SalePeriodTo);
+  }
+  #[inline]
+  pub fn add_ProductSaleDay(&mut self, ProductSaleDay: i64) {
+    self.fbb_.push_slot::<i64>(ShopCashExcel::VT_PRODUCTSALEDAY, ProductSaleDay, 0);
   }
   #[inline]
   pub fn add_PeriodTag(&mut self, PeriodTag: bool) {
@@ -496,14 +605,19 @@ impl core::fmt::Debug for ShopCashExcel<'_> {
       ds.field("Id", &self.Id());
       ds.field("CashProductId", &self.CashProductId());
       ds.field("PackageType", &self.PackageType());
+      ds.field("TargetGroup", &self.TargetGroup());
       ds.field("LocalizeEtcId", &self.LocalizeEtcId());
+      ds.field("InMailPurchaseLock", &self.InMailPurchaseLock());
+      ds.field("UseMailParcel", &self.UseMailParcel());
       ds.field("IconPath", &self.IconPath());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.field("RenewalDisplayOrder", &self.RenewalDisplayOrder());
       ds.field("CategoryType", &self.CategoryType());
       ds.field("DisplayTag", &self.DisplayTag());
+      ds.field("ProductSaleType", &self.ProductSaleType());
       ds.field("SalePeriodFrom", &self.SalePeriodFrom());
       ds.field("SalePeriodTo", &self.SalePeriodTo());
+      ds.field("ProductSaleDay", &self.ProductSaleDay());
       ds.field("PeriodTag", &self.PeriodTag());
       ds.field("AccountLevelLimit", &self.AccountLevelLimit());
       ds.field("AccountLevelHide", &self.AccountLevelHide());
@@ -519,14 +633,19 @@ pub struct ShopCashExcelT {
   pub Id: i64,
   pub CashProductId: i64,
   pub PackageType: PurchaseSourceType,
+  pub TargetGroup: TargetGroup,
   pub LocalizeEtcId: u32,
+  pub InMailPurchaseLock: bool,
+  pub UseMailParcel: bool,
   pub IconPath: Option<String>,
   pub DisplayOrder: i64,
   pub RenewalDisplayOrder: i64,
   pub CategoryType: ProductCategory,
   pub DisplayTag: ProductDisplayTag,
+  pub ProductSaleType: ProductSaleType,
   pub SalePeriodFrom: Option<String>,
   pub SalePeriodTo: Option<String>,
+  pub ProductSaleDay: i64,
   pub PeriodTag: bool,
   pub AccountLevelLimit: i64,
   pub AccountLevelHide: bool,
@@ -540,14 +659,19 @@ impl Default for ShopCashExcelT {
       Id: 0,
       CashProductId: 0,
       PackageType: PurchaseSourceType::None,
+      TargetGroup: TargetGroup::WaitingSignIn,
       LocalizeEtcId: 0,
+      InMailPurchaseLock: false,
+      UseMailParcel: false,
       IconPath: None,
       DisplayOrder: 0,
       RenewalDisplayOrder: 0,
       CategoryType: ProductCategory::None,
       DisplayTag: ProductDisplayTag::None,
+      ProductSaleType: ProductSaleType::Limited,
       SalePeriodFrom: None,
       SalePeriodTo: None,
+      ProductSaleDay: 0,
       PeriodTag: false,
       AccountLevelLimit: 0,
       AccountLevelHide: false,
@@ -565,7 +689,10 @@ impl ShopCashExcelT {
     let Id = self.Id;
     let CashProductId = self.CashProductId;
     let PackageType = self.PackageType;
+    let TargetGroup = self.TargetGroup;
     let LocalizeEtcId = self.LocalizeEtcId;
+    let InMailPurchaseLock = self.InMailPurchaseLock;
+    let UseMailParcel = self.UseMailParcel;
     let IconPath = self.IconPath.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -573,12 +700,14 @@ impl ShopCashExcelT {
     let RenewalDisplayOrder = self.RenewalDisplayOrder;
     let CategoryType = self.CategoryType;
     let DisplayTag = self.DisplayTag;
+    let ProductSaleType = self.ProductSaleType;
     let SalePeriodFrom = self.SalePeriodFrom.as_ref().map(|x|{
       _fbb.create_string(x)
     });
     let SalePeriodTo = self.SalePeriodTo.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let ProductSaleDay = self.ProductSaleDay;
     let PeriodTag = self.PeriodTag;
     let AccountLevelLimit = self.AccountLevelLimit;
     let AccountLevelHide = self.AccountLevelHide;
@@ -591,14 +720,19 @@ impl ShopCashExcelT {
       Id,
       CashProductId,
       PackageType,
+      TargetGroup,
       LocalizeEtcId,
+      InMailPurchaseLock,
+      UseMailParcel,
       IconPath,
       DisplayOrder,
       RenewalDisplayOrder,
       CategoryType,
       DisplayTag,
+      ProductSaleType,
       SalePeriodFrom,
       SalePeriodTo,
+      ProductSaleDay,
       PeriodTag,
       AccountLevelLimit,
       AccountLevelHide,

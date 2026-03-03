@@ -16,16 +16,17 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_ARMOR_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_ARMOR_TYPE: i32 = 5;
+pub const ENUM_MAX_ARMOR_TYPE: i32 = 6;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_ARMOR_TYPE: [ArmorType; 6] = [
+pub const ENUM_VALUES_ARMOR_TYPE: [ArmorType; 7] = [
   ArmorType::LightArmor,
   ArmorType::HeavyArmor,
   ArmorType::Unarmed,
   ArmorType::Structure,
   ArmorType::Normal,
   ArmorType::ElasticArmor,
+  ArmorType::CompositeArmor,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -39,9 +40,10 @@ impl ArmorType {
   pub const Structure: Self = Self(3);
   pub const Normal: Self = Self(4);
   pub const ElasticArmor: Self = Self(5);
+  pub const CompositeArmor: Self = Self(6);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 5;
+  pub const ENUM_MAX: i32 = 6;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::LightArmor,
     Self::HeavyArmor,
@@ -49,6 +51,7 @@ impl ArmorType {
     Self::Structure,
     Self::Normal,
     Self::ElasticArmor,
+    Self::CompositeArmor,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -59,6 +62,7 @@ impl ArmorType {
       Self::Structure => Some("Structure"),
       Self::Normal => Some("Normal"),
       Self::ElasticArmor => Some("ElasticArmor"),
+      Self::CompositeArmor => Some("CompositeArmor"),
       _ => None,
     }
   }

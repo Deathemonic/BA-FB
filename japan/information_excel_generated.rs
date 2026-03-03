@@ -31,9 +31,10 @@ impl<'a> flatbuffers::Follow<'a> for InformationExcel<'a> {
 impl<'a> InformationExcel<'a> {
   pub const VT_GROUPID: flatbuffers::VOffsetT = 4;
   pub const VT_PAGENAME: flatbuffers::VOffsetT = 6;
-  pub const VT_LOCALIZECODEID: flatbuffers::VOffsetT = 8;
-  pub const VT_TUTORIALPARENTNAME: flatbuffers::VOffsetT = 10;
-  pub const VT_UINAME: flatbuffers::VOffsetT = 12;
+  pub const VT_ISPCBUILD: flatbuffers::VOffsetT = 8;
+  pub const VT_LOCALIZECODEID: flatbuffers::VOffsetT = 10;
+  pub const VT_TUTORIALPARENTNAME: flatbuffers::VOffsetT = 12;
+  pub const VT_UINAME: flatbuffers::VOffsetT = 14;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -61,6 +62,7 @@ impl<'a> InformationExcel<'a> {
       if let Some(x) = args.PageName {
         builder.add_PageName(x);
       }
+      builder.add_IsPcBuild(args.IsPcBuild);
     builder.finish()
   }
 
@@ -70,6 +72,7 @@ impl<'a> InformationExcel<'a> {
     let PageName = self.PageName().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+      let IsPcBuild = self.IsPcBuild();
     let LocalizeCodeId = self.LocalizeCodeId().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -82,6 +85,7 @@ impl<'a> InformationExcel<'a> {
     InformationExcelT {
       GroupID,
       PageName,
+      IsPcBuild,
       LocalizeCodeId,
       TutorialParentName,
       UIName,
@@ -101,6 +105,13 @@ impl<'a> InformationExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(InformationExcel::VT_PAGENAME, None)}
+  }
+  #[inline]
+  pub fn IsPcBuild(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(InformationExcel::VT_ISPCBUILD, Some(false)).unwrap()}
   }
   #[inline]
   pub fn LocalizeCodeId(&self) -> Option<&'a str> {
@@ -134,6 +145,7 @@ impl flatbuffers::Verifiable for InformationExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("GroupID", Self::VT_GROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PageName", Self::VT_PAGENAME, false)?
+     .visit_field::<bool>("IsPcBuild", Self::VT_ISPCBUILD, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("LocalizeCodeId", Self::VT_LOCALIZECODEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("TutorialParentName", Self::VT_TUTORIALPARENTNAME, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("UIName", Self::VT_UINAME, false)?
@@ -144,6 +156,7 @@ impl flatbuffers::Verifiable for InformationExcel<'_> {
 pub struct InformationExcelArgs<'a> {
     pub GroupID: i64,
     pub PageName: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub IsPcBuild: bool,
     pub LocalizeCodeId: Option<flatbuffers::WIPOffset<&'a str>>,
     pub TutorialParentName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub UIName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
@@ -154,6 +167,7 @@ impl<'a> Default for InformationExcelArgs<'a> {
     InformationExcelArgs {
       GroupID: 0,
       PageName: None,
+      IsPcBuild: false,
       LocalizeCodeId: None,
       TutorialParentName: None,
       UIName: None,
@@ -166,13 +180,14 @@ impl Serialize for InformationExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("InformationExcel", 5)?;
+    let mut s = serializer.serialize_struct("InformationExcel", 6)?;
       s.serialize_field("GroupID", &self.GroupID())?;
       if let Some(f) = self.PageName() {
         s.serialize_field("PageName", &f)?;
       } else {
         s.skip_field("PageName")?;
       }
+      s.serialize_field("IsPcBuild", &self.IsPcBuild())?;
       if let Some(f) = self.LocalizeCodeId() {
         s.serialize_field("LocalizeCodeId", &f)?;
       } else {
@@ -206,6 +221,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> InformationExcelBuilder<'a, 'b,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(InformationExcel::VT_PAGENAME, PageName);
   }
   #[inline]
+  pub fn add_IsPcBuild(&mut self, IsPcBuild: bool) {
+    self.fbb_.push_slot::<bool>(InformationExcel::VT_ISPCBUILD, IsPcBuild, false);
+  }
+  #[inline]
   pub fn add_LocalizeCodeId(&mut self, LocalizeCodeId: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(InformationExcel::VT_LOCALIZECODEID, LocalizeCodeId);
   }
@@ -237,6 +256,7 @@ impl core::fmt::Debug for InformationExcel<'_> {
     let mut ds = f.debug_struct("InformationExcel");
       ds.field("GroupID", &self.GroupID());
       ds.field("PageName", &self.PageName());
+      ds.field("IsPcBuild", &self.IsPcBuild());
       ds.field("LocalizeCodeId", &self.LocalizeCodeId());
       ds.field("TutorialParentName", &self.TutorialParentName());
       ds.field("UIName", &self.UIName());
@@ -248,6 +268,7 @@ impl core::fmt::Debug for InformationExcel<'_> {
 pub struct InformationExcelT {
   pub GroupID: i64,
   pub PageName: Option<String>,
+  pub IsPcBuild: bool,
   pub LocalizeCodeId: Option<String>,
   pub TutorialParentName: Option<Vec<String>>,
   pub UIName: Option<Vec<String>>,
@@ -257,6 +278,7 @@ impl Default for InformationExcelT {
     Self {
       GroupID: 0,
       PageName: None,
+      IsPcBuild: false,
       LocalizeCodeId: None,
       TutorialParentName: None,
       UIName: None,
@@ -272,6 +294,7 @@ impl InformationExcelT {
     let PageName = self.PageName.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let IsPcBuild = self.IsPcBuild;
     let LocalizeCodeId = self.LocalizeCodeId.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -284,6 +307,7 @@ impl InformationExcelT {
     InformationExcel::create(_fbb, &InformationExcelArgs{
       GroupID,
       PageName,
+      IsPcBuild,
       LocalizeCodeId,
       TutorialParentName,
       UIName,

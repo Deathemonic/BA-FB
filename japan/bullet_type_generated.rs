@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_BULLET_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_BULLET_TYPE: i32 = 6;
+pub const ENUM_MAX_BULLET_TYPE: i32 = 7;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_BULLET_TYPE: [BulletType; 7] = [
+pub const ENUM_VALUES_BULLET_TYPE: [BulletType; 8] = [
   BulletType::Normal,
   BulletType::Pierce,
   BulletType::Explosion,
@@ -27,6 +27,7 @@ pub const ENUM_VALUES_BULLET_TYPE: [BulletType; 7] = [
   BulletType::Mystic,
   BulletType::None,
   BulletType::Sonic,
+  BulletType::Chemical,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -41,9 +42,10 @@ impl BulletType {
   pub const Mystic: Self = Self(4);
   pub const None: Self = Self(5);
   pub const Sonic: Self = Self(6);
+  pub const Chemical: Self = Self(7);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 6;
+  pub const ENUM_MAX: i32 = 7;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Normal,
     Self::Pierce,
@@ -52,6 +54,7 @@ impl BulletType {
     Self::Mystic,
     Self::None,
     Self::Sonic,
+    Self::Chemical,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -63,6 +66,7 @@ impl BulletType {
       Self::Mystic => Some("Mystic"),
       Self::None => Some("None"),
       Self::Sonic => Some("Sonic"),
+      Self::Chemical => Some("Chemical"),
       _ => None,
     }
   }

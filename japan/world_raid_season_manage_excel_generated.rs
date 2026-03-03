@@ -30,7 +30,7 @@ impl<'a> flatbuffers::Follow<'a> for WorldRaidSeasonManageExcel<'a> {
 
 impl<'a> WorldRaidSeasonManageExcel<'a> {
   pub const VT_SEASONID: flatbuffers::VOffsetT = 4;
-  pub const VT_EVENTCONTENTID: flatbuffers::VOffsetT = 6;
+  pub const VT_PHASEID: flatbuffers::VOffsetT = 6;
   pub const VT_ENTERTICKET: flatbuffers::VOffsetT = 8;
   pub const VT_WORLDRAIDLOBBYSCENE: flatbuffers::VOffsetT = 10;
   pub const VT_WORLDRAIDLOBBYBANNER: flatbuffers::VOffsetT = 12;
@@ -70,9 +70,9 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
       let x = args.SeasonOpenCondition;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_SeasonOpenCondition(x);
-      let x = args.EventContentId;
+      let x = args.PhaseId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
-      builder.add_EventContentId(x);
+      builder.add_PhaseId(x);
       let x = args.SeasonId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_SeasonId(x);
@@ -123,7 +123,7 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
   pub fn unpack(&self) -> WorldRaidSeasonManageExcelT {
     let key = table_encryption_service::create_key(b"WorldRaidSeasonManage");
       let SeasonId = self.SeasonId();
-      let EventContentId = self.EventContentId();
+      let PhaseId = self.PhaseId();
       let EnterTicket = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_enum(self.EnterTicket(), &key)
       } else {
@@ -171,7 +171,7 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
       let UseFavorRankBuff = self.UseFavorRankBuff();
     WorldRaidSeasonManageExcelT {
       SeasonId,
-      EventContentId,
+      PhaseId,
       EnterTicket,
       WorldRaidLobbyScene,
       WorldRaidLobbyBanner,
@@ -204,11 +204,11 @@ impl<'a> WorldRaidSeasonManageExcel<'a> {
     unsafe { self._tab.get::<i64>(WorldRaidSeasonManageExcel::VT_SEASONID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn EventContentId(&self) -> i64 {
+  pub fn PhaseId(&self) -> i64 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(WorldRaidSeasonManageExcel::VT_EVENTCONTENTID, Some(0)).unwrap()}
+    unsafe { self._tab.get::<i64>(WorldRaidSeasonManageExcel::VT_PHASEID, Some(0)).unwrap()}
   }
   #[inline]
   pub fn EnterTicket(&self) -> CurrencyTypes {
@@ -367,7 +367,7 @@ impl flatbuffers::Verifiable for WorldRaidSeasonManageExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<i64>("SeasonId", Self::VT_SEASONID, false)?
-     .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
+     .visit_field::<i64>("PhaseId", Self::VT_PHASEID, false)?
      .visit_field::<CurrencyTypes>("EnterTicket", Self::VT_ENTERTICKET, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("WorldRaidLobbyScene", Self::VT_WORLDRAIDLOBBYSCENE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("WorldRaidLobbyBanner", Self::VT_WORLDRAIDLOBBYBANNER, false)?
@@ -395,7 +395,7 @@ impl flatbuffers::Verifiable for WorldRaidSeasonManageExcel<'_> {
 }
 pub struct WorldRaidSeasonManageExcelArgs<'a> {
     pub SeasonId: i64,
-    pub EventContentId: i64,
+    pub PhaseId: i64,
     pub EnterTicket: CurrencyTypes,
     pub WorldRaidLobbyScene: Option<flatbuffers::WIPOffset<&'a str>>,
     pub WorldRaidLobbyBanner: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -423,7 +423,7 @@ impl<'a> Default for WorldRaidSeasonManageExcelArgs<'a> {
   fn default() -> Self {
     WorldRaidSeasonManageExcelArgs {
       SeasonId: 0,
-      EventContentId: 0,
+      PhaseId: 0,
       EnterTicket: CurrencyTypes::Invalid,
       WorldRaidLobbyScene: None,
       WorldRaidLobbyBanner: None,
@@ -456,7 +456,7 @@ impl Serialize for WorldRaidSeasonManageExcel<'_> {
   {
     let mut s = serializer.serialize_struct("WorldRaidSeasonManageExcel", 23)?;
       s.serialize_field("SeasonId", &self.SeasonId())?;
-      s.serialize_field("EventContentId", &self.EventContentId())?;
+      s.serialize_field("PhaseId", &self.PhaseId())?;
       s.serialize_field("EnterTicket", &self.EnterTicket())?;
       if let Some(f) = self.WorldRaidLobbyScene() {
         s.serialize_field("WorldRaidLobbyScene", &f)?;
@@ -532,8 +532,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> WorldRaidSeasonManageExcelBuild
     self.fbb_.push_slot::<i64>(WorldRaidSeasonManageExcel::VT_SEASONID, SeasonId, 0);
   }
   #[inline]
-  pub fn add_EventContentId(&mut self, EventContentId: i64) {
-    self.fbb_.push_slot::<i64>(WorldRaidSeasonManageExcel::VT_EVENTCONTENTID, EventContentId, 0);
+  pub fn add_PhaseId(&mut self, PhaseId: i64) {
+    self.fbb_.push_slot::<i64>(WorldRaidSeasonManageExcel::VT_PHASEID, PhaseId, 0);
   }
   #[inline]
   pub fn add_EnterTicket(&mut self, EnterTicket: CurrencyTypes) {
@@ -638,7 +638,7 @@ impl core::fmt::Debug for WorldRaidSeasonManageExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("WorldRaidSeasonManageExcel");
       ds.field("SeasonId", &self.SeasonId());
-      ds.field("EventContentId", &self.EventContentId());
+      ds.field("PhaseId", &self.PhaseId());
       ds.field("EnterTicket", &self.EnterTicket());
       ds.field("WorldRaidLobbyScene", &self.WorldRaidLobbyScene());
       ds.field("WorldRaidLobbyBanner", &self.WorldRaidLobbyBanner());
@@ -667,7 +667,7 @@ impl core::fmt::Debug for WorldRaidSeasonManageExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct WorldRaidSeasonManageExcelT {
   pub SeasonId: i64,
-  pub EventContentId: i64,
+  pub PhaseId: i64,
   pub EnterTicket: CurrencyTypes,
   pub WorldRaidLobbyScene: Option<String>,
   pub WorldRaidLobbyBanner: Option<String>,
@@ -694,7 +694,7 @@ impl Default for WorldRaidSeasonManageExcelT {
   fn default() -> Self {
     Self {
       SeasonId: 0,
-      EventContentId: 0,
+      PhaseId: 0,
       EnterTicket: CurrencyTypes::Invalid,
       WorldRaidLobbyScene: None,
       WorldRaidLobbyBanner: None,
@@ -725,7 +725,7 @@ impl WorldRaidSeasonManageExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<WorldRaidSeasonManageExcel<'b>> {
     let SeasonId = self.SeasonId;
-    let EventContentId = self.EventContentId;
+    let PhaseId = self.PhaseId;
     let EnterTicket = self.EnterTicket;
     let WorldRaidLobbyScene = self.WorldRaidLobbyScene.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -769,7 +769,7 @@ impl WorldRaidSeasonManageExcelT {
     let UseFavorRankBuff = self.UseFavorRankBuff;
     WorldRaidSeasonManageExcel::create(_fbb, &WorldRaidSeasonManageExcelArgs{
       SeasonId,
-      EventContentId,
+      PhaseId,
       EnterTicket,
       WorldRaidLobbyScene,
       WorldRaidLobbyBanner,

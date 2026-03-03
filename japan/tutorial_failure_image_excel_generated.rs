@@ -34,6 +34,7 @@ impl<'a> TutorialFailureImageExcel<'a> {
   pub const VT_TYPE: flatbuffers::VOffsetT = 8;
   pub const VT_IMAGEPATHKR: flatbuffers::VOffsetT = 10;
   pub const VT_IMAGEPATHJP: flatbuffers::VOffsetT = 12;
+  pub const VT_REPLACELOCALIZEKEY: flatbuffers::VOffsetT = 14;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -49,6 +50,9 @@ impl<'a> TutorialFailureImageExcel<'a> {
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
+      if let Some(x) = args.ReplaceLocalizeKey {
+        builder.add_ReplaceLocalizeKey(x);
+      }
       if let Some(x) = args.ImagePathJp {
         builder.add_ImagePathJp(x);
       }
@@ -81,12 +85,16 @@ impl<'a> TutorialFailureImageExcel<'a> {
     let ImagePathJp = self.ImagePathJp().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+    let ReplaceLocalizeKey = self.ReplaceLocalizeKey().map(|x| {
+      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    });
     TutorialFailureImageExcelT {
       Id,
       Contents,
       Type,
       ImagePathKr,
       ImagePathJp,
+      ReplaceLocalizeKey,
     }
   }
 
@@ -125,6 +133,13 @@ impl<'a> TutorialFailureImageExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(TutorialFailureImageExcel::VT_IMAGEPATHJP, None)}
   }
+  #[inline]
+  pub fn ReplaceLocalizeKey(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(TutorialFailureImageExcel::VT_REPLACELOCALIZEKEY, None)}
+  }
 }
 
 impl flatbuffers::Verifiable for TutorialFailureImageExcel<'_> {
@@ -139,6 +154,7 @@ impl flatbuffers::Verifiable for TutorialFailureImageExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("Type", Self::VT_TYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ImagePathKr", Self::VT_IMAGEPATHKR, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ImagePathJp", Self::VT_IMAGEPATHJP, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ReplaceLocalizeKey", Self::VT_REPLACELOCALIZEKEY, false)?
      .finish();
     Ok(())
   }
@@ -149,6 +165,7 @@ pub struct TutorialFailureImageExcelArgs<'a> {
     pub Type: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ImagePathKr: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ImagePathJp: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub ReplaceLocalizeKey: Option<flatbuffers::WIPOffset<&'a str>>,
 }
 impl<'a> Default for TutorialFailureImageExcelArgs<'a> {
   #[inline]
@@ -159,6 +176,7 @@ impl<'a> Default for TutorialFailureImageExcelArgs<'a> {
       Type: None,
       ImagePathKr: None,
       ImagePathJp: None,
+      ReplaceLocalizeKey: None,
     }
   }
 }
@@ -168,7 +186,7 @@ impl Serialize for TutorialFailureImageExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("TutorialFailureImageExcel", 5)?;
+    let mut s = serializer.serialize_struct("TutorialFailureImageExcel", 6)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("Contents", &self.Contents())?;
       if let Some(f) = self.Type() {
@@ -185,6 +203,11 @@ impl Serialize for TutorialFailureImageExcel<'_> {
         s.serialize_field("ImagePathJp", &f)?;
       } else {
         s.skip_field("ImagePathJp")?;
+      }
+      if let Some(f) = self.ReplaceLocalizeKey() {
+        s.serialize_field("ReplaceLocalizeKey", &f)?;
+      } else {
+        s.skip_field("ReplaceLocalizeKey")?;
       }
     s.end()
   }
@@ -216,6 +239,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> TutorialFailureImageExcelBuilde
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TutorialFailureImageExcel::VT_IMAGEPATHJP, ImagePathJp);
   }
   #[inline]
+  pub fn add_ReplaceLocalizeKey(&mut self, ReplaceLocalizeKey: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(TutorialFailureImageExcel::VT_REPLACELOCALIZEKEY, ReplaceLocalizeKey);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> TutorialFailureImageExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     TutorialFailureImageExcelBuilder {
@@ -238,6 +265,7 @@ impl core::fmt::Debug for TutorialFailureImageExcel<'_> {
       ds.field("Type", &self.Type());
       ds.field("ImagePathKr", &self.ImagePathKr());
       ds.field("ImagePathJp", &self.ImagePathJp());
+      ds.field("ReplaceLocalizeKey", &self.ReplaceLocalizeKey());
       ds.finish()
   }
 }
@@ -249,6 +277,7 @@ pub struct TutorialFailureImageExcelT {
   pub Type: Option<String>,
   pub ImagePathKr: Option<String>,
   pub ImagePathJp: Option<String>,
+  pub ReplaceLocalizeKey: Option<String>,
 }
 impl Default for TutorialFailureImageExcelT {
   fn default() -> Self {
@@ -258,6 +287,7 @@ impl Default for TutorialFailureImageExcelT {
       Type: None,
       ImagePathKr: None,
       ImagePathJp: None,
+      ReplaceLocalizeKey: None,
     }
   }
 }
@@ -277,12 +307,16 @@ impl TutorialFailureImageExcelT {
     let ImagePathJp = self.ImagePathJp.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let ReplaceLocalizeKey = self.ReplaceLocalizeKey.as_ref().map(|x|{
+      _fbb.create_string(x)
+    });
     TutorialFailureImageExcel::create(_fbb, &TutorialFailureImageExcelArgs{
       Id,
       Contents,
       Type,
       ImagePathKr,
       ImagePathJp,
+      ReplaceLocalizeKey,
     })
   }
 }

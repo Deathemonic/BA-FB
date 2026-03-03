@@ -43,7 +43,7 @@ impl<'a> RaidStageExcel<'a> {
   pub const VT_RAIDROOMLIFETIME: flatbuffers::VOffsetT = 26;
   pub const VT_BATTLEDURATION: flatbuffers::VOffsetT = 28;
   pub const VT_GROUNDID: flatbuffers::VOffsetT = 30;
-  pub const VT_GROUNDDEVNAME: flatbuffers::VOffsetT = 32;
+  pub const VT_RAIDBOSSGROUPTYPE: flatbuffers::VOffsetT = 32;
   pub const VT_ENTERTIMELINE: flatbuffers::VOffsetT = 34;
   pub const VT_TACTICENVIRONMENT: flatbuffers::VOffsetT = 36;
   pub const VT_DEFAULTCLEARSCORE: flatbuffers::VOffsetT = 38;
@@ -148,9 +148,9 @@ impl<'a> RaidStageExcel<'a> {
       if let Some(x) = args.EnterTimeLine {
         builder.add_EnterTimeLine(x);
       }
-      if let Some(x) = args.GroundDevName {
-        builder.add_GroundDevName(x);
-      }
+      let x = args.RaidBossGroupType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_RaidBossGroupType(x);
       let x = args.RaidRoomLifeTime;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_RaidRoomLifeTime(x);
@@ -204,9 +204,11 @@ impl<'a> RaidStageExcel<'a> {
       let RaidRoomLifeTime = self.RaidRoomLifeTime();
       let BattleDuration = self.BattleDuration();
       let GroundId = self.GroundId();
-    let GroundDevName = self.GroundDevName().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
+      let RaidBossGroupType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.RaidBossGroupType(), &key)
+      } else {
+        self.RaidBossGroupType()
+      };
     let EnterTimeLine = self.EnterTimeLine().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -262,7 +264,7 @@ impl<'a> RaidStageExcel<'a> {
       RaidRoomLifeTime,
       BattleDuration,
       GroundId,
-      GroundDevName,
+      RaidBossGroupType,
       EnterTimeLine,
       TacticEnvironment,
       DefaultClearScore,
@@ -385,11 +387,11 @@ impl<'a> RaidStageExcel<'a> {
     unsafe { self._tab.get::<i64>(RaidStageExcel::VT_GROUNDID, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn GroundDevName(&self) -> Option<&'a str> {
+  pub fn RaidBossGroupType(&self) -> RaidBossGroupType {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(RaidStageExcel::VT_GROUNDDEVNAME, None)}
+    unsafe { self._tab.get::<RaidBossGroupType>(RaidStageExcel::VT_RAIDBOSSGROUPTYPE, Some(RaidBossGroupType::None)).unwrap()}
   }
   #[inline]
   pub fn EnterTimeLine(&self) -> Option<&'a str> {
@@ -554,7 +556,7 @@ impl flatbuffers::Verifiable for RaidStageExcel<'_> {
      .visit_field::<i32>("RaidRoomLifeTime", Self::VT_RAIDROOMLIFETIME, false)?
      .visit_field::<i64>("BattleDuration", Self::VT_BATTLEDURATION, false)?
      .visit_field::<i64>("GroundId", Self::VT_GROUNDID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("GroundDevName", Self::VT_GROUNDDEVNAME, false)?
+     .visit_field::<RaidBossGroupType>("RaidBossGroupType", Self::VT_RAIDBOSSGROUPTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("EnterTimeLine", Self::VT_ENTERTIMELINE, false)?
      .visit_field::<TacticEnvironment>("TacticEnvironment", Self::VT_TACTICENVIRONMENT, false)?
      .visit_field::<i64>("DefaultClearScore", Self::VT_DEFAULTCLEARSCORE, false)?
@@ -594,7 +596,7 @@ pub struct RaidStageExcelArgs<'a> {
     pub RaidRoomLifeTime: i32,
     pub BattleDuration: i64,
     pub GroundId: i64,
-    pub GroundDevName: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub RaidBossGroupType: RaidBossGroupType,
     pub EnterTimeLine: Option<flatbuffers::WIPOffset<&'a str>>,
     pub TacticEnvironment: TacticEnvironment,
     pub DefaultClearScore: i64,
@@ -634,7 +636,7 @@ impl<'a> Default for RaidStageExcelArgs<'a> {
       RaidRoomLifeTime: 0,
       BattleDuration: 0,
       GroundId: 0,
-      GroundDevName: None,
+      RaidBossGroupType: RaidBossGroupType::None,
       EnterTimeLine: None,
       TacticEnvironment: TacticEnvironment::None,
       DefaultClearScore: 0,
@@ -695,11 +697,7 @@ impl Serialize for RaidStageExcel<'_> {
       s.serialize_field("RaidRoomLifeTime", &self.RaidRoomLifeTime())?;
       s.serialize_field("BattleDuration", &self.BattleDuration())?;
       s.serialize_field("GroundId", &self.GroundId())?;
-      if let Some(f) = self.GroundDevName() {
-        s.serialize_field("GroundDevName", &f)?;
-      } else {
-        s.skip_field("GroundDevName")?;
-      }
+      s.serialize_field("RaidBossGroupType", &self.RaidBossGroupType())?;
       if let Some(f) = self.EnterTimeLine() {
         s.serialize_field("EnterTimeLine", &f)?;
       } else {
@@ -810,8 +808,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> RaidStageExcelBuilder<'a, 'b, A
     self.fbb_.push_slot::<i64>(RaidStageExcel::VT_GROUNDID, GroundId, 0);
   }
   #[inline]
-  pub fn add_GroundDevName(&mut self, GroundDevName: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RaidStageExcel::VT_GROUNDDEVNAME, GroundDevName);
+  pub fn add_RaidBossGroupType(&mut self, RaidBossGroupType: RaidBossGroupType) {
+    self.fbb_.push_slot::<RaidBossGroupType>(RaidStageExcel::VT_RAIDBOSSGROUPTYPE, RaidBossGroupType, RaidBossGroupType::None);
   }
   #[inline]
   pub fn add_EnterTimeLine(&mut self, EnterTimeLine: flatbuffers::WIPOffset<&'b  str>) {
@@ -925,7 +923,7 @@ impl core::fmt::Debug for RaidStageExcel<'_> {
       ds.field("RaidRoomLifeTime", &self.RaidRoomLifeTime());
       ds.field("BattleDuration", &self.BattleDuration());
       ds.field("GroundId", &self.GroundId());
-      ds.field("GroundDevName", &self.GroundDevName());
+      ds.field("RaidBossGroupType", &self.RaidBossGroupType());
       ds.field("EnterTimeLine", &self.EnterTimeLine());
       ds.field("TacticEnvironment", &self.TacticEnvironment());
       ds.field("DefaultClearScore", &self.DefaultClearScore());
@@ -966,7 +964,7 @@ pub struct RaidStageExcelT {
   pub RaidRoomLifeTime: i32,
   pub BattleDuration: i64,
   pub GroundId: i64,
-  pub GroundDevName: Option<String>,
+  pub RaidBossGroupType: RaidBossGroupType,
   pub EnterTimeLine: Option<String>,
   pub TacticEnvironment: TacticEnvironment,
   pub DefaultClearScore: i64,
@@ -1005,7 +1003,7 @@ impl Default for RaidStageExcelT {
       RaidRoomLifeTime: 0,
       BattleDuration: 0,
       GroundId: 0,
-      GroundDevName: None,
+      RaidBossGroupType: RaidBossGroupType::None,
       EnterTimeLine: None,
       TacticEnvironment: TacticEnvironment::None,
       DefaultClearScore: 0,
@@ -1056,9 +1054,7 @@ impl RaidStageExcelT {
     let RaidRoomLifeTime = self.RaidRoomLifeTime;
     let BattleDuration = self.BattleDuration;
     let GroundId = self.GroundId;
-    let GroundDevName = self.GroundDevName.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
+    let RaidBossGroupType = self.RaidBossGroupType;
     let EnterTimeLine = self.EnterTimeLine.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -1106,7 +1102,7 @@ impl RaidStageExcelT {
       RaidRoomLifeTime,
       BattleDuration,
       GroundId,
-      GroundDevName,
+      RaidBossGroupType,
       EnterTimeLine,
       TacticEnvironment,
       DefaultClearScore,

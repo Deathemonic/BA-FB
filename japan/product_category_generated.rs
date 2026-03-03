@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_PRODUCT_CATEGORY: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_PRODUCT_CATEGORY: i32 = 7;
+pub const ENUM_MAX_PRODUCT_CATEGORY: i32 = 8;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_PRODUCT_CATEGORY: [ProductCategory; 8] = [
+pub const ENUM_VALUES_PRODUCT_CATEGORY: [ProductCategory; 9] = [
   ProductCategory::None,
   ProductCategory::Gem,
   ProductCategory::Monthly,
@@ -28,6 +28,7 @@ pub const ENUM_VALUES_PRODUCT_CATEGORY: [ProductCategory; 8] = [
   ProductCategory::TimeLimit,
   ProductCategory::BattlePass,
   ProductCategory::GooglePoint,
+  ProductCategory::DailyRecord,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -43,9 +44,10 @@ impl ProductCategory {
   pub const TimeLimit: Self = Self(5);
   pub const BattlePass: Self = Self(6);
   pub const GooglePoint: Self = Self(7);
+  pub const DailyRecord: Self = Self(8);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 7;
+  pub const ENUM_MAX: i32 = 8;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Gem,
@@ -55,6 +57,7 @@ impl ProductCategory {
     Self::TimeLimit,
     Self::BattlePass,
     Self::GooglePoint,
+    Self::DailyRecord,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -67,6 +70,7 @@ impl ProductCategory {
       Self::TimeLimit => Some("TimeLimit"),
       Self::BattlePass => Some("BattlePass"),
       Self::GooglePoint => Some("GooglePoint"),
+      Self::DailyRecord => Some("DailyRecord"),
       _ => None,
     }
   }

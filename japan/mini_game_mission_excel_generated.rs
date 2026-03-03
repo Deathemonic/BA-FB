@@ -41,7 +41,7 @@ impl<'a> MiniGameMissionExcel<'a> {
   pub const VT_VIEWFLAG: flatbuffers::VOffsetT = 22;
   pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 24;
   pub const VT_PREMISSIONID: flatbuffers::VOffsetT = 26;
-  pub const VT_ACCOUNTTYPE: flatbuffers::VOffsetT = 28;
+  pub const VT_TARGETGROUP: flatbuffers::VOffsetT = 28;
   pub const VT_ACCOUNTLEVEL: flatbuffers::VOffsetT = 30;
   pub const VT_SHORTCUTUI: flatbuffers::VOffsetT = 32;
   pub const VT_COMPLETECONDITIONTYPE: flatbuffers::VOffsetT = 34;
@@ -127,9 +127,9 @@ impl<'a> MiniGameMissionExcel<'a> {
       if let Some(x) = args.ShortcutUI {
         builder.add_ShortcutUI(x);
       }
-      let x = args.AccountType;
+      let x = args.TargetGroup;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
-      builder.add_AccountType(x);
+      builder.add_TargetGroup(x);
       if let Some(x) = args.PreMissionId {
         builder.add_PreMissionId(x);
       }
@@ -188,10 +188,10 @@ impl<'a> MiniGameMissionExcel<'a> {
     let PreMissionId = self.PreMissionId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-      let AccountType = if table_encryption_service::use_encryption() {
-        table_encryption_service::convert_enum(self.AccountType(), &key)
+      let TargetGroup = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.TargetGroup(), &key)
       } else {
-        self.AccountType()
+        self.TargetGroup()
       };
       let AccountLevel = self.AccountLevel();
     let ShortcutUI = self.ShortcutUI().map(|x| {
@@ -248,7 +248,7 @@ impl<'a> MiniGameMissionExcel<'a> {
       ViewFlag,
       DisplayOrder,
       PreMissionId,
-      AccountType,
+      TargetGroup,
       AccountLevel,
       ShortcutUI,
       CompleteConditionType,
@@ -353,11 +353,11 @@ impl<'a> MiniGameMissionExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(MiniGameMissionExcel::VT_PREMISSIONID, None)}
   }
   #[inline]
-  pub fn AccountType(&self) -> AccountState {
+  pub fn TargetGroup(&self) -> TargetGroup {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<AccountState>(MiniGameMissionExcel::VT_ACCOUNTTYPE, Some(AccountState::WaitingSignIn)).unwrap()}
+    unsafe { self._tab.get::<TargetGroup>(MiniGameMissionExcel::VT_TARGETGROUP, Some(TargetGroup::WaitingSignIn)).unwrap()}
   }
   #[inline]
   pub fn AccountLevel(&self) -> i64 {
@@ -492,7 +492,7 @@ impl flatbuffers::Verifiable for MiniGameMissionExcel<'_> {
      .visit_field::<bool>("ViewFlag", Self::VT_VIEWFLAG, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("PreMissionId", Self::VT_PREMISSIONID, false)?
-     .visit_field::<AccountState>("AccountType", Self::VT_ACCOUNTTYPE, false)?
+     .visit_field::<TargetGroup>("TargetGroup", Self::VT_TARGETGROUP, false)?
      .visit_field::<i64>("AccountLevel", Self::VT_ACCOUNTLEVEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ShortcutUI", Self::VT_SHORTCUTUI, false)?
      .visit_field::<MissionCompleteConditionType>("CompleteConditionType", Self::VT_COMPLETECONDITIONTYPE, false)?
@@ -526,7 +526,7 @@ pub struct MiniGameMissionExcelArgs<'a> {
     pub ViewFlag: bool,
     pub DisplayOrder: i64,
     pub PreMissionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub AccountType: AccountState,
+    pub TargetGroup: TargetGroup,
     pub AccountLevel: i64,
     pub ShortcutUI: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub CompleteConditionType: MissionCompleteConditionType,
@@ -560,7 +560,7 @@ impl<'a> Default for MiniGameMissionExcelArgs<'a> {
       ViewFlag: false,
       DisplayOrder: 0,
       PreMissionId: None,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       AccountLevel: 0,
       ShortcutUI: None,
       CompleteConditionType: MissionCompleteConditionType::None,
@@ -611,7 +611,7 @@ impl Serialize for MiniGameMissionExcel<'_> {
       } else {
         s.skip_field("PreMissionId")?;
       }
-      s.serialize_field("AccountType", &self.AccountType())?;
+      s.serialize_field("TargetGroup", &self.TargetGroup())?;
       s.serialize_field("AccountLevel", &self.AccountLevel())?;
       if let Some(f) = self.ShortcutUI() {
         s.serialize_field("ShortcutUI", &f)?;
@@ -730,8 +730,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGameMissionExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MiniGameMissionExcel::VT_PREMISSIONID, PreMissionId);
   }
   #[inline]
-  pub fn add_AccountType(&mut self, AccountType: AccountState) {
-    self.fbb_.push_slot::<AccountState>(MiniGameMissionExcel::VT_ACCOUNTTYPE, AccountType, AccountState::WaitingSignIn);
+  pub fn add_TargetGroup(&mut self, TargetGroup: TargetGroup) {
+    self.fbb_.push_slot::<TargetGroup>(MiniGameMissionExcel::VT_TARGETGROUP, TargetGroup, TargetGroup::WaitingSignIn);
   }
   #[inline]
   pub fn add_AccountLevel(&mut self, AccountLevel: i64) {
@@ -827,7 +827,7 @@ impl core::fmt::Debug for MiniGameMissionExcel<'_> {
       ds.field("ViewFlag", &self.ViewFlag());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.field("PreMissionId", &self.PreMissionId());
-      ds.field("AccountType", &self.AccountType());
+      ds.field("TargetGroup", &self.TargetGroup());
       ds.field("AccountLevel", &self.AccountLevel());
       ds.field("ShortcutUI", &self.ShortcutUI());
       ds.field("CompleteConditionType", &self.CompleteConditionType());
@@ -862,7 +862,7 @@ pub struct MiniGameMissionExcelT {
   pub ViewFlag: bool,
   pub DisplayOrder: i64,
   pub PreMissionId: Option<Vec<i64>>,
-  pub AccountType: AccountState,
+  pub TargetGroup: TargetGroup,
   pub AccountLevel: i64,
   pub ShortcutUI: Option<Vec<String>>,
   pub CompleteConditionType: MissionCompleteConditionType,
@@ -895,7 +895,7 @@ impl Default for MiniGameMissionExcelT {
       ViewFlag: false,
       DisplayOrder: 0,
       PreMissionId: None,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       AccountLevel: 0,
       ShortcutUI: None,
       CompleteConditionType: MissionCompleteConditionType::None,
@@ -938,7 +938,7 @@ impl MiniGameMissionExcelT {
     let PreMissionId = self.PreMissionId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let AccountType = self.AccountType;
+    let TargetGroup = self.TargetGroup;
     let AccountLevel = self.AccountLevel;
     let ShortcutUI = self.ShortcutUI.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
@@ -990,7 +990,7 @@ impl MiniGameMissionExcelT {
       ViewFlag,
       DisplayOrder,
       PreMissionId,
-      AccountType,
+      TargetGroup,
       AccountLevel,
       ShortcutUI,
       CompleteConditionType,

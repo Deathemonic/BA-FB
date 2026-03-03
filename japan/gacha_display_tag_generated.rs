@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_GACHA_DISPLAY_TAG: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_GACHA_DISPLAY_TAG: i32 = 8;
+pub const ENUM_MAX_GACHA_DISPLAY_TAG: i32 = 10;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_GACHA_DISPLAY_TAG: [GachaDisplayTag; 9] = [
+pub const ENUM_VALUES_GACHA_DISPLAY_TAG: [GachaDisplayTag; 11] = [
   GachaDisplayTag::None,
   GachaDisplayTag::Limited,
   GachaDisplayTag::TwoStar,
@@ -29,6 +29,8 @@ pub const ENUM_VALUES_GACHA_DISPLAY_TAG: [GachaDisplayTag; 9] = [
   GachaDisplayTag::Fes,
   GachaDisplayTag::SelectRecruit,
   GachaDisplayTag::LimitedThreeStar,
+  GachaDisplayTag::Revival,
+  GachaDisplayTag::SelectLimited,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -45,9 +47,11 @@ impl GachaDisplayTag {
   pub const Fes: Self = Self(6);
   pub const SelectRecruit: Self = Self(7);
   pub const LimitedThreeStar: Self = Self(8);
+  pub const Revival: Self = Self(9);
+  pub const SelectLimited: Self = Self(10);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 8;
+  pub const ENUM_MAX: i32 = 10;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Limited,
@@ -58,6 +62,8 @@ impl GachaDisplayTag {
     Self::Fes,
     Self::SelectRecruit,
     Self::LimitedThreeStar,
+    Self::Revival,
+    Self::SelectLimited,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -71,6 +77,8 @@ impl GachaDisplayTag {
       Self::Fes => Some("Fes"),
       Self::SelectRecruit => Some("SelectRecruit"),
       Self::LimitedThreeStar => Some("LimitedThreeStar"),
+      Self::Revival => Some("Revival"),
+      Self::SelectLimited => Some("SelectLimited"),
       _ => None,
     }
   }

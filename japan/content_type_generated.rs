@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_CONTENT_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_CONTENT_TYPE: i32 = 22;
+pub const ENUM_MAX_CONTENT_TYPE: i32 = 24;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_CONTENT_TYPE: [ContentType; 23] = [
+pub const ENUM_VALUES_CONTENT_TYPE: [ContentType; 25] = [
   ContentType::None,
   ContentType::CampaignMainStage,
   ContentType::CampaignSubStage,
@@ -43,6 +43,8 @@ pub const ENUM_VALUES_CONTENT_TYPE: [ContentType; 23] = [
   ContentType::FieldContentStage,
   ContentType::MultiFloorRaid,
   ContentType::MinigameDefense,
+  ContentType::InteractiveWorldRaid,
+  ContentType::PermanentRaid,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -73,9 +75,11 @@ impl ContentType {
   pub const FieldContentStage: Self = Self(20);
   pub const MultiFloorRaid: Self = Self(21);
   pub const MinigameDefense: Self = Self(22);
+  pub const InteractiveWorldRaid: Self = Self(23);
+  pub const PermanentRaid: Self = Self(24);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 22;
+  pub const ENUM_MAX: i32 = 24;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::CampaignMainStage,
@@ -100,6 +104,8 @@ impl ContentType {
     Self::FieldContentStage,
     Self::MultiFloorRaid,
     Self::MinigameDefense,
+    Self::InteractiveWorldRaid,
+    Self::PermanentRaid,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -127,6 +133,8 @@ impl ContentType {
       Self::FieldContentStage => Some("FieldContentStage"),
       Self::MultiFloorRaid => Some("MultiFloorRaid"),
       Self::MinigameDefense => Some("MinigameDefense"),
+      Self::InteractiveWorldRaid => Some("InteractiveWorldRaid"),
+      Self::PermanentRaid => Some("PermanentRaid"),
       _ => None,
     }
   }

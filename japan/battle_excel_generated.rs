@@ -141,9 +141,9 @@ impl<'a> BattleExcel<'a> {
       let x = args.DISTANCE;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_DISTANCE(x);
-      let x = args.All;
-      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
-      builder.add_All(x);
+      if let Some(x) = args.all {
+        builder.add_all(x);
+      }
       let x = args.Wood;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_Wood(x);
@@ -233,11 +233,9 @@ impl<'a> BattleExcel<'a> {
       } else {
         self.Wood()
       };
-      let All = if table_encryption_service::use_encryption() {
-        table_encryption_service::convert_enum(self.All(), &key)
-      } else {
-        self.All()
-      };
+    let all = self.all().map(|x| {
+      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
+    });
       let DISTANCE = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_enum(self.DISTANCE(), &key)
       } else {
@@ -360,7 +358,7 @@ impl<'a> BattleExcel<'a> {
       AllySelf,
       LightArmor,
       Wood,
-      All,
+      all,
       DISTANCE,
       CloseToObstacle,
       Students,
@@ -464,11 +462,11 @@ impl<'a> BattleExcel<'a> {
     unsafe { self._tab.get::<EntityMaterialType>(BattleExcel::VT_WOOD, Some(EntityMaterialType::Wood)).unwrap()}
   }
   #[inline]
-  pub fn All(&self) -> CoverMotionType {
+  pub fn all(&self) -> Option<flatbuffers::Vector<'a, CoverMotionType>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<CoverMotionType>(BattleExcel::VT_ALL, Some(CoverMotionType::All)).unwrap()}
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, CoverMotionType>>>(BattleExcel::VT_ALL, None)}
   }
   #[inline]
   pub fn DISTANCE(&self) -> TargetSortBy {
@@ -644,7 +642,7 @@ impl flatbuffers::Verifiable for BattleExcel<'_> {
      .visit_field::<ReArrangeTargetType>("AllySelf", Self::VT_ALLYSELF, false)?
      .visit_field::<ArmorType>("LightArmor", Self::VT_LIGHTARMOR, false)?
      .visit_field::<EntityMaterialType>("Wood", Self::VT_WOOD, false)?
-     .visit_field::<CoverMotionType>("All", Self::VT_ALL, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, CoverMotionType>>>("all", Self::VT_ALL, false)?
      .visit_field::<TargetSortBy>("DISTANCE", Self::VT_DISTANCE, false)?
      .visit_field::<PositioningType>("CloseToObstacle", Self::VT_CLOSETOOBSTACLE, false)?
      .visit_field::<FormationLine>("Students", Self::VT_STUDENTS, false)?
@@ -683,7 +681,7 @@ pub struct BattleExcelArgs<'a> {
     pub AllySelf: ReArrangeTargetType,
     pub LightArmor: ArmorType,
     pub Wood: EntityMaterialType,
-    pub All: CoverMotionType,
+    pub all: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, CoverMotionType>>>,
     pub DISTANCE: TargetSortBy,
     pub CloseToObstacle: PositioningType,
     pub Students: FormationLine,
@@ -722,7 +720,7 @@ impl<'a> Default for BattleExcelArgs<'a> {
       AllySelf: ReArrangeTargetType::AllySelf,
       LightArmor: ArmorType::LightArmor,
       Wood: EntityMaterialType::Wood,
-      All: CoverMotionType::All,
+      all: None,
       DISTANCE: TargetSortBy::DISTANCE,
       CloseToObstacle: PositioningType::CloseToObstacle,
       Students: FormationLine::Students,
@@ -774,7 +772,11 @@ impl Serialize for BattleExcel<'_> {
       s.serialize_field("AllySelf", &self.AllySelf())?;
       s.serialize_field("LightArmor", &self.LightArmor())?;
       s.serialize_field("Wood", &self.Wood())?;
-      s.serialize_field("All", &self.All())?;
+      if let Some(f) = self.all() {
+        s.serialize_field("all", &f)?;
+      } else {
+        s.skip_field("all")?;
+      }
       s.serialize_field("DISTANCE", &self.DISTANCE())?;
       s.serialize_field("CloseToObstacle", &self.CloseToObstacle())?;
       s.serialize_field("Students", &self.Students())?;
@@ -851,8 +853,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> BattleExcelBuilder<'a, 'b, A> {
     self.fbb_.push_slot::<EntityMaterialType>(BattleExcel::VT_WOOD, Wood, EntityMaterialType::Wood);
   }
   #[inline]
-  pub fn add_All(&mut self, All: CoverMotionType) {
-    self.fbb_.push_slot::<CoverMotionType>(BattleExcel::VT_ALL, All, CoverMotionType::All);
+  pub fn add_all(&mut self, all: flatbuffers::WIPOffset<flatbuffers::Vector<'b , CoverMotionType>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(BattleExcel::VT_ALL, all);
   }
   #[inline]
   pub fn add_DISTANCE(&mut self, DISTANCE: TargetSortBy) {
@@ -971,7 +973,7 @@ impl core::fmt::Debug for BattleExcel<'_> {
       ds.field("AllySelf", &self.AllySelf());
       ds.field("LightArmor", &self.LightArmor());
       ds.field("Wood", &self.Wood());
-      ds.field("All", &self.All());
+      ds.field("all", &self.all());
       ds.field("DISTANCE", &self.DISTANCE());
       ds.field("CloseToObstacle", &self.CloseToObstacle());
       ds.field("Students", &self.Students());
@@ -1011,7 +1013,7 @@ pub struct BattleExcelT {
   pub AllySelf: ReArrangeTargetType,
   pub LightArmor: ArmorType,
   pub Wood: EntityMaterialType,
-  pub All: CoverMotionType,
+  pub all: Option<Vec<CoverMotionType>>,
   pub DISTANCE: TargetSortBy,
   pub CloseToObstacle: PositioningType,
   pub Students: FormationLine,
@@ -1049,7 +1051,7 @@ impl Default for BattleExcelT {
       AllySelf: ReArrangeTargetType::AllySelf,
       LightArmor: ArmorType::LightArmor,
       Wood: EntityMaterialType::Wood,
-      All: CoverMotionType::All,
+      all: None,
       DISTANCE: TargetSortBy::DISTANCE,
       CloseToObstacle: PositioningType::CloseToObstacle,
       Students: FormationLine::Students,
@@ -1095,7 +1097,9 @@ impl BattleExcelT {
     let AllySelf = self.AllySelf;
     let LightArmor = self.LightArmor;
     let Wood = self.Wood;
-    let All = self.All;
+    let all = self.all.as_ref().map(|x|{
+      _fbb.create_vector(x)
+    });
     let DISTANCE = self.DISTANCE;
     let CloseToObstacle = self.CloseToObstacle;
     let Students = self.Students;
@@ -1130,7 +1134,7 @@ impl BattleExcelT {
       AllySelf,
       LightArmor,
       Wood,
-      All,
+      all,
       DISTANCE,
       CloseToObstacle,
       Students,

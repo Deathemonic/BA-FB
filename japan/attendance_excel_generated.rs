@@ -33,7 +33,7 @@ impl<'a> AttendanceExcel<'a> {
   pub const VT_TYPE: flatbuffers::VOffsetT = 6;
   pub const VT_COUNTDOWNPREFAB: flatbuffers::VOffsetT = 8;
   pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 10;
-  pub const VT_ACCOUNTTYPE: flatbuffers::VOffsetT = 12;
+  pub const VT_TARGETGROUP: flatbuffers::VOffsetT = 12;
   pub const VT_ACCOUNTLEVELLIMIT: flatbuffers::VOffsetT = 14;
   pub const VT_TITLE: flatbuffers::VOffsetT = 16;
   pub const VT_INFOMATIONLOCALIZECODE: flatbuffers::VOffsetT = 18;
@@ -112,9 +112,9 @@ impl<'a> AttendanceExcel<'a> {
       if let Some(x) = args.Title {
         builder.add_Title(x);
       }
-      let x = args.AccountType;
+      let x = args.TargetGroup;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
-      builder.add_AccountType(x);
+      builder.add_TargetGroup(x);
       if let Some(x) = args.CountdownPrefab {
         builder.add_CountdownPrefab(x);
       }
@@ -136,10 +136,10 @@ impl<'a> AttendanceExcel<'a> {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
       let DisplayOrder = self.DisplayOrder();
-      let AccountType = if table_encryption_service::use_encryption() {
-        table_encryption_service::convert_enum(self.AccountType(), &key)
+      let TargetGroup = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.TargetGroup(), &key)
       } else {
-        self.AccountType()
+        self.TargetGroup()
       };
       let AccountLevelLimit = self.AccountLevelLimit();
     let Title = self.Title().map(|x| {
@@ -193,7 +193,7 @@ impl<'a> AttendanceExcel<'a> {
       Type,
       CountdownPrefab,
       DisplayOrder,
-      AccountType,
+      TargetGroup,
       AccountLevelLimit,
       Title,
       InfomationLocalizeCode,
@@ -241,11 +241,11 @@ impl<'a> AttendanceExcel<'a> {
     unsafe { self._tab.get::<i64>(AttendanceExcel::VT_DISPLAYORDER, Some(0)).unwrap()}
   }
   #[inline]
-  pub fn AccountType(&self) -> AccountState {
+  pub fn TargetGroup(&self) -> TargetGroup {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<AccountState>(AttendanceExcel::VT_ACCOUNTTYPE, Some(AccountState::WaitingSignIn)).unwrap()}
+    unsafe { self._tab.get::<TargetGroup>(AttendanceExcel::VT_TARGETGROUP, Some(TargetGroup::WaitingSignIn)).unwrap()}
   }
   #[inline]
   pub fn AccountLevelLimit(&self) -> i64 {
@@ -365,7 +365,7 @@ impl flatbuffers::Verifiable for AttendanceExcel<'_> {
      .visit_field::<AttendanceType>("Type", Self::VT_TYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("CountdownPrefab", Self::VT_COUNTDOWNPREFAB, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
-     .visit_field::<AccountState>("AccountType", Self::VT_ACCOUNTTYPE, false)?
+     .visit_field::<TargetGroup>("TargetGroup", Self::VT_TARGETGROUP, false)?
      .visit_field::<i64>("AccountLevelLimit", Self::VT_ACCOUNTLEVELLIMIT, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("Title", Self::VT_TITLE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("InfomationLocalizeCode", Self::VT_INFOMATIONLOCALIZECODE, false)?
@@ -390,7 +390,7 @@ pub struct AttendanceExcelArgs<'a> {
     pub Type: AttendanceType,
     pub CountdownPrefab: Option<flatbuffers::WIPOffset<&'a str>>,
     pub DisplayOrder: i64,
-    pub AccountType: AccountState,
+    pub TargetGroup: TargetGroup,
     pub AccountLevelLimit: i64,
     pub Title: Option<flatbuffers::WIPOffset<&'a str>>,
     pub InfomationLocalizeCode: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -415,7 +415,7 @@ impl<'a> Default for AttendanceExcelArgs<'a> {
       Type: AttendanceType::Basic,
       CountdownPrefab: None,
       DisplayOrder: 0,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       AccountLevelLimit: 0,
       Title: None,
       InfomationLocalizeCode: None,
@@ -449,7 +449,7 @@ impl Serialize for AttendanceExcel<'_> {
         s.skip_field("CountdownPrefab")?;
       }
       s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
-      s.serialize_field("AccountType", &self.AccountType())?;
+      s.serialize_field("TargetGroup", &self.TargetGroup())?;
       s.serialize_field("AccountLevelLimit", &self.AccountLevelLimit())?;
       if let Some(f) = self.Title() {
         s.serialize_field("Title", &f)?;
@@ -523,8 +523,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AttendanceExcelBuilder<'a, 'b, 
     self.fbb_.push_slot::<i64>(AttendanceExcel::VT_DISPLAYORDER, DisplayOrder, 0);
   }
   #[inline]
-  pub fn add_AccountType(&mut self, AccountType: AccountState) {
-    self.fbb_.push_slot::<AccountState>(AttendanceExcel::VT_ACCOUNTTYPE, AccountType, AccountState::WaitingSignIn);
+  pub fn add_TargetGroup(&mut self, TargetGroup: TargetGroup) {
+    self.fbb_.push_slot::<TargetGroup>(AttendanceExcel::VT_TARGETGROUP, TargetGroup, TargetGroup::WaitingSignIn);
   }
   #[inline]
   pub fn add_AccountLevelLimit(&mut self, AccountLevelLimit: i64) {
@@ -608,7 +608,7 @@ impl core::fmt::Debug for AttendanceExcel<'_> {
       ds.field("Type", &self.Type());
       ds.field("CountdownPrefab", &self.CountdownPrefab());
       ds.field("DisplayOrder", &self.DisplayOrder());
-      ds.field("AccountType", &self.AccountType());
+      ds.field("TargetGroup", &self.TargetGroup());
       ds.field("AccountLevelLimit", &self.AccountLevelLimit());
       ds.field("Title", &self.Title());
       ds.field("InfomationLocalizeCode", &self.InfomationLocalizeCode());
@@ -634,7 +634,7 @@ pub struct AttendanceExcelT {
   pub Type: AttendanceType,
   pub CountdownPrefab: Option<String>,
   pub DisplayOrder: i64,
-  pub AccountType: AccountState,
+  pub TargetGroup: TargetGroup,
   pub AccountLevelLimit: i64,
   pub Title: Option<String>,
   pub InfomationLocalizeCode: Option<String>,
@@ -658,7 +658,7 @@ impl Default for AttendanceExcelT {
       Type: AttendanceType::Basic,
       CountdownPrefab: None,
       DisplayOrder: 0,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       AccountLevelLimit: 0,
       Title: None,
       InfomationLocalizeCode: None,
@@ -688,7 +688,7 @@ impl AttendanceExcelT {
       _fbb.create_string(x)
     });
     let DisplayOrder = self.DisplayOrder;
-    let AccountType = self.AccountType;
+    let TargetGroup = self.TargetGroup;
     let AccountLevelLimit = self.AccountLevelLimit;
     let Title = self.Title.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -725,7 +725,7 @@ impl AttendanceExcelT {
       Type,
       CountdownPrefab,
       DisplayOrder,
-      AccountType,
+      TargetGroup,
       AccountLevelLimit,
       Title,
       InfomationLocalizeCode,

@@ -44,7 +44,7 @@ impl<'a> MissionExcel<'a> {
   pub const VT_DATEAUTOREFER: flatbuffers::VOffsetT = 28;
   pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 30;
   pub const VT_PREMISSIONID: flatbuffers::VOffsetT = 32;
-  pub const VT_ACCOUNTTYPE: flatbuffers::VOffsetT = 34;
+  pub const VT_TARGETGROUP: flatbuffers::VOffsetT = 34;
   pub const VT_ACCOUNTLEVEL: flatbuffers::VOffsetT = 36;
   pub const VT_CONTENTTAGS: flatbuffers::VOffsetT = 38;
   pub const VT_SHORTCUTUI: flatbuffers::VOffsetT = 40;
@@ -114,9 +114,9 @@ impl<'a> MissionExcel<'a> {
       if let Some(x) = args.ContentTags {
         builder.add_ContentTags(x);
       }
-      let x = args.AccountType;
+      let x = args.TargetGroup;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
-      builder.add_AccountType(x);
+      builder.add_TargetGroup(x);
       if let Some(x) = args.PreMissionId {
         builder.add_PreMissionId(x);
       }
@@ -195,10 +195,10 @@ impl<'a> MissionExcel<'a> {
     let PreMissionId = self.PreMissionId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-      let AccountType = if table_encryption_service::use_encryption() {
-        table_encryption_service::convert_enum(self.AccountType(), &key)
+      let TargetGroup = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.TargetGroup(), &key)
       } else {
-        self.AccountType()
+        self.TargetGroup()
       };
       let AccountLevel = self.AccountLevel();
     let ContentTags = self.ContentTags().map(|x| {
@@ -248,7 +248,7 @@ impl<'a> MissionExcel<'a> {
       DateAutoRefer,
       DisplayOrder,
       PreMissionId,
-      AccountType,
+      TargetGroup,
       AccountLevel,
       ContentTags,
       ShortcutUI,
@@ -370,11 +370,11 @@ impl<'a> MissionExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(MissionExcel::VT_PREMISSIONID, None)}
   }
   #[inline]
-  pub fn AccountType(&self) -> AccountState {
+  pub fn TargetGroup(&self) -> TargetGroup {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<AccountState>(MissionExcel::VT_ACCOUNTTYPE, Some(AccountState::WaitingSignIn)).unwrap()}
+    unsafe { self._tab.get::<TargetGroup>(MissionExcel::VT_TARGETGROUP, Some(TargetGroup::WaitingSignIn)).unwrap()}
   }
   #[inline]
   pub fn AccountLevel(&self) -> i64 {
@@ -484,7 +484,7 @@ impl flatbuffers::Verifiable for MissionExcel<'_> {
      .visit_field::<ContentType>("DateAutoRefer", Self::VT_DATEAUTOREFER, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("PreMissionId", Self::VT_PREMISSIONID, false)?
-     .visit_field::<AccountState>("AccountType", Self::VT_ACCOUNTTYPE, false)?
+     .visit_field::<TargetGroup>("TargetGroup", Self::VT_TARGETGROUP, false)?
      .visit_field::<i64>("AccountLevel", Self::VT_ACCOUNTLEVEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, SuddenMissionContentType>>>("ContentTags", Self::VT_CONTENTTAGS, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ShortcutUI", Self::VT_SHORTCUTUI, false)?
@@ -517,7 +517,7 @@ pub struct MissionExcelArgs<'a> {
     pub DateAutoRefer: ContentType,
     pub DisplayOrder: i64,
     pub PreMissionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub AccountType: AccountState,
+    pub TargetGroup: TargetGroup,
     pub AccountLevel: i64,
     pub ContentTags: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, SuddenMissionContentType>>>,
     pub ShortcutUI: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
@@ -550,7 +550,7 @@ impl<'a> Default for MissionExcelArgs<'a> {
       DateAutoRefer: ContentType::None,
       DisplayOrder: 0,
       PreMissionId: None,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       AccountLevel: 0,
       ContentTags: None,
       ShortcutUI: None,
@@ -608,7 +608,7 @@ impl Serialize for MissionExcel<'_> {
       } else {
         s.skip_field("PreMissionId")?;
       }
-      s.serialize_field("AccountType", &self.AccountType())?;
+      s.serialize_field("TargetGroup", &self.TargetGroup())?;
       s.serialize_field("AccountLevel", &self.AccountLevel())?;
       if let Some(f) = self.ContentTags() {
         s.serialize_field("ContentTags", &f)?;
@@ -723,8 +723,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MissionExcelBuilder<'a, 'b, A> 
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MissionExcel::VT_PREMISSIONID, PreMissionId);
   }
   #[inline]
-  pub fn add_AccountType(&mut self, AccountType: AccountState) {
-    self.fbb_.push_slot::<AccountState>(MissionExcel::VT_ACCOUNTTYPE, AccountType, AccountState::WaitingSignIn);
+  pub fn add_TargetGroup(&mut self, TargetGroup: TargetGroup) {
+    self.fbb_.push_slot::<TargetGroup>(MissionExcel::VT_TARGETGROUP, TargetGroup, TargetGroup::WaitingSignIn);
   }
   #[inline]
   pub fn add_AccountLevel(&mut self, AccountLevel: i64) {
@@ -807,7 +807,7 @@ impl core::fmt::Debug for MissionExcel<'_> {
       ds.field("DateAutoRefer", &self.DateAutoRefer());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.field("PreMissionId", &self.PreMissionId());
-      ds.field("AccountType", &self.AccountType());
+      ds.field("TargetGroup", &self.TargetGroup());
       ds.field("AccountLevel", &self.AccountLevel());
       ds.field("ContentTags", &self.ContentTags());
       ds.field("ShortcutUI", &self.ShortcutUI());
@@ -841,7 +841,7 @@ pub struct MissionExcelT {
   pub DateAutoRefer: ContentType,
   pub DisplayOrder: i64,
   pub PreMissionId: Option<Vec<i64>>,
-  pub AccountType: AccountState,
+  pub TargetGroup: TargetGroup,
   pub AccountLevel: i64,
   pub ContentTags: Option<Vec<SuddenMissionContentType>>,
   pub ShortcutUI: Option<Vec<String>>,
@@ -873,7 +873,7 @@ impl Default for MissionExcelT {
       DateAutoRefer: ContentType::None,
       DisplayOrder: 0,
       PreMissionId: None,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       AccountLevel: 0,
       ContentTags: None,
       ShortcutUI: None,
@@ -919,7 +919,7 @@ impl MissionExcelT {
     let PreMissionId = self.PreMissionId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let AccountType = self.AccountType;
+    let TargetGroup = self.TargetGroup;
     let AccountLevel = self.AccountLevel;
     let ContentTags = self.ContentTags.as_ref().map(|x|{
       _fbb.create_vector(x)
@@ -964,7 +964,7 @@ impl MissionExcelT {
       DateAutoRefer,
       DisplayOrder,
       PreMissionId,
-      AccountType,
+      TargetGroup,
       AccountLevel,
       ContentTags,
       ShortcutUI,

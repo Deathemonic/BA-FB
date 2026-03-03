@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_FIELD_DIALOG_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_FIELD_DIALOG_TYPE: i32 = 18;
+pub const ENUM_MAX_FIELD_DIALOG_TYPE: i32 = 26;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_FIELD_DIALOG_TYPE: [FieldDialogType; 19] = [
+pub const ENUM_VALUES_FIELD_DIALOG_TYPE: [FieldDialogType; 27] = [
   FieldDialogType::None,
   FieldDialogType::Talk,
   FieldDialogType::Think,
@@ -39,6 +39,14 @@ pub const ENUM_VALUES_FIELD_DIALOG_TYPE: [FieldDialogType; 19] = [
   FieldDialogType::Evidence,
   FieldDialogType::Chat,
   FieldDialogType::Keyword_843,
+  FieldDialogType::Angry_Nobubble,
+  FieldDialogType::Sad_Nobubble,
+  FieldDialogType::Steam_Nobubble,
+  FieldDialogType::Respond_Nobubble,
+  FieldDialogType::Sweat_Nobubble,
+  FieldDialogType::Twinkle_Nobubble,
+  FieldDialogType::ZZZ_Nobubble,
+  FieldDialogType::Chat_Nobubble,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -65,9 +73,17 @@ impl FieldDialogType {
   pub const Evidence: Self = Self(16);
   pub const Chat: Self = Self(17);
   pub const Keyword_843: Self = Self(18);
+  pub const Angry_Nobubble: Self = Self(19);
+  pub const Sad_Nobubble: Self = Self(20);
+  pub const Steam_Nobubble: Self = Self(21);
+  pub const Respond_Nobubble: Self = Self(22);
+  pub const Sweat_Nobubble: Self = Self(23);
+  pub const Twinkle_Nobubble: Self = Self(24);
+  pub const ZZZ_Nobubble: Self = Self(25);
+  pub const Chat_Nobubble: Self = Self(26);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 18;
+  pub const ENUM_MAX: i32 = 26;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Talk,
@@ -88,6 +104,14 @@ impl FieldDialogType {
     Self::Evidence,
     Self::Chat,
     Self::Keyword_843,
+    Self::Angry_Nobubble,
+    Self::Sad_Nobubble,
+    Self::Steam_Nobubble,
+    Self::Respond_Nobubble,
+    Self::Sweat_Nobubble,
+    Self::Twinkle_Nobubble,
+    Self::ZZZ_Nobubble,
+    Self::Chat_Nobubble,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -111,6 +135,14 @@ impl FieldDialogType {
       Self::Evidence => Some("Evidence"),
       Self::Chat => Some("Chat"),
       Self::Keyword_843 => Some("Keyword_843"),
+      Self::Angry_Nobubble => Some("Angry_Nobubble"),
+      Self::Sad_Nobubble => Some("Sad_Nobubble"),
+      Self::Steam_Nobubble => Some("Steam_Nobubble"),
+      Self::Respond_Nobubble => Some("Respond_Nobubble"),
+      Self::Sweat_Nobubble => Some("Sweat_Nobubble"),
+      Self::Twinkle_Nobubble => Some("Twinkle_Nobubble"),
+      Self::ZZZ_Nobubble => Some("ZZZ_Nobubble"),
+      Self::Chat_Nobubble => Some("Chat_Nobubble"),
       _ => None,
     }
   }

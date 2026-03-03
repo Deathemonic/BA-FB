@@ -42,31 +42,32 @@ impl<'a> LocalizeCharProfileExcel<'a> {
   pub const VT_FAMILYNAMERUBYJP: flatbuffers::VOffsetT = 24;
   pub const VT_PERSONALNAMEJP: flatbuffers::VOffsetT = 26;
   pub const VT_PERSONALNAMERUBYJP: flatbuffers::VOffsetT = 28;
-  pub const VT_SCHOOLYEARKR: flatbuffers::VOffsetT = 30;
-  pub const VT_SCHOOLYEARJP: flatbuffers::VOffsetT = 32;
-  pub const VT_CHARACTERAGEKR: flatbuffers::VOffsetT = 34;
-  pub const VT_CHARACTERAGEJP: flatbuffers::VOffsetT = 36;
-  pub const VT_BIRTHDAY: flatbuffers::VOffsetT = 38;
-  pub const VT_BIRTHDAYKR: flatbuffers::VOffsetT = 40;
-  pub const VT_BIRTHDAYJP: flatbuffers::VOffsetT = 42;
-  pub const VT_CHARHEIGHTKR: flatbuffers::VOffsetT = 44;
-  pub const VT_CHARHEIGHTJP: flatbuffers::VOffsetT = 46;
-  pub const VT_DESIGNERNAMEKR: flatbuffers::VOffsetT = 48;
-  pub const VT_DESIGNERNAMEJP: flatbuffers::VOffsetT = 50;
-  pub const VT_ILLUSTRATORNAMEKR: flatbuffers::VOffsetT = 52;
-  pub const VT_ILLUSTRATORNAMEJP: flatbuffers::VOffsetT = 54;
-  pub const VT_CHARACTERVOICEKR: flatbuffers::VOffsetT = 56;
-  pub const VT_CHARACTERVOICEJP: flatbuffers::VOffsetT = 58;
-  pub const VT_HOBBYKR: flatbuffers::VOffsetT = 60;
-  pub const VT_HOBBYJP: flatbuffers::VOffsetT = 62;
-  pub const VT_WEAPONNAMEKR: flatbuffers::VOffsetT = 64;
-  pub const VT_WEAPONDESCKR: flatbuffers::VOffsetT = 66;
-  pub const VT_WEAPONNAMEJP: flatbuffers::VOffsetT = 68;
-  pub const VT_WEAPONDESCJP: flatbuffers::VOffsetT = 70;
-  pub const VT_PROFILEINTRODUCTIONKR: flatbuffers::VOffsetT = 72;
-  pub const VT_PROFILEINTRODUCTIONJP: flatbuffers::VOffsetT = 74;
-  pub const VT_CHARACTERSSRNEWKR: flatbuffers::VOffsetT = 76;
-  pub const VT_CHARACTERSSRNEWJP: flatbuffers::VOffsetT = 78;
+  pub const VT_CLUB: flatbuffers::VOffsetT = 30;
+  pub const VT_SCHOOLYEARKR: flatbuffers::VOffsetT = 32;
+  pub const VT_SCHOOLYEARJP: flatbuffers::VOffsetT = 34;
+  pub const VT_CHARACTERAGEKR: flatbuffers::VOffsetT = 36;
+  pub const VT_CHARACTERAGEJP: flatbuffers::VOffsetT = 38;
+  pub const VT_BIRTHDAY: flatbuffers::VOffsetT = 40;
+  pub const VT_BIRTHDAYKR: flatbuffers::VOffsetT = 42;
+  pub const VT_BIRTHDAYJP: flatbuffers::VOffsetT = 44;
+  pub const VT_CHARHEIGHTKR: flatbuffers::VOffsetT = 46;
+  pub const VT_CHARHEIGHTJP: flatbuffers::VOffsetT = 48;
+  pub const VT_DESIGNERNAMEKR: flatbuffers::VOffsetT = 50;
+  pub const VT_DESIGNERNAMEJP: flatbuffers::VOffsetT = 52;
+  pub const VT_ILLUSTRATORNAMEKR: flatbuffers::VOffsetT = 54;
+  pub const VT_ILLUSTRATORNAMEJP: flatbuffers::VOffsetT = 56;
+  pub const VT_CHARACTERVOICEKR: flatbuffers::VOffsetT = 58;
+  pub const VT_CHARACTERVOICEJP: flatbuffers::VOffsetT = 60;
+  pub const VT_HOBBYKR: flatbuffers::VOffsetT = 62;
+  pub const VT_HOBBYJP: flatbuffers::VOffsetT = 64;
+  pub const VT_WEAPONNAMEKR: flatbuffers::VOffsetT = 66;
+  pub const VT_WEAPONDESCKR: flatbuffers::VOffsetT = 68;
+  pub const VT_WEAPONNAMEJP: flatbuffers::VOffsetT = 70;
+  pub const VT_WEAPONDESCJP: flatbuffers::VOffsetT = 72;
+  pub const VT_PROFILEINTRODUCTIONKR: flatbuffers::VOffsetT = 74;
+  pub const VT_PROFILEINTRODUCTIONJP: flatbuffers::VOffsetT = 76;
+  pub const VT_CHARACTERSSRNEWKR: flatbuffers::VOffsetT = 78;
+  pub const VT_CHARACTERSSRNEWJP: flatbuffers::VOffsetT = 80;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -157,6 +158,9 @@ impl<'a> LocalizeCharProfileExcel<'a> {
       if let Some(x) = args.SchoolYearKr {
         builder.add_SchoolYearKr(x);
       }
+      let x = args.Club;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_Club(x);
       if let Some(x) = args.PersonalNameRubyJp {
         builder.add_PersonalNameRubyJp(x);
       }
@@ -235,6 +239,11 @@ impl<'a> LocalizeCharProfileExcel<'a> {
     let PersonalNameRubyJp = self.PersonalNameRubyJp().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+      let Club = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.Club(), &key)
+      } else {
+        self.Club()
+      };
     let SchoolYearKr = self.SchoolYearKr().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
@@ -324,6 +333,7 @@ impl<'a> LocalizeCharProfileExcel<'a> {
       FamilyNameRubyJp,
       PersonalNameJp,
       PersonalNameRubyJp,
+      Club,
       SchoolYearKr,
       SchoolYearJp,
       CharacterAgeKr,
@@ -442,6 +452,13 @@ impl<'a> LocalizeCharProfileExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(LocalizeCharProfileExcel::VT_PERSONALNAMERUBYJP, None)}
+  }
+  #[inline]
+  pub fn Club(&self) -> Club {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<Club>(LocalizeCharProfileExcel::VT_CLUB, Some(Club::None)).unwrap()}
   }
   #[inline]
   pub fn SchoolYearKr(&self) -> Option<&'a str> {
@@ -640,6 +657,7 @@ impl flatbuffers::Verifiable for LocalizeCharProfileExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("FamilyNameRubyJp", Self::VT_FAMILYNAMERUBYJP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PersonalNameJp", Self::VT_PERSONALNAMEJP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PersonalNameRubyJp", Self::VT_PERSONALNAMERUBYJP, false)?
+     .visit_field::<Club>("Club", Self::VT_CLUB, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SchoolYearKr", Self::VT_SCHOOLYEARKR, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("SchoolYearJp", Self::VT_SCHOOLYEARJP, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("CharacterAgeKr", Self::VT_CHARACTERAGEKR, false)?
@@ -683,6 +701,7 @@ pub struct LocalizeCharProfileExcelArgs<'a> {
     pub FamilyNameRubyJp: Option<flatbuffers::WIPOffset<&'a str>>,
     pub PersonalNameJp: Option<flatbuffers::WIPOffset<&'a str>>,
     pub PersonalNameRubyJp: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub Club: Club,
     pub SchoolYearKr: Option<flatbuffers::WIPOffset<&'a str>>,
     pub SchoolYearJp: Option<flatbuffers::WIPOffset<&'a str>>,
     pub CharacterAgeKr: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -726,6 +745,7 @@ impl<'a> Default for LocalizeCharProfileExcelArgs<'a> {
       FamilyNameRubyJp: None,
       PersonalNameJp: None,
       PersonalNameRubyJp: None,
+      Club: Club::None,
       SchoolYearKr: None,
       SchoolYearJp: None,
       CharacterAgeKr: None,
@@ -760,7 +780,7 @@ impl Serialize for LocalizeCharProfileExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("LocalizeCharProfileExcel", 38)?;
+    let mut s = serializer.serialize_struct("LocalizeCharProfileExcel", 39)?;
       s.serialize_field("CharacterId", &self.CharacterId())?;
       if let Some(f) = self.StatusMessageKr() {
         s.serialize_field("StatusMessageKr", &f)?;
@@ -822,6 +842,7 @@ impl Serialize for LocalizeCharProfileExcel<'_> {
       } else {
         s.skip_field("PersonalNameRubyJp")?;
       }
+      s.serialize_field("Club", &self.Club())?;
       if let Some(f) = self.SchoolYearKr() {
         s.serialize_field("SchoolYearKr", &f)?;
       } else {
@@ -1009,6 +1030,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> LocalizeCharProfileExcelBuilder
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(LocalizeCharProfileExcel::VT_PERSONALNAMERUBYJP, PersonalNameRubyJp);
   }
   #[inline]
+  pub fn add_Club(&mut self, Club: Club) {
+    self.fbb_.push_slot::<Club>(LocalizeCharProfileExcel::VT_CLUB, Club, Club::None);
+  }
+  #[inline]
   pub fn add_SchoolYearKr(&mut self, SchoolYearKr: flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(LocalizeCharProfileExcel::VT_SCHOOLYEARKR, SchoolYearKr);
   }
@@ -1139,6 +1164,7 @@ impl core::fmt::Debug for LocalizeCharProfileExcel<'_> {
       ds.field("FamilyNameRubyJp", &self.FamilyNameRubyJp());
       ds.field("PersonalNameJp", &self.PersonalNameJp());
       ds.field("PersonalNameRubyJp", &self.PersonalNameRubyJp());
+      ds.field("Club", &self.Club());
       ds.field("SchoolYearKr", &self.SchoolYearKr());
       ds.field("SchoolYearJp", &self.SchoolYearJp());
       ds.field("CharacterAgeKr", &self.CharacterAgeKr());
@@ -1183,6 +1209,7 @@ pub struct LocalizeCharProfileExcelT {
   pub FamilyNameRubyJp: Option<String>,
   pub PersonalNameJp: Option<String>,
   pub PersonalNameRubyJp: Option<String>,
+  pub Club: Club,
   pub SchoolYearKr: Option<String>,
   pub SchoolYearJp: Option<String>,
   pub CharacterAgeKr: Option<String>,
@@ -1225,6 +1252,7 @@ impl Default for LocalizeCharProfileExcelT {
       FamilyNameRubyJp: None,
       PersonalNameJp: None,
       PersonalNameRubyJp: None,
+      Club: Club::None,
       SchoolYearKr: None,
       SchoolYearJp: None,
       CharacterAgeKr: None,
@@ -1295,6 +1323,7 @@ impl LocalizeCharProfileExcelT {
     let PersonalNameRubyJp = self.PersonalNameRubyJp.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let Club = self.Club;
     let SchoolYearKr = self.SchoolYearKr.as_ref().map(|x|{
       _fbb.create_string(x)
     });
@@ -1384,6 +1413,7 @@ impl LocalizeCharProfileExcelT {
       FamilyNameRubyJp,
       PersonalNameJp,
       PersonalNameRubyJp,
+      Club,
       SchoolYearKr,
       SchoolYearJp,
       CharacterAgeKr,

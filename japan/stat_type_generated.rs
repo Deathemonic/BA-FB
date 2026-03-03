@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_STAT_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_STAT_TYPE: i32 = 85;
+pub const ENUM_MAX_STAT_TYPE: i32 = 89;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_STAT_TYPE: [StatType; 86] = [
+pub const ENUM_VALUES_STAT_TYPE: [StatType; 90] = [
   StatType::None,
   StatType::MaxHP,
   StatType::AttackPower,
@@ -105,6 +105,10 @@ pub const ENUM_VALUES_STAT_TYPE: [StatType; 86] = [
   StatType::GrowthScore,
   StatType::CharacterBulletTypeEnhanceRate,
   StatType::MaxCostIncrease,
+  StatType::EnhanceChemicalRate,
+  StatType::EnhanceCompositeArmorRate,
+  StatType::EnhanceWeakDamageRate,
+  StatType::ReduceWeakDamagedRate,
   StatType::Max,
 ];
 
@@ -198,10 +202,14 @@ impl StatType {
   pub const GrowthScore: Self = Self(82);
   pub const CharacterBulletTypeEnhanceRate: Self = Self(83);
   pub const MaxCostIncrease: Self = Self(84);
-  pub const Max: Self = Self(85);
+  pub const EnhanceChemicalRate: Self = Self(85);
+  pub const EnhanceCompositeArmorRate: Self = Self(86);
+  pub const EnhanceWeakDamageRate: Self = Self(87);
+  pub const ReduceWeakDamagedRate: Self = Self(88);
+  pub const Max: Self = Self(89);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 85;
+  pub const ENUM_MAX: i32 = 89;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::MaxHP,
@@ -288,6 +296,10 @@ impl StatType {
     Self::GrowthScore,
     Self::CharacterBulletTypeEnhanceRate,
     Self::MaxCostIncrease,
+    Self::EnhanceChemicalRate,
+    Self::EnhanceCompositeArmorRate,
+    Self::EnhanceWeakDamageRate,
+    Self::ReduceWeakDamagedRate,
     Self::Max,
   ];
   /// Returns the variant's name or "" if unknown.
@@ -378,6 +390,10 @@ impl StatType {
       Self::GrowthScore => Some("GrowthScore"),
       Self::CharacterBulletTypeEnhanceRate => Some("CharacterBulletTypeEnhanceRate"),
       Self::MaxCostIncrease => Some("MaxCostIncrease"),
+      Self::EnhanceChemicalRate => Some("EnhanceChemicalRate"),
+      Self::EnhanceCompositeArmorRate => Some("EnhanceCompositeArmorRate"),
+      Self::EnhanceWeakDamageRate => Some("EnhanceWeakDamageRate"),
+      Self::ReduceWeakDamagedRate => Some("ReduceWeakDamagedRate"),
       Self::Max => Some("Max"),
       _ => None,
     }

@@ -34,6 +34,8 @@ impl<'a> EventContentSpineDisplayPeriodExcel<'a> {
   pub const VT_COSTUMEUNIQUEID: flatbuffers::VOffsetT = 8;
   pub const VT_SHOWPERIODFROM: flatbuffers::VOffsetT = 10;
   pub const VT_SHOWPERIODTO: flatbuffers::VOffsetT = 12;
+  pub const VT_SHOWWORLDRAIDCONDITIONIDFROM: flatbuffers::VOffsetT = 14;
+  pub const VT_SHOWWORLDRAIDCONDITIONIDTO: flatbuffers::VOffsetT = 16;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -46,6 +48,12 @@ impl<'a> EventContentSpineDisplayPeriodExcel<'a> {
   ) -> flatbuffers::WIPOffset<EventContentSpineDisplayPeriodExcel<'bldr>> {
     let mut builder = EventContentSpineDisplayPeriodExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"EventContentSpineDisplayPeriod");
+      let x = args.ShowWorldRaidConditionIDTo;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ShowWorldRaidConditionIDTo(x);
+      let x = args.ShowWorldRaidConditionIDFrom;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_ShowWorldRaidConditionIDFrom(x);
       let x = args.CostumeUniqueId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_CostumeUniqueId(x);
@@ -79,12 +87,16 @@ impl<'a> EventContentSpineDisplayPeriodExcel<'a> {
     let ShowPeriodTo = self.ShowPeriodTo().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+      let ShowWorldRaidConditionIDFrom = self.ShowWorldRaidConditionIDFrom();
+      let ShowWorldRaidConditionIDTo = self.ShowWorldRaidConditionIDTo();
     EventContentSpineDisplayPeriodExcelT {
       EventContentId,
       DialogCategory,
       CostumeUniqueId,
       ShowPeriodFrom,
       ShowPeriodTo,
+      ShowWorldRaidConditionIDFrom,
+      ShowWorldRaidConditionIDTo,
     }
   }
 
@@ -123,6 +135,20 @@ impl<'a> EventContentSpineDisplayPeriodExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(EventContentSpineDisplayPeriodExcel::VT_SHOWPERIODTO, None)}
   }
+  #[inline]
+  pub fn ShowWorldRaidConditionIDFrom(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(EventContentSpineDisplayPeriodExcel::VT_SHOWWORLDRAIDCONDITIONIDFROM, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn ShowWorldRaidConditionIDTo(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(EventContentSpineDisplayPeriodExcel::VT_SHOWWORLDRAIDCONDITIONIDTO, Some(0)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for EventContentSpineDisplayPeriodExcel<'_> {
@@ -137,6 +163,8 @@ impl flatbuffers::Verifiable for EventContentSpineDisplayPeriodExcel<'_> {
      .visit_field::<i64>("CostumeUniqueId", Self::VT_COSTUMEUNIQUEID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ShowPeriodFrom", Self::VT_SHOWPERIODFROM, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ShowPeriodTo", Self::VT_SHOWPERIODTO, false)?
+     .visit_field::<i64>("ShowWorldRaidConditionIDFrom", Self::VT_SHOWWORLDRAIDCONDITIONIDFROM, false)?
+     .visit_field::<i64>("ShowWorldRaidConditionIDTo", Self::VT_SHOWWORLDRAIDCONDITIONIDTO, false)?
      .finish();
     Ok(())
   }
@@ -147,6 +175,8 @@ pub struct EventContentSpineDisplayPeriodExcelArgs<'a> {
     pub CostumeUniqueId: i64,
     pub ShowPeriodFrom: Option<flatbuffers::WIPOffset<&'a str>>,
     pub ShowPeriodTo: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub ShowWorldRaidConditionIDFrom: i64,
+    pub ShowWorldRaidConditionIDTo: i64,
 }
 impl<'a> Default for EventContentSpineDisplayPeriodExcelArgs<'a> {
   #[inline]
@@ -157,6 +187,8 @@ impl<'a> Default for EventContentSpineDisplayPeriodExcelArgs<'a> {
       CostumeUniqueId: 0,
       ShowPeriodFrom: None,
       ShowPeriodTo: None,
+      ShowWorldRaidConditionIDFrom: 0,
+      ShowWorldRaidConditionIDTo: 0,
     }
   }
 }
@@ -166,7 +198,7 @@ impl Serialize for EventContentSpineDisplayPeriodExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EventContentSpineDisplayPeriodExcel", 5)?;
+    let mut s = serializer.serialize_struct("EventContentSpineDisplayPeriodExcel", 7)?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
       s.serialize_field("DialogCategory", &self.DialogCategory())?;
       s.serialize_field("CostumeUniqueId", &self.CostumeUniqueId())?;
@@ -180,6 +212,8 @@ impl Serialize for EventContentSpineDisplayPeriodExcel<'_> {
       } else {
         s.skip_field("ShowPeriodTo")?;
       }
+      s.serialize_field("ShowWorldRaidConditionIDFrom", &self.ShowWorldRaidConditionIDFrom())?;
+      s.serialize_field("ShowWorldRaidConditionIDTo", &self.ShowWorldRaidConditionIDTo())?;
     s.end()
   }
 }
@@ -210,6 +244,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentSpineDisplayPeriodE
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentSpineDisplayPeriodExcel::VT_SHOWPERIODTO, ShowPeriodTo);
   }
   #[inline]
+  pub fn add_ShowWorldRaidConditionIDFrom(&mut self, ShowWorldRaidConditionIDFrom: i64) {
+    self.fbb_.push_slot::<i64>(EventContentSpineDisplayPeriodExcel::VT_SHOWWORLDRAIDCONDITIONIDFROM, ShowWorldRaidConditionIDFrom, 0);
+  }
+  #[inline]
+  pub fn add_ShowWorldRaidConditionIDTo(&mut self, ShowWorldRaidConditionIDTo: i64) {
+    self.fbb_.push_slot::<i64>(EventContentSpineDisplayPeriodExcel::VT_SHOWWORLDRAIDCONDITIONIDTO, ShowWorldRaidConditionIDTo, 0);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EventContentSpineDisplayPeriodExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     EventContentSpineDisplayPeriodExcelBuilder {
@@ -232,6 +274,8 @@ impl core::fmt::Debug for EventContentSpineDisplayPeriodExcel<'_> {
       ds.field("CostumeUniqueId", &self.CostumeUniqueId());
       ds.field("ShowPeriodFrom", &self.ShowPeriodFrom());
       ds.field("ShowPeriodTo", &self.ShowPeriodTo());
+      ds.field("ShowWorldRaidConditionIDFrom", &self.ShowWorldRaidConditionIDFrom());
+      ds.field("ShowWorldRaidConditionIDTo", &self.ShowWorldRaidConditionIDTo());
       ds.finish()
   }
 }
@@ -243,6 +287,8 @@ pub struct EventContentSpineDisplayPeriodExcelT {
   pub CostumeUniqueId: i64,
   pub ShowPeriodFrom: Option<String>,
   pub ShowPeriodTo: Option<String>,
+  pub ShowWorldRaidConditionIDFrom: i64,
+  pub ShowWorldRaidConditionIDTo: i64,
 }
 impl Default for EventContentSpineDisplayPeriodExcelT {
   fn default() -> Self {
@@ -252,6 +298,8 @@ impl Default for EventContentSpineDisplayPeriodExcelT {
       CostumeUniqueId: 0,
       ShowPeriodFrom: None,
       ShowPeriodTo: None,
+      ShowWorldRaidConditionIDFrom: 0,
+      ShowWorldRaidConditionIDTo: 0,
     }
   }
 }
@@ -269,12 +317,16 @@ impl EventContentSpineDisplayPeriodExcelT {
     let ShowPeriodTo = self.ShowPeriodTo.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let ShowWorldRaidConditionIDFrom = self.ShowWorldRaidConditionIDFrom;
+    let ShowWorldRaidConditionIDTo = self.ShowWorldRaidConditionIDTo;
     EventContentSpineDisplayPeriodExcel::create(_fbb, &EventContentSpineDisplayPeriodExcelArgs{
       EventContentId,
       DialogCategory,
       CostumeUniqueId,
       ShowPeriodFrom,
       ShowPeriodTo,
+      ShowWorldRaidConditionIDFrom,
+      ShowWorldRaidConditionIDTo,
     })
   }
 }

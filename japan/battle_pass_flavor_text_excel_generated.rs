@@ -31,7 +31,9 @@ impl<'a> flatbuffers::Follow<'a> for BattlePassFlavorTextExcel<'a> {
 impl<'a> BattlePassFlavorTextExcel<'a> {
   pub const VT_GROUPID: flatbuffers::VOffsetT = 4;
   pub const VT_ID: flatbuffers::VOffsetT = 6;
-  pub const VT_LOCALIZECODEID: flatbuffers::VOffsetT = 8;
+  pub const VT_TEXTGROUP: flatbuffers::VOffsetT = 8;
+  pub const VT_LOCALIZECODEID: flatbuffers::VOffsetT = 10;
+  pub const VT_SORT: flatbuffers::VOffsetT = 12;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -44,6 +46,12 @@ impl<'a> BattlePassFlavorTextExcel<'a> {
   ) -> flatbuffers::WIPOffset<BattlePassFlavorTextExcel<'bldr>> {
     let mut builder = BattlePassFlavorTextExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"BattlePassFlavorText");
+      let x = args.Sort;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_Sort(x);
+      let x = args.TextGroup;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_TextGroup(x);
       let x = args.Id;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_Id(x);
@@ -60,11 +68,15 @@ impl<'a> BattlePassFlavorTextExcel<'a> {
     let key = table_encryption_service::create_key(b"BattlePassFlavorText");
       let GroupId = self.GroupId();
       let Id = self.Id();
+      let TextGroup = self.TextGroup();
       let LocalizeCodeId = self.LocalizeCodeId();
+      let Sort = self.Sort();
     BattlePassFlavorTextExcelT {
       GroupId,
       Id,
+      TextGroup,
       LocalizeCodeId,
+      Sort,
     }
   }
 
@@ -83,11 +95,25 @@ impl<'a> BattlePassFlavorTextExcel<'a> {
     unsafe { self._tab.get::<i64>(BattlePassFlavorTextExcel::VT_ID, Some(0)).unwrap()}
   }
   #[inline]
+  pub fn TextGroup(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(BattlePassFlavorTextExcel::VT_TEXTGROUP, Some(0)).unwrap()}
+  }
+  #[inline]
   pub fn LocalizeCodeId(&self) -> u32 {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<u32>(BattlePassFlavorTextExcel::VT_LOCALIZECODEID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn Sort(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(BattlePassFlavorTextExcel::VT_SORT, Some(0)).unwrap()}
   }
 }
 
@@ -100,7 +126,9 @@ impl flatbuffers::Verifiable for BattlePassFlavorTextExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("GroupId", Self::VT_GROUPID, false)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
+     .visit_field::<i64>("TextGroup", Self::VT_TEXTGROUP, false)?
      .visit_field::<u32>("LocalizeCodeId", Self::VT_LOCALIZECODEID, false)?
+     .visit_field::<i64>("Sort", Self::VT_SORT, false)?
      .finish();
     Ok(())
   }
@@ -108,7 +136,9 @@ impl flatbuffers::Verifiable for BattlePassFlavorTextExcel<'_> {
 pub struct BattlePassFlavorTextExcelArgs {
     pub GroupId: i64,
     pub Id: i64,
+    pub TextGroup: i64,
     pub LocalizeCodeId: u32,
+    pub Sort: i64,
 }
 impl<'a> Default for BattlePassFlavorTextExcelArgs {
   #[inline]
@@ -116,7 +146,9 @@ impl<'a> Default for BattlePassFlavorTextExcelArgs {
     BattlePassFlavorTextExcelArgs {
       GroupId: 0,
       Id: 0,
+      TextGroup: 0,
       LocalizeCodeId: 0,
+      Sort: 0,
     }
   }
 }
@@ -126,10 +158,12 @@ impl Serialize for BattlePassFlavorTextExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("BattlePassFlavorTextExcel", 3)?;
+    let mut s = serializer.serialize_struct("BattlePassFlavorTextExcel", 5)?;
       s.serialize_field("GroupId", &self.GroupId())?;
       s.serialize_field("Id", &self.Id())?;
+      s.serialize_field("TextGroup", &self.TextGroup())?;
       s.serialize_field("LocalizeCodeId", &self.LocalizeCodeId())?;
+      s.serialize_field("Sort", &self.Sort())?;
     s.end()
   }
 }
@@ -148,8 +182,16 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> BattlePassFlavorTextExcelBuilde
     self.fbb_.push_slot::<i64>(BattlePassFlavorTextExcel::VT_ID, Id, 0);
   }
   #[inline]
+  pub fn add_TextGroup(&mut self, TextGroup: i64) {
+    self.fbb_.push_slot::<i64>(BattlePassFlavorTextExcel::VT_TEXTGROUP, TextGroup, 0);
+  }
+  #[inline]
   pub fn add_LocalizeCodeId(&mut self, LocalizeCodeId: u32) {
     self.fbb_.push_slot::<u32>(BattlePassFlavorTextExcel::VT_LOCALIZECODEID, LocalizeCodeId, 0);
+  }
+  #[inline]
+  pub fn add_Sort(&mut self, Sort: i64) {
+    self.fbb_.push_slot::<i64>(BattlePassFlavorTextExcel::VT_SORT, Sort, 0);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> BattlePassFlavorTextExcelBuilder<'a, 'b, A> {
@@ -171,7 +213,9 @@ impl core::fmt::Debug for BattlePassFlavorTextExcel<'_> {
     let mut ds = f.debug_struct("BattlePassFlavorTextExcel");
       ds.field("GroupId", &self.GroupId());
       ds.field("Id", &self.Id());
+      ds.field("TextGroup", &self.TextGroup());
       ds.field("LocalizeCodeId", &self.LocalizeCodeId());
+      ds.field("Sort", &self.Sort());
       ds.finish()
   }
 }
@@ -180,14 +224,18 @@ impl core::fmt::Debug for BattlePassFlavorTextExcel<'_> {
 pub struct BattlePassFlavorTextExcelT {
   pub GroupId: i64,
   pub Id: i64,
+  pub TextGroup: i64,
   pub LocalizeCodeId: u32,
+  pub Sort: i64,
 }
 impl Default for BattlePassFlavorTextExcelT {
   fn default() -> Self {
     Self {
       GroupId: 0,
       Id: 0,
+      TextGroup: 0,
       LocalizeCodeId: 0,
+      Sort: 0,
     }
   }
 }
@@ -198,11 +246,15 @@ impl BattlePassFlavorTextExcelT {
   ) -> flatbuffers::WIPOffset<BattlePassFlavorTextExcel<'b>> {
     let GroupId = self.GroupId;
     let Id = self.Id;
+    let TextGroup = self.TextGroup;
     let LocalizeCodeId = self.LocalizeCodeId;
+    let Sort = self.Sort;
     BattlePassFlavorTextExcel::create(_fbb, &BattlePassFlavorTextExcelArgs{
       GroupId,
       Id,
+      TextGroup,
       LocalizeCodeId,
+      Sort,
     })
   }
 }

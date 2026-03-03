@@ -33,9 +33,6 @@ impl<'a> FavorLevelRewardExcel<'a> {
   pub const VT_FAVORLEVEL: flatbuffers::VOffsetT = 6;
   pub const VT_STATTYPE: flatbuffers::VOffsetT = 8;
   pub const VT_STATVALUE: flatbuffers::VOffsetT = 10;
-  pub const VT_REWARDPARCELTYPE: flatbuffers::VOffsetT = 12;
-  pub const VT_REWARDPARCELID: flatbuffers::VOffsetT = 14;
-  pub const VT_REWARDAMOUNT: flatbuffers::VOffsetT = 16;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -54,15 +51,6 @@ impl<'a> FavorLevelRewardExcel<'a> {
       let x = args.CharacterId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_CharacterId(x);
-      if let Some(x) = args.RewardAmount {
-        builder.add_RewardAmount(x);
-      }
-      if let Some(x) = args.RewardParcelId {
-        builder.add_RewardParcelId(x);
-      }
-      if let Some(x) = args.RewardParcelType {
-        builder.add_RewardParcelType(x);
-      }
       if let Some(x) = args.StatValue {
         builder.add_StatValue(x);
       }
@@ -82,23 +70,11 @@ impl<'a> FavorLevelRewardExcel<'a> {
     let StatValue = self.StatValue().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-    let RewardParcelType = self.RewardParcelType().map(|x| {
-      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
-    });
-    let RewardParcelId = self.RewardParcelId().map(|x| {
-      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
-    });
-    let RewardAmount = self.RewardAmount().map(|x| {
-      x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
-    });
     FavorLevelRewardExcelT {
       CharacterId,
       FavorLevel,
       StatType,
       StatValue,
-      RewardParcelType,
-      RewardParcelId,
-      RewardAmount,
     }
   }
 
@@ -130,27 +106,6 @@ impl<'a> FavorLevelRewardExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(FavorLevelRewardExcel::VT_STATVALUE, None)}
   }
-  #[inline]
-  pub fn RewardParcelType(&self) -> Option<flatbuffers::Vector<'a, ParcelType>> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, ParcelType>>>(FavorLevelRewardExcel::VT_REWARDPARCELTYPE, None)}
-  }
-  #[inline]
-  pub fn RewardParcelId(&self) -> Option<flatbuffers::Vector<'a, i64>> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(FavorLevelRewardExcel::VT_REWARDPARCELID, None)}
-  }
-  #[inline]
-  pub fn RewardAmount(&self) -> Option<flatbuffers::Vector<'a, i64>> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(FavorLevelRewardExcel::VT_REWARDAMOUNT, None)}
-  }
 }
 
 impl flatbuffers::Verifiable for FavorLevelRewardExcel<'_> {
@@ -164,9 +119,6 @@ impl flatbuffers::Verifiable for FavorLevelRewardExcel<'_> {
      .visit_field::<i64>("FavorLevel", Self::VT_FAVORLEVEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, EquipmentOptionType>>>("StatType", Self::VT_STATTYPE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("StatValue", Self::VT_STATVALUE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ParcelType>>>("RewardParcelType", Self::VT_REWARDPARCELTYPE, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardParcelId", Self::VT_REWARDPARCELID, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("RewardAmount", Self::VT_REWARDAMOUNT, false)?
      .finish();
     Ok(())
   }
@@ -176,9 +128,6 @@ pub struct FavorLevelRewardExcelArgs<'a> {
     pub FavorLevel: i64,
     pub StatType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, EquipmentOptionType>>>,
     pub StatValue: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub RewardParcelType: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ParcelType>>>,
-    pub RewardParcelId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub RewardAmount: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
 }
 impl<'a> Default for FavorLevelRewardExcelArgs<'a> {
   #[inline]
@@ -188,9 +137,6 @@ impl<'a> Default for FavorLevelRewardExcelArgs<'a> {
       FavorLevel: 0,
       StatType: None,
       StatValue: None,
-      RewardParcelType: None,
-      RewardParcelId: None,
-      RewardAmount: None,
     }
   }
 }
@@ -200,7 +146,7 @@ impl Serialize for FavorLevelRewardExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("FavorLevelRewardExcel", 7)?;
+    let mut s = serializer.serialize_struct("FavorLevelRewardExcel", 4)?;
       s.serialize_field("CharacterId", &self.CharacterId())?;
       s.serialize_field("FavorLevel", &self.FavorLevel())?;
       if let Some(f) = self.StatType() {
@@ -212,21 +158,6 @@ impl Serialize for FavorLevelRewardExcel<'_> {
         s.serialize_field("StatValue", &f)?;
       } else {
         s.skip_field("StatValue")?;
-      }
-      if let Some(f) = self.RewardParcelType() {
-        s.serialize_field("RewardParcelType", &f)?;
-      } else {
-        s.skip_field("RewardParcelType")?;
-      }
-      if let Some(f) = self.RewardParcelId() {
-        s.serialize_field("RewardParcelId", &f)?;
-      } else {
-        s.skip_field("RewardParcelId")?;
-      }
-      if let Some(f) = self.RewardAmount() {
-        s.serialize_field("RewardAmount", &f)?;
-      } else {
-        s.skip_field("RewardAmount")?;
       }
     s.end()
   }
@@ -254,18 +185,6 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> FavorLevelRewardExcelBuilder<'a
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FavorLevelRewardExcel::VT_STATVALUE, StatValue);
   }
   #[inline]
-  pub fn add_RewardParcelType(&mut self, RewardParcelType: flatbuffers::WIPOffset<flatbuffers::Vector<'b , ParcelType>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FavorLevelRewardExcel::VT_REWARDPARCELTYPE, RewardParcelType);
-  }
-  #[inline]
-  pub fn add_RewardParcelId(&mut self, RewardParcelId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FavorLevelRewardExcel::VT_REWARDPARCELID, RewardParcelId);
-  }
-  #[inline]
-  pub fn add_RewardAmount(&mut self, RewardAmount: flatbuffers::WIPOffset<flatbuffers::Vector<'b , i64>>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(FavorLevelRewardExcel::VT_REWARDAMOUNT, RewardAmount);
-  }
-  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> FavorLevelRewardExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     FavorLevelRewardExcelBuilder {
@@ -287,9 +206,6 @@ impl core::fmt::Debug for FavorLevelRewardExcel<'_> {
       ds.field("FavorLevel", &self.FavorLevel());
       ds.field("StatType", &self.StatType());
       ds.field("StatValue", &self.StatValue());
-      ds.field("RewardParcelType", &self.RewardParcelType());
-      ds.field("RewardParcelId", &self.RewardParcelId());
-      ds.field("RewardAmount", &self.RewardAmount());
       ds.finish()
   }
 }
@@ -300,9 +216,6 @@ pub struct FavorLevelRewardExcelT {
   pub FavorLevel: i64,
   pub StatType: Option<Vec<EquipmentOptionType>>,
   pub StatValue: Option<Vec<i64>>,
-  pub RewardParcelType: Option<Vec<ParcelType>>,
-  pub RewardParcelId: Option<Vec<i64>>,
-  pub RewardAmount: Option<Vec<i64>>,
 }
 impl Default for FavorLevelRewardExcelT {
   fn default() -> Self {
@@ -311,9 +224,6 @@ impl Default for FavorLevelRewardExcelT {
       FavorLevel: 0,
       StatType: None,
       StatValue: None,
-      RewardParcelType: None,
-      RewardParcelId: None,
-      RewardAmount: None,
     }
   }
 }
@@ -330,23 +240,11 @@ impl FavorLevelRewardExcelT {
     let StatValue = self.StatValue.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let RewardParcelType = self.RewardParcelType.as_ref().map(|x|{
-      _fbb.create_vector(x)
-    });
-    let RewardParcelId = self.RewardParcelId.as_ref().map(|x|{
-      _fbb.create_vector(x)
-    });
-    let RewardAmount = self.RewardAmount.as_ref().map(|x|{
-      _fbb.create_vector(x)
-    });
     FavorLevelRewardExcel::create(_fbb, &FavorLevelRewardExcelArgs{
       CharacterId,
       FavorLevel,
       StatType,
       StatValue,
-      RewardParcelType,
-      RewardParcelId,
-      RewardAmount,
     })
   }
 }

@@ -48,6 +48,7 @@ impl<'a> EquipmentExcel<'a> {
   pub const VT_SHIFTINGCRAFTQUALITY: flatbuffers::VOffsetT = 36;
   pub const VT_SHOPCATEGORY: flatbuffers::VOffsetT = 38;
   pub const VT_SHORTCUTTYPEID: flatbuffers::VOffsetT = 40;
+  pub const VT_REDIRECTITEMID: flatbuffers::VOffsetT = 42;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -60,6 +61,9 @@ impl<'a> EquipmentExcel<'a> {
   ) -> flatbuffers::WIPOffset<EquipmentExcel<'bldr>> {
     let mut builder = EquipmentExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"Equipment");
+      let x = args.RedirectItemId;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
+      builder.add_RedirectItemId(x);
       let x = args.ShortcutTypeId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_ShortcutTypeId(x);
@@ -155,6 +159,7 @@ impl<'a> EquipmentExcel<'a> {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(*val, &key) } else { *val }).collect()
     });
       let ShortcutTypeId = self.ShortcutTypeId();
+      let RedirectItemId = self.RedirectItemId();
     EquipmentExcelT {
       Id,
       EquipmentCategory,
@@ -175,6 +180,7 @@ impl<'a> EquipmentExcel<'a> {
       ShiftingCraftQuality,
       ShopCategory,
       ShortcutTypeId,
+      RedirectItemId,
     }
   }
 
@@ -311,6 +317,13 @@ impl<'a> EquipmentExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(EquipmentExcel::VT_SHORTCUTTYPEID, Some(0)).unwrap()}
   }
+  #[inline]
+  pub fn RedirectItemId(&self) -> i64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<i64>(EquipmentExcel::VT_REDIRECTITEMID, Some(0)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for EquipmentExcel<'_> {
@@ -339,6 +352,7 @@ impl flatbuffers::Verifiable for EquipmentExcel<'_> {
      .visit_field::<i64>("ShiftingCraftQuality", Self::VT_SHIFTINGCRAFTQUALITY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, ShopCategoryType>>>("ShopCategory", Self::VT_SHOPCATEGORY, false)?
      .visit_field::<i64>("ShortcutTypeId", Self::VT_SHORTCUTTYPEID, false)?
+     .visit_field::<i64>("RedirectItemId", Self::VT_REDIRECTITEMID, false)?
      .finish();
     Ok(())
   }
@@ -363,6 +377,7 @@ pub struct EquipmentExcelArgs<'a> {
     pub ShiftingCraftQuality: i64,
     pub ShopCategory: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, ShopCategoryType>>>,
     pub ShortcutTypeId: i64,
+    pub RedirectItemId: i64,
 }
 impl<'a> Default for EquipmentExcelArgs<'a> {
   #[inline]
@@ -387,6 +402,7 @@ impl<'a> Default for EquipmentExcelArgs<'a> {
       ShiftingCraftQuality: 0,
       ShopCategory: None,
       ShortcutTypeId: 0,
+      RedirectItemId: 0,
     }
   }
 }
@@ -396,7 +412,7 @@ impl Serialize for EquipmentExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("EquipmentExcel", 19)?;
+    let mut s = serializer.serialize_struct("EquipmentExcel", 20)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("EquipmentCategory", &self.EquipmentCategory())?;
       s.serialize_field("Rarity", &self.Rarity())?;
@@ -432,6 +448,7 @@ impl Serialize for EquipmentExcel<'_> {
         s.skip_field("ShopCategory")?;
       }
       s.serialize_field("ShortcutTypeId", &self.ShortcutTypeId())?;
+      s.serialize_field("RedirectItemId", &self.RedirectItemId())?;
     s.end()
   }
 }
@@ -518,6 +535,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EquipmentExcelBuilder<'a, 'b, A
     self.fbb_.push_slot::<i64>(EquipmentExcel::VT_SHORTCUTTYPEID, ShortcutTypeId, 0);
   }
   #[inline]
+  pub fn add_RedirectItemId(&mut self, RedirectItemId: i64) {
+    self.fbb_.push_slot::<i64>(EquipmentExcel::VT_REDIRECTITEMID, RedirectItemId, 0);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> EquipmentExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     EquipmentExcelBuilder {
@@ -554,6 +575,7 @@ impl core::fmt::Debug for EquipmentExcel<'_> {
       ds.field("ShiftingCraftQuality", &self.ShiftingCraftQuality());
       ds.field("ShopCategory", &self.ShopCategory());
       ds.field("ShortcutTypeId", &self.ShortcutTypeId());
+      ds.field("RedirectItemId", &self.RedirectItemId());
       ds.finish()
   }
 }
@@ -579,6 +601,7 @@ pub struct EquipmentExcelT {
   pub ShiftingCraftQuality: i64,
   pub ShopCategory: Option<Vec<ShopCategoryType>>,
   pub ShortcutTypeId: i64,
+  pub RedirectItemId: i64,
 }
 impl Default for EquipmentExcelT {
   fn default() -> Self {
@@ -602,6 +625,7 @@ impl Default for EquipmentExcelT {
       ShiftingCraftQuality: 0,
       ShopCategory: None,
       ShortcutTypeId: 0,
+      RedirectItemId: 0,
     }
   }
 }
@@ -637,6 +661,7 @@ impl EquipmentExcelT {
       _fbb.create_vector(x)
     });
     let ShortcutTypeId = self.ShortcutTypeId;
+    let RedirectItemId = self.RedirectItemId;
     EquipmentExcel::create(_fbb, &EquipmentExcelArgs{
       Id,
       EquipmentCategory,
@@ -657,6 +682,7 @@ impl EquipmentExcelT {
       ShiftingCraftQuality,
       ShopCategory,
       ShortcutTypeId,
+      RedirectItemId,
     })
   }
 }

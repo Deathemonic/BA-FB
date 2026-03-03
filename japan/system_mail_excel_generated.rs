@@ -30,9 +30,11 @@ impl<'a> flatbuffers::Follow<'a> for SystemMailExcel<'a> {
 
 impl<'a> SystemMailExcel<'a> {
   pub const VT_MAILTYPE: flatbuffers::VOffsetT = 4;
-  pub const VT_EXPIREDDAY: flatbuffers::VOffsetT = 6;
-  pub const VT_SENDER: flatbuffers::VOffsetT = 8;
-  pub const VT_COMMENT: flatbuffers::VOffsetT = 10;
+  pub const VT_ISPRODUCTMAIL: flatbuffers::VOffsetT = 6;
+  pub const VT_ISVARIABLEEXPIREDDAY: flatbuffers::VOffsetT = 8;
+  pub const VT_EXPIREDDAY: flatbuffers::VOffsetT = 10;
+  pub const VT_SENDER: flatbuffers::VOffsetT = 12;
+  pub const VT_COMMENT: flatbuffers::VOffsetT = 14;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -57,6 +59,8 @@ impl<'a> SystemMailExcel<'a> {
       let x = args.MailType;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
       builder.add_MailType(x);
+      builder.add_IsVariableExpiredDay(args.IsVariableExpiredDay);
+      builder.add_IsProductMail(args.IsProductMail);
     builder.finish()
   }
 
@@ -67,6 +71,8 @@ impl<'a> SystemMailExcel<'a> {
       } else {
         self.MailType()
       };
+      let IsProductMail = self.IsProductMail();
+      let IsVariableExpiredDay = self.IsVariableExpiredDay();
       let ExpiredDay = self.ExpiredDay();
     let Sender = self.Sender().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
@@ -76,6 +82,8 @@ impl<'a> SystemMailExcel<'a> {
     });
     SystemMailExcelT {
       MailType,
+      IsProductMail,
+      IsVariableExpiredDay,
       ExpiredDay,
       Sender,
       Comment,
@@ -88,6 +96,20 @@ impl<'a> SystemMailExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<MailType>(SystemMailExcel::VT_MAILTYPE, Some(MailType::System)).unwrap()}
+  }
+  #[inline]
+  pub fn IsProductMail(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(SystemMailExcel::VT_ISPRODUCTMAIL, Some(false)).unwrap()}
+  }
+  #[inline]
+  pub fn IsVariableExpiredDay(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(SystemMailExcel::VT_ISVARIABLEEXPIREDDAY, Some(false)).unwrap()}
   }
   #[inline]
   pub fn ExpiredDay(&self) -> i64 {
@@ -120,6 +142,8 @@ impl flatbuffers::Verifiable for SystemMailExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<MailType>("MailType", Self::VT_MAILTYPE, false)?
+     .visit_field::<bool>("IsProductMail", Self::VT_ISPRODUCTMAIL, false)?
+     .visit_field::<bool>("IsVariableExpiredDay", Self::VT_ISVARIABLEEXPIREDDAY, false)?
      .visit_field::<i64>("ExpiredDay", Self::VT_EXPIREDDAY, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("Sender", Self::VT_SENDER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("Comment", Self::VT_COMMENT, false)?
@@ -129,6 +153,8 @@ impl flatbuffers::Verifiable for SystemMailExcel<'_> {
 }
 pub struct SystemMailExcelArgs<'a> {
     pub MailType: MailType,
+    pub IsProductMail: bool,
+    pub IsVariableExpiredDay: bool,
     pub ExpiredDay: i64,
     pub Sender: Option<flatbuffers::WIPOffset<&'a str>>,
     pub Comment: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -138,6 +164,8 @@ impl<'a> Default for SystemMailExcelArgs<'a> {
   fn default() -> Self {
     SystemMailExcelArgs {
       MailType: MailType::System,
+      IsProductMail: false,
+      IsVariableExpiredDay: false,
       ExpiredDay: 0,
       Sender: None,
       Comment: None,
@@ -150,8 +178,10 @@ impl Serialize for SystemMailExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("SystemMailExcel", 4)?;
+    let mut s = serializer.serialize_struct("SystemMailExcel", 6)?;
       s.serialize_field("MailType", &self.MailType())?;
+      s.serialize_field("IsProductMail", &self.IsProductMail())?;
+      s.serialize_field("IsVariableExpiredDay", &self.IsVariableExpiredDay())?;
       s.serialize_field("ExpiredDay", &self.ExpiredDay())?;
       if let Some(f) = self.Sender() {
         s.serialize_field("Sender", &f)?;
@@ -175,6 +205,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> SystemMailExcelBuilder<'a, 'b, 
   #[inline]
   pub fn add_MailType(&mut self, MailType: MailType) {
     self.fbb_.push_slot::<MailType>(SystemMailExcel::VT_MAILTYPE, MailType, MailType::System);
+  }
+  #[inline]
+  pub fn add_IsProductMail(&mut self, IsProductMail: bool) {
+    self.fbb_.push_slot::<bool>(SystemMailExcel::VT_ISPRODUCTMAIL, IsProductMail, false);
+  }
+  #[inline]
+  pub fn add_IsVariableExpiredDay(&mut self, IsVariableExpiredDay: bool) {
+    self.fbb_.push_slot::<bool>(SystemMailExcel::VT_ISVARIABLEEXPIREDDAY, IsVariableExpiredDay, false);
   }
   #[inline]
   pub fn add_ExpiredDay(&mut self, ExpiredDay: i64) {
@@ -207,6 +245,8 @@ impl core::fmt::Debug for SystemMailExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("SystemMailExcel");
       ds.field("MailType", &self.MailType());
+      ds.field("IsProductMail", &self.IsProductMail());
+      ds.field("IsVariableExpiredDay", &self.IsVariableExpiredDay());
       ds.field("ExpiredDay", &self.ExpiredDay());
       ds.field("Sender", &self.Sender());
       ds.field("Comment", &self.Comment());
@@ -217,6 +257,8 @@ impl core::fmt::Debug for SystemMailExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct SystemMailExcelT {
   pub MailType: MailType,
+  pub IsProductMail: bool,
+  pub IsVariableExpiredDay: bool,
   pub ExpiredDay: i64,
   pub Sender: Option<String>,
   pub Comment: Option<String>,
@@ -225,6 +267,8 @@ impl Default for SystemMailExcelT {
   fn default() -> Self {
     Self {
       MailType: MailType::System,
+      IsProductMail: false,
+      IsVariableExpiredDay: false,
       ExpiredDay: 0,
       Sender: None,
       Comment: None,
@@ -237,6 +281,8 @@ impl SystemMailExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<SystemMailExcel<'b>> {
     let MailType = self.MailType;
+    let IsProductMail = self.IsProductMail;
+    let IsVariableExpiredDay = self.IsVariableExpiredDay;
     let ExpiredDay = self.ExpiredDay;
     let Sender = self.Sender.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -246,6 +292,8 @@ impl SystemMailExcelT {
     });
     SystemMailExcel::create(_fbb, &SystemMailExcelArgs{
       MailType,
+      IsProductMail,
+      IsVariableExpiredDay,
       ExpiredDay,
       Sender,
       Comment,

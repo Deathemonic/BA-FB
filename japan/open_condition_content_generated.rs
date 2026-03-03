@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_OPEN_CONDITION_CONTENT: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_OPEN_CONDITION_CONTENT: i32 = 57;
+pub const ENUM_MAX_OPEN_CONDITION_CONTENT: i32 = 58;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_OPEN_CONDITION_CONTENT: [OpenConditionContent; 58] = [
+pub const ENUM_VALUES_OPEN_CONDITION_CONTENT: [OpenConditionContent; 59] = [
   OpenConditionContent::Shop,
   OpenConditionContent::Gacha,
   OpenConditionContent::LobbyIllust,
@@ -78,6 +78,7 @@ pub const ENUM_VALUES_OPEN_CONDITION_CONTENT: [OpenConditionContent; 58] = [
   OpenConditionContent::MinigameDreamMaker,
   OpenConditionContent::MiniGameDefense,
   OpenConditionContent::MiniGameCCG,
+  OpenConditionContent::Main_L_1_5,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -143,9 +144,10 @@ impl OpenConditionContent {
   pub const MinigameDreamMaker: Self = Self(55);
   pub const MiniGameDefense: Self = Self(56);
   pub const MiniGameCCG: Self = Self(57);
+  pub const Main_L_1_5: Self = Self(58);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 57;
+  pub const ENUM_MAX: i32 = 58;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Shop,
     Self::Gacha,
@@ -205,6 +207,7 @@ impl OpenConditionContent {
     Self::MinigameDreamMaker,
     Self::MiniGameDefense,
     Self::MiniGameCCG,
+    Self::Main_L_1_5,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -267,6 +270,7 @@ impl OpenConditionContent {
       Self::MinigameDreamMaker => Some("MinigameDreamMaker"),
       Self::MiniGameDefense => Some("MiniGameDefense"),
       Self::MiniGameCCG => Some("MiniGameCCG"),
+      Self::Main_L_1_5 => Some("Main_L_1_5"),
       _ => None,
     }
   }

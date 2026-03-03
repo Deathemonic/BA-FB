@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_DIALOG_CATEGORY: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_DIALOG_CATEGORY: i32 = 74;
+pub const ENUM_MAX_DIALOG_CATEGORY: i32 = 77;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_DIALOG_CATEGORY: [DialogCategory; 75] = [
+pub const ENUM_VALUES_DIALOG_CATEGORY: [DialogCategory; 78] = [
   DialogCategory::Cafe,
   DialogCategory::Echelon,
   DialogCategory::CharacterSSRNew,
@@ -95,6 +95,9 @@ pub const ENUM_VALUES_DIALOG_CATEGORY: [DialogCategory; 75] = [
   DialogCategory::UIBattlePassLobby,
   DialogCategory::UIBattlePassMission,
   DialogCategory::UIAttendanceEvent19,
+  DialogCategory::UIAttendanceEvent20,
+  DialogCategory::UIAttendanceEvent21,
+  DialogCategory::UIEventClueSearch,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -177,9 +180,12 @@ impl DialogCategory {
   pub const UIBattlePassLobby: Self = Self(72);
   pub const UIBattlePassMission: Self = Self(73);
   pub const UIAttendanceEvent19: Self = Self(74);
+  pub const UIAttendanceEvent20: Self = Self(75);
+  pub const UIAttendanceEvent21: Self = Self(76);
+  pub const UIEventClueSearch: Self = Self(77);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 74;
+  pub const ENUM_MAX: i32 = 77;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Cafe,
     Self::Echelon,
@@ -256,6 +262,9 @@ impl DialogCategory {
     Self::UIBattlePassLobby,
     Self::UIBattlePassMission,
     Self::UIAttendanceEvent19,
+    Self::UIAttendanceEvent20,
+    Self::UIAttendanceEvent21,
+    Self::UIEventClueSearch,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -335,6 +344,9 @@ impl DialogCategory {
       Self::UIBattlePassLobby => Some("UIBattlePassLobby"),
       Self::UIBattlePassMission => Some("UIBattlePassMission"),
       Self::UIAttendanceEvent19 => Some("UIAttendanceEvent19"),
+      Self::UIAttendanceEvent20 => Some("UIAttendanceEvent20"),
+      Self::UIAttendanceEvent21 => Some("UIAttendanceEvent21"),
+      Self::UIEventClueSearch => Some("UIEventClueSearch"),
       _ => None,
     }
   }

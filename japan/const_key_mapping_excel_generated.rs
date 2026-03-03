@@ -30,10 +30,9 @@ impl<'a> flatbuffers::Follow<'a> for ConstKeyMappingExcel<'a> {
 
 impl<'a> ConstKeyMappingExcel<'a> {
   pub const VT_DRAGSENSITIVITY: flatbuffers::VOffsetT = 4;
-  pub const VT_PCINFORMATIONGROUPID: flatbuffers::VOffsetT = 6;
-  pub const VT_SCROLLWHEELFACTOR: flatbuffers::VOffsetT = 8;
-  pub const VT_REMOVEKEYCODEWORD: flatbuffers::VOffsetT = 10;
-  pub const VT_TUTORIALDIALOGTOUCHKEY: flatbuffers::VOffsetT = 12;
+  pub const VT_SCROLLWHEELFACTOR: flatbuffers::VOffsetT = 6;
+  pub const VT_REMOVEKEYCODEWORD: flatbuffers::VOffsetT = 8;
+  pub const VT_TUTORIALDIALOGTOUCHKEY: flatbuffers::VOffsetT = 10;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -46,9 +45,6 @@ impl<'a> ConstKeyMappingExcel<'a> {
   ) -> flatbuffers::WIPOffset<ConstKeyMappingExcel<'bldr>> {
     let mut builder = ConstKeyMappingExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"ConstKeyMapping");
-      let x = args.PcInformationGroupID;
-      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
-      builder.add_PcInformationGroupID(x);
       if let Some(x) = args.TutorialDialogTouchKey {
         builder.add_TutorialDialogTouchKey(x);
       }
@@ -71,7 +67,6 @@ impl<'a> ConstKeyMappingExcel<'a> {
       } else {
         self.DragSensitivity()
       };
-      let PcInformationGroupID = self.PcInformationGroupID();
       let ScrollWheelFactor = if table_encryption_service::use_encryption() {
         table_encryption_service::convert_float(self.ScrollWheelFactor(), &key)
       } else {
@@ -85,7 +80,6 @@ impl<'a> ConstKeyMappingExcel<'a> {
     });
     ConstKeyMappingExcelT {
       DragSensitivity,
-      PcInformationGroupID,
       ScrollWheelFactor,
       RemoveKeycodeWord,
       TutorialDialogTouchKey,
@@ -98,13 +92,6 @@ impl<'a> ConstKeyMappingExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<f32>(ConstKeyMappingExcel::VT_DRAGSENSITIVITY, Some(0.0)).unwrap()}
-  }
-  #[inline]
-  pub fn PcInformationGroupID(&self) -> i64 {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<i64>(ConstKeyMappingExcel::VT_PCINFORMATIONGROUPID, Some(0)).unwrap()}
   }
   #[inline]
   pub fn ScrollWheelFactor(&self) -> f32 {
@@ -137,7 +124,6 @@ impl flatbuffers::Verifiable for ConstKeyMappingExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<f32>("DragSensitivity", Self::VT_DRAGSENSITIVITY, false)?
-     .visit_field::<i64>("PcInformationGroupID", Self::VT_PCINFORMATIONGROUPID, false)?
      .visit_field::<f32>("ScrollWheelFactor", Self::VT_SCROLLWHEELFACTOR, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("RemoveKeycodeWord", Self::VT_REMOVEKEYCODEWORD, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("TutorialDialogTouchKey", Self::VT_TUTORIALDIALOGTOUCHKEY, false)?
@@ -147,7 +133,6 @@ impl flatbuffers::Verifiable for ConstKeyMappingExcel<'_> {
 }
 pub struct ConstKeyMappingExcelArgs<'a> {
     pub DragSensitivity: f32,
-    pub PcInformationGroupID: i64,
     pub ScrollWheelFactor: f32,
     pub RemoveKeycodeWord: Option<flatbuffers::WIPOffset<&'a str>>,
     pub TutorialDialogTouchKey: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -157,7 +142,6 @@ impl<'a> Default for ConstKeyMappingExcelArgs<'a> {
   fn default() -> Self {
     ConstKeyMappingExcelArgs {
       DragSensitivity: 0.0,
-      PcInformationGroupID: 0,
       ScrollWheelFactor: 0.0,
       RemoveKeycodeWord: None,
       TutorialDialogTouchKey: None,
@@ -170,9 +154,8 @@ impl Serialize for ConstKeyMappingExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("ConstKeyMappingExcel", 5)?;
+    let mut s = serializer.serialize_struct("ConstKeyMappingExcel", 4)?;
       s.serialize_field("DragSensitivity", &self.DragSensitivity())?;
-      s.serialize_field("PcInformationGroupID", &self.PcInformationGroupID())?;
       s.serialize_field("ScrollWheelFactor", &self.ScrollWheelFactor())?;
       if let Some(f) = self.RemoveKeycodeWord() {
         s.serialize_field("RemoveKeycodeWord", &f)?;
@@ -196,10 +179,6 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> ConstKeyMappingExcelBuilder<'a,
   #[inline]
   pub fn add_DragSensitivity(&mut self, DragSensitivity: f32) {
     self.fbb_.push_slot::<f32>(ConstKeyMappingExcel::VT_DRAGSENSITIVITY, DragSensitivity, 0.0);
-  }
-  #[inline]
-  pub fn add_PcInformationGroupID(&mut self, PcInformationGroupID: i64) {
-    self.fbb_.push_slot::<i64>(ConstKeyMappingExcel::VT_PCINFORMATIONGROUPID, PcInformationGroupID, 0);
   }
   #[inline]
   pub fn add_ScrollWheelFactor(&mut self, ScrollWheelFactor: f32) {
@@ -232,7 +211,6 @@ impl core::fmt::Debug for ConstKeyMappingExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("ConstKeyMappingExcel");
       ds.field("DragSensitivity", &self.DragSensitivity());
-      ds.field("PcInformationGroupID", &self.PcInformationGroupID());
       ds.field("ScrollWheelFactor", &self.ScrollWheelFactor());
       ds.field("RemoveKeycodeWord", &self.RemoveKeycodeWord());
       ds.field("TutorialDialogTouchKey", &self.TutorialDialogTouchKey());
@@ -243,7 +221,6 @@ impl core::fmt::Debug for ConstKeyMappingExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct ConstKeyMappingExcelT {
   pub DragSensitivity: f32,
-  pub PcInformationGroupID: i64,
   pub ScrollWheelFactor: f32,
   pub RemoveKeycodeWord: Option<String>,
   pub TutorialDialogTouchKey: Option<String>,
@@ -252,7 +229,6 @@ impl Default for ConstKeyMappingExcelT {
   fn default() -> Self {
     Self {
       DragSensitivity: 0.0,
-      PcInformationGroupID: 0,
       ScrollWheelFactor: 0.0,
       RemoveKeycodeWord: None,
       TutorialDialogTouchKey: None,
@@ -265,7 +241,6 @@ impl ConstKeyMappingExcelT {
     _fbb: &mut flatbuffers::FlatBufferBuilder<'b, A>
   ) -> flatbuffers::WIPOffset<ConstKeyMappingExcel<'b>> {
     let DragSensitivity = self.DragSensitivity;
-    let PcInformationGroupID = self.PcInformationGroupID;
     let ScrollWheelFactor = self.ScrollWheelFactor;
     let RemoveKeycodeWord = self.RemoveKeycodeWord.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -275,7 +250,6 @@ impl ConstKeyMappingExcelT {
     });
     ConstKeyMappingExcel::create(_fbb, &ConstKeyMappingExcelArgs{
       DragSensitivity,
-      PcInformationGroupID,
       ScrollWheelFactor,
       RemoveKeycodeWord,
       TutorialDialogTouchKey,

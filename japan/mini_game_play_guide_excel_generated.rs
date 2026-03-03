@@ -31,10 +31,12 @@ impl<'a> flatbuffers::Follow<'a> for MiniGamePlayGuideExcel<'a> {
 impl<'a> MiniGamePlayGuideExcel<'a> {
   pub const VT_ID: flatbuffers::VOffsetT = 4;
   pub const VT_EVENTCONTENTID: flatbuffers::VOffsetT = 6;
-  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 8;
-  pub const VT_GUIDETITLE: flatbuffers::VOffsetT = 10;
-  pub const VT_GUIDEIMAGEPATH: flatbuffers::VOffsetT = 12;
-  pub const VT_GUIDETEXT: flatbuffers::VOffsetT = 14;
+  pub const VT_MINIGAMETYPE: flatbuffers::VOffsetT = 8;
+  pub const VT_ISPCBUILD: flatbuffers::VOffsetT = 10;
+  pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 12;
+  pub const VT_GUIDETITLE: flatbuffers::VOffsetT = 14;
+  pub const VT_GUIDEIMAGEPATH: flatbuffers::VOffsetT = 16;
+  pub const VT_GUIDETEXT: flatbuffers::VOffsetT = 18;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -65,6 +67,10 @@ impl<'a> MiniGamePlayGuideExcel<'a> {
       let x = args.DisplayOrder;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_int(x, &key) } else { x };
       builder.add_DisplayOrder(x);
+      let x = args.MiniGameType;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_MiniGameType(x);
+      builder.add_IsPcBuild(args.IsPcBuild);
     builder.finish()
   }
 
@@ -72,6 +78,12 @@ impl<'a> MiniGamePlayGuideExcel<'a> {
     let key = table_encryption_service::create_key(b"MiniGamePlayGuide");
       let Id = self.Id();
       let EventContentId = self.EventContentId();
+      let MiniGameType = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.MiniGameType(), &key)
+      } else {
+        self.MiniGameType()
+      };
+      let IsPcBuild = self.IsPcBuild();
       let DisplayOrder = self.DisplayOrder();
     let GuideTitle = self.GuideTitle().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
@@ -85,6 +97,8 @@ impl<'a> MiniGamePlayGuideExcel<'a> {
     MiniGamePlayGuideExcelT {
       Id,
       EventContentId,
+      MiniGameType,
+      IsPcBuild,
       DisplayOrder,
       GuideTitle,
       GuideImagePath,
@@ -105,6 +119,20 @@ impl<'a> MiniGamePlayGuideExcel<'a> {
     // Created from valid Table for this object
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(MiniGamePlayGuideExcel::VT_EVENTCONTENTID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn MiniGameType(&self) -> EventContentType {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<EventContentType>(MiniGamePlayGuideExcel::VT_MINIGAMETYPE, Some(EventContentType::Stage)).unwrap()}
+  }
+  #[inline]
+  pub fn IsPcBuild(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(MiniGamePlayGuideExcel::VT_ISPCBUILD, Some(false)).unwrap()}
   }
   #[inline]
   pub fn DisplayOrder(&self) -> i32 {
@@ -145,6 +173,8 @@ impl flatbuffers::Verifiable for MiniGamePlayGuideExcel<'_> {
     v.visit_table(pos)?
      .visit_field::<i64>("Id", Self::VT_ID, false)?
      .visit_field::<i64>("EventContentId", Self::VT_EVENTCONTENTID, false)?
+     .visit_field::<EventContentType>("MiniGameType", Self::VT_MINIGAMETYPE, false)?
+     .visit_field::<bool>("IsPcBuild", Self::VT_ISPCBUILD, false)?
      .visit_field::<i32>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("GuideTitle", Self::VT_GUIDETITLE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("GuideImagePath", Self::VT_GUIDEIMAGEPATH, false)?
@@ -156,6 +186,8 @@ impl flatbuffers::Verifiable for MiniGamePlayGuideExcel<'_> {
 pub struct MiniGamePlayGuideExcelArgs<'a> {
     pub Id: i64,
     pub EventContentId: i64,
+    pub MiniGameType: EventContentType,
+    pub IsPcBuild: bool,
     pub DisplayOrder: i32,
     pub GuideTitle: Option<flatbuffers::WIPOffset<&'a str>>,
     pub GuideImagePath: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -167,6 +199,8 @@ impl<'a> Default for MiniGamePlayGuideExcelArgs<'a> {
     MiniGamePlayGuideExcelArgs {
       Id: 0,
       EventContentId: 0,
+      MiniGameType: EventContentType::Stage,
+      IsPcBuild: false,
       DisplayOrder: 0,
       GuideTitle: None,
       GuideImagePath: None,
@@ -180,9 +214,11 @@ impl Serialize for MiniGamePlayGuideExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("MiniGamePlayGuideExcel", 6)?;
+    let mut s = serializer.serialize_struct("MiniGamePlayGuideExcel", 8)?;
       s.serialize_field("Id", &self.Id())?;
       s.serialize_field("EventContentId", &self.EventContentId())?;
+      s.serialize_field("MiniGameType", &self.MiniGameType())?;
+      s.serialize_field("IsPcBuild", &self.IsPcBuild())?;
       s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
       if let Some(f) = self.GuideTitle() {
         s.serialize_field("GuideTitle", &f)?;
@@ -215,6 +251,14 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> MiniGamePlayGuideExcelBuilder<'
   #[inline]
   pub fn add_EventContentId(&mut self, EventContentId: i64) {
     self.fbb_.push_slot::<i64>(MiniGamePlayGuideExcel::VT_EVENTCONTENTID, EventContentId, 0);
+  }
+  #[inline]
+  pub fn add_MiniGameType(&mut self, MiniGameType: EventContentType) {
+    self.fbb_.push_slot::<EventContentType>(MiniGamePlayGuideExcel::VT_MINIGAMETYPE, MiniGameType, EventContentType::Stage);
+  }
+  #[inline]
+  pub fn add_IsPcBuild(&mut self, IsPcBuild: bool) {
+    self.fbb_.push_slot::<bool>(MiniGamePlayGuideExcel::VT_ISPCBUILD, IsPcBuild, false);
   }
   #[inline]
   pub fn add_DisplayOrder(&mut self, DisplayOrder: i32) {
@@ -252,6 +296,8 @@ impl core::fmt::Debug for MiniGamePlayGuideExcel<'_> {
     let mut ds = f.debug_struct("MiniGamePlayGuideExcel");
       ds.field("Id", &self.Id());
       ds.field("EventContentId", &self.EventContentId());
+      ds.field("MiniGameType", &self.MiniGameType());
+      ds.field("IsPcBuild", &self.IsPcBuild());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.field("GuideTitle", &self.GuideTitle());
       ds.field("GuideImagePath", &self.GuideImagePath());
@@ -264,6 +310,8 @@ impl core::fmt::Debug for MiniGamePlayGuideExcel<'_> {
 pub struct MiniGamePlayGuideExcelT {
   pub Id: i64,
   pub EventContentId: i64,
+  pub MiniGameType: EventContentType,
+  pub IsPcBuild: bool,
   pub DisplayOrder: i32,
   pub GuideTitle: Option<String>,
   pub GuideImagePath: Option<String>,
@@ -274,6 +322,8 @@ impl Default for MiniGamePlayGuideExcelT {
     Self {
       Id: 0,
       EventContentId: 0,
+      MiniGameType: EventContentType::Stage,
+      IsPcBuild: false,
       DisplayOrder: 0,
       GuideTitle: None,
       GuideImagePath: None,
@@ -288,6 +338,8 @@ impl MiniGamePlayGuideExcelT {
   ) -> flatbuffers::WIPOffset<MiniGamePlayGuideExcel<'b>> {
     let Id = self.Id;
     let EventContentId = self.EventContentId;
+    let MiniGameType = self.MiniGameType;
+    let IsPcBuild = self.IsPcBuild;
     let DisplayOrder = self.DisplayOrder;
     let GuideTitle = self.GuideTitle.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -301,6 +353,8 @@ impl MiniGamePlayGuideExcelT {
     MiniGamePlayGuideExcel::create(_fbb, &MiniGamePlayGuideExcelArgs{
       Id,
       EventContentId,
+      MiniGameType,
+      IsPcBuild,
       DisplayOrder,
       GuideTitle,
       GuideImagePath,

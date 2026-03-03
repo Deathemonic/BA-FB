@@ -30,16 +30,8 @@ impl<'a> flatbuffers::Follow<'a> for KeyMappingPopupExcel<'a> {
 
 impl<'a> KeyMappingPopupExcel<'a> {
   pub const VT_PREFABNAME: flatbuffers::VOffsetT = 4;
-  pub const VT_BUTTONNAME01: flatbuffers::VOffsetT = 6;
-  pub const VT_KEYMAPPINGID01: flatbuffers::VOffsetT = 8;
-  pub const VT_BUTTONNAME02: flatbuffers::VOffsetT = 10;
-  pub const VT_KEYMAPPINGID02: flatbuffers::VOffsetT = 12;
-  pub const VT_BUTTONNAME03: flatbuffers::VOffsetT = 14;
-  pub const VT_KEYMAPPINGID03: flatbuffers::VOffsetT = 16;
-  pub const VT_BUTTONNAME04: flatbuffers::VOffsetT = 18;
-  pub const VT_KEYMAPPINGID04: flatbuffers::VOffsetT = 20;
-  pub const VT_BUTTONNAME05: flatbuffers::VOffsetT = 22;
-  pub const VT_KEYMAPPINGID05: flatbuffers::VOffsetT = 24;
+  pub const VT_BUTTONNAME: flatbuffers::VOffsetT = 6;
+  pub const VT_KEYMAPPINGID: flatbuffers::VOffsetT = 8;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -52,35 +44,11 @@ impl<'a> KeyMappingPopupExcel<'a> {
   ) -> flatbuffers::WIPOffset<KeyMappingPopupExcel<'bldr>> {
     let mut builder = KeyMappingPopupExcelBuilder::new(_fbb);
     let key = table_encryption_service::create_key(b"KeyMappingPopup");
-      if let Some(x) = args.KeyMappingId05 {
-        builder.add_KeyMappingId05(x);
+      if let Some(x) = args.KeyMappingId {
+        builder.add_KeyMappingId(x);
       }
-      if let Some(x) = args.ButtonName05 {
-        builder.add_ButtonName05(x);
-      }
-      if let Some(x) = args.KeyMappingId04 {
-        builder.add_KeyMappingId04(x);
-      }
-      if let Some(x) = args.ButtonName04 {
-        builder.add_ButtonName04(x);
-      }
-      if let Some(x) = args.KeyMappingId03 {
-        builder.add_KeyMappingId03(x);
-      }
-      if let Some(x) = args.ButtonName03 {
-        builder.add_ButtonName03(x);
-      }
-      if let Some(x) = args.KeyMappingId02 {
-        builder.add_KeyMappingId02(x);
-      }
-      if let Some(x) = args.ButtonName02 {
-        builder.add_ButtonName02(x);
-      }
-      if let Some(x) = args.KeyMappingId01 {
-        builder.add_KeyMappingId01(x);
-      }
-      if let Some(x) = args.ButtonName01 {
-        builder.add_ButtonName01(x);
+      if let Some(x) = args.ButtonName {
+        builder.add_ButtonName(x);
       }
       if let Some(x) = args.PrefabName {
         builder.add_PrefabName(x);
@@ -93,48 +61,16 @@ impl<'a> KeyMappingPopupExcel<'a> {
     let PrefabName = self.PrefabName().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-    let ButtonName01 = self.ButtonName01().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    let ButtonName = self.ButtonName().map(|x| {
+      x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
-    let KeyMappingId01 = self.KeyMappingId01().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let ButtonName02 = self.ButtonName02().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let KeyMappingId02 = self.KeyMappingId02().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let ButtonName03 = self.ButtonName03().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let KeyMappingId03 = self.KeyMappingId03().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let ButtonName04 = self.ButtonName04().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let KeyMappingId04 = self.KeyMappingId04().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let ButtonName05 = self.ButtonName05().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
-    });
-    let KeyMappingId05 = self.KeyMappingId05().map(|x| {
-      if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
+    let KeyMappingId = self.KeyMappingId().map(|x| {
+      x.iter().map(|s| if table_encryption_service::use_encryption() { table_encryption_service::convert_string(s, &key).unwrap() } else { s.to_string() }).collect()
     });
     KeyMappingPopupExcelT {
       PrefabName,
-      ButtonName01,
-      KeyMappingId01,
-      ButtonName02,
-      KeyMappingId02,
-      ButtonName03,
-      KeyMappingId03,
-      ButtonName04,
-      KeyMappingId04,
-      ButtonName05,
-      KeyMappingId05,
+      ButtonName,
+      KeyMappingId,
     }
   }
 
@@ -146,74 +82,18 @@ impl<'a> KeyMappingPopupExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_PREFABNAME, None)}
   }
   #[inline]
-  pub fn ButtonName01(&self) -> Option<&'a str> {
+  pub fn ButtonName(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_BUTTONNAME01, None)}
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(KeyMappingPopupExcel::VT_BUTTONNAME, None)}
   }
   #[inline]
-  pub fn KeyMappingId01(&self) -> Option<&'a str> {
+  pub fn KeyMappingId(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>> {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_KEYMAPPINGID01, None)}
-  }
-  #[inline]
-  pub fn ButtonName02(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_BUTTONNAME02, None)}
-  }
-  #[inline]
-  pub fn KeyMappingId02(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_KEYMAPPINGID02, None)}
-  }
-  #[inline]
-  pub fn ButtonName03(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_BUTTONNAME03, None)}
-  }
-  #[inline]
-  pub fn KeyMappingId03(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_KEYMAPPINGID03, None)}
-  }
-  #[inline]
-  pub fn ButtonName04(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_BUTTONNAME04, None)}
-  }
-  #[inline]
-  pub fn KeyMappingId04(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_KEYMAPPINGID04, None)}
-  }
-  #[inline]
-  pub fn ButtonName05(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_BUTTONNAME05, None)}
-  }
-  #[inline]
-  pub fn KeyMappingId05(&self) -> Option<&'a str> {
-    // Safety:
-    // Created from valid Table for this object
-    // which contains a valid value in this slot
-    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(KeyMappingPopupExcel::VT_KEYMAPPINGID05, None)}
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>(KeyMappingPopupExcel::VT_KEYMAPPINGID, None)}
   }
 }
 
@@ -225,48 +105,24 @@ impl flatbuffers::Verifiable for KeyMappingPopupExcel<'_> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PrefabName", Self::VT_PREFABNAME, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ButtonName01", Self::VT_BUTTONNAME01, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("KeyMappingId01", Self::VT_KEYMAPPINGID01, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ButtonName02", Self::VT_BUTTONNAME02, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("KeyMappingId02", Self::VT_KEYMAPPINGID02, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ButtonName03", Self::VT_BUTTONNAME03, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("KeyMappingId03", Self::VT_KEYMAPPINGID03, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ButtonName04", Self::VT_BUTTONNAME04, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("KeyMappingId04", Self::VT_KEYMAPPINGID04, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("ButtonName05", Self::VT_BUTTONNAME05, false)?
-     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("KeyMappingId05", Self::VT_KEYMAPPINGID05, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ButtonName", Self::VT_BUTTONNAME, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("KeyMappingId", Self::VT_KEYMAPPINGID, false)?
      .finish();
     Ok(())
   }
 }
 pub struct KeyMappingPopupExcelArgs<'a> {
     pub PrefabName: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub ButtonName01: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub KeyMappingId01: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub ButtonName02: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub KeyMappingId02: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub ButtonName03: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub KeyMappingId03: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub ButtonName04: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub KeyMappingId04: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub ButtonName05: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub KeyMappingId05: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub ButtonName: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
+    pub KeyMappingId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
 }
 impl<'a> Default for KeyMappingPopupExcelArgs<'a> {
   #[inline]
   fn default() -> Self {
     KeyMappingPopupExcelArgs {
       PrefabName: None,
-      ButtonName01: None,
-      KeyMappingId01: None,
-      ButtonName02: None,
-      KeyMappingId02: None,
-      ButtonName03: None,
-      KeyMappingId03: None,
-      ButtonName04: None,
-      KeyMappingId04: None,
-      ButtonName05: None,
-      KeyMappingId05: None,
+      ButtonName: None,
+      KeyMappingId: None,
     }
   }
 }
@@ -276,61 +132,21 @@ impl Serialize for KeyMappingPopupExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("KeyMappingPopupExcel", 11)?;
+    let mut s = serializer.serialize_struct("KeyMappingPopupExcel", 3)?;
       if let Some(f) = self.PrefabName() {
         s.serialize_field("PrefabName", &f)?;
       } else {
         s.skip_field("PrefabName")?;
       }
-      if let Some(f) = self.ButtonName01() {
-        s.serialize_field("ButtonName01", &f)?;
+      if let Some(f) = self.ButtonName() {
+        s.serialize_field("ButtonName", &f)?;
       } else {
-        s.skip_field("ButtonName01")?;
+        s.skip_field("ButtonName")?;
       }
-      if let Some(f) = self.KeyMappingId01() {
-        s.serialize_field("KeyMappingId01", &f)?;
+      if let Some(f) = self.KeyMappingId() {
+        s.serialize_field("KeyMappingId", &f)?;
       } else {
-        s.skip_field("KeyMappingId01")?;
-      }
-      if let Some(f) = self.ButtonName02() {
-        s.serialize_field("ButtonName02", &f)?;
-      } else {
-        s.skip_field("ButtonName02")?;
-      }
-      if let Some(f) = self.KeyMappingId02() {
-        s.serialize_field("KeyMappingId02", &f)?;
-      } else {
-        s.skip_field("KeyMappingId02")?;
-      }
-      if let Some(f) = self.ButtonName03() {
-        s.serialize_field("ButtonName03", &f)?;
-      } else {
-        s.skip_field("ButtonName03")?;
-      }
-      if let Some(f) = self.KeyMappingId03() {
-        s.serialize_field("KeyMappingId03", &f)?;
-      } else {
-        s.skip_field("KeyMappingId03")?;
-      }
-      if let Some(f) = self.ButtonName04() {
-        s.serialize_field("ButtonName04", &f)?;
-      } else {
-        s.skip_field("ButtonName04")?;
-      }
-      if let Some(f) = self.KeyMappingId04() {
-        s.serialize_field("KeyMappingId04", &f)?;
-      } else {
-        s.skip_field("KeyMappingId04")?;
-      }
-      if let Some(f) = self.ButtonName05() {
-        s.serialize_field("ButtonName05", &f)?;
-      } else {
-        s.skip_field("ButtonName05")?;
-      }
-      if let Some(f) = self.KeyMappingId05() {
-        s.serialize_field("KeyMappingId05", &f)?;
-      } else {
-        s.skip_field("KeyMappingId05")?;
+        s.skip_field("KeyMappingId")?;
       }
     s.end()
   }
@@ -346,44 +162,12 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> KeyMappingPopupExcelBuilder<'a,
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_PREFABNAME, PrefabName);
   }
   #[inline]
-  pub fn add_ButtonName01(&mut self, ButtonName01: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_BUTTONNAME01, ButtonName01);
+  pub fn add_ButtonName(&mut self, ButtonName: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_BUTTONNAME, ButtonName);
   }
   #[inline]
-  pub fn add_KeyMappingId01(&mut self, KeyMappingId01: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_KEYMAPPINGID01, KeyMappingId01);
-  }
-  #[inline]
-  pub fn add_ButtonName02(&mut self, ButtonName02: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_BUTTONNAME02, ButtonName02);
-  }
-  #[inline]
-  pub fn add_KeyMappingId02(&mut self, KeyMappingId02: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_KEYMAPPINGID02, KeyMappingId02);
-  }
-  #[inline]
-  pub fn add_ButtonName03(&mut self, ButtonName03: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_BUTTONNAME03, ButtonName03);
-  }
-  #[inline]
-  pub fn add_KeyMappingId03(&mut self, KeyMappingId03: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_KEYMAPPINGID03, KeyMappingId03);
-  }
-  #[inline]
-  pub fn add_ButtonName04(&mut self, ButtonName04: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_BUTTONNAME04, ButtonName04);
-  }
-  #[inline]
-  pub fn add_KeyMappingId04(&mut self, KeyMappingId04: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_KEYMAPPINGID04, KeyMappingId04);
-  }
-  #[inline]
-  pub fn add_ButtonName05(&mut self, ButtonName05: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_BUTTONNAME05, ButtonName05);
-  }
-  #[inline]
-  pub fn add_KeyMappingId05(&mut self, KeyMappingId05: flatbuffers::WIPOffset<&'b  str>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_KEYMAPPINGID05, KeyMappingId05);
+  pub fn add_KeyMappingId(&mut self, KeyMappingId: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<&'b  str>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(KeyMappingPopupExcel::VT_KEYMAPPINGID, KeyMappingId);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> KeyMappingPopupExcelBuilder<'a, 'b, A> {
@@ -404,16 +188,8 @@ impl core::fmt::Debug for KeyMappingPopupExcel<'_> {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let mut ds = f.debug_struct("KeyMappingPopupExcel");
       ds.field("PrefabName", &self.PrefabName());
-      ds.field("ButtonName01", &self.ButtonName01());
-      ds.field("KeyMappingId01", &self.KeyMappingId01());
-      ds.field("ButtonName02", &self.ButtonName02());
-      ds.field("KeyMappingId02", &self.KeyMappingId02());
-      ds.field("ButtonName03", &self.ButtonName03());
-      ds.field("KeyMappingId03", &self.KeyMappingId03());
-      ds.field("ButtonName04", &self.ButtonName04());
-      ds.field("KeyMappingId04", &self.KeyMappingId04());
-      ds.field("ButtonName05", &self.ButtonName05());
-      ds.field("KeyMappingId05", &self.KeyMappingId05());
+      ds.field("ButtonName", &self.ButtonName());
+      ds.field("KeyMappingId", &self.KeyMappingId());
       ds.finish()
   }
 }
@@ -421,31 +197,15 @@ impl core::fmt::Debug for KeyMappingPopupExcel<'_> {
 #[derive(Debug, Clone, PartialEq)]
 pub struct KeyMappingPopupExcelT {
   pub PrefabName: Option<String>,
-  pub ButtonName01: Option<String>,
-  pub KeyMappingId01: Option<String>,
-  pub ButtonName02: Option<String>,
-  pub KeyMappingId02: Option<String>,
-  pub ButtonName03: Option<String>,
-  pub KeyMappingId03: Option<String>,
-  pub ButtonName04: Option<String>,
-  pub KeyMappingId04: Option<String>,
-  pub ButtonName05: Option<String>,
-  pub KeyMappingId05: Option<String>,
+  pub ButtonName: Option<Vec<String>>,
+  pub KeyMappingId: Option<Vec<String>>,
 }
 impl Default for KeyMappingPopupExcelT {
   fn default() -> Self {
     Self {
       PrefabName: None,
-      ButtonName01: None,
-      KeyMappingId01: None,
-      ButtonName02: None,
-      KeyMappingId02: None,
-      ButtonName03: None,
-      KeyMappingId03: None,
-      ButtonName04: None,
-      KeyMappingId04: None,
-      ButtonName05: None,
-      KeyMappingId05: None,
+      ButtonName: None,
+      KeyMappingId: None,
     }
   }
 }
@@ -457,48 +217,16 @@ impl KeyMappingPopupExcelT {
     let PrefabName = self.PrefabName.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let ButtonName01 = self.ButtonName01.as_ref().map(|x|{
-      _fbb.create_string(x)
+    let ButtonName = self.ButtonName.as_ref().map(|x|{
+      let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
-    let KeyMappingId01 = self.KeyMappingId01.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let ButtonName02 = self.ButtonName02.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let KeyMappingId02 = self.KeyMappingId02.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let ButtonName03 = self.ButtonName03.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let KeyMappingId03 = self.KeyMappingId03.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let ButtonName04 = self.ButtonName04.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let KeyMappingId04 = self.KeyMappingId04.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let ButtonName05 = self.ButtonName05.as_ref().map(|x|{
-      _fbb.create_string(x)
-    });
-    let KeyMappingId05 = self.KeyMappingId05.as_ref().map(|x|{
-      _fbb.create_string(x)
+    let KeyMappingId = self.KeyMappingId.as_ref().map(|x|{
+      let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
     });
     KeyMappingPopupExcel::create(_fbb, &KeyMappingPopupExcelArgs{
       PrefabName,
-      ButtonName01,
-      KeyMappingId01,
-      ButtonName02,
-      KeyMappingId02,
-      ButtonName03,
-      KeyMappingId03,
-      ButtonName04,
-      KeyMappingId04,
-      ButtonName05,
-      KeyMappingId05,
+      ButtonName,
+      KeyMappingId,
     })
   }
 }

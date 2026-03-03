@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_DIALOG_CONDITION: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_DIALOG_CONDITION: i32 = 30;
+pub const ENUM_MAX_DIALOG_CONDITION: i32 = 33;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_DIALOG_CONDITION: [DialogCondition; 31] = [
+pub const ENUM_VALUES_DIALOG_CONDITION: [DialogCondition; 34] = [
   DialogCondition::Idle,
   DialogCondition::Enter,
   DialogCondition::Exit,
@@ -51,6 +51,9 @@ pub const ENUM_VALUES_DIALOG_CONDITION: [DialogCondition; 31] = [
   DialogCondition::MiniGameDreamMakerDefault,
   DialogCondition::PassLevelUp,
   DialogCondition::UnlockPassReward,
+  DialogCondition::ClueSearch,
+  DialogCondition::ClueRegistration,
+  DialogCondition::ClueCompletion,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -89,9 +92,12 @@ impl DialogCondition {
   pub const MiniGameDreamMakerDefault: Self = Self(28);
   pub const PassLevelUp: Self = Self(29);
   pub const UnlockPassReward: Self = Self(30);
+  pub const ClueSearch: Self = Self(31);
+  pub const ClueRegistration: Self = Self(32);
+  pub const ClueCompletion: Self = Self(33);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 30;
+  pub const ENUM_MAX: i32 = 33;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::Idle,
     Self::Enter,
@@ -124,6 +130,9 @@ impl DialogCondition {
     Self::MiniGameDreamMakerDefault,
     Self::PassLevelUp,
     Self::UnlockPassReward,
+    Self::ClueSearch,
+    Self::ClueRegistration,
+    Self::ClueCompletion,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -159,6 +168,9 @@ impl DialogCondition {
       Self::MiniGameDreamMakerDefault => Some("MiniGameDreamMakerDefault"),
       Self::PassLevelUp => Some("PassLevelUp"),
       Self::UnlockPassReward => Some("UnlockPassReward"),
+      Self::ClueSearch => Some("ClueSearch"),
+      Self::ClueRegistration => Some("ClueRegistration"),
+      Self::ClueCompletion => Some("ClueCompletion"),
       _ => None,
     }
   }

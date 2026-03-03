@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_GACHA_TICKET_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_GACHA_TICKET_TYPE: i32 = 12;
+pub const ENUM_MAX_GACHA_TICKET_TYPE: i32 = 16;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_GACHA_TICKET_TYPE: [GachaTicketType; 13] = [
+pub const ENUM_VALUES_GACHA_TICKET_TYPE: [GachaTicketType; 17] = [
   GachaTicketType::None,
   GachaTicketType::PackageThreeStar,
   GachaTicketType::ThreeStar,
@@ -33,6 +33,10 @@ pub const ENUM_VALUES_GACHA_TICKET_TYPE: [GachaTicketType; 13] = [
   GachaTicketType::SelectPickup,
   GachaTicketType::SelectPickupOnce,
   GachaTicketType::PackageLimitedThreeStar,
+  GachaTicketType::PackageThreeStar_R88_Explosion,
+  GachaTicketType::PackageThreeStar_R88_Mystic,
+  GachaTicketType::PackageThreeStar_R88_Pierce,
+  GachaTicketType::PackageThreeStar_R88_Sonic,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -53,9 +57,13 @@ impl GachaTicketType {
   pub const SelectPickup: Self = Self(10);
   pub const SelectPickupOnce: Self = Self(11);
   pub const PackageLimitedThreeStar: Self = Self(12);
+  pub const PackageThreeStar_R88_Explosion: Self = Self(13);
+  pub const PackageThreeStar_R88_Mystic: Self = Self(14);
+  pub const PackageThreeStar_R88_Pierce: Self = Self(15);
+  pub const PackageThreeStar_R88_Sonic: Self = Self(16);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 12;
+  pub const ENUM_MAX: i32 = 16;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::PackageThreeStar,
@@ -70,6 +78,10 @@ impl GachaTicketType {
     Self::SelectPickup,
     Self::SelectPickupOnce,
     Self::PackageLimitedThreeStar,
+    Self::PackageThreeStar_R88_Explosion,
+    Self::PackageThreeStar_R88_Mystic,
+    Self::PackageThreeStar_R88_Pierce,
+    Self::PackageThreeStar_R88_Sonic,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -87,6 +99,10 @@ impl GachaTicketType {
       Self::SelectPickup => Some("SelectPickup"),
       Self::SelectPickupOnce => Some("SelectPickupOnce"),
       Self::PackageLimitedThreeStar => Some("PackageLimitedThreeStar"),
+      Self::PackageThreeStar_R88_Explosion => Some("PackageThreeStar_R88_Explosion"),
+      Self::PackageThreeStar_R88_Mystic => Some("PackageThreeStar_R88_Mystic"),
+      Self::PackageThreeStar_R88_Pierce => Some("PackageThreeStar_R88_Pierce"),
+      Self::PackageThreeStar_R88_Sonic => Some("PackageThreeStar_R88_Sonic"),
       _ => None,
     }
   }

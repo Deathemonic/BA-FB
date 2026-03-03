@@ -32,6 +32,7 @@ impl<'a> LocalizeCharProfileChangeExcel<'a> {
   pub const VT_CHARACTERID: flatbuffers::VOffsetT = 4;
   pub const VT_SCENARIOMODEID: flatbuffers::VOffsetT = 6;
   pub const VT_CHANGECHARACTERID: flatbuffers::VOffsetT = 8;
+  pub const VT_OVERRIDECLUB: flatbuffers::VOffsetT = 10;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -53,6 +54,7 @@ impl<'a> LocalizeCharProfileChangeExcel<'a> {
       let x = args.CharacterId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_CharacterId(x);
+      builder.add_OverrideClub(args.OverrideClub);
     builder.finish()
   }
 
@@ -61,10 +63,12 @@ impl<'a> LocalizeCharProfileChangeExcel<'a> {
       let CharacterId = self.CharacterId();
       let ScenarioModeId = self.ScenarioModeId();
       let ChangeCharacterID = self.ChangeCharacterID();
+      let OverrideClub = self.OverrideClub();
     LocalizeCharProfileChangeExcelT {
       CharacterId,
       ScenarioModeId,
       ChangeCharacterID,
+      OverrideClub,
     }
   }
 
@@ -89,6 +93,13 @@ impl<'a> LocalizeCharProfileChangeExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<i64>(LocalizeCharProfileChangeExcel::VT_CHANGECHARACTERID, Some(0)).unwrap()}
   }
+  #[inline]
+  pub fn OverrideClub(&self) -> bool {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<bool>(LocalizeCharProfileChangeExcel::VT_OVERRIDECLUB, Some(false)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for LocalizeCharProfileChangeExcel<'_> {
@@ -101,6 +112,7 @@ impl flatbuffers::Verifiable for LocalizeCharProfileChangeExcel<'_> {
      .visit_field::<i64>("CharacterId", Self::VT_CHARACTERID, false)?
      .visit_field::<i64>("ScenarioModeId", Self::VT_SCENARIOMODEID, false)?
      .visit_field::<i64>("ChangeCharacterID", Self::VT_CHANGECHARACTERID, false)?
+     .visit_field::<bool>("OverrideClub", Self::VT_OVERRIDECLUB, false)?
      .finish();
     Ok(())
   }
@@ -109,6 +121,7 @@ pub struct LocalizeCharProfileChangeExcelArgs {
     pub CharacterId: i64,
     pub ScenarioModeId: i64,
     pub ChangeCharacterID: i64,
+    pub OverrideClub: bool,
 }
 impl<'a> Default for LocalizeCharProfileChangeExcelArgs {
   #[inline]
@@ -117,6 +130,7 @@ impl<'a> Default for LocalizeCharProfileChangeExcelArgs {
       CharacterId: 0,
       ScenarioModeId: 0,
       ChangeCharacterID: 0,
+      OverrideClub: false,
     }
   }
 }
@@ -126,10 +140,11 @@ impl Serialize for LocalizeCharProfileChangeExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("LocalizeCharProfileChangeExcel", 3)?;
+    let mut s = serializer.serialize_struct("LocalizeCharProfileChangeExcel", 4)?;
       s.serialize_field("CharacterId", &self.CharacterId())?;
       s.serialize_field("ScenarioModeId", &self.ScenarioModeId())?;
       s.serialize_field("ChangeCharacterID", &self.ChangeCharacterID())?;
+      s.serialize_field("OverrideClub", &self.OverrideClub())?;
     s.end()
   }
 }
@@ -152,6 +167,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> LocalizeCharProfileChangeExcelB
     self.fbb_.push_slot::<i64>(LocalizeCharProfileChangeExcel::VT_CHANGECHARACTERID, ChangeCharacterID, 0);
   }
   #[inline]
+  pub fn add_OverrideClub(&mut self, OverrideClub: bool) {
+    self.fbb_.push_slot::<bool>(LocalizeCharProfileChangeExcel::VT_OVERRIDECLUB, OverrideClub, false);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> LocalizeCharProfileChangeExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     LocalizeCharProfileChangeExcelBuilder {
@@ -172,6 +191,7 @@ impl core::fmt::Debug for LocalizeCharProfileChangeExcel<'_> {
       ds.field("CharacterId", &self.CharacterId());
       ds.field("ScenarioModeId", &self.ScenarioModeId());
       ds.field("ChangeCharacterID", &self.ChangeCharacterID());
+      ds.field("OverrideClub", &self.OverrideClub());
       ds.finish()
   }
 }
@@ -181,6 +201,7 @@ pub struct LocalizeCharProfileChangeExcelT {
   pub CharacterId: i64,
   pub ScenarioModeId: i64,
   pub ChangeCharacterID: i64,
+  pub OverrideClub: bool,
 }
 impl Default for LocalizeCharProfileChangeExcelT {
   fn default() -> Self {
@@ -188,6 +209,7 @@ impl Default for LocalizeCharProfileChangeExcelT {
       CharacterId: 0,
       ScenarioModeId: 0,
       ChangeCharacterID: 0,
+      OverrideClub: false,
     }
   }
 }
@@ -199,10 +221,12 @@ impl LocalizeCharProfileChangeExcelT {
     let CharacterId = self.CharacterId;
     let ScenarioModeId = self.ScenarioModeId;
     let ChangeCharacterID = self.ChangeCharacterID;
+    let OverrideClub = self.OverrideClub;
     LocalizeCharProfileChangeExcel::create(_fbb, &LocalizeCharProfileChangeExcelArgs{
       CharacterId,
       ScenarioModeId,
       ChangeCharacterID,
+      OverrideClub,
     })
   }
 }

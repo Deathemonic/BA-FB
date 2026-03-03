@@ -41,7 +41,7 @@ impl<'a> EventContentMissionExcel<'a> {
   pub const VT_VIEWFLAG: flatbuffers::VOffsetT = 22;
   pub const VT_DISPLAYORDER: flatbuffers::VOffsetT = 24;
   pub const VT_PREMISSIONID: flatbuffers::VOffsetT = 26;
-  pub const VT_ACCOUNTTYPE: flatbuffers::VOffsetT = 28;
+  pub const VT_TARGETGROUP: flatbuffers::VOffsetT = 28;
   pub const VT_ACCOUNTLEVEL: flatbuffers::VOffsetT = 30;
   pub const VT_SHORTCUTUI: flatbuffers::VOffsetT = 32;
   pub const VT_CHALLENGESTAGESHORTCUT: flatbuffers::VOffsetT = 34;
@@ -131,9 +131,9 @@ impl<'a> EventContentMissionExcel<'a> {
       if let Some(x) = args.ShortcutUI {
         builder.add_ShortcutUI(x);
       }
-      let x = args.AccountType;
+      let x = args.TargetGroup;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
-      builder.add_AccountType(x);
+      builder.add_TargetGroup(x);
       if let Some(x) = args.PreMissionId {
         builder.add_PreMissionId(x);
       }
@@ -192,10 +192,10 @@ impl<'a> EventContentMissionExcel<'a> {
     let PreMissionId = self.PreMissionId().map(|x| {
       x.iter().map(|val| if table_encryption_service::use_encryption() { table_encryption_service::convert_long(*val, &key) } else { *val }).collect()
     });
-      let AccountType = if table_encryption_service::use_encryption() {
-        table_encryption_service::convert_enum(self.AccountType(), &key)
+      let TargetGroup = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.TargetGroup(), &key)
       } else {
-        self.AccountType()
+        self.TargetGroup()
       };
       let AccountLevel = self.AccountLevel();
     let ShortcutUI = self.ShortcutUI().map(|x| {
@@ -253,7 +253,7 @@ impl<'a> EventContentMissionExcel<'a> {
       ViewFlag,
       DisplayOrder,
       PreMissionId,
-      AccountType,
+      TargetGroup,
       AccountLevel,
       ShortcutUI,
       ChallengeStageShortcut,
@@ -359,11 +359,11 @@ impl<'a> EventContentMissionExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, i64>>>(EventContentMissionExcel::VT_PREMISSIONID, None)}
   }
   #[inline]
-  pub fn AccountType(&self) -> AccountState {
+  pub fn TargetGroup(&self) -> TargetGroup {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<AccountState>(EventContentMissionExcel::VT_ACCOUNTTYPE, Some(AccountState::WaitingSignIn)).unwrap()}
+    unsafe { self._tab.get::<TargetGroup>(EventContentMissionExcel::VT_TARGETGROUP, Some(TargetGroup::WaitingSignIn)).unwrap()}
   }
   #[inline]
   pub fn AccountLevel(&self) -> i64 {
@@ -505,7 +505,7 @@ impl flatbuffers::Verifiable for EventContentMissionExcel<'_> {
      .visit_field::<bool>("ViewFlag", Self::VT_VIEWFLAG, false)?
      .visit_field::<i64>("DisplayOrder", Self::VT_DISPLAYORDER, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, i64>>>("PreMissionId", Self::VT_PREMISSIONID, false)?
-     .visit_field::<AccountState>("AccountType", Self::VT_ACCOUNTTYPE, false)?
+     .visit_field::<TargetGroup>("TargetGroup", Self::VT_TARGETGROUP, false)?
      .visit_field::<i64>("AccountLevel", Self::VT_ACCOUNTLEVEL, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<&'_ str>>>>("ShortcutUI", Self::VT_SHORTCUTUI, false)?
      .visit_field::<i64>("ChallengeStageShortcut", Self::VT_CHALLENGESTAGESHORTCUT, false)?
@@ -540,7 +540,7 @@ pub struct EventContentMissionExcelArgs<'a> {
     pub ViewFlag: bool,
     pub DisplayOrder: i64,
     pub PreMissionId: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, i64>>>,
-    pub AccountType: AccountState,
+    pub TargetGroup: TargetGroup,
     pub AccountLevel: i64,
     pub ShortcutUI: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<&'a str>>>>,
     pub ChallengeStageShortcut: i64,
@@ -575,7 +575,7 @@ impl<'a> Default for EventContentMissionExcelArgs<'a> {
       ViewFlag: false,
       DisplayOrder: 0,
       PreMissionId: None,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       AccountLevel: 0,
       ShortcutUI: None,
       ChallengeStageShortcut: 0,
@@ -627,7 +627,7 @@ impl Serialize for EventContentMissionExcel<'_> {
       } else {
         s.skip_field("PreMissionId")?;
       }
-      s.serialize_field("AccountType", &self.AccountType())?;
+      s.serialize_field("TargetGroup", &self.TargetGroup())?;
       s.serialize_field("AccountLevel", &self.AccountLevel())?;
       if let Some(f) = self.ShortcutUI() {
         s.serialize_field("ShortcutUI", &f)?;
@@ -747,8 +747,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> EventContentMissionExcelBuilder
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(EventContentMissionExcel::VT_PREMISSIONID, PreMissionId);
   }
   #[inline]
-  pub fn add_AccountType(&mut self, AccountType: AccountState) {
-    self.fbb_.push_slot::<AccountState>(EventContentMissionExcel::VT_ACCOUNTTYPE, AccountType, AccountState::WaitingSignIn);
+  pub fn add_TargetGroup(&mut self, TargetGroup: TargetGroup) {
+    self.fbb_.push_slot::<TargetGroup>(EventContentMissionExcel::VT_TARGETGROUP, TargetGroup, TargetGroup::WaitingSignIn);
   }
   #[inline]
   pub fn add_AccountLevel(&mut self, AccountLevel: i64) {
@@ -848,7 +848,7 @@ impl core::fmt::Debug for EventContentMissionExcel<'_> {
       ds.field("ViewFlag", &self.ViewFlag());
       ds.field("DisplayOrder", &self.DisplayOrder());
       ds.field("PreMissionId", &self.PreMissionId());
-      ds.field("AccountType", &self.AccountType());
+      ds.field("TargetGroup", &self.TargetGroup());
       ds.field("AccountLevel", &self.AccountLevel());
       ds.field("ShortcutUI", &self.ShortcutUI());
       ds.field("ChallengeStageShortcut", &self.ChallengeStageShortcut());
@@ -884,7 +884,7 @@ pub struct EventContentMissionExcelT {
   pub ViewFlag: bool,
   pub DisplayOrder: i64,
   pub PreMissionId: Option<Vec<i64>>,
-  pub AccountType: AccountState,
+  pub TargetGroup: TargetGroup,
   pub AccountLevel: i64,
   pub ShortcutUI: Option<Vec<String>>,
   pub ChallengeStageShortcut: i64,
@@ -918,7 +918,7 @@ impl Default for EventContentMissionExcelT {
       ViewFlag: false,
       DisplayOrder: 0,
       PreMissionId: None,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       AccountLevel: 0,
       ShortcutUI: None,
       ChallengeStageShortcut: 0,
@@ -962,7 +962,7 @@ impl EventContentMissionExcelT {
     let PreMissionId = self.PreMissionId.as_ref().map(|x|{
       _fbb.create_vector(x)
     });
-    let AccountType = self.AccountType;
+    let TargetGroup = self.TargetGroup;
     let AccountLevel = self.AccountLevel;
     let ShortcutUI = self.ShortcutUI.as_ref().map(|x|{
       let w: Vec<_> = x.iter().map(|s| _fbb.create_string(s)).collect();_fbb.create_vector(&w)
@@ -1015,7 +1015,7 @@ impl EventContentMissionExcelT {
       ViewFlag,
       DisplayOrder,
       PreMissionId,
-      AccountType,
+      TargetGroup,
       AccountLevel,
       ShortcutUI,
       ChallengeStageShortcut,

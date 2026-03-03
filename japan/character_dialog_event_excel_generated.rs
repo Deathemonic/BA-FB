@@ -52,6 +52,7 @@ impl<'a> CharacterDialogEventExcel<'a> {
   pub const VT_UNLOCKEVENTSEASON: flatbuffers::VOffsetT = 44;
   pub const VT_SCENARIOGROUPID: flatbuffers::VOffsetT = 46;
   pub const VT_LOCALIZECVGROUP: flatbuffers::VOffsetT = 48;
+  pub const VT_SCENARIOCHARACTERSHAPES: flatbuffers::VOffsetT = 50;
 
   #[inline]
   pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
@@ -91,6 +92,9 @@ impl<'a> CharacterDialogEventExcel<'a> {
       let x = args.CostumeUniqueId;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_long(x, &key) } else { x };
       builder.add_CostumeUniqueId(x);
+      let x = args.ScenarioCharacterShapes;
+      let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
+      builder.add_ScenarioCharacterShapes(x);
       if let Some(x) = args.LocalizeCVGroup {
         builder.add_LocalizeCVGroup(x);
       }
@@ -199,6 +203,11 @@ impl<'a> CharacterDialogEventExcel<'a> {
     let LocalizeCVGroup = self.LocalizeCVGroup().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
+      let ScenarioCharacterShapes = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.ScenarioCharacterShapes(), &key)
+      } else {
+        self.ScenarioCharacterShapes()
+      };
     CharacterDialogEventExcelT {
       CostumeUniqueId,
       OriginalCharacterId,
@@ -223,6 +232,7 @@ impl<'a> CharacterDialogEventExcel<'a> {
       UnlockEventSeason,
       ScenarioGroupId,
       LocalizeCVGroup,
+      ScenarioCharacterShapes,
     }
   }
 
@@ -387,6 +397,13 @@ impl<'a> CharacterDialogEventExcel<'a> {
     // which contains a valid value in this slot
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(CharacterDialogEventExcel::VT_LOCALIZECVGROUP, None)}
   }
+  #[inline]
+  pub fn ScenarioCharacterShapes(&self) -> ScenarioCharacterShapes {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<ScenarioCharacterShapes>(CharacterDialogEventExcel::VT_SCENARIOCHARACTERSHAPES, Some(ScenarioCharacterShapes::None)).unwrap()}
+  }
 }
 
 impl flatbuffers::Verifiable for CharacterDialogEventExcel<'_> {
@@ -419,6 +436,7 @@ impl flatbuffers::Verifiable for CharacterDialogEventExcel<'_> {
      .visit_field::<i64>("UnlockEventSeason", Self::VT_UNLOCKEVENTSEASON, false)?
      .visit_field::<i64>("ScenarioGroupId", Self::VT_SCENARIOGROUPID, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("LocalizeCVGroup", Self::VT_LOCALIZECVGROUP, false)?
+     .visit_field::<ScenarioCharacterShapes>("ScenarioCharacterShapes", Self::VT_SCENARIOCHARACTERSHAPES, false)?
      .finish();
     Ok(())
   }
@@ -447,6 +465,7 @@ pub struct CharacterDialogEventExcelArgs<'a> {
     pub UnlockEventSeason: i64,
     pub ScenarioGroupId: i64,
     pub LocalizeCVGroup: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub ScenarioCharacterShapes: ScenarioCharacterShapes,
 }
 impl<'a> Default for CharacterDialogEventExcelArgs<'a> {
   #[inline]
@@ -475,6 +494,7 @@ impl<'a> Default for CharacterDialogEventExcelArgs<'a> {
       UnlockEventSeason: 0,
       ScenarioGroupId: 0,
       LocalizeCVGroup: None,
+      ScenarioCharacterShapes: ScenarioCharacterShapes::None,
     }
   }
 }
@@ -484,7 +504,7 @@ impl Serialize for CharacterDialogEventExcel<'_> {
   where
     S: Serializer,
   {
-    let mut s = serializer.serialize_struct("CharacterDialogEventExcel", 23)?;
+    let mut s = serializer.serialize_struct("CharacterDialogEventExcel", 24)?;
       s.serialize_field("CostumeUniqueId", &self.CostumeUniqueId())?;
       s.serialize_field("OriginalCharacterId", &self.OriginalCharacterId())?;
       s.serialize_field("DisplayOrder", &self.DisplayOrder())?;
@@ -532,6 +552,7 @@ impl Serialize for CharacterDialogEventExcel<'_> {
       } else {
         s.skip_field("LocalizeCVGroup")?;
       }
+      s.serialize_field("ScenarioCharacterShapes", &self.ScenarioCharacterShapes())?;
     s.end()
   }
 }
@@ -634,6 +655,10 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> CharacterDialogEventExcelBuilde
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(CharacterDialogEventExcel::VT_LOCALIZECVGROUP, LocalizeCVGroup);
   }
   #[inline]
+  pub fn add_ScenarioCharacterShapes(&mut self, ScenarioCharacterShapes: ScenarioCharacterShapes) {
+    self.fbb_.push_slot::<ScenarioCharacterShapes>(CharacterDialogEventExcel::VT_SCENARIOCHARACTERSHAPES, ScenarioCharacterShapes, ScenarioCharacterShapes::None);
+  }
+  #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> CharacterDialogEventExcelBuilder<'a, 'b, A> {
     let start = _fbb.start_table();
     CharacterDialogEventExcelBuilder {
@@ -674,6 +699,7 @@ impl core::fmt::Debug for CharacterDialogEventExcel<'_> {
       ds.field("UnlockEventSeason", &self.UnlockEventSeason());
       ds.field("ScenarioGroupId", &self.ScenarioGroupId());
       ds.field("LocalizeCVGroup", &self.LocalizeCVGroup());
+      ds.field("ScenarioCharacterShapes", &self.ScenarioCharacterShapes());
       ds.finish()
   }
 }
@@ -703,6 +729,7 @@ pub struct CharacterDialogEventExcelT {
   pub UnlockEventSeason: i64,
   pub ScenarioGroupId: i64,
   pub LocalizeCVGroup: Option<String>,
+  pub ScenarioCharacterShapes: ScenarioCharacterShapes,
 }
 impl Default for CharacterDialogEventExcelT {
   fn default() -> Self {
@@ -730,6 +757,7 @@ impl Default for CharacterDialogEventExcelT {
       UnlockEventSeason: 0,
       ScenarioGroupId: 0,
       LocalizeCVGroup: None,
+      ScenarioCharacterShapes: ScenarioCharacterShapes::None,
     }
   }
 }
@@ -773,6 +801,7 @@ impl CharacterDialogEventExcelT {
     let LocalizeCVGroup = self.LocalizeCVGroup.as_ref().map(|x|{
       _fbb.create_string(x)
     });
+    let ScenarioCharacterShapes = self.ScenarioCharacterShapes;
     CharacterDialogEventExcel::create(_fbb, &CharacterDialogEventExcelArgs{
       CostumeUniqueId,
       OriginalCharacterId,
@@ -797,6 +826,7 @@ impl CharacterDialogEventExcelT {
       UnlockEventSeason,
       ScenarioGroupId,
       LocalizeCVGroup,
+      ScenarioCharacterShapes,
     })
   }
 }

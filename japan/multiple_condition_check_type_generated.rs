@@ -16,12 +16,13 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_MULTIPLE_CONDITION_CHECK_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_MULTIPLE_CONDITION_CHECK_TYPE: i32 = 1;
+pub const ENUM_MAX_MULTIPLE_CONDITION_CHECK_TYPE: i32 = 2;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_MULTIPLE_CONDITION_CHECK_TYPE: [MultipleConditionCheckType; 2] = [
+pub const ENUM_VALUES_MULTIPLE_CONDITION_CHECK_TYPE: [MultipleConditionCheckType; 3] = [
   MultipleConditionCheckType::And,
   MultipleConditionCheckType::Or,
+  MultipleConditionCheckType::Count,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -31,18 +32,21 @@ pub struct MultipleConditionCheckType(pub i32);
 impl MultipleConditionCheckType {
   pub const And: Self = Self(0);
   pub const Or: Self = Self(1);
+  pub const Count: Self = Self(2);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 1;
+  pub const ENUM_MAX: i32 = 2;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::And,
     Self::Or,
+    Self::Count,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
     match self {
       Self::And => Some("And"),
       Self::Or => Some("Or"),
+      Self::Count => Some("Count"),
       _ => None,
     }
   }

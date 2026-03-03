@@ -33,7 +33,7 @@ impl<'a> GuideMissionSeasonExcel<'a> {
   pub const VT_TITLELOCALIZECODE: flatbuffers::VOffsetT = 6;
   pub const VT_PERMANENTINFOMATIONLOCALIZECODE: flatbuffers::VOffsetT = 8;
   pub const VT_INFOMATIONLOCALIZECODE: flatbuffers::VOffsetT = 10;
-  pub const VT_ACCOUNTTYPE: flatbuffers::VOffsetT = 12;
+  pub const VT_TARGETGROUP: flatbuffers::VOffsetT = 12;
   pub const VT_ENABLED: flatbuffers::VOffsetT = 14;
   pub const VT_BANNEROPENDATE: flatbuffers::VOffsetT = 16;
   pub const VT_STARTDATE: flatbuffers::VOffsetT = 18;
@@ -124,9 +124,9 @@ impl<'a> GuideMissionSeasonExcel<'a> {
       if let Some(x) = args.BannerOpenDate {
         builder.add_BannerOpenDate(x);
       }
-      let x = args.AccountType;
+      let x = args.TargetGroup;
       let x = if table_encryption_service::use_encryption() { table_encryption_service::convert_enum(x, &key) } else { x };
-      builder.add_AccountType(x);
+      builder.add_TargetGroup(x);
       if let Some(x) = args.InfomationLocalizeCode {
         builder.add_InfomationLocalizeCode(x);
       }
@@ -154,10 +154,10 @@ impl<'a> GuideMissionSeasonExcel<'a> {
     let InfomationLocalizeCode = self.InfomationLocalizeCode().map(|x| {
       if table_encryption_service::use_encryption() { table_encryption_service::convert_string(&x, &key).unwrap() } else { x.to_string() }
     });
-      let AccountType = if table_encryption_service::use_encryption() {
-        table_encryption_service::convert_enum(self.AccountType(), &key)
+      let TargetGroup = if table_encryption_service::use_encryption() {
+        table_encryption_service::convert_enum(self.TargetGroup(), &key)
       } else {
-        self.AccountType()
+        self.TargetGroup()
       };
       let Enabled = self.Enabled();
     let BannerOpenDate = self.BannerOpenDate().map(|x| {
@@ -211,7 +211,7 @@ impl<'a> GuideMissionSeasonExcel<'a> {
       TitleLocalizeCode,
       PermanentInfomationLocalizeCode,
       InfomationLocalizeCode,
-      AccountType,
+      TargetGroup,
       Enabled,
       BannerOpenDate,
       StartDate,
@@ -265,11 +265,11 @@ impl<'a> GuideMissionSeasonExcel<'a> {
     unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(GuideMissionSeasonExcel::VT_INFOMATIONLOCALIZECODE, None)}
   }
   #[inline]
-  pub fn AccountType(&self) -> AccountState {
+  pub fn TargetGroup(&self) -> TargetGroup {
     // Safety:
     // Created from valid Table for this object
     // which contains a valid value in this slot
-    unsafe { self._tab.get::<AccountState>(GuideMissionSeasonExcel::VT_ACCOUNTTYPE, Some(AccountState::WaitingSignIn)).unwrap()}
+    unsafe { self._tab.get::<TargetGroup>(GuideMissionSeasonExcel::VT_TARGETGROUP, Some(TargetGroup::WaitingSignIn)).unwrap()}
   }
   #[inline]
   pub fn Enabled(&self) -> bool {
@@ -431,7 +431,7 @@ impl flatbuffers::Verifiable for GuideMissionSeasonExcel<'_> {
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("TitleLocalizeCode", Self::VT_TITLELOCALIZECODE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("PermanentInfomationLocalizeCode", Self::VT_PERMANENTINFOMATIONLOCALIZECODE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("InfomationLocalizeCode", Self::VT_INFOMATIONLOCALIZECODE, false)?
-     .visit_field::<AccountState>("AccountType", Self::VT_ACCOUNTTYPE, false)?
+     .visit_field::<TargetGroup>("TargetGroup", Self::VT_TARGETGROUP, false)?
      .visit_field::<bool>("Enabled", Self::VT_ENABLED, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("BannerOpenDate", Self::VT_BANNEROPENDATE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("StartDate", Self::VT_STARTDATE, false)?
@@ -462,7 +462,7 @@ pub struct GuideMissionSeasonExcelArgs<'a> {
     pub TitleLocalizeCode: Option<flatbuffers::WIPOffset<&'a str>>,
     pub PermanentInfomationLocalizeCode: Option<flatbuffers::WIPOffset<&'a str>>,
     pub InfomationLocalizeCode: Option<flatbuffers::WIPOffset<&'a str>>,
-    pub AccountType: AccountState,
+    pub TargetGroup: TargetGroup,
     pub Enabled: bool,
     pub BannerOpenDate: Option<flatbuffers::WIPOffset<&'a str>>,
     pub StartDate: Option<flatbuffers::WIPOffset<&'a str>>,
@@ -493,7 +493,7 @@ impl<'a> Default for GuideMissionSeasonExcelArgs<'a> {
       TitleLocalizeCode: None,
       PermanentInfomationLocalizeCode: None,
       InfomationLocalizeCode: None,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       Enabled: false,
       BannerOpenDate: None,
       StartDate: None,
@@ -541,7 +541,7 @@ impl Serialize for GuideMissionSeasonExcel<'_> {
       } else {
         s.skip_field("InfomationLocalizeCode")?;
       }
-      s.serialize_field("AccountType", &self.AccountType())?;
+      s.serialize_field("TargetGroup", &self.TargetGroup())?;
       s.serialize_field("Enabled", &self.Enabled())?;
       if let Some(f) = self.BannerOpenDate() {
         s.serialize_field("BannerOpenDate", &f)?;
@@ -625,8 +625,8 @@ impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> GuideMissionSeasonExcelBuilder<
     self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(GuideMissionSeasonExcel::VT_INFOMATIONLOCALIZECODE, InfomationLocalizeCode);
   }
   #[inline]
-  pub fn add_AccountType(&mut self, AccountType: AccountState) {
-    self.fbb_.push_slot::<AccountState>(GuideMissionSeasonExcel::VT_ACCOUNTTYPE, AccountType, AccountState::WaitingSignIn);
+  pub fn add_TargetGroup(&mut self, TargetGroup: TargetGroup) {
+    self.fbb_.push_slot::<TargetGroup>(GuideMissionSeasonExcel::VT_TARGETGROUP, TargetGroup, TargetGroup::WaitingSignIn);
   }
   #[inline]
   pub fn add_Enabled(&mut self, Enabled: bool) {
@@ -734,7 +734,7 @@ impl core::fmt::Debug for GuideMissionSeasonExcel<'_> {
       ds.field("TitleLocalizeCode", &self.TitleLocalizeCode());
       ds.field("PermanentInfomationLocalizeCode", &self.PermanentInfomationLocalizeCode());
       ds.field("InfomationLocalizeCode", &self.InfomationLocalizeCode());
-      ds.field("AccountType", &self.AccountType());
+      ds.field("TargetGroup", &self.TargetGroup());
       ds.field("Enabled", &self.Enabled());
       ds.field("BannerOpenDate", &self.BannerOpenDate());
       ds.field("StartDate", &self.StartDate());
@@ -766,7 +766,7 @@ pub struct GuideMissionSeasonExcelT {
   pub TitleLocalizeCode: Option<String>,
   pub PermanentInfomationLocalizeCode: Option<String>,
   pub InfomationLocalizeCode: Option<String>,
-  pub AccountType: AccountState,
+  pub TargetGroup: TargetGroup,
   pub Enabled: bool,
   pub BannerOpenDate: Option<String>,
   pub StartDate: Option<String>,
@@ -796,7 +796,7 @@ impl Default for GuideMissionSeasonExcelT {
       TitleLocalizeCode: None,
       PermanentInfomationLocalizeCode: None,
       InfomationLocalizeCode: None,
-      AccountType: AccountState::WaitingSignIn,
+      TargetGroup: TargetGroup::WaitingSignIn,
       Enabled: false,
       BannerOpenDate: None,
       StartDate: None,
@@ -836,7 +836,7 @@ impl GuideMissionSeasonExcelT {
     let InfomationLocalizeCode = self.InfomationLocalizeCode.as_ref().map(|x|{
       _fbb.create_string(x)
     });
-    let AccountType = self.AccountType;
+    let TargetGroup = self.TargetGroup;
     let Enabled = self.Enabled;
     let BannerOpenDate = self.BannerOpenDate.as_ref().map(|x|{
       _fbb.create_string(x)
@@ -881,7 +881,7 @@ impl GuideMissionSeasonExcelT {
       TitleLocalizeCode,
       PermanentInfomationLocalizeCode,
       InfomationLocalizeCode,
-      AccountType,
+      TargetGroup,
       Enabled,
       BannerOpenDate,
       StartDate,

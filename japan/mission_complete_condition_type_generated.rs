@@ -16,10 +16,10 @@ use super::*;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_MISSION_COMPLETE_CONDITION_TYPE: i32 = 0;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_MISSION_COMPLETE_CONDITION_TYPE: i32 = 185;
+pub const ENUM_MAX_MISSION_COMPLETE_CONDITION_TYPE: i32 = 188;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteConditionType; 186] = [
+pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteConditionType; 189] = [
   MissionCompleteConditionType::None,
   MissionCompleteConditionType::Reset_DailyLogin,
   MissionCompleteConditionType::Reset_DailyLoginCount,
@@ -206,6 +206,9 @@ pub const ENUM_VALUES_MISSION_COMPLETE_CONDITION_TYPE: [MissionCompleteCondition
   MissionCompleteConditionType::Reset_DayCompleteMission,
   MissionCompleteConditionType::Reset_ConcentrationCardMatchCount,
   MissionCompleteConditionType::Reset_ConcentrationClearCount,
+  MissionCompleteConditionType::Reset_WorldRaidSpecificBossClear,
+  MissionCompleteConditionType::Reset_WorldRaidActivateCoreCount,
+  MissionCompleteConditionType::Reset_WorldRaidActivateUSBCount,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -399,9 +402,12 @@ impl MissionCompleteConditionType {
   pub const Reset_DayCompleteMission: Self = Self(183);
   pub const Reset_ConcentrationCardMatchCount: Self = Self(184);
   pub const Reset_ConcentrationClearCount: Self = Self(185);
+  pub const Reset_WorldRaidSpecificBossClear: Self = Self(186);
+  pub const Reset_WorldRaidActivateCoreCount: Self = Self(187);
+  pub const Reset_WorldRaidActivateUSBCount: Self = Self(188);
 
   pub const ENUM_MIN: i32 = 0;
-  pub const ENUM_MAX: i32 = 185;
+  pub const ENUM_MAX: i32 = 188;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::None,
     Self::Reset_DailyLogin,
@@ -589,6 +595,9 @@ impl MissionCompleteConditionType {
     Self::Reset_DayCompleteMission,
     Self::Reset_ConcentrationCardMatchCount,
     Self::Reset_ConcentrationClearCount,
+    Self::Reset_WorldRaidSpecificBossClear,
+    Self::Reset_WorldRaidActivateCoreCount,
+    Self::Reset_WorldRaidActivateUSBCount,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -779,6 +788,9 @@ impl MissionCompleteConditionType {
       Self::Reset_DayCompleteMission => Some("Reset_DayCompleteMission"),
       Self::Reset_ConcentrationCardMatchCount => Some("Reset_ConcentrationCardMatchCount"),
       Self::Reset_ConcentrationClearCount => Some("Reset_ConcentrationClearCount"),
+      Self::Reset_WorldRaidSpecificBossClear => Some("Reset_WorldRaidSpecificBossClear"),
+      Self::Reset_WorldRaidActivateCoreCount => Some("Reset_WorldRaidActivateCoreCount"),
+      Self::Reset_WorldRaidActivateUSBCount => Some("Reset_WorldRaidActivateUSBCount"),
       _ => None,
     }
   }
