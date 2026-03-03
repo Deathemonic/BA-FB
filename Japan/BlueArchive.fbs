@@ -53,7 +53,8 @@ enum BulletType : int {
 	Siege = 3,
 	Mystic = 4,
 	None = 5,
-	Sonic = 6
+	Sonic = 6,
+	Chemical = 7
 }
 
 enum ActionType : int {
@@ -82,7 +83,8 @@ enum ArmorType : int {
 	Unarmed = 2,
 	Structure = 3,
 	Normal = 4,
-	ElasticArmor = 5
+	ElasticArmor = 5,
+	CompositeArmor = 6
 }
 
 enum EntityMaterialType : int {
@@ -142,7 +144,9 @@ enum ExternalBehavior : int {
 	AddGroggy = 14,
 	SelectTargetToUseSkillAlly = 15,
 	ForceChangePhase = 16,
-	ClearUseSkillEndGroupId = 17
+	ClearUseSkillEndGroupId = 17,
+	ChangePhaseKeepATG = 18,
+	ForceChangePhaseKeepATG = 19
 }
 
 enum TacticEntityType : int {
@@ -289,7 +293,15 @@ enum FieldDialogType : int {
 	Keyword = 15,
 	Evidence = 16,
 	Chat = 17,
-	Keyword_843 = 18
+	Keyword_843 = 18,
+	Angry_Nobubble = 19,
+	Sad_Nobubble = 20,
+	Steam_Nobubble = 21,
+	Respond_Nobubble = 22,
+	Sweat_Nobubble = 23,
+	Twinkle_Nobubble = 24,
+	ZZZ_Nobubble = 25,
+	Chat_Nobubble = 26
 }
 
 enum ContentType : int {
@@ -315,7 +327,9 @@ enum ContentType : int {
 	Chaser = 19,
 	FieldContentStage = 20,
 	MultiFloorRaid = 21,
-	MinigameDefense = 22
+	MinigameDefense = 22,
+	InteractiveWorldRaid = 23,
+	PermanentRaid = 24
 }
 
 enum StageDifficulty : int {
@@ -442,7 +456,11 @@ enum StatType : int {
 	GrowthScore = 82,
 	CharacterBulletTypeEnhanceRate = 83,
 	MaxCostIncrease = 84,
-	Max = 85
+	EnhanceChemicalRate = 85,
+	EnhanceCompositeArmorRate = 86,
+	EnhanceWeakDamageRate = 87,
+	ReduceWeakDamagedRate = 88,
+	Max = 89
 }
 
 enum Rarity : int {
@@ -525,7 +543,12 @@ enum MailType : int {
 	Temp_4 = 27,
 	Temp_5 = 28,
 	Temp_6 = 29,
-	ProductGooglePointReward = 30
+	ProductGooglePointReward = 30,
+	PaymentCenterProduct = 31,
+	PaymentCenterMonthly = 32,
+	PaymentCenterBattlePass = 33,
+	PaymentCenterDailyRecord = 34,
+	ExpiryProductDailyRecordItem = 35
 }
 
 enum StarGoalType : int {
@@ -620,6 +643,12 @@ enum GroundNodeType : int {
 	NotWalkAble = 2147483647
 }
 
+enum SkillSlotHighLightType : int {
+	None = 0,
+	New = 1,
+	Upgrade = 2
+}
+
 enum StrategyEnvironment : int {
 	None = 0,
 	MapFog = 1
@@ -698,7 +727,8 @@ enum OpenConditionContent : int {
 	StrategySkip = 54,
 	MinigameDreamMaker = 55,
 	MiniGameDefense = 56,
-	MiniGameCCG = 57
+	MiniGameCCG = 57,
+	Main_L_1_5 = 58
 }
 
 enum RecipeType : int {
@@ -808,7 +838,10 @@ enum DialogCategory : int {
 	UIAttendanceEvent18 = 71,
 	UIBattlePassLobby = 72,
 	UIBattlePassMission = 73,
-	UIAttendanceEvent19 = 74
+	UIAttendanceEvent19 = 74,
+	UIAttendanceEvent20 = 75,
+	UIAttendanceEvent21 = 76,
+	UIEventClueSearch = 77
 }
 
 enum DialogType : int {
@@ -4051,7 +4084,8 @@ enum EchelonType : int {
 	EliminateRaid03 = 22,
 	Field = 23,
 	MultiFloorRaid = 24,
-	MinigameDefense = 25
+	MinigameDefense = 25,
+	PermanentRaid = 26
 }
 
 enum AssistRewardType : int {
@@ -4068,7 +4102,7 @@ enum AttendanceType : int {
 	Event20Days = 4
 }
 
-enum AccountState : int {
+enum TargetGroup : int {
 	WaitingSignIn = 0,
 	Normal = 1,
 	Dormant = 2,
@@ -4300,7 +4334,10 @@ enum MissionCompleteConditionType : int {
 	Reset_ClearMultiFloorRaid = 182,
 	Reset_DayCompleteMission = 183,
 	Reset_ConcentrationCardMatchCount = 184,
-	Reset_ConcentrationClearCount = 185
+	Reset_ConcentrationClearCount = 185,
+	Reset_WorldRaidSpecificBossClear = 186,
+	Reset_WorldRaidActivateCoreCount = 187,
+	Reset_WorldRaidActivateUSBCount = 188
 }
 
 enum Nation : int {
@@ -4371,7 +4408,9 @@ enum ShopCategoryType : int {
 	SelectPickupGacha = 35,
 	GemDaily = 36,
 	GemWeekly = 37,
-	CafeSummonTicket = 38
+	CafeSummonTicket = 38,
+	SelectPickupFesGacha = 39,
+	SelectPickupLimitedGacha = 40
 }
 
 enum BubbleType : int {
@@ -4468,7 +4507,10 @@ enum DialogCondition : int {
 	MiniGameDreamMakerEnough04 = 27,
 	MiniGameDreamMakerDefault = 28,
 	PassLevelUp = 29,
-	UnlockPassReward = 30
+	UnlockPassReward = 30,
+	ClueSearch = 31,
+	ClueRegistration = 32,
+	ClueCompletion = 33
 }
 
 enum DialogConditionDetail : int {
@@ -4489,6 +4531,15 @@ enum CVUnlockScenarioType : int {
 	Main = 0,
 	Event = 1,
 	SpecialOperation = 2
+}
+
+enum ScenarioCharacterShapes : int {
+	None = 0,
+	Signal = 1,
+	BlackSilhouette = 2,
+	Closeup = 4,
+	Highlight = 8,
+	WhiteSilhouette = 16
 }
 
 enum Anniversary : int {
@@ -4527,7 +4578,8 @@ enum WeaponType : int {
 	MT = 17,
 	Relic = 18,
 	FT = 19,
-	Akemi = 20
+	Akemi = 20,
+	KetherCannon = 21
 }
 
 enum TacticRange : int {
@@ -4671,7 +4723,11 @@ enum EquipmentOptionType : int {
 	RegenCost_Base = 87,
 	RegenCost_Coefficient = 88,
 	MaxCostIncrease_Base = 89,
-	HealRate_Base = 90
+	HealRate_Base = 90,
+	EnhanceChemicalRate_Base = 91,
+	EnhanceChemicalRate_Coefficient = 92,
+	EnhanceCompositeArmorRate_Base = 93,
+	EnhanceCompositeArmorRate_Coefficient = 94
 }
 
 enum PotentialStatBonusRateType : int {
@@ -4790,6 +4846,24 @@ enum FeverBattleType : int {
 	Arena = 3
 }
 
+enum ScenarioModeTypes : int {
+	None = 0,
+	Main = 1,
+	Sub = 2,
+	Replay = 3,
+	Mini = 4,
+	SpecialOperation = 5,
+	Prologue = 6
+}
+
+enum AccountState : int {
+	WaitingSignIn = 0,
+	Normal = 1,
+	Dormant = 2,
+	Comeback = 3,
+	Newbie = 4
+}
+
 enum CurrencyOverChargeType : int {
 	CanNotCharge = 0,
 	FitToLimit = 1,
@@ -4835,6 +4909,23 @@ enum Difficulty : int {
 	Insane = 5,
 	Torment = 6,
 	Lunatic = 7
+}
+
+enum RaidBossGroupType : int {
+	None = 0,
+	Binah = 1,
+	Chesed = 2,
+	ShiroKuro = 3,
+	Hieronymus = 4,
+	Kaitenger = 5,
+	Perorozilla = 6,
+	HOD = 7,
+	Goz = 8,
+	HoverCraft = 9,
+	EN0005 = 10,
+	EN0006 = 11,
+	EN0010 = 12,
+	EN0013 = 13
 }
 
 enum EmblemCategory : int {
@@ -4914,7 +5005,8 @@ enum CollectionUnlockType : int {
 
 enum MultipleConditionCheckType : int {
 	And = 0,
-	Or = 1
+	Or = 1,
+	Count = 2
 }
 
 enum ConcentrationRewardType : int {
@@ -4998,7 +5090,9 @@ enum EventContentType : int {
 	MiniShop = 38,
 	MiniGameRoad = 39,
 	MiniGameCCG = 40,
-	Concentration = 41
+	Concentration = 41,
+	InteractiveWorldRaid = 42,
+	ClueSearch = 43
 }
 
 enum MeetupConditionType : int {
@@ -5127,7 +5221,11 @@ enum GachaTicketType : int {
 	PackageAcademyThreeStar = 9,
 	SelectPickup = 10,
 	SelectPickupOnce = 11,
-	PackageLimitedThreeStar = 12
+	PackageLimitedThreeStar = 12,
+	PackageThreeStar_R88_Explosion = 13,
+	PackageThreeStar_R88_Mystic = 14,
+	PackageThreeStar_R88_Pierce = 15,
+	PackageThreeStar_R88_Sonic = 16
 }
 
 enum CraftNodeTier : int {
@@ -5202,6 +5300,40 @@ enum GuideMissionTabType : int {
 	None = 0,
 	Daily = 1,
 	StageClear = 2
+}
+
+enum WorldRaidMapType : int {
+	None = 0,
+	Carrier = 1,
+	WorldMap = 2
+}
+
+enum WorldRaidConditionType : int {
+	None = 0,
+	BossClear = 1,
+	EventScenarioClear = 2,
+	EventStageClear = 3,
+	MainScenarioClear = 4,
+	BossHprateUnder = 5
+}
+
+enum SkillSlotShowType : int {
+	None = 0,
+	Ex = 1,
+	Public = 2,
+	Passive = 3,
+	Global = 4
+}
+
+enum WorldRaidDifficulty : int {
+	None = 0,
+	A = 1,
+	B = 2,
+	C = 3,
+	D = 4,
+	E = 5,
+	F = 6,
+	G = 7
 }
 
 enum WebAPIErrorLevel : int {
@@ -5542,7 +5674,11 @@ enum StoreType : int {
 	MicrosoftStore = 4,
 	GalaxyStore = 5,
 	STEAM = 6,
-	FreeProduct = 7
+	FreeProduct = 7,
+	Twitch = 8,
+	Chzzk = 9,
+	PaymentCenter = 10,
+	PCStore = 11
 }
 
 enum PurchasePeriodType : int {
@@ -5562,25 +5698,6 @@ enum ScenarioBGScroll : int {
 	None = 0,
 	Vertical = 1,
 	Horizontal = 2
-}
-
-enum ScenarioCharacterShapes : int {
-	None = 0,
-	Signal = 1,
-	BlackSilhouette = 2,
-	Closeup = 4,
-	Highlight = 8,
-	WhiteSilhouette = 16
-}
-
-enum ScenarioModeTypes : int {
-	None = 0,
-	Main = 1,
-	Sub = 2,
-	Replay = 3,
-	Mini = 4,
-	SpecialOperation = 5,
-	Prologue = 6
 }
 
 enum ScenarioModeSubTypes : int {
@@ -5605,7 +5722,8 @@ enum PurchaseSourceType : int {
 	ProductMonthly = 2,
 	ProductBattlePass = 3,
 	ProductSelect = 4,
-	ProductGooglePoint = 5
+	ProductGooglePoint = 5,
+	ProductDailyRecord = 6
 }
 
 enum ProductCategory : int {
@@ -5616,7 +5734,8 @@ enum ProductCategory : int {
 	GachaDirect = 4,
 	TimeLimit = 5,
 	BattlePass = 6,
-	GooglePoint = 7
+	GooglePoint = 7,
+	DailyRecord = 8
 }
 
 enum ProductDisplayTag : int {
@@ -5626,6 +5745,11 @@ enum ProductDisplayTag : int {
 	Sale = 3,
 	Limited = 4,
 	Free = 5
+}
+
+enum ProductSaleType : int {
+	Limited = 0,
+	SaleDay = 1
 }
 
 enum ShopFilterType : int {
@@ -5697,7 +5821,9 @@ enum GachaDisplayTag : int {
 	New = 5,
 	Fes = 6,
 	SelectRecruit = 7,
-	LimitedThreeStar = 8
+	LimitedThreeStar = 8,
+	Revival = 9,
+	SelectLimited = 10
 }
 
 enum ShopPurchasePopupType : int {
@@ -5716,7 +5842,8 @@ enum ShopGroupType : int {
 	SecretStoneGrowth = 6,
 	TimeAttack = 7,
 	EliminateRaid = 8,
-	Gem = 9
+	Gem = 9,
+	Chaser = 10
 }
 
 enum ShortcutContentType : int {
@@ -5860,24 +5987,14 @@ enum TutorialFailureContentType : int {
 	WorldRaid = 5,
 	Conquest = 6,
 	EliminateRaid = 7,
-	MultiFloorRaid = 8
+	MultiFloorRaid = 8,
+	InteractiveWorldRaid = 9
 }
 
 enum CVPrintType : int {
 	CharacterOverwrite = 0,
 	PrefabOverwrite = 1,
 	Add = 2
-}
-
-enum WorldRaidDifficulty : int {
-	None = 0,
-	A = 1,
-	B = 2,
-	C = 3,
-	D = 4,
-	E = 5,
-	F = 6,
-	G = 7
 }
 
 table GroundVector3 {
@@ -5950,7 +6067,7 @@ table BattleExcel {
 	AllySelf: ReArrangeTargetType; // index 0x8
 	LightArmor: ArmorType; // index 0x9
 	Wood: EntityMaterialType; // index 0xA
-	All: CoverMotionType; // index 0xB
+	all: [CoverMotionType]; // index 0xB
 	DISTANCE: TargetSortBy; // index 0xC
 	CloseToObstacle: PositioningType; // index 0xD
 	Students: FormationLine; // index 0xE
@@ -6200,6 +6317,8 @@ table ConstCombatExcel {
 	ExcessiveTouchCheckCount: int; // index 0x54
 	CampaignAlertPopupLevelGap: int; // index 0x55
 	MoveCorrectionSkipRatio: int; // index 0x56
+	ObstacleColliderHeightJumpable: float; // index 0x57
+	ObstacleColliderHeightNotJumpable: float; // index 0x58
 }
 
 table ConstCommonExcelTable {
@@ -6221,6 +6340,15 @@ table ConstConquestExcel {
 	AnimationUnitAmountMin: int; // index 0x3
 	AnimationUnitAmountMax: int; // index 0x4
 	AnimationUnitDelay: float; // index 0x5
+}
+
+table ConstContentsExcelTable {
+	DataList: [ConstContentsExcel]; // index 0x0
+}
+
+table ConstContentsExcel {
+	UseSearchFieldOptimize: bool; // index 0x0
+	SearchUpdateTime: float; // index 0x1
 }
 
 table ConstEventCommonExcelTable {
@@ -6262,10 +6390,9 @@ table ConstKeyMappingExcelTable {
 
 table ConstKeyMappingExcel {
 	DragSensitivity: float; // index 0x0
-	PcInformationGroupID: long; // index 0x1
-	ScrollWheelFactor: float; // index 0x2
-	RemoveKeycodeWord: string; // index 0x3
-	TutorialDialogTouchKey: string; // index 0x4
+	ScrollWheelFactor: float; // index 0x1
+	RemoveKeycodeWord: string; // index 0x2
+	TutorialDialogTouchKey: string; // index 0x3
 }
 
 table ConstMinigameCCGExcelTable {
@@ -6832,6 +6959,19 @@ table GroundNodeLayerFlat {
 	Layers: [int8]; // index 0x0
 }
 
+table IAWorldRaidSkillDescriptionListExcelTable {
+	DataList: [IAWorldRaidSkillDescriptionListExcel]; // index 0x0
+}
+
+table IAWorldRaidSkillDescriptionListExcel {
+	Id: long; // index 0x0
+	globalSkillGroupId: [string]; // index 0x1
+	globalSkillRemoveCondition: [long]; // index 0x2
+	globalSkillHighlightResource: [SkillSlotHighLightType]; // index 0x3
+	skillGroupId: [string]; // index 0x4
+	highlightResource: [SkillSlotHighLightType]; // index 0x5
+}
+
 table KnockBackExcelTable {
 	DataList: [KnockBackExcel]; // index 0x0
 }
@@ -7130,9 +7270,11 @@ table SystemMailExcelTable {
 
 table SystemMailExcel {
 	MailType: MailType; // index 0x0
-	ExpiredDay: long; // index 0x1
-	Sender: string; // index 0x2
-	Comment: string; // index 0x3
+	IsProductMail: bool; // index 0x1
+	IsVariableExpiredDay: bool; // index 0x2
+	ExpiredDay: long; // index 0x3
+	Sender: string; // index 0x4
+	Comment: string; // index 0x5
 }
 
 table TacticArenaSimulatorSettingExcelTable {
@@ -7447,7 +7589,7 @@ table AttendanceExcel {
 	Type: AttendanceType; // index 0x1
 	CountdownPrefab: string; // index 0x2
 	DisplayOrder: long; // index 0x3
-	AccountType: AccountState; // index 0x4
+	TargetGroup: TargetGroup; // index 0x4
 	AccountLevelLimit: long; // index 0x5
 	Title: string; // index 0x6
 	InfomationLocalizeCode: string; // index 0x7
@@ -7506,7 +7648,9 @@ table BattlePassExpLimitExcel {
 table BattlePassFlavorTextExcel {
 	GroupId: long; // index 0x0
 	Id: long; // index 0x1
-	LocalizeCodeId: uint; // index 0x2
+	TextGroup: long; // index 0x2
+	LocalizeCodeId: uint; // index 0x3
+	Sort: long; // index 0x4
 }
 
 table BattlePassInfoExcel {
@@ -7868,6 +8012,7 @@ table CharacterDialogEventExcel {
 	UnlockEventSeason: long; // index 0x14
 	ScenarioGroupId: long; // index 0x15
 	LocalizeCVGroup: string; // index 0x16
+	ScenarioCharacterShapes: ScenarioCharacterShapes; // index 0x17
 }
 
 table CharacterDialogExcel {
@@ -8098,58 +8243,62 @@ table CharacterStatExcel {
 	EnhancePierceRate: long; // index 0x1A
 	EnhanceMysticRate: long; // index 0x1B
 	EnhanceSonicRate: long; // index 0x1C
-	EnhanceSiegeRate: long; // index 0x1D
-	EnhanceNormalRate: long; // index 0x1E
-	EnhanceLightArmorRate: long; // index 0x1F
-	EnhanceHeavyArmorRate: long; // index 0x20
-	EnhanceUnarmedRate: long; // index 0x21
-	EnhanceElasticArmorRate: long; // index 0x22
-	EnhanceStructureRate: long; // index 0x23
-	EnhanceNormalArmorRate: long; // index 0x24
-	ExtendBuffDuration: long; // index 0x25
-	ExtendDebuffDuration: long; // index 0x26
-	ExtendCrowdControlDuration: long; // index 0x27
-	AmmoCount: long; // index 0x28
-	AmmoCost: long; // index 0x29
-	IgnoreDelayCount: long; // index 0x2A
-	NormalAttackSpeed: long; // index 0x2B
-	Range: long; // index 0x2C
-	InitialRangeRate: long; // index 0x2D
-	MoveSpeed: long; // index 0x2E
-	SightPoint: long; // index 0x2F
-	ActiveGauge: long; // index 0x30
-	GroggyGauge: int; // index 0x31
-	GroggyTime: int; // index 0x32
-	StrategyMobility: long; // index 0x33
-	ActionCount: long; // index 0x34
-	StrategySightRange: long; // index 0x35
-	DamageRatio: long; // index 0x36
-	DamagedRatio: long; // index 0x37
-	DamageRatio2Increase: long; // index 0x38
-	DamageRatio2Decrease: long; // index 0x39
-	DamagedRatio2Increase: long; // index 0x3A
-	DamagedRatio2Decrease: long; // index 0x3B
-	ExDamagedRatioIncrease: long; // index 0x3C
-	ExDamagedRatioDecrease: long; // index 0x3D
-	EnhanceExDamageRate: long; // index 0x3E
-	ReduceExDamagedRate: long; // index 0x3F
-	EnhanceBasicsDamageRate: long; // index 0x40
-	ReduceBasicsDamagedRate: long; // index 0x41
-	HealRate: long; // index 0x42
-	HealLightArmorRate: long; // index 0x43
-	HealHeavyArmorRate: long; // index 0x44
-	HealUnarmedRate: long; // index 0x45
-	HealElasticArmorRate: long; // index 0x46
-	HealNormalArmorRate: long; // index 0x47
-	HealedExplosionRate: long; // index 0x48
-	HealedPierceRate: long; // index 0x49
-	HealedMysticRate: long; // index 0x4A
-	HealedSonicRate: long; // index 0x4B
-	HealedNormalRate: long; // index 0x4C
-	StreetBattleAdaptation: TerrainAdaptationStat; // index 0x4D
-	OutdoorBattleAdaptation: TerrainAdaptationStat; // index 0x4E
-	IndoorBattleAdaptation: TerrainAdaptationStat; // index 0x4F
-	RegenCost: long; // index 0x50
+	EnhanceChemicalRate: long; // index 0x1D
+	EnhanceSiegeRate: long; // index 0x1E
+	EnhanceNormalRate: long; // index 0x1F
+	EnhanceLightArmorRate: long; // index 0x20
+	EnhanceHeavyArmorRate: long; // index 0x21
+	EnhanceUnarmedRate: long; // index 0x22
+	EnhanceElasticArmorRate: long; // index 0x23
+	EnhanceCompositeArmorRate: long; // index 0x24
+	EnhanceStructureRate: long; // index 0x25
+	EnhanceNormalArmorRate: long; // index 0x26
+	ExtendBuffDuration: long; // index 0x27
+	ExtendDebuffDuration: long; // index 0x28
+	ExtendCrowdControlDuration: long; // index 0x29
+	AmmoCount: long; // index 0x2A
+	AmmoCost: long; // index 0x2B
+	IgnoreDelayCount: long; // index 0x2C
+	NormalAttackSpeed: long; // index 0x2D
+	Range: long; // index 0x2E
+	InitialRangeRate: long; // index 0x2F
+	MoveSpeed: long; // index 0x30
+	SightPoint: long; // index 0x31
+	ActiveGauge: long; // index 0x32
+	GroggyGauge: int; // index 0x33
+	GroggyTime: int; // index 0x34
+	StrategyMobility: long; // index 0x35
+	ActionCount: long; // index 0x36
+	StrategySightRange: long; // index 0x37
+	DamageRatio: long; // index 0x38
+	DamagedRatio: long; // index 0x39
+	DamageRatio2Increase: long; // index 0x3A
+	DamageRatio2Decrease: long; // index 0x3B
+	DamagedRatio2Increase: long; // index 0x3C
+	DamagedRatio2Decrease: long; // index 0x3D
+	ExDamagedRatioIncrease: long; // index 0x3E
+	ExDamagedRatioDecrease: long; // index 0x3F
+	EnhanceExDamageRate: long; // index 0x40
+	ReduceExDamagedRate: long; // index 0x41
+	EnhanceBasicsDamageRate: long; // index 0x42
+	ReduceBasicsDamagedRate: long; // index 0x43
+	EnhanceWeakDamageRate: long; // index 0x44
+	ReduceWeakDamagedRate: long; // index 0x45
+	HealRate: long; // index 0x46
+	HealLightArmorRate: long; // index 0x47
+	HealHeavyArmorRate: long; // index 0x48
+	HealUnarmedRate: long; // index 0x49
+	HealElasticArmorRate: long; // index 0x4A
+	HealNormalArmorRate: long; // index 0x4B
+	HealedExplosionRate: long; // index 0x4C
+	HealedPierceRate: long; // index 0x4D
+	HealedMysticRate: long; // index 0x4E
+	HealedSonicRate: long; // index 0x4F
+	HealedNormalRate: long; // index 0x50
+	StreetBattleAdaptation: TerrainAdaptationStat; // index 0x51
+	OutdoorBattleAdaptation: TerrainAdaptationStat; // index 0x52
+	IndoorBattleAdaptation: TerrainAdaptationStat; // index 0x53
+	RegenCost: long; // index 0x54
 }
 
 table CharacterStatLimitExcel {
@@ -8581,16 +8730,22 @@ table ContentsShortcutExcel {
 	UniqueId: long; // index 0x0
 	ContentType: ContentType; // index 0x1
 	EventContentId: long; // index 0x2
-	ScenarioModeVolume: long; // index 0x3
-	ScenarioModeChapter: long; // index 0x4
-	ShortcutOpenTime: string; // index 0x5
-	ShortcutCloseTime: string; // index 0x6
-	ConditionContentId: long; // index 0x7
-	ConquestMapDifficulty: StageDifficulty; // index 0x8
-	ConquestStepIndex: int; // index 0x9
-	ShortcutContentId: long; // index 0xA
-	ShortcutUIName: [string]; // index 0xB
-	Localize: string; // index 0xC
+	ScenarioModeType: ScenarioModeTypes; // index 0x3
+	ScenarioModeVolume: long; // index 0x4
+	ScenarioModeChapter: long; // index 0x5
+	ShortcutOpenTime: string; // index 0x6
+	ShortcutCloseTime: string; // index 0x7
+	ConditionContentId: long; // index 0x8
+	ConquestMapDifficulty: StageDifficulty; // index 0x9
+	ConquestStepIndex: int; // index 0xA
+	ShortcutContentId: long; // index 0xB
+	ShortcutUIName: [string]; // index 0xC
+	Localize: string; // index 0xD
+}
+
+table ContentTargetGroupExcel {
+	TargetGroup: TargetGroup; // index 0x0
+	AccountType: [AccountState]; // index 0x1
 }
 
 table CostumeExcel {
@@ -8733,7 +8888,7 @@ table EliminateRaidStageExcel {
 	RaidRoomLifeTime: int; // index 0xF
 	BattleDuration: long; // index 0x10
 	GroundId: long; // index 0x11
-	GroundDevName: string; // index 0x12
+	RaidBossGroupType: RaidBossGroupType; // index 0x12
 	EnterTimeLine: string; // index 0x13
 	TacticEnvironment: TacticEnvironment; // index 0x14
 	DefaultClearScore: long; // index 0x15
@@ -8824,6 +8979,7 @@ table EquipmentExcel {
 	ShiftingCraftQuality: long; // index 0x10
 	ShopCategory: [ShopCategoryType]; // index 0x11
 	ShortcutTypeId: long; // index 0x12
+	RedirectItemId: long; // index 0x13
 }
 
 table EquipmentLevelExcel {
@@ -8958,6 +9114,48 @@ table EventContentCharacterBonusExcel {
 	CharacterId: long; // index 0x1
 	EventContentItemType: [EventContentItemType]; // index 0x2
 	BonusPercentage: [long]; // index 0x3
+}
+
+table EventContentClueExcel {
+	EventContentId: long; // index 0x0
+	ClueId: long; // index 0x1
+	LocalizeEtcId: uint; // index 0x2
+	SlotClueImagePath: string; // index 0x3
+	ClueImagePath: string; // index 0x4
+	RewardParcelType: [ParcelType]; // index 0x5
+	RewardParcelId: [long]; // index 0x6
+	RewardParcelAmount: [long]; // index 0x7
+	HintUse: bool; // index 0x8
+	Hintlocalizeid: uint; // index 0x9
+}
+
+table EventContentClueSearchExcel {
+	EventContentId: long; // index 0x0
+	TitleLocalize: uint; // index 0x1
+	UsePrefabName: string; // index 0x2
+	ClueBGImagePath: string; // index 0x3
+}
+
+table EventContentClueSearchRewardExcel {
+	Id: long; // index 0x0
+	RewardParcelType: [ParcelType]; // index 0x1
+	RewardParcelId: [long]; // index 0x2
+	RewardParcelAmount: [long]; // index 0x3
+}
+
+table EventContentClueSearchRoundExcel {
+	EventContentId: long; // index 0x0
+	Round: long; // index 0x1
+	IsLoop: bool; // index 0x2
+	TargetImagePath: string; // index 0x3
+	Localizeld: uint; // index 0x4
+	RewardId: long; // index 0x5
+	ClueSlotNumber: [int]; // index 0x6
+	ClueId: [long]; // index 0x7
+	ClueCostAmount: [long]; // index 0x8
+	HintlocalizeId: uint; // index 0x9
+	ClearlocalizeId: uint; // index 0xA
+	ClearPageImagePath: string; // index 0xB
 }
 
 table EventContentCollectionExcel {
@@ -9200,7 +9398,7 @@ table EventContentMissionExcel {
 	ViewFlag: bool; // index 0x9
 	DisplayOrder: long; // index 0xA
 	PreMissionId: [long]; // index 0xB
-	AccountType: AccountState; // index 0xC
+	TargetGroup: TargetGroup; // index 0xC
 	AccountLevel: long; // index 0xD
 	ShortcutUI: [string]; // index 0xE
 	ChallengeStageShortcut: long; // index 0xF
@@ -9233,10 +9431,11 @@ table EventContentNotifyExcel {
 table EventContentPlayGuideExcel {
 	Id: long; // index 0x0
 	EventContentId: long; // index 0x1
-	DisplayOrder: int; // index 0x2
-	GuideTitle: string; // index 0x3
-	GuideImagePath: string; // index 0x4
-	GuideText: string; // index 0x5
+	IsPcBuild: bool; // index 0x2
+	DisplayOrder: int; // index 0x3
+	GuideTitle: string; // index 0x4
+	GuideImagePath: string; // index 0x5
+	GuideText: string; // index 0x6
 }
 
 table EventContentScenarioExcel {
@@ -9347,6 +9546,7 @@ table EventContentShopRefreshExcel {
 	RefreshGroup: int; // index 0x7
 	Prob: int; // index 0x8
 	BuyReportEventName: string; // index 0x9
+	ProductUpdateTime: string; // index 0xA
 }
 
 table EventContentSpecialOperationsExcel {
@@ -9370,6 +9570,8 @@ table EventContentSpineDisplayPeriodExcel {
 	CostumeUniqueId: long; // index 0x2
 	ShowPeriodFrom: string; // index 0x3
 	ShowPeriodTo: string; // index 0x4
+	ShowWorldRaidConditionIDFrom: long; // index 0x5
+	ShowWorldRaidConditionIDTo: long; // index 0x6
 }
 
 table EventContentSpoilerPopupExcel {
@@ -9535,9 +9737,6 @@ table FavorLevelRewardExcel {
 	FavorLevel: long; // index 0x1
 	StatType: [EquipmentOptionType]; // index 0x2
 	StatValue: [long]; // index 0x3
-	RewardParcelType: [ParcelType]; // index 0x4
-	RewardParcelId: [long]; // index 0x5
-	RewardAmount: [long]; // index 0x6
 }
 
 table FixedEchelonSettingExcel {
@@ -9814,10 +10013,11 @@ table GroundExcel {
 	UIEmojiScale: float; // index 0x33
 	UISkillMainLogScale: float; // index 0x34
 	EffectCountLimit: int; // index 0x35
-	AllyPassiveSkillId: [string]; // index 0x36
-	AllyPassiveSkillLevel: [int]; // index 0x37
-	EnemyPassiveSkillId: [string]; // index 0x38
-	EnemyPassiveSkillLevel: [int]; // index 0x39
+	CarrierSkillGroupId: long; // index 0x36
+	AllyPassiveSkillId: [string]; // index 0x37
+	AllyPassiveSkillLevel: [int]; // index 0x38
+	EnemyPassiveSkillId: [string]; // index 0x39
+	EnemyPassiveSkillLevel: [int]; // index 0x3A
 }
 
 table GroundModuleRewardExcel {
@@ -9874,7 +10074,7 @@ table GuideMissionSeasonExcel {
 	TitleLocalizeCode: string; // index 0x1
 	PermanentInfomationLocalizeCode: string; // index 0x2
 	InfomationLocalizeCode: string; // index 0x3
-	AccountType: AccountState; // index 0x4
+	TargetGroup: TargetGroup; // index 0x4
 	Enabled: bool; // index 0x5
 	BannerOpenDate: string; // index 0x6
 	StartDate: string; // index 0x7
@@ -9904,6 +10104,16 @@ table HpBarAbbreviationExcel {
 	RaidBossHpBar: int; // index 0x2
 }
 
+table IAWorldRaidStageRewardExcel {
+	GroupId: long; // index 0x0
+	IsClearStageRewardHideInfo: bool; // index 0x1
+	ClearStageRewardProb: long; // index 0x2
+	ClearStageRewardParcelType: ParcelType; // index 0x3
+	ClearStageRewardParcelUniqueID: long; // index 0x4
+	ClearStageRewardParcelUniqueName: string; // index 0x5
+	ClearStageRewardAmount: long; // index 0x6
+}
+
 table IdCardBackgroundExcel {
 	Id: long; // index 0x0
 	Rarity: Rarity; // index 0x1
@@ -9918,9 +10128,10 @@ table IdCardBackgroundExcel {
 table InformationExcel {
 	GroupID: long; // index 0x0
 	PageName: string; // index 0x1
-	LocalizeCodeId: string; // index 0x2
-	TutorialParentName: [string]; // index 0x3
-	UIName: [string]; // index 0x4
+	IsPcBuild: bool; // index 0x2
+	LocalizeCodeId: string; // index 0x3
+	TutorialParentName: [string]; // index 0x4
+	UIName: [string]; // index 0x5
 }
 
 table InformationStrategyObjectExcel {
@@ -9928,6 +10139,201 @@ table InformationStrategyObjectExcel {
 	StageId: long; // index 0x1
 	PageName: string; // index 0x2
 	LocalizeCodeId: string; // index 0x3
+}
+
+table InteractiveWorldRaidArcadeMachineExcel {
+	EventContentId: long; // index 0x0
+	MiniGameType: [EventContentType]; // index 0x1
+	MiniGameCostItemId: [long]; // index 0x2
+	MiniGameCostItemAmount: [long]; // index 0x3
+	MiniGameSoftLimitItemId: [string]; // index 0x4
+	MiniGameSoftLimitItemAmount: [string]; // index 0x5
+	MiniGameImage: [string]; // index 0x6
+	LocalizeTitle: [uint]; // index 0x7
+	LocalizeDesc: [uint]; // index 0x8
+}
+
+table InteractiveWorldRaidBossGroupExcel {
+	Id: long; // index 0x0
+	WorldRaidBossGroupId: long; // index 0x1
+	WorldBossHPLinkGroup: long; // index 0x2
+	WorldBossName: string; // index 0x3
+	WorldBossPopupPortrait: string; // index 0x4
+	WorldBossPopupNameTexture: string; // index 0x5
+	WorldBossPopupBG: string; // index 0x6
+	WorldBossParcelPortrait: string; // index 0x7
+	WorldBossListParcel: string; // index 0x8
+	WorldBossHP: long; // index 0x9
+	UIHideBeforeSpawn: bool; // index 0xA
+	HideAnotherBossKilled: bool; // index 0xB
+	WorldBossClearRewardGroupId: long; // index 0xC
+	AnotherBossKilled: [long]; // index 0xD
+	EchelonConstraintGroupId: long; // index 0xE
+	ExclusiveOperatorBossSpawn: string; // index 0xF
+	ExclusiveOperatorBossKill: string; // index 0x10
+	ExclusiveOperatorScenarioBattle: string; // index 0x11
+	ExclusiveOperatorBossDamaged: string; // index 0x12
+	BossGroupOpenCondition: long; // index 0x13
+	RaidScenarioBattleLocalizeKey: string; // index 0x14
+	IsSeasonFinalBoss: bool; // index 0x15
+}
+
+table InteractiveWorldRaidCarrierExcel {
+	CarrierSkillListGroupId: long; // index 0x0
+	EventContentId: long; // index 0x1
+	CharacterId: long; // index 0x2
+	CharacterLevel: int; // index 0x3
+	CharacterGrade: int; // index 0x4
+	ExSkillGroupId: [string]; // index 0x5
+	ExSkillCardTexture: [string]; // index 0x6
+	FixedExSkillLevel: [int]; // index 0x7
+	PassiveSkillGroupId: [string]; // index 0x8
+	PassiveSkillCardTexture: [string]; // index 0x9
+	FixedPassiveSkillLevel: [int]; // index 0xA
+	ExtraPassiveSkillGroupId: [string]; // index 0xB
+	ExtraPassiveSkillCardTexture: [string]; // index 0xC
+	FixedExtraPassiveSkillLevel: [int]; // index 0xD
+	HiddenPassiveSkillGroupId: [string]; // index 0xE
+	HiddenPassiveSkillCardTexture: [string]; // index 0xF
+	FixedHiddenPassiveSkillLevel: [int]; // index 0x10
+}
+
+table InteractiveWorldRaidCarrierMapExcel {
+	Id: long; // index 0x0
+	ConditionId: long; // index 0x1
+	WorldRaidSeasonId: long; // index 0x2
+	WorldRaidPhaseId: long; // index 0x3
+	ReplaySeasonGroupId: long; // index 0x4
+	ReplaySeasonOriginalPhaseId: long; // index 0x5
+	RecentClearBossGroupId: long; // index 0x6
+	RecentClearEventStageId: long; // index 0x7
+	ChangeTarget: WorldRaidMapType; // index 0x8
+	Priority: long; // index 0x9
+	ArtLevelPath: string; // index 0xA
+	DesignLevelPath: string; // index 0xB
+	BridgeBGM: long; // index 0xC
+	HangarBGM: long; // index 0xD
+	LobbyBGM: long; // index 0xE
+	WorldMapBGM: long; // index 0xF
+	InformationGroupIdWorldMap: long; // index 0x10
+	InformationGroupIdUCPopup: long; // index 0x11
+	InformationGroupIdBridge: long; // index 0x12
+	InformationGroupIdHangar: long; // index 0x13
+	InformationGroupIdLobby: long; // index 0x14
+}
+
+table InteractiveWorldRaidCarrierRecipeExcel {
+	SkillId: long; // index 0x0
+	SkillSlot: string; // index 0x1
+	Level: int; // index 0x2
+	RecipeIngredientId: [long]; // index 0x3
+}
+
+table InteractiveWorldRaidConditionExcel {
+	Id: long; // index 0x0
+	WorldRaidSeasonId: long; // index 0x1
+	WorldRaidPhaseId: long; // index 0x2
+	Priority: long; // index 0x3
+	MultipleConditionCheckType: MultipleConditionCheckType; // index 0x4
+	MultipleConditionCheckParameter: long; // index 0x5
+	ConditionType: [WorldRaidConditionType]; // index 0x6
+	ConditionValue: [long]; // index 0x7
+}
+
+table InteractiveWorldRaidSeasonManageExcel {
+	SeasonId: long; // index 0x0
+	PhaseId: long; // index 0x1
+	PhaseStartCondition: long; // index 0x2
+	IsReplaySeason: bool; // index 0x3
+	EnterTicket: CurrencyTypes; // index 0x4
+	PhaseStartTime: string; // index 0x5
+	PhaseEndTime: string; // index 0x6
+	WorldRaidLobbyScene: string; // index 0x7
+	WorldRaidLobbyBanner: string; // index 0x8
+	WorldRaidLobbyBG: string; // index 0x9
+	WorldRaidLobbyBannerShow: bool; // index 0xA
+	SeasonOpenCondition: long; // index 0xB
+	WorldRaidLobbyEnterScenario: long; // index 0xC
+	CanPlayNotSeasonTime: bool; // index 0xD
+	WorldRaidUniqueThemeLobbyUI: bool; // index 0xE
+	WorldRaidUniqueThemeName: string; // index 0xF
+	CanWorldRaidGemEnter: bool; // index 0x10
+	HideWorldRaidTicketUI: bool; // index 0x11
+	HideWorldRaidBossCompleteRewardUI: bool; // index 0x12
+	UseWorldRaidCommonToast: bool; // index 0x13
+	OpenRaidBossGroupId: [long]; // index 0x14
+	BossSpawnTime: [string]; // index 0x15
+	EliminateTime: [string]; // index 0x16
+	ScenarioOutputConditionId: [long]; // index 0x17
+	ConditionScenarioGroupid: [long]; // index 0x18
+	CarrierSkillGroupId: long; // index 0x19
+	WorldRaidMapEnterOperator: string; // index 0x1A
+	UseFavorRankBuff: bool; // index 0x1B
+}
+
+table InteractiveWorldRaidSkillDescriptionListExcel {
+	Id: long; // index 0x0
+	SkillParcelEchelonType: EchelonExtensionType; // index 0x1
+	GlobalSkillGroupId: [string]; // index 0x2
+	GlobalSkillRemoveCondition: [long]; // index 0x3
+	GlobalSkillShowSkillSlot: [SkillSlotShowType]; // index 0x4
+	GlobalSkillHighlightResource: [SkillSlotHighLightType]; // index 0x5
+	SkillGroupId: [string]; // index 0x6
+	ShowSkillSlot: [SkillSlotShowType]; // index 0x7
+	HighlightResource: [SkillSlotHighLightType]; // index 0x8
+}
+
+table InteractiveWorldRaidStageExcel {
+	Id: long; // index 0x0
+	UseBossIndex: bool; // index 0x1
+	UseBossAIPhaseSync: bool; // index 0x2
+	WorldRaidBossGroupId: long; // index 0x3
+	PortraitPath: string; // index 0x4
+	BGPath: string; // index 0x5
+	RaidSkillDescriptionListId: long; // index 0x6
+	RaidCharacterId: long; // index 0x7
+	BossCharacterId: [long]; // index 0x8
+	AssistCharacterLimitCount: long; // index 0x9
+	WorldRaidDifficulty: WorldRaidDifficulty; // index 0xA
+	DifficultyOpenCondition: bool; // index 0xB
+	RaidEnterAmount: long; // index 0xC
+	ReEnterAmount: long; // index 0xD
+	BattleDuration: long; // index 0xE
+	GroundId: long; // index 0xF
+	RaidBattleEndRewardGroupId: long; // index 0x10
+	RaidRewardGroupId: long; // index 0x11
+	BattleReadyTimelinePath: [string]; // index 0x12
+	BattleReadyTimelinePhaseStart: [int]; // index 0x13
+	BattleReadyTimelinePhaseEnd: [int]; // index 0x14
+	VictoryTimelinePath: string; // index 0x15
+	PhaseChangeTimelinePath: string; // index 0x16
+	TimeLinePhase: long; // index 0x17
+	EnterScenarioKey: long; // index 0x18
+	ClearScenarioKey: long; // index 0x19
+	UseFixedEchelon: bool; // index 0x1A
+	FixedEchelonId: long; // index 0x1B
+	IsRaidScenarioBattle: bool; // index 0x1C
+	ShowSkillCard: bool; // index 0x1D
+	BossBGInfoKey: uint; // index 0x1E
+	DamageToWorldBoss: long; // index 0x1F
+	AllyPassiveSkill: [string]; // index 0x20
+	AllyPassiveSkillLevel: [int]; // index 0x21
+	AllyPassiveSkillRemoveCondition: [long]; // index 0x22
+	EnemyPassiveSkill: [string]; // index 0x23
+	EnemyPassiveSkillLevel: [int]; // index 0x24
+	EnemyPassiveSkillRemoveCondition: [long]; // index 0x25
+	SaveCurrentLocalBossHP: bool; // index 0x26
+	EchelonExtensionType: EchelonExtensionType; // index 0x27
+}
+
+table InteractiveWorldRaidStatusPresetExcel {
+	Id: long; // index 0x0
+	WorldRaidSeasonId: long; // index 0x1
+	WorldRaidPhaseId: long; // index 0x2
+	ScenarioModeId: long; // index 0x3
+	IAWorldRaidGroupId: [long]; // index 0x4
+	EventContentStageId: [long]; // index 0x5
+	EventContentScenarioId: [long]; // index 0x6
 }
 
 table ItemExcel {
@@ -9982,16 +10388,8 @@ table KeyMappingExcel {
 
 table KeyMappingPopupExcel {
 	PrefabName: string; // index 0x0
-	ButtonName01: string; // index 0x1
-	KeyMappingId01: string; // index 0x2
-	ButtonName02: string; // index 0x3
-	KeyMappingId02: string; // index 0x4
-	ButtonName03: string; // index 0x5
-	KeyMappingId03: string; // index 0x6
-	ButtonName04: string; // index 0x7
-	KeyMappingId04: string; // index 0x8
-	ButtonName05: string; // index 0x9
-	KeyMappingId05: string; // index 0xA
+	ButtonName: [string]; // index 0x1
+	KeyMappingId: [string]; // index 0x2
 }
 
 table LevelExpMasterCoinExcel {
@@ -10012,6 +10410,7 @@ table LocalizeCharProfileChangeExcel {
 	CharacterId: long; // index 0x0
 	ScenarioModeId: long; // index 0x1
 	ChangeCharacterID: long; // index 0x2
+	OverrideClub: bool; // index 0x3
 }
 
 table LocalizeCharProfileExcel {
@@ -10028,31 +10427,32 @@ table LocalizeCharProfileExcel {
 	FamilyNameRubyJp: string; // index 0xA
 	PersonalNameJp: string; // index 0xB
 	PersonalNameRubyJp: string; // index 0xC
-	SchoolYearKr: string; // index 0xD
-	SchoolYearJp: string; // index 0xE
-	CharacterAgeKr: string; // index 0xF
-	CharacterAgeJp: string; // index 0x10
-	BirthDay: string; // index 0x11
-	BirthdayKr: string; // index 0x12
-	BirthdayJp: string; // index 0x13
-	CharHeightKr: string; // index 0x14
-	CharHeightJp: string; // index 0x15
-	DesignerNameKr: string; // index 0x16
-	DesignerNameJp: string; // index 0x17
-	IllustratorNameKr: string; // index 0x18
-	IllustratorNameJp: string; // index 0x19
-	CharacterVoiceKr: string; // index 0x1A
-	CharacterVoiceJp: string; // index 0x1B
-	HobbyKr: string; // index 0x1C
-	HobbyJp: string; // index 0x1D
-	WeaponNameKr: string; // index 0x1E
-	WeaponDescKr: string; // index 0x1F
-	WeaponNameJp: string; // index 0x20
-	WeaponDescJp: string; // index 0x21
-	ProfileIntroductionKr: string; // index 0x22
-	ProfileIntroductionJp: string; // index 0x23
-	CharacterSSRNewKr: string; // index 0x24
-	CharacterSSRNewJp: string; // index 0x25
+	Club: Club; // index 0xD
+	SchoolYearKr: string; // index 0xE
+	SchoolYearJp: string; // index 0xF
+	CharacterAgeKr: string; // index 0x10
+	CharacterAgeJp: string; // index 0x11
+	BirthDay: string; // index 0x12
+	BirthdayKr: string; // index 0x13
+	BirthdayJp: string; // index 0x14
+	CharHeightKr: string; // index 0x15
+	CharHeightJp: string; // index 0x16
+	DesignerNameKr: string; // index 0x17
+	DesignerNameJp: string; // index 0x18
+	IllustratorNameKr: string; // index 0x19
+	IllustratorNameJp: string; // index 0x1A
+	CharacterVoiceKr: string; // index 0x1B
+	CharacterVoiceJp: string; // index 0x1C
+	HobbyKr: string; // index 0x1D
+	HobbyJp: string; // index 0x1E
+	WeaponNameKr: string; // index 0x1F
+	WeaponDescKr: string; // index 0x20
+	WeaponNameJp: string; // index 0x21
+	WeaponDescJp: string; // index 0x22
+	ProfileIntroductionKr: string; // index 0x23
+	ProfileIntroductionJp: string; // index 0x24
+	CharacterSSRNewKr: string; // index 0x25
+	CharacterSSRNewJp: string; // index 0x26
 }
 
 table LocalizeCodeInBuildExcel {
@@ -10524,7 +10924,7 @@ table MiniGameMissionExcel {
 	ViewFlag: bool; // index 0x9
 	DisplayOrder: long; // index 0xA
 	PreMissionId: [long]; // index 0xB
-	AccountType: AccountState; // index 0xC
+	TargetGroup: TargetGroup; // index 0xC
 	AccountLevel: long; // index 0xD
 	ShortcutUI: [string]; // index 0xE
 	CompleteConditionType: MissionCompleteConditionType; // index 0xF
@@ -10546,10 +10946,12 @@ table MiniGameMissionExcel {
 table MiniGamePlayGuideExcel {
 	Id: long; // index 0x0
 	EventContentId: long; // index 0x1
-	DisplayOrder: int; // index 0x2
-	GuideTitle: string; // index 0x3
-	GuideImagePath: string; // index 0x4
-	GuideText: string; // index 0x5
+	MiniGameType: EventContentType; // index 0x2
+	IsPcBuild: bool; // index 0x3
+	DisplayOrder: int; // index 0x4
+	GuideTitle: string; // index 0x5
+	GuideImagePath: string; // index 0x6
+	GuideText: string; // index 0x7
 }
 
 table MiniGameRhythmBgmExcel {
@@ -10904,7 +11306,7 @@ table MissionExcel {
 	DateAutoRefer: ContentType; // index 0xC
 	DisplayOrder: long; // index 0xD
 	PreMissionId: [long]; // index 0xE
-	AccountType: AccountState; // index 0xF
+	TargetGroup: TargetGroup; // index 0xF
 	AccountLevel: long; // index 0x10
 	ContentTags: [SuddenMissionContentType]; // index 0x11
 	ShortcutUI: [string]; // index 0x12
@@ -10917,6 +11319,14 @@ table MissionExcel {
 	MissionRewardParcelType: [ParcelType]; // index 0x19
 	MissionRewardParcelId: [long]; // index 0x1A
 	MissionRewardAmount: [int]; // index 0x1B
+}
+
+table MomotalkScheduleSpoilerPopupExcel {
+	FavorScheduleId: long; // index 0x0
+	SpoilerPopupTitle: uint; // index 0x1
+	SpoilerPopupDescription: uint; // index 0x2
+	PopupType: SpoilerPopupType; // index 0x3
+	ConditionScenarioModeId: long; // index 0x4
 }
 
 table MultiFloorRaidRewardExcel {
@@ -10998,10 +11408,12 @@ table ObstacleStatExcel {
 	EnhanceHeavyArmorRate: long; // index 0x9
 	EnhanceUnarmedRate: long; // index 0xA
 	EnhanceElasticArmorRate: long; // index 0xB
-	EnhanceStructureRate: long; // index 0xC
-	EnhanceNormalArmorRate: long; // index 0xD
-	ReduceExDamagedRate: long; // index 0xE
-	ReduceBasicsDamagedRate: long; // index 0xF
+	EnhanceCompositeArmorRate: long; // index 0xC
+	EnhanceStructureRate: long; // index 0xD
+	EnhanceNormalArmorRate: long; // index 0xE
+	ReduceExDamagedRate: long; // index 0xF
+	ReduceBasicsDamagedRate: long; // index 0x10
+	ReduceWeakDamagedRate: long; // index 0x11
 }
 
 table OpenConditionExcel {
@@ -11055,6 +11467,12 @@ table ParcelAutoSynthExcel {
 	ResultParcelAmount: long; // index 0x8
 }
 
+table PermanentRaidManageExcel {
+	Type: RaidBossGroupType; // index 0x0
+	OpenRaidBossGroup: [string]; // index 0x1
+	OpenDate: string; // index 0x2
+}
+
 table PersonalityExcel {
 	Id: long; // index 0x0
 	Name: string; // index 0x1
@@ -11064,6 +11482,16 @@ table PickupDuplicateBonusExcel {
 	Id: long; // index 0x0
 	ShopCategoryType: ShopCategoryType; // index 0x1
 	ShopId: long; // index 0x2
+	PickupCharacterId: long; // index 0x3
+	RewardParcelType: ParcelType; // index 0x4
+	RewardParcelId: long; // index 0x5
+	RewardParcelAmount: long; // index 0x6
+}
+
+table PickupFirstGetBonus2Excel {
+	Id: long; // index 0x0
+	ShopRecruitId: long; // index 0x1
+	RecruitSellectionShopId: long; // index 0x2
 	PickupCharacterId: long; // index 0x3
 	RewardParcelType: ParcelType; // index 0x4
 	RewardParcelId: long; // index 0x5
@@ -11150,6 +11578,33 @@ table ProductBattlePassExcel {
 	ParcelAmount: [long]; // index 0x8
 }
 
+table ProductDailyRecordExcel {
+	Id: long; // index 0x0
+	ProductId: string; // index 0x1
+	StoreType: StoreType; // index 0x2
+	Price: long; // index 0x3
+	PurchaseCountLimit: long; // index 0x4
+	RewardId: long; // index 0x5
+	ParcelType: [ParcelType]; // index 0x6
+	ParcelId: [long]; // index 0x7
+	ParcelAmount: [long]; // index 0x8
+	TitleImagePath: string; // index 0x9
+}
+
+table ProductDailyRecordInfoExcel {
+	Id: long; // index 0x0
+	DaySize: int; // index 0x1
+	ExpirationDate: string; // index 0x2
+}
+
+table ProductDailyRecordRewardExcel {
+	Id: long; // index 0x0
+	Day: int; // index 0x1
+	RewardParcelType: [ParcelType]; // index 0x2
+	RewardId: [long]; // index 0x3
+	RewardAmount: [long]; // index 0x4
+}
+
 table ProductExcel {
 	Id: long; // index 0x0
 	ProductId: string; // index 0x1
@@ -11207,6 +11662,17 @@ table ProductSelectionGroupExcel {
 	ConditionParcelId: long; // index 0x7
 }
 
+table RaidContentPlayGuideExcel {
+	Id: long; // index 0x0
+	RaidBossGroupType: RaidBossGroupType; // index 0x1
+	IsPCBuild: bool; // index 0x2
+	IdExport: bool; // index 0x3
+	DisplayOrder: int; // index 0x4
+	GuideTitle: uint; // index 0x5
+	GuideImagePath: string; // index 0x6
+	GuideText: uint; // index 0x7
+}
+
 table RaidRankingRewardExcel {
 	RankingRewardGroupId: long; // index 0x0
 	Id: long; // index 0x1
@@ -11249,7 +11715,7 @@ table RaidStageExcel {
 	RaidRoomLifeTime: int; // index 0xB
 	BattleDuration: long; // index 0xC
 	GroundId: long; // index 0xD
-	GroundDevName: string; // index 0xE
+	RaidBossGroupType: RaidBossGroupType; // index 0xE
 	EnterTimeLine: string; // index 0xF
 	TacticEnvironment: TacticEnvironment; // index 0x10
 	DefaultClearScore: long; // index 0x11
@@ -11557,20 +12023,25 @@ table ShopCashExcel {
 	Id: long; // index 0x0
 	CashProductId: long; // index 0x1
 	PackageType: PurchaseSourceType; // index 0x2
-	LocalizeEtcId: uint; // index 0x3
-	IconPath: string; // index 0x4
-	DisplayOrder: long; // index 0x5
-	RenewalDisplayOrder: long; // index 0x6
-	CategoryType: ProductCategory; // index 0x7
-	DisplayTag: ProductDisplayTag; // index 0x8
-	SalePeriodFrom: string; // index 0x9
-	SalePeriodTo: string; // index 0xA
-	PeriodTag: bool; // index 0xB
-	AccountLevelLimit: long; // index 0xC
-	AccountLevelHide: bool; // index 0xD
-	ClearMissionLimit: long; // index 0xE
-	ClearMissionHide: bool; // index 0xF
-	PurchaseReportEventName: string; // index 0x10
+	TargetGroup: TargetGroup; // index 0x3
+	LocalizeEtcId: uint; // index 0x4
+	InMailPurchaseLock: bool; // index 0x5
+	UseMailParcel: bool; // index 0x6
+	IconPath: string; // index 0x7
+	DisplayOrder: long; // index 0x8
+	RenewalDisplayOrder: long; // index 0x9
+	CategoryType: ProductCategory; // index 0xA
+	DisplayTag: ProductDisplayTag; // index 0xB
+	ProductSaleType: ProductSaleType; // index 0xC
+	SalePeriodFrom: string; // index 0xD
+	SalePeriodTo: string; // index 0xE
+	ProductSaleDay: long; // index 0xF
+	PeriodTag: bool; // index 0x10
+	AccountLevelLimit: long; // index 0x11
+	AccountLevelHide: bool; // index 0x12
+	ClearMissionLimit: long; // index 0x13
+	ClearMissionHide: bool; // index 0x14
+	PurchaseReportEventName: string; // index 0x15
 }
 
 table ShopCashScenarioResourceInfoExcel {
@@ -11975,6 +12446,7 @@ table TutorialFailureImageExcel {
 	Type: string; // index 0x2
 	ImagePathKr: string; // index 0x3
 	ImagePathJp: string; // index 0x4
+	ReplaceLocalizeKey: string; // index 0x5
 }
 
 table UnderCoverStageExcel {
@@ -12126,7 +12598,7 @@ table WorldRaidFavorBuffExcel {
 
 table WorldRaidSeasonManageExcel {
 	SeasonId: long; // index 0x0
-	EventContentId: long; // index 0x1
+	PhaseId: long; // index 0x1
 	EnterTicket: CurrencyTypes; // index 0x2
 	WorldRaidLobbyScene: string; // index 0x3
 	WorldRaidLobbyBanner: string; // index 0x4
